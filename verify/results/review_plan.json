@@ -1,0 +1,114 @@
+{
+  "stage": "review_plan",
+  "evaluated_at": "2026-10-04T19:08:33",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 505.3,
+      "structure_problems": [],
+      "judgments": {
+        "review_plan.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A is substantively rich and mostly consistent with the document's figures, with some strong cross-review insights such as sequential phase-gating and whether mitigation costs sit inside the €40B envelope. But it clearly violates the stage's explicit constraints: bullets run roughly 250–600 words against a cap of about 80, later answers are as long as or longer than the first, and it repeats the same figures across many reviews. It also adds invented specifics (2% exceedance probabilities, a 10% earthquake probability in 20 years, 12 attorneys, named consultancy and vendor examples) and has odd recommendations such as \"by September 2026\" when that is the current date. Candidate B follows the format: three concise bullets of about 50–90 words each, consistent in length, using the document's figures and giving dated recommendations. It covers varied, distinct topics (platform storm resilience, climate change, the decommissioning gap, program overhead). It is thinner, has a few mildly invented numbers and an odd claim that Morocco \"transitions from standard\", and does not challenge the ASAP start date. Overall B better meets the stage's intended format and constraints, and A's depth does not make up for ignoring the length and consistency instructions."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "A follows the stage's brevity rule (short, consistent bullets, exactly 3 per question) and keeps its figures consistent with the document. B's bullets snowball to several hundred words each and add invented consultancies, vendors and figures, which the stage tweak explicitly forbids. B has deeper content in places, such as sequencing, budget reconciliation and refinancing, but it breaks the format constraints and recommends moving mobilization to 2030–2031, against the \"ASAP\" premise. A has minor weaknesses, including a prototype date inconsistency and some generic motivation items."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 715.2,
+      "structure_problems": [],
+      "judgments": {
+        "review_plan.md": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates cover all 16 reviews with three bullets each. Both also run longer than the roughly 80-word guideline.\n\nA is readable and its actions are clear. It names owners and dates, for example the Q1 2027 DGSI confirmation and the 2026-09-01 ring-fence of the holding-cost budget. Its weaknesses:\n- Several answers are generic or speculative. Review 10 is hypothetical (\"if a major partner materializes\"), and Review 15 gives soft morale advice such as celebrating avoided risks.\n- Review 7 invents a \"Version 2\" improvement that the documents do not support.\n- Some actions are odd, such as hiring the missing role in order to produce a cost estimate.\n\nB is more tightly tied to the source documents. It cites specific files and items (data-collection Items 1–4, Team.md omissions, SWOT missing data, the May 24, 2026 RTE deadline) and gives quantified consequences. It covers more distinct issues:\n- brownfield remediation overrun\n- water and PUE\n- anchor tenant demand validation\n- subsea landing points\n- the EDF PPA price assumption\n- fiber right-of-way costs\n- Phase 3+ capital stack\n- power cost escalation\n- decision-authority ambiguity between roles\n\nIts Review 7 honestly states that the materials do not specify how Version 2 differs, instead of inventing it. Its weaknesses:\n- Some bullets are dense and long.\n- A few figures look invented or inconsistent: \"20% Phase 0 budget\" alongside €12.5M–€37.5M (which is 5% of the Phase 0 range), \"Phase 1.5\", and a 90% hedging recommendation.\n- It repeats the €15B–€25B / 45% figures across many answers.\n\nOverall, B is more specific, better grounded, and more decision-useful, despite some verbosity and a few shaky numbers. A is cleaner but more generic."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Both candidates answer all 16 questions with 3 bullets each and follow the schema. The difference is in specificity, concision and fidelity.\n\nA is more specific and decision-useful. Most bullets name a concrete action, a deadline and a quantified consequence, and tie them to the document's decisions and risks. Examples are the 90% hedging increase, the 36-month RTE lead time versus the Phase 2 gate, and the €1.3B holding cost with a proposed 30%/50% buffer structure. In Review 7, A admits the materials don't say how Version 2 differs, which is more honest than inventing an answer. A's weaknesses are length and repetition.\n- Many bullets run well over the ~80-word limit, around 100–130 words.\n- The same 60%/45%/€15–25B figures recur in many bullets.\n- It adds figures and tools that are probably invented or inconsistent, such as \"20% Phase 0 budget = €12.5M–€37.5M\" (which is really 5%), \"80% of Phase 0 budget on environmental testing\", and Salesforce/ArcGIS.\n\nB is more compact and uses named roles as owners. Its bullets are single long sentences, which read less clearly, and they are vaguer on quantification. Its Review 7 asserts how Version 2 will differ without support. Its Review 10 relies on generic assumptions (interest rates, GPU lead times) rather than document-specific ones. Some figures also look shaky, such as \"€4B–€6B loss\" as 4–6% of a €100B project NPV, and the 6 GW cap. It repeats the \"Tenant Acquisition Trigger Threshold\" phrasing throughout.\n\nOverall, A offers more insight and more actionable, time-bound recommendations. B is somewhat cleaner but more generic. A's number slips and verbosity keep the margin small."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 694.5,
+      "structure_problems": [],
+      "judgments": {
+        "review_plan.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both exceed the ~80-word bullet limit and both contain invented figures. A is more specific and actionable: concrete month and date deadlines, trigger thresholds, contingencies, budget mechanics (€300M reserve, €180M grant carve-out, PRD cost cap) and source citations. It has a templated, repeated ROI-reduction figure, a minor pilot-timing inconsistency (2026-12-31 vs month 15) and an odd tool choice (SAP Concur). B assigns actions to named team roles and has some good dependency ideas, but its bullets are vaguer and run-on. It frames some consequences as 'positive' with 'years ahead of schedule' despite the realistic-scenario instruction, has odd figures ('100% ROI loss'), a typo ('DGMOU') and a stray '**', and its timeline logic is muddled (Month 24 vs Q2). A is moderately better."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the 16-review, 3-bullet structure, and both reach the same core conclusions: pivot Decision 3 to the collective insurance pool, bring accessibility forward, and adopt fast-track governance. B is better on specificity, grounding and decision-usefulness.\n\nA has several internal inconsistencies:\n- Review 2 calls the \"aggressive pacing\" of binding standards a positive, although the scenario is the pragmatic Builder one. It also says the 40% goal could be reached \"years ahead of schedule\", which is unrealistic.\n- Review 2 defends the tiered liability approach that Review 1 says to replace.\n- KPI 2 sets a 150% buffer target but triggers at 160%, which is incoherent.\n- Review 5 gives \"Likelihood: High\" labels to assumptions that are meant to be uncertain.\n- Review 8 is a bit thin on how the data gaps would be validated.\n- There is a typo (\"DGMOU\"), and many bullets run long.\n- Few of A's recommendations carry concrete dates, thresholds or owners beyond \"Q1/Q2\".\n\nB ties its points to document sources (expert review sections, data-collection items, the ERTMS precedent, WBS and team omissions). It also adds new insight:\n- Early-mover concentration of grants among the large operators, with a proposed 20% reserve.\n- An enforcement transparency board.\n- Specific numbers: a €30M annual cap on the public reference distributor, a 3% royalty penalty cap, and pilot success criteria.\n- Multi-site testing logistics risk.\n- Timeline dependencies with month-level cascades.\n- Post-2031 governance funding and the cost of the reduction-card subsidy.\n\nB's weaknesses:\n- It repeats \"ROI reduction 8–12% (~€120–180M)\" across many bullets, which looks like boilerplate, and some quantifications may be invented.\n- It names an odd tool (SAP Concur, an expense platform) for cost auditing.\n- Its bullets are also long.\n- Its KPI bullets are less cleanly formatted.\n\nEven so, B is the more concrete, varied and actionable review, and it is more useful for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 699.9,
+      "structure_problems": [],
+      "judgments": {
+        "review_plan.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more concrete and decision-useful than B. It gives specific deadlines, quantified impacts, and explicit validation or recommendation steps. It cites source documents (pitch.md, SWOT, data-collection.md). It also adds useful new points: Tier 2/3 premium costs, a transport subsidy baseline, legal audit costs, the missing finance-tracker role, and vendor renewal escalation. Its Report Objectives answer describes the plan (Leipzig, the gates, the audience), which fits the question. Its timeline-dependency answers are well reasoned, for example the MCR segregation date versus M1 spending, and the threshold finalization date versus partner training. Weaknesses: some deadlines look inconsistent with a start date of 3 May 2026 (for example \"by end March 2026\" and \"April 15\"), and it invents several figures. It also runs over the roughly 80-word bullet limit.\n\nCandidate B is more generic and prose-heavy, and many bullets are vague. Examples are \"100% penalty fees,\" \"40% underestimation,\" and \"50% increased insurance premium,\" none of which is grounded. Its Report Objectives answer describes the review report rather than the plan. Its sequencing logic is weaker, for example procurement before installation contracts. It does assign clear owners by role, and some of its points are good, such as legal indemnification before script training and defining who can release the MCR. It still has less quantification and fewer concrete actions than A, and its bullets are about as long as A's.\n\nOverall, A is stronger on specificity and usefulness for downstream planning, despite the date-consistency issues."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the 16-question format with 3 bullets each and ground their points in plan elements (MCR, M4 gate, triage script, vouchers, Tier 1 centers). Both invent some figures (A: 25% service reduction and 50% premium; B: 150–200 residents and 5–15 incidents).\n\nA's strengths: its dates mostly fall after the stated \"today\" of 2026-05-03, and its role and timeline items are sensible. Its weaknesses:\n- Its bullets are often well over the ~80-word limit (Reviews 4, 5, 9, 11 and 14).\n- Review 7 is vague and meta, with item 3 mostly describing a hypothetical \"Version 2\".\n- Its >20% EMS reduction target may not match the document.\n- Review 16 recommends a mobile form and a single platform, which sits oddly with the plan's non-app emphasis.\n\nB's strengths:\n- Its bullets are tighter and more consistently structured (issue, impact, interaction, recommendation).\n- It cites source files and quotes the gate criteria.\n- Its cost arithmetic is concrete (for example 120/hour × 5 × 8 × 10 = €48k, and the transport per-trip range).\n- It covers distinct gaps: the Project Administrator role, the volunteer surge coordinator, installation QA, and the procurement-before-contract timing gap.\n- Its Review 7 is far more informative.\n\nB's weaknesses:\n- Many deadlines (March 31, April 1/7/15, May 1) are before the stated current date. They are consistent with the document's own timeline but not with the prompt.\n- It invents some figures, and its sensor and USSD automation ideas are speculative.\n\nOverall B is slightly more specific, more decision-useful and closer to the length constraint, though A's date realism partly offsets that."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

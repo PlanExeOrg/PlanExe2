@@ -1,0 +1,54 @@
+{
+  "$defs": {
+    "ReviewItem": {
+      "properties": {
+        "issue": {
+          "description": "A brief title or name for the omission/improvement.",
+          "title": "Issue",
+          "type": "string"
+        },
+        "explanation": {
+          "description": "A concise description of why this issue is important.",
+          "title": "Explanation",
+          "type": "string"
+        },
+        "recommendation": {
+          "description": "Specific suggestions on how to address the issue.",
+          "title": "Recommendation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue",
+        "explanation",
+        "recommendation"
+      ],
+      "title": "ReviewItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "omissions": {
+      "description": "The most significant omissions.",
+      "items": {
+        "$ref": "#/$defs/ReviewItem"
+      },
+      "title": "Omissions",
+      "type": "array"
+    },
+    "potential_improvements": {
+      "description": "Suggestions and recommendations.",
+      "items": {
+        "$ref": "#/$defs/ReviewItem"
+      },
+      "title": "Potential Improvements",
+      "type": "array"
+    }
+  },
+  "required": [
+    "omissions",
+    "potential_improvements"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

@@ -1,0 +1,90 @@
+{
+  "description": "Identify internal and external factors that are favorable and unfavorable to achieving goals.",
+  "properties": {
+    "strengths": {
+      "description": "List of strengths.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Strengths",
+      "type": "array"
+    },
+    "weaknesses": {
+      "description": "List of weaknesses.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Weaknesses",
+      "type": "array"
+    },
+    "opportunities": {
+      "description": "List of opportunities.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Opportunities",
+      "type": "array"
+    },
+    "threats": {
+      "description": "List of threats.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Threats",
+      "type": "array"
+    },
+    "recommendations": {
+      "description": "A list of specific actions that address weaknesses, mitigate threats, and capitalize on opportunities. Each action should be actionable, time-bound, and assigned to an owner.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Recommendations",
+      "type": "array"
+    },
+    "strategic_objectives": {
+      "description": "Specific, measurable, achievable, relevant, and time-bound (SMART) goals that the project aims to achieve. These objectives should be directly informed by the SWOT analysis and provide a roadmap for action.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Strategic Objectives",
+      "type": "array"
+    },
+    "assumptions": {
+      "description": "Hypotheses or conditions taken as true for the purpose of this SWOT. If any assumption changes, the analysis may need updating.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assumptions",
+      "type": "array"
+    },
+    "missing_information": {
+      "description": "Gaps in data, research, or stakeholder input. If these gaps are filled, the accuracy and utility of this SWOT will improve.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Missing Information",
+      "type": "array"
+    },
+    "user_questions": {
+      "description": "Five crucial, thought-provoking questions to guide the user in identifying and evaluating strengths, weaknesses, opportunities, and threats.",
+      "items": {
+        "type": "string"
+      },
+      "title": "User Questions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "strengths",
+    "weaknesses",
+    "opportunities",
+    "threats",
+    "recommendations",
+    "strategic_objectives",
+    "assumptions",
+    "missing_information",
+    "user_questions"
+  ],
+  "title": "SWOTAnalysis",
+  "type": "object"
+}

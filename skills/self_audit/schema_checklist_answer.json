@@ -1,0 +1,26 @@
+{
+  "properties": {
+    "justification": {
+      "description": "Why this level and not another level. 30 words.",
+      "title": "Justification",
+      "type": "string"
+    },
+    "mitigation": {
+      "description": "One concrete action that reduces/removes the flag. 30 words.",
+      "title": "Mitigation",
+      "type": "string"
+    },
+    "level": {
+      "description": "low, medium, high. Must be consistent with the justification — if the justification cannot defend a higher rating, level MUST be 'low'.",
+      "title": "Level",
+      "type": "string"
+    }
+  },
+  "required": [
+    "justification",
+    "mitigation",
+    "level"
+  ],
+  "title": "ChecklistAnswer",
+  "type": "object"
+}

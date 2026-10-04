@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "Expert": {
+      "properties": {
+        "expert_title": {
+          "description": "Job title of the expert.",
+          "title": "Expert Title",
+          "type": "string"
+        },
+        "expert_knowledge": {
+          "description": "Industry Knowledge/Specialization, specific industries or subfields where they have focused their career, such as: tech industry for an IT consultant, healthcare sector for a medical expert. **Must be a brief comma separated list**.",
+          "title": "Expert Knowledge",
+          "type": "string"
+        },
+        "expert_why": {
+          "description": "Why can this expert be of help. Area of expertise.",
+          "title": "Expert Why",
+          "type": "string"
+        },
+        "expert_what": {
+          "description": "Describe what area of this document the role should advise about.",
+          "title": "Expert What",
+          "type": "string"
+        },
+        "expert_relevant_skills": {
+          "description": "Skills that are relevant to the document.",
+          "title": "Expert Relevant Skills",
+          "type": "string"
+        },
+        "expert_search_query": {
+          "description": "What query to use when searching for this expert.",
+          "title": "Expert Search Query",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expert_title",
+        "expert_knowledge",
+        "expert_why",
+        "expert_what",
+        "expert_relevant_skills",
+        "expert_search_query"
+      ],
+      "title": "Expert",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "experts": {
+      "description": "List of experts.",
+      "items": {
+        "$ref": "#/$defs/Expert"
+      },
+      "title": "Experts",
+      "type": "array"
+    }
+  },
+  "required": [
+    "experts"
+  ],
+  "title": "ExpertDetails",
+  "type": "object"
+}

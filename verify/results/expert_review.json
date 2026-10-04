@@ -1,0 +1,114 @@
+{
+  "stage": "expert_review",
+  "evaluated_at": "2026-10-04T18:58:13",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 483.6,
+      "structure_problems": [],
+      "judgments": {
+        "expert_criticism.md": {
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected structure: two critics with info blocks, Primary and Secondary Actions, a Follow Up Consultation, three A–E issues each, and the remaining experts listed as having no feedback.\n\n**A** goes deep on two well-chosen domains, geotechnical/seismic and cross-border law. Its geotechnical critique is strong and decision-useful. It increases the borehole count to 7–10 with 2 km spacing, sets rock-quality classes by UCS and RQD, and adds a bedrock-anchoring decision tree. It also gives acceptance criteria for the prototype (a safety factor of 2.5 and leakage below 1 L/day) and a 20% cost-escalation trigger. It correctly argues that 1:50 scale and a 50 m prototype are inadequate, citing Reynolds/Froude scaling, soil-structure interaction and joint pressure.\n\nA's legal critique is concrete, with a penalty architecture, an escrow arrangement, a liability tiering and a causation protocol. It also asks for written evidence that both governments endorse the neutral-consortium model. Its weaknesses are:\n- Some invented or shaky precedents and numbers: a \"Nile Waters Agreement (1999)\", Schengen as a treaty-lock-in precedent, a fabricated \"Haftel & Leuenberger 2018\" reference, and a Spain €20B escrow figure.\n- Some padding, such as the \"sign-off ceremony\".\n- It is extremely long.\n- The follow-up consultation is rendered as a JSON blob.\n\n**B** is broader and shorter. Its first expert is a generalist structural engineer whose primary actions bundle in energy, flooding, gauge, marketing and decommissioning. That makes the critique unfocused, though it covers many of the plan's gaps. Its geotechnical points simply repeat the plan's 5 boreholes at 200 m, with no deeper challenge. Its legal expert adds a few useful catches:\n- The UNCLOS artificial-installation classification and the seabed's legal status.\n- Bilateral investment treaty (BIT) analysis.\n- EU law constraints.\n- An unrealistic 18-month ratification window.\n- A sequencing and critical-path problem, with a realistic mobilization date of 2030–31 set against the \"ASAP\" start.\n\nThat last point is faithful to the prompt's ASAP constraint. B also has errors: it describes UNCLOS Part III as \"Archipelagic Sea Routes Passage\", which is wrong. It names law firms as recommendations. Its actions are less quantified, and issue 1.4 largely duplicates 1.5.\n\nOverall, A gives more insight and specificity that later stages can use, despite some hallucinated precedents. B has the better timeline and legal-classification catches but is more generic and thinner on the engineering. I give A a slight edge."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates follow the expected structure: an info block, Primary and Secondary Actions, Follow Up Consultation, A-E issues, then the experts without feedback. Both critique the first two experts.\n\nCandidate A has broader and more decision-useful coverage.\n- Its structural expert covers the unvalidated architecture, the seismic and geotechnical gap, and the energy and flooding gaps.\n- Its legal expert covers treaty architecture, maritime law and sequencing.\n- The sequencing issue is a real catch. It says the pre-project deadlines are mutually inconsistent with an \"ASAP\" start, and that an 18-month treaty ratification is unrealistic. It proposes phase gates and quantifies the carrying cost of delay.\n- Weaknesses: some secondary actions are out of scope for the expert (rail gauge, marketing). Issue 1.6 lumps two unrelated topics together. There are some legal errors, for example \"Archipelagic Sea Routes\" under UNCLOS Part III. It also names specific law firms.\n\nCandidate B goes much deeper on geotechnical and prototype validation.\n- It gives a bedrock-anchoring decision tree, acceptance criteria, and a sharp critique of 1:50 scaling (Reynolds and Froude effects).\n- Weaknesses: the follow-up consultation for expert 1 is dumped as a raw JSON blob, which is a format glitch. Both experts' three issues are narrow, and the geotechnical ones overlap heavily.\n- The legal expert contains questionable or invented precedents: Nile Waters Agreement dated 1999 and a \"100+ year\" binding clause, Schengen as a treaty-lock-in precedent, a Channel Tunnel 1990 ICC episode, and a \"Haftel & Leuenberger 2018\" reference.\n- Its proposed ratification by Q3 2027 is unrealistic, and many invented specifics (a 10% compounding quarterly penalty, a €5-10B termination penalty, Spain and Morocco contribution splits) are asserted without basis.\n- It does not question the start date or the timeline sequencing as A does.\n\nOverall, B is deeper in one domain, but it is narrower, less realistic on governance, and has a formatting flaw. A is more balanced, more faithful to the plan's constraints, and more useful downstream, though less deep."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 828.0,
+      "structure_problems": [],
+      "judgments": {
+        "expert_criticism.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A delivers two highly specific, plan-grounded expert critiques. Experts are well chosen: an RTE/energy specialist and a land assembly/environmental counsel. Each critique has multiple issues with detailed mitigations, consequences and root causes. It catches real structural problems: the 80% buffer model against the 9 GW target, RTE non-binding consultation versus lender covenants, grid lead times, the sovereign partition's hidden CAPEX, and Phase 0 budget re-baselining. It also has flaws. Some figures are invented or dubious (the 10,000–12,000 MW/km² density math is nonsensical, the \"Article L. 331-4 Code Rural\" citation is likely made up, and \"RTE PPA\" and \"EDF nuclear on-site\" are loose). It also recommends concrete actions that partly contradict the prompt's red-team framing, such as terminating the buffer land. The \"deadline PASSED\" remarks are inconsistent with the dates but show engagement. A French-language follow-up is odd. The two experts overlap on RTE. Still, the content is decision-useful.\n\nCandidate B is generic and thin. The three issues, land use, power procurement and community engagement, are repeated near-verbatim across the two experts. Its mitigations are boilerplate. It makes an error by telling the team to secure a \"binding PPA with RTE\", since RTE is the grid operator, not a power seller. It also tells the team to wire fees by 2026-05-24 and to define GIS boundaries by 2026-06-30, which are borrowed from the prior document. The second expert's issues do not match their stated expertise: an RTE specialist's third issue is community engagement. The critique is not skeptical or deep, and it adds little for downstream stages. Its expert list is reasonable, but the criticism is weak.\n\nA is clearly better despite some hallucinated specifics."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A is generic and repetitive. Both experts raise the same three issues: land use, power procurement and community engagement. Expert 2, the energy regulation specialist, gives land-use GIS and workforce mandates rather than energy advice, so the critiques don't match the experts' stated domains. It also contains a conceptual error, a \"binding PPA with RTE\", because RTE is the grid operator and does not sell power under a PPA. Its suggestions are thin and offer little for downstream stages.\n\nCandidate B is far more specific and decision-useful. Each critique is tied to the plan's decisions and the plan's skeptical stance. It covers the non-binding RTE hosting consultation versus a binding connection offer and the 5–7 year transmission lead time. It also covers the absence of a concrete power procurement counterparty, the 80% buffer land model and SAFER/DREAL exposure, hidden security compartmentalization CAPEX, and a circular dependency between tenants and grid. It adds concrete gates, budgets, dates, and kill conditions. The experts are well matched to their critiques.\n\nB has real flaws:\n- Its density math for the 9 GW cap is nonsensical (240,000 MW, then 4–5 GW).\n- It treats the 2026-05-24 deadline as already passed, using a wrong \"today\" of 2026-10-04.\n- Its cost figures are inconsistent (€5–10M vs €8–15M vs €1.5–3M for RTE studies).\n- It makes some dubious legal citations.\n- It includes a French-language follow-up and some overwrought tone.\n\nEven so, it surfaces real, plan-relevant risks and recommends downsizing, a split campus, and kill criteria, which matches the red-team brief. A's problems are shallowness and mismatch, and B's depth and insight outweigh its errors."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 341.3,
+      "structure_problems": [],
+      "judgments": {
+        "expert_criticism.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A is much more specific and decision-useful. Expert 1 catches a real internal contradiction: the provisional versus final binding dates against the API-exposure timing in Decisions 4 and 14. It also flags the liability fragmentation and the deferred-accessibility risk. Expert 2 gives a detailed critique of clearing and settlement: Day-1 float bootstrap, undefined collateral, no default fund, no actuarial sizing of the backstop, and missing distributor bonding and credit limits. It sets dated actions that fit the May 2026 start. Its weaknesses are real. The tone is hyperbolic (\"Regulatory Catastrophe\"). Some legal references are wrong or mismatched: asking the ECJ registry for an opinion is not possible, C-318/05 is mislabelled, and Directive 2019/2161 is not an accessibility instrument. The Follow Up Consultation in 2.3 is a raw JSON blob. Several actions are duplicated between sections. Even so, it is complete and gives downstream stages a lot of material.\n\nCandidate B is thin and partly generic. Expert 1's actions are one-liners, and its issues (governance, under-capitalization, accessibility) are shallow restatements of the plan. Expert 2, an Intermodal Logistics Architect, critiques liability, accessibility and governance decisions, which is outside the stated expertise and ignores the bus, ferry and air hooks it was chosen to review. The Root Cause field is the literal string \"Empty\" in three issues, which is a placeholder and a format failure. The decision numbering is also inconsistent: liability is called Decision 3 here, while A and Expert 1's own context use Decision 1. Its fast-track governance suggestion is reasonable but low-impact.\n\nOverall, A is clearly more insightful and complete despite its flaws."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected structure: expert info blocks, Primary and Secondary Actions, Follow Up Consultation, A-E issue subsections, and a list of experts without feedback. Both are faithful to the earlier stage outputs, such as the €200M float, the 35 FTEs and the numbered decisions.\n\nCandidate A is concise and ties its actions to specific decisions and dates. It has several weaknesses:\n- Three issues (2.4.E, 2.5.E, 2.6.E) have the root cause literally set to \"Empty\", which looks like a placeholder or a failed generation.\n- Expert 2 is an Intermodal Logistics Architect, yet their critique covers liability, accessibility and governance, none of which is the stated remit of that role.\n- Expert 1's issues are generic (governance, under-capitalization, accessibility) and are not especially deep.\n- Its recommendation to pivot to a \"Mandatory Collective Insurance Pool\" is reasonable but thinly justified.\n\nCandidate B is much deeper and more insightful.\n- It identifies a real internal timeline contradiction: Decision 14's \"18 months after binding\" against the 30-month API exposure goal, with provisional against final binding left ambiguous.\n- It flags the deferred accessibility scope and the 2.25 FTE PRM allocation.\n- It critiques the clearing mechanism's Day 1 bootstrap, undefined bank guarantees, absent default fund and unactuarial backstop sizing.\n- It identifies missing distributor payment security.\n- Each expert's critique stays within their stated role, and the items are actionable.\n\nB also has defects:\n- It is extremely verbose and hyperbolic (\"Regulatory Catastrophe in Progress\").\n- It has legal inaccuracies: it applies EU261/2004 (air passenger rights) to rail, cites air-law and irrelevant case law, and suggests an \"ECJ registry\" legal opinion, which is not a real mechanism.\n- It proposes many new roles with veto powers, which is overreach.\n- The follow-up consultation for Expert 2 is a raw JSON blob pasted into the markdown.\n\nEven so, B delivers far more decision-useful, plan-specific content, with no empty sections. Its legal errors and formatting glitch are real flaws, but A's empty root causes and role mismatch are also significant. Overall B is better for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 255.7,
+      "structure_problems": [],
+      "judgments": {
+        "expert_criticism.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the required structure: an info block per expert, Primary and Secondary Actions, a Follow Up Consultation, issues with A–E subsections, then the experts without feedback. Candidate A has two clear defects. First, the \"Root Cause\" field reads \"Empty\" for all three of Expert 2's issues, so the stage output is incomplete there. Second, the two experts overlap heavily. Both say to halt vouchers, ring-fence the €300k reserve, and replace the triage script with an aggregate MOU. Expert 1 is billed as an epidemiologist but spends most of its feedback on finance and home-installation strategy rather than baselines and attribution. There are also sloppy references such as \"Decision 7973...\". Some of A's content is useful, though. It flags the gap in overnight cover for hot nights and the liability of non-municipal sites, and it keeps the €300k reserve and funding gate in view. Candidate B's two experts cover distinct areas, GDPR and incident command. Each issue is filled in, with specific, dated actions tied to the plan's Leipzig context and the Saxon data protection authority. B catches real problems: that the escalation script has no lawful basis, that an opt-out registry is non-compliant, and that retention schedules and paper-to-CRM migration are undefined. It also flags that the incident command structure is only named and not actually built, that the alert thresholds need empirical calibration against Leipzig mortality data to avoid alert fatigue, and that the Month 4 gate needs an objective contact-verification protocol. Its weaknesses are extreme verbosity, some over-prescription, and a few questionable suggestions: a geolocation photo stamp, a Google Sheet dashboard, and a Follow Up Consultation formatted as a JSON array. Overall B is more insightful, more complete, and more useful to downstream stages, despite the length."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is clearly stronger. Its two critics, a GDPR/healthcare data officer and an emergency-management coordinator, are well matched to the plan's biggest risks. Both give concrete, Leipzig-specific, dated actions. The GDPR expert covers the MOU legal basis, opt-in versus opt-out registries, multilingual Article 13 notices, a retention schedule, a paper-to-CRM migration protocol and a data classification guide. The emergency expert covers the ICS charter and succession, alert fatigue with an empirical threshold analysis, a structured data loop with receipt confirmation and escalation triggers, and an objective way to verify the Month 4 contact-success gate. Every issue has complete A–E subsections. Weaknesses: it is very verbose. A few suggestions sit badly with its own advice or with GDPR. A shared Google Sheet dashboard is one. Photo geolocation stamps conflict with data minimisation. Calling for \"automated\" extracts is also questionable. It also treats the plan's own internal contradictions as certain. Even so, it is decision-useful.\n\nCandidate B has structural and quality problems. The \"Public Health Epidemiologist\" mostly critiques finance, vouchers and contingency reserve rather than epidemiology or baselines, so the critique does not match the expert's role. The Procurement Specialist's issues 2.4–2.6 have \"Root Cause: Empty\", which is an incomplete placeholder. The two experts contradict each other: one says to reverse the triage-script strategy, the other says to run it as a dual track. They also repeat the same points about vouchers, MCR and the health loop. Some content is useful, such as the hot-night coverage gap and the MCR ring-fencing. Overall it is thinner, more generic, and less complete."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

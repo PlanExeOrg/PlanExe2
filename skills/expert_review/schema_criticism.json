@@ -1,0 +1,97 @@
+{
+  "$defs": {
+    "NegativeFeedbackItem": {
+      "properties": {
+        "feedback_index": {
+          "description": "Incrementing index, such as 1, 2, 3, 4, 5.",
+          "title": "Feedback Index",
+          "type": "integer"
+        },
+        "feedback_title": {
+          "description": "Constructive criticism. What is the problem?",
+          "title": "Feedback Title",
+          "type": "string"
+        },
+        "feedback_verbose": {
+          "description": "Elaborate on the criticism. Provide more context and details.",
+          "title": "Feedback Verbose",
+          "type": "string"
+        },
+        "feedback_problem_tags": {
+          "description": "Short identifiers that describe the problem.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Feedback Problem Tags",
+          "type": "array"
+        },
+        "feedback_mitigation": {
+          "description": "Mitigation plan.",
+          "title": "Feedback Mitigation",
+          "type": "string"
+        },
+        "feedback_consequence": {
+          "description": "Without mitigation what are the consequences.",
+          "title": "Feedback Consequence",
+          "type": "string"
+        },
+        "feedback_root_cause": {
+          "default": "",
+          "description": "Possible root cause.",
+          "title": "Feedback Root Cause",
+          "type": "string"
+        }
+      },
+      "required": [
+        "feedback_index",
+        "feedback_title",
+        "feedback_verbose",
+        "feedback_problem_tags",
+        "feedback_mitigation",
+        "feedback_consequence"
+      ],
+      "title": "NegativeFeedbackItem",
+      "type": "object"
+    }
+  },
+  "description": "Status after todays meeting with the client.",
+  "properties": {
+    "negative_feedback_list": {
+      "description": "Your negative feedback.",
+      "items": {
+        "$ref": "#/$defs/NegativeFeedbackItem"
+      },
+      "title": "Negative Feedback List",
+      "type": "array"
+    },
+    "user_primary_actions": {
+      "description": "List of actionable steps the user MUST take.",
+      "items": {
+        "type": "string"
+      },
+      "title": "User Primary Actions",
+      "type": "array"
+    },
+    "user_secondary_actions": {
+      "description": "List of actionable steps the user should take.",
+      "items": {
+        "type": "string"
+      },
+      "title": "User Secondary Actions",
+      "type": "array"
+    },
+    "follow_up_consultation": {
+      "description": "What to talk about in the next consultation.",
+      "title": "Follow Up Consultation",
+      "type": "string"
+    }
+  },
+  "required": [
+    "negative_feedback_list",
+    "user_primary_actions",
+    "user_secondary_actions",
+    "follow_up_consultation"
+  ],
+  "title": "ExpertConsultation",
+  "type": "object"
+}

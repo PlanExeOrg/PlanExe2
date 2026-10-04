@@ -1,0 +1,46 @@
+{
+  "$defs": {
+    "TeamMember": {
+      "description": "A human with domain knowledge.",
+      "properties": {
+        "id": {
+          "description": "A unique id for the job_category.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "equipment_needs": {
+          "description": "What expensive resources are needed for the daily job.",
+          "title": "Equipment Needs",
+          "type": "string"
+        },
+        "facility_needs": {
+          "description": "What facilities are needed for the daily job.",
+          "title": "Facility Needs",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "equipment_needs",
+        "facility_needs"
+      ],
+      "title": "TeamMember",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "team_members": {
+      "description": "The experts with domain knowledge about the problem.",
+      "items": {
+        "$ref": "#/$defs/TeamMember"
+      },
+      "title": "Team Members",
+      "type": "array"
+    }
+  },
+  "required": [
+    "team_members"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

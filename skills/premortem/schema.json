@@ -1,0 +1,191 @@
+{
+  "$defs": {
+    "AssumptionItem": {
+      "properties": {
+        "assumption_id": {
+          "description": "Enumerate the assumption items starting from 'A1', 'A2', 'A3', 'A4', etc. Do not restart at A1.",
+          "title": "Assumption Id",
+          "type": "string"
+        },
+        "statement": {
+          "description": "The core assumption we are making that, if false, would kill the project.",
+          "title": "Statement",
+          "type": "string"
+        },
+        "test_now": {
+          "description": "A concrete, immediate action to test if this assumption is true.",
+          "title": "Test Now",
+          "type": "string"
+        },
+        "falsifier": {
+          "description": "The specific result from the test that would prove the assumption false.",
+          "title": "Falsifier",
+          "type": "string"
+        }
+      },
+      "required": [
+        "assumption_id",
+        "statement",
+        "test_now",
+        "falsifier"
+      ],
+      "title": "AssumptionItem",
+      "type": "object"
+    },
+    "FailureModeItem": {
+      "properties": {
+        "failure_mode_index": {
+          "description": "Enumerate the failure_mode items starting from 1",
+          "title": "Failure Mode Index",
+          "type": "integer"
+        },
+        "root_cause_assumption_id": {
+          "description": "The 'assumption_id' (e.g., 'A1') of the single assumption that is the primary root cause of this failure mode.",
+          "title": "Root Cause Assumption Id",
+          "type": "string"
+        },
+        "failure_mode_archetype": {
+          "description": "The archetype of failure: 'Process/Financial', 'Technical/Logistical', or 'Market/Human'.",
+          "title": "Failure Mode Archetype",
+          "type": "string"
+        },
+        "failure_mode_title": {
+          "description": "A compelling, story-like title (e.g., 'The Gridlock Gamble').",
+          "title": "Failure Mode Title",
+          "type": "string"
+        },
+        "risk_analysis": {
+          "description": "Structured, factual breakdown of causes, contributing factors, and impacts for the failure mode. Use bullet points or short factual sentences. Avoid narratives or fictional elements.",
+          "title": "Risk Analysis",
+          "type": "string"
+        },
+        "early_warning_signs": {
+          "description": "Clear, measurable indicators that this failure mode may occur. Each must be objectively testable.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Early Warning Signs",
+          "type": "array"
+        },
+        "owner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "The single role who owns this risk (e.g., 'Permitting Lead', 'Head of Engineering').",
+          "title": "Owner"
+        },
+        "likelihood_5": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Integer from 1 (rare) to 5 (almost certain) of this failure occurring.",
+          "title": "Likelihood 5"
+        },
+        "impact_5": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Integer from 1 (minor) to 5 (catastrophic) if this failure occurs.",
+          "title": "Impact 5"
+        },
+        "tripwires": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Array of 2-3 short, specific strings with NUMERIC thresholds that signal this failure is imminent (e.g., 'Permit delays exceed 90 days').",
+          "title": "Tripwires"
+        },
+        "playbook": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Array of exactly 3 brief, imperative action steps for the owner to take if a tripwire is hit.",
+          "title": "Playbook"
+        },
+        "stop_rule": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A single, short, hard stop condition that would trigger project cancellation or a major pivot.",
+          "title": "Stop Rule"
+        }
+      },
+      "required": [
+        "failure_mode_index",
+        "root_cause_assumption_id",
+        "failure_mode_archetype",
+        "failure_mode_title",
+        "risk_analysis",
+        "early_warning_signs"
+      ],
+      "title": "FailureModeItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "assumptions_to_kill": {
+      "description": "A list of 3 new, critical, underlying assumptions to test immediately.",
+      "items": {
+        "$ref": "#/$defs/AssumptionItem"
+      },
+      "title": "Assumptions To Kill",
+      "type": "array"
+    },
+    "failure_modes": {
+      "description": "A list containing exactly 3 distinct failure failure_modes, one for each archetype.",
+      "items": {
+        "$ref": "#/$defs/FailureModeItem"
+      },
+      "title": "Failure Modes",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assumptions_to_kill",
+    "failure_modes"
+  ],
+  "title": "PremortemAnalysis",
+  "type": "object"
+}

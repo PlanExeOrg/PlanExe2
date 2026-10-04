@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "AdherenceResult": {
+      "properties": {
+        "directive_index": {
+          "description": "References a directive_index from Phase 1.",
+          "title": "Directive Index",
+          "type": "integer"
+        },
+        "adherence_5": {
+          "description": "1 (ignored/contradicted) to 5 (fully honored).",
+          "title": "Adherence 5",
+          "type": "integer"
+        },
+        "category": {
+          "description": "fully_honored: plan respects this exactly. partially_honored: plan addresses it but incompletely. softened: plan weakens the requirement. ignored: plan doesn't address it at all. contradicted: plan says the opposite. unsolicited_caveat: plan adds qualifications the user didn't ask for.",
+          "enum": [
+            "fully_honored",
+            "partially_honored",
+            "softened",
+            "ignored",
+            "contradicted",
+            "unsolicited_caveat"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "evidence": {
+          "description": "Direct quote from the plan (under 200 chars).",
+          "title": "Evidence",
+          "type": "string"
+        },
+        "explanation": {
+          "description": "How the plan handled this directive and why this score was given.",
+          "title": "Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "directive_index",
+        "adherence_5",
+        "category",
+        "evidence",
+        "explanation"
+      ],
+      "title": "AdherenceResult",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "results": {
+      "description": "One scoring result per directive from Phase 1.",
+      "items": {
+        "$ref": "#/$defs/AdherenceResult"
+      },
+      "title": "Results",
+      "type": "array"
+    }
+  },
+  "required": [
+    "results"
+  ],
+  "title": "AdherenceScoreResult",
+  "type": "object"
+}

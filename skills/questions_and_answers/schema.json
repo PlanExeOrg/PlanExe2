@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "QuestionAnswerPair": {
+      "properties": {
+        "item_index": {
+          "description": "Enumeration of the question answer pairs, starting from 1.",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "question": {
+          "description": "The question.",
+          "title": "Question",
+          "type": "string"
+        },
+        "answer": {
+          "description": "The answer to the question.",
+          "title": "Answer",
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Explain why this particular question answer pair is suggested.",
+          "title": "Rationale",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_index",
+        "question",
+        "answer",
+        "rationale"
+      ],
+      "title": "QuestionAnswerPair",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "question_answer_pairs": {
+      "description": "List of question answer pairs.",
+      "items": {
+        "$ref": "#/$defs/QuestionAnswerPair"
+      },
+      "title": "Question Answer Pairs",
+      "type": "array"
+    },
+    "summary": {
+      "description": "Providing a high level context.",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "question_answer_pairs",
+    "summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

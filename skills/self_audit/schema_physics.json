@@ -1,0 +1,31 @@
+{
+  "properties": {
+    "justification": {
+      "description": "Why this level. 1-2 sentences. If medium/high, MUST name a specific physics law and describe the physical-quantity violation.",
+      "title": "Justification",
+      "type": "string"
+    },
+    "mitigation": {
+      "description": "One concrete action, ~30 words, role + verb + relative timeframe (no absolute calendar dates).",
+      "title": "Mitigation",
+      "type": "string"
+    },
+    "level": {
+      "description": "low / medium / high. If justification does not name a specific physics law, MUST be 'low'.",
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Level",
+      "type": "string"
+    }
+  },
+  "required": [
+    "justification",
+    "mitigation",
+    "level"
+  ],
+  "title": "PhysicsCheck",
+  "type": "object"
+}

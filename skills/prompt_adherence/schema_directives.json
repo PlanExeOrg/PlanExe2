@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "Directive": {
+      "properties": {
+        "directive_index": {
+          "description": "Index of this directive, starting from 1.",
+          "title": "Directive Index",
+          "type": "integer"
+        },
+        "directive_type": {
+          "description": "constraint: explicit numeric or scope limits (budget, timeline, capacity). stated_fact: things the user says are already true about the world. requirement: what must be built or done. banned: words, approaches, or technologies the user explicitly prohibits. intent: the user's posture, tone, or implied expectations about execution vs. study.",
+          "enum": [
+            "constraint",
+            "stated_fact",
+            "requirement",
+            "banned",
+            "intent"
+          ],
+          "title": "Directive Type",
+          "type": "string"
+        },
+        "text": {
+          "description": "The user's words — short quote or close paraphrase (under 100 chars).",
+          "title": "Text",
+          "type": "string"
+        },
+        "importance_5": {
+          "description": "1 (minor detail) to 5 (core requirement). Rate how central this is to the user's request.",
+          "title": "Importance 5",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "directive_index",
+        "directive_type",
+        "text",
+        "importance_5"
+      ],
+      "title": "Directive",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "directives": {
+      "description": "5-15 directives extracted from the user's prompt.",
+      "items": {
+        "$ref": "#/$defs/Directive"
+      },
+      "title": "Directives",
+      "type": "array"
+    }
+  },
+  "required": [
+    "directives"
+  ],
+  "title": "DirectiveExtractionResult",
+  "type": "object"
+}

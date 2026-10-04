@@ -1,0 +1,114 @@
+{
+  "stage": "data_collection",
+  "evaluated_at": "2026-10-04T19:16:35",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 1282.8,
+      "structure_problems": [],
+      "judgments": {
+        "data_collection.md": {
+          "verdict": "baseline",
+          "score_new": 4.0,
+          "score_baseline": 8.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 8,
+              "analysis": "Candidate A gives 14 fully structured items. Each has a rationale, data to collect, simulation steps, expert validation, responsible parties, assumptions with sensitivity, a SMART objective and notes. It covers geotechnical, architecture/prototype, governance, environment, energy, rail gauge, maritime traffic, flooding, workforce, finance/currency, corrosion, climate, decommissioning and supply chain. That breadth matches the plan's key risks and the upstream expert review. It uses the team names and numbers from the earlier stages, so it is consistent with the pipeline context. Weaknesses: it is verbose, and some simulation steps are fanciful (e.g. SAP SuccessFactors as a workforce simulator, \"MITRE Collision Risk Assessment Tool\"). Some SMART dates fall before or around the project start (Sept 2026), and some assumptions are oddly worded. The summary lists the items in a different order than the body. Overall it is comprehensive and decision-useful.\n\nCandidate B has only 4 items. It omits the hybrid architecture prototype validation, rail gauge, environment, finance, maritime traffic, corrosion, climate, workforce and decommissioning. Its summary mentions the rail gauge and architecture gaps, but no items address them, so the summary contradicts the body. Its simulation steps are partly just URLs or lookups, and some are dubious: the USGS online calculator (US-focused), \"SolidWorks simulation\" for sensor placement, and \"Det Norske Veritas\" listed separately from DNV GL. It lacks per-item rationale paragraphs beyond a brief intro. It does have some nice touches, such as precedents from Channel Tunnel, Marmaray and Midcat, but it is incomplete overall.\n\nA is much better for downstream use."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 8,
+              "analysis": "Candidate A has only 4 items: geotechnical, governance, energy and flooding. They are specific but cover a small slice of the plan's risks. Some tool choices are odd, such as a USGS event-catalogue link as a \"PSHA calculator\", CloudCompare for seismic data, and GeoCalc. Its Summary cites rail gauge, prototype validation and other issues that have no items, so it reads as incomplete. Candidate B has 14 items covering the architecture prototype, rail gauge, maritime traffic, environment, finance and FX, corrosion, climate, decommissioning, workforce and supply chain. It follows the required structure, uses plan-specific numbers and named team roles, and gives each item SMART objectives and assumptions with sensitivity scores. Its flaws are minor. Some simulation tools are generic or odd. Some assumptions repeat the plan's optimistic claims, such as the 18-month ratification, while the notes call it unrealistic. A few dates are inconsistent. The summary numbering does not match the item order. B is far more complete and more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 1934.3,
+      "structure_problems": [],
+      "judgments": {
+        "data_collection.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A is better. It has 11 items covering most of the plan's critical validation areas: grid, land and holding costs, tenant demand, DGSI/ANSSI security, cooling and PUE, fiber and latency, workforce, FX and financing, heat reuse, schedule and critical path, and social license. Each item is fully populated, with several data points, simulations, expert steps, multiple rated assumptions, a dated SMART objective, and notes. It is also specific to the plan: Cambrai/Valenciennes/Dunkirk, DREAL, RTE, the 32.2 km² buildable area, the 128.8 km² buffer, and the 60% tenant trigger. It flags uncontrolled external dependencies, as the prompt demands. Its weaknesses are some dubious details: \"EDSF\", \"Windisch\", Agilent and Cascade Microtech as cooling vendors, and ARS as the water-permit authority. It also has implausible figures such as 50,000–100,000 labor hours for 1 GW and a few internal inconsistencies, and it asserts some \"High\" assumptions too optimistically. Even so, it gives downstream stages a usable data-gathering agenda.\n\nCandidate B has only 4 items: RTE timeline, land holding costs, DGSI isolation, and workforce. It omits tenant demand, financing and FX, cooling and water, fiber and latency, heat reuse, and social license, even though the prompt lists all of these under required analysis. Its items are thin, with 2–3 data points and 1–2 assumptions each, and one simulation step is just \"N/A\". The few items it has are reasonable and tied to the review issues, but the coverage is far too narrow for this stage. Its summary also reflects that narrow scope."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It covers far more of the plan's required validation areas. It has 11 items: grid, land, tenants, security, cooling/PUE and water, fiber, workforce, FX, heat reuse, schedule and social license. Each item has concrete data to collect, simulation steps, named expert validations, assumptions with sensitivity ratings, dated SMART objectives and substantive notes. The notes flag real risks, such as RTE possibly requiring the developer to fund more than 50% of upgrades, DGSI retrofit costs, and 24–36+ month security reviews. B ties items back to earlier stages (Decision 4, Risk 5, Issue 2) and to the plan's EUR/USD split. It also marks uncontrolled external dependencies, which the prompt required.\n\nB has flaws:\n- Several vendor and organization names are dubious, such as \"EDSF\", Agilent and Cascade Microtech as cooling vendors, and ARS as a water-permit authority.\n- The labor-hours figures are inconsistent: 50,000–100,000 hours is stated next to 2–5M hours.\n- Some sensitivity ratings are questionable, for example 'High' on optimistic assumptions.\n- It is very long.\n\nA is concise and its dated objectives are reasonable. However, it has only 4 items and omits cooling and water, tenants and demand, fiber, FX, heat reuse and social license. Its summary also mislabels the workforce item as Data Item 3 when it is item 4. It is thinner and less useful for downstream stages, though it has fewer fabricated details.\n\nB's breadth and specificity outweigh its inaccuracies."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 374.6,
+      "structure_problems": [],
+      "judgments": {
+        "data_collection.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A has only three items: liability and backstop capitalization, OSDM latency, and commercial-terms auditability. They are tied to earlier-stage decisions and experts, which is good. But the set leaves out the main success metric (40% through-ticket share, modal shift), market data, and the financial and regulatory checks the stage is meant to cover. Its expert labelling is inconsistent: Expert 6 is both the settlement specialist and the distributor strategist. Item 1's SMART objective, \"within 160% of the €300M reserve\", is odd. The items are also thin, with few quantified targets. Its summary is short and says it will focus on Items 2 and 1, so it does not cover the plan as a whole.\n\nCandidate B has eight items covering market adoption and modal shift, the technical data layer, clearing capitalization, operator compliance and the three-strikes enforcement, backstop claims, PRM and reduction cards, governance cycle speed, and royalty auditing. Each has concrete data points, simulation steps, dated SMART objectives that fit the May 2026 start, and useful notes on risks and uncertainties. It flags that the 300M-journey baseline may be overestimated, and that the €500M/month velocity is untested. It also gives a clear sensitivity hierarchy and a prioritized summary.\n\nB has flaws. Some details are invented or wrong:\n- \"Eurostar, Renfe\" are named as independent market research firms.\n- ERTMS is invoked as a comparison, which is mostly irrelevant here.\n- Directives 2008/164/EC and 1371/2007 are mislabelled or loosely cited.\n- AWS SageMaker is named as a load-testing platform.\n- The \"next 90 days\" label is inconsistent with the dates listed under it.\n- The €1.8M validation budget, 1:833 ratio and 100K requests/second target are unsupported.\n- The summary is bloated.\n\nEven so, B is far more complete, specific and useful for downstream planning, and it addresses the plan's main success criteria. A is tighter but too narrow."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A is much stronger. It has eight items covering market adoption and modal shift, OSDM technical performance, clearing capitalisation, operator compliance, passenger-rights claims, PRM and reduction cards, governance, and commercial-terms auditing. Each item has concrete data to collect, simulations, named expert validators, owners, graded assumptions, dated SMART objectives, and risk notes. It ties back to the plan's decisions and risks, including the €200M float, the €300M reserve, T+5 latency, the three-strikes enforcement posture, and the 5% royalty cap. It also adds a useful summary with priorities, a validation budget and escalation paths. It has weaknesses. Some figures are invented or shaky, such as the 300M journeys baseline and the 1:833 ROI ratio. Some references are wrong or odd: Directive 2008/164/EC, Eurostar named as a market research firm, and AWS SageMaker for load testing. The \"next 90 days\" label also covers dates spread over about eight months. Even so, it is plan-specific and useful for downstream stages.\n\nCandidate B has only three items, and it omits market and demand validation, modal shift and the 40% target. It also leaves out accessibility, governance and dedicated clearing validation. Its content is thin, with only two or three bullets per section. Several \"data to collect\" entries are really deliverables, such as templates and guidance drafts. It refers to \"Expert 6\" and \"Kenji Ito\" in ways that leak internal context. Its summary says tasks are \"detailed below\", but none follow. It does reflect some decisions and the expert review, but it falls well short on coverage and decision usefulness."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 491.6,
+      "structure_problems": [],
+      "judgments": {
+        "data_collection.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives seven well-developed items. They cover the mortality and morbidity baseline, outreach contact rates and vulnerable-population sizing, cooling-center readiness, home-intervention cost and effectiveness, alert-threshold calibration, field staffing and safety, and the health-system data loop. Each has concrete data sources (DWD, the Saxon statistics office, the Gesundheitsamt), plan-specific simulations and external expert checks. The SMART objectives are measurable and tied to the Month 2 and Month 4 gates. It also covers the GDPR and consent points.\n\nIt has flaws. The summary claims 12 areas but only 7 are delivered. It says 95% inter-rater reliability while the item uses kappa ≥0.75. It misstates the Month 4 gate as requiring a demonstrated mortality reduction. Some deadlines are already past (the 15 April request date, given a 3 May start). Some steps are heavy for the timeline, such as EnergyPlus modelling, 500 random-digit-dial calls, and quotes for 5,000 units. Even so, it is plainly decision-useful.\n\nCandidate B has only four short items. Several of its \"data to collect\" entries are really deliverables or tasks, such as signed documents and contracts. Its expert validation steps mostly consult internal staff, or roles marked \"(Missing)\", rather than independent experts. It covers the finance segregation, the data MOU, and the voucher pivot. It leaves out the baseline epidemiology, alert thresholds, outreach contact rates, multilingual coverage, worker protection, communications, and the GDPR approach. Its simulation steps are thin. It is concise and internally consistent, and the financial-governance item is a good catch. But it has much less validation value and less usefulness for downstream stages.\n\nOverall A is substantially stronger despite its inconsistencies."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It is Leipzig-specific and covers the data needs that most affect this plan. Those are the mortality/EMS/ED baseline, the vulnerable-population size and the 60% contact rate, cooling-center readiness, home-intervention cost and effect, alert-threshold calibration, outreach staffing and safety, and the health data loop. Each item has concrete data sources (DWD, the state statistics office, hospital and EMS logs), simulation steps, expert checks, and SMART objectives with numbers. It ties directly to the Month 2 and Month 4 gates. It also has flaws:\n- The summary claims 12 areas but only 7 are delivered.\n- Some deadlines are already past (data requests due April 15, MCR lock by April 30, when today is May 3).\n- Some content is over-engineered, such as EnergyPlus modelling and random-digit-dial surveys.\n- It has no dedicated financial or MCR item, although the summary mentions the MCR.\n- It leans heavily on validating the triage script.\n- Worker protection, communications and transport get no dedicated item.\n\nCandidate A has only 4 items and never names the city. Its items read more like contract and decision checklists than data-gathering actions. It misses most of what the stage needs: baselines, alert thresholds, outreach feasibility, procurement pricing, worker protection, and comms and transport. It does have a useful and plausible financial-governance item (the MCR) and realistic near-term dates, and it is consistent with the upstream strategic pivots. But its coverage is too thin for downstream use, and its items lean on \"Missing\" roles and decision references without context.\n\nOverall, B is far more complete and decision-useful despite its imperfections."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

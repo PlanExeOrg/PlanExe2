@@ -1,0 +1,114 @@
+{
+  "stage": "questions_and_answers",
+  "evaluated_at": "2026-10-04T18:29:05",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 179.5,
+      "structure_problems": [],
+      "judgments": {
+        "questions_and_answers.md": {
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates give 10 Q&A pairs. Both are largely faithful to the plan's facts: the Builder's Foundation path, the 1:50 model and 50 m prototype gates, the seismic probabilities, the gauge mismatch, the €2-4bn decommissioning reserve and the 8-12k workforce. Neither shows the summary section.\n\nCandidate A asks sharp questions of the kind stakeholders, investors or regulators would raise. They cover the no-precedent architecture, missing geotechnical data, gauge, flooding, decommissioning, treaty and governance fragility, shipping-lane collision risk, workforce ethics, ridership and funds, and megaproject overrun precedents. Its answers are detailed and quantified. They carry real insight, such as \"no treaty truly binds a future government\", the ridership-to-funds cascade, and the comparison with Channel, Seikan and Marmaray. Weaknesses:\n- The answers are very long and read as walls of text.\n- They repeat the \"ethical controversy\" framing.\n- They contain some specifics that may be embellished, such as 500 sensors and 50-passenger submersibles.\n- They have small inconsistencies, such as the mobilization-date framing.\n- They skip energy supply, environmental strategy and the legal/UNCLOS gaps.\n\nCandidate B is concise, clear and accurate to the plan. It covers topics A omits: energy supply, cybersecurity, UNCLOS and BIT legal gaps, and the environmental strategy. However, many of its questions are descriptive (\"What is the Builder's Foundation?\", \"What is the killer application?\"). They read as plan summaries more than as probing stakeholder questions. It also omits shipping-traffic risk, geopolitical and treaty risk, cost-overrun precedent and ridership downside. Its answers are less decision-useful and give less insight into consequences and mitigations.\n\nOverall, A better fulfils the purpose of anticipating hard stakeholder questions and answering them with plan-specific substance. B is cleaner and more digestible and has broader coverage, but it is shallower."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates draw on the same review material (Builder's Foundation, the validation gates, seismic data gaps, rail gauge, decommissioning, workforce) and give 10 Q&A pairs in the required format.\n\nCandidate A has concise, well-structured answers that stay close to the plan's content. It covers a broad set of issues: legal and treaty gaps (BITs, UNCLOS classification, ratification timeline), missing energy supply, flooding protocols, cybersecurity, the environmental strategy, workforce, seismic risk and decommissioning. Each answer ends with a clear recommendation or conclusion. Its weakness is that many questions read like \"what is X\" summaries rather than the pointed questions stakeholders would ask. It also omits ridership risk, shipping-lane collision risk and comparison with earlier megaprojects.\n\nCandidate B phrases its questions more like real, challenging stakeholder questions. It covers shipping-lane collision, ridership shortfall and its effect on the funds, geopolitical fragility of the neutral consortium, and comparison with the Channel Tunnel, Seikan and other precedents. Its content is deep and decision-relevant. However, the answers are very long, single-paragraph walls of text, which makes them less \"clear\". They repeat the same figures and editorialise (\"institutional hubris\", \"ethical controversy\"). They also add specifics that may be invented, such as 500 sensor points, 200 m compartments and 50-passenger submersibles. Some claims are doubtful, for example that 100 m is deeper than Seikan's deepest section, when Seikan lies about 240 m below sea level. B also drops the energy and cybersecurity gaps and the legal gaps.\n\nOverall, B is more insightful in question design but is verbose and has some factual slips. A is clearer, broader across the review's gaps, and more faithful, though less probing. On balance this is close, with a slight edge to A for clarity and breadth."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 209.7,
+      "structure_problems": [],
+      "judgments": {
+        "questions_and_answers.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A gives specific, decision-useful answers tied to the plan's content. It covers the Pragmatic Scale-Up strategy, the 80% buffer land-use model, the tenant take-or-pay gate, RTE staged commitments and lead times, DGSI/ANSSI sovereign sequencing, water and PUE trade-offs, the workforce mandate, and heat-reuse economics. It states risks, quantified exposures and mitigations, and it keeps the skeptical tone the plan asks for. Its weaknesses are real. Some figures are invented or shaky: the 60% threshold differs from the prompt's 30–50%, and the heat prices and the €10–20B sovereign revenue figure have no source. There are factual slips: OpenAI and Meta are called \"European hyperscalers\", AlphaFold is described as a data center anchor, and ARS is named as the water permitting authority. Q2 also contradicts itself (\"hyper-dense\" with 80% buffers, \"18-month expansion reserves\"). The answers are very long and sometimes ramble. Candidate B is short and generic. Each answer is two or three sentences with few numbers and little insight. It misses important topics such as water, security and the DGSI review, and its Q1 is a bland \"levers\" question. It is mostly accurate, with the €1–2B stranded-capital figure being its one concrete number, but it adds little for downstream stages and doesn't test the plan's hard questions. Overall A is substantially more useful despite its flaws."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate B is the stronger Q&A. Its questions are specific and each answer cites concrete plan content. That content includes the Pragmatic Scale-Up strategy, the 60% take-or-pay gate, the RTE binding-allocation deferral and its 36+ month lead time, the DGSI/ANSSI sovereign-partition sequencing, the 80% buffer and 32.2 km² buildable area, dry-cooler PUE risk, the 75% local-apprentice mandate, and heat reuse economics. It gives numbers, trade-offs, mitigations and failure modes that downstream stages can use. It also stays in the plan's skeptical, red-team spirit, for example by questioning whether heat reuse is a public benefit rather than a profit driver.\n\nB has flaws. It is very long and verbose. Some claims look invented or wrong: waste heat is described as 60–70% of power, the AlphaFold example is odd, ARS is cited as the water-permit authority, and some cost figures are unsupported. Some details may be aligned with earlier-stage documents rather than the original prompt, such as the 60% threshold versus the prompt's 30–50%. Even so, it is largely coherent and decision-useful.\n\nCandidate A is short and generic. Q5 and Q8 overlap, and Q7 repeats Q5. The \"ethical considerations\" questions are shoehorned in. Its answers are thin and give little quantification. It does cover relevant topics: RTE allocation risk, land assembly, tenant triggers, PUE and heat reuse. But it adds little insight, and the €1B–€2B stranded-capital figure is unexplained.\n\nNeither includes the summary. Overall B is clearly more useful and specific despite its verbosity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 112.6,
+      "structure_problems": [],
+      "judgments": {
+        "questions_and_answers.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives plan-specific questions and answers. They cite the chosen \"Pragmatic Harmonization\" scenario, Decisions 8, 9, 10, 11 and 12, and the T+5 latency target. They also cover the €300M reserve, the capped royalty, the public reference distributor, the 18-month binding deadline, and reduction cards. Most answers include the expert review's recommendation (collective insurance pool, de-escalation playbook, historical-claim-based contributions) and explain the tensions in the plan. This is useful for downstream stages. It has flaws. It mixes \"$300M\" with \"€\", and a few figures look invented (3-7% penalties, 5-15% rework, 12-24 months). The answers are long and some drift into speculation. The overall quality is still high. Candidate B is generic and shallow, with short answers that restate the topic. Q3 and Q7 overlap, as do Q4 and Q7. Q5 presents the three-strikes policy as a mitigation, with no scrutiny of its political risk. B also covers little of the expert criticism, and it omits the reference distributor, reduction cards, and the specific figures. Its only number, \"€50-200 million\", is vague. Q1 and Q2 are poorly framed."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is more specific and more useful. Candidate A is generic and repetitive.\n\nCandidate B:\n- Its questions are tied to the plan's own content: the \"Pragmatic Harmonization\" scenario, tiered liability versus a collective insurance pool, the T+5 latency benchmark, the capped royalty, Decision 12 \"Three Strikes\", the €300M float reserve, the Public Reference Distributor, and reduction cards.\n- It surfaces real tensions and contradictions that the expert review raised, and it gives the recommended remedies. That is what a stakeholder Q&A should do.\n- Its answers are long and sometimes speculative. For example, it cites a \"3-7% penalty\" and \"5-15% rework\" figures that may come from the review documents or may be invented.\n- Q7's heading has a \"$300M\" currency slip, and the Q&A has no summary.\n- It stays consistent with the prompt on the 18-month, 30-month and €1.5B figures.\n\nCandidate A:\n- Its answers are short and mostly generic.\n- Q3, Q4 and Q7 largely repeat each other on tiered liability, moral hazard and fairness.\n- Q5 and Q9 both cover the three-strikes policy.\n- It gives fewer concrete details and does not use the scenario context, apart from the €50-200M working-capital figure.\n- It also has no summary.\n- Its questions are phrased more like \"what is the significance of X\" than the questions a stakeholder would actually ask.\n\nB's verbosity and its few doubtful figures are minor next to A's lack of specificity and its duplication."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 468.4,
+      "structure_problems": [],
+      "judgments": {
+        "questions_and_answers.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A matches the stated markdown format (**Q<n>: ...** / A<n>: ...). It has ten distinct questions that cover a wide range: GDPR vs. outreach, alert fatigue, the voucher-to-installation pivot, the Month 4 gate and contingency reserve, Builder vs. Pioneer vs. Consolidator, field safety, displacement vs. reduction, staff reallocation, cooling-center failure cascades, and the health-system script vs. MOU. The answers are specific. They cite risk numbers, decision options, and quantified figures such as €250k, €300k, 43%, and 15–25%. They give real reasoning and trade-offs that stakeholders would ask about. Weaknesses: the answers are very long, and some are speculative. For example, A lists only two of the four Month 4 gate criteria. It also omits the rationale field and the summary. Q3 and Q7 overlap on vouchers.\n\nCandidate B uses a raw-schema layout (\"Question Answer Pair N\", with a Rationale and a Summary), not the expected Q/A markdown. That layout does supply the rationale and summary fields. Its answers are concise and mostly accurate, but the set is repetitive. Alert fatigue appears in Q4 and Q7. The voucher/installation conflict appears in Q2 and Q8. The health-system script appears in Q3 and Q9. Safety and canvassing overlap in Q5 and Q6. It has a few questionable claims, such as the \"Builder path chose vouchers\" framing, the €400k/year figure, and the claim that vouchers neglect structural burden. It has less depth and less variety. It does include a useful sustainability question (Q10) and the MCR question.\n\nOverall, A is richer, more diverse, and more decision-useful, and it follows the expected format. B's concision and its rationale and summary fields do not offset its redundancy and thinner insight."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates draw on the same review material (MCR, voucher vs. installation, triage script vs. MOU, alert fatigue, field safety). They differ in format, redundancy and depth.\n\nCandidate A:\n- It uses \"Question Answer Pair\" headers with Question, Answer and Rationale fields, plus a summary. That is closer to the schema than to the stated markdown format (`**Q<n>:**` / `A<n>:`).\n- Its 10 pairs are noticeably redundant. Pair 3 and pair 9 both cover the triage script and GDPR. Pair 2 and pair 8 both cover vouchers. Pair 4 and pair 7 both cover alert fatigue. Pair 5 and pair 6 both cover buddy-system safety.\n- Its answers are short and thin on detail.\n- Pair 8 calls the voucher model the chosen path, while pair 2 says it is being reversed, so it is partly inconsistent.\n- It does cover the MCR and the long-term cost of 24-hour cooling centers. These are useful additions, but the cost figures are loosely sourced.\n\nCandidate B:\n- It follows the specified `**Q<n>: …**` / `A<n>:` markdown format and has 10 distinct questions.\n- The topics are varied: the GDPR vs. outreach tension, alert fatigue, the voucher pivot, the Month 4 gate and MCR, the scenario choice (Pioneer/Consolidator/Builder), field safety, displacement vs. reduction of risk, staff reallocation, facility failure cascades, and the triage script.\n- The answers are detailed, plan-specific and decision-useful. They include risk ratings, quantified impacts such as €250k, €50k and 15–25%, and mitigation steps.\n- Weaknesses: the answers are long, and the Month 4 gate summary omits the transport and after-action criteria. Some content, such as the \"displacement\" discussion, is speculative.\n\nOverall, B is more varied, deeper and better formatted for downstream use. A's redundancy and shallowness count against it."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

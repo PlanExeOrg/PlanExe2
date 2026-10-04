@@ -1,0 +1,142 @@
+{
+  "$defs": {
+    "AssumptionItem": {
+      "properties": {
+        "item_index": {
+          "description": "Enumeration, starting from 1.",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "assumption": {
+          "description": "The assumption to be validated.",
+          "title": "Assumption",
+          "type": "string"
+        },
+        "sensitivity_score": {
+          "description": "The sensitivity score of the assumption.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Sensitivity Score",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_index",
+        "assumption",
+        "sensitivity_score"
+      ],
+      "title": "AssumptionItem",
+      "type": "object"
+    },
+    "PlannedDataCollectionItem": {
+      "properties": {
+        "item_index": {
+          "description": "Enumeration, starting from 1.",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "title": {
+          "description": "Brief title, such as 'Venue Cost Estimates', 'Sponsorship & Revenue Streams'.",
+          "title": "Title",
+          "type": "string"
+        },
+        "data_to_collect": {
+          "description": "What data to collect",
+          "items": {
+            "type": "string"
+          },
+          "title": "Data To Collect",
+          "type": "array"
+        },
+        "simulation_steps": {
+          "description": "How to simulate the data and what tools to use.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Simulation Steps",
+          "type": "array"
+        },
+        "expert_validation_steps": {
+          "description": "Human expert validation steps.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Expert Validation Steps",
+          "type": "array"
+        },
+        "rationale": {
+          "description": "Explain why this particular data is to be collected.",
+          "title": "Rationale",
+          "type": "string"
+        },
+        "responsible_parties": {
+          "description": "Who specifically should be involved or responsible.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Responsible Parties",
+          "type": "array"
+        },
+        "assumptions": {
+          "description": "What assumptions are made about data, validation, collection, etc.",
+          "items": {
+            "$ref": "#/$defs/AssumptionItem"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "smart_validation_objective": {
+          "description": "Explicit SMART objectives for validation.",
+          "title": "Smart Validation Objective",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Insights and notes.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Notes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "item_index",
+        "title",
+        "data_to_collect",
+        "simulation_steps",
+        "expert_validation_steps",
+        "rationale",
+        "responsible_parties",
+        "assumptions",
+        "smart_validation_objective",
+        "notes"
+      ],
+      "title": "PlannedDataCollectionItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "data_collection_list": {
+      "description": "List of data to be collected.",
+      "items": {
+        "$ref": "#/$defs/PlannedDataCollectionItem"
+      },
+      "title": "Data Collection List",
+      "type": "array"
+    },
+    "summary": {
+      "description": "Providing a high level context.",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "data_collection_list",
+    "summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

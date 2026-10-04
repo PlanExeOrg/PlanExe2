@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "TeamMember": {
+      "description": "A human with domain knowledge.",
+      "properties": {
+        "id": {
+          "description": "A unique id for the job_category.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "contract_type": {
+          "description": "The legal and financial agreement.",
+          "enum": [
+            "full_time_employee",
+            "part_time_employee",
+            "independent_contractor",
+            "agency_temp",
+            "other"
+          ],
+          "title": "Contract Type",
+          "type": "string"
+        },
+        "justification": {
+          "description": "Brief explanation for why that contract type was chosen. Helps justify decisions and allows for easy review.",
+          "title": "Justification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "contract_type",
+        "justification"
+      ],
+      "title": "TeamMember",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "team_members": {
+      "description": "The experts with domain knowledge about the problem.",
+      "items": {
+        "$ref": "#/$defs/TeamMember"
+      },
+      "title": "Team Members",
+      "type": "array"
+    }
+  },
+  "required": [
+    "team_members"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

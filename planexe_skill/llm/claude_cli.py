@@ -8,17 +8,18 @@ import json
 import os
 import shutil
 import subprocess
+import tempfile
 import time
 
 from planexe_skill.llm.base import Backend, LLMError, LLMResult
 
 DEFAULT_MODELS = {"high": "claude-sonnet-5-5", "low": "claude-haiku-4-5-20251001"}
-DEFAULT_EFFORTS = {"high": "high", "low": None}
+DEFAULT_EFFORTS = {"high": "high", "low": "low"}
 
 # Messages that are worth retrying after a pause.
 _TRANSIENT = ("overloaded", "rate limit", "rate_limit", "529", "503", "502", "timeout", "timed out",
               "econnreset", "socket hang up", "internal server error", "api_error",
-              "structured_output_retry_exhausted")
+              "structured_output_retry_exhausted", "server error")
 
 
 def child_env() -> dict[str, str]:
@@ -32,6 +33,13 @@ def child_env() -> dict[str, str]:
     drop_exact = {"ANTHROPIC_BASE_URL", "AI_AGENT", "BAGGAGE", "CLAUDECODE"}
     return {k: v for k, v in os.environ.items()
             if k not in drop_exact and not k.startswith("CLAUDE_CODE_") and not k.startswith("CLAUDE_")}
+
+
+def _neutral_cwd() -> str:
+    """An empty directory, so the child picks up no project CLAUDE.md / .claude settings."""
+    d = os.path.join(tempfile.gettempdir(), "planexe_skill_claude_cwd")
+    os.makedirs(d, exist_ok=True)
+    return d
 
 
 class ClaudeCLIBackend(Backend):
@@ -48,12 +56,19 @@ class ClaudeCLIBackend(Backend):
     def model_for(self, tier: str) -> str:
         return self.models.get(tier, self.models["low"])
 
-    def build_command(self, system: str, schema: dict | None, tier: str) -> list[str]:
+    def build_command(self, system_file: str, schema: dict | None, tier: str) -> list[str]:
+        """`system_file` holds the system prompt (a file avoids OS argument-length limits)."""
+        # Isolation: the child must behave like a plain LLM call. Without these flags it would
+        # inherit the user's settings (e.g. effortLevel, plugins, SessionStart hooks that inject
+        # text, MCP servers, skills) and the effort level of the user's own sessions.
         cmd = [self.executable, "-p", "--output-format", "json",
                "--model", self.model_for(tier),
                "--tools", "",
                "--no-session-persistence",
-               "--system-prompt", system]
+               "--setting-sources", "project",
+               "--strict-mcp-config",
+               "--disable-slash-commands",
+               "--system-prompt-file", system_file]
         effort = self.efforts.get(tier)
         if effort:
             cmd += ["--effort", effort]
@@ -77,7 +92,7 @@ class ClaudeCLIBackend(Backend):
                            f"(https://docs.claude.com/claude-code) and run 'claude auth login'.")
         try:
             proc = subprocess.run(cmd, input=user, capture_output=True, text=True,
-                                  timeout=self.timeout, env=child_env())
+                                  timeout=self.timeout, env=child_env(), cwd=_neutral_cwd())
         except subprocess.TimeoutExpired:
             raise LLMError(f"claude CLI timed out after {self.timeout:.0f}s") from None
         envelope = None
@@ -98,7 +113,16 @@ class ClaudeCLIBackend(Backend):
         return envelope
 
     def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low") -> LLMResult:
-        cmd = self.build_command(system, schema, tier)
+        fd, system_file = tempfile.mkstemp(prefix="planexe_skill_system_", suffix=".md")
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(system)
+        try:
+            return self._complete(system_file, user, schema, tier)
+        finally:
+            os.unlink(system_file)
+
+    def _complete(self, system_file: str, user: str, schema: dict | None, tier: str) -> LLMResult:
+        cmd = self.build_command(system_file, schema, tier)
         last_error: LLMError | None = None
         for attempt in range(self.retries + 1):
             start = time.time()

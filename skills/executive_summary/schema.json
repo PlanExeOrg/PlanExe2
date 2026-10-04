@@ -1,0 +1,62 @@
+{
+  "properties": {
+    "audience_tailoring": {
+      "description": "Adapt the tone and detail based on who will be reading this summary (individual hobbyist, corporate, government, etc.).",
+      "title": "Audience Tailoring",
+      "type": "string"
+    },
+    "focus_and_context": {
+      "description": "A short statement about why this project or plan exists and its overall objectives.",
+      "title": "Focus And Context",
+      "type": "string"
+    },
+    "purpose_and_goals": {
+      "description": "A crisp statement of the project's main goals and success criteria.",
+      "title": "Purpose And Goals",
+      "type": "string"
+    },
+    "key_deliverables_and_outcomes": {
+      "description": "Bulleted summary of the expected end-products or results from the plan.",
+      "title": "Key Deliverables And Outcomes",
+      "type": "string"
+    },
+    "timeline_and_budget": {
+      "description": "A short estimate of time and top-level budget",
+      "title": "Timeline And Budget",
+      "type": "string"
+    },
+    "risks_and_mitigations": {
+      "description": "Identify 1-2 major risks and how you plan to reduce or address them.",
+      "title": "Risks And Mitigations",
+      "type": "string"
+    },
+    "action_orientation": {
+      "description": "Explain the immediate actions or next steps needed to move forward. Summarize who, what, and when.",
+      "title": "Action Orientation",
+      "type": "string"
+    },
+    "overall_takeaway": {
+      "description": "A final, concise statement emphasizing the main point or value of the plan (e.g., expected benefits, ROI, key success metric).",
+      "title": "Overall Takeaway",
+      "type": "string"
+    },
+    "feedback": {
+      "description": "Suggestions for how to strengthen the executive summary by adding more evidence or improving persuasiveness.",
+      "title": "Feedback",
+      "type": "string"
+    }
+  },
+  "required": [
+    "audience_tailoring",
+    "focus_and_context",
+    "purpose_and_goals",
+    "key_deliverables_and_outcomes",
+    "timeline_and_budget",
+    "risks_and_mitigations",
+    "action_orientation",
+    "overall_takeaway",
+    "feedback"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

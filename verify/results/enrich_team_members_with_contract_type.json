@@ -1,0 +1,114 @@
+{
+  "stage": "enrich_team_members_with_contract_type",
+  "evaluated_at": "2026-10-04T18:05:45",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 58.1,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_contract_type.json": {
+          "verdict": "baseline",
+          "score_new": 6.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates give the same contract-type classification for all eight roles. Geotechnical & Seismic is independent_contractor and the other seven are full_time_employee. The explanation, consequences and count fields are identical, so the comparison rests on the contract_type_justification text.\n\nCandidate A:\n- Its justifications are grounded in the plan's facts and in each role's own details.\n- For the geotechnical role it explains why a contractor fits. The work is campaign-based, the 'min 1, max 2' count varies with concurrent campaigns, and the expertise can be sourced from specialist firms. It also notes that ongoing monitoring is handled by the full-time Structural Integrity Director, which is a sensible cross-reference.\n- It makes no clear factual errors.\n- Weakness: much of each justification restates the role description and risk figures rather than reasoning about contract type. They are verbose, but the employment-model reasoning is still present (continuity, authority, institutional knowledge).\n\nCandidate B:\n- Its justifications are concise and focus more directly on the contract-type reasoning, such as \"cannot be episodic\" and \"needs sustained integration\".\n- It invents specifics that the inputs do not support: \"2-3 years intensive validation\", \"~15 years of continuous offshore construction\", and \"5-6 year design/construction phase\".\n- It contains a factual misattribution. It says \"Environmental delays are the highest-likelihood risk (add 2-5 years, €2-5B costs)\". The input attributes that figure to governance misalignment, which Candidate A states correctly.\n- It writes \"1-2 contractors\", a slight mischaracterization of \"min 1, max 2\".\n- Its brevity is a plus, but the invented figures and the misattributed risk reduce faithfulness and correctness.\n\nA is more faithful and accurate. B is tighter but contains an error and unsupported numbers."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "The two candidates are identical except for the contract_type_justification text. Both give the same contract types: independent_contractor for the geotechnical role and full_time_employee for the other seven. Both are valid and schema-conformant, so the comparison turns on the quality of the justifications.\n\nA's justifications are concise and focus on why each role is continuous or episodic, which is what the stage asks for. A has a factual slip in the Environmental justification. It says \"Environmental delays are the highest-likelihood risk (add 2-5 years, €2-5B costs)\". That figure is the governance misalignment risk from the Program Director's consequences text, so A misattributes it. A also makes some loose claims, such as \"Cannot be external\" and \"~15 years\". A's geotechnical justification includes a vague reference to \"'1-2 contractors'\".\n\nB's justifications are longer and mostly restate the explanation and consequences fields. That is redundant, but they are accurate. Their reasoning is also more role-specific. For example, the geotechnical justification says ongoing monitoring is handed to the full-time Structural Integrity Director, and it notes that the expertise can be sourced from specialist firms. The others cite institutional knowledge, authority, and on-site presence. B has no misattributed figures.\n\nB is slightly better on correctness and on the quality of its contract-type reasoning, though it is more verbose. A is cleaner but contains the misattribution."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 41.2,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_contract_type.json": {
+          "verdict": "tie",
+          "score_new": 5.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Both candidates keep the same team members and only differ in contract_type and justification.\n\nCandidate A splits the roles: 4 full-time employees (strategist, compliance lead, financial controller, and one more) and 4 independent contractors (grid/power, land modeling, cooling design, social license, telecoms). That split fits a red-team scenario where Phase 0 may end in cancellation. It avoids committing to a large permanent headcount before the decision gates are passed, and it uses specialists for discrete, high-expertise tasks. Its weaknesses are generic justifications and a few odd choices. One example is calling the grid/power negotiators contractors even though RTE/EDF engagement runs through all phases. Another is \"fiduciary duty\" for the strategist, which is questionable.\n\nCandidate B makes all eight roles full-time employees. Its justifications cite plan details such as €4.32B FX exposure, 60% take-or-pay, <2ms RTT, and the €12.5M skills academy, which is more specific. But assigning every role the same type shows little discrimination. It also commits to a large permanent staff for a project that may be killed at the Phase 0 gate. Some of its reasoning undercuts itself: the telecom entry admits that the expertise is \"often external\" and then picks full-time anyway. The claim that regulatory knowledge is \"not available via external contractors\" is overstated.\n\nA is the more realistic and differentiated choice, and B is the more specific in its wording. I give A a slight edge."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the input fields unchanged and add a contract_type and a justification for each of the 8 roles, so the format is equally complete.\n\nCandidate A marks all 8 roles as full_time_employee. Its justifications are specific and tied to the plan: the €4.32B FX exposure, the 60% take-or-pay threshold, the 32.2 km² buildable area against 128.8 km² of buffer, the €30M+ holding cost, the <2ms RTT latency requirement, and the Phase 0–4 span. They explain why each role is continuous and on the critical path. The weaknesses are that nothing is differentiated and it ignores that the plan may be cancelled after Phase 0, so hiring everyone full-time is risky. The telecom justification also concedes that this expertise is usually external, then picks FTE anyway.\n\nCandidate B splits the roles: 4 FTE and 4 independent contractors. That is more realistic in principle, and it fits contractors to episodic work such as land modeling and telecom negotiation. But its choices are questionable. Grid and power procurement is the single biggest critical-path blocker (RTE/EDF, 9 GW), yet B makes it a contractor on the grounds of \"discrete negotiation.\" That clashes with the plan's emphasis on continuous RTE engagement. B also makes the Social License role a contractor even though community trust takes sustained presence. Its justifications are generic (\"niche expertise,\" \"best experts operate as consultants\") and use few plan-specific facts. Its claim of \"a focused 3–5 year assembly period\" is thin. It also gives the Chief Strategist a vague \"fiduciary duty\" rationale.\n\nOverall, A has stronger, better-grounded reasoning, but its uniformity is a weakness. B is more varied, but its key classifications are less defensible and its reasoning is more boilerplate. I lean slightly toward A."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 86.3,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_contract_type.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the input fields intact and add contract_type and a justification for all 8 roles. They agree on roles 1, 2, 3, 4, 6 and 7. The differences are roles 5 and 8, and the quality of the justifications.\n\nCandidate A makes role 5 (Passenger Rights Analyst) and role 8 (Testing Coordinators) full-time. It ties each justification to the plan's specifics: the €300M float, the T+3 and T+5 benchmarks, Decisions 8, 9 and 13, the quarterly BEUC and disability-group reviews, and the Month 6, 18 and 30 milestones. Its weaknesses are that nearly everything is FTE, so it differentiates little. The role 4 justification also hedges by saying supporting staff could be part-time. Making the testing coordinators FTE, while admitting the work is front-loaded, is arguable.\n\nCandidate B differentiates more. It makes role 5 an independent contractor and role 8 agency_temp. Agency_temp for front-loaded testing coordination is plausible, but those coordinators manage 15 FTEs across three hubs, so it is debatable. Making the Passenger Rights Analyst a contractor is weakly justified (\"often sourced externally\") and sits poorly with the ongoing 90-minute threshold governance and the stakeholder reviews. B's justifications are shorter and more generic. Role 3 also contains a factual inconsistency: it cites a \"$200M float\" when the plan and B's own explanation say €300M, with the wrong currency and the wrong amount.\n\nA is more plan-specific and consistent, and it has no factual errors. B's extra variety is a modest plus, but it comes with an error and thinner reasoning. A is slightly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the input fields unchanged and add contract_type and a justification for all 8 roles. They differ in the contract types chosen and in how well the justifications use the plan.\n\nCandidate A varies the contract types: five FTEs, two independent contractors and one agency temp. That variety looks like real differentiation, but several choices are weak:\n- The Passenger Rights & Equity Policy Analyst is made a contractor. Yet this role covers ongoing 90-minute threshold governance, the backstop design, and the accessibility and reduction-card decisions. It is core and continuous work, and the justification only says such expertise is \"often sourced externally\".\n- The Conformance Testing Coordinators are agency temps, even though they manage 15 testing FTEs across three hubs for a multi-year program. Agency staff in a leadership and continuity role is questionable.\n- It contains a factual inconsistency: \"$200M float\" in the Financial Specialist justification, against the €300M Emergency Float Reserve stated elsewhere.\n- Its justifications are short and fairly generic, and they reuse the role description.\n\nCandidate B assigns FTE to seven roles and contractor to one, the Distributor Strategist. Its justifications are more plan-specific:\n- They cite the Month 6, 18 and 30 milestones.\n- They cite the quarterly stakeholder reviews with disability groups and BEUC.\n- They cite the \"three strikes\" enforcement protocol.\n- They cite the €300M float and the T+3 benchmark.\n- They explain why each role cannot be episodic.\n\nIts weaknesses:\n- It is heavily FTE-skewed, with little differentiation.\n- The Rail Operator Liaison justification hedges, saying supporting roles \"could be part-time or contract-based\", which does not match its FTE label.\n- The Testing Coordinators are described as front-loaded yet kept as FTEs for all five years.\n- Some claims, such as \"cannot be outsourced\", are overstated.\n\nOverall, B's classifications are more defensible for a public coordination program with a long horizon and core governance roles. Its justifications are also richer and free of numeric errors. A's variety is not backed by sound reasoning and contains an error. B is moderately better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 79.6,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_contract_type.json": {
+          "verdict": "tie",
+          "score_new": 6.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the input fields unchanged and add a valid contract_type and justification for all 8 roles. They agree on roles 1, 2, 3 (full-time) and role 5 (contractor). They differ on roles 4, 6, 7 and 8. A makes these full-time. B makes them contractors.\n\nA's justifications are more specific. They cite the Month 2 and Month 4 gates, the heat season (Months 5-9), the 60% contact KPI, and the front-loaded workload. They also say when a second hire could be a contractor or temp. That helps staffing and budget planning. The weaknesses are some hedging (\"could be FTE if...\") and a mismatch on role 7. A calls it full-time through Month 6, but the role is described as front-loaded in M1-M3 and might suit a contractor better. Making 7 of 8 roles full-time also puts a lot of fixed payroll into a 12-month pilot that has a staged budget and a hiring constraint. It is still defensible for a municipal incident structure.\n\nB's justifications are shorter and generic, with phrases like \"often outsourced\". Some choices are hard to defend:\n- The outreach coordinator is a contractor, even though the role owns volunteer and staff safety and the core gate KPI, and needs institutional accountability.\n- The health-system liaison is an external \"impartial specialist\", even though the role needs trusted municipal standing with hospitals and with other city departments.\n- Treating the front-loaded logistics role and the communications role as contractors is plausible and fits a time-bound build-out.\n- B does name Leipzig, which fits the prompt context.\n\nB's mix of contract types is more varied and flexible. A has the better reasoning, ties its choices to the plan's gates, and is more useful downstream."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 7,
+              "analysis": "Candidate A assigns a differentiated mix (3 FTE, 5 contractors). This fits a time-boxed 12-month pilot, the \"hireable or contractable\" staffing constraint, and the front-loaded or surge nature of the logistics, GDPR, outreach and communications work. A few choices are debatable, notably the Health Liaison and Outreach Coordinator as contractors. Its justifications are concise and plan-specific. Candidate B makes 7 of 8 roles full-time employees and calls them \"permanent\", which is poorly suited to a 12-month pilot and weakly differentiated. Its justifications are detailed and tied to months and gates, but they hedge repeatedly (\"could transition to part_time\", \"could be FTE if…\"). The hedges contradict the single chosen type, for example a front-loaded logistics role classified as FTE. B's detail is nice, but its classifications are less realistic."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

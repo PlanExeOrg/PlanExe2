@@ -1,0 +1,114 @@
+{
+  "stage": "swot_analysis",
+  "evaluated_at": "2026-10-04T18:09:06",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 160.5,
+      "structure_problems": [],
+      "judgments": {
+        "swot_analysis.md": {
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required six-section structure with the emoji headings. They also share the same upstream-derived content: Builder's Foundation, the 14 km Tarifa–Tangier crossing, the Azores-Gibraltar seismic zone, the energy gap, the gauge mismatch and the MAD currency risk. Both mislabel the 25kV AC and 3kV DC electrification difference. Both also treat the \"20-year\" timeline as an operational lifespan, which is questionable.\n\nA is much more specific and decision-useful. Its weaknesses and threats are quantified, and they include extra real issues: climate change, maintenance funding, buoyancy and ballast failure, rail systems integration, technological obsolescence and cost-overrun benchmarks (Channel Tunnel 73%, Marmaray 80%). Its recommendations and objectives carry owners, dated gates and measurable success criteria. Its missing-information list is a good set of real gaps. A's flaws are verbosity, duplication and some invented or implausible numbers. It repeats the killer application across several sections. It lists environmental permitting twice and workforce turnover twice. It cites €100–150B annual trade, 10–20 GW of renewable export and \"4–6 weeks to 3–5 days\" shipping, none of which is credible. Some of its dates are unrealistic, such as treaty ratification by March 2027. It also claims \"demonstrated political commitment\" without support.\n\nB is tighter and stays closer to the upstream documents, for example the Builder's Foundation 9/10 fit score and the 18 risks. Its weaknesses are shallower and some content is misplaced. The \"killer application\" is circular, since it just restates the rail link. Several Missing Information items are really recommendations or already-known plan elements, such as the decommissioning reserve and the supply chain redundancy plan. The treaty timeline is inconsistent: the objective says March 2028, while the recommendation targets 2027-06-30. The gauge recommendation is internally muddled, with a unified 1,435mm standard alongside a €200–500M \"transition\" budget. Its strategic objectives are less measurable. It also has only 5 questions, two of which overlap. B does catch flooding protocols and environmental baselines, which are good points.\n\nOverall, A is more useful for downstream planning despite its bloat and inflated opportunity figures. B is cleaner but thinner and has more internal inconsistencies."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates use the required six-section structure with emoji headings, and both draw on the same upstream material: Builder's Foundation, the hybrid floating-pillar design, the Tarifa–Tangier route, the 18 risks and the reference projects. Both also repeat the same dubious claim that Spain and Morocco have incompatible rail gauges and electrification. In fact Spain's AVE and Morocco's Al Boraq are both standard gauge. Neither catches this, so it does not separate them.\n\nCandidate A is tighter and more internally consistent. Its treaty ratification target of March 2028 matches the 18-month assumption, which is correct counting from September 2026. Its recommendations, objectives and questions are readable and decision-useful. Its opportunities are speculative, for example exporting the design to Hormuz, Malacca or a trans-Pacific link, but they carry few invented quantities. Its weaknesses are the main gaps: it has no cost-overrun benchmarking against precedent projects, and it omits buoyancy or ballast failure and technological obsolescence as threats. It also lists \"comprehensive risk identification\" as a strength, which is a meta-observation about the plan documents rather than a strength of the project.\n\nCandidate B is more exhaustive. It adds useful threats: cost overrun benchmarks (Channel Tunnel 73%, Marmaray 80%), ballast and buoyancy failure, rail integration failure, technological obsolescence and funding-cliff mechanics. Its missing-information list is also richer. But its opportunities are inflated with unsupported figures, such as €100–150 billion of additional annual trade, 10–20 GW of renewable export generating €5–10 billion a year, and a 100–200 basis point reduction in financing costs worldwide. These are not grounded in the prompt. It also has internal inconsistencies. The assumptions say the treaty will be ratified within 18 months, but the recommendation and objective set a ratification date of March 31, 2027, only about 6 months from the start. The geotechnical recommendation is garbled, tying probabilistic seismic hazard analysis to \"10 additional boreholes\". The questions are long essay-style paragraphs, which makes the output bloated and less usable downstream.\n\nOverall, B has more depth and a few real insights, but it is padded with speculative numbers and has timeline inconsistencies. A is cleaner, more consistent and more credible, though less comprehensive. This is a close call, and I give A a slight edge."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 186.8,
+      "structure_problems": [],
+      "judgments": {
+        "swot_analysis.md": {
+          "verdict": "tie",
+          "score_new": 5.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Candidate A is compact and tied to the upstream strategic decisions (Pragmatic Scale-Up, 60% tenant threshold, the 80% buffer / 32.2 km² buildable model, the €4.32B FX residual). Its recommendations have owners and dates that mostly fit the 2026-05-16 start. Its threats and missing-information items are relevant: RTE timelines, buffer holding costs, DGSI/ANSSI definitions. It has weaknesses. Some recommendations are odd, such as a 2026-09-01 deadline for a 'binding local concession' and 20% of the Phase 0 budget for DGSI pre-agreements. Calling the 80% buffer a strength is debatable. It is also thinner than B and does little to challenge the sub-2ms latency claim.\n\nCandidate B is much more exhaustive, with many threats, a detailed missing-information list and probing questions. It contains serious faithfulness and consistency errors. Several timelines refer to Q2–Q3 2025, which is before the plan's start date. It sets Q1 2026 as the deadline for 100% legal control of 161 km², and that quarter has already ended. It asks for a binding Phase 2 RTE agreement with liquidated damages by 'Q3 2025'. It wants a 'locked' killer app and binding government commitments by Q2 2026, about six weeks away. It claims sub-2ms latency to Frankfurt (about 550 km) and London for synchronized training, which is physically impossible. It lists invented figures such as the distances and market sizes. It sets objectives that require binding commitments from RTE, DGSI and AWS/Google, which cuts against the prompt's instruction not to assume external commitments. It also contradicts the prompt by treating a split-campus model as a strength that reduces risk. These flaws make its objectives and recommendations unusable for downstream planning, despite the breadth.\n\nA is more internally consistent and plan-faithful. B has more depth but is less correct."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "A is far more comprehensive and plan-specific. It covers brownfield remediation, FX exposure, tenant concentration, fiber diversity, workforce, water, interest rates, supply chain, and competition. Its missing-information list is detailed and decision-useful, and its questions are sharp. It is skeptical, as the prompt requires, and it flags that tenant commitments and external approvals are not yet secured.\n\nA also has real flaws:\n- Some dates are inconsistent with today's date of 2026-05-16, such as \"Q2-Q3 2025\" and an \"end of Q1 2026\" land-control objective that is already past.\n- Some numbers appear invented, such as the €5B–€10B co-funding figure and the heat-reuse revenue.\n- The claim of sub-2ms latency to Frankfurt (550 km) is physically implausible.\n- Its 3–4 GW cap for a buildable area under 20 km² is inconsistent with its own 32.2 km² figure for 9 GW. B's 5–6 GW is more consistent.\n- It is overly prescriptive, for example in its wording on binding RTE agreements and liquidated damages.\n\nB is cleaner, ties its points to the earlier strategic decisions and risks, and has fewer glaring errors. It is thin, though. It has only five strengths and five weaknesses, and it omits water, brownfield, fiber diversity, financing and tenant-concentration depth. Its objectives are unrealistic in places, such as a binding 2.5 GW RTE contract before Phase 1 FID, and one date is malformed (\"2027-05-16 + 18 months\"). Some recommendations are vague.\n\nOverall, A is more useful downstream despite its errors, while B is safer but shallow."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 107.7,
+      "structure_problems": [],
+      "judgments": {
+        "swot_analysis.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better overall, despite real flaws. Candidate A is short and generic, and some of its items are odd. Candidate B is much more specific and useful downstream, but its dates are wrong in places and some figures look invented.\n\n**Candidate A**\n- It follows the format and its lists are tidy.\n- Its content is generic. The strengths, for example, are \"EU regulatory backing\" and \"phased approach\".\n- The \"killer app\" framing is awkward. Recommendation 1 says the Provisional Binding Specification V0.9 \"establishes a killer app for accessibility\", which is a confused claim.\n- The questions are all variants of \"killer app\" and add little.\n- It does catch some key points: clearing-mechanism undercapitalisation, operator resistance, the T+5 latency benchmark, and the three-strikes assumption.\n- It is not very decision-useful. It has few concrete risks, such as cybersecurity, market consolidation, regulator inconsistency or accessibility timing.\n- Its strategic objectives are reasonable, and 2031-05-14 is the correct five-year end date.\n\n**Candidate B**\n- It ties closely to the plan's decisions and risks: the Builder scenario, three strikes, the €200M float, the 5% cost-recovery royalty, T+3 settlement, the 90-minute continuity threshold, and the PRM schema.\n- It covers a much broader set of real risks, including distributor consolidation, cybersecurity and GDPR, inconsistent regulators, smaller-operator IT capacity, accessibility timing under Directive 2019/882, and governance veto risk.\n- Its missing-information items and questions are probing and actionable. Its recommendations have owners, dates and success metrics.\n- Date and logic errors:\n  - Month 18 is given as 2027-04-14 (it should be 2027-11-14).\n  - Month 30 is given as 2027-11-14 (it should be 2028-11-14).\n  - Recommendation 4 has sub-deadlines (2026-07-15) that fall before the project start and before the stated month-based deadline.\n  - Some figures look invented: \"15–20% acceleration\", \"Optus/Capital One\" as precedents, and the €300M reserve.\n- It is very verbose. Calling the timeline \"aggressive\" sits oddly against the \"realistic scenario\" request.\n- The \"killer app\" focus is heavy in places, but it is at least tied to a specific candidate analysis.\n- Overall its depth and specificity outweigh its flaws."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A is much more specific and decision-useful. It ties into the plan's concrete elements: the four corridors, named carriers and distributors, the €200M float and €300M reserve, the T+3 settlement, the 'three strikes' enforcement, the 90-minute continuity threshold, the 18/30/60-month milestones, and 2026 start-date-anchored deadlines. Its threats are well differentiated and include cybersecurity/GDPR, market consolidation, regulator fragmentation, carrier solvency, and the lessons from ERTMS and PSD2. Its recommendations carry owners, dates, and success metrics. Its missing-information and question sections are substantive. It has flaws. Some dates are internally inconsistent (Rec 4 is due 2026-09-30 but sets deadlines in July and August). It lists ÖBB as a 'smaller operator' and Paris–Lyon as a cross-border example. Its numbers appear to be invented, such as the 15-20% adoption acceleration. It also over-focuses on a 'killer app' that the prompt never asked for, and it is very long. Candidate B follows the format but is generic and thin: five short bullets per section, with little plan-specific insight. Its recommendations are shallow, for example treating PRM schema integration as a 'killer app', and it has no real owners or metrics beyond dates. Its questions repeat the 'killer app' theme five times. Its objectives are reasonable but sparse, and it misses most of the real risks. Overall A is substantially more useful for downstream stages despite its inconsistencies."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 151.0,
+      "structure_problems": [],
+      "judgments": {
+        "swot_analysis.md": {
+          "verdict": "tie",
+          "score_new": 6.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 7,
+              "analysis": "Candidate A is concise, mostly grounded in the plan, and internally consistent. Its strengths cite the 3-level alert thresholds, the paper-based GDPR fallback, and the gated funding. Its weaknesses are real: the 43% funding-cliff exposure, voucher equity gaps, no contingency reserve, and staffing and training fidelity. Its recommendations are specific, with owners, dates, and rationale (ring-fence €300k, contract installation for social housing, audit the triage script). Its flaws are modest. It treats a \"killer app\" registry as an opportunity, which sits awkwardly with the \"no apps as primary solution\" constraint. It labels some threats \"market risk\" and \"competition for capital\", which fit poorly. It also gives the program end as 2026-12-31 instead of month 12 (about April/May 2027).\n\nCandidate B covers more ground. Its threats include misinformation, media narrative, forecast error, supply chain, and surge, and its missing-information list is detailed. But much of its content is poorly aligned with the prompt. It names the \"absence of a Killer App\" as a core weakness. It then proposes a wearable bracelet or misting-device gadget as the main opportunity and first recommendation, which is off-scope and unrealistic. It uses \"£\" for a EU plan. It proposes a revolving micro-finance loan fund for vulnerable residents and licensing revenue, neither of which fits a municipal pilot. It cites Ramadan, which does not fall in the 2026 summer. It schedules the Thermal Buddy network and the utility billing messaging after the summer season ends, which makes them useless for this summer. Its \"Heat Hero\" mandatory protocols contradict the non-binding employer guidance the prompt specifies. It is also very long, with many diluted recommendations, which is less useful downstream.\n\nA is more faithful, focused, and decision-useful. B has broader risk coverage but is dominated by distracting and contradictory ideas."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much richer and more plan-specific. It names Leipzig, DWD forecasts, Stadtwerke, and the local universities. It covers many real risks: a Level 3 event in Month 3 draining the first tranche, voucher failure for frail residents, the GDPR coverage blind spot, contractor SLA failure, forecast error, misinformation, and volunteer safety and burnout. Its recommendations have owners, dates, and success metrics. Its strategic objectives, assumptions, and missing information are detailed and useful for downstream stages. Its main flaws are the invented \"Killer App\" wearable or device, which is a template artifact and sits awkwardly with the prompt's de-emphasis of apps and gadgets. It also has a \"£\" currency slip, some speculative opportunities (micro-finance fund, licensing revenue), and it is very long. A few details (the 15% contingency, the €250k surge) are assumed. Even so, most of the content is grounded and actionable.\n\nCandidate B is concise and mostly consistent with the plan. It has a sensible ring-fenced contingency, an equity fix for vouchers, a triage script audit, and an outreach training recommendation. However, it is thin: it has only 5 weaknesses, 5 threats, and 5 recommendations, and the strengths are generic. It mislabels \"Market risk\", and the \"killer app = registry\" idea is incoherent. It has an inconsistent program-end date (2026-12-31 for a 12-month program starting May 2026). It misses many risks the prompt asks about, such as volunteer safety, extreme-event surge, misinformation, and the unhoused and migrant reach gaps. Its objectives are few and light on metrics, and its missing-information list is short. It is less useful downstream.\n\nA's depth and specificity outweigh its tangents."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

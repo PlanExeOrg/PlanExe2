@@ -1,0 +1,51 @@
+{
+  "$defs": {
+    "TeamMember": {
+      "properties": {
+        "job_category_title": {
+          "description": "Human readable title",
+          "title": "Job Category Title",
+          "type": "string"
+        },
+        "short_explanation": {
+          "description": "Why that category of expert is relevant to solving the task.",
+          "title": "Short Explanation",
+          "type": "string"
+        },
+        "people_needed": {
+          "description": "Number of people needed.",
+          "title": "People Needed",
+          "type": "string"
+        },
+        "consequences_of_not_having_this_role": {
+          "description": "Consequences of not having this role.",
+          "title": "Consequences Of Not Having This Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "job_category_title",
+        "short_explanation",
+        "people_needed",
+        "consequences_of_not_having_this_role"
+      ],
+      "title": "TeamMember",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "brainstorm_of_needed_team_members": {
+      "description": "What experts may be needed with domain knowledge about the problem.",
+      "items": {
+        "$ref": "#/$defs/TeamMember"
+      },
+      "title": "Brainstorm Of Needed Team Members",
+      "type": "array"
+    }
+  },
+  "required": [
+    "brainstorm_of_needed_team_members"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

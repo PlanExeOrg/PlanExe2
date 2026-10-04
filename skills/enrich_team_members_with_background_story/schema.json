@@ -1,0 +1,46 @@
+{
+  "$defs": {
+    "TeamMember": {
+      "description": "A human with domain knowledge.",
+      "properties": {
+        "id": {
+          "description": "A unique id for the job_category.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "job_background_story_of_employee": {
+          "description": "Provide a fictional story for this person.",
+          "title": "Job Background Story Of Employee",
+          "type": "string"
+        },
+        "typical_job_activities": {
+          "description": "Describe some typical activities in the job.",
+          "title": "Typical Job Activities",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "job_background_story_of_employee",
+        "typical_job_activities"
+      ],
+      "title": "TeamMember",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "team_members": {
+      "description": "The experts with domain knowledge about the problem.",
+      "items": {
+        "$ref": "#/$defs/TeamMember"
+      },
+      "title": "Team Members",
+      "type": "array"
+    }
+  },
+  "required": [
+    "team_members"
+  ],
+  "title": "TeamDetails",
+  "type": "object"
+}

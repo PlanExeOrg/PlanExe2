@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "bullet_points": {
+      "description": "Answers to the questions in bullet points.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Bullet Points",
+      "type": "array"
+    }
+  },
+  "required": [
+    "bullet_points"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

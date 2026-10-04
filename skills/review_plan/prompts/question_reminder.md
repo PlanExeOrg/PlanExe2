@@ -1,0 +1,1 @@
+Reminder: answer only this question with exactly three bullet points, each at most about 80 words, and do not repeat issues from the earlier answers. Ground every claim and number in the document; do not invent events, measurements, or developments that the document does not mention.

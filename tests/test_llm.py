@@ -22,11 +22,12 @@ class ClaudeCLITest(unittest.TestCase):
         self.assertEqual(cmd[cmd.index("--model") + 1], "claude-sonnet-5-5")
         self.assertEqual(cmd[cmd.index("--effort") + 1], "high")
         self.assertEqual(cmd[cmd.index("--tools") + 1], "")
-        self.assertEqual(cmd[cmd.index("--system-prompt") + 1], "SYS")
+        self.assertEqual(cmd[cmd.index("--system-prompt-file") + 1], "SYS")
 
-    def test_command_low_tier_has_no_effort(self):
+    def test_command_low_tier_isolated_low_effort(self):
         cmd = ClaudeCLIBackend().build_command("SYS", None, "low")
-        self.assertNotIn("--effort", cmd)
+        self.assertEqual(cmd[cmd.index("--effort") + 1], "low")
+        self.assertEqual(cmd[cmd.index("--setting-sources") + 1], "project")
         self.assertNotIn("--json-schema", cmd)
 
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
