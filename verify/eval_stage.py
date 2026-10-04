@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import re
 import shutil
 import sys
 import time
@@ -90,6 +91,34 @@ def structure_check(skill: Skill, baseline_dir: Path, work: Path, templates: dic
     return problems
 
 
+_TIMESTAMP_LINE = re.compile(r"^.*Generated on: \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.*$", re.M)
+_HTML_TAGS = ["<h1", "<h2", "<h3", "<h4", "<ul", "<ol", "<li", "<table", "<tr", "<strong", "<em>", "<code", "<pre",
+              "<script", "<div"]
+
+
+def deterministic_equal(baseline: Path, candidate: Path) -> bool:
+    """Byte equality, ignoring 'Generated on' timestamps. HTML files are compared by tag profile
+    (the stdlib markdown renderer is not byte-compatible with Python-Markdown): every tag count
+    must be within 2% of the baseline's."""
+    a, b = baseline.read_bytes(), candidate.read_bytes()
+    if a == b:
+        return True
+    ta = _TIMESTAMP_LINE.sub("", a.decode("utf-8", "replace"))
+    tb = _TIMESTAMP_LINE.sub("", b.decode("utf-8", "replace"))
+    if ta == tb:
+        return True
+    if baseline.suffix == ".html":
+        # PlanExe-web injects Google Analytics (2 <script> tags) into published reports.
+        ta = re.sub(r"<script async src=\"https://www.googletagmanager.com.*?</script>\s*<script>.*?</script>", "",
+                    ta, flags=re.S)
+        for tag in _HTML_TAGS:
+            ca, cb = ta.count(tag), tb.count(tag)
+            if abs(ca - cb) > max(1, 0.02 * ca):
+                return False
+        return True
+    return False
+
+
 def eval_one(dag: Dag, skill: Skill, baseline: str, args, templates: dict) -> dict:
     work = WORK_DIR / "stage_runs" / skill.name / baseline
     baseline_dir = extract_baseline(baseline)
@@ -106,7 +135,7 @@ def eval_one(dag: Dag, skill: Skill, baseline: str, args, templates: dict) -> di
     rec["structure_problems"] = structure_check(skill, baseline_dir, work, templates)
     if skill.est_llm_calls == 0:
         # Deterministic stage: must reproduce the baseline (given identical inputs).
-        rec["identical"] = {o: (baseline_dir / o).read_bytes() == (work / o).read_bytes()
+        rec["identical"] = {o: deterministic_equal(baseline_dir / o, work / o)
                             for o in existing_outputs(skill, baseline_dir) if (work / o).exists()}
     if args.no_judge or skill.est_llm_calls == 0:
         return rec

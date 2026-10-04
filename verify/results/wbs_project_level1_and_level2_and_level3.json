@@ -1,0 +1,46 @@
+{
+  "stage": "wbs_project_level1_and_level2_and_level3",
+  "evaluated_at": "2026-10-04T17:52:25",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 0.2,
+      "structure_problems": [],
+      "identical": {
+        "wbs_project_level1_and_level2_and_level3.json": true,
+        "wbs_project_level1_and_level2_and_level3.csv": true
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 0.2,
+      "structure_problems": [],
+      "identical": {
+        "wbs_project_level1_and_level2_and_level3.json": true,
+        "wbs_project_level1_and_level2_and_level3.csv": true
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 0.2,
+      "structure_problems": [],
+      "identical": {
+        "wbs_project_level1_and_level2_and_level3.json": true,
+        "wbs_project_level1_and_level2_and_level3.csv": true
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 0.2,
+      "structure_problems": [],
+      "identical": {
+        "wbs_project_level1_and_level2_and_level3.json": true,
+        "wbs_project_level1_and_level2_and_level3.csv": true
+      }
+    }
+  ]
+}

@@ -55,7 +55,10 @@ def skill_hash(skill: Skill) -> str:
     for rel in skill.uses:
         p = REPO_ROOT / rel
         h.update(rel.encode())
-        h.update(p.read_bytes() if p.exists() else b"<missing>")
+        if p.is_dir():
+            h.update(hash_dir(p).encode())
+        else:
+            h.update(p.read_bytes() if p.exists() else b"<missing>")
     return h.hexdigest()[:16]
 
 

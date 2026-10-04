@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PLACEHOLDER_TITLE</title>
+  <style>
+    body {
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        margin: 2rem;
+    }
+  </style>
+  <!--HTML_HEAD_START-->
+  <!-- 
+  Versions available at:
+  https://www.jsdelivr.com/package/npm/dhtmlx-gantt 
+  Version 9.1.0 breaks the zoom in/out/fit buttons.
+  Version 9.0.15 normal. The zoom in/out/fit buttons works.
+  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dhtmlx-gantt@9.0.15/codebase/dhtmlxgantt.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/dhtmlx-gantt@9.0.15/codebase/dhtmlxgantt.min.js"></script>
+  <style>
+    .gantt_container_with_controls {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .gantt_container {
+        width: 100%;
+        height: 80vh;
+        margin-bottom: 1rem;
+    }
+    .gantt_tooltip {
+        max-width: 30rem;
+        white-space: break-spaces;
+    }
+    .gantt-controls {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    .zoom-buttons {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+    }
+    .export-button {
+        position: absolute;
+        right: 0;
+    }
+    .gantt-controls button {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        background: white;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    .gantt-controls button:hover {
+        background: #f5f5f5;
+    }
+    .project-task.gantt_task_line {
+        background-color: #b67134;
+        border-color: #f57c00;
+    }
+    .project-task .gantt_task_content {
+        color: white;
+    }
+    .project-task.gantt_project.gantt_task_line {
+        border-radius: 0;
+    }
+  </style>
+  <!--HTML_HEAD_END-->
+</head>
+<body>
+    <h1>PLACEHOLDER_TITLE</h1>
+<!--HTML_BODY_CONTENT_START-->
+<div class="gantt_container_with_controls">
+    <div class="gantt-controls">
+        <div class="zoom-buttons">
+            <button id="zoomFitButton">Zoom Fit</button>
+            <button id="zoomInButton">Zoom In</button>
+            <button id="zoomOutButton">Zoom Out</button>
+        </div>
+        <button id="exportToCSVButton" class="export-button">Export to CSV</button>
+    </div>
+    <div id="gantt_container" class="gantt_container"></div>
+</div>
+<!--HTML_BODY_CONTENT_END-->
+
+<!--HTML_BODY_SCRIPT_START-->
+<script type="module">
+    // When `null`, the "Export to CSV" button is hidden.
+    // When a string, it's the CSV data, eg: `"hello;csv;world"` and the button is shown.
+    const GANTT_DATA_CSV = PLACEHOLDER_GANTT_DATA_CSV;
+
+    // This must be a string, eg: `"planexe_export.csv"`
+    const GANTT_FILENAME_CSV = PLACEHOLDER_GANTT_FILENAME_CSV;
+
+    // This must be json. It's not a string.
+    const GANTT_DATA_DHTMLX = PLACEHOLDER_GANTT_DATA_DHTMLX;
+
+    function zoomFit() {
+        const tasks = gantt.getTaskByTime();
+        if (tasks.length > 0) {
+            const firstTask = tasks[0];
+            const lastTask = tasks[tasks.length - 1];
+            gantt.showDate(firstTask.start_date);
+            
+            // Calculate total duration in days
+            const startDate = new Date(firstTask.start_date);
+            const endDate = new Date(lastTask.end_date);
+            const durationDays = (endDate - startDate) / (1000 * 60 * 60 * 24);
+            
+            // Choose appropriate scale based on duration
+            if (durationDays > 3650) { // More than 10 years
+                gantt.config.scale_unit = "year";
+                gantt.config.step = 10;
+                gantt.config.subscales = [
+                    {unit: "year", step: 1, date: "%Y"}
+                ];
+            } else if (durationDays > 365) { // More than 1 year
+                gantt.config.scale_unit = "year";
+                gantt.config.step = 1;
+                gantt.config.subscales = [
+                    {unit: "month", step: 1, date: "%M"}
+                ];
+            } else if (durationDays > 30) { // More than 1 month
+                gantt.config.scale_unit = "month";
+                gantt.config.step = 1;
+                gantt.config.subscales = [
+                    {unit: "day", step: 1, date: "%d"}
+                ];
+            } else if (durationDays > 7) { // More than 1 week
+                gantt.config.scale_unit = "week";
+                gantt.config.step = 1;
+                gantt.config.subscales = [
+                    {unit: "day", step: 1, date: "%d"}
+                ];
+            } else {
+                gantt.config.scale_unit = "day";
+                gantt.config.step = 1;
+                gantt.config.subscales = [];
+            }
+            gantt.render();
+        }
+    }
+
+    function zoomIn() {
+        const currentUnit = gantt.config.scale_unit;
+        const currentStep = gantt.config.step;
+        
+        if (currentUnit === "year" && currentStep === 10) {
+            gantt.config.scale_unit = "year";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "month", step: 1, date: "%M"}
+            ];
+        } else if (currentUnit === "year") {
+            gantt.config.scale_unit = "month";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "day", step: 1, date: "%d"}
+            ];
+        } else if (currentUnit === "month") {
+            gantt.config.scale_unit = "week";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "day", step: 1, date: "%d"}
+            ];
+        } else if (currentUnit === "week") {
+            gantt.config.scale_unit = "day";
+            gantt.config.step = 1;
+            gantt.config.subscales = [];
+        }
+        gantt.render();
+    }
+
+    function zoomOut() {
+        const currentUnit = gantt.config.scale_unit;
+        const currentStep = gantt.config.step;
+        
+        if (currentUnit === "day") {
+            gantt.config.scale_unit = "week";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "day", step: 1, date: "%d"}
+            ];
+        } else if (currentUnit === "week") {
+            gantt.config.scale_unit = "month";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "day", step: 1, date: "%d"}
+            ];
+        } else if (currentUnit === "month") {
+            gantt.config.scale_unit = "year";
+            gantt.config.step = 1;
+            gantt.config.subscales = [
+                {unit: "month", step: 1, date: "%M"}
+            ];
+        } else if (currentUnit === "year") {
+            gantt.config.scale_unit = "year";
+            gantt.config.step = 10;
+            gantt.config.subscales = [
+                {unit: "year", step: 1, date: "%Y"}
+            ];
+        }
+        gantt.render();
+    }
+
+    function downloadCSV() {
+        if (GANTT_DATA_CSV === null) {
+            return;
+        }
+        const blob = new Blob([GANTT_DATA_CSV], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', GANTT_FILENAME_CSV);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+
+    // Gantt Initialization
+    gantt.config.readonly = true;
+    gantt.config.date_format = "%Y-%m-%d";
+    gantt.config.scale_unit = "month";
+    gantt.config.step = 1;
+    gantt.config.subscales = [
+        {unit: "day", step: 1, date: "%d"}
+    ];
+
+    gantt.config.columns = [
+        {name:"text", label:"Task name", width:"*", tree:true},
+        // {name:"start_date", label:"Start time", align: "center"},
+        // {name:"duration", label:"Duration", align: "center"}
+    ];
+
+    gantt.templates.task_class = function(start, end, task) {
+        if (task.type === "project") {
+            return "project-task";
+        }
+        return "";
+    };
+
+    gantt.templates.tooltip_text = function(start, end, task) {
+        return task.custom_tooltip || "No tooltip";
+    };
+    
+	gantt.plugins({
+		tooltip: true
+	});
+	gantt.attachEvent("onGanttReady", function(){
+		var tooltips = gantt.ext.tooltips;
+		tooltips.tooltip.setViewport(gantt.$task_data);
+	});
+    gantt.init("gantt_container");
+    gantt.parse(GANTT_DATA_DHTMLX);
+
+    // Hide the export to CSV button if there is no CSV data
+    if (GANTT_DATA_CSV === null) {
+        document.getElementById('exportToCSVButton').style.display = 'none';
+    }
+
+    document.getElementById('zoomFitButton').addEventListener('click', zoomFit);
+    document.getElementById('zoomInButton').addEventListener('click', zoomIn);
+    document.getElementById('zoomOutButton').addEventListener('click', zoomOut);
+    document.getElementById('exportToCSVButton').addEventListener('click', downloadCSV);
+</script>
+<!--HTML_BODY_SCRIPT_END-->
+</body>
+</html>

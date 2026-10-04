@@ -48,17 +48,22 @@ class SkillContext:
         raise SkillContractError(
             f"skill '{self.skill.name}' tried to write '{name}', which is not listed in its SKILL.md outputs.")
 
-    def path(self, name: str) -> Path:
+    def _resolve(self, name: str) -> Path:
         staged = self.staging_dir / name
         return staged if staged.exists() else self.run_dir / name
 
+    def path(self, name: str) -> Path:
+        """Filesystem path of a declared input (or an output already written by this skill)."""
+        self._check_read(name)
+        return self._resolve(name)
+
     def exists(self, name: str) -> bool:
         self._check_read(name)
-        return self.path(name).exists()
+        return self._resolve(name).exists()
 
     def read_text(self, name: str) -> str:
         self._check_read(name)
-        p = self.path(name)
+        p = self._resolve(name)
         if not p.exists():
             raise FileNotFoundError(f"skill '{self.skill.name}': input file '{name}' does not exist in {self.run_dir}")
         return p.read_text(encoding="utf-8")
