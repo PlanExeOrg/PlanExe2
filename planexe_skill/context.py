@@ -1,6 +1,7 @@
 """The object a skill's run(ctx) receives."""
 from __future__ import annotations
 
+import hashlib
 import json
 import threading
 import time
@@ -22,7 +23,7 @@ class SkillContractError(Exception):
 class SkillContext:
     def __init__(self, run_dir: Path, staging_dir: Path, skill: Skill, backend: Backend,
                  llm_slots: threading.Semaphore, on_llm_call: Callable[[str, dict], None] | None = None,
-                 log_path: Path | None = None):
+                 log_path: Path | None = None, cache_dir: Path | None = None):
         self.run_dir = run_dir
         self.staging_dir = staging_dir
         self.skill = skill
@@ -33,6 +34,11 @@ class SkillContext:
         self._log_path = log_path
         self._log_lock = threading.Lock()
         self.llm_calls = 0
+        self.cache_hits = 0
+        # Resume points: every completed call is stored here. When a stage fails halfway (e.g. at
+        # question 15 of 16) the re-run replays the finished calls instantly. The runner deletes
+        # the cache once the stage succeeds, so a later --force gets fresh answers.
+        self.cache_dir = cache_dir
 
     # ---------- files ----------
     def _check_read(self, name: str) -> None:
@@ -99,6 +105,20 @@ class SkillContext:
             label: str = "") -> LLMResult:
         """One LLM call. Concurrency across the whole run is bounded by the runner."""
         tier = tier or self.skill.tier
+        model = self.backend.model_for(tier)
+        cache_file = None
+        if self.cache_dir is not None:
+            key = hashlib.sha256(json.dumps([model, system, user, schema], sort_keys=True).encode()).hexdigest()[:24]
+            cache_file = self.cache_dir / f"{key}.json"
+            if cache_file.exists():
+                try:
+                    c = json.loads(cache_file.read_text(encoding="utf-8"))
+                    self.cache_hits += 1
+                    self.llm_calls += 1
+                    self.log(f"LLM call {label} replayed from resume cache ({cache_file.name})")
+                    return LLMResult(data=c["data"], text=c["text"], metadata={**c["metadata"], "cached": True})
+                except (OSError, json.JSONDecodeError, KeyError):
+                    pass
         self.log(f"LLM call {label} tier={tier} model={self.backend.model_for(tier)}\n"
                  f"--- system ---\n{system}\n--- user ---\n{user}\n--- schema ---\n"
                  f"{json.dumps(schema)[:3000] if schema else None}")
@@ -114,6 +134,15 @@ class SkillContext:
                                                         "metadata": result.metadata if result else {}})
         assert result is not None
         self.llm_calls += 1
+        if cache_file is not None:
+            try:
+                cache_file.parent.mkdir(parents=True, exist_ok=True)
+                tmp = cache_file.with_suffix(".tmp")
+                tmp.write_text(json.dumps({"data": result.data, "text": result.text, "metadata": result.metadata}),
+                               encoding="utf-8")
+                tmp.replace(cache_file)
+            except (OSError, TypeError):
+                pass
         self.log(f"--- response ({result.metadata.get('duration_seconds')}s) ---\n{result.text[:20000]}")
         return result
 

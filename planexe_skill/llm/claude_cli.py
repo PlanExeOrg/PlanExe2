@@ -9,6 +9,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+import threading
 import time
 
 from planexe_skill.llm.base import Backend, LLMError, LLMResult
@@ -21,7 +22,7 @@ DEFAULT_EFFORTS = {"high": "high", "mid": "low", "low": None}
 _NO_THINKING_SETTINGS = json.dumps({"alwaysThinkingEnabled": False})
 
 # Messages that are worth retrying after a pause.
-_TRANSIENT = ("overloaded", "rate limit", "rate_limit", "529", "503", "502", "timeout", "timed out",
+_TRANSIENT = ("stalled", "overloaded", "rate limit", "rate_limit", "529", "503", "502", "timeout", "timed out",
               "econnreset", "socket hang up", "internal server error", "api_error",
               "structured_output_retry_exhausted", "server error")
 
@@ -50,10 +51,13 @@ class ClaudeCLIBackend(Backend):
     name = "claude"
 
     def __init__(self, models: dict[str, str] | None = None, efforts: dict[str, str | None] | None = None,
-                 timeout: float = 900.0, retries: int = 3, executable: str = "claude"):
+                 timeout: float = 600.0, retries: int = 3, executable: str = "claude",
+                 idle_timeout: float = 90.0, max_structured_rejections: int = 1):
         self.models = {**DEFAULT_MODELS, **(models or {})}
         self.efforts = {**DEFAULT_EFFORTS, **(efforts or {})}
         self.timeout = timeout
+        self.idle_timeout = idle_timeout
+        self.max_structured_rejections = max_structured_rejections
         self.retries = retries
         self.executable = executable
 
@@ -65,7 +69,8 @@ class ClaudeCLIBackend(Backend):
         # Isolation: the child must behave like a plain LLM call. Without these flags it would
         # inherit the user's settings (e.g. effortLevel, plugins, SessionStart hooks that inject
         # text, MCP servers, skills) and the effort level of the user's own sessions.
-        cmd = [self.executable, "-p", "--output-format", "json",
+        cmd = [self.executable, "-p", "--output-format", "stream-json", "--verbose", "--include-partial-messages",
+               "--max-turns", "4",
                "--model", self.model_for(tier),
                "--tools", "",
                "--no-session-persistence",
@@ -97,32 +102,93 @@ class ClaudeCLIBackend(Backend):
         return " ".join(out)
 
     def _run_once(self, cmd: list[str], user: str) -> dict:
+        """Run one CLI call, streaming its events so a stalled call is detected within seconds.
+
+        Fails fast instead of waiting for a long timeout: no stream event for `idle_timeout`
+        seconds -> stalled; total runtime above `timeout` -> too slow. Returns the final
+        `result` event (same shape as `--output-format json`).
+        """
         env = child_env()
         if _NO_THINKING_SETTINGS in cmd:
             env["MAX_THINKING_TOKENS"] = "0"
         if shutil.which(self.executable) is None:
             raise LLMError(f"'{self.executable}' was not found on PATH. Install Claude Code "
                            f"(https://docs.claude.com/claude-code) and run 'claude auth login'.")
+        proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                text=True, env=env, cwd=_neutral_cwd())
+        state = {"last": time.time(), "chars": 0, "result": None, "rejections": 0, "lines": []}
+        stderr_chunks: list[str] = []
+
+        def read_stdout() -> None:
+            assert proc.stdout is not None
+            for line in proc.stdout:
+                state["last"] = time.time()
+                try:
+                    event = json.loads(line)
+                except json.JSONDecodeError:
+                    state["lines"].append(line[-500:])
+                    continue
+                etype = event.get("type")
+                if etype == "stream_event":
+                    delta = (event.get("event") or {}).get("delta") or {}
+                    state["chars"] += len(delta.get("text") or delta.get("partial_json") or "")
+                elif etype == "user":
+                    # A tool_result with is_error = the CLI rejected the structured output.
+                    for block in ((event.get("message") or {}).get("content") or []):
+                        if isinstance(block, dict) and block.get("is_error"):
+                            state["rejections"] += 1
+                elif etype == "result":
+                    state["result"] = event
+
+        def read_stderr() -> None:
+            assert proc.stderr is not None
+            stderr_chunks.append(proc.stderr.read())
+
+        readers = [threading.Thread(target=read_stdout, daemon=True), threading.Thread(target=read_stderr, daemon=True)]
+        for r in readers:
+            r.start()
         try:
-            proc = subprocess.run(cmd, input=user, capture_output=True, text=True,
-                                  timeout=self.timeout, env=env, cwd=_neutral_cwd())
-        except subprocess.TimeoutExpired:
-            raise LLMError(f"claude CLI timed out after {self.timeout:.0f}s") from None
-        envelope = None
-        try:
-            envelope = json.loads(proc.stdout) if proc.stdout.strip() else None
-        except json.JSONDecodeError:
+            assert proc.stdin is not None
+            proc.stdin.write(user)
+            proc.stdin.close()
+        except BrokenPipeError:
             pass
+        started = time.time()
+        failure = None
+        while proc.poll() is None:
+            time.sleep(0.5)
+            now = time.time()
+            if now - state["last"] > self.idle_timeout:
+                failure = (f"claude CLI stalled: no output for {self.idle_timeout:.0f}s "
+                           f"(after {now - started:.0f}s, {state['chars']} chars streamed)")
+            elif now - started > self.timeout:
+                failure = (f"claude CLI timed out after {self.timeout:.0f}s "
+                           f"({state['chars']} chars streamed; output is probably too long)")
+            elif state["rejections"] > self.max_structured_rejections:
+                failure = ("structured_output_retry_exhausted: the CLI rejected the structured output "
+                           f"{state['rejections']} times")
+            if failure:
+                proc.kill()
+                break
+        proc.wait()
+        for r in readers:
+            r.join(timeout=5)
+        stderr = "".join(stderr_chunks)
+        if failure:
+            raise LLMError(failure)
+        envelope = state["result"]
         if envelope is None:
             raise LLMError(f"claude CLI exited with code {proc.returncode} and no JSON output.\n"
-                           f"stderr (tail):\n{proc.stderr[-2000:]}\nstdout (tail):\n{proc.stdout[-1000:]}")
+                           f"stderr (tail):\n{stderr[-2000:]}\nstdout (tail):\n{''.join(state['lines'])[-1000:]}")
         if envelope.get("is_error"):
-            msg = envelope.get("result") or envelope.get("terminal_reason") or "unknown error"
+            msg = envelope.get("result") or envelope.get("terminal_reason") or envelope.get("subtype") or "unknown error"
+            if envelope.get("subtype") == "error_max_turns":
+                msg = "structured_output_retry_exhausted (max turns reached)"
             hint = ""
             if "authenticate" in str(msg).lower() or "oauth" in str(msg).lower():
                 hint = ("\nHint: run 'claude auth login' in a terminal. If you run inside a sandbox, "
                         "the CLI may be unable to reach the macOS keychain; run without the sandbox.")
-            raise LLMError(f"claude CLI reported an error: {msg}{hint}\nstderr (tail):\n{proc.stderr[-1500:]}")
+            raise LLMError(f"claude CLI reported an error: {msg}{hint}\nstderr (tail):\n{stderr[-1500:]}")
         return envelope
 
     def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low") -> LLMResult:
@@ -149,6 +215,7 @@ class ClaudeCLIBackend(Backend):
         # up (structured_output_retry_exhausted, seen with long outputs), plain JSON in the reply that we
         # parse and validate ourselves ("text"), with the validation problems fed back on a retry.
         mode = "tool"
+        slow_failures = 0
         text_system_file: str | None = None
         feedback = ""
         last_error: LLMError | None = None
@@ -170,7 +237,12 @@ class ClaudeCLIBackend(Backend):
                     if schema is not None and "structured_output_retry_exhausted" in str(e):
                         mode = "text"
                         continue
-                    transient = any(t in str(e).lower() for t in _TRANSIENT)
+                    msg = str(e).lower()
+                    transient = any(t in msg for t in _TRANSIENT)
+                    if ("stalled" in msg or "timed out" in msg) and slow_failures >= 1:
+                        transient = False  # one retry for a stall/timeout, then fail fast
+                    if "stalled" in msg or "timed out" in msg:
+                        slow_failures += 1
                     if attempt < self.retries and transient:
                         time.sleep(min(60, 5 * 2 ** attempt))
                         continue

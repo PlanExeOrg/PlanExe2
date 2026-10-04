@@ -10,8 +10,50 @@ from planexe_skill.llm.claude_cli import ClaudeCLIBackend, child_env
 SCHEMA = {"type": "object", "properties": {"x": {"type": "string"}}, "required": ["x"]}
 
 
+class FakePopen:
+    """Stands in for subprocess.Popen: replays a final `result` event as a stream-json line."""
+    def __init__(self, envelope: str, returncode: int = 0, stderr: str = ""):
+        self._envelope = envelope
+        self.returncode = returncode
+        self._stderr = stderr
+        self.input = None
+
+    def __call__(self, cmd, **kwargs):
+        import io
+        self.cmd = cmd
+        result = json.loads(self._envelope)
+        result.setdefault("type", "result")
+        self.stdout = io.StringIO(json.dumps(result) + "\n")
+        self.stderr = io.StringIO(self._stderr)
+        outer = self
+
+        class _Stdin:
+            def write(self, s):
+                outer.input = s
+
+            def close(self):
+                pass
+        self.stdin = _Stdin()
+        return self
+
+    def poll(self):
+        return self.returncode
+
+    def wait(self):
+        return self.returncode
+
+    def kill(self):
+        pass
+
+
 def fake_proc(stdout: str, returncode: int = 0, stderr: str = ""):
-    return subprocess.CompletedProcess(args=[], returncode=returncode, stdout=stdout, stderr=stderr)
+    return FakePopen(stdout, returncode, stderr)
+
+
+def popen_sequence(*fakes):
+    """side_effect for a mocked Popen: each call is served by the next FakePopen."""
+    it = iter(fakes)
+    return lambda cmd, **kw: next(it)(cmd, **kw)
 
 
 class ClaudeCLITest(unittest.TestCase):
@@ -32,23 +74,25 @@ class ClaudeCLITest(unittest.TestCase):
         self.assertNotIn("--json-schema", cmd)
 
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
-    @mock.patch("planexe_skill.llm.claude_cli.subprocess.run")
+    @mock.patch("planexe_skill.llm.claude_cli.subprocess.Popen")
     def test_parses_structured_output(self, run, _):
-        run.return_value = fake_proc(json.dumps({
+        fake = fake_proc(json.dumps({
             "is_error": False, "result": '{"x":"y"}', "structured_output": {"x": "y"},
             "usage": {"input_tokens": 3, "cache_creation_input_tokens": 10, "output_tokens": 5},
             "total_cost_usd": 0.01}))
+        run.side_effect = popen_sequence(fake)
         r = ClaudeCLIBackend().complete("s", "u", SCHEMA, "low")
         self.assertEqual(r.data, {"x": "y"})
         self.assertEqual(r.metadata["input_tokens"], 13)
         self.assertEqual(r.metadata["output_tokens"], 5)
-        self.assertEqual(run.call_args.kwargs["input"], "u")
+        self.assertEqual(fake.input, "u")
+        self.assertIn("--include-partial-messages", fake.cmd)
 
     @mock.patch("planexe_skill.llm.claude_cli.time.sleep")
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
-    @mock.patch("planexe_skill.llm.claude_cli.subprocess.run")
+    @mock.patch("planexe_skill.llm.claude_cli.subprocess.Popen")
     def test_error_message_is_readable(self, run, _which, _sleep):
-        run.return_value = fake_proc(json.dumps({"is_error": True, "result": "Failed to authenticate: x"}))
+        run.side_effect = popen_sequence(fake_proc(json.dumps({"is_error": True, "result": "Failed to authenticate: x"})))
         with self.assertRaises(LLMError) as cm:
             ClaudeCLIBackend(retries=0).complete("s", "u", SCHEMA, "low")
         msg = str(cm.exception)
@@ -58,28 +102,27 @@ class ClaudeCLITest(unittest.TestCase):
 
     @mock.patch("planexe_skill.llm.claude_cli.time.sleep")
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
-    @mock.patch("planexe_skill.llm.claude_cli.subprocess.run")
+    @mock.patch("planexe_skill.llm.claude_cli.subprocess.Popen")
     def test_retries_transient(self, run, _which, sleep):
         ok = json.dumps({"is_error": False, "result": "", "structured_output": {"x": "1"}})
-        run.side_effect = [fake_proc(json.dumps({"is_error": True, "result": "API overloaded"})), fake_proc(ok)]
+        run.side_effect = popen_sequence(fake_proc(json.dumps({"is_error": True, "result": "API overloaded"})), fake_proc(ok))
         r = ClaudeCLIBackend(retries=2).complete("s", "u", SCHEMA, "low")
         self.assertEqual(r.data, {"x": "1"})
         self.assertEqual(r.metadata["attempts"], 2)
 
     @mock.patch("planexe_skill.llm.claude_cli.time.sleep")
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
-    @mock.patch("planexe_skill.llm.claude_cli.subprocess.run")
+    @mock.patch("planexe_skill.llm.claude_cli.subprocess.Popen")
     def test_falls_back_to_text_json(self, run, _which, _sleep):
         exhausted = fake_proc(json.dumps({"is_error": True, "result": "structured_output_retry_exhausted"}))
         bad = fake_proc(json.dumps({"is_error": False, "result": '{"y": 1}'}))
         good = fake_proc(json.dumps({"is_error": False, "result": 'Here:\n```json\n{"x": "ok"}\n```'}))
-        run.side_effect = [exhausted, bad, good]
+        run.side_effect = popen_sequence(exhausted, bad, good)
         r = ClaudeCLIBackend(retries=3).complete("s", "u", SCHEMA, "low")
         self.assertEqual(r.data, {"x": "ok"})
         self.assertEqual(r.metadata["structured_mode"], "text")
-        second_cmd = run.call_args_list[1].args[0]
-        self.assertNotIn("--json-schema", second_cmd)
-        self.assertIn("missing required key", run.call_args_list[2].kwargs["input"])
+        self.assertNotIn("--json-schema", bad.cmd)
+        self.assertIn("missing required key", good.input)
 
     def test_child_env_strips_host_vars(self):
         with mock.patch.dict(os.environ, {"CLAUDE_CODE_X": "1", "ANTHROPIC_BASE_URL": "u", "KEEP": "k"}):

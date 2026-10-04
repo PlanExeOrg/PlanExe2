@@ -42,6 +42,12 @@ Create `RUN_DIR/.planexe_skill/stop` to stop gracefully; progress is mirrored to
 `RUN_DIR/.planexe_skill/progress.json`, per-stage logs (every prompt and response) live in
 `RUN_DIR/.planexe_skill/logs/`.
 
+## Failures and resuming
+
+LLM calls stream their output; a call that produces nothing for 90 s is killed and retried once,
+and no call may run longer than 10 minutes. Completed LLM calls inside a stage are cached, so
+re-running after a failure only repeats the calls that didn't finish.
+
 ## How dirtiness works
 
 `RUN_DIR/.planexe_skill/manifest.json` stores, for every stage, hashes of its skill folder,

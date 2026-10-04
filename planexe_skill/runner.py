@@ -135,7 +135,10 @@ class Runner:
             progress.llm_call(stage, info)
             self._record_usage(stage, info)
 
-        ctx = SkillContext(self.run_dir, staging, skill, self.backend, slots, on_call, log_path)
+        cache_dir = self.meta_dir / "llm_cache" / skill.name
+        if skill.name in self.forced:
+            shutil.rmtree(cache_dir, ignore_errors=True)  # forced re-run = fresh answers
+        ctx = SkillContext(self.run_dir, staging, skill, self.backend, slots, on_call, log_path, cache_dir)
         skill.module().run(ctx)
         missing = [o for o in skill.fixed_outputs() if not (staging / o).exists()]
         if missing:
@@ -149,6 +152,10 @@ class Runner:
         shutil.rmtree(staging, ignore_errors=True)
         self.manifest.record_completed(skill, self.run_dir)
         self.manifest.save()
+        shutil.rmtree(cache_dir, ignore_errors=True)
+        if ctx.cache_hits:
+            with open(log_path, "a", encoding="utf-8") as f:
+                f.write(f"resumed: {ctx.cache_hits} of {ctx.llm_calls} LLM calls replayed from the resume cache\n")
         return ctx.llm_calls
 
     def _failure_report(self, name: str, exc: BaseException) -> str:

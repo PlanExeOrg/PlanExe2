@@ -157,5 +157,35 @@ class RunnerTest(unittest.TestCase):
         self.assertAlmostEqual(p.eta_seconds(), 60.0)
 
 
+
+class ResumeCacheTest(unittest.TestCase):
+    def test_failed_stage_resumes_completed_calls(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            run_dir = base / "run"
+            run_dir.mkdir()
+            (run_dir / "plan.txt").write_text("P")
+            (base / "flag").write_text("fail")
+            run_py = textwrap.dedent(f"""\
+                from pathlib import Path
+                def run(ctx):
+                    for i in range(3):
+                        ctx.llm("sys", f"q{{i}}", {{"type": "object", "properties": {{"v": {{"type": "string"}}}}}})
+                    if Path({str(base / 'flag')!r}).read_text() == "fail":
+                        raise RuntimeError("boom after 3 calls")
+                    ctx.write_text("a.txt", "ok")
+                """)
+            make_skill(base / "skills", "a", ["plan.txt"], ["a.txt"], run_py=run_py, est_llm_calls=3)
+            backend = FakeBackend()
+            dag = Dag(load_skills(base / "skills"))
+            Runner(dag, run_dir, backend, stream=io.StringIO(), heartbeat_secs=999).run()
+            self.assertEqual(len(backend.calls), 3)
+            (base / "flag").write_text("ok")
+            res = Runner(dag, run_dir, backend, stream=io.StringIO(), heartbeat_secs=999).run()
+            self.assertTrue(res.ok)
+            self.assertEqual(len(backend.calls), 3)  # all 3 calls replayed from the resume cache
+            self.assertFalse((run_dir / ".planexe_skill" / "llm_cache" / "a").exists())
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -62,6 +62,16 @@ rationales are recorded below where they influenced a decision.
   (filter_documents_to_create). On a test call this halved latency (15.9 s -> 7.8 s).
 - **Transient CLI errors.** `structured_output_retry_exhausted` (seen with Haiku on 20k+ token
   structured outputs) and mid-response server errors are retried with backoff by the backend.
+- **Fail fast instead of waiting.** Some calls used to take 25-30 minutes before failing: the CLI
+  silently re-generated a rejected structured output (~4 min per attempt for 20k-token answers), the
+  per-call timeout was 15 min and timeouts were retried 3 times. Now every call streams
+  (`--output-format stream-json --include-partial-messages`); no stream event for 90 s = stalled,
+  killed; hard cap 10 min; a stall/timeout is retried once; the CLI may re-try a rejected
+  structured output once (`--max-turns 4`, rejection events counted) and then the backend switches
+  to plain-JSON mode with local schema validation and the problems fed back.
+- **Resume points.** Every completed LLM call is cached under
+  `RUN_DIR/.planexe_skill/llm_cache/<stage>/`. A stage that fails at call 15 of 16 replays the
+  first 14 instantly when re-run. The cache is deleted when the stage succeeds (and on `--force`).
 - **Note on earlier per-stage evals.** Stages evaluated before the isolation fix ran with the
   user's settings leaking into the child (high effort for Haiku, hook text in context). Their
   verdicts stand as recorded; the end-to-end runs below use the isolated backend.
