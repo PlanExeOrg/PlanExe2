@@ -1,0 +1,75 @@
+# PlanExe-skill
+
+[PlanExe](https://github.com/PlanExeOrg/PlanExe)'s plan-generation pipeline, rewritten as
+**skills** executed by a tiny, dependency-free Python DAG runner.
+
+- No pip install. Python >= 3.11 standard library only.
+- LLM calls go through the headless Claude Code CLI (`claude -p`), using your Claude subscription.
+- Every stage writes the same intermediary files as PlanExe (same names, same JSON/markdown structure).
+- Edit any intermediary file and re-run: your edit is kept and everything downstream is regenerated.
+- Progress bar with an ETA based on the DAG's critical path.
+
+## Quick start
+
+```bash
+claude auth login                      # once
+python3 -m planexe_skill create runs/my_plan --prompt-file my_prompt.txt
+python3 -m planexe_skill run runs/my_plan
+```
+
+A full plan is ~180-250 LLM calls and takes roughly 15-45 minutes. The final report is
+`runs/my_plan/report.html`.
+
+> Running inside a sandboxed agent (e.g. Claude Code desktop with sandbox on)? The child
+> `claude` process needs keychain access for auth, so run the command outside the sandbox.
+
+## Commands
+
+| command | what it does |
+|---|---|
+| `create RUN_DIR --prompt-file F` | create a run dir (`plan_raw.json`, `start_time.json`) |
+| `run RUN_DIR` | run every dirty stage; resumes where it left off |
+| `run RUN_DIR --only STAGE` | run one stage (its inputs must already exist) |
+| `run RUN_DIR --until STAGE` | run a stage and everything it depends on |
+| `run RUN_DIR --force-downstream STAGE` | regenerate a stage and everything after it |
+| `run RUN_DIR --dry-run` | list stages that would run |
+| `status RUN_DIR` | which stages are dirty and why |
+| `explain RUN_DIR STAGE` | details for one stage |
+| `graph [--dot]` | stages in topological order |
+
+Options: `--workers N` (concurrent LLM calls, default 4), `--model-high`, `--model-low`.
+Create `RUN_DIR/.planexe_skill/stop` to stop gracefully; progress is mirrored to
+`RUN_DIR/.planexe_skill/progress.json`, per-stage logs (every prompt and response) live in
+`RUN_DIR/.planexe_skill/logs/`.
+
+## How dirtiness works
+
+`RUN_DIR/.planexe_skill/manifest.json` stores, for every stage, hashes of its skill folder,
+its input files and its output files. A stage re-runs when an output is missing, its skill
+folder changed, or one of its inputs changed. Hand-edited outputs are kept and make the
+downstream stages dirty. Output files without a manifest record are adopted as clean, so you
+can drop a PlanExe run's files into a run dir and regenerate selected stages.
+
+## Skills
+
+Each stage is a folder in `skills/`:
+
+```
+skills/identify_purpose/
+  SKILL.md        frontmatter (inputs, outputs, tier, est_llm_calls) + description
+  prompts/        system prompts, verbatim from PlanExe unless noted in report.md
+  schema.json     JSON schema for structured output
+  run.py          def run(ctx): reads inputs, calls ctx.llm(...), writes outputs
+```
+
+`tier: high` stages (the foundational early stages) use Sonnet with high effort,
+`tier: low` stages use Haiku. Edges in the DAG are derived from file names: a stage depends
+on whichever stage produces one of its inputs.
+
+## Tests
+
+```bash
+python3 -m unittest discover -s tests -t .
+```
+
+Verification against PlanExe baselines lives in `verify/`; findings are in `report.md`.
