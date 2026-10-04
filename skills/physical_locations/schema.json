@@ -1,0 +1,78 @@
+{
+  "$defs": {
+    "PhysicalLocationItem": {
+      "properties": {
+        "item_index": {
+          "description": "Enumeration of the locations, starting from 1.",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "physical_location_broad": {
+          "description": "A broad location for the project, such as a country or region. Use 'Global' if applicable.",
+          "title": "Physical Location Broad",
+          "type": "string"
+        },
+        "physical_location_detailed": {
+          "description": "Narrow down the physical location even more, such as a city name.",
+          "title": "Physical Location Detailed",
+          "type": "string"
+        },
+        "physical_location_specific": {
+          "description": "Narrow down the physical location even more, such as a city name, region, or type of location (e.g., 'Oceanographic Research Centers').",
+          "title": "Physical Location Specific",
+          "type": "string"
+        },
+        "rationale_for_suggestion": {
+          "description": "Explain why this particular physical location is suggested.",
+          "title": "Rationale For Suggestion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_index",
+        "physical_location_broad",
+        "physical_location_detailed",
+        "physical_location_specific",
+        "rationale_for_suggestion"
+      ],
+      "title": "PhysicalLocationItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "has_location_in_plan": {
+      "description": "Is the location specified in the plan.",
+      "title": "Has Location In Plan",
+      "type": "boolean"
+    },
+    "requirements_for_the_physical_locations": {
+      "description": "List of requirements/constraints for well suited locations.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Requirements For The Physical Locations",
+      "type": "array"
+    },
+    "physical_locations": {
+      "description": "List of physical locations.",
+      "items": {
+        "$ref": "#/$defs/PhysicalLocationItem"
+      },
+      "title": "Physical Locations",
+      "type": "array"
+    },
+    "location_summary": {
+      "description": "Providing a high level context.",
+      "title": "Location Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "has_location_in_plan",
+    "requirements_for_the_physical_locations",
+    "physical_locations",
+    "location_summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

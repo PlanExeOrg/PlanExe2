@@ -1,0 +1,72 @@
+{
+  "$defs": {
+    "ReviewItem": {
+      "properties": {
+        "issue": {
+          "description": "A brief title or name.",
+          "title": "Issue",
+          "type": "string"
+        },
+        "explanation": {
+          "description": "A concise description of why this issue is important.",
+          "title": "Explanation",
+          "type": "string"
+        },
+        "recommendation": {
+          "description": "Specific suggestions on how to address the issue.",
+          "title": "Recommendation",
+          "type": "string"
+        },
+        "sensitivity": {
+          "default": "",
+          "description": "Optional: Provide any sensitivity analysis insights related to this issue.",
+          "title": "Sensitivity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue",
+        "explanation",
+        "recommendation"
+      ],
+      "title": "ReviewItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "expert_domain": {
+      "description": "The domain of the expert reviewer.",
+      "title": "Expert Domain",
+      "type": "string"
+    },
+    "domain_specific_considerations": {
+      "description": "Key factors and areas of focus relevant to the specific project domain, which this review should prioritize.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Domain Specific Considerations",
+      "type": "array"
+    },
+    "issues": {
+      "description": "The most significant issues.",
+      "items": {
+        "$ref": "#/$defs/ReviewItem"
+      },
+      "title": "Issues",
+      "type": "array"
+    },
+    "conclusion": {
+      "description": "Summary of the most important issues.",
+      "title": "Conclusion",
+      "type": "string"
+    }
+  },
+  "required": [
+    "expert_domain",
+    "domain_specific_considerations",
+    "issues",
+    "conclusion"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "currency_strategy",
+  "evaluated_at": "2026-10-04T17:51:11",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 10.7,
+      "structure_problems": [],
+      "judgments": {
+        "currency_strategy.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both pick EUR as primary and include MAD, which is correct. B adds USD, which is relevant for a megaproject buying steel, vessels, subsea equipment and drawing on international lenders, and gives a much more concrete FX strategy: contract in EUR where possible, hedge USD and MAD exposure, tie tranched financing to the EUR budget, hold an FX/inflation contingency reserve, and use multi-currency treasury accounts. It also notes that the MAD is managed against a EUR/USD basket, which is accurate. A is thinner, and its mention of \"cards\" for international payments is odd for a €40B project. B's phrase \"Local currencies, EUR in Spain and MAD in Morocco\" is slightly redundant, but that is minor. B is more decision-useful and fits the schema just as well."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates correctly choose EUR as the primary currency and include MAD for Moroccan-side costs. Both follow the required structure of money_involved, currency list, primary currency and strategy.\n\nCandidate A is more complete and decision-useful. It adds USD for commodities, offshore vessels, subsea equipment and multilateral lenders, which fits a mega-project with a global supply chain. Its MAD note is accurate: the dirham is managed against a EUR/USD basket. The strategy is concrete. It covers contracting in EUR where possible, hedging USD purchases and MAD exposure, tying tranched financing to the EUR budget, holding an FX and inflation contingency reserve, reviewing hedges regularly, and using multi-currency treasury accounts. It also names Tangier-Med staging, which ties it to the plan. One small imprecision is that it lists EUR as a \"local currency\" for Spain, but that is minor.\n\nCandidate B is correct but thin. It omits USD even though specialized equipment and vessels for a project like this are often priced in USD. Its advice to use \"cards or banking facilities with minimal foreign transaction fees\" is trivial and out of scale for a €40 billion programme. It does mention forwards and swaps, but gives little else on FX risk management over 20 years.\n\nA is more specific, more insightful, and more useful to downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 11.7,
+      "structure_problems": [],
+      "judgments": {
+        "currency_strategy.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both correctly identify EUR as primary and USD as separately tracked exposure, matching the prompt. A is minimal: it mentions EUR/USD and a generic hedging recommendation (forward contracts starting Phase 1), and misses the prompt's explicit points about financing, public benefit, permitting, etc. It also lists \"potential international financing\" as USD exposure, which is a bit off given the prompt's EUR-financing preference. B is more specific and plan-aligned: it lists the full set of EUR cost categories, includes the budget figures, and covers USD hardware, vendor/EPC contracts, and USD-priced tenants. It adds a minor GBP exposure tied to London fiber and UK tenants, which is relevant given the prompt's London connectivity. Its hedging strategy is concrete (layered forwards/options, 60-80% coverage of 12-24 month payables, EUR-indexed clauses, natural hedge, EUR debt, review at each gate, USD hardware as Phase 1 FID input). Minor weaknesses: the \"cards or accounts with no foreign transaction fees\" advice is trivial boilerplate for a €100B project, and the 60-80% figure is unsupported. It is somewhat longer than needed, but the content is decision-useful. Overall B is clearly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both pick EUR as primary and track USD separately, matching the prompt. A is much more specific and decision-useful. It lists the cost categories in EUR and the USD hardware/vendor/tenant exposure. It adds GBP for the London fiber link, which the prompt does mention. It gives concrete hedging guidance (layered forwards or options, 60-80% cover of the 12-24 month payables, EUR-indexed vendor clauses, natural hedge against USD tenant revenue, EUR project debt). It also ties FX review to the phase gates and treats USD spend as a Phase 1 FID input. Its weak points are the minor \"cards with no foreign transaction fees\" item, which is trivial for a project of this scale, and the hedge ratio being asserted without justification. B is correct but generic and thin. It omits GBP, gives only a brief mention of forwards, and says nothing about the hedge ratio, the gating, or the natural hedge. It also lists \"potential international financing\" as USD, which is not supported by the prompt. A is better for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 12.9,
+      "structure_problems": [],
+      "judgments": {
+        "currency_strategy.md": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A is much better. It correctly finds the non-euro exposure the prompt implies: CHF (Zürich/SBB on the Wien–München–Zürich corridor), DKK (Copenhagen corridor) and SEK (SJ is named). It keeps EUR as primary for the €1.5B public budget and the clearing mechanism. It gives a concrete FX approach: settle in EUR, use ECB reference rates, hedge or match natural exposures, hold contingency for volatile currencies, and estimate private IT investment separately in EUR. PLN, CZK, HUF and RON are speculative, since the prompt only mentions \"roughly twenty more\" carriers, and this slightly bloats the list. Even so, they are plausible for the later TEN-T extension. Candidate B reaches the right primary currency, but it wrongly says no non-euro countries are obvious in the initial corridors, even though Switzerland and Denmark are explicitly on them and Sweden is named. It is thin, hedges with \"if any\", and gives little help to later stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate A is generic, lists only EUR, and hedges about whether non-euro countries are involved, even though the prompt names SJ (Sweden) and Zürich (Switzerland) and Copenhagen (Denmark). That is an inaccuracy: \"none are immediately obvious\". It also doesn't mention the €1.5B budget or the separate private IT estimate. Candidate B correctly sets EUR as the primary currency and ties it to the €1.5B budget, the clearing mechanism, and the private IT investment. It lists the non-euro currencies that actually matter (CHF, DKK, SEK) and adds plausible later-phase TEN-T currencies (PLN, CZK, HUF, RON). It gives a concrete FX approach: ECB reference rates, settlement in EUR, hedging for bank guarantees, and contingency for volatile currencies. Minor flaws in B: Portugal and Estonia are in the euro list, which is correct, and the CEE currencies are somewhat speculative. The list is slightly long, but it is decision-useful. B is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 7.5,
+      "structure_problems": [],
+      "judgments": {
+        "currency_strategy.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both choose EUR for a Leipzig, Germany pilot, which is correct and consistent with the prompt. A is generic and omits the €3.5M budget and the staged tranches. B ties the currency choice to the plan: the €3.5M budget is already in EUR, with €2.0M initial and €1.5M at month 4, and it names the real cost categories (cooling centers, taxi/paratransit, home interventions, outreach, evaluation). B has no errors and is more decision-useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates make the same correct call. Both choose EUR as the primary currency for a single-country eurozone pilot in Leipzig, and both state that no FX management is needed. Both follow the expected structure: money_involved, a currency list, a primary currency and a strategy. A ties the currency choice to the plan's facts. It names the €2.0M and €1.5M tranches and lists the cost categories paid in EUR: cooling centers, transport contracts, home interventions and handyperson services, outreach staff, communications and evaluation. That is more useful to later stages. B is correct but generic. It mentions only local budgeting, procurement and contractor payments, and it leaves out the staged funding. The difference is small, but A is more specific and better grounded in the plan."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "CurrencyItem": {
+      "properties": {
+        "currency": {
+          "description": "ISO 4217 alphabetic code.",
+          "title": "Currency",
+          "type": "string"
+        },
+        "consideration": {
+          "description": "Why use this currency.",
+          "title": "Consideration",
+          "type": "string"
+        }
+      },
+      "required": [
+        "currency",
+        "consideration"
+      ],
+      "title": "CurrencyItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "money_involved": {
+      "description": "True if the project likely involves any financial transactions (e.g., purchasing equipment, paying for services, travel, lab tests), otherwise False.",
+      "title": "Money Involved",
+      "type": "boolean"
+    },
+    "currency_list": {
+      "description": "List of currencies that are relevant for this project.",
+      "items": {
+        "$ref": "#/$defs/CurrencyItem"
+      },
+      "title": "Currency List",
+      "type": "array"
+    },
+    "primary_currency": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "The main currency for budgeting and reporting (ISO 4217 alphabetic code).",
+      "title": "Primary Currency"
+    },
+    "currency_strategy": {
+      "default": "",
+      "description": "A short summary of how to handle currency exchange and risk during the project.",
+      "title": "Currency Strategy",
+      "type": "string"
+    }
+  },
+  "required": [
+    "money_involved",
+    "currency_list"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

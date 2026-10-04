@@ -1,0 +1,114 @@
+{
+  "stage": "review_assumptions",
+  "evaluated_at": "2026-10-04T17:51:10",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 46.0,
+      "structure_problems": [],
+      "judgments": {
+        "review_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is stronger. It finds the core feasibility and planning flaws. A 100 m tunnel in a 300–900 m deep strait needs very long pillars or tethers, which contradicts the \"reduced seabed penetration\" premise. The 20-year build period is confused with design life, and a 100-year design life is the norm. It flags the 10–15% contingency against reference-class overruns, the unstated real vs nominal basis, interest during construction, and the missing revenue case. It also notes that the schedule ignores a long pre-construction critical path of treaty, EIA, prototype and procurement. It catches internal inconsistencies, such as the conflicting weather-availability figures, and the implausible \"pressurised\" corridor and missing evacuation shafts. Its recommendations are actionable (TRL gate, prototype, P80 budget, stage-gating), and its sensitivities are quantified and tied to baselines. Its weaknesses are that it covers only four issues and that its references to \"Risk 7\" and \"Risk 9\" depend on upstream documents. The issues it does cover are the most decision-relevant.\n\nCandidate B lists seven issues: seismic and geotechnical, energy, maritime traffic, decommissioning, gauge, climate and flooding. Several are reasonable, and the seismic point is valid. But it largely accepts the plan's framing. It treats the 20-year lifespan as given, so its decommissioning and climate issues rest on an unchallenged premise. It never questions the cost basis, contingency, revenue or schedule logic, and it misses the pillar-versus-depth contradiction. Several details are weak or speculative. The gauge issue is partly misframed, since the high-speed lines in both countries are standard gauge. The seismic probabilities and the energy and collision numbers look invented. The flooding issue accepts the pressurised-corridor premise. The conclusion also doesn't match the prompt's call for the three most important issues. B is broader but shallower and misses the largest financial and feasibility risks."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate B is the better review. It catches the real feasibility problems. The strait is 300-900 m deep, so a tunnel at 100 m would need very long pillars or tethers, which contradicts the \"reduced seabed penetration\" premise. It also catches that the 20-year design life is confused with the 20-year build period, and it flags the first-of-a-kind technology readiness gap. It then examines the cost and schedule assumptions. It compares the 10-15% contingency with reference-class overruns of 34-80%, notes that real versus nominal euros and IDC are unstated, and points out that there is no revenue case. It finds the missing 7-12 year pre-construction critical path, and it spots the inconsistent weather-availability figures (20-30%, 30-40%, and a further 15-20% loss). It also challenges the \"pressurised\" corridor (internal pressure should be near 1 atm) and the lack of shafts or cross-passages for evacuation. Its sensitivities are quantified and tied to the baseline. B has only four issues, and some of the safety content is compressed.\n\nCandidate A is well formatted and has quantified sensitivities. However, its issues are largely generic megaproject boilerplate: seismic, energy, maritime traffic, decommissioning, climate. It also contains a factual error. It treats rail gauge as a major gap, claiming Spain's Iberian gauge versus Morocco's standard gauge. Spain's high-speed network is already standard gauge, and Morocco's Al Boraq is standard gauge at 25 kV AC. A also accepts the \"pressurized corridor\" and \"10 atmospheres\" framing uncritically. It never addresses the depth/pillar contradiction, the budget and contingency realism, the schedule logic, or the design-life confusion. Decommissioning matters less here because of how it frames the lifespan. A's closing claim that the strategy is \"sound\" is weakly supported. Its sensitivity figures also look arbitrary, for example 10% and 2% earthquake probabilities presented as precise.\n\nFor downstream planning, B's findings are sharper, more correct, and more decision-useful."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 55.5,
+      "structure_problems": [],
+      "judgments": {
+        "review_assumptions.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 5,
+              "analysis": "Candidate B is clearly stronger. It finds real contradictions and errors in the upstream documents. These include the powered-shell versus GPU-owning capex scope, which makes the €120B budget and the FX estimate inconsistent. They also include the Cambrai–Dunkirk latency geography and the PUE cost understated 5–10x. I checked the PUE arithmetic (0.1 × 1 GW × 8760 h ≈ 0.88 TWh, about €50–60M/yr) and it is correct. B also adds French-specific regulatory items that matter for the critical path: ZAN, PENE/PINM, CNDP, SAFER and ORE. It separates the PPA gate from the tenant take-or-pay gate and gives concrete recommendations and quantified sensitivities. It has a small slip: 9 GW at 85% load is about 67 TWh, not 79 TWh. That does not change its conclusions. It also has four issues where three were requested, which is minor.\n\nCandidate A is more generic. Its grid lead-time point is valid, but the workforce issue is low-value. Its holding-cost figure of €50–75k per hectare per year is implausible for agricultural or buffer land. At 12,880 ha that is about €640–970M per year, which A never reconciles with its own sensitivity. It reads as plausible but not rigorous. It misses the capex and FX inconsistency, the latency errors, and the French planning and legal regimes. That makes it less useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is clearly stronger. It finds substantive, plan-specific problems. First, the Phase 2 trigger confuses PPAs with tenant take-or-pay contracts, and there is no power price or load-factor assumption. Second, the capex scope contradicts itself: a €100-140B budget only fits a powered shell, yet the plan assumes 30% USD hardware. Third, the regulatory path leaves out ZAN, PENE/PINM, CNDP and SAFER. Fourth, it catches physical and arithmetic errors in the latency geography and the PUE cost. Its quantification is mostly sound and checkable. The PUE cost of about €50-70M per GW per year is right. The fiber rule of about 10 µs/km round-trip is right. The shell-versus-GPU FX comparison is sensible. One small slip is that 9 GW at 85% load is about 67 TWh, not 79 TWh. The recommendations are actionable: separate power and tenant gates, a downsize option, a tenant concentration cap, and phased land release. It also follows the required structure.\n\nCandidate B is more generic. Its grid lead-time point is valid but shallow. Its land-holding cost of €50-75k per hectare per year is implausibly high, and the sensitivity built on it (€1.3B overrun) is shaky. The workforce issue is real but low-impact next to the missing items in A. The sensitivities are loosely derived (\"ROI loss 8-12%\"). It does not flag the FX or capex-scope contradiction, ZAN or CNDP, or the latency and PUE errors. Its conclusion is also somewhat promotional (\"strategically sound\"), which does not suit a red-team stage."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 38.9,
+      "structure_problems": [],
+      "judgments": {
+        "review_assumptions.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A names the issues that most threaten this plan. The first is the missing legal basis and legislative timeline behind the \"binding\" standards, which affects every downstream date. The second is the budget: the €200M float has no source, there is no contingency line, grants and FTE counts look too small, and state-aid exposure on the public distributor goes unaddressed. The third is the 90-minute backstop threshold, which is weaker than the 60/120-minute thresholds in Reg. 2021/782, plus the unclear first/last-leg liability and the fault-attribution process. Its recommendations are concrete: a legal opinion within 60 days, 30–50% operator co-funding, an EIB guarantee line, a 6-month shadow-mode pilot with pass criteria. Its sensitivity ranges are quantified, and its conclusion flags further gaps (competition law, PSD2 licensing, GDPR/NIS2, Swiss/non-euro participants, the 5% royalty cap, demand evidence). It follows the schema fully, and some of its numbers are speculative but plausible.\n\nCandidate B is thinner and less insightful. Its Issue 1 is built on a questionable premise, a 30-month grace period for accessibility. It then recommends gating the month-18 binding on full accessibility conformance, which is arguably unrealistic and adds schedule risk. Its Issue 2 on float depletion is valid, but the fix of ring-fencing 20% (€300M) is arbitrary and would consume a large share of the budget. Its Issue 3 on political resistance to enforcement is reasonable. The sensitivity figures are vaguer, for example \"regulatory fines of 3–7% of the operational budget\" with no basis. It misses the legal basis, the contingency gap, the conflict with passenger-rights law, state aid and non-EU participants. It has fewer domain considerations and less downstream value.\n\nA is clearly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "B is clearly stronger. It finds real structural gaps in the assumptions. First, \"binding\" standards have no legal basis or legislative timeline, and the plan has no legal power to suspend operators. Second, the budget math doesn't add up: €900M + €150M leaves €450M, there is no contingency, the €200M float has no source, and the 35-FTE governance body is implausibly small. Third, the 90-minute passenger-rights backstop is weaker than Reg. 2021/782, which gives 25% compensation at 60 minutes and 50% at 120 minutes. B also raises state aid for the public distributor, PSD2 licensing, GDPR/NIS2, Swiss and non-euro participants, and the ambiguous 5% royalty cap. Its recommendations are concrete (legal opinion within 60 days, EIB guarantee line, 30–50% co-funding, graduated sanctions, shadow-mode pilot with pass criteria). Its sensitivity ranges are quantified and mostly tied to specific baselines. A's issues are narrower and weaker. The accessibility deferral is a fair point. The float issue partly overlaps B's budget issue, but its proposed €300M ring-fence is arbitrary. The enforcement-resistance issue is valid but thin. Several of A's figures (3–7% fines, 15–20% revenue shortfall) look invented and weakly grounded. A also misses legal-basis and passenger-rights consistency problems. A's note that the \"Decision 9 accessibility deferral\" is a \"significant tactical omission\" is plausible but less decision-useful. B is far more useful to downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 27.1,
+      "structure_problems": [],
+      "judgments": {
+        "review_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is concrete and decision-useful. It catches a real internal contradiction (the night-threshold direction, \"<19°C\" vs \">19°C\"). It also catches the staffing arithmetic mismatch (62 people vs ~12 FTE). It flags the seasonality and calendar risk, the missing contingency, and the lack of a verified legal basis. It anchors the alert levels to DWD warnings and brings in German-specific constraints: works council, TVöD, Arbeitszeitgesetz, UVgO and DPIA. Its sensitivity ranges are quantified and mostly plausible, and its recommendations are actionable, with Month 1 and Month 2 deadlines. Weaknesses: it is a little verbose and some figures are loose. It also mentions a \"~600k\" city without flagging that this is outside the 150–400k range in the prompt. Candidate B is thinner and more generic. It rests on internal \"Decision\" numbers that the reader can't verify. Its recommendation for Issue 3 is muddled: it says to redirect voucher funds to \"Decision 7, Option 2\", which is the same option it criticises. Its ideas of 95% inter-rater reliability and indemnification from a health authority are less grounded. It does make a valid point about vouchers failing frail social-housing tenants. Overall it is less insightful and less useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "B is clearly stronger. It finds real internal inconsistencies in the upstream assumptions: the night-temperature direction (<19 vs >19°C), and the staffing arithmetic (62 people versus ~12 FTE). It also raises issues specific to the plan's context. These include DWD alignment, the legal basis for declaring alerts, works council and TVöD/Arbeitszeitgesetz constraints, UVgO procurement, and the seasonality and calendar conflict with the Month 4 gate. Its recommendations are actionable (back-test against 2018–2023, a 10% contingency, a cap of 25% non-cancellable commitments, framework contracts). Its sensitivity ranges are quantified, with figures such as €25–35k/day, a 20% procurement overrun, and a 100–150% staffing cost increase. One flaw: it calls Leipzig a city of ~600k, which is outside the prompt's 150–400k range, and it does not flag this. It also says \"contingent tranche\", which is loose wording.\n\nA is generic and has weaker logic. Its contingency issue is reasonable, but its claims are shaky, such as a Level 3 activation causing a \"100% budget halt\". Issue 2 treats a triage script as needing \"inter-rater reliability\" and legal indemnification, which is somewhat tangential. Issue 3 is muddled. It assumes \"homeowner-installed vouchers\" for social housing and then recommends redirecting funds from \"Decision 7, Option 2\" to \"Decision 7, Option 2\", which refers to itself. It also references upstream decision labels that are opaque to a reader. It misses the seasonality, staffing, threshold and legal-basis problems. It is less decision-useful for downstream stages."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "identify_risks",
+  "evaluated_at": "2026-10-04T17:54:11",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 109.5,
+      "structure_problems": [],
+      "judgments": {
+        "identify_risks.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 5,
+              "analysis": "Candidate B is clearly stronger. It spots the plan's core problems. The brief is internally inconsistent: it says \"pillar-supported\" and also \"buoyant/anchored\". The strait is 300–900 m deep, so a tunnel at 100 m would need 200–800 m of vertical support. The brief treats a 20-year horizon as the design life, and \"start ASAP\" conflicts with the years of survey, treaty and permitting that are needed. B also covers risks A misses entirely: seismic and geotechnical hazards, strong currents and internal waves, evacuation and fire safety with no vertical shafts, maritime collision and NATO chokepoint issues, the Gibraltar sovereignty question, insurance, demand and revenue, and climate and carbon. Its cost-overrun analysis uses reference classes (Fehmarnbelt, Channel Tunnel, Flyvbjerg) and arrives at a realistic €60–100B outturn. Its risk summary states assumptions and gaps, ranks the top risks, and ends with a clear recommendation of stage gates. That is useful for downstream stages. Some of B's figures are rough, but it labels them as order-of-magnitude estimates.\n\nCandidate A is competent and well formatted, and it follows the schema. However, it is largely generic. It accepts the prompt's premises uncritically, for example the 20-year \"lifespan\" and the viability of the concept. It has odd phrasing, such as \"towing operations at 100-meter depth\". It treats the €40B budget as credible, with only a 10–15% overrun, and it misses seismic, safety/evacuation and feasibility risks. Its mitigations are less decision-useful. For example, it suggests blockchain tracking and a \"full-scale prototype\" without noting the fundamental design issues."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much stronger. It catches the core inconsistencies in the prompt: a pillar-supported tunnel that is also buoyant, and a 100 m depth in a strait that is 300–900 m deep. It also notes that \"20-year design life\" conflicts with infrastructure that normally needs 100+ years, and it flags the \"ASAP\" start as unrealistic. Its risks are specific to the location: seismicity, Camarinal Sill, internal waves, shipping density, Gibraltar sovereignty, orcas and Natura 2000, Iberian vs standard gauge, and MAD basket/hedging limits. Impacts are quantified and benchmarked (Fehmarnbelt, Channel Tunnel, Flyvbjerg). The risk areas cover the requested strategic, operational, financial, and location-specific categories, and it includes safety/evacuation, insurance, and a thoughtful summary with assumptions and overlapping mitigations. Some of its numbers are order-of-magnitude, and the likelihood ratings are mostly high, but the content is credible.\n\nCandidate B is generic. It never questions the depth versus seabed mismatch, so it treats feasibility as only a \"medium\" likelihood risk. It accepts the 20-year design life as adequate. It has no seismic or geotechnical risk, no evacuation or fire safety risk, and no insurance risk. It contains errors and oddities: \"towing operations at 100-meter depth\", \"UV degradation\" and \"blockchain tracking\", and it describes a 10–15% overrun as the cost risk, which is unrealistically low for this project. Its currency analysis is weaker. It does tie risks to the strategic decisions (Builder's Foundation, ballast, single hub), which helps a little, but overall it has less insight and less decision-useful content."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 142.8,
+      "structure_problems": [],
+      "judgments": {
+        "identify_risks.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is much stronger. It gives 25 risks across strategic, operational, financial and location-specific areas, as the stage requires. The risks are tied to Hauts-de-France and to the prompt's own constraints. Examples are 9 GW being about 63 TWh/yr (roughly 13% of French consumption and more than Gravelines), the RTE connection offer process, ZAN, CNDP, ICPE, SAFER, UXO on the battlefields, Seveso sites, the post-ARENH power regime, and anti-drone legal limits. Its figures are mostly plausible and internally consistent. It flags that the budget may cover only the powered shell and not the IT hardware. It catches inconsistencies in the upstream documents, including the 161 km² versus 30 km² buildable area, the \"high-rise\" text versus the 14–30 m halls, the fibre decision versus the stated connectivity needs, and the plan date versus today's date. Its actions are concrete, such as staged Phase 0 spend, option agreements with conditions precedent, and a P50/P80 schedule. The summary is thorough and includes trade-offs. Weaknesses are length and some mixing of \"60% take-or-pay\" with the prompt's 30–50%, which reflects the earlier decision files.\n\nCandidate B has only 9 risks and leaves out many that matter: power price and procurement, land assembly feasibility, agricultural displacement, labour, long-lead equipment, backup generation and BESS, and legal risk. Several of its impact figures are shaky. It treats the €250–750M Phase 0 budget as remediation cost, and it puts the FX exposure at €8–15B on the whole 9 GW budget even though the budget is mostly EUR. Its latency risk is poorly framed. Its actions are thin; the Risk 3 action, for example, is just \"strictly adhere to the strategy\". Its summary is short. It does reference the decision files, which is good, but it is less decision-useful overall."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate B is clearly stronger.\n\nCandidate A has 9 risks, and several are thin or flawed:\n- Risk 9 confuses the Phase 0 budget (€250–750M) with a remediation budget.\n- The Risk 9 action to put 80% of the Phase 0 budget into deep-bore testing is unrealistic.\n- The Risk 8 latency premise (sub-millisecond consistency across Paris, London and Brussels) is physically implausible.\n- Risk 6 gives \"€1M–€5M per week\" penalties without support.\n- A omits major issues: power price and procurement, the CAPEX scope problem, tenant credit, ZAN and CNDP, grid stability, long-lead equipment, labour, UXO, agricultural displacement, heat-reuse feasibility, and schedule realism.\n- A mostly accepts the plan's framing.\n\nCandidate B has 25 risks, with French-specific content that is concrete and well calibrated:\n- It names ZAN, CNDP, ICPE, SAFER, ERC, PPRI, the RTE convention de raccordement, and the post-ARENH pricing regime.\n- It runs numbers: 9 GW is about 63 TWh a year, roughly 13% of French consumption, and more than Gravelines.\n- It flags that the budget is probably a powered shell only, with GPUs excluded.\n- It flags internal inconsistencies in the upstream documents: 161 km² against 30 km² buildable, the high-rise text against the 14–30 m halls, and binding against non-binding grid commitments.\n- It flags the fibre decision against the stated London, Frankfurt and subsea requirement.\n- It marks milestones as uncontrolled and sets kill-style criteria.\n- Its actions are actionable, and its summary names the most critical risks, the trade-offs and the key assumptions.\n\nB is long, and some figures are order-of-magnitude, but it says so. It follows the required format of one `## Risk N` section per risk followed by `## Risk summary`. It is more useful for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 168.4,
+      "structure_problems": [],
+      "judgments": {
+        "identify_risks.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is a thorough 20-risk register covering strategic, operational, financial and location-specific areas. Its risks are specific to this plan: the Regulation is still only a proposal, OSDM gaps, legacy carrier IT, clearing-house licensing and guarantees, state aid, GDPR/NIS2 and PRM data, and non-EU or non-euro participants (CHF on Wien–München–Zürich, DKK on Copenhagen–Hamburg–Berlin, SEK for SJ). It also flags that the 40% target depends on levers the program doesn't control. Impacts are quantified with ranges, and each action is concrete. It estimates the private IT investment separately, as the prompt asked. The summary names the top risks, states assumptions and covers trade-offs. One flaw is that it cites an \"Oct 2026\" date that conflicts with the plan's May 2026 date. This is minor, and it even uses the mismatch as a risk.\n\nCandidate B has only 8 risks, and they are thin and generic. It leans on \"Decision N\" references that downstream readers can't resolve without the earlier files. It has no location-specific or currency risks, even though the prompt and the physical-locations and currency inputs call for them. It omits legal, security, accessibility-compliance, competition-law and budget-overrun risks. Several impacts are vague or poorly justified. For example, Risk 4 refers to an \"on-board experience\" metric that isn't in the plan. Risk 8 is labeled \"Environmental/Scope Creep\" even though it concerns scope. The actions are mostly \"adhere to Decision X\". Its summary is short.\n\nA is clearly better for downstream use."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate B is clearly stronger. It gives 20 plan-specific risks across strategic, operational, financial and location-specific areas. These include the legal status of the proposed Regulation, OSDM gaps, legacy carrier IT, incumbent resistance, clearing-house licensing (PSD2), competition law and state aid, GDPR/NIS2 and PRM data, and the weak link between the program's levers and the 40% and modal-shift targets. It handles the \"realistic scenario\" instruction well. It estimates private carrier IT at €2–4B, which the prompt asked for, and projects a 12–24 month slip. It also catches location-specific issues: CHF on the Zürich corridor, DKK, SEK, and non-EU participation by Switzerland, Norway and the UK. Impacts are quantified and actions are concrete, such as a phase 0, a T0-relative timeline, stage gates and a liquidity backstop. Its summary names the top three risks, trade-offs and assumptions. Minor flaws: the summary contains literal \"\\n\" artifacts, and the note about the \"Oct 2026\" date is questionable. It is also long, but the length is justified by the content.\n\nCandidate A is competent but thin, with only 8 risks. It leans on \"Decision N\" references that make it less self-contained. It has odd labels, such as \"Environmental/Scope Creep\" and \"Regulatory & Permitting\". It invents a success metric (\"improving on-board experience\"). It omits the currency and non-EU issues, security and data protection, competition law and state aid, the legal-basis uncertainty, and the private IT estimate. Several actions are generic, and its Risk 7 is relatively weak. Its summary says \"Builder scenario\" and \"Pragmatic Harmonization\" interchangeably, which is inconsistent."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 103.9,
+      "structure_problems": [],
+      "judgments": {
+        "identify_risks.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is generic and relies on opaque \"Decision N\" references. It never names the city. It has only 8 risks. It misses several required risk categories: extreme-event surge, health-system integration, worker protection, communications/misinformation, evaluation and measurement, and a proper GDPR treatment. It also includes questionable advice, such as \"secure bridging financing\" and \"Triaging staff scripts over formal data sharing\". Its summary is thin. Its mitigations are plausible but not very specific.\n\nCandidate B is much more comprehensive and specific. It covers 21 risks that map to every scope area and to the risk types the plan asks for: reputational, GDPR, volunteer safety and extreme-event surge. It is grounded in Leipzig: Personalrat, ArbZG, VgV/UVgO, DWD, LWB, Leitstelle, named districts and named hospitals. It catches real issues. The date conflict is one. Leipzig's population of about 616k exceeds the brief's 150–400k range, and B handles this by restricting the pilot to 3–4 districts. The gate timing is another: Month 4 falls after most of the peak season. Its actions are concrete and its impact estimates are quantified. Weaknesses: it is long, some figures are invented order-of-magnitude estimates (B flags this), and there are a few small inconsistencies. For example, it says \"40% of budget held back\" when the real share is about 43%. It is also markdown-compliant. B is clearly better for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is a comprehensive, 21-risk register that is specific to the plan: it names Leipzig, German legal regimes (SGB X, ArbZG, Personalrat, VgV/UVgO), and local institutions. It covers all required scope areas (GDPR, staffing, procurement, cooling centers, transport, home interventions, outreach safety, health integration, workers, comms, extreme surge, financial, reputational). It gives quantified impacts, concrete actions, and a useful summary with assumptions. It also flags real inconsistencies: the timeline problem of a Month 4 gate in September, Leipzig being above the 150–400k brief, and the date mismatch. Some of those flags are slightly noisy, and some numbers are speculative, but it is very decision-useful. Candidate B has only 8 risks. It relies heavily on references to \"Decision N\" of upstream documents, which makes it opaque. Its actions are thinner and sometimes odd (e.g. \"secure bridging financing\"; the mitigation for Risk 1 recommends triaging scripts over formal data sharing, which sits uneasily with GDPR compliance). It omits transport, health-system integration, worker protection, comms/misinformation, extreme-event surge, cybersecurity, and evaluation. Its risk areas are also less specific, and its summary is short. A is clearly better for downstream planning."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

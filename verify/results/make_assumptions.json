@@ -1,0 +1,114 @@
+{
+  "stage": "make_assumptions",
+  "evaluated_at": "2026-10-04T17:55:57",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 71.5,
+      "structure_problems": [],
+      "judgments": {
+        "make_assumptions.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 5,
+              "analysis": "Candidate B is more plan-specific and decision-useful. It benchmarks the €40B against Fehmarnbelt and the Channel Tunnel and flags it as a Class 5 estimate. It gives an explicit budget split and funding mix. It surfaces the ambiguity in what \"20-year\" means. It also catches real physical issues: Strait depth is 300–900 m, so pillars at 100 m depth need very tall pillars or tethers. It covers seismic risk, UNCLOS transit passage and the Espoo Convention. It names real stakeholders (ADIF, ONCF, EIB) and the gauge compatibility between Spain and Morocco. It also covers the revenue case and break-even. It follows the stage's eight-area format and fits the 2026 start date, with phases mapped to years.\n\nCandidate A is generic and plausible but weaker. It has some questionable content: saturation diving talk that is irrelevant to a sealed tunnel, \"permanent offshore residential platforms with family accommodation\", and tidal-energy power for the tunnel. Its phase durations sum oddly (6–7 + 5–6 + 4–5 = 15–18 years, leaving 2–5 years of contingency, loosely consistent). It never questions the plan's feasibility and misses the key geotechnical and depth issue. Its \"10-15% contingency\" is stated but not tested.\n\nB's assumptions are denser, though some assessments run long. A few items in B's assumptions are hedged or speculative, such as the ~70% seabed-contact reduction and the 10–20 Mt CO2e figure. Overall B is clearly stronger."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is much stronger. Each of its eight items gives concrete assumptions: a €40B split by category, funding shares, a phase timeline with gates, workforce and yard counts, and treaty and legal instruments. The assessments catch real, decision-relevant issues:\n- The ambiguity between 20 years as build time and design life.\n- Estimate accuracy: €40B is a Class 5 estimate, and the Fehmarnbelt and Channel Tunnel benchmarks show a cost gap.\n- The Strait is 300–900m deep, so \"pillars\" at 100m depth would be very tall or tethered.\n- Seismic and tsunami hazard, TRL maturity, and EU rail interface issues such as ERTMS and gauge.\n- A break-even passenger estimate and the risk of undershooting demand forecasts.\nIt cites the risk register and gives quantified mitigations. Some numbers are invented, but they are labelled as assumptions and are plausible.\n\nCandidate B is generic and thin. Its assumptions are short and vague: no concrete budget split, no funding-source split, and no calendar dates. It endorses odd or unrealistic ideas without challenge: permanent offshore family-accommodation platforms, tidal energy generators powering ventilation, and saturation diving as relevant to passenger evacuation. It never questions whether the 100m depth is physically coherent, and it never tackles the 20-year ambiguity. It is internally inconsistent: it says weather windows are 20–30% of working time in one place and 30–40% in another, and it calls turnover under 15% a target while permanent platforms conflict with the financing constraints. Its references to \"Decision N\" and \"Risk N\" are useful for traceability but add little insight.\n\nA is more useful for the downstream stages, including distill_assumptions."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 87.2,
+      "structure_problems": [],
+      "judgments": {
+        "make_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "A is much stronger. It covers the eight critical planning areas the stage requires: funding, timeline, resources, governance, safety, environment, stakeholders and operational systems. Each item pairs a grounded assumption with a detailed assessment that has numbers, French regulatory specifics (ICPE, ZAN, SAFER, CNDP, SecNumCloud, S3REnR) and kill signals. It stays faithful to the prompt's skepticism. It treats external approvals as uncontrolled, challenges the budget scope (ex-IT vs incl-IT), and challenges the 1.5 ms latency SLA and the 1.15 PUE. It also flags an inconsistency between the strategy file and the risk register. Some figures are loose, for example the FX exposure number and the supercapacitor mention, but the content is decision-useful and consistent overall.\n\nB does not map to the eight required areas. It covers land breakdown, grid trigger, public benefit, PUE, FX, latency, security isolation and ROW easements, and it has no items on workforce, governance, environment or safety. Its assessments are thin, with no detail on remediation, UXO or permitting lead times. Several assumptions are weak or questionable. Q6 requires under 2 ms RTT for synchronized training between clusters with a stated 50–70 km separation, but Cambrai and Dunkirk are farther apart than that. Q5 assumes 30% of capex is USD hardware, which is inconsistent with a budget that is mostly shell. Its Q1 is simple arithmetic. It is less useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It covers the eight areas the stage asks for (funding, timeline, resources, governance, safety, environment, stakeholders, operational systems), one per item, in that order. Its content is specific and skeptical, and it raises real issues:\n- Whether the budget includes IT hardware.\n- Realistic RTE and permitting lead times, with controlled and uncontrolled milestones marked.\n- ZAN, SAFER, ICPE and CNDP constraints.\n- Contamination and unexploded ordnance risk.\n- Dry-cooler limits in heat waves.\n- A latency physics check showing the 1.5 ms Paris SLA is not achievable.\n- Internal inconsistencies in the earlier files.\nIt also gives kill signals and gates. Some figures are loose. The FX exposure of €8–15B per 10% move does not match its own IT-cost assumption, and the assessments are very dense. Even so, it is far more decision-useful for downstream stages.\n\nCandidate A is narrower and drifts from the required areas. It has two items on grid or land control, none on workforce, and none on a proper safety analysis. Its FX arithmetic is wrong: 0.30 × 120 × 0.10 is €3.6B, not €4.32B. It also calls that figure the residual exposure after hedging, yet it is the gross figure with no hedge applied. Its 2 ms inter-site RTT requirement is asserted without physical reasoning. Its assumptions are mostly restatements of earlier strategic decisions rather than gap-filling with grounded numbers."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 87.1,
+      "structure_problems": [],
+      "judgments": {
+        "make_assumptions.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate A delivers eight items covering exactly the eight required planning areas (funding, timeline, resources, governance, safety, environment, stakeholders, operational systems). It is concrete and plan-specific. It gives a full budget split that sums to €1.5B (180+250+300+400+200+170=1500), a private IT estimate (€2.5B), a dated milestone schedule, staffing numbers, a legal and regulatory framework, settlement and reserve sizing, a modest modal-shift estimate, a stakeholder engagement model, and SLAs. It follows the \"realistic scenario\" instruction and includes useful, decision-relevant assessments. Some minor numeric oddities exist: the settlement arithmetic is a bit loose, and the capacity-building share is compared with the private IT bill in a way that is slightly muddled. The overall quality is high and it is highly useful downstream.\n\nCandidate B's questions are narrow and idiosyncratic, and they do not map to the required eight areas. There is no safety/risk, environment or stakeholder item, and the funding item addresses only float. Assumptions are thin. Examples include a €200M float (which contradicts the Builder scenario's guarantees), and a 60% capacity-building share with no full budget split and no private IT estimate. Assessments are brief. The \"royalty capped at 5% of O&M expenditure\" figure looks arbitrary. Enforcement is named for SNCF/DB/ÖBB only. B also omits the private IT estimate that the prompt explicitly requested. It is much less complete and less useful.\n\nA is clearly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "B is clearly stronger. It covers the eight required planning areas: funding, timeline, resources, governance, safety, environment, stakeholders and operational systems. A skips environment and safety, and its questions are narrow and oddly specific. B uses the prompt's constraints well: the €1.5B public budget split across the named lines, a separate private IT estimate (about €2.5B), a June 2026 start, the 18/30/60-month milestones, the four launch corridors, a \"realistic not aggressive\" modal shift of 3–5%, and the named stakeholders. It adds decision-useful detail: gates, a critical-path legal-basis risk, PSD2 and state-aid issues, SLAs, a conformance-test design, and a PRM dispatch integration. It also cross-references the earlier decisions and risks. Its weaknesses are minor. The reserve sizing is a little inconsistent with the €50–200M exposure, and it is long. A is thin and often arbitrary: a €200M float with no basis, a 5% royalty cap, naming SNCF/DB/ÖBB as the first audit targets, and 35 FTE for governance, which is implausibly low for this program. A also ignores the private IT estimate and the start date, and it puts the public reference distributor at only 10% of the budget. Its assessments are shallow."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 88.5,
+      "structure_problems": [],
+      "judgments": {
+        "make_assumptions.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate B is much stronger. It covers the eight areas with plan-specific, quantified assumptions. These include a budget breakdown with break clauses, a critical path anchored to the May 2026 start, and a fallback for the Month 4 gate if there are too few heat days. It also gives a staffing plan with FTE counts and a hire/secondment/contract mix, and alert thresholds tied to DWD. It names the legal basis (GDPR Art. 6 and 9, SGB X, a DPIA, Arbeitsschutzgesetz). It names Leipzig partners (LWB, Klinikum St. Georg, Caritas and others). Its footprint decision handles the fact that Leipzig (about 616k) is larger than the 150–400k range. B also flags that a gate in early September falls after the July–August peak, which is a real insight. Its low-tech, non-smartphone systems fit the prompt's constraints.\n\nCandidate A is thin and generic, and it has internal errors. It says Cooling Center readiness is \"T+6 weeks (mid-March)\", but the project starts in May. Its staffing math is inconsistent: 42 + 20 personnel against about 12 FTE. It names Leipzig only in a couple of places and never addresses that the city is too large for the brief. It proposes a Salesforce CRM, which is vague and sits poorly with the low-tech, GDPR-conscious requirements. Its legal basis is vague (\"Public Nuisance\" charters). Its Q5 proposes a \"geotagged dispatch system\", and its Q6 sets a single threshold with no sourcing. It also misses equity, baseline and surge detail."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "A is much stronger. It covers the eight areas with concrete, plan-specific numbers. These include a budget split with break clauses, staffing counts and capacity math, alert thresholds tied to DWD forecasts, and a legal basis under GDPR Art. 6 and 9, SGB X and a DPIA. It also names the Leipzig partners (LWB, Caritas, Klinikum St. Georg and others). It flags a real problem: Leipzig has about 616k residents, above the 150–400k range, so it limits the pilot to 3–4 districts. It also notes that a September gate falls after the July–August peak, and it proposes simulated drills if too few heat days occur. The assessments add risks, mitigations and opportunities, and they stay consistent with the gates and the non-smartphone constraint. There are small flaws: it uses 4 May as day 0 against a 3 May start, and the numbers are a little loosely reconciled.\n\nB is thin and generic, and it has errors. It gives a \"T+6 weeks (mid-March)\" readiness date, which contradicts a May start. It assumes a Salesforce-style CRM and a \"geotagged dispatch system\" despite the low-tech and GDPR emphasis. It says thresholds are \"too high (too conservative)\", which is confused. Its 60/40 budget split labels the 40% as \"non-refundable\" with no justification. Its legal basis is vague (\"Public Nuisance\" charters). It uses internal \"Decision N\" and \"Risk N\" references with little content behind them. It misses the population-range issue and the timing problem with the gate. Many of its questions are narrow rather than covering whole planning areas, so it is less useful downstream."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "$defs": {
+    "QuestionAssumptionItem": {
+      "properties": {
+        "item_index": {
+          "description": "Index in the list",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "question": {
+          "description": "Question to clarify and refine the user's description",
+          "title": "Question",
+          "type": "string"
+        },
+        "assumptions": {
+          "description": "Reasonable assumptions made to fill in the gaps or missing details in the user's description.",
+          "title": "Assumptions",
+          "type": "string"
+        },
+        "assessments": {
+          "description": "Detailed information about the assessments, including key findings and recommendations. *max 3 assessments*.",
+          "title": "Assessments",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_index",
+        "question",
+        "assumptions",
+        "assessments"
+      ],
+      "title": "QuestionAssumptionItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "question_assumption_list": {
+      "description": "Questions and assumptions",
+      "items": {
+        "$ref": "#/$defs/QuestionAssumptionItem"
+      },
+      "title": "Question Assumption List",
+      "type": "array"
+    }
+  },
+  "required": [
+    "question_assumption_list"
+  ],
+  "title": "ExpertDetails",
+  "type": "object"
+}

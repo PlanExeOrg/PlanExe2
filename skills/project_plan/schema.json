@@ -1,0 +1,228 @@
+{
+  "$defs": {
+    "RegulatoryAndComplianceRequirements": {
+      "description": "Detailed overview of the regulatory and compliance requirements necessary for the project.\nEnsures the project operates within legal frameworks and adheres to all necessary standards.",
+      "properties": {
+        "permits_and_licenses": {
+          "description": "List of permits and licenses required at local, regional, and national levels. Such as Building Permit, Cave Exploration Permit, Hazardous Materials Handling Permit.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Permits And Licenses",
+          "type": "array"
+        },
+        "compliance_standards": {
+          "description": "Ensure adherence to environmental, safety, and industry-specific standards and regulations.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Compliance Standards",
+          "type": "array"
+        },
+        "regulatory_bodies": {
+          "description": "List of regulatory bodies and their roles in the project's compliance landscape. Such as International Energy Agency, International Maritime Organization, World Health Organization.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Regulatory Bodies",
+          "type": "array"
+        },
+        "compliance_actions": {
+          "description": "List with actions and steps taken to ensure compliance with all relevant regulations and standards. Example: ['Building and Electrical Codes', 'Wildlife Protection', 'Fire safety measures', 'Biosafety Regulations', 'Radiation Safety'].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Compliance Actions",
+          "type": "array"
+        }
+      },
+      "required": [
+        "permits_and_licenses",
+        "compliance_standards",
+        "regulatory_bodies",
+        "compliance_actions"
+      ],
+      "title": "RegulatoryAndComplianceRequirements",
+      "type": "object"
+    },
+    "RiskAssessmentAndMitigationStrategies": {
+      "description": "By systematically identifying, analyzing, and addressing risks, you enhance the project \nresilience and increase the likelihood of achieving sustainable and long-term success.",
+      "properties": {
+        "key_risks": {
+          "description": "Things that can negatively impact the project, such as regulatory changes, financial uncertainties, technological failures, supply chain disruptions and environmental challenges.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Key Risks",
+          "type": "array"
+        },
+        "diverse_risks": {
+          "description": "Things that can negatively impact the project, such as operational risks, systematic risks, business risks.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Diverse Risks",
+          "type": "array"
+        },
+        "mitigation_plans": {
+          "description": "Develop strategies to minimize or manage these risks, ensuring the project remains on track despite unforeseen obstacles.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Mitigation Plans",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key_risks",
+        "diverse_risks",
+        "mitigation_plans"
+      ],
+      "title": "RiskAssessmentAndMitigationStrategies",
+      "type": "object"
+    },
+    "SMARTCriteria": {
+      "properties": {
+        "specific": {
+          "description": "Clearly defines what is to be accomplished. Provides context and purpose behind the goal. Avoid vagueness, unrealistic targets, broad statements that lack direction.",
+          "title": "Specific",
+          "type": "string"
+        },
+        "measurable": {
+          "description": "Establish how you will measure success. This could be quantitative (e.g., numbers, percentages) or qualitative (e.g., satisfaction levels). Without clear metrics, it’s difficult to track progress or determine success.",
+          "title": "Measurable",
+          "type": "string"
+        },
+        "achievable": {
+          "description": "Realism: Ensures the goal is attainable with the available resources and within constraints. Feasibility: Considers practical aspects such as time, budget, and expertise.",
+          "title": "Achievable",
+          "type": "string"
+        },
+        "relevant": {
+          "description": "Alignment: Connects the goal to broader objectives or missions. Importance: Highlights the significance and impact of achieving the goal.",
+          "title": "Relevant",
+          "type": "string"
+        },
+        "time_bound": {
+          "description": "Deadline: Specifies a clear timeframe for goal completion. Milestones: Breaks down the timeline into smaller, manageable phases if necessary.",
+          "title": "Time Bound",
+          "type": "string"
+        }
+      },
+      "required": [
+        "specific",
+        "measurable",
+        "achievable",
+        "relevant",
+        "time_bound"
+      ],
+      "title": "SMARTCriteria",
+      "type": "object"
+    },
+    "StakeholderAnalysis": {
+      "description": "Understanding the interests, expectations, and concerns of stakeholders is essential for building\nstrong relationships, securing support, and ensuring project success.",
+      "properties": {
+        "primary_stakeholders": {
+          "description": "List all key stakeholders, including government agencies, local communities, investors, suppliers, and end-users.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Primary Stakeholders",
+          "type": "array"
+        },
+        "secondary_stakeholders": {
+          "description": "List all secondary stakeholders, such as regulatory bodies, environmental groups, and suppliers.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Secondary Stakeholders",
+          "type": "array"
+        },
+        "engagement_strategies": {
+          "description": "Outline how each stakeholder group will be engaged, their roles, and how their interests will be addressed to secure support and collaboration.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Engagement Strategies",
+          "type": "array"
+        }
+      },
+      "required": [
+        "primary_stakeholders",
+        "secondary_stakeholders",
+        "engagement_strategies"
+      ],
+      "title": "StakeholderAnalysis",
+      "type": "object"
+    }
+  },
+  "description": "A clear, specific, and actionable statement that outlines what you aim to achieve.\nA well-defined goal serves as a foundation for effective planning, problem decomposition, and team assembly.",
+  "properties": {
+    "goal_statement": {
+      "description": "Adhering to the SMART criteria (Specific, Measurable, Achievable, Relevant, Time-bound)",
+      "title": "Goal Statement",
+      "type": "string"
+    },
+    "smart_criteria": {
+      "$ref": "#/$defs/SMARTCriteria",
+      "description": "Details of the SMART criteria."
+    },
+    "dependencies": {
+      "description": "Other goals or tasks that must be completed before this goal can be achieved. Example: ['Securing funding for equipment and personnel', 'Obtaining necessary permits for cave exploration'].",
+      "items": {
+        "type": "string"
+      },
+      "title": "Dependencies",
+      "type": "array"
+    },
+    "resources_required": {
+      "description": "Resources necessary to achieve the goal. Example: ['Cave exploration gear', 'Biological sampling tools'].",
+      "items": {
+        "type": "string"
+      },
+      "title": "Resources Required",
+      "type": "array"
+    },
+    "related_goals": {
+      "description": "Other goals that are related or interconnected. Facilitates understanding of goal interdependencies and broader objectives.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Related Goals",
+      "type": "array"
+    },
+    "tags": {
+      "description": "Keywords or labels associated with the goal. Enhances searchability and categorization, making it easier to filter and find goals based on keywords. Example: ['Extremophiles', 'DNA Sequencing', 'Microbial Life'].",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tags",
+      "type": "array"
+    },
+    "risk_assessment_and_mitigation_strategies": {
+      "$ref": "#/$defs/RiskAssessmentAndMitigationStrategies",
+      "description": "Identify potential risks and develop strategies to mitigate them, ensuring the goal remains achievable despite unforeseen challenges."
+    },
+    "stakeholder_analysis": {
+      "$ref": "#/$defs/StakeholderAnalysis",
+      "description": "Analyze key stakeholders, their interests, and engagement strategies to secure support and collaboration for goal achievement."
+    },
+    "regulatory_and_compliance_requirements": {
+      "$ref": "#/$defs/RegulatoryAndComplianceRequirements",
+      "description": "Ensure compliance with all regulatory and legal requirements, including permits, licenses, and industry-specific standards."
+    }
+  },
+  "required": [
+    "goal_statement",
+    "smart_criteria",
+    "dependencies",
+    "resources_required",
+    "related_goals",
+    "tags",
+    "risk_assessment_and_mitigation_strategies",
+    "stakeholder_analysis",
+    "regulatory_and_compliance_requirements"
+  ],
+  "title": "GoalDefinition",
+  "type": "object"
+}

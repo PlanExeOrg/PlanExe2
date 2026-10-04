@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "Expert": {
+      "properties": {
+        "expert_title": {
+          "description": "Job title of the expert.",
+          "title": "Expert Title",
+          "type": "string"
+        },
+        "expert_full_name": {
+          "description": "First name and last name of the expert.",
+          "title": "Expert Full Name",
+          "type": "string"
+        },
+        "feedback_item_list": {
+          "description": "List of feedback items.",
+          "items": {
+            "$ref": "#/$defs/FeedbackItem"
+          },
+          "title": "Feedback Item List",
+          "type": "array"
+        }
+      },
+      "required": [
+        "expert_title",
+        "expert_full_name",
+        "feedback_item_list"
+      ],
+      "title": "Expert",
+      "type": "object"
+    },
+    "FeedbackItem": {
+      "properties": {
+        "feedback_index": {
+          "description": "The index of the feedback item.",
+          "title": "Feedback Index",
+          "type": "integer"
+        },
+        "feedback_title": {
+          "description": "What is the feedback about?",
+          "title": "Feedback Title",
+          "type": "string"
+        },
+        "feedback_description": {
+          "description": "Describe the feedback.",
+          "title": "Feedback Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "feedback_index",
+        "feedback_title",
+        "feedback_description"
+      ],
+      "title": "FeedbackItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "expert1": {
+      "$ref": "#/$defs/Expert",
+      "description": "Perspective from expert 1."
+    },
+    "expert2": {
+      "$ref": "#/$defs/Expert",
+      "description": "Perspective from expert 2."
+    },
+    "combined_summary": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "",
+      "description": "Summary of the feedback from both experts.",
+      "title": "Combined Summary"
+    },
+    "go_no_go_recommendation": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": "",
+      "description": "A 'Go' or 'No Go' recommendation, with an explanation.",
+      "title": "Go No Go Recommendation"
+    }
+  },
+  "required": [
+    "expert1",
+    "expert2"
+  ],
+  "title": "ExpertDetails",
+  "type": "object"
+}

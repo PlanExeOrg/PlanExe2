@@ -1,0 +1,17 @@
+{
+  "properties": {
+    "assumption_list": {
+      "description": "List of assumptions",
+      "items": {
+        "type": "string"
+      },
+      "title": "Assumption List",
+      "type": "array"
+    }
+  },
+  "required": [
+    "assumption_list"
+  ],
+  "title": "AssumptionDetails",
+  "type": "object"
+}

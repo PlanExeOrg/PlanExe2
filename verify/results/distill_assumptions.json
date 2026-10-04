@@ -1,0 +1,114 @@
+{
+  "stage": "distill_assumptions",
+  "evaluated_at": "2026-10-04T17:56:22",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 11.8,
+      "structure_problems": [],
+      "judgments": {
+        "distill_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A follows the stage's brief better. It has 28 bullets, most short single-idea sentences of about 12–17 words (a few run slightly over), and it keeps the key numbers: the €4–6B contingency and 15% overrun threshold, the 6–7, 5–6 and 4–5 year phase durations, weather windows at 20–30% of annual time plus a further 15–20% cut from cetacean restrictions, the €200–500M marine fund, the workforce figures, the safety rate, and the €3–8B maintenance trust fund. It also covers risks later stages need: 2–5 year permitting delays, treaty ratification risk, investor withdrawal risk, the pressurized rail prototype, schedule buffers, and go/no-go gates with Monte Carlo schedule risk management. Candidate B has only 15 bullets, and many run 25–35 words, which breaks the ≤17-word rule. It drops important assumptions (permitting delays, cetacean impact, the marine fund, core workforce and turnover, schedule contingency, the prototype, the safety rate, schedule risk methods). Its \"approximately 4-5 years per phase\" is a lossy rewrite of the source phase durations and doesn't sum sensibly to 20 years. B adds some detail, such as the funding sources and \"10 atmospheres\", but it is less complete and less faithful to the format. Overall A is more complete, better on format, and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "The stage asks for concise assumptions: one short sentence (<=17 words) each, keeping key numbers. Candidate A has 15 bullets, but most are long, well over 17 words (e.g., the corrosion, safety, and stakeholder bullets run 25-35 words), so it violates the length constraint badly. It also drops details like phasing durations and the workforce core. Candidate B has 29 bullets, mostly within ~17 words, though a few exceed it slightly (e.g., the stakeholder engagement and cetacean bullets are near the limit). B keeps more key numbers (phase years 6-7/5-6/4-5, 15-20% cetacean reduction, €200-500M mitigation fund, 0.5 incident rate, 3,000-4,000 core workforce, <15% turnover), plus risks (covenant breaches, permitting delays 2-5 years, withdrawal risk). B is more decision-useful for downstream stages. One consideration: \"condense\" might favor fewer bullets, and B is longer in total, but its per-item discipline matches the spec better. A's first bullet restates the plan rather than an assumption. B is also consistent: 6-7+5-6+4-5 = 15-18 years plus 2-3 years of contingency fits within 20 years. A's \"4-5 years per phase\" for three phases yields only 12-15 years, which is less consistent."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 11.1,
+      "structure_problems": [],
+      "judgments": {
+        "distill_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives a full, balanced distillation. It keeps the red-team framing and the permission to downsize or cancel. It also keeps the 9 GW and 161 km² scale, the budget tiers, EUR/USD exposure, the phase timeline, and the rule that external commitments are \"uncontrolled\" until backed by a contract, permit, or term sheet. It includes the no-FID-without-anchor-tenants gate, the land-use split, the split-campus alternative, the building heights, PUE and cooling, the security and sovereign partition approach, fiber, and the Phase 0 spend on social license. Most bullets are short and keep their key numbers. A few run slightly long. It also keeps the specific upstream assumptions, such as the non-binding RTE response, the 60% take-or-pay trigger, the 2 ms latency limit, and the easements. That makes it useful for later stages. One small flaw is that the \"€4.3B on €120B\" FX figure comes from upstream and looks questionable.\n\nCandidate B is concise but has only 8 bullets. It drops most of the strategically important assumptions: the red-team and kill-criteria framing, the 9 GW target, the budget tiers, the phase timeline, the uncontrolled-approvals rule, the no-FID gate, the water and cooling approach, the fiber strategy, and the power strategy. What it keeps are narrow, detailed items. It also states the FX figure as \"unhedged exposure on hardware,\" which is inconsistent with the hedging setup. Its \"mandatory direct-to-chip\" wording and the \"2 GW tranche\" detail are fine, but the set is too thin to condense the assumptions for this plan.\n\nA is clearly more complete and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It keeps the plan's strategic assumptions: the red-team framing and permission to cancel, the 9 GW / 161 km² / Hauts-de-France scope, the full budget ladder, EUR-primary currency with USD exposure and hedging, and the phase timeline. It also keeps the rule that external approvals are \"uncontrolled\" until backed by a contract, permit or term sheet. The 60% take-or-pay gate, the no-anchor-no-FID rule, the 20% buildable land split, and the split-campus alternative with its latency constraint are all there. The sovereign/commercial separation and the 5% Phase 0 skills/heat-reuse budget are made concrete (€12.5M–37.5M). The bullets stay short and carry the key numbers. A few run slightly over 17 words, and 24 bullets is less condensed than ideal.\n\nCandidate A is very concise but covers only a small slice. It omits the budget, the phase timeline, the red-team and kill-criteria framing, the \"uncontrolled\" external dependencies and the no-FID rule. Its \"5% of initial budget\" has no stated base, and its €4.32B figure has no stated basis. Downstream stages would lack critical context."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 8.7,
+      "structure_problems": [],
+      "judgments": {
+        "distill_assumptions.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It is consistent, faithful to the plan, and useful downstream.\n\nCandidate A has several problems:\n- It repeats itself. The provisional-binding-at-6-months, API-fee-cap, and liability/compensation points each appear two or three times.\n- It contradicts itself. A \"30-month grace period\" for accessibility and reduction cards conflicts with the 30-month API mandate. An \"aggressive enforcement posture\" with \"three strikes\" suspension conflicts with the prompt's instruction to pick a realistic, not aggressive, scenario.\n- Some items are vague or oddly worded, such as \"T+5 minutes\" latency and \"first and last known segment failures.\"\n- It omits key plan facts: the corridors, the 40% success target, the stakeholders, the scenario choice, and the separate private IT estimate.\n\nCandidate B is non-redundant and covers the timeline, corridors, budget split, governance, clearing float, settlement, fee cap, backstop scope, liability, latency, enforcement, amendment threshold, success metrics, the realistic-scenario choice, multimodal hooks, and the start date. It does have weaknesses:\n- Some bullets restate the plan rather than state assumptions.\n- A few bullets run slightly long.\n\nEven so, it is more complete, coherent, and faithful, and it gives later stages more to work with."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both are bullet lists of short, number-bearing sentences. Candidate A covers the plan more broadly. It includes the timeline, the budget split, the governance FTEs, the clearing float and T+3 target, the fee cap and audit, the backstop scope, the liability rule, the 5-minute data target, the enforcement targets, the success metrics, the realistic scenario, the scope limits on bus, ferry and air, and the start date. Its accessibility grace period (12 months, due at month 30) is coherent with the 30-month API milestone. A few bullets restate prompt facts rather than assumptions, and a couple run slightly over 17 words, but they give downstream stages useful context. Candidate B is more strictly assumption-like and adds some distinct details: a 90-minute backstop threshold and a 'three strikes' suspension rule. It is also noticeably redundant. Provisional binding at 6 months and final binding at 18 months appear in three bullets. The liability rule appears in three bullets. The fee-cap and cost-recovery point is repeated. It also says \"30-month grace period\" for accessibility, which looks like a conflation. Some phrasing is awkward, such as \"first and last known segment failures\". The 'aggressive enforcement posture' sits oddly with the \"realistic scenario\" instruction. B also omits the success metrics, the scope limits, the corridors and the start date. Overall A is more complete, less redundant and more consistent."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 8.9,
+      "structure_problems": [],
+      "judgments": {
+        "distill_assumptions.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is thin and has a logic error. It leaves out the pilot city, the €3.5M budget with its staging, and the Month 2 and Month 4 gate criteria, which are central to the plan. Its Level 2 threshold says night \"< 19°C\". That contradicts the hot-nights premise, since a heat alert should trigger on a night minimum above a threshold. It also mentions a commercial CRM with no cost, and leaves out communications, worker protection and home-intervention approach. Candidate B keeps the key numbers: the city (Leipzig), the budget split (€1.2M / €0.8M), the gate criteria, the drill timing, and the Level 2 threshold with the correct night min >19°C. It also records operational sizing (10 centers, 14 hours, 3 staff per shift, 10 two-person teams, about 12 FTEs), the GDPR-aware data loop, non-smartphone channels, the CRM cost (€30k), and staffing and quality risks. Its bullets are mostly concise and decision-useful. B has 22 bullets, which is somewhat long for a \"distilled\" list, and a few are near the 17-word limit. Its voucher-based home-intervention assumption departs a bit from the handyperson service in the prompt. These are minor against A's gaps and error. B is much more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A covers the strategically important assumptions for this plan: the pilot city (Leipzig), the €3.5M staged budget, the gate criteria and their timing, alert thresholds, governance authority, cooling-center and outreach scale, staffing, GDPR-limited data flows, non-app communications, procurement timing and the staffing-quality risk. It keeps key numbers and is mostly concise, although a few bullets run past 17 words. It has some weaknesses. The voucher-based home interventions with homeowner installation sit awkwardly with the required handyperson service. The €0.6M loss figure is very specific. Candidate B is far too thin, with 8 bullets. It omits the city, total budget, gates, transport, home interventions, worker protection and communications. It also has a clear date error: \"mid-March (T+6 weeks)\" contradicts a project start of 3 May 2026, since six weeks later is mid-June. Its \"Day > 30°C and Night < 19°C\" threshold is also questionable, because hot nights mean minimums above a threshold rather than below it. A is much more useful for downstream stages and more faithful to the prompt."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "$defs": {
+    "RiskItem": {
+      "properties": {
+        "risk_area": {
+          "description": "The category or domain of the risk, e.g., Regulatory, Financial, Technical.",
+          "title": "Risk Area",
+          "type": "string"
+        },
+        "risk_description": {
+          "description": "A detailed explanation outlining the specific nature of the risk.",
+          "title": "Risk Description",
+          "type": "string"
+        },
+        "potential_impact": {
+          "description": "Possible consequences or adverse effects on the project if the risk materializes.",
+          "title": "Potential Impact",
+          "type": "string"
+        },
+        "likelihood": {
+          "description": "A qualitative measure (e.g., low, medium, high) indicating the probability that the risk will occur.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Likelihood",
+          "type": "string"
+        },
+        "severity": {
+          "description": "A qualitative measure (e.g., low, medium, high) describing the extent of the potential negative impact if the risk occurs.",
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "title": "Severity",
+          "type": "string"
+        },
+        "action": {
+          "description": "Recommended mitigation strategies or steps to reduce the likelihood or impact of the risk.",
+          "title": "Action",
+          "type": "string"
+        }
+      },
+      "required": [
+        "risk_area",
+        "risk_description",
+        "potential_impact",
+        "likelihood",
+        "severity",
+        "action"
+      ],
+      "title": "RiskItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "risks": {
+      "description": "A list of identified project risks.",
+      "items": {
+        "$ref": "#/$defs/RiskItem"
+      },
+      "title": "Risks",
+      "type": "array"
+    },
+    "risk_assessment_summary": {
+      "description": "Providing a high level context.",
+      "title": "Risk Assessment Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "risks",
+    "risk_assessment_summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}
