@@ -92,5 +92,21 @@ class ManifestTest(unittest.TestCase):
         self.assertEqual(h1, hash_dir(self.skills_root / "a"))
 
 
+
+class SharedUsesTest(unittest.TestCase):
+    def test_uses_file_changes_skill_hash(self):
+        from planexe_skill.manifest import skill_hash
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            make_skill(root / "skills", "a", [], ["a.txt"])
+            shared = root / "shared.py"
+            shared.write_text("x = 1\n")
+            skill = load_skills(root / "skills")["a"]
+            skill.uses = [str(shared)]  # absolute path also works: REPO_ROOT / abs == abs
+            h1 = skill_hash(skill)
+            shared.write_text("x = 2\n")
+            self.assertNotEqual(h1, skill_hash(skill))
+
+
 if __name__ == "__main__":
     unittest.main()

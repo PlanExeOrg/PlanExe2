@@ -48,6 +48,17 @@ def hash_dir(path: Path) -> str:
     return h.hexdigest()[:16]
 
 
+def skill_hash(skill: Skill) -> str:
+    """Hash of the skill folder plus any shared helper files it declares in `uses:`."""
+    from planexe_skill import REPO_ROOT
+    h = hashlib.sha256(hash_dir(skill.dir).encode())
+    for rel in skill.uses:
+        p = REPO_ROOT / rel
+        h.update(rel.encode())
+        h.update(p.read_bytes() if p.exists() else b"<missing>")
+    return h.hexdigest()[:16]
+
+
 def existing_outputs(skill: Skill, run_dir: Path) -> list[str]:
     """Output files of `skill` currently present in run_dir (fan-out patterns expanded)."""
     found = [o for o in skill.fixed_outputs() if (run_dir / o).exists()]
@@ -102,7 +113,7 @@ class Manifest:
 
     def record_completed(self, skill: Skill, run_dir: Path, adopted: bool = False) -> None:
         entry = {
-            "skill_hash": hash_dir(skill.dir),
+            "skill_hash": skill_hash(skill),
             "inputs": self._input_hashes(skill, run_dir),
             "outputs": {o: hash_file(run_dir / o) for o in existing_outputs(skill, run_dir)},
             "completed_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
@@ -123,7 +134,7 @@ class Manifest:
         if gone:
             return StageStatus(True, [f"missing output {g}" for g in gone])
         reasons = []
-        if entry["skill_hash"] != hash_dir(skill.dir):
+        if entry["skill_hash"] != skill_hash(skill):
             reasons.append("skill definition changed")
         current = self._input_hashes(skill, run_dir)
         for name, h in current.items():

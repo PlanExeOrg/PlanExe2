@@ -66,6 +66,7 @@ class Skill:
     est_llm_calls: int
     dir: Path
     body: str = ""
+    uses: list[str] = field(default_factory=list)
     meta: dict[str, Any] = field(default_factory=dict)
     _module: ModuleType | None = field(default=None, repr=False)
 
@@ -118,6 +119,7 @@ def load_skill(skill_dir: Path) -> Skill:
         est_llm_calls=int(meta.get("est_llm_calls", 0)),
         dir=skill_dir,
         body=body,
+        uses=list(meta.get("uses", [])),
         meta=meta,
     )
 
