@@ -18,6 +18,12 @@ R = TypeVar("R")
 
 
 DEFAULT_MAX_WORDS_PER_FIELD = 160
+FACT_CHECK_INSTRUCTION = (
+    "\n\n# Fact checking\nBefore answering, identify the few real-world facts your answer depends on most "
+    "(laws and regulations, geography, prices and costs, technology readiness, named organizations or "
+    "precedents) that you are not certain about, and verify them with web search (at most 3 searches; "
+    "none if you are confident). Do not invent facts, names or numbers; if something could not be verified, "
+    "say so briefly in the relevant field.")
 # PlanExe's own length hints ("50-70 words", "1-2 sentences", "~30 words", "3-5 items") win.
 _LENGTH_HINT = re.compile(r"\b(\d+\s*(-|–|to)\s*\d+|~?\d+|one|two|three)\s+(words?|sentences?)\b|"
                           r"\bone sentence\b|\bone short sentence\b", re.I)
@@ -141,6 +147,11 @@ class SkillContext:
         """One LLM call. Concurrency across the whole run is bounded by the runner."""
         tier = tier or self.skill.tier
         model = self.backend.model_for(tier)
+        # The reasoning tier fact-checks with web search (skills can opt out with `fact_check: false`),
+        # so the foundational stages hand verified facts to the many single-shot stages downstream.
+        web_search = bool(self.skill.meta.get("fact_check", tier == "high")) and tier == "high"
+        if web_search:
+            system = system.rstrip() + FACT_CHECK_INSTRUCTION
         # Length budget for the non-reasoning tiers: without it Haiku writes essays per field,
         # which makes calls take minutes. Skills can tune it via `max_words_per_field:` (0 = off).
         budget = int(self.skill.meta.get("max_words_per_field", DEFAULT_MAX_WORDS_PER_FIELD) or 0)
@@ -150,7 +161,7 @@ class SkillContext:
                       "prefer short, specific sentences over essays.")
         cache_file = None
         if self.cache_dir is not None:
-            key = hashlib.sha256(json.dumps([model, system, user, schema], sort_keys=True).encode()).hexdigest()[:24]
+            key = hashlib.sha256(json.dumps([model, system, user, schema, web_search], sort_keys=True).encode()).hexdigest()[:24]
             cache_file = self.cache_dir / f"{key}.json"
             if cache_file.exists():
                 try:
@@ -168,7 +179,7 @@ class SkillContext:
             start = time.time()
             result: LLMResult | None = None
             try:
-                result = self.backend.complete(system, user, schema, tier)
+                result = self.backend.complete(system, user, schema, tier, web_search=web_search)
             finally:
                 if self._on_llm_call:
                     self._on_llm_call(self.skill.name, {"tier": tier, "success": result is not None,

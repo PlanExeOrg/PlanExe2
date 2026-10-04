@@ -4,6 +4,7 @@ description: Identify the expert disciplines the project involves, then pick a p
 inputs: [plan.txt, identify_purpose_raw.json, identify_purpose.md, extract_constraints.md]
 outputs: [classify_domain_raw.json, classify_domain.md]
 tier: high
+fact_check: false
 est_llm_calls: 4
 ---
 Two passes.

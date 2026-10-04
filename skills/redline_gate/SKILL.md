@@ -4,6 +4,7 @@ description: Safety gate. Decide ALLOW / ALLOW_WITH_SAFETY_FRAMING / REFUSE for 
 inputs: [plan.txt]
 outputs: [redline_gate_raw.json, redline_gate.md]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md` (PlanExe's SYSTEM_PROMPT_25, "the balanced

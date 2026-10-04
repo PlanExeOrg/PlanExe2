@@ -34,8 +34,9 @@ class FakeBackend(Backend):
     def model_for(self, tier: str) -> str:
         return f"fake-{tier}"
 
-    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low") -> LLMResult:
-        self.calls.append({"system": system, "user": user, "schema": schema, "tier": tier})
+    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low",
+                 web_search: bool = False) -> LLMResult:
+        self.calls.append({"system": system, "user": user, "schema": schema, "tier": tier, "web_search": web_search})
         if self.responder is not None:
             data = self.responder(system, user, schema, tier)
         elif schema is not None:

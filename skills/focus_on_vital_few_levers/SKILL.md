@@ -4,6 +4,7 @@ description: Select the ~5 highest-impact levers by rating each as critical, hig
 inputs: [plan.txt, identify_purpose.md, plan_type.md, enriched_levers_raw.json]
 outputs: [vital_few_levers_raw.json]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 80/20 principle. One structured call (system prompt `prompts/system.md`, schema `schema.json`): the

@@ -4,6 +4,7 @@ description: Screen the user's prompt; flag it UNUSABLE only when it is clearly 
 inputs: [plan_raw.json]
 outputs: [screen_planning_prompt.json, screen_planning_prompt.md]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 One structured call. System prompt: `prompts/system.md`. User prompt = prompt statistics

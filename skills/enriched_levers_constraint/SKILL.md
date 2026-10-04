@@ -4,6 +4,7 @@ description: Guardrail: verify enriched levers still respect the user's constrai
 inputs: [extract_constraints_raw.json, enriched_levers_raw.json]
 outputs: [enriched_levers_constraint.json]
 tier: high
+fact_check: false
 est_llm_calls: 1
 uses: [planexe_skill/shared/constraint_checker.py]
 ---

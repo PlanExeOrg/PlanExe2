@@ -239,6 +239,16 @@ read `wbs_project_level1_and_level2_and_level3.csv` and also `review_plan.md`,
 - Resuming the aborted run: `python3 -m planexe_skill run runs/battery` continues with the 4
   remaining stages (finished stages are clean in the manifest).
 
+### Fact-checking in the reasoning tier (2026-10-05)
+
+Reasoning-tier calls may use the `WebSearch` tool (`--tools WebSearch`, at most 3 searches per call,
+only for claims the answer depends on and the model is unsure of). Enabled for the stages that make
+real-world claims: premise_attack, potential_levers, enrich_levers, candidate_scenarios,
+select_scenario. Classification and constraint-check stages opt out (`fact_check: false`).
+Everything downstream stays single-shot without tools. The four longest single-call stages
+(data_collection, identify_documents, questions_and_answers, premortem) got a tighter budget of
+80 words per field (not re-verified per stage, to save tokens).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge

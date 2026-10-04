@@ -4,6 +4,7 @@ description: Guardrail: verify the chosen scenario respects the user's constrain
 inputs: [extract_constraints_raw.json, selected_scenario.json]
 outputs: [selected_scenario_constraint.json]
 tier: high
+fact_check: false
 est_llm_calls: 1
 uses: [planexe_skill/shared/constraint_checker.py]
 ---

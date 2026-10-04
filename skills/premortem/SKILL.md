@@ -7,6 +7,7 @@ tier: low
 est_llm_calls: 3
 parallel_llm: 1
 uses: [planexe_skill/shared/final_review.py]
+max_words_per_field: 80
 ---
 User prompt = the 11 review documents (see review_plan) + `File 'review-plan.md'` +
 `File 'questions-and-answers.md'`. (The PlanExe node also *requires* consolidate_governance and

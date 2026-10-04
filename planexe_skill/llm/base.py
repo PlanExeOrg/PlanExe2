@@ -19,7 +19,8 @@ class LLMResult:
 class Backend:
     name = "base"
 
-    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low") -> LLMResult:
+    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low",
+                 web_search: bool = False) -> LLMResult:
         raise NotImplementedError
 
     def model_for(self, tier: str) -> str:

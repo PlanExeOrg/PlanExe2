@@ -116,7 +116,7 @@ class Runner:
         row = {"timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"), "success": info.get("success", False),
                "stage": stage, "model": meta.get("model") or self.backend.model_for(info.get("tier", "low")),
                "duration_seconds": round(info.get("duration_seconds", 0.0), 3)}
-        for k in ("input_tokens", "output_tokens", "cost_usd"):
+        for k in ("input_tokens", "output_tokens", "cost_usd", "web_searches"):
             if meta.get(k) is not None:
                 row[k] = meta[k]
         with self._usage_lock:

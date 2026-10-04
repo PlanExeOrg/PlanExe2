@@ -64,20 +64,22 @@ class ClaudeCLIBackend(Backend):
     def model_for(self, tier: str) -> str:
         return self.models.get(tier, self.models["low"])
 
-    def build_command(self, system_file: str, schema: dict | None, tier: str) -> list[str]:
+    def build_command(self, system_file: str, schema: dict | None, tier: str, web_search: bool = False) -> list[str]:
         """`system_file` holds the system prompt (a file avoids OS argument-length limits)."""
         # Isolation: the child must behave like a plain LLM call. Without these flags it would
         # inherit the user's settings (e.g. effortLevel, plugins, SessionStart hooks that inject
         # text, MCP servers, skills) and the effort level of the user's own sessions.
         cmd = [self.executable, "-p", "--output-format", "stream-json", "--verbose", "--include-partial-messages",
-               "--max-turns", "4",
+               "--max-turns", "12" if web_search else "4",
                "--model", self.model_for(tier),
-               "--tools", "",
+               "--tools", "WebSearch" if web_search else "",
                "--no-session-persistence",
                "--setting-sources", "project",
                "--strict-mcp-config",
                "--disable-slash-commands",
                "--system-prompt-file", system_file]
+        if web_search:
+            cmd += ["--allowedTools", "WebSearch"]
         effort = self.efforts.get(tier)
         if effort:
             cmd += ["--effort", effort]
@@ -191,12 +193,13 @@ class ClaudeCLIBackend(Backend):
             raise LLMError(f"claude CLI reported an error: {msg}{hint}\nstderr (tail):\n{stderr[-1500:]}")
         return envelope
 
-    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low") -> LLMResult:
+    def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low",
+                 web_search: bool = False) -> LLMResult:
         fd, system_file = tempfile.mkstemp(prefix="planexe_skill_system_", suffix=".md")
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             f.write(system)
         try:
-            return self._complete(system_file, user, schema, tier)
+            return self._complete(system_file, user, schema, tier, web_search)
         finally:
             os.unlink(system_file)
 
@@ -210,7 +213,8 @@ class ClaudeCLIBackend(Backend):
                     "fences) that conforms to this JSON schema:\n" + json.dumps(schema, indent=1))
         return path
 
-    def _complete(self, system_file: str, user: str, schema: dict | None, tier: str) -> LLMResult:
+    def _complete(self, system_file: str, user: str, schema: dict | None, tier: str,
+                  web_search: bool = False) -> LLMResult:
         # Two ways to get structured output: the CLI's schema-enforced tool ("tool"), and, if that gives
         # up (structured_output_retry_exhausted, seen with long outputs), plain JSON in the reply that we
         # parse and validate ourselves ("text"), with the validation problems fed back on a retry.
@@ -222,12 +226,12 @@ class ClaudeCLIBackend(Backend):
         try:
             for attempt in range(self.retries + 1):
                 if mode == "tool" or schema is None:
-                    cmd = self.build_command(system_file, schema, tier)
+                    cmd = self.build_command(system_file, schema, tier, web_search)
                     prompt = user
                 else:
                     if text_system_file is None:
                         text_system_file = self._text_json_files(system_file, schema)
-                    cmd = self.build_command(text_system_file, None, tier)
+                    cmd = self.build_command(text_system_file, None, tier, web_search)
                     prompt = user + feedback
                 start = time.time()
                 try:
@@ -276,6 +280,7 @@ class ClaudeCLIBackend(Backend):
                     "cost_usd": env.get("total_cost_usd"),
                     "attempts": attempt + 1,
                     "structured_mode": mode if schema is not None else None,
+                    "web_searches": ((usage.get("server_tool_use") or {}).get("web_search_requests") or 0),
                 }
                 return LLMResult(data=data, text=text, metadata=meta)
         finally:

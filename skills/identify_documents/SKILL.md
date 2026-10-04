@@ -7,6 +7,7 @@ tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/documents.py]
 judge: [identified_documents.md]
+max_words_per_field: 80
 ---
 The purpose in identify_purpose_raw.json selects the system prompt (`prompts/business.md`,
 `prompts/personal.md`, `prompts/other.md`). One structured call, schema `schema.json`

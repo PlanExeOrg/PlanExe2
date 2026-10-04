@@ -4,6 +4,7 @@ description: Classify the plan as business, personal or other so downstream prom
 inputs: [plan.txt]
 outputs: [identify_purpose_raw.json, identify_purpose.md]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, user prompt = plan.txt, schema `schema.json`

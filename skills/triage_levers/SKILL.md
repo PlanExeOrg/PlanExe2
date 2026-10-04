@@ -4,6 +4,7 @@ description: Triage levers into primary, secondary, or remove.
 inputs: [plan.txt, identify_purpose.md, plan_type.md, potential_levers.json]
 outputs: [triaged_levers_raw.json]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 One batch call: system prompt `prompts/system.md`, schema `schema.json` (one decision per lever_id:

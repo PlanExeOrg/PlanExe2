@@ -4,6 +4,7 @@ description: Decide whether the plan is purely digital or needs physical locatio
 inputs: [plan.txt, classify_domain.md, identify_purpose.md]
 outputs: [plan_type_raw.json, plan_type.md]
 tier: high
+fact_check: false
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (explanation, plan_type).
