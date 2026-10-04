@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import io
 import json
+import os
 import re
 import shutil
 import sys
@@ -30,6 +31,9 @@ from verify.judge import judge_pair, load_for_judging
 from verify.structure import compare_json_files, compare_markdown, template_headings
 
 RESULTS_DIR = REPO_ROOT / "verify" / "results"
+# Evaluations run many stages concurrently, so their timings are not representative of a real run:
+# keep them out of the user's ETA history (~/.planexe_skill/timings.json).
+os.environ.setdefault("PLANEXE_SKILL_HOME", str(REPO_ROOT / ".verify_work" / "home"))
 
 
 def files_to_judge(skill: Skill) -> list[str]:
