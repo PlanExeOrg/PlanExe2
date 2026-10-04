@@ -12,7 +12,7 @@ import tempfile
 import threading
 import time
 
-from planexe_skill.llm.base import Backend, LLMError, LLMResult
+from planexe_skill.llm.base import Backend, LLMAuthError, LLMError, LLMResult
 from planexe_skill.llm.jsonschema_lite import extract_json_object, validate
 
 # Tiers: "high" = reasoning (the early, foundational stages); "mid" = strong model, no thinking
@@ -190,7 +190,10 @@ class ClaudeCLIBackend(Backend):
             if "authenticate" in str(msg).lower() or "oauth" in str(msg).lower():
                 hint = ("\nHint: run 'claude auth login' in a terminal. If you run inside a sandbox, "
                         "the CLI may be unable to reach the macOS keychain; run without the sandbox.")
-            raise LLMError(f"claude CLI reported an error: {msg}{hint}\nstderr (tail):\n{stderr[-1500:]}")
+            text = f"claude CLI reported an error: {msg}{hint}\nstderr (tail):\n{stderr[-1500:]}"
+            if hint or "401" in str(msg) or "revoked" in str(msg).lower():
+                raise LLMAuthError(text + "\nHint: run 'claude auth login', then resume the run.")
+            raise LLMError(text)
         return envelope
 
     def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low",
@@ -236,6 +239,8 @@ class ClaudeCLIBackend(Backend):
                 start = time.time()
                 try:
                     env = self._run_once(cmd, prompt)
+                except LLMAuthError:
+                    raise
                 except LLMError as e:
                     last_error = e
                     if schema is not None and "structured_output_retry_exhausted" in str(e):

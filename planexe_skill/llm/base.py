@@ -9,6 +9,10 @@ class LLMError(Exception):
     """An LLM call failed. The message is meant to be read by a human."""
 
 
+class LLMAuthError(LLMError):
+    """Not logged in / credentials revoked: every further call will fail, so the run must stop."""
+
+
 @dataclass
 class LLMResult:
     data: Any                 # parsed structured output (dict) or None for free text

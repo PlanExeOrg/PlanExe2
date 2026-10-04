@@ -208,5 +208,26 @@ class LengthBudgetTest(unittest.TestCase):
         self.assertNotIn("At most", schema["$defs"]["I"]["properties"]["title"]["description"])
 
 
+
+class AuthStopTest(unittest.TestCase):
+    def test_auth_error_stops_run(self):
+        from planexe_skill.llm.base import LLMAuthError
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp)
+            run_dir = base / "run"
+            run_dir.mkdir()
+            (run_dir / "plan.txt").write_text("P")
+            make_skill(base / "skills", "a", ["plan.txt"], ["a.txt"], run_py="def run(ctx):\n    ctx.llm('s', 'u')\n")
+            make_skill(base / "skills", "b", ["a.txt"], ["b.txt"])
+
+            class Revoked(FakeBackend):
+                def complete(self, *a, **k):
+                    raise LLMAuthError("401 OAuth access token has been revoked")
+            out = io.StringIO()
+            res = Runner(Dag(load_skills(base / "skills")), run_dir, Revoked(), stream=out, heartbeat_secs=999).run()
+            self.assertTrue(res.stopped)
+            self.assertIn("claude auth login", out.getvalue())
+
+
 if __name__ == "__main__":
     unittest.main()

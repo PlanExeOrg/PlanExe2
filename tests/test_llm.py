@@ -98,7 +98,8 @@ class ClaudeCLITest(unittest.TestCase):
         msg = str(cm.exception)
         self.assertIn("Failed to authenticate", msg)
         self.assertIn("claude auth login", msg)
-        self.assertIn("command: claude -p", msg)
+        from planexe_skill.llm.base import LLMAuthError
+        self.assertIsInstance(cm.exception, LLMAuthError)
 
     @mock.patch("planexe_skill.llm.claude_cli.time.sleep")
     @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")

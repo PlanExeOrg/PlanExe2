@@ -14,7 +14,7 @@ from pathlib import Path
 
 from planexe_skill.context import SkillContext
 from planexe_skill.dag import Dag, DagError
-from planexe_skill.llm.base import Backend
+from planexe_skill.llm.base import Backend, LLMAuthError
 from planexe_skill.manifest import MANIFEST_DIRNAME, Manifest, existing_outputs
 from planexe_skill.progress import Progress
 from planexe_skill.skill import Skill
@@ -32,6 +32,14 @@ class RunResult:
 
 class StageFailure(Exception):
     pass
+
+
+def _is_auth_error(exc: BaseException | None) -> bool:
+    while exc is not None:
+        if isinstance(exc, LLMAuthError):
+            return True
+        exc = exc.__cause__ or exc.__context__
+    return False
 
 
 class Runner:
@@ -240,6 +248,11 @@ class Runner:
                         result.failed[name] = str(exc)
                         progress.stage_finished(name, "failed")
                         print(self._failure_report(name, exc), file=self.stream, flush=True)
+                        if _is_auth_error(exc):
+                            result.stopped = True
+                            print("Authentication failed: stopping the run (no point in starting more LLM calls). "
+                                  f"Run 'claude auth login', then resume: python -m planexe_skill run {self.run_dir}",
+                                  file=self.stream, flush=True)
         except KeyboardInterrupt:
             print("\nInterrupted: waiting for running stages to stop. Re-run the same command to resume.",
                   file=self.stream, flush=True)
