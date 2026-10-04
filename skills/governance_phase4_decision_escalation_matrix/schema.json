@@ -1,0 +1,57 @@
+{
+  "$defs": {
+    "DecisionEscalationItem": {
+      "properties": {
+        "issue_type": {
+          "description": "Type of issue (e.g., budget overruns, ethical concerns, strategic pivot).",
+          "title": "Issue Type",
+          "type": "string"
+        },
+        "escalation_level": {
+          "description": "Indicates the governance body or role to which the issue is escalated (e.g., Steering Committee).",
+          "title": "Escalation Level",
+          "type": "string"
+        },
+        "approval_process": {
+          "description": "Outlines how an issue is approved or resolved once escalated (e.g., majority vote).",
+          "title": "Approval Process",
+          "type": "string"
+        },
+        "rationale": {
+          "description": "Explains *why* this issue triggers escalation—i.e. potential impacts or risks that justify escalating.",
+          "title": "Rationale",
+          "type": "string"
+        },
+        "negative_consequences": {
+          "description": "Describes the potential adverse outcomes or risks if this issue remains unresolved or is not escalated in a timely manner.",
+          "title": "Negative Consequences",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issue_type",
+        "escalation_level",
+        "approval_process",
+        "rationale",
+        "negative_consequences"
+      ],
+      "title": "DecisionEscalationItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "decision_escalation_matrix": {
+      "description": "Clear escalation paths for various issues.",
+      "items": {
+        "$ref": "#/$defs/DecisionEscalationItem"
+      },
+      "title": "Decision Escalation Matrix",
+      "type": "array"
+    }
+  },
+  "required": [
+    "decision_escalation_matrix"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase3_impl_plan",
+  "evaluated_at": "2026-10-04T18:14:48",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 110.2,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase3_impl_plan.md": {
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates follow the expected format: \"### N. step\" headings with responsible body, timeframe, outputs and dependencies. Both cover all six governance bodies (SteerCo, PMO, TAG, Ethics, Environmental, Risk) and the draft ToR → appoint → kick-off pattern.\n\nCandidate A is tightly focused on governance set-up. Each body gets a ToR-approval step, a formation-lead drafting step, an appointment step and a kick-off step. It ends with a joint summit and a SteerCo completion authorisation. Its 24-week timeline is aggressive but coherent. It deals with the treaty-ratification problem by allowing \"interim authorization\", so the SteerCo does not have to wait for parliaments. Weaknesses are minor: PMO ToR approval (step 9) is listed before its drafting (step 10), and ratification of the charter within about 6 weeks is optimistic. It also has less plan-specific detail than B.\n\nCandidate B is longer and has more plan-specific detail: the €50M threshold, the €4–6B contingency reserve, 18 risks, 1:50 model tests, 10+ acoustic buoys, the Azores-Gibraltar fault, and The Hague legal counsel. Its sequencing is more cautious, with ratification before appointments.\n\nB has several real problems:\n- Scope creep: steps 33–34 commission geotechnical and environmental contracts, and step 39 sets up ongoing monitoring. These go beyond setting up governance bodies.\n- Internal inconsistency: the Project Director is appointed by the end of Month 5, yet step 14 has the Director building the PMO structure in week 2 of Month 5. International legal counsel is needed in step 4 (Month 2) but only engaged in step 36 (Month 3). The Bilateral Task Force negotiates the treaty in Month 2 but holds its \"first coordination meeting\" in Month 4.\n- Unrealistic timing: treaty ratification by two parliaments in 3 months, a global director search in about 6 weeks, and a signed 3D seismic contract by Month 5.\n- Gating the whole structure on ratification introduces a bottleneck that B does not manage.\n\nOverall, A is cleaner, more internally consistent and better scoped to the stage. B has richer detail but more logic errors and scope drift."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the stage format: \"### N. step\" headings with responsible body, timeframe, deliverables and dependencies. Both also cover who drafts the ToR, who appoints members, and who holds the kick-offs.\n\nCandidate A is more plan-specific and decision-useful. It draws on the earlier files: the €50M delegation threshold, 18 risks, a €4-6B contingency reserve, the former IMO head as an independent member, 10+ monitoring buoys, a 24-month baseline study, and the Azores-Gibraltar fault zone. It sequences work realistically: charters are approved first, then chairs are recruited, then members, then first meetings. It also adds legal counsel, a bilateral task force, cross-committee coordination and ongoing governance monitoring.\n\nA has weaknesses:\n- Requiring treaty ratification by both parliaments within 3 months, before the SteerCo is seated, is unrealistic.\n- Some timing and dependency logic is inconsistent. Steps 33 and 34 are due by Month 5 but depend on the TAG and Environmental Board being operational, which only happens in Month 6. Steps 17 to 32 are listed after the PMO kickoff.\n- The text says both \"five\" and \"six\" bodies.\n- Commissioning geotechnical and environmental studies goes beyond governance setup.\n\nCandidate B is cleaner and has a systematic pattern: an interim formation lead drafts each body's ToR, the SteerCo approves it, and the SteerCo appoints the chair and members. That maps directly onto \"who drafts ToR\". It handles ratification more sensibly with \"interim authorization\". It also includes a joint summit and a final readiness gate.\n\nB has weaknesses:\n- Its timelines are compressed (about 24 weeks), so global recruitment of the TAG, ethics, risk and environmental bodies in weeks 5-19 is implausible.\n- Ordering is reversed in places, with \"approve ToR\" listed before \"draft ToR\". For example, step 9 depends on step 10.\n- The content is thinner and more generic, with fewer figures and fewer concrete roles.\n- It does not show the recruitment steps for chairs and members.\n\nOverall, A is richer and more actionable despite its treaty-timing unrealism and some dependency slips. B is tidier but shallower and rushed. I give A a slight edge."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 184.8,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase3_impl_plan.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is concise and has some plan-specific references (DGSI protocol, 80% buffer zone, 32.2 km² buildable area, Decision 1 and 10 links). But it is inconsistent on who appoints the Project Director: the Executive Sponsor designates them in step 1, then the PSC appoints them in step 6. Step 5 is muddled, because the PSC is the responsible body while the Executive Sponsor approves the ToR from the PSC's nominations. Steps 11–13 drift into technical work and a month-5 \"Phase 1 Construction Start Authorization\", which clashes with the skeptical, gate-driven framing. Dependencies are thin and one reads \"Implied from Input\". Candidate B is much longer but follows the stage brief closely. It sets out who drafts each ToR or charter, who appoints members, and who holds each kick-off for the PSC, CPMG and RCAB, in a coherent order: draft, circulate, finalize, appoint, accept, then inaugural meeting. It gives the RCAB real independence, with stop-work power and an RFP for an independent audit partner. It adds inter-body escalation and conflict-resolution protocols, a financial authority matrix, a dashboard and a sign-off. Dependencies and deliverables are explicit. Its weaknesses are verbosity, redundancy, an invented €2–5M governance budget, and an aggressive week-7 approval of the Phase 0 budget. Overall B is more complete, consistent and useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is a complete, ordered setup sequence for all three bodies (PSC, CPMG, RCAB). Each step names who drafts the charter, who appoints members, who circulates it, and who holds the kick-off. Each step also has timeframes, concrete deliverables and dependencies that chain correctly. It covers the Executive Sponsor's approval, the Formation Leads, the PSC Chair appointment, the Project Director appointment, the RCAB audit partner RFP, inter-body escalation protocols, the Phase 0 budget authorization and a second PSC meeting. That matches the stage's purpose. Weaknesses: it is long and somewhat repetitive. It uses the €500M authority threshold, which sits awkwardly against a Phase 0 budget of €250M–€750M. It is light on Hauts-de-France and 9 GW specifics, apart from DGSI/ANSSI. It also schedules the first PSC meeting before the Phase 0 budget is approved, which is acceptable.\n\nCandidate B is shorter and uses some plan-specific hooks: the 80% buffer zone, Decision 10, the 32.2 km² buildable area and DGSI. It has several logic problems. The Project Director is designated in step 1 and then appointed by the PSC in step 6. Step 5 says the Executive Sponsor approves the PSC ToR but lists the PSC as the responsible body. The PSC members are appointed before the ToR is final. The inaugural PSC meeting comes after the CPMG and RCAB kick-offs, which is backwards. Steps 11–13 drift away from governance setup into footprint modeling and ROW easements. Step 13 grants \"Phase 1 Construction Start Authorization\" at month 5, which contradicts the skeptical, gated Phase 0 premise. Several steps have thin deliverables, and the sequence is less actionable.\n\nA is clearly better in coherence, completeness and fit to the stage."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 142.0,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase3_impl_plan.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates cover the main sequence: mandate, PSC ToR, PSC chair and members, PSC kickoff, subordinate bodies' ToRs and members, and subordinate kickoffs. Both tie in the plan's specific decisions (Decision 2, 4/14, 5, Q3, Q6, SNCF/DB/ÖBB, €200M float).\n\nCandidate A is compact (14 steps) and easy to follow. It is weaker on the stage's core questions. Who appoints the members of OMG, TASG and CLAB is vague (\"Chairs, advised by the PM, secure final confirmations\"). It has little on kickoff preparation. It has a sequencing slip: step 4 lists \"Final Approved PSC ToR\" as an output, but the PSC doesn't approve it until step 5. It also drifts into operational work, such as disbursing a €900M grant fund in week 12 before the governance bodies have settled, which is aggressive given the \"realistic scenario\" instruction. Its timeline is plausible but thin.\n\nCandidate B is much more thorough (33 steps). It gives an explicit owner for each ToR draft, nomination, appointment and kickoff. It names the member composition for each body, which matches the phase-2 bodies file. It adds a PMO, feedback windows, kickoff prep, a master governance calendar, a consolidated charter, stakeholder engagement, and a monitoring and completion report. This makes it more useful downstream. Its flaws are:\n- Some redundancy and ordering confusion: the PSC chair is \"identified\" in step 5 and \"appointed\" in step 9, and the PSC chair appoints members after the ToR is finalised.\n- A garbled \"Chief Legal Officer (Project Sponsor...)\" entry.\n- A \"Week 12 (by end of Month 1)\" inconsistency.\n- It is verbose.\n\nOverall B better fulfils the stage's purpose with more actionable and complete detail, despite its minor inconsistencies. A is cleaner but under-specified on appointments and kickoffs."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates produce a step-by-step governance setup plan. Candidate A is far more detailed: 33 steps with clear sequencing (mandate → Program Director → PMO → ToR drafting → chair/member appointment → feedback → kick-offs for PSC, OMG, TASG, CLAB → cadence, charter, monitoring, readiness). It names who drafts ToRs, who appoints members, and who holds kick-offs, as the stage requires. It ties in strategic decisions and assumptions (Decision 5 €200M float, three strikes, T+5 latency, OSDM 65% threshold, SOW for auditors). Weaknesses: verbose, some redundancy (PSC Chair is identified in step 5 and appointed in step 9), a few possible inventions (e.g., \"Chief Legal Officer\" in the PSC, timing assumptions such as the Week 12 completion, which is aggressive for EU bodies), and the compressed timeline arguably unrealistic for a €1.5B EU program. It also puts \"Capitalization Plan\" approval at the PSC's first meeting, which is a stretch. Candidate B is concise with 14 steps, and it is thinner on process: it lacks feedback loops, procurement, and stakeholder engagement. It has some logical oddities: step 4 has the PSC approving its own ToR before it is confirmed. It also mixes in operational steps, such as the €900M capacity grant disbursement in Week 12 before the standards are mature, and the final steps run to Month 3. Its \"Project Manager (via assumed interim coordination role)\" is vague. Overall A better fulfills the stage's purpose with greater specificity and completeness; B is leaner but weaker on who drafts ToR, appoints, and holds kick-offs."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 156.9,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase3_impl_plan.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "The stage is about setting up governance bodies: who drafts ToRs, who appoints members, and who holds kick-offs. B covers this directly. It has the Sponsor appoint the Project Lead, then drafts of the PSC, COAT and HRC ToRs, member feedback, Sponsor-approved ToRs v1.0, and formal appointment orders. After that come an escalation and decision-authority framework and inaugural kick-off meetings for all three bodies. It also adds governance-relevant steps: engaging the Independent Assurance Member, engaging external legal counsel, setting up the MCR dual-authorization protocol, and building a master meeting calendar with templates. Its dependencies are mostly coherent and cross-reference the right step numbers. Its weaknesses are some verbosity and some scope creep (outreach RFQs, the paper registry). It also stops at about Week 6 and does not cover ongoing governance.\n\nA starts reasonably, with a mandate, draft ToRs, and PSC appointment. It then drifts into operational execution: drills, the €1.5M release, canvassing, home-intervention strategy shifts, and the evaluation report. That is beyond governance setup. A has a lot of internal inconsistencies:\n- Cross-references to step numbers are often wrong. Step 14 cites the \"Step 12\" drill report, but the drill is step 13. Step 15 cites \"Step 11: HRC Protocol Sign-off\", but that is step 12. Several steps cite \"Step 13: Authorization of €1.5M\", but that is step 14.\n- The fund release is at Week 10 (Month 4 start), yet the Month 4 gate review is at Week 16 (Month 5). The gate should be met before release, so the sequence is backwards.\n- HRC has no kick-off. COAT is chaired by the Project Lead, but COAT members are appointed after the PSC ToR, and the PSC Chair is appointed before the ToR is finalized.\n- Step 23 depends on \"Step 19: Draft Data & Evaluation Report\", which is actually step 22.\n\nA is more compact, but it is less aligned with the stage and less internally consistent. B is better for downstream use."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A fits the stage purpose better. The stage is a plan for setting up the governance bodies: who drafts the ToRs, who appoints members, and who holds the kick-offs. A stays on that. Steps 1–18 run over weeks 1–6 and cover: appointing the Project Lead; drafting the PSC, COAT and HRC ToRs; circulating and finalizing them; formal appointment orders; the escalation protocol; the three inaugural kick-offs; the MCR dual-authorization protocol; and the master calendar and templates. Owners are clear and dependencies cross-reference correctly (for example, kick-offs depend on step 8 appointments and step 9 escalation). It also ties in project-specific items, namely the €300k MCR, GDPR and paper-based logging, external counsel, the Regional Health Authority MOU and field safety. Weaknesses: it is verbose, it invents some specifics (a €50k threshold, fee estimates), and it adds some operational tasks such as RFQs and counsel procurement. Those tasks are still tied to governance and the Month 2 gate.\n\nCandidate B drifts into the whole 12-month project. Steps 14–23 cover releasing the €1.5M, canvassing, the home-intervention strategy, the live MOU, KPI monitoring and the final report, and none of that is governance setup. It also has internal inconsistencies. The step cross-references are wrong: \"Step 11: HRC Protocol Sign-off\" actually points to step 12, and the \"Step 12: drill report\" dependency in step 14 points to step 13. The gate timing is illogical: the €1.5M release at week 10 comes before the \"first routine review against the Month 4 Scale Gate\" in step 18. The PSC approves its own ToR, and the independent assurance member is appointed before any ToR is finalized. B does give concrete dates and ties to the risk and issue numbers. It skips an explicit kick-off for HRC and any escalation framework. It is less accurate, and less useful for the governance-setup stage."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

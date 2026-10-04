@@ -1,0 +1,66 @@
+{
+  "$defs": {
+    "MonitoringProgress": {
+      "properties": {
+        "approach": {
+          "description": "General approach to monitoring progress.",
+          "title": "Approach",
+          "type": "string"
+        },
+        "monitoring_tools_platforms": {
+          "description": "Specific tools or platforms used for monitoring (e.g., 'Asana dashboard', 'Shared KPI Spreadsheet', 'Monthly Report Template').",
+          "items": {
+            "type": "string"
+          },
+          "title": "Monitoring Tools Platforms",
+          "type": "array"
+        },
+        "frequency": {
+          "description": "How often progress is reviewed.",
+          "title": "Frequency",
+          "type": "string"
+        },
+        "responsible_role": {
+          "description": "Role or group responsible for collecting/analyzing data.",
+          "title": "Responsible Role",
+          "type": "string"
+        },
+        "adaptation_process": {
+          "description": "How plan changes are made based on monitoring data.",
+          "title": "Adaptation Process",
+          "type": "string"
+        },
+        "adaptation_trigger": {
+          "description": "What specifically triggers the adaptation process (e.g., 'KPI deviation > 10%', 'Steering Committee review').",
+          "title": "Adaptation Trigger",
+          "type": "string"
+        }
+      },
+      "required": [
+        "approach",
+        "monitoring_tools_platforms",
+        "frequency",
+        "responsible_role",
+        "adaptation_process",
+        "adaptation_trigger"
+      ],
+      "title": "MonitoringProgress",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "monitoring_progress": {
+      "description": "How the team monitors progress and adapts the plan over time.",
+      "items": {
+        "$ref": "#/$defs/MonitoringProgress"
+      },
+      "title": "Monitoring Progress",
+      "type": "array"
+    }
+  },
+  "required": [
+    "monitoring_progress"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

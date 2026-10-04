@@ -1,0 +1,21 @@
+{
+  "description": "Represents the top-level details of a Work Breakdown Structure (WBS)",
+  "properties": {
+    "project_title": {
+      "description": "A clear, overarching title that conveys the primary objective of the project. Serves as the projects strategic anchor, guiding all subsequent tasks and deliverables.",
+      "title": "Project Title",
+      "type": "string"
+    },
+    "final_deliverable": {
+      "description": "A detailed description of the projects ultimate outcome or product upon completion. Clearly states the final state or result that the team aims to achieve.",
+      "title": "Final Deliverable",
+      "type": "string"
+    }
+  },
+  "required": [
+    "project_title",
+    "final_deliverable"
+  ],
+  "title": "WBSLevel1",
+  "type": "object"
+}

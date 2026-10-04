@@ -1,0 +1,114 @@
+{
+  "stage": "related_resources",
+  "evaluated_at": "2026-10-04T18:03:06",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 258.5,
+      "structure_problems": [],
+      "judgments": {
+        "related_resources.md": {
+          "verdict": "baseline",
+          "score_new": 4.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 7,
+              "analysis": "Candidate A gives five well-chosen references: Channel Tunnel, Seikan, Marmaray, Gotthard and Øresund. Four of them are submerged or undersea rail or tunnel precedents. Marmaray (immersed tube) and Seikan (seismic risk, depth) are especially apt for a submerged rail tunnel in a seismic strait. The core facts are largely right: lengths, dates, Marmaray's 60 m depth, Gotthard's 57 km, and the Channel Tunnel's cost overrun. There are some errors. The Channel Tunnel did not go into \"administration\" in 2006, and the Seikan accident figures are shaky. Several contact emails look invented (for example dft.crossborder@..., gesj@gesj.org). The format is clean and complete, each project's rationale is tied to the plan, and nothing is truncated. A is thin on plan-specific numbers, though.\n\nCandidate B is far longer and ties many lessons to the plan's own assumptions (contingency, maintenance budget, rail gauge mismatch, cetacean corridors). That plan-linking is useful. But it is riddled with factual errors and fabrications:\n- It says Getlink acquired or operates the Øresund Link; this is false.\n- It gives the wrong Getlink domain, \"getlinked.com\", and a named CEO contact with an invented email address.\n- It describes the Channel Tunnel as pressurized and says workers used saturation diving.\n- It gives incorrect HZMB details, including \"six lanes each direction\", and omits the bridge's immersed tunnel.\n- It says Nord Stream 2 operated in 2022 and claims \"<1 mm\" alignment tolerance.\n- It cites fictitious mitigation statistics.\n- It misstates Øresund geology and seismic conditions.\n\nIt also omits Seikan and Marmaray, the most relevant tunnel references. Nord Stream is a weak, unstable reference. The summary says three projects but four are listed. Nord Stream's section is missing success metrics detail, and the file is bloated. Because downstream stages rely on these references, B's confident but false figures are a serious liability.\n\nA is more accurate, more relevant in its choice of projects, and fits the format better. B has more plan-specific insight, but it is undermined by hallucinations."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Candidate A is very long and ties each lesson to the plan (contingency sizing, gauge mismatch, cetacean corridor, maintenance budgets, treaty). But much of its detail is fabricated or wrong. It says Getlink acquired Øresund in 2020 and that Nord Stream 2 began operating in 2022. It gives Chunnel saturation diving at 200 m and \"10-atmosphere\" pressure at 50 m depth, implausible HZMB lane and pier counts, and bad Øresund details. It names a CEO who is not current, and its contacts and URLs look invented. Its maintenance advice contradicts itself (\"10-15% of capital annually\" next to a €10-15bn total). It includes Nord Stream, a weak analogue, with a thin entry, and omits Seikan and Marmaray. Candidate B is concise and consistently structured, with a better reference mix: Channel Tunnel, Seikan (deep undersea rail, seismic), Marmaray (immersed tube under a busy strait in a seismic zone), Gotthard (scale and duration) and Øresund. Most core facts are roughly right. It has some errors (the Seikan explosion detail, Marmaray ridership, invented email addresses) and it is less tailored to the plan's specifics. Overall B is more accurate and better chosen, though less insightful. A is richer in plan linkage but unreliable and bloated."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 152.3,
+      "structure_problems": [],
+      "judgments": {
+        "related_resources.md": {
+          "verdict": "new",
+          "score_new": 6.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 3,
+              "analysis": "Candidate A offers real, relevant references: OVH (headquartered in Roubaix, Hauts-de-France), the ROMEO/GENCI supercomputer in Reims, Google in Belgium, the Dunkirk port authority, and the French national AI strategy. Each has full sections, ties back to the plan's decisions and risks, and gives concrete actionable steps. It also labels the last two as secondary references and says the AI strategy is nascent.\n\nA has serious faults. It invents many figures and outcomes: OVH \"multi-GW\", ROMEO at €1.2–1.5B with RTE funding 60% of grid upgrades, and Google's \"€1B+ grid co-investment\". It also invents contact emails, and it puts Google's Belgian site in Liège when it is at Saint-Ghislain. ROMEO is not a 9 GW-like analogue, and its scale is overstated. Many \"success metrics\" read as fabricated precision, which is risky for a skeptical plan. Even so, the references point at real organizations and give a usable starting point for due diligence.\n\nCandidate B is thin and generic. It contains clear errors: \"Google Bertelsmann Data Center Campus\" is a garbled name, \"Microsoft / Facebook\" at Luleå is a conflation (Luleå is Meta's), and Vattenfall is named as the PPA partner. Its third suggestion, the \"Cœur de l'Europe Digital Hub Initiative (Poche Sud-Ouest)\", appears to be invented outright. B has no Hauts-de-France or French reference projects, and no brownfield, land-assembly, security or sovereign-compute analogues. Its metrics are vague and its actionable steps are less specific. It is less hallucination-heavy in numbers only because it gives almost none.\n\nOverall, A is far more useful and faithful to the plan's themes, despite its fabrications. B is weaker and also contains a fabricated reference."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 4,
+              "analysis": "Both candidates contain hallucinations, so the choice depends on which is more useful and less wrong.\n\nCandidate A has three suggestions. Two are weak or wrong:\n- Suggestion 1 is \"Google Bertelsmann Data Center Campus\". The name is garbled, since Bertelsmann has nothing to do with Google's Eemshaven site. The claim that Eemshaven reached multi-GW is also dubious.\n- Suggestion 2 is \"Microsoft / Facebook Luleå\". This conflates Meta's Luleå site with Microsoft, and it mentions Finnish agencies for a Swedish site.\n- Suggestion 3 is the \"Cœur de l'Europe Digital Hub Initiative (Poche Sud-Ouest)\". This appears to be invented, and its content is generic.\nA's contacts and \"where to find info\" entries are vague (for example \"search LinkedIn\"). A does tie its suggestions to the plan's decisions and risks. Its only French-process entry is a fabricated initiative.\n\nCandidate B has five suggestions. They are more relevant to Hauts-de-France and to the plan's key risks:\n- OVH, headquartered in Roubaix, is a real in-region operator.\n- ROMEO in Reims is a real sovereign HPC facility.\n- The Dunkirk Port Authority is a real brownfield and industrial-land reference.\n- Google in Belgium is a real but misplaced reference, since the site is Saint-Ghislain, not Liège.\n- The French national AI strategy is a real policy reference.\nB covers sovereignty, brownfield, land assembly, cooling, fiber, FX and workforce. It gives concrete URLs and actionable steps, and it labels the last two entries as secondary.\n\nB's weaknesses are serious:\n- It states many precise outcomes and figures with no basis, such as \"OVH multi-GW\", \"ROMEO €1.2B\", \"RTE pre-commitment to fund 60%\", and \"50+ km² assembled by the port\".\n- It gives invented email addresses.\n- It states wrong distances: Roubaix is not 25 km from Cambrai.\n- It overstates ROMEO's scale and calls it multi-GW.\n- It is very verbose.\n- It is promotional in tone, which clashes with the skeptical brief.\n\nEven so, B is much more decision-useful for downstream stages, because its references are regional, real and relevant. A's fabricated project names and generic content make it less credible. B is better overall, but not by a wide margin given the fabrication."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 273.0,
+      "structure_problems": [],
+      "judgments": {
+        "related_resources.md": {
+          "verdict": "new",
+          "score_new": 6.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 4,
+              "analysis": "Candidate A picks three broad analogues. ERTMS/Shift2Rail is a signalling program, not ticketing or distribution, so it is only loosely relevant. It also gets facts wrong: the Shift2Rail successor is Europe's Rail, not \"INNOWAI\", and \"ERADIS\" is mischaracterised. PSD2/SEPA is a reasonable analogue for clearing and settlement, but the entries are generic. Its URLs and contacts are vague, and it misses OSDM, TAP TSI and the actual distributors. It is modest and mostly not fabricated, but it does little for downstream planning. Its main strength is that it makes few precise but false claims.\n\nCandidate B picks the most relevant real references: OSDM (UIC), TAP TSI, Trainline and CEF. These match the plan's OSDM APIs, mandatory standards, independent distributors and corridors. It ties each reference to the plan's decisions and corridors and gives concrete actionable steps. However, it contains a lot of hallucinated detail. Examples are invented statistics (OSDM booking volumes, CEF ROI, Trainline revenue of €137M and NPS), invented committees and programs, made-up email addresses and named individuals, and a conflation of Directive 2016/797 with TAP TSI. The detail is also verbose and repetitive. These errors would mislead if taken at face value, but the underlying choice of references is correct, and the structure and specificity serve downstream stages far better than A's weak analogues.\n\nOverall, B is more faithful to the plan's domain and more useful despite the fabrication risk. A is safer but substantially less relevant."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 3,
+              "analysis": "Candidate A picks references that are highly relevant to the plan: OSDM, CEF rail and ticketing projects, Trainline as an independent distributor, and TAP TSI. Each suggestion is filled out in full, with metrics, risks, mitigations, URLs, contacts and concrete steps. It ties each reference back to the plan's own decisions, such as the 30-month API exposure deadline, enforcement, governance consensus, the clearing mechanism, and the realistic-scenario framing. The structure is complete. Its main weakness is heavy fabrication or doubtful precision. Examples are invented statistics (ROI of 3.5–4.2x, NPS 72), made-up named contacts and email addresses, a misdescribed Directive 2016/797 (which is the interoperability directive, with TAP TSI a separate regulation), and doubtful URLs. Some figures also contradict each other, such as Trainline revenue of €137M next to €800M GMV. Even so, the references and steps still point downstream stages in the right direction. Candidate B is thin and generic. ERTMS is a signalling system and has little in common with ticketing. PSD2/SEPA is only a loose analogy. The accessibility item is vague and wrongly named as a project. It invents \"INNOWAI\" and \"ERADIS\" and gives few concrete metrics, contacts or sources. It also omits the most obvious analogues (OSDM, Trainline, CEF, TAP TSI). Its actionable steps are vague, and the suggestions are not real past projects similar to this one. A is clearly more useful despite its hallucination risk."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 256.7,
+      "structure_problems": [],
+      "judgments": {
+        "related_resources.md": {
+          "verdict": "new",
+          "score_new": 6.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 4,
+              "analysis": "Candidate A names five real, well-known programs: Paris Plan Canicule, Rome, Vienna, Barcelona and the Netherlands. Each entry covers the required fields in depth and maps closely to the plan's scopes (alert thresholds, GDPR data loop, multilingual outreach, home kits and early procurement, worker protection, analog-first comms). It gives lessons, contact steps and links, so it is usable downstream.\n\nA also has serious reliability problems. Many statistics, dates and quotes look fabricated, such as 81-87% contact rates, a 28-minute transport average and \"zero incidents in 18 years\". Several email addresses and named contacts look invented, for example heat-data-guidance@cnil.fr and \"Dr. Agnès Riboton\". Some programme details are wrong or mislabelled: Hittestress.nu is presented as a KNMI-run national system, Vienna's plan start date is off, and the Rome demographic comparison is inconsistent. Barcelona's timeline is internally incoherent, and the summary claims a German project that the list does not include. It is also very long and verbose.\n\nCandidate B is short and vague. Brussels is described generically. The Frankfurt \"Urban Green and Cooling Corridor Pilot\" looks invented, and its claims, such as zero lost workdays, are unverifiable. B has almost no concrete metrics, no real URLs or contacts (it suggests LinkedIn searches), and only three references. It contains meta phrases like \"the user plan attempts\". It does offer a German reference and fewer fabricated precise numbers, but it gives little decision-useful content for downstream stages.\n\nOverall, A is far more specific, complete and actionable and uses mostly genuine reference programs, despite its fabricated detail. B is thin and partly fabricated too. A is better, with reduced confidence because of the hallucinations."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "A is concise and consistent but generic. It has an apparently invented Frankfurt \"pilot\", no URLs or concrete contacts, and unverifiable metrics. B covers five mostly real programs (Paris, Rome, Vienna, Barcelona, Dutch heat network) with lessons tied to the Leipzig plan's constraints: threshold calibration, GDPR aggregate data loops, procurement lead times, handyperson installation, multilingual outreach, volunteer safety, transport surge, and SMS digital divide. It also gives concrete, step-by-step actionable contacts. B has real flaws: fabricated statistics, fake emails and named contacts, a possibly invented HeatWatch tool, a Barcelona timeline inconsistency, advice dated before the actual start date (PO by April 30, 2026), and a summary that claims a German project it does not include. Even so, B is substantially more decision-useful and plan-specific for downstream stages, so it edges ahead despite its hallucination risk."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

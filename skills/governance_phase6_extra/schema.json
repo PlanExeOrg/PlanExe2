@@ -1,0 +1,32 @@
+{
+  "properties": {
+    "governance_validation_checks": {
+      "description": "A rigorous check of the generated governance components for completeness, consistency, and potential gaps based on the inputs and standard practices.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Governance Validation Checks",
+      "type": "array"
+    },
+    "tough_questions": {
+      "description": "Representative questions leadership should regularly ask (e.g., 'Are we on budget?').",
+      "items": {
+        "type": "string"
+      },
+      "title": "Tough Questions",
+      "type": "array"
+    },
+    "summary": {
+      "description": "High-level context or summary of governance approach.",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "governance_validation_checks",
+    "tough_questions",
+    "summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase6_extra",
+  "evaluated_at": "2026-10-04T18:11:14",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 161.9,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase6_extra.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Candidate A is stronger overall, mainly on specificity and decision-usefulness. I could not verify either candidate's counts against the source files. A says 26 steps and 12 monitoring approaches, while B says 24 steps and 14 approaches, so at most one is right.\n\nA's strengths:\n- Its ten gaps are concrete and each comes with an actionable recommendation. Examples are a tiered delegation matrix, an urgency matrix for adaptation triggers, an authority hierarchy for conflicts between independent bodies, and data classification for the transparency portal.\n- It catches real risks: the consortium holding several roles at once, non-voting advisers, and review cycles too slow for structural anomalies.\n- Its tough questions reach beyond the governance documents into project-critical issues: seismic risk on the Azores-Gibraltar fault, the energy supply plan, treaty ratification and sovereign breach consequences, contingency adequacy, cetacean seasonal windows, rail gauge and electrification compatibility, and decommissioning liability. They are plan-specific and push for evidence.\n\nA's weaknesses:\n- It is very verbose.\n- Check 2 says \"no contradictions detected\" and then flags several ambiguities.\n- Some figures in the questions look invented, for example the gauge-conversion costs.\n- The summary is long.\n\nB's strengths:\n- It is concise and well organised.\n- Its seven gaps are valid: Sponsor role, conflict of interest, change control, delegation, information flow, whistleblower process, and stakeholder communication.\n- Its summary is clean.\n\nB's weaknesses:\n- The gaps are shallow and offer no recommendations.\n- Its tough questions mostly restate the gaps. Questions 5, 6, 7 and 9 repeat gaps 6, 5, 3 and 1.\n- It does not raise the major project-level risks: seismic, energy, rail gauge, decommissioning, or treaty enforceability.\n- The summary includes uncritical praise, such as \"elegantly resolving cross-border governance complexity\".\n\nA is more useful for downstream planning and shows more insight, despite its verbosity."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required structure: numbered validation checks, numbered tough questions, then a summary. Neither can be checked against the source phases, so the step and approach counts are unverified. A says 24 steps and 14 approaches. B says 26 steps and 12 approaches. Candidate A is concise and readable. Its seven gaps are reasonable (Sponsor role, conflict-of-interest process, change control, delegation, information flow, whistleblower process, communications). Its tough questions mostly restate those gaps, plus some budget-trigger and hedging questions. They add little new insight and are mainly about governance procedure. Its consistency check is largely a positive confirmation with little critical probing. Candidate B is much more thorough and decision-useful. It finds more real gaps: the urgency hierarchy for adaptation triggers, conflicts between independent bodies, data classification for the transparency portal, and the weak role of non-voting advisors. It also notes the neutral consortium's overlapping roles. Most gaps come with concrete recommendations. Its tough questions raise project-critical issues that A does not: seismic risk on the Azores-Gibraltar fault, energy supply, treaty enforceability, rail gauge, signalling and electrification, contingency adequacy, seasonal environmental windows, and decommissioning liability. These are tied to the plan's scale and location. B's weaknesses are extreme length, tough questions that are sprawling multi-part essays, and some invented figures. It also has a few slips: it says the project \"operates for 20 years\", and it says \"milliseconds\" in the summary. Its checks also drift into recommendations, which goes beyond validation. Even so, B gives later stages more insight and catches more real risks, while A is thinner and repetitive."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 114.9,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase6_extra.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the required structure (validation checks, tough questions, summary). Candidate A is much more thorough and concrete. It identifies specific gaps: no conflict-of-interest policy, no whistleblower ownership, no kill-criteria or termination framework, no phase-gate decision logic, and an ambiguous CPMG/RCAB authority boundary. It also flags unclear Sponsor and PSC Chair roles and the missing change control board. Each gap comes with a recommendation. Its 10 tough questions are demanding and tied to the plan's specifics: RTE 36-month evidence, the €1.3B holding cost, DGSI/ANSSI confirmation, anchor tenants, and kill criteria. These match the prompt's skeptical, red-team framing and its emphasis on kill criteria and uncontrolled external dependencies. Weaknesses: it is verbose, has a typo (\"SPECCH\", \"tenure disputes\"), and some questions are somewhat repetitive. The \"Pioneer-like\" reference and the claim that governance lacks kill criteria may be partly overstated, but they are plausible given the stage inputs. Candidate B is shorter and more generic. It declares the framework \"highly consistent\" with little scrutiny and lists fairly minor gaps (delegation below the CPMG, FX hedging tracking, annual reassessment of the expansion reserve). Some of those are useful, especially the FX hedging point, which is tied to the prompt's USD exposure. Its tough questions are decent (for example RTE collateral, take-or-pay force majeure, and the PUE-versus-workforce link), but it misses COI, whistleblower and gate logic. It does ask about kill criteria. Overall A is more decision-useful and more rigorous, while B is too lenient for a validation stage."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected structure: validation checks, tough questions, then a summary. Both tie their points to upstream artifacts such as the 60% tenant threshold, the 36-month RTE buffer, the 80% buffer land and the €500M threshold.\n\nCandidate A is concise and readable. Its gaps are real but fairly minor: advisor dissent, CPMG-to-RCAB reporting, delegation below the CPMG, FX hedging ownership, and reserve reassessment. It calls the framework \"highly consistent\" and finds no actual inconsistencies. It misses the most important governance gap for a red-team plan, which is the absence of a formal kill and downsize procedure. It only asks about kill criteria in a tough question. Several of its questions are somewhat odd. One asks for the \"financial penalty per week of RCAB halt\". Another asks for \"legally binding kill criteria\". Its summary is generic.\n\nCandidate B is much more thorough and decision-useful. It finds concrete inconsistencies:\n- The CPMG/RCAB authority boundary on remediation.\n- Ownership of the €1.3B land holding cost.\n- Who validates breach of the 36-month RTE buffer.\n- Sponsor versus PSC Chair terminology.\n\nIt identifies missing structures: a kill and downsize framework, phase-gate decision logic, a conflict-of-interest policy, a whistleblower process, change control, and an information protocol. These fit the prompt's emphasis on kill criteria and skepticism. Its tough questions are sharp, evidence-demanding and tied to specific upstream items. Examples are the RTE confirmation, the DGSI/ANSSI position, named anchor tenants, and the independent audit of strategy adherence. Its summary is substantive.\n\nB's weaknesses are:\n- The checks are dense, with very long paragraphs.\n- It has a few typos (\"INSUFFICIENT SPECCH\", \"tenure disputes\").\n- It mislabels the gate logic as \"OR\".\n- It invents some details, such as \"20% each\" for three tenants.\n- It is somewhat bloated and partly drifts into generic project governance.\n\nEven so, it is considerably more insightful and useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 151.0,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase6_extra.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required structure: numbered validation checks, numbered tough questions, then a summary. The difference is depth and usefulness.\n\nCandidate A checks consistency across phases in detail. It links the bodies, the implementation timing, the monitoring-to-escalation chain, and decisions and assumptions to the bodies that own them. It then raises five gaps that matter for this plan:\n- Sponsor and tie-break ambiguity on the PSC.\n- Undefined independence and roles for advisors and independent members.\n- No conflict-of-interest or whistleblower ownership and timelines.\n- No change-control or inter-body dependency process.\n- Carriers, distributors and regulators are excluded from the decision bodies.\n\nEach gap comes with concrete recommendations. Its tough questions are plan-specific and demanding. They cover the definition of an API-failure strike, stress-testing the €200M float, fault attribution across carriers, cost-recovery scope creep, spec errors found after the M+6 provisional binding, political pushback from SNCF or DB, staffing scale-up, and the PRM schema gap. The summary is coherent and ties back to the gaps. Weaknesses are verbosity and some assumed specifics, such as decision numbering and \"Stage 1 AuditDetails\", which it appears to take from the inputs. Some questions are demands for evidence rather than questions.\n\nCandidate B is concise and mostly accurate. Its gaps (sponsor versus director roles, conflict-of-interest protocol, OMG grant delegation, no appeal route for sanctioned operators) are valid but shallower. Its consistency check is thin. It omits the audit phase from the completeness check. Its tough questions are good and specific: the 90-minute threshold, the T+5 variance, the Plan B for PRM, and Daily Liquidity Report oversight. They are less probing overall. Its decision numbering differs from A's, for example tiered liability is Decision 3 in B and Decision 1 in A, so one of them is likely misattributed, though I cannot verify which. Its summary is shorter and less tied to the findings.\n\nOverall, A is more thorough and gives downstream stages more actionable content. B is adequate but lighter."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required structure: numbered validation checks, numbered tough questions, then a summary. Both tie their points to the earlier phases (PSC/OMG/TASG/CLAB, Decisions 5/12/13, T+5 latency, the €200M float and €300M reserve).\n\nCandidate A is concise and has some sharp points. One is the missing appeal step before a sanction reaches the PSC. Another is the variance allowance for the T+5 rule. A third is the Plan B for PRM accessibility. But its gaps are thinner and more generic (role clarity, conflict of interest, delegation). It gives no recommendations. Several of its questions are narrow, for example the PSC review frequency of the liquidity report. Its summary is brief and somewhat generic.\n\nCandidate B is much more thorough and decision-useful. It finds real structural issues:\n- DG MOVE may both vote and hold the tie-break, and the sponsor line is unclear.\n- Independent and advisory roles are underspecified.\n- There is no conflict-of-interest or whistleblower ownership.\n- Cross-body change control is missing.\n- Carriers, distributors and regulators are excluded from governance even though they are the subjects of enforcement.\n\nEach gap comes with concrete recommendations. Its tough questions are specific and probing: the definition of a strike and force majeure, a stress test of the float, fault attribution across multiple carriers, the cost-recovery audit standard, a semantic error in the spec after the M+6 provisional lock, political override of an enforcement action, staffing scale-up, and the PRM schema gap between month 18 and month 30. Its summary ties the findings together.\n\nWeaknesses of B: it is verbose. Its consistency check slightly overclaims (\"no contradictions\") while the gaps then list real issues. A few questions demand evidence such as comparable EU programs or sample reports, which are unrealistic to ask of a plan. Despite this, it is more useful for downstream planning and for catching risks."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 94.4,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase6_extra.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both follow the expected structure: numbered validation checks, numbered tough questions, then a summary. A is concise and its gaps are reasonable: HRC unanimity with an external liaison, MCR trigger granularity, contractor management, comms ownership, and playbook sign-off. Its tough questions are sharp (bridging finance, performance bonds, equity of the contact-rate gate, internal fallback staff). However, it has few gaps, its consistency checks are mostly affirmations, and it makes a small error by describing the Month 4 gate as \"80% utilization\" when the gate is 80% of planned hours delivered. B is much deeper. It catches real governance holes: conflict-of-interest and recusal rules, whistleblower escalation against members, undefined voting and change-control thresholds, delegation authority, deadlock and dispute resolution, MOU and triage-script fallbacks, and the MCR signatories, SLA and reconciliation. It also notices a timeline tension, with the MOU finalized in Month 5 while the Month 2 gate assumes health integration. Its 11 tough questions are plan-specific and decision-useful, including succession planning, facility assessment failure, and closed-loop verification of corrective actions. Its summary is specific and names Leipzig. Weaknesses are verbosity and embedded recommendations beyond what a validation stage needs, plus a somewhat overstated \"critical inconsistency\" and a few shaky details. Overall B is more useful for downstream stages and better at catching real risks."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is a much more rigorous validation. It confirms completeness, then finds real governance gaps: no conflict-of-interest or recusal rules for the Finance Director and Housing Association Head, who sit on the PSC and benefit from the budget. It also finds undefined voting and change thresholds, missing delegation authority, deadlock and escalation endpoints, no fallback if the health MOU fails, and no signatory rules or SLA for the €300k reserve (MCR). Each gap comes with a concrete recommendation. Its tough questions are tied to this plan's gates and risks: the early-season Level 3 cost against the MCR, the 60% contact-rate gate and equity, contractor burnout, facility assessments failing, succession, and whistleblower handling. The summary names Leipzig and states the key vulnerabilities. Weaknesses: it is very verbose, the checks run to long paragraphs, and a few references may be loose (for example, Q11's framing of monthly versus quarterly reviews). Candidate B is concise and well-formed, and some of its questions are sharp (indemnification, performance bonds, the ring-fenced social-housing budget, bridging finance). But its consistency checks are mostly affirmations (\"strong logical alignment\"). Its gaps are thinner and more generic, and it misses the conflict-of-interest, change-control, succession and fallback issues. The summary is generic. A is more decision-useful for downstream work."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

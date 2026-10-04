@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase5_monitoring_progress",
+  "evaluated_at": "2026-10-04T18:08:14",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 141.3,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase5_monitoring_progress.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected structure (approach, tools, frequency, responsible role, adaptation process, trigger) and stay faithful to the Spain–Morocco submerged tunnel context. They reuse upstream governance bodies: TAG, Steering Committee, PMO, Risk Management Committee, Environmental Oversight Board and Bilateral Diplomatic Task Force.\n\nA has 15 items. Its triggers often copy risk-register impact ranges instead of giving monitoring thresholds. Examples: \"Seismic event exceeding M5.5-6.5 (10% probability in 20 years) causing €3-8 billion\", \"Supply chain disruption lasting 2-4 months (€1-3 billion)\", and \"Decommissioning costs estimated to exceed €5-15 billion\". These describe consequences of a risk, not a measurable trigger, so they are less useful for plan adaptation. A also puts descriptive design facts into the adaptation process, such as \"Platforms are designed to withstand 100-year storm events\". It merges some areas well, and its escalation chain for the TAG, Steering Committee and independent panel is clear. It has no separate treatment of energy supply, flooding or water intrusion, geopolitical stability, or cross-risk cascades. It also lacks an enterprise risk register item.\n\nB has 19 items and covers more of the plan's risk space. These include energy infrastructure, flooding and hull breach, subsea structural surveillance, geopolitical and government stability, enterprise cascading risk, climate adaptation, and gauge and electrification detail (Iberian 1,668mm vs 1,435mm; 25kV AC vs 3kV DC). Its triggers are more operational and measurable, for example:\n- schedule variance over 2 weeks\n- weather utilization below 80%\n- FEA deviation over 15%\n- sensor gap over 4 hours\n- tranche milestone at risk by more than 4 weeks\n\nIt also links monitoring to named roles and to the escalation paths in the earlier phases.\n\nB's weaknesses are some verbosity, a few odd or invented details (\"Atlasian weather optimization protocols\", the \"Funding tranch\" typo), and an inconsistent turnover metric (15% annual vs monthly). Several thresholds are invented, though they are plausible. It also has some overlap, such as geopolitics repeated across items 5 and 17, and currency repeated across items 4 and 16.\n\nOverall, B is more comprehensive and its triggers are more actionable for downstream use. A is tighter but its triggers are weaker and it omits several major risk areas."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected structure (approach, tools, frequency, responsible role, adaptation process, adaptation trigger). A has 19 items; B has 15.\n\nA is far more thorough. Each item has concrete, measurable thresholds, such as >15% deviation between model tests and FEA, a 24-hour halt, schedule variance triggers at 2, 4 and 8 weeks, and turnover below 15%. It covers all the major risk areas from the earlier stages: technical, environmental, schedule, finance, governance, workforce, financing, risk, geotech, energy, maritime, supply chain, corrosion, rail, surveillance, FX, geopolitics, flooding and climate. It also gives clear responsible roles and ties each escalation to the governance bodies. Weaknesses: some thresholds look invented, and it has small inconsistencies. The 5/10/15% triggers are described as contingency utilization in one place and as budget utilization in another. The turnover trigger is stated as \">15% in any month\" when it should be a monthly rate of about 1.25%. It also contains some questionable specifics, such as blockchain tracking and a Spain 25kV vs Morocco 3kV electrification comparison. It misses decommissioning, and it is long. Its financial and FX items overlap a little.\n\nB is more concise. Its triggers mix in risk-event cost figures (for example \"€3-8 billion repairs\", \"M7.0+ 2% probability\"), which describe the impact of a risk and are not monitoring thresholds. Several triggers are essentially restated risk descriptions and are not actionable metrics. Its adaptation processes are shorter and less operational. It includes decommissioning, which A lacks, and has some good governance details, such as the €250M drawdown approval and the TAG disagreement path. It merges climate into corrosion and omits energy, flooding, surveillance and geopolitics. Item 1 is a generic schedule and KPI item. Overall it is less specific on monitoring cadence and thresholds.\n\nA is more decision-useful for downstream stages, with clearer monitoring metrics and adaptation triggers. B's coverage is narrower, and its triggers read as risk impacts and not as monitoring signals."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 87.9,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase5_monitoring_progress.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected structure: a numbered approach per item, with tools, frequency, responsible role, adaptation process and trigger. Both draw on upstream governance bodies (PSC, CPMG, RCAB) and decisions.\n\nCandidate A is concise with 6 items. It covers phase gates, grid, security, land, tenants and workforce. Its triggers are often vague, such as \"any official communication from RTE\" or \"failure to satisfy all conditions\". It has no monitoring of cooling/PUE, fiber and latency, budget variance or FX, or the overall risk register. The prompt explicitly required USD/FX tracking, PUE, fiber and financing credibility. Item 5 is muddled: it says \"falls below 40% ... (60% threshold)\". Item 6's response, hiring management teams to oversee training, is odd. Its strengths are readability and a few concrete numbers (15% variance, 4 weeks, €20–40M).\n\nCandidate B has 10 items and covers all the critical success factors from the prompt: grid and power, land and permitting, security, tenants, PUE and cooling, fiber and latency, social license, finance with FX hedging, the risk register, and gate readiness. It gives quantified triggers throughout (30-day RTE slip, +20% transmission cost, 5%/10% variance, PUE >1.25 for 2 months, 60-day prefectural slip, 4-week DGSI slip). Adaptation processes have tiered escalation and concrete options, such as downscoping Phase 2 to 1 GW or reducing Phase 1 to 500 MW. It ties to the skeptical, kill-criteria framing and to the Decision Escalation Matrix. Weaknesses: it is verbose and has minor inconsistencies. It mixes a 50% trigger with the 60% threshold, uses a \"2ms RTT\" criterion loosely, and includes some invented figures (the €4.3B FX exposure and the 1,000-signature petition threshold). These are monitoring thresholds, though, not external commitments, so they are acceptable.\n\nOverall B is far more decision-useful and complete for downstream use, despite its length."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is much more complete and decision-useful. It has 10 monitoring areas covering grid, land and permitting, security, tenants, PUE and cooling, fiber, social license, finance and FX, the risk register, and gate readiness. Each has specific tools, frequencies, named roles from the governance bodies (CPMG, PSC, RCAB) and quantified triggers, such as RTE delay >30 days, PUE >1.25 for 2 months, budget variance of 5% and 10%, and the 60% tenant threshold. It is faithful to the plan's themes: skepticism, gate discipline, USD/FX exposure, the PUE target, and fiber latency. It has minor flaws. Some thresholds are inconsistent: the tenant item mixes 50%, 55% and 60%. It also uses a few invented specifics, and it is verbose. Candidate B is thin: 6 items, with only one or two tools each and vague frequencies. It omits finance and FX, cooling and PUE, fiber, and risk-register monitoring. Its triggers are less measurable, and its tenant item is confusing (\"below 40% ... (60% threshold)\"). It does tie some actions to specific review issues and decisions, but overall it covers too little for downstream use."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 58.1,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase5_monitoring_progress.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected structure and reference upstream decisions (Decision 4, 12, 13, Risks, Assumption Q3, CLAB/TASG/OMG/PSC). A covers 11 monitoring areas, including the prompt's headline success metrics (40% through-ticket share, complaints halved), budget burn against the €1.5B, accessibility and reduction cards, stakeholder resistance, and governance agility. Its triggers are quantified and layered, and its adaptation processes are concrete. Some weaknesses: a few thresholds look invented, and there are minor inconsistencies (for example, a 5-per-quarter threshold in the process against 3 in the trigger, and a Month 6 trigger of >3 weeks against a >2-week process threshold). It also overuses the SNCF/DB/ÖBB trio. Even so, it is much more complete and decision-useful. B has only 6 items and is thin. It omits the core 40% adoption target, budget monitoring, accessibility, reduction cards, bike reservations, modal shift, and stakeholder resistance. Its triggers are vaguer, for example \"royalties deviating more than 5% from expected transaction volume yields\" and \"solvency threshold\" with no number. Its \"Month 6/18 calibration weeks\" wording is awkward. B is concise and mostly consistent, but it doesn't monitor progress against the plan's main success criteria. A is better for downstream use."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected structure (approach, tools, frequency, role, adaptation process, trigger) and reference upstream decisions/risks (TASG, OMG, CLAB, PSC, T+5, three strikes, €300M float reserve). Candidate A has 6 items covering timeline, latency, enforcement, liquidity, royalty and backstop. It is concise and consistent, but omits monitoring of the plan's headline success criteria (40% through-ticket share, modal shift versus air), budget burn on the €1.5B, accessibility/reduction cards, and stakeholder resistance. Some triggers are vague (\"pre-defined solvency threshold\"). Its latency trigger and process are slightly inconsistent (two cycles vs 7 days). Candidate B has 11 items. It adds the adoption target with year-by-year thresholds, budget utilization, accessibility and reduction cards, distributor engagement, stakeholder resistance and governance agility. Its triggers are quantified and measurable (e.g. >10% failure for 7 days, 5% claims, 3.5/5 survey scores). It ties to specific decisions and assumptions and covers all the scope elements (PRM, reduction cards, distributors, budget). Risks: some invented figures (€200M float, €900M grants, 35 FTE) may come from upstream docs, and a few triggers are slightly inconsistent (<5 vs <3 platforms per quarter; 2 strikes vs 3). It is longer, but the length is substantive and useful. It misses the modal-shift-versus-air KPI and bus/ferry/air hooks, which A also misses. Overall B is considerably more complete and decision-useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 98.6,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase5_monitoring_progress.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is clearly stronger. It has 13 monitoring items covering the plan's critical areas: gate KPIs, GDPR, health integration, staffing, procurement and home interventions, cooling centers, outreach and equity, alert governance, budget, risk register, field safety, health outcomes, and governance compliance. Each item has concrete tools, frequencies tied to project phases (M1–M4, M5–M8, alert days), named owners, and a specific adaptation process with numeric triggers. The triggers match the prompt's gates: 80% center hours, 60% contact rate, 45-minute transport, and the €2.0M/€1.5M tranches. It also addresses the prompt's named risks: GDPR, volunteer and field safety, reputational risk, surge, and equity by deprivation quartile. It has minor flaws: some \"Review Issue\" references are opaque, the triage-script inter-rater audit of hospital staff is somewhat odd, and a few thresholds are arbitrary. It is still decision-useful and internally consistent.\n\nCandidate B has only 6 items and is thin. It omits monitoring of cooling centers, outreach and equity, staffing, field safety, health outcomes, and procurement. Several items have only two tools and vague triggers, such as \"any procedural deviation from GDPR best practices\". Some adaptations are illogical: halting all door-knocking because the triage inter-rater score is low, and diverting \"unspent MCR funds\" to handypeople. It also leaves out the 6-month-plus phase and outcome metrics. It is shorter and not more insightful."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate B is better. It covers the gates and monitoring areas the plan requires: Month 2 and Month 4 gates, cooling centers, outreach and equity, home-intervention procurement, health outcomes (EMS/ED, mortality proxies), alert triggering and alert fatigue, staffing, field safety, GDPR, budget and the risk register. It also adds governance adherence checks against the escalation matrix. Its triggers are specific and measurable (for example 5-working-day delivery delay, 15% unit cost variance, 12-hour data lag, 72-hour accessibility fix, 85% tranche spend, €300k MCR dual signature). It ties monitoring directly to the Month 4 gate metrics (80% hours, 60% contact, <45 min transport). Its weaknesses are length and some loose triggers, such as \"KPI deviation >10% from baseline/target\", plus the odd idea of running inter-rater reliability on hospital triage staff. Candidate A has only six items. It omits cooling-center operations, staffing, field safety, alert governance, health outcomes and the Month 2 gate. Some of its logic is odd: a 5% deviation trigger that doesn't match the gate thresholds, a \"50:50 split\" for installations versus vouchers, and unexplained references to the \"Builder path\" and \"Review Issue 2/3\". A is tighter but leaves significant monitoring gaps relative to the plan's scope and gates. B is more useful for downstream planning and for execution."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

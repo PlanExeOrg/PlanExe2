@@ -1,0 +1,93 @@
+{
+  "$defs": {
+    "SuggestionItem": {
+      "properties": {
+        "item_index": {
+          "description": "Enumeration, starting from 1.",
+          "title": "Item Index",
+          "type": "integer"
+        },
+        "project_name": {
+          "description": "The name of the project.",
+          "title": "Project Name",
+          "type": "string"
+        },
+        "project_description": {
+          "description": "A description of the project.",
+          "title": "Project Description",
+          "type": "string"
+        },
+        "success_metrics": {
+          "description": "Indicators of success, challenges encountered, and project outcomes.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Success Metrics",
+          "type": "array"
+        },
+        "risks_and_challenges_faced": {
+          "description": "Explain how each project overcame or mitigated these challenges to provide practical guidance.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Risks And Challenges Faced",
+          "type": "array"
+        },
+        "where_to_find_more_information": {
+          "description": "Links to online resources, articles, official documents, or industry reports where more information can be found.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Where To Find More Information",
+          "type": "array"
+        },
+        "actionable_steps": {
+          "description": "Clear instructions on how the user might directly contact key individuals or organizations from those projects, if they desire deeper insights.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Actionable Steps",
+          "type": "array"
+        },
+        "rationale_for_suggestion": {
+          "description": "Explain why this particular project is suggested.",
+          "title": "Rationale For Suggestion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_index",
+        "project_name",
+        "project_description",
+        "success_metrics",
+        "risks_and_challenges_faced",
+        "where_to_find_more_information",
+        "actionable_steps",
+        "rationale_for_suggestion"
+      ],
+      "title": "SuggestionItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "suggestion_list": {
+      "description": "List of suggestions.",
+      "items": {
+        "$ref": "#/$defs/SuggestionItem"
+      },
+      "title": "Suggestion List",
+      "type": "array"
+    },
+    "summary": {
+      "description": "Providing a high level context.",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "suggestion_list",
+    "summary"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

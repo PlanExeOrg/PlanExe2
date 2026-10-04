@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase4_decision_escalation_matrix",
+  "evaluated_at": "2026-10-04T18:05:39",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 50.5,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase4_decision_escalation_matrix.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required format (bold issue line, then plain \"Field: value\" lines) and use the same upstream governance bodies and consistent figures (€50M PMO authority, €2-6B carrying costs, €50-500M fines). A (6 items) has a concrete €250M contingency-drawdown trigger, but its technical item is slightly circular: the TAG assessment is called \"binding\" yet the Steering Committee can disagree with it. A also has no geopolitical or funding-guarantee item and no passenger-safety item, and it gives few time limits beyond the 30-day mediation window. B (7 items) covers more of the real triggers for this megaproject, adding a geopolitical crisis threatening treaty and funding guarantees and a passenger-safety or catastrophic-failure item. B also has clearer escalation chains, concrete timeframes (30, 14 and 60 days) and richer consequence quantification, such as the 200-400 bps cost-of-capital increase. B's budget trigger (15% contingency, €4-6B) is internally consistent. B's weaknesses are minor: verbosity, a few slightly off references (FCPA, \"pressurized corridor\"), and no separate risk-appetite item. Overall B is more complete, more specific and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected format: a bold issue line followed by plain \"Field: value\" lines. Both also reuse plan-specific facts, including the €50M PMO authority, the Spain/Morocco two-thirds vote, the TAG, the Environmental Oversight Board, the ICC arbitration, and the €4-6B contingency.\n\nCandidate A has seven items. They cover budget overrun, design flaw, cross-border deadlock, environmental halt, corruption, geopolitical or funding crisis, and passenger safety. Each has a clear escalation chain, timeframes (30 days, 14 days, 60 days), and quantified consequences. The geopolitical item and the safety item are real risks for a 20-year binational project, and B omits both. A's chains are sequential and workable, for example Ethics Committee → Steering Committee → judicial authorities. Its numbers are mostly consistent, since 15% of €40B is €6B. It has minor flaws: it is verbose, it adds external references such as OECD and FCPA, and \"pressurized corridor\" is slightly odd. It also has an inconsistency, because it says the Environmental Board's halt authority is absolute but then says it can be overridden with IMO and government concurrence.\n\nCandidate B has six items. They are thinner, and the negative consequences are generic in places, as in the budget item. It has some logic problems:\n- The technical item says the TAG assessment is \"binding\", yet the Steering Committee can disagree with it and send it to a further panel.\n- The environmental halt \"cannot be overridden without unanimous Board consent\", which is odd because the Board is the body doing the halting.\n- The corruption item has the Steering Committee \"remove neutral consortium leadership\", which is vague.\n- The corruption item gives no process timeline and no contract-suspension authority.\n\nB does include a useful risk-appetite and contingency-drawdown item with a €250M threshold. This is a good addition, but it overlaps with its budget item. B also has no safety item and no geopolitical or funding item.\n\nOverall, A is more complete, more specific, and more useful for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 84.8,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase4_decision_escalation_matrix.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Stage: decision escalation matrix, covering which issues go to which governance body, how, and why. Format is one bold issue line followed by plain \"Field: value\" lines.\n\nCandidate A has 5 items, all escalated to the PSC. Several are tied to specific upstream elements (Review Issue 2, Critical Risk 3, Risk 5, Decision 2/4/9, Assumptions Q6). It is concise and its consequences are plausible. Weaknesses:\n- The escalation levels are undifferentiated, so there is no real matrix across governance bodies. Every item goes to the PSC.\n- The RCAB veto item is muddled. It says the veto \"requires unanimous agreement from RCAB to halt work\" and gives the PSC Chair a tie-breaker, which is odd.\n- Coverage is thin. It has nothing on water/cooling, community opposition, brownfield, FX, tenant threshold, or schedule delay.\n\nCandidate B has 10 items covering many of the plan's key risk areas: budget, grid, tenant threshold, national security, water, community, schedule, brownfield, latency, and FX. It uses several escalation levels, including CPMG→PSC and RCAB→PSC, with thresholds, timeframes, and voting rules. It ties items to the plan's themes: the 80% buffer, the 60% tenant threshold, the 2ms RTT, water, sovereign zones, and the split-campus model.\n\nB's weaknesses:\n- It is verbose and invents many numbers, such as €4.32B unhedged exposure, \"hedging covers 70%\", €10–20B sovereign revenue, and 8% hurdle rate. Some of these may be inconsistent with upstream files.\n- Some details are questionable. \"Sub-millisecond consistency\" sits oddly beside a 2ms RTT. The 1.5x CFO vote weight is odd. The \">50% overrun = €375M–€1.1B\" figure is only loosely consistent.\n- The remediation numbers are partly arithmetic-inconsistent.\n- Its \"Escalation Level\" field sometimes holds a long sentence rather than a single body.\n\nOverall, B is far more complete, more decision-useful, and better differentiated across governance levels. It also fits the plan's red-team emphasis on kill criteria and gate failures, such as DGSI rejection, grid denial, and tenant shortfall. A is more concise but narrow and has a confusing item. B's invented numbers are a risk, but it is still more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives nine escalation items covering the main risk domains: capex overrun, RTE grid denial, tenant threshold, DGSI/ANSSI security review, water/cooling permit, community opposition, schedule delay, brownfield remediation, split-campus latency, and FX. Each has an escalation level, a detailed approval process with options and voting rules, a rationale and quantified consequences. It is well tailored to the prompt (Hauts-de-France, water, brownfield, FX/USD exposure, DGSI/ANSSI). It also uses multi-level escalation (CPMG to PSC, RCAB to PSC), which is more realistic. Weaknesses: some invented numbers (a 60% threshold where the prompt says 30–50%, though this may come from upstream strategic decisions; €4.32B on a €120B base; 32.2 km²), some internal inconsistencies (the hedging \"70% covered\" versus \"€4.32B unhedged\"), and it is long. Several figures are likely drawn from the upstream documents, so they are plausible.\n\nCandidate B has only five items. They are shorter and tied to upstream references (Review Issue 2, Risk 3, Decision 4/9). It misses major areas: water, brownfield, community, FX, tenant shortfall, schedule. Its consequences are vague and not quantified. Some of its logic is odd: the RCAB veto \"requires unanimous agreement from RCAB\" while the PSC Chair casts a tie-breaker. The PPA item is plausible and insightful. Overall it is thinner and less useful downstream.\n\nA is better for coverage and decision-usefulness."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 56.3,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase4_decision_escalation_matrix.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both follow the expected format (bold issue line, then fields). Candidate A uses the stage's exact \"Field: value\" format with six items; it is coherent and references the governance bodies (PSC, OMG, TASG, CLAB), the Decisions, Risks, and the 150% float threshold. Its first item has an awkward threshold (>10% deviation vs. the Director's <€500k), and it has a slightly muddled item where the escalation level is OMG and then PSC. It is fairly concise, with milder consequences.\n\nCandidate B has seven items with more concrete operational detail: time-bound escalation windows (24h, 48h, 1 week, 5/10/15 business days), explicit options for the decision body, and specific coverage of the OSDM deadline breach, the royalty dispute, and the regulatory compliance conflict (PRM, reduction cards). It maps well to the plan's key concerns (18/30-month deadlines, 40% target, the 5% cost-recovery cap). Weaknesses: some invented numbers (€200M float, 3–7% fines = €45–105M, >€5M claims, 4-4 split, \"reducing adoption by 15–20%\") that may not come from upstream files, and the negative consequences are a bit hyperbolic. The \"Escalation Level\" for two items starts at CLAB rather than a pure escalation. The format is also \"Field: value\" lines, so it is compliant. Overall B is more decision-useful and covers more of the plan's key issues, such as deadline breach and accessibility, which A omits. A is more restrained on invented figures but less complete and less specific.\n\nOn balance B is better for downstream usefulness, despite the risk of invented figures."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more concrete and more useful downstream. Each item has a time-boxed process (24 hours, 1 week, 5 or 10 business days, a 30-day challenge window). It names who presents (CFO, TASG, CLAB). It lays out explicit decision options, such as phased binding versus provisional binding versus an extension request. It also quantifies the consequences. It ties into the earlier decisions and assumptions: the €500k OMG authority, the 150% float rule, the T+3 settlement, the Decision 2 royalty cap, the Decision 3 liability model, and PRM/accessibility. Its coverage includes the 18-month standards deadline, the compliance-versus-feasibility conflict, and the commercial-terms dispute, which fit this plan well.\n\nA has weaknesses. Some numbers are invented or shaky: the 4-4 split, the >€5M claim threshold, the €10-50M exposure, and a \"regulatory fine of 3-7% of coordination budget\" that makes little sense for a program budget. It also sends almost everything to the PSC, so the matrix is less differentiated by level.\n\nCandidate B shows a real multi-level hierarchy, with an OMG deadlock item and a TASG to OMG to PSC path. Its fields are thin, though. The approval processes are generic (\"Urgent call; review necessity\"), with no timelines or options. The negative consequences are vague. A few items are muddled, such as the \"T+5 latency testing\" reference and the TASG item's escalation level. The very long bold issue lines are also awkward. B is more conservative about invented numbers, but it gives later stages much less to work with."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 53.4,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase4_decision_escalation_matrix.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more complete and more useful downstream. It has 10 plan-specific items. They cover budget overruns, GDPR, gate failure, scope change, a health-authority MOU impasse, field safety, MCR use, staffing shortfall, partner breach during an alert, and procurement delay. Each has concrete thresholds, timelines (48h, 24h, 5 business days, two meetings), named roles, and fallback routes. It follows the requested format of an issue line plus Field: value lines. It also ties consequences to the €1.5M tranche, the 60% contact-rate KPI and the Month 4 gate.\n\nCandidate A has flaws. It misstates the gate as 80% cooling-center utilization when the plan says 80% of planned hours delivered. It cites GDPR fines of \"up to €20M or 4% annual revenue\" and \"loss of project operating license\", which fit a municipality poorly. It invents \"5,000 kits\". It requires unanimity that includes external counsel. Several thresholds (€20k, €30k, €40k) look invented, though they are plausible. Three items sit at COAT level, which is less of a true escalation, but they still show the delegation boundaries.\n\nCandidate B is correct but thin, with only 6 items. Its approval processes are vague, for example \"subject to MCR protocol\". It has no thresholds, no timelines beyond one 72-hour session, and no items for staffing, partners, procurement, health-system MOU or extreme-event surge. Its first item escalates to COAT, which gives little escalation detail. It is internally consistent and it uses the governance bodies sensibly, such as the Independent Assurance Member and the PSC Chair. But it gives much less decision-useful guidance.\n\nOverall A's depth outweighs its minor inaccuracies."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate B is the stronger matrix. It has 10 items covering budget overruns, GDPR breaches, gate-failure risk, scope change, a refused or GDPR-violating health-authority MOU, field safety incidents, MCR activation, staffing shortage, partner breach during an alert, and procurement delay. These match the plan's risk register and gates. Its approval processes have concrete thresholds and timelines: €50k, €30k, €40k and €20k limits, 24- and 48-hour windows, and \"two meetings, then City Manager\". It also ties items to specific project elements such as the €300k MCR, the Month 2 and Month 4 gates, and the Builder strategy. The levels are sensible: COAT handles operational issues and PSC takes financial or strategic ones.\n\nB has weaknesses. It writes \"80% cooling center utilization\" when the gate is 80% of planned hours delivered. It includes generic GDPR fine language (\"loss of project operating license\"). It is verbose. It also appears to reference a \"5,000 kits\" figure, which may or may not come from the upstream files.\n\nCandidate A has 6 items and is concise, but it is thinner and less operational. Its first item is internally odd: expenditure above COAT's €50k limit is assigned to COAT as the escalation level, with the Project Lead casting the deciding vote. It has no item for staffing, procurement or partner failure, MCR use, or the health-system MOU. Its gate item covers only Month 2. Its approval processes mostly lack timelines and thresholds. Its GDPR item has no breach-notification step.\n\nB is more useful downstream and more plan-specific."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

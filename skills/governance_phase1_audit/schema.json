@@ -1,0 +1,44 @@
+{
+  "properties": {
+    "corruption_list": {
+      "description": "Corruption risks in this project: bribery, nepotism, etc.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Corruption List",
+      "type": "array"
+    },
+    "misallocation_list": {
+      "description": "Ways resources can be misallocated: budget misuse, double spending, etc.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Misallocation List",
+      "type": "array"
+    },
+    "audit_procedures": {
+      "description": "Procedures for conducting regular and ad-hoc audits (e.g., quarterly external audits).",
+      "items": {
+        "type": "string"
+      },
+      "title": "Audit Procedures",
+      "type": "array"
+    },
+    "transparency_measures": {
+      "description": "Mechanisms to ensure transparency (e.g., public dashboards, published meeting minutes).",
+      "items": {
+        "type": "string"
+      },
+      "title": "Transparency Measures",
+      "type": "array"
+    }
+  },
+  "required": [
+    "corruption_list",
+    "misallocation_list",
+    "audit_procedures",
+    "transparency_measures"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

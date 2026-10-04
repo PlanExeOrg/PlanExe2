@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "ImplementationStep": {
+      "properties": {
+        "step_description": {
+          "description": "Specific action required to set up or implement a governance component (e.g., 'Draft Steering Committee ToR', 'Select External Auditor').",
+          "title": "Step Description",
+          "type": "string"
+        },
+        "responsible_body_or_role": {
+          "description": "The committee or role primarily responsible for executing or overseeing this step.",
+          "title": "Responsible Body Or Role",
+          "type": "string"
+        },
+        "suggested_timeframe": {
+          "description": "A suggested target for completing this step, relative to project start (e.g., 'Within 1 week of kickoff', 'By end of Month 1', 'Ongoing Quarterly').",
+          "title": "Suggested Timeframe",
+          "type": "string"
+        },
+        "key_outputs_deliverables": {
+          "description": "Tangible outputs resulting from this step (e.g., 'Approved Terms of Reference', 'Signed Audit Contract', 'Published Dashboard').",
+          "items": {
+            "type": "string"
+          },
+          "title": "Key Outputs Deliverables",
+          "type": "array"
+        },
+        "dependencies": {
+          "description": "Prerequisite steps or decisions needed before this step can be effectively started or completed.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        }
+      },
+      "required": [
+        "step_description",
+        "responsible_body_or_role",
+        "suggested_timeframe",
+        "key_outputs_deliverables",
+        "dependencies"
+      ],
+      "title": "ImplementationStep",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "governance_implementation_plan": {
+      "description": "Actionable steps required to establish and operationalize the described governance framework.",
+      "items": {
+        "$ref": "#/$defs/ImplementationStep"
+      },
+      "title": "Governance Implementation Plan",
+      "type": "array"
+    }
+  },
+  "required": [
+    "governance_implementation_plan"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase2_bodies",
+  "evaluated_at": "2026-10-04T18:25:28",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 166.3,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase2_bodies.md": {
+          "verdict": "baseline",
+          "score_new": 6.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Candidate A defines six bodies with consistent thresholds (€50M, €250M, 6 months) across the Steering Committee, PMO and Risk Committee. Its assurance structure is strong: an externally chaired TAG, an independent Ethics Committee that reports to both governments, and an Environmental Board whose halt authority is hard to override. It is plan-specific. Its gaps are no dedicated Safety, Finance or Stakeholder body, a low €50M Steering threshold, and some referenced bodies left undefined. Candidate B covers more ground, adding Safety, Finance and Stakeholder bodies, with good plan-specific detail. But its decision rights conflict: the Steering threshold is €100M while PMO escalation is at €50M, and contingency release authority is contradictory across the Risk, Finance and Steering sections. Independence is also weak: the Project Director chairs the Steering Committee, the internal CTO chairs the TAB, ethics is folded into the environmental committee, and criminal referrals need CTO and government sign-off. A's coherence and stronger independence outweigh B's breadth."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates follow the required structure, with every field present for every body, and both are specific to the Spain–Morocco tunnel. They differ mainly in coverage versus internal consistency.\n\nCandidate A has 8 bodies, including dedicated Safety, Finance and Stakeholder committees. That coverage is a real strength for a 10,000-person offshore project. But its decision rights and thresholds contradict each other in several places:\n- The Steering Committee's threshold is €100M, but the PMO rationale and escalation use €50M. This leaves a gap in €50–100M approvals, which A only partly plugs by giving the CFO that authority inside the Finance Committee.\n- Contingency release authority is inconsistent across bodies. The Steering Committee takes anything over €500M. The Risk Management Committee (RMC) may release up to €100M per release and €500M per quarter, and says releases over €100M need Steering approval. The Finance Committee says €100M–500M goes to the Finance Committee and RMC-type releases up to €500M per quarter. These cannot all hold.\n- The Project Director chairs the Steering Committee while also leading the PMO that it oversees. That is a conflict of interest.\n- Several mechanisms are odd or invented:\n  - Criminal prosecution is listed as an escalation step.\n  - A \"€50M per day\" halt cost appears without support.\n  - The prototype decision is tied to \"8,000+ personnel offshore\".\n  - The ESCC criminal-referral rule requires the CTO to sign off.\n\nCandidate B has 6 bodies, with no separate Safety or Finance committee. Safety is covered only through the PMO's HSE head, and finance through the PMO and RMC. That is a coverage gap. In return, B's design is more coherent and better suited to a binational megaproject:\n- The Steering Committee is sovereign-level. It includes ministers, regional governors and independent external members.\n- It uses a qualified majority that must include at least one vote from each nation.\n- Deadlock follows a clear path: Bilateral Diplomatic Task Force mediation within 30 days, then ICC arbitration, with parliaments handling envelope breaches.\n- The €50M and €250M thresholds are applied consistently across the Steering Committee, PMO and RMC.\n- Independent assurance is stronger: an independent Technical Advisory Group (TAG) chair, an Ethics & Compliance Committee grounded in the corruption risks, and an Environmental Oversight Board with halt authority.\n- Escalation paths cross-reference the other bodies' names consistently.\n\nB has minor flaws: a typo (\"a apex\"), a long PMO membership list, and a 10-member Steering Committee.\n\nOverall, B is more internally consistent and better separates governance from management. A is broader but has contradictory thresholds and a chair conflict. I give B a modest edge."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 222.6,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase2_bodies.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "The stage asks for internal governance bodies (steering, operational, advisory/assurance) with membership, decision rights, mechanisms, cadence, agenda, escalation. Both follow the structure.\n\nCandidate A has 8 bodies: Steering, Core Project Team, and six specialized committees (Power, Security, Land/Social License, Finance & Risk, Delivery/Technical, Tenant). It is detailed and tied to the project's levers, thresholds, and risks. It uses plan-specific figures: the 80/20 buffer split, the RTE grid dependency, DGSI, the 60% tenant trigger and FX hedging. It has some weaknesses. Some details look invented or inconsistent: a 60% trigger versus the prompt's 30–50%, \"Majority vote (5 of 7)\" for a 6-member steering committee, and the Power Commission's \"6 of 7\". There are several €500M/€50M/€100M threshold inconsistencies, \"Tenant Committee\" is referenced, and \"five specialized advisory committees\" is mentioned while six are listed. Decision-making is also somewhat overloaded, with the Steering Committee owning \"10 strategic levers\". It also lacks an independent assurance/audit body, though the Finance committee includes an external auditor. The \"DGSI feedback takes precedence\" language is a bit odd, and the \"Regional Prefectural representative\" on a committee is questionable. It is very verbose. Even so, it is extremely useful downstream, and it treats external approvals as uncertain in places.\n\nCandidate B has only 3 bodies: Steering, Core Project Management Group, and an assurance board (RCAB). It is concise and consistent with the phase-1 audit (whistleblower, anti-corruption, remediation vetting), which gives it a distinct assurance angle. But it is thin: no dedicated power/grid, finance, or tenant bodies for a 9 GW project. The steering committee has no CRO, and the tie-breaker is the Executive Sponsor after 48 hours. The agendas are short. The Core group meets twice weekly, which is fine. The requirement spans steering, operational and advisory/assurance, so B technically covers all three types. Still, it is much less decision-useful. Its strength is the integrity/audit orientation, which responds to the phase-1 audit.\n\nOverall, A is better for specificity and coverage despite some inconsistencies and bloat. B is cleaner but too sparse for the scale."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected format (numbered bodies with bold fields and bullet lists) and tie into the plan's strategic decisions: the 80% buffer / 32.2 km² buildable zone, RTE, DGSI, and the €500M threshold.\n\nCandidate A has three bodies: a Steering Committee, a Core Project Management Group, and a Regulatory & Compliance Assurance Board. It is concise and internally coherent. The assurance board is a good fit for the \"assurance\" category and for audit-driven concerns such as whistleblowing, anti-corruption, remediation-contract vetting, and security partition sign-off. Its weaknesses are coverage and consistency:\n- Power/grid, finance and risk, tenant/commercial, technical, and community/land have no dedicated body, even though these are the plan's main risk domains.\n- The CPMG's decision right \"any decision under €500M\" conflicts with its own 10% cost-impact limits.\n- Requiring unanimity for a \"Stop Work\" is a weak design.\n\nCandidate B has eight bodies: Steering, Core Team, and six specialized committees (Power & Grid, Security & Sovereignty, Land/Permitting/Social License, Finance & Risk, Delivery/Technical, Tenant & Revenue). Each ties to the plan's critical, uncontrolled dependencies and gives concrete thresholds and triggers:\n- RTE confirming less than 3 GW.\n- A PUE above 1.25.\n- Sub-30% tenant commitment.\n- A DREAL/PIG rejection.\n- FX hedging at 70%.\n- Escalation levels in euros.\n\nThis gives much more usable decision rights, escalation paths, and agenda items for downstream stages. Its flaws are:\n- Considerable verbosity.\n- Inconsistent thresholds (a >€500M variance versus >5% per phase, a €50M versus €500M escalation for the Core Team).\n- A \"5 of 7\" vote with only 6 listed Steering members.\n- Some invented figures.\n- Overlapping memberships.\n- No dedicated independent audit body, although external auditors sit within committees.\n\nOverall, B better fulfills the stage's purpose of defining steering, operational, and advisory bodies with decision rights and escalation. Its depth and plan-specificity outweigh its inconsistencies. A is cleaner but too thin for a 9 GW, multi-domain programme."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 248.9,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase2_bodies.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is more complete and more useful downstream. It defines seven bodies: Steering, PMO, Technical Standards, Financial Clearing, Commercial Terms, Passenger Rights, and Compliance/Ethics. Every body has fully populated fields, and the content is tied to the plan's facts. These include the €1.5B budget, the €900M capacity-building grants, 35 FTEs, M6/M18/M30 milestones, T+5 latency, the 150% float trigger, the 5% royalty cap, the three-strikes policy, and the 90-minute continuity threshold. Membership covers the stakeholders the prompt names: DG MOVE, the EU Agency for Railways, CER, operators, independent distributors, BEUC, disability-rights bodies, and national regulators. Decision rights, thresholds, tie-breakers, cadences, and escalation paths run in both directions between bodies. It has some internal inconsistencies:\n- The Steering Committee uses a 5-of-7 supermajority and also has a tie-breaker, which is odd.\n- Some veto and escalation wording is muddled.\n- The tie-breaker choices are questionable, such as the disability rep casting the tie-break in the Passenger Rights Committee.\n- Its numbers, such as the €300M reserve, rest on earlier-stage assumptions that are not visible here.\n\nEven with these flaws, it is substantive and decision-useful.\n\nCandidate B is concise and covers only four bodies. Its fields are thin, with only 3–5 bullets each, and it has real gaps:\n- The Steering Committee has no distributor, consumer, or disability representation. It does include an odd \"Chief Legal Officer (Project Sponsor)\".\n- It refers to a \"Technical Advisory Group\" that is never defined.\n- It has no dedicated passenger-rights, accessibility, or advisory body, and no separate financial or commercial body.\n- The Compliance and Liability Assurance Board decides by \"consensus among the Chair and Independent Counsel\", which is weak.\n- TASG's dual-threshold voting mechanism is confusing.\n- The escalation paths are shallow.\n- It names SNCF, DB, and ÖBB as enforcement targets, which could be seen as biased or unfounded.\n\nOverall, A is clearly stronger on specificity, coverage, and usefulness."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the expected format (name, rationale, responsibilities, setup actions, membership, decision rights, mechanism, cadence, agenda, escalation) and both cite the strategic decisions, assumptions and audit findings.\n\nCandidate A has four bodies: a steering committee, an operational group, a technical group and a compliance board.\n- Strengths: it is concise and cross-references Decisions and Assumptions.\n- Weakness, membership: the PSC leaves out CER, operators, distributors, BEUC and disability bodies, even though the prompt lists them as stakeholders. \"Chief Legal Officer (Project Sponsor)\" is an odd role. A \"weighted majority vote\" with a DG MOVE casting vote is vague.\n- Weakness, structure: there is a gap between the €500k OMG limit and the €5M PSC threshold. The TASG escalates technical disputes to the OMG, which is awkward.\n- Weakness, coverage: there is no dedicated body for passenger rights, accessibility, commercial terms or clearing. CLAB covers some of this thinly.\n\nCandidate B has seven bodies: a steering committee, a PMO and five specialised committees (technical, financial clearing, commercial, passenger rights, compliance/ethics).\n- Strengths, coverage: it maps closely onto the program's workstreams and risks. It gives balanced steering membership (DG MOVE, the EU Agency for Railways, CER, an operator, a distributor and BEUC). It includes disability-rights and consumer representation, independent experts, an OLAF/whistleblower channel and concrete float and reserve triggers. Escalation paths run in several directions and are specific.\n- Weakness, internal consistency: \"5 of 7\" voting conflicts with a non-voting Project Director. A rotating external tie-breaker on a 7-member body is odd. The €50M steering threshold against the €5M PMO limit leaves a gap. The €100M overrun escalation to the \"EU Budget Authority\" is a bit loose.\n- Weakness, verbosity: it is very long, and seven bodies may be heavy. It is still substantive and decision-useful for downstream stages, not filler.\n\nOverall B is more complete, more faithful to the stakeholder set and more useful downstream. A is tidier but leaves out key stakeholders and bodies."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 209.0,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase2_bodies.md": {
+          "verdict": "tie",
+          "score_new": 6.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Candidate A gives three bodies: a steering committee, an operations and assurance team, and a compliance board. This matches the stage's steering/operational/advisory-assurance brief and suits a 12-month, €3.5M municipal pilot with limited staff. Its thresholds are consistent: €50k is the line between COAT and the PSC, the €300k contingency reserve needs dual authorization, and the Month 4 gate is tied to the PSC. Escalation paths are clear (consensus failure goes to the City Manager, GDPR breaches go to the PSC), and it cites plan-specific items such as the Builder strategy, the data-loop MOU and the 95% inter-rater target. Its weaknesses are that COAT merges PMO and assurance, which weakens independence. The HRC's unanimity rule includes a Health Authority liaison \"if present\", which is awkward. There is no explicit communications owner. The content is also thin in places.\n\nCandidate B gives seven committees with very detailed fields. It covers more ground, including communications, finance, staffing/safety and a health data body, and it ties them to the audit's risks. But it over-engineers governance for a short pilot with constrained staffing. Seven bodies with bi-weekly, weekly and daily meetings would overload a small team, and there is heavy member overlap. It also has internal inconsistencies:\n- The approval thresholds overlap or conflict. Steering handles contracts over €100k, the finance committee €25k–100k, and operations under €50k, yet finance also lists €50k–100k as a Steering approval.\n- Several escalation targets are undefined or inconsistently named, such as \"Health & Safety Committee\", \"Operations Committee\" and \"HR/Discipline Committee\".\n- The GDPR Officer's veto \"cannot be overridden\" even by the Steering Committee.\n- It hard-codes gate dates of end of February and end of April. The plan starts in May 2026, so these are wrong.\n- The 5-of-7 quorum is awkward given the optional members.\n- It makes the Steering Committee handle media relations.\nIt is also very verbose, with many repetitive agenda items.\n\nOverall, A is leaner, more consistent and more executable. B is more comprehensive but bloated, partly contradictory, and has a clear date error. I give A a modest edge."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "The stage asks for internal governance bodies (steering, operational, advisory/assurance) with membership, decision rights, mechanisms, cadence, agenda items and escalation paths.\n\nCandidate A defines seven bodies. Each has every required field filled in, with detailed membership, thresholds, voting and quorum rules, vetoes, cadence and escalation. It also ties back to the plan: the Month 2 and Month 4 gates, the €300k contingency reserve, GDPR, field safety, communications, the health data loop and the 'Builder' strategy. Weaknesses:\n- It is bloated for a 12-month pilot, with seven committees, each with 6–8 members.\n- Some thresholds overlap or conflict. The Steering Committee authorizes €100k–€500k, but the Finance Committee's escalation path says >€100k needs Steering plus Executive, and the Finance Committee's own authority bands differ from Steering's.\n- Some dates are wrong. It places the Month 2 gate at end of February and the Month 4 gate at end of April, but the plan starts in May 2026.\n- The Steering Committee requires unanimity for gates while the Chair holds the tie-break.\n- The GDPR officer's veto \"cannot be overridden by Steering\".\n- Escalation references a \"Health & Safety Committee\" and an \"HR/Discipline Committee\" that are not defined.\n\nCandidate B defines three bodies. It is concise and covers the required fields, but it is thin. It has a small Steering Committee with an independent assurance member, a combined operations and assurance team (COAT), and a compliance board. Weaknesses:\n- Several cited elements are unclear, such as \"M1 (Engineering)\" reviews.\n- The COAT combines PMO and assurance, which weakens independence.\n- The Steering Committee Chair is also the alert authority.\n- The HRC requires unanimity, which can deadlock, although an escalation route is given.\n- It has no body for communications, field safety or health coordination. Those are covered only partly, and the operational body has just four members.\n- Escalation paths are brief.\n- The Steering Committee's decision rights omit the Month 2 gate.\n- It has no stakeholder or community advisory body.\n\nOverall, A is far more complete and more decision-useful for downstream stages, despite its heaviness and some inconsistencies. B is leaner and arguably more realistic for a pilot, but too sparse. A is better."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

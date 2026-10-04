@@ -1,0 +1,114 @@
+{
+  "stage": "governance_phase1_audit",
+  "evaluated_at": "2026-10-04T17:58:19",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 69.0,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase1_audit.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the required structure, with four \"## Audit - ...\" sections. Candidate A is concise but mostly generic. Its corruption and misallocation items (bribery, nepotism, embezzlement, double spending) could fit any megaproject. Some of its procedures are weak or illogical: \"escalation triggers at 5%, 10%, and 15% budget utilization\" is a confused metric, since utilization naturally rises over the project. A's blockchain \"double-spending of materials\" idea is also gimmicky. Its transparency list is reasonable but thin. Its audit procedures name few concrete cadences, owners or verification steps.\n\nCandidate B is far more plan-specific and decision-useful. It ties risks to concrete project elements: the €4-6B contingency, the marine mitigation fund, the maintenance trust fund, the 70% MAD hedging program, regional fabrication yards in Tarifa/Algeciras and Tangier, offshore staging inventory, the 10 acoustic buoys, cetacean migration windows, 8,000-12,000 personnel, and the 10-atm pressure environment. Its misallocation risks are realistic and quantified, such as demobilization cycles and yard underutilization. Its procedures set cadence, scope and sub-checks. Its transparency measures give thresholds, publication deadlines and an external whistleblower hotline with an ombudsperson.\n\nB has minor flaws. Phrases like \"€40 billion in specialized materials\" are loose. The luxury-platform and golf-simulator example is speculative. Some thresholds are invented, and the list is very long. Even so, it is much stronger for downstream governance planning."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is more plan-specific and decision-useful. Its corruption and misallocation risks are concrete and tied to the plan's details: the €4-6B contingency, the marine mitigation fund, the maintenance trust fund, the 70% MAD hedging, the Tarifa/Tangier yards, the offshore platforms and the three phases. They also carry quantified exposure estimates. Its audit procedures set frequencies and sub-checks, and they cover technical, environmental, bilateral-governance and currency audits. Its transparency measures have clear thresholds, timelines and a whistleblower program with an external hotline. Some figures may be invented or inferred from earlier stages, such as the luxury-platform example and the 20-50% delivery shortfall. It is also verbose, but the content is relevant and internally consistent. Candidate B is generic and thin. Its items are one-liners with little quantification. Some are poorly framed: \"escalation triggers at 5%, 10%, 15% budget utilization\" is illogical because it should be variance, not utilization. The \"blockchain-based tracking\" item is gimmicky, and \"double spending of materials\" is a misuse of the term. Its misallocation list mixes in embezzlement, which belongs under corruption. It does have a few good points, such as phase-gate audits tied to tranche release and the bilingual community offices. Overall it gives downstream stages far less to work with."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 94.6,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase1_audit.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required four-section structure and tie their items to the plan's decisions.\n\nCandidate A is concise and tied to the plan: the 80% buffer (128.8 km²), the PUE 1.15 vs 1.20 trade-off, the 70% FX hedge, the DGSI sovereign-zone segregation and the 60% tenant trigger. It has no obvious factual errors. It is thin, with five items per list. Some items are weakly framed, such as the PUE misallocation item. It also has little quantification and few procedural thresholds, so later governance stages get less to work with.\n\nCandidate B is far more detailed and operational. It covers procurement thresholds (three or more bids, change control), tenant overbooking and deposit segregation, grid-contract verification before FID, independent remediation testing, security audits, phase-closeout Big-4 audits, and an audit committee. It also adds more transparency mechanisms. However, it has several errors and invented specifics:\n- It says Phase 1 CAPEX is \"split among 50-100+ major data halls\", when Phase 1 has 8–20 halls.\n- It says Phase 0 \"budgets €250M–€750M for brownfield remediation\", when that figure is for the whole of feasibility and site control.\n- Its FX arithmetic is inconsistent. 30% of €120B is €36B, 30% of that unhedged is €10.8B, and a 10% move is about €1.08B, not €4.32B.\n- It makes the \"triennial\" audit cadence conflict with per-phase closeouts.\n- Many of its misallocation items are really corruption or fraud scenarios, so the two lists overlap.\n- Its overbooking scenario and some of its quantified overrun estimates are speculative.\n- Publishing grid interactions and tenant details has security and confidentiality tensions, though it does mention redactions.\n\nOverall, B's breadth and actionable audit procedures give more decision-useful content, but its numerical and factual slips reduce its correctness. A is cleaner but shallower. I give B a slight edge for usefulness."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much more thorough: 7 corruption risks, 8 misallocation risks, 8 audit procedures and 8 transparency measures. They are tied to specific plan decisions (grid trigger, 60% tenant threshold, heat reuse, workforce, sovereign partition) and use concrete figures and thresholds. The procedures are actionable, with cadence and verification steps. It has flaws: it says \"50-100+ halls\" for Phase 1 when Phase 1 is 8–20 halls, it describes RTE as a PPA counterparty, its triennial audit cadence conflicts with its per-phase closeout, some figures look invented, and some items are repetitive. Candidate B is concise, cross-references the plan's risks and decisions, and has good plan-specific misallocation items and a whistleblower mechanism. It is thin (5 items per list), has no quantification, shallow procedures, and misses procurement/EPC and tenant-deposit risks. One of its misallocation items is a design opinion on PUE, not an audit risk. A is more useful for downstream governance planning despite its minor inaccuracies."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 58.7,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase1_audit.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more thorough and more useful downstream. It has 7 corruption risks, 8 misallocation risks, 8 audit procedures and 8 transparency measures. Each ties to the program's specifics: the €900M capacity-building pool, the €200M clearing float, T+3 settlement, the cost-recovery cap (Decision 2), the three-strikes enforcement posture (Decision 12), the 65% emergency-consensus rule (Decision 10), the 90-minute liability threshold (Decision 3), and the public reference distributor budget. Its procedures name owners, frequencies, sampling rates and thresholds. Its transparency measures are concrete: a conformance dashboard, a standards repository, quarterly reports, published audit summaries, an accessibility tracker, backstop claims reports, minutes with dissents, and a complaint portal with a 60-day response. It also catches real risks such as double billing in settlement, parallel proprietary APIs, and PRM deferral.\n\nA has some weaknesses. The \"insider trading\" item is a poor fit for this setting. A 90% uptime target is low. The €150M reference-distributor figure may be an inference from earlier stages. A is also verbose.\n\nCandidate B is correct and tied to the decisions and assumptions, with a few good ideas. These include a forensic review before three-strikes suspension, a float trigger at 150% of peak daily obligation, and a whistleblower channel. But it is much thinner, with 5 items in each list. Some procedures lack frequency or ownership. It has no audit of the public reference distributor, no complaint portal, and little on enforcement transparency or backstop fund reporting. Its coverage of misallocation and audit procedures is notably narrower.\n\nOverall A better fulfils the stage's purpose."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the required four \"## Audit - ...\" sections and tie their items to the program's decisions (D2 royalty cap, D3 liability, D10 TSC, D12 three strikes, the €900M capacity grants, the €200M float and the 35 FTEs).\n\nCandidate A is concise and has some sharp points. Examples are the 150% collateral trigger, the month-6 PRM schema audit, forensic review of three-strikes cases, and a whistleblower channel. But it is thin. It has only 5 items per list, and no audit covers the public reference distributor budget, the TSC decision log, or distributor contract compliance. Its transparency list lacks passenger-rights claims reporting, a public conformance dashboard for enforcement, and a stakeholder complaint channel. A few items are vague, such as \"capped royalty\" with no figure, and the \"Month 30\" backstop audit is a single one-off review.\n\nCandidate B is much broader and more decision-useful.\n- **Corruption risks:** It covers vendor conflicts of interest on standards bodies, collateral-provider kickbacks, misuse of confidential data, and favoritism in grant allocation.\n- **Misallocation risks:** It adds parallel proprietary APIs, public reference distributor overruns (€150M, 10% of €1.5B), float manipulation through settlement timing, double billing in settlement, grants diverted to non-OSDM infrastructure, and perpetual deferral of PRM.\n- **Procedures:** It has eight audits, each with a concrete cadence, metric or threshold (5% cap, T+3 at 99%, 15–20% grant sampling, 10% overrun threshold, 65% consensus check).\n- **Transparency:** It has eight measures, including a public conformance dashboard, quarterly progress reports, redacted audit findings, a PRM tracker, backstop claims reporting, minutes that include dissenting positions, and a complaint portal with a 60-day response.\n\nB's weaknesses are minor. \"Insider trading\" is a slightly odd label, the \"Risk 3\" cross-reference is unclear, and the 90% uptime target is somewhat arbitrary. B is also longer, but the extra length adds substance and not padding. Overall B is more complete, specific and useful for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 61.7,
+      "structure_problems": [],
+      "judgments": {
+        "governance_phase1_audit.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required structure with four \"## Audit - ...\" sections. A is concise, with 5 items per list. It ties several items to upstream decisions (Decision 1, 6, 10, 12) and the €300k reserve. Its coverage has gaps. It never addresses fraudulent or gamed gate KPIs, even though the €1.5M release at Month 4 is the biggest incentive in the plan. It also has no ghost-staff or payroll controls, no inventory controls for the home kits, and no controls on alert-threshold manipulation. Some of its items are vague, such as \"annual financial reconciliation\" in a 12-month program.\n\nB is much more thorough and fits this plan closely. Its corruption list includes fraudulent KPI reporting to unlock the €1.5M, ghost staff in the Month 3-4 window, bribery to manipulate alert thresholds, misuse of registry data, and politically driven allocation of home interventions. Its misallocation list covers double-counting installations, a 10-15% loss rate on kits, idle-capacity payments, an inflated \"contact\" definition, and emergency procurement markups. Its procedures are concrete and verifiable: 10% sampling of outreach records, independent certifier sign-off at the gates, payroll cross-checks, inventory reconciliation, dual authorization on the reserve, and DPAs and access-log audits. Its transparency measures are broad, with multilingual access, town halls, a whistleblower SLA, and de-identified equity statistics.\n\nB's weaknesses are length and some overlap. A few misallocation items are really fraud, a few figures (95% inter-rater reliability, \"hourly\" occupancy updates) are over-engineered, and publishing stats by chronic condition could create small-cell GDPR risk. It also asserts specifics such as Leipzig and 5,000 homes that I can't check against the plan. These are minor next to its coverage and decision-usefulness. B is the stronger audit framework for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much more thorough and decision-useful. It has 10 corruption risks, 12 misallocation risks, 13 audit procedures and 15 transparency measures. Many of them tie directly to this plan's features:\n- the Month 2 and Month 4 gates, including inflated KPIs and counting door attempts as contacts\n- the €300k contingency reserve\n- ghost staff in contracted outreach teams\n- kit inventory loss\n- the 60/40 split\n- GDPR registry access\n- threshold manipulation\n\nIts procedures are concrete, with sampling rates, variance thresholds, dual authorization, timing and independent certifier sign-off. Its transparency measures are broad and include a whistleblower channel, a public contract database and after-action reports.\n\nA has weaknesses:\n- It cites some invented figures, such as 5,000 homes, a €400k kit budget and 95% inter-rater reliability.\n- It is somewhat repetitive; the contingency reserve and contact-rate misreporting each appear in more than one list.\n- Some transparency items, such as an hourly real-time occupancy dashboard, are ambitious.\n- Naming Leipzig is questionable given the 150–400k population range, but this likely comes from the upstream plan.\n\nCandidate B references specific decisions and strategic choices, which shows good grounding. It is very thin, with only five items per list and procedures that lack sampling or thresholds. It misses key risks such as KPI fraud at the gate, ghost staff and data-access abuse. Some of its items are vague or oddly framed, for example \"annual financial reconciliation\" for a 12-month program. It is also less useful for downstream stages.\n\nOverall, A is clearly stronger."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

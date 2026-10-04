@@ -17,7 +17,8 @@ DEFAULT_EFFORTS = {"high": "high", "low": None}
 
 # Messages that are worth retrying after a pause.
 _TRANSIENT = ("overloaded", "rate limit", "rate_limit", "529", "503", "502", "timeout", "timed out",
-              "econnreset", "socket hang up", "internal server error", "api_error")
+              "econnreset", "socket hang up", "internal server error", "api_error",
+              "structured_output_retry_exhausted")
 
 
 def child_env() -> dict[str, str]:

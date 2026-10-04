@@ -1,0 +1,99 @@
+{
+  "$defs": {
+    "InternalGovernanceBody": {
+      "properties": {
+        "name": {
+          "description": "Name of the internal governance body.",
+          "title": "Name",
+          "type": "string"
+        },
+        "rationale_for_inclusion": {
+          "description": "Brief justification explaining *why* this specific type of internal governance body (e.g., Steering Committee, PMO, Ethics Committee) is necessary or appropriate for *this particular project*, based on its description, scale, or key challenges.",
+          "title": "Rationale For Inclusion",
+          "type": "string"
+        },
+        "responsibilities": {
+          "description": "Key tasks or responsibilities of this internal body.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Responsibilities",
+          "type": "array"
+        },
+        "initial_setup_actions": {
+          "description": "Key initial actions this body needs to take upon formation (e.g., 'Finalize Terms of Reference', 'Elect Chair', 'Set meeting schedule').",
+          "items": {
+            "type": "string"
+          },
+          "title": "Initial Setup Actions",
+          "type": "array"
+        },
+        "membership": {
+          "description": "Roles or titles of individuals *within the project/organization* forming this internal body.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Membership",
+          "type": "array"
+        },
+        "decision_rights": {
+          "description": "Type and scope of decisions this internal body is empowered to make.",
+          "title": "Decision Rights",
+          "type": "string"
+        },
+        "decision_mechanism": {
+          "description": "How decisions are typically made within this internal body. Specify tie-breaker if applicable.",
+          "title": "Decision Mechanism",
+          "type": "string"
+        },
+        "meeting_cadence": {
+          "description": "How often this internal body meets.",
+          "title": "Meeting Cadence",
+          "type": "string"
+        },
+        "typical_agenda_items": {
+          "description": "Example recurring items for this internal body's meetings.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Typical Agenda Items",
+          "type": "array"
+        },
+        "escalation_path": {
+          "description": "Where or to which *other internal body or senior project/organization role* issues exceeding authority are escalated.",
+          "title": "Escalation Path",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "rationale_for_inclusion",
+        "responsibilities",
+        "initial_setup_actions",
+        "membership",
+        "decision_rights",
+        "decision_mechanism",
+        "meeting_cadence",
+        "typical_agenda_items",
+        "escalation_path"
+      ],
+      "title": "InternalGovernanceBody",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "internal_governance_bodies": {
+      "description": "List of all internal governance bodies with roles, responsibilities, and membership.",
+      "items": {
+        "$ref": "#/$defs/InternalGovernanceBody"
+      },
+      "title": "Internal Governance Bodies",
+      "type": "array"
+    }
+  },
+  "required": [
+    "internal_governance_bodies"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}
