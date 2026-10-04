@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "DomainFit": {
+      "properties": {
+        "domain": {
+          "description": "A short Title Case noun phrase (1-3 words) naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun, not the noun for the person who practises it. Pick the narrowest field the prompt's signals support.",
+          "title": "Domain",
+          "type": "string"
+        },
+        "importance": {
+          "description": "How much this domain affects whether the project succeeds, on a 1-5 Likert scale. 1 = barely affects success (peripheral concern). 2 = minor influence. 3 = useful supporting influence. 4 = major influence (the project depends on getting this right). 5 = critical to success (a blocking constraint or core capability the project cannot proceed without).",
+          "title": "Importance",
+          "type": "integer"
+        },
+        "specificity": {
+          "description": "How directly this domain matches the actual project mechanism, on a 1-5 Likert scale. 1 = very indirect or background context. 2 = somewhat related, but broad or peripheral. 3 = relevant but not central. 4 = strong match to a key part of the project. 5 = direct match to the core mechanism or specific technique the project uses (a specialist subfield, not its umbrella).",
+          "title": "Specificity",
+          "type": "integer"
+        },
+        "role": {
+          "description": "Why this domain shows up. 'outcome' = this domain owns the project's main success criterion (any kind of success criterion, including intangible changes and ongoing operations, not only physical deliverables). 'constraint' = this domain enforces regulatory, compliance, safety, or legal requirements that must be met. 'market' = this domain's actors are the audience, buyer, or beneficiary. 'method' = this domain's techniques are used as means to deliver the project. 'stakeholder' = a key actor in the project comes from this domain. 'tool' = this domain provides a generic instrument used in the project. 'unclear' = this domain is present in the project but its functional role is genuinely ambiguous.",
+          "enum": [
+            "outcome",
+            "constraint",
+            "market",
+            "method",
+            "stakeholder",
+            "tool",
+            "unclear"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "reason": {
+          "description": "One short sentence (≤15 words) explaining why this domain shows up and how it relates to the project.",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "domain",
+        "importance",
+        "specificity",
+        "role",
+        "reason"
+      ],
+      "title": "DomainFit",
+      "type": "object"
+    }
+  },
+  "description": "A list of candidate domain fits for the project. The first-pass\nclassifier emits only this field; the primary domain, secondary\ndomains, and the human-readable rationale are all computed by\nthe second-pass primary-selection LLM call (or by\ndeterministic fallbacks when the second pass does not run).",
+  "properties": {
+    "domain_fits": {
+      "description": "Exactly 3 candidate domains for the current batch. The user message may instruct you that this is the first or a subsequent batch — in subsequent batches the candidates must be distinct from those already produced. For prompts that name no concrete project, emit an empty list regardless of the requested batch size.",
+      "items": {
+        "$ref": "#/$defs/DomainFit"
+      },
+      "title": "Domain Fits",
+      "type": "array"
+    }
+  },
+  "title": "DomainFitAssessment",
+  "type": "object"
+}

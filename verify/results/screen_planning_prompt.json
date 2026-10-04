@@ -1,0 +1,114 @@
+{
+  "stage": "screen_planning_prompt",
+  "evaluated_at": "2026-10-04T17:36:18",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 5.3,
+      "structure_problems": [],
+      "judgments": {
+        "screen_planning_prompt.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly return USABLE with the same format: a verdict and a rationale, with no reason or confidence, as expected for a usable verdict. Both cite the key concrete details: €40B, 20 years, Spain–Morocco, buoyant concrete tunnels at 100 m, and high-speed rail. Candidate A adds that feasibility isn't a screening criterion. That is the main screening judgment here, because the project is wildly ambitious and a weaker screener might wrongly reject it. A also notes the real-world locations give enough to plan around. Candidate B mentions \"pillar-supported\" and says there is enough material for a multi-step plan. That is accurate but more generic. The difference is small, and A is slightly more insightful about the screening boundary."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly mark the prompt USABLE, and both give accurate, prompt-specific rationales. They differ only slightly. A restates the details and says they are enough for a multi-step plan. B restates the details, including the high-speed rail purpose. B also notes that feasibility isn't a screening criterion. That note is the right framing for a screener, because this project is wildly ambitious and arguably unrealistic, and the screen should only reject garbage. B's rationale is a little more insightful and better matches the stage's purpose. A omits the high-speed rail purpose, but that omission is minor. B is slightly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 4.6,
+      "structure_problems": [],
+      "judgments": {
+        "screen_planning_prompt.md": {
+          "verdict": "tie",
+          "score_new": 7.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates give the same correct verdict (USABLE). The prompt is detailed and plannable, so that is right. The difference is in the rationale. A calls it \"hypothetical\" and refers to the \"ambitious\" scale. That fits the prompt's own framing as a red-team planning scenario, and it also names the specifics: dimensions, power targets, timelines, budgets and required analysis sections. B calls it \"a concrete, real-world project\". That is slightly off, because the prompt calls it a red-team scenario. B does say it is not a prompt injection, and it names the location and key specs. B's \"real-world\" label is a small inaccuracy, and A's \"hypothetical\" label is closer to the prompt's intent. A also notes why the level of detail makes the prompt suitable for generating a plan. B's explicit injection check is a minor plus. Overall they are close, and A is marginally more faithful."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly give a USABLE verdict for a detailed, concrete prompt. Neither is flagged unusable, so no reason or confidence is needed. Candidate A is accurate and specific: it names the 9 GW campus in Hauts-de-France and mentions footprint, power, phasing, budget, cooling, security and required outputs. It also notes the prompt is not an injection. Candidate B is also accurate, but it calls the project \"hypothetical\" and says \"even though the scale is ambitious\". That is slightly off, because the prompt frames it as a red-team planning scenario, though \"hypothetical\" is a reasonable reading of that. B's rationale is more generic and doesn't mention the location or the specifics. A is a bit more grounded in the prompt's details. The difference is minor."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 5.4,
+      "structure_problems": [],
+      "judgments": {
+        "screen_planning_prompt.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "tie",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly mark the prompt USABLE, and the prompt is clearly a detailed, legitimate plan. The stage expects a verdict and rationale, and no reason or confidence is needed for a usable verdict. Both follow that format. A's rationale is concise and cites specifics: scope, stakeholders, corridors, timeline milestones, the €1.5B budget and success criteria. B's rationale is a bit more generic and uses promotional wording (\"ideal for generating a detailed project plan\"). B also says \"budget estimates\", which is slightly less accurate than A. The difference is marginal."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates give the same correct verdict (USABLE) in the expected format: verdict plus rationale, with no reason/confidence since it isn't unusable. The prompt is clearly a valid, detailed plan. Differences are minor. A is slightly more verbose and includes evaluative filler (\"ideal for generating a detailed project plan\"). It says \"budget estimates\", which is slightly imprecise because the prompt gives a firm budget. B is more concise and lists concrete elements: scope, stakeholders, corridors, timeline milestones, the €1.5B budget and measurable success criteria. It also notes the program is real-world and plannable. B is a bit more accurate and specific, but the gap is small."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 4.5,
+      "structure_problems": [],
+      "judgments": {
+        "screen_planning_prompt.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates give the same correct verdict (USABLE) with short rationales. The stage only needs a verdict and rationale, since the reason and confidence fields apply only to unusable prompts. Candidate B's rationale is more specific. It names the 12-month municipal heatwave-mortality program, the staged €3.5M budget, the gates, the metrics and the constraints. It also states that no injection or placeholder content was found, which is the thing this screening stage is meant to check. Candidate A's rationale is accurate but more generic. It uses filler such as \"exceptionally suitable\" and \"realistic real-world context\". It also says nothing about injection or placeholders. B is slightly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates give the same correct verdict (USABLE), and the prompt is clearly plannable. The difference is in the rationale. A cites specifics from the prompt: the 12-month municipal heatwave-mortality program, the staged €3.5M budget, gates, scope, metrics, constraints and deliverables. It also notes there is no injection or placeholder content, which is the screening criterion for this stage. B is more generic (\"public health response program\", \"realistic real-world context\"). It does not mention the injection or garbage check, and its \"exceptionally suitable\" is a little inflated. Both are concise and fit the format. A is slightly more faithful and specific."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

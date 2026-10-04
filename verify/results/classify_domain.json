@@ -1,0 +1,114 @@
+{
+  "stage": "classify_domain",
+  "evaluated_at": "2026-10-04T17:41:26",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 25.9,
+      "structure_problems": [],
+      "judgments": {
+        "classify_domain.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is better. It names a specific primary domain, Submerged Tunnel Engineering. Its table covers the disciplines that matter for this plan: offshore structural, marine geotechnics (including seismic risk), tunnel safety (fire, evacuation, flooding), high-speed rail, project finance, environmental impact assessment, treaty law, and megaproject management. That covers the binational, €40B, 20-year scale and the blocking safety constraints. Its weakness is that the listed secondaries (High-Speed Rail, Project Finance, Marine Geotechnics) are not the first three other candidates in document order, which would be Offshore Structural, Marine Geotechnics, Tunnel Safety. The rationale also contradicts the listed secondaries. Candidate B has the same ordering problem, since its secondaries don't follow table order either. B's list is also narrower and redundant: Marine, Offshore, Coastal, Naval Architecture, Structural and Materials overlap heavily. It omits safety, finance, treaty law and project management. Its primary, \"Marine Engineering\", is generic. B also misreads the tunnel as \"transoceanic\" and \"international waters\", though it is a strait crossing. A gives downstream stages more useful and insightful content."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates violate the stage rule that secondaries are the first 3 other candidates in document order (A should list Geotechnical, Offshore, Materials; B should list Offshore Structural, Marine Geotechnics, Tunnel Safety). So the rule violation does not separate them. On content, B is more plan-specific. Its primary, \"Submerged Tunnel Engineering\", names the core deliverable and is the only outcome-role domain, and its rationale says so correctly. B also covers the real risks and constraints of this megaproject: seismic and tunnel safety, binational treaty law, EU/Moroccan environmental approvals, financing, and megaproject governance. A is more generic, with a broad \"Marine Engineering\" primary and four overlapping marine, offshore, coastal and naval rows. It omits safety, legal, finance and management disciplines and tags two domains as outcome. B's rationale has small inconsistencies: it calls High-Speed Rail subordinate yet selects it, and it names Tunnel Safety as supporting but does not select it. These are minor next to A's gaps."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 27.0,
+      "structure_problems": [],
+      "judgments": {
+        "classify_domain.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "A's nine domains are distinct and cover the plan's key risk areas: grid, finance, cooling, permitting, security, land, water and community. Its primary is coherent. Its secondaries deviate from \"first 3 other candidates in document order\", because Environmental Permitting replaces Liquid Cooling Engineering, but two of the three are correct. B is redundant, with Energy Grid Management and Electrical Power Engineering overlapping and three land and real-estate variants. It has two \"outcome\" roles, which its rationale contradicts. It omits finance, cooling, security and community. Its secondaries also do not follow document order. A is better."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Neither candidate follows the \"first 3 others in document order\" rule exactly. A's stated secondaries (Electrical Power Engineering, Large Scale Land Development, French Regulatory Compliance) differ clearly from its table order. B's (Power Grid Engineering, Environmental Permitting, Project Finance) differ less. A is highly redundant: Energy Grid Management and Electrical Power Engineering overlap, and three rows cover land and real-estate assembly. It has no finance, cooling, security or community row, even though the plan stresses €100B+ budgeting, FX hedging, take-or-pay and liquid cooling. A's rationale is also muddled. B covers more distinct disciplines (grid, finance, liquid cooling, permitting, security, land, water, community). Its reasons cite plan-specific details such as RTE/EDF, FID gates and zero-water cooling. B's rationale is consistent, with a single outcome row, though it mentions Land Assembly as a secondary when that is not listed. B is more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 18.8,
+      "structure_problems": [],
+      "judgments": {
+        "classify_domain.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A picks \"Railway Ticketing Systems\" as primary. That fits the plan's core: cross-border through-ticketing, OSDM APIs, distribution, clearing and refunds, and the 40% through-ticket success metric. Its secondaries (Transport Regulation, Program Management) are sensible and match the first three other candidates in document order. Its weakness is breadth. It lists only 3 disciplines where the stage expects up to 9, so it omits Interoperability/OSDM standards, payments/clearing and passenger rights as separate candidates. Downstream stages get less to work with.\n\nCandidate B lists 9 candidates, which is closer to the stage's candidate-generation intent. Its primary selection is weak. \"Financial Clearing Mechanisms\" is only one deliverable out of many, and the plan's success criteria (through-ticket share, fewer complaints, modal shift from air) are not about clearing. B also lists \"Financial Settlement Systems\" as a near-duplicate of Financial Clearing. The rationale names it as an alternative outcome, which is redundant. The listed secondaries are inconsistent with the stated rule: Rail Infrastructure Management is the 5th row, yet it is placed third. Digital Distribution Systems is skipped even though it is rated 5/5. Rail Infrastructure Management is also a poor fit, since the plan concerns booking and ticketing rather than infrastructure. B has no explicit rail ticketing domain, and that is the project's real center.\n\nOverall, A's classification is more accurate and internally consistent. B is broader but its primary and secondaries are misjudged, so A is better for downstream use."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A picks \"Financial Clearing Mechanisms\" as primary. That is only one component of a rail ticketing and booking program whose success metrics are through-ticket share, complaints and modal shift. A also lists near-duplicate domains (clearing vs settlement), and its secondaries break the \"first 3 others in document order\" rule: Rail Infrastructure Management appears in place of Digital Distribution Systems. It does have broad coverage with 9 candidates. Candidate B picks \"Railway Ticketing Systems\" as primary, which fits the plan. Its secondaries, Transport Regulation and Program Management, follow document order and are sensible. B has only 3 candidates, well short of the expected 9, so it misses disciplines such as interoperability standards, passenger rights and financial clearing. The primary choice matters most downstream, and B gets it right, so B is better overall."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 27.3,
+      "structure_problems": [],
+      "judgments": {
+        "classify_domain.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A gives nine distinct, plan-specific disciplines: Public Health Emergency Preparedness, Urban Climate Adaptation, Municipal Emergency Management, Data Protection Law, Community Outreach, Occupational Health, Epidemiology, Health Risk Communication and Public Procurement. These match the plan's scope: GDPR constraints, outdoor workers, metrics and attribution caveats, multilingual outreach, and procurement. The roles (outcome, method, constraint) are sensible. The primary choice is well argued, including why Urban Climate Adaptation is not primary because there is no construction. Its flaw is minor: the listed secondaries are not in table order, since Urban Climate Adaptation comes second in the table but last in the list.\n\nCandidate B has near-duplicate candidates: Public Health, Public Health Intervention, and arguably Municipal Operations versus Urban Governance. Its rationale is incoherent, saying Public Health \"narrowly beat Public Health\". It lists \"Public Health\" as a secondary alongside a primary of Public Health Intervention, which is redundant. The primary is also not the top row, and the table is not ordered in a way that supports the stated selection. It has some useful items, such as Social Work, Gerontology and Environmental Climatology. It misses GDPR/data protection, occupational health for worker protection, risk communication and epidemiology, which are central to the plan. It is more generic and less useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A has overlapping, redundant candidates (\"Public Health\" and \"Public Health Intervention\") and an incoherent rationale (\"Public Health ... narrowly beating Public Health\"). It misses key disciplines the prompt stresses: GDPR/data protection, occupational health, epidemiology, risk communication, procurement. Its secondaries also don't follow the document-order rule, and one repeats the primary. Candidate B gives distinct, plan-specific disciplines, with sensible roles (GDPR and procurement as constraints) and a coherent rationale that explains why Urban Climate Adaptation is not primary (no construction). Its secondaries deviate slightly from strict document order, but they are relevant and non-redundant. B is clearly more insightful and useful downstream."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

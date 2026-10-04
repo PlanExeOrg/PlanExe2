@@ -1,0 +1,114 @@
+{
+  "stage": "extract_constraints",
+  "evaluated_at": "2026-10-04T17:38:47",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 5.3,
+      "structure_problems": [],
+      "judgments": {
+        "extract_constraints.md": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates list only positive constraints and capture the same core items: 20-year duration, €40B budget, Spain–Morocco, submerged buoyant concrete tunnels, high-speed rail, 100 m depth, ASAP start. A is a terse list of attributes (e.g. \"Purpose: high-speed rail traffic\"). B phrases them as actionable requirements (\"must be engineered\", \"securely anchored\") and keeps the prompt's wording more faithfully, which helps later constraint checkers. B also includes the date context (2026-09-05), which gives the ASAP start a concrete anchor. A's \"pillar-supported\" is folded into the project type, as it is in B. B is slightly more precise and useful downstream; neither extracts negative constraints, since the prompt states none. Both are very close, with a slight edge to B."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Both candidates capture the same core constraints faithfully: 20 years, €40B, Spain–Morocco, submerged buoyant concrete tunnels, high-speed rail, 100 m depth, ASAP start. Neither lists negative constraints, and the prompt gives none. A uses clearer full-statement bullets and anchors ASAP with the date (2026-09-05). It also keeps \"pillar-supported transoceanic submerged tunnel\" as its own construction constraint. Its first bullet is redundant. B uses terse labeled fields and folds \"pillar-supported\" into the project type. It has no date anchor. The difference is marginal, and A is slightly more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 17.4,
+      "structure_problems": [],
+      "judgments": {
+        "extract_constraints.md": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more complete and more faithful to the prompt. It keeps the key constraints that B drops or weakens:\n- the \"uncontrolled\" milestone-marking rule\n- the Phase 0 and Phase 1 decision gates, including the 30–50% take-or-pay anchor-tenant threshold and the \"no credible anchor tenants = no FID\" rule\n- the conditional Phase 4 (\"only if demand, grid, financing, permits, social license remain strong\")\n- the instruction to validate or challenge the budgets\n- FX hedging assumptions\n- the cost-driver list\n- the required analysis topics\n- the 22 required output sections\n- the explanation of why taller buildings are less suitable\n- the single-site vs split-campus challenge\n\nA is somewhat long, and a few items are classified loosely. For example, the \"answer the core feasibility question\" bullet is listed as a positive constraint. Overall its classifications are sensible, and the \"no FID without anchor tenants\" item is correctly a negative constraint.\n\nB is shorter and misses many constraints, including the decision gates, the uncontrolled-milestone rule, the required output sections, FX hedging, cost drivers, and the budget validate/challenge instruction. It also drops the Phase 4 conditions. It misclassifies \"plan must recommend downsizing…\" as a negative constraint, when it is a permission. Its splitting of single constraints into many fragments, such as the footprint and height lines, adds little. B does include \"intentionally extreme\" and the red-team framing. These are minor gains next to what it omits.\n\nFor downstream constraint-checker stages, A is clearly more useful."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 5,
+              "analysis": "Both candidates extract most constraints faithfully. Candidate B is more complete and better aligned with the prompt's emphasis. It includes the \"uncontrolled\" milestone-marking rule, which is an explicit constraint and which A omits entirely. It includes the core feasibility question, the \"validate or challenge\" framing of the budget, FX hedging, the list of cost drivers, the explanation of why taller buildings are unsuitable, and the single-site vs split-campus challenge. It also keeps the decision gates, including the 30–50% anchor-tenant take-or-pay condition, and the required output sections and analysis list. It states \"Hauts-de-France is the only location\". It also captures \"No FID without credible anchor tenants\" as a negative constraint. A omits the Phase 0 and Phase 1 decision gates, the Phase 4 conditionality (it just says \"Reach 9 GW\"), the required output sections, the required analysis list, the \"uncontrolled\" marking, the split-campus challenge, and the tall-building explanation. A also drops \"over 10-15+ years\" as a conditional and loses the FX hedging. A's negative list is decent but misses the anchor-tenant gate. A does include the date. B is also more compact in some places but consolidates well. B is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 8.3,
+      "structure_problems": [],
+      "judgments": {
+        "extract_constraints.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates capture the positive constraints well. A is more concise and merges related items, and it adds useful detail: the numeric 18/30/60-month milestones, the \"separately estimate private IT\" constraint, and the date context. B omits the explicit constraint to estimate private carrier IT investment separately. That is a real, checkable requirement that later stages need. B also splits some items into fragments such as \"Stand up technical, commercial and governance arrangements\" and \"Target horizon of five years\", which is more granular but adds little value.\n\nB includes a Negative Constraints section. However, those items are restatements of the problem description (the current-state pain points), not constraints stated as things to avoid. They are mostly inverses of the positive goals, so they are redundant. \"Avoid national operators each having their own fares...\" is arguably misleading, because the program does not require eliminating national fares. Still, B at least provides the section the stage asks for. A has no Negative Constraints section. The prompt has few explicit negatives, apart from \"not the most aggressive scenario\" (which both treat as positive). So A's omission is defensible, although a downstream checker might expect the section to exist.\n\nWeighing these: A is more complete on the real constraints (private IT estimated separately), and it is cleaner and more faithful. B's negatives are somewhat inaccurate and redundant. B's structural completeness helps a little. Overall A is slightly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates capture the positive constraints well. B captures a constraint A omits: \"estimate the larger private carrier IT investment separately\" — an explicit instruction that downstream stages should respect. B also adds the date context to \"ASAP\" and includes the Trainline/Omio examples. B is more concise and consolidates the extension to TEN-T. A has a \"Negative Constraints\" section, but its items are restatements of the problem description (the current pain points), not real \"to avoid\" constraints; they are framed as avoid-statements but are essentially redundant with the objectives. The prompt has no explicit prohibitions, so an empty or absent negative section is arguably more faithful; A's items are not harmful but are mildly noisy. A is also more fragmented and omits the separate private IT estimate. Overall B is more complete on a key constraint and cleaner. A's negatives could have marginal value, but the missing private-investment constraint is a more substantive gap."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 19.4,
+      "structure_problems": [],
+      "judgments": {
+        "extract_constraints.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A captures the prompt's constraints in much more detail and accurately. It includes the non-capital EU city requirement and the justification for the pilot site (demographics, housing stock, assets). It lists the specific scope elements: alert thresholds, incident command roles, communications cadence, cooling-center hours and capacity, accessibility, GDPR-compliant outreach channels, the \"no wrong door\" mechanism, the home package, the selection rubric, the data loop, escalation guidelines, worker protection, channels and misinformation. It also has the exact Month 2 and Month 4 gate criteria (80%, ≥60%, <45 min, after-action report), the metrics and equity requirements, and all four end-of-month-12 deliverables. The negative constraints are complete, including the banned words and the \"no sensitive health records\" point. Candidate B is much thinner. It names scope areas only at headline level and omits the non-capital and city-justification requirement. It drops the gate thresholds, Month 2 readiness criteria, metrics, equity requirements, deliverables, and the budget-control and \"executable immediately\" requirements. Its one advantage is an explicit \"do not release €1.5M if gates not met\" negative constraint, which is a reasonable inference. That does not make up for the large omissions. Later constraint-checker stages would get far more useful material from A."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is a thin summary. It lists the seven scope headings without their sub-requirements. It leaves out the specific city pick and the justification for it. It also omits the Month 2 readiness gate, the individual Month 4 gate thresholds (80% of hours, ≥60% contact success, <45 minute transport, after-action report), all the metrics, and all four month-12 deliverables. It does not say that vulnerable residents may not use smartphones. It also lumps the vulnerable groups together and drops the detail on alert thresholds, incident command and communications cadence. Downstream constraint checkers would have little to verify against. It does add a \"do not release €1.5M if gates not met\" negative, which is a reasonable inference, and it lists the risk register items. Candidate B is comprehensive and faithful. It captures the city selection requirement, each scope item's sub-requirements, both gates with exact thresholds, the metrics, the deliverables, the date, the \"no smartphone assumption\" and the exclusion of sensitive health records from the data loop. It is longer, but the added length is real constraint content, and it is well structured for later stages. It does not state the \"gate not met means no release\" negative explicitly, but \"only if gates are met\" covers it. B is clearly better."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

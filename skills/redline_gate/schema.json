@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "Severity": {
+      "enum": [
+        "High",
+        "Medium",
+        "Low"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "ViolationCategory": {
+      "enum": [
+        "Severe Harm",
+        "Physical Harm",
+        "Psychological Harm",
+        "Illegality",
+        "Criminal Facilitation",
+        "Safety Compliance",
+        "Weapons",
+        "Biorisk",
+        "Cybersecurity Abuse",
+        "Privacy Violation",
+        "Extremism/Terrorism",
+        "Child Safety",
+        "Hate/Harassment",
+        "Financial Crime",
+        "Property Damage / Critical Infrastructure",
+        "Environmental Harm",
+        "Medical Risk",
+        "Self-Harm",
+        "Exploitation/Coercion",
+        "Human Subjects / Non-therapeutic Experimentation",
+        "Safeguard Evasion",
+        "Capability Uplift",
+        "Other"
+      ],
+      "title": "ViolationCategory",
+      "type": "string"
+    }
+  },
+  "description": "Single safety decision for a prompt.\nPolicy: always treat the prompt as real-world intent; disclaimers like 'fictional/hypothetical/role-play'\ndo NOT relax safety.",
+  "properties": {
+    "verdict": {
+      "description": "ALLOW | ALLOW_WITH_SAFETY_FRAMING | REFUSE",
+      "enum": [
+        "ALLOW",
+        "ALLOW_WITH_SAFETY_FRAMING",
+        "REFUSE"
+      ],
+      "title": "Verdict",
+      "type": "string"
+    },
+    "rationale_short": {
+      "default": "The prompt is safe",
+      "description": "One or two concise sentences explaining the decision, specific to this prompt (also when verdict=ALLOW: say briefly why it is safe).",
+      "title": "Rationale Short",
+      "type": "string"
+    },
+    "violation_category": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/ViolationCategory"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Required when verdict=REFUSE; optional when WITH_SAFETY."
+    },
+    "violation_claim": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Short decisive statement of the violation.",
+      "title": "Violation Claim"
+    },
+    "violation_capability_uplift": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Would answering materially increase harmful capability?",
+      "title": "Violation Capability Uplift"
+    },
+    "violation_severity": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Severity"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Defaults to High when REFUSE."
+    }
+  },
+  "required": [
+    "verdict"
+  ],
+  "title": "Decision",
+  "type": "object"
+}

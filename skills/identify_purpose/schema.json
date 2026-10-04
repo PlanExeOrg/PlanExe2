@@ -1,0 +1,32 @@
+{
+  "description": "Identify the purpose of the plan to be performed.",
+  "properties": {
+    "topic": {
+      "description": "The subject of the plan.",
+      "title": "Topic",
+      "type": "string"
+    },
+    "purpose_detailed": {
+      "description": "Detailed purpose of the plan, such as: health, healthier habits, product, market trend, strategic planning, project management.",
+      "title": "Purpose Detailed",
+      "type": "string"
+    },
+    "purpose": {
+      "description": "Purpose of the plan.",
+      "enum": [
+        "personal",
+        "business",
+        "other"
+      ],
+      "title": "Purpose",
+      "type": "string"
+    }
+  },
+  "required": [
+    "topic",
+    "purpose_detailed",
+    "purpose"
+  ],
+  "title": "PlanPurposeInfo",
+  "type": "object"
+}

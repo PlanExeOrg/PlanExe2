@@ -1,0 +1,114 @@
+{
+  "stage": "identify_purpose",
+  "evaluated_at": "2026-10-04T17:36:33",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 5.7,
+      "structure_problems": [],
+      "judgments": {
+        "identify_purpose.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both classify as \"business\", which is a reasonable and identical label (a debatable choice, since this is a public infrastructure project, but both made the same call). The difference is in the detail. A's purpose_detailed is more specific: it names the pillar-supported buoyant design, the 100 m depth, the Europe–Africa link, and the engineering, financing and multi-government coordination challenges. It also mentions the immediate start and the 20-year timeline. A's topic adds \"across the Strait of Gibraltar\", which is accurate and useful context, and the term \"submerged floating tunnel\" is the standard one. B's detail is more generic, with phrases like \"significant economic, commercial, and public welfare implications\". B's topic keeps the prompt's wording, including \"transoceanic\". A's extra specificity is more useful downstream. The Strait of Gibraltar is not stated in the prompt, but it is the only plausible location for a Spain–Morocco link, so this is a reasonable inference rather than an invented contradiction."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates classify the plan as \"business\" and use the same three fields. That is a defensible label for a large infrastructure investment, and the two are equal on it. They differ in detail. B keeps more of the prompt's specifics: \"pillar-supported\", the 100 m anchoring depth, the 20-year timeline starting immediately, and the multi-government coordination and financing. It also adds the Strait of Gibraltar. That is a reasonable inference and useful context for later stages. A drops \"pillar-supported\" and the \"start ASAP\" timing. A's description is also more generic, and it calls the project \"governmental/societal\" while still labelling it business. B's \"Europe and Africa\" and \"Strait of Gibraltar\" add specific, correct content. B is somewhat more useful for tailoring downstream prompts."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 5.2,
+      "structure_problems": [],
+      "judgments": {
+        "identify_purpose.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates classify the plan as \"business\", which is correct for a commercial hyperscale data center project. A is more specific and more faithful to the prompt. Its purpose_detailed mentions the €100B–€140B+ budget, tenant strategy, financing, permitting, national-security review, brownfield work and community commitments. It also captures the red-team framing: skeptical feasibility, decision gates, kill criteria, and the option to downsize, split, delay or cancel. Its topic names the locations, 161 km² and the red-team nature. B is accurate but generic. It leaves out the skeptical, kill-criteria framing, the budget, and the sites. Its topic does include \"intentionally extreme\" and Hauts-de-France. A gives downstream prompts more useful context. A is a bit long for a \"purpose\" field, but that is not a real flaw."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both correctly classify as business. A is concise and accurate but generic; it omits the red-team/skeptical framing, budget scale, and the possibility of cancellation. B is more specific and plan-faithful: it captures the €100B–€140B+ budget, red-team feasibility nature, locations, decision gates, kill criteria, and potential downsizing/cancellation. These details help downstream prompts tailor to a skeptical feasibility exercise. B is longer, but the extra content is decision-useful rather than padding. The topic in B also includes the 161 km² footprint and the specific locations. B is the better one."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 5.4,
+      "structure_problems": [],
+      "judgments": {
+        "identify_purpose.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates classify the plan as \"business\". That is defensible for a large institutional program, and neither is wrong on the label. The difference is in the detail. A is accurate but generic. It leaves out the €1.5B budget, the five-year horizon, the success targets (40% through-tickets, halved complaints), the stakeholders, the corridor rollout and the public reference distributor. Its topic is fine but does not mention the Regulation. B's purpose_detailed is specific to this plan. It includes the budget, horizon, OSDM APIs, shared data layer, clearing and settlement, passenger-rights backstop, public reference distributor, phased TEN-T rollout, the measurable targets and the stakeholder groups. It also explains why a public, governmental project is classed as business, which helps downstream stages that tailor prompts. Its topic names the regulatory alignment. B is longer, but the extra length is useful context rather than padding. Downstream stages would get more from B."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates classify the plan as \"business\", so the label doesn't separate them. A public-sector, multi-stakeholder program with a €1.5B budget and commercial settlement elements could arguably be \"other\", but both make the same choice. The difference is in the detail. Candidate A gives a concrete purpose_detailed. It names the €1.5B public budget, the five-year horizon, OSDM-compatible APIs, the shared data layer, clearing and settlement, the passenger-rights backstop, the public reference distributor, and phased TEN-T rollout. It also lists the success metrics (40% through-tickets, halved complaints, modal shift), the stakeholder groups, and a short reason for the \"business\" label. That gives downstream stages the scale, governance and public/private context they need. Its topic also names the EC's proposed Regulation. Candidate B is accurate but generic. It leaves out the budget, timeline, stakeholders, success metrics and scope components, and its topic is shorter and less specific. It is adequate for a classification stage but gives downstream prompts less to tailor on. A is somewhat longer, but the extra content is relevant and not padding."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 5.6,
+      "structure_problems": [],
+      "judgments": {
+        "identify_purpose.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates classify the plan as \"business\", so the classification itself does not separate them. The difference is in the supporting fields. A's purpose_detailed is generic (\"comprehensive, multi-faceted... strategic project management\") and could describe almost any municipal program. A's topic is short but accurate. B's purpose_detailed is plan-specific. It names the €3.5M staged budget, the gates, the MOUs, the KPIs and the covered workstreams, and it explains why the plan is classed as business (a societal, governmental and public-welfare project). B's topic also captures the 12-month scope, the mid-sized European city setting and the mortality and serious-illness goal. B is somewhat longer, but the extra detail is useful for downstream prompt tailoring. B is better on specificity and faithfulness."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates choose the same classification, \"business\". That label is arguably debatable for a municipal public-health program, but it doesn't separate them. The difference is in the detail. Candidate A's purpose_detailed names the plan's specifics: the €3.5M staged budget, governance, staffing, procurement, MOUs, go/no-go gates, KPIs and the scale-up cost model. It also lists the seven scope areas, which gives downstream stages useful tailoring context. Its topic is specific: 12-month, municipal, heatwave response, mortality and serious illness, mid-sized European city. A also gives a rationale for the classification, though the line about a \"societal, governmental and public welfare criterion\" is a bit awkward. Candidate B is accurate but generic. Its topic is short and omits the 12-month and European-city scope, and its purpose_detailed would fit almost any municipal operational plan. A is more faithful to the prompt and more useful downstream."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

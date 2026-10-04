@@ -1,0 +1,114 @@
+{
+  "stage": "plan_type",
+  "evaluated_at": "2026-10-04T17:41:44",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 6.5,
+      "structure_problems": [],
+      "judgments": {
+        "plan_type.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly classify the plan as physical and have nearly identical structure and opening. Both are faithful to the prompt. A names the Strait of Gibraltar, covers the full lifecycle (surveys, casting yards/dry docks, shoreline portals, rail infrastructure, commissioning, site offices, ports, government coordination), and includes the rail system, which is central to the prompt. B has good specifics (hydrodynamic forces, corrosion, mooring, thousands of workers) but omits the rail/portal/shoreline connections and the two-country coordination. B says \"across international waters\", which is slightly loose, and \"open ocean\", which is inaccurate for a strait. A's \"the plan gains major benefit from physical presence\" is slightly awkward but harmless. A is marginally more complete and accurate."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly classify the plan as physical and give the same conclusion. A is accurate but somewhat generic. It adds \"across international waters\" and \"open ocean,\" which is slightly off for the Strait of Gibraltar. B is more specific and faithful to the prompt. It cites the 20-year, €40B scale, high-speed rail, casting yards and dry docks, shoreline portals and rail infrastructure in both countries, and coordination between Spain and Morocco. Its list of physical needs (surveys, manufacturing, installation, commissioning) is more decision-useful for downstream stages. The closing phrase \"gains major benefit from physical presence\" is slightly awkward but harmless. B is somewhat better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 8.2,
+      "structure_problems": [],
+      "judgments": {
+        "plan_type.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 7.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly classify the plan as physical, with near-identical headline wording. The difference is in the explanation. A is specific and itemized. It covers land across the named towns, construction, grid, cooling, fiber, hardware, security, people and site visits. It also states that the planning documents are digital but execution is physical. B gives a single dense paragraph covering the same themes: construction, land assembly, grid, cooling, fiber, brownfield and permitting. It also notes that the compute output is software-related while the plan is physical. B is accurate but less concrete, and it adds nothing A lacks. A is a bit more verbose, but its detail is plan-specific and not padded. Both fit the format of an explanation plus plan_type. A is slightly more useful and faithful to the prompt's specifics, such as the named towns, subsea routes and the 180-day plan."
+            },
+            {
+              "winner": "tie",
+              "score_new": 8,
+              "score_baseline": 8,
+              "analysis": "Both correctly classify the plan as physical and the same label. The difference is the explanation. A is concise, accurate, and covers land, power, cooling, fiber, remediation, and permitting. B is a structured list that gives more plan-specific detail (named towns, 50–100+ halls, hardware shipping, security, people/site visits) and acknowledges that the planning documents are digital but execution is physical. B is a bit long, and \"50–100+ data halls\" slightly conflates \"buildings\" and \"halls\", which is minor. Its \"180-day feasibility work\" mention is relevant. A's phrasing \"overwhelmingly dedicated\" and its note about software output is a nice nuance. Both are adequate for this simple stage. B is slightly more specific and comprehensive and useful downstream, though the extra verbosity adds little. I give a slight edge to B."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 8.8,
+      "structure_problems": [],
+      "judgments": {
+        "plan_type.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both correctly classify the plan as physical. A's reasoning is generic and partly weak (physical meetings and workshops, \"even the budget allocation\" implying physical coordination), with few prompt-specific details. B ties the classification to the plan's specifics: the named corridors and TEN-T, accessibility assistance, bicycle reservations, bus/ferry/air hooks, conformance testing and pilots, the modal shift from flying to rail, and the stakeholders. It also acknowledges the digital components (APIs, clearing) and explains why the plan as a whole is still physical. Its data-centre and hardware point is slightly speculative, but that is minor. B is more faithful, specific and useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates classify the plan as physical, which is correct. The plan covers rail corridors, stations, PRM assistance, bicycle reservations, and a modal shift from air to rail. The difference is the quality of the reasoning, which downstream stages may rely on.\n\nCandidate A bases its case on the plan's real physical elements. These are the named corridors and TEN-T, accessibility assistance, bicycle reservations, and integration with buses, ferries and air. It also cites the modal-shift success metric and the on-site pilots and testing. It admits that the APIs and clearing mechanism are digital but explains why the plan as a whole is still physical. Its weaker points are the claim about data centres and hardware, which is somewhat speculative, and the fact that it is a bit padded.\n\nCandidate B is generic. It justifies \"physical\" mainly through physical meetings and workshops, and by saying \"even the budget allocation... imply physical coordination\". That argument is weak, because meetings alone would not make a plan physical. It does mention real-world integration and passengers' physical journeys, but it ignores the strongest evidence in the prompt: the corridors, accessibility, bicycles, and modal shift. It is less plan-specific and less convincing.\n\nA is more specific, better grounded, and more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 6.9,
+      "structure_problems": [],
+      "judgments": {
+        "plan_type.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both candidates correctly classify the plan as physical, with the same opening statement. A gives a more thorough, plan-specific explanation. It covers all seven scope areas and also hiring, contracts, drills and the month-4 gate. It also notes that many vulnerable residents are offline, which is why communications use physical channels. B reaches the same conclusion with a shorter explanation. It covers most areas but omits public communications and health outcomes, and it adds little beyond a list. Both are correct and the classification is the same, so downstream impact is identical. A's explanation is more complete and better grounded in the prompt, though it is somewhat verbose."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "Both correctly classify the plan as physical, matching the schema (explanation, plan_type). A is concise and accurate, covering cooling centers, transport, door-knocking, home installations, worker rest points and healthcare facilities. It omits public communications and the outcome measures, and its closing sentence repeats the opening. B covers all seven scope areas, links them to physical activity, and notes the physical communication channels needed because many vulnerable residents are not online. It also mentions hiring, contracts, drills and the month-4 gate. This is more plan-specific and gives more useful context to later stages. B's wording is slightly emphatic (\"unequivocally\"), but nothing in it is wrong or invented. The gap is modest because the stage needs only a classification."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

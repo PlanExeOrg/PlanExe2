@@ -1,0 +1,24 @@
+{
+  "properties": {
+    "explanation": {
+      "description": "Providing a high level context.",
+      "title": "Explanation",
+      "type": "string"
+    },
+    "plan_type": {
+      "description": "Classify the type of plan.",
+      "enum": [
+        "digital",
+        "physical"
+      ],
+      "title": "Plan Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "explanation",
+    "plan_type"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

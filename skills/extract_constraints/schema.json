@@ -1,0 +1,45 @@
+{
+  "$defs": {
+    "ConstraintItem": {
+      "description": "A single constraint extracted from the user's prompt.",
+      "properties": {
+        "classification": {
+          "description": "'positive' for things the user wants (goals, features, locations, budgets, timelines, technologies to use). 'negative' for things the user wants to avoid (banned words, technologies to exclude, non-goals, hard limits).",
+          "enum": [
+            "positive",
+            "negative"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "constraint_text": {
+          "description": "A short, self-contained bullet-point item describing the constraint. Must be understandable without the original prompt. For negative constraints, phrase as 'Do not use X' or 'Avoid X'.",
+          "title": "Constraint Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "classification",
+        "constraint_text"
+      ],
+      "title": "ConstraintItem",
+      "type": "object"
+    }
+  },
+  "description": "Structured output for constraint extraction.",
+  "properties": {
+    "constraints": {
+      "description": "List of all explicit constraints found in the user's prompt. Empty list if none found.",
+      "items": {
+        "$ref": "#/$defs/ConstraintItem"
+      },
+      "title": "Constraints",
+      "type": "array"
+    }
+  },
+  "required": [
+    "constraints"
+  ],
+  "title": "ConstraintExtractionResult",
+  "type": "object"
+}

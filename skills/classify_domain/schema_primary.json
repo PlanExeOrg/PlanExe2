@@ -1,0 +1,21 @@
+{
+  "description": "LLM-returned choice of primary domain from a candidate list.",
+  "properties": {
+    "primary_index": {
+      "description": "Zero-based index into the candidate list. Pick exactly one candidate whose discipline owns the project's main success criterion. The index must be in the range [0, number_of_candidates - 1].",
+      "title": "Primary Index",
+      "type": "integer"
+    },
+    "rationale": {
+      "description": "One to two sentences (≤40 words) explaining why this candidate is the best primary fit for the project as a whole, including how it compares to the other candidates. Refer to candidates by their domain name only — never by their bracket index (`[0]`, `[1]`, ...) or by phrasings like 'index 0' or 'candidate 3'. The indices are an interface detail for the primary_index field and are not meaningful in the human-readable rationale text.",
+      "title": "Rationale",
+      "type": "string"
+    }
+  },
+  "required": [
+    "primary_index",
+    "rationale"
+  ],
+  "title": "PrimarySelection",
+  "type": "object"
+}

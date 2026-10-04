@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "core_thesis": {
+      "description": "Summary of the fundamental, unfixable flaw in the prompt's premise.",
+      "title": "Core Thesis",
+      "type": "string"
+    },
+    "reasons": {
+      "description": "Reasons to reject, 3-5 items.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Reasons",
+      "type": "array"
+    },
+    "second_order_effects": {
+      "description": "Second-Order Effects, 3-5 items.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Second Order Effects",
+      "type": "array"
+    },
+    "evidence": {
+      "description": "Grounds the critique in a real-world example or a powerful narrative, 3-5 items.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "bottom_line": {
+      "description": "Final Judgment, 1-2 sentences.",
+      "title": "Bottom Line",
+      "type": "string"
+    }
+  },
+  "required": [
+    "core_thesis",
+    "reasons",
+    "second_order_effects",
+    "evidence",
+    "bottom_line"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

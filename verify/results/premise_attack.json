@@ -1,0 +1,114 @@
+{
+  "stage": "premise_attack",
+  "evaluated_at": "2026-10-04T17:40:28",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 73.8,
+      "structure_problems": [],
+      "judgments": {
+        "premise_attack.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is the stronger premise attack. It spots the prompt's core internal contradiction: the tunnel is described as both \"buoyant\" and \"pillar-supported\". It also notes that the Strait is hundreds of metres deep (about 300 m at the Camarinal Sill and up to about 900 m in the deep channel), so a tube held at 100 m needs very tall pillars or long tethers. It notes the Strait is not \"transoceanic\". Its evidence is specific and mostly accurate. It cites SECEGSA/SNED and the decades of fixed-link studies, Norway's E39 submerged-floating-tunnel studies, the 1755 Lisbon earthquake, the 2004 Al Hoceima earthquake, Fehmarnbelt, the Channel Tunnel overrun of about 80%, Flyvbjerg, and UNCLOS transit passage (Arts. 37–44), which is the legally relevant provision. It also covers practical risks: anchor strikes, evacuation, rail-gauge mismatch, and the \"start ASAP\" lock-in.\n\nCandidate A has several factual errors and exaggerations:\n- It says the Channel Tunnel took \"over 150 years\" and \"15 years of construction\".\n- It says UNCLOS has no relevant provision, when transit-passage rules clearly apply.\n- It cites the London Protocol on dumping, which is largely irrelevant.\n- It gives an invented account of the Seattle SR-520 bridge failure.\n- It claims Marmaray overran by \"400%\".\n- It invents \"quicksand\" seabed conditions.\n- It says a buoyant tunnel is a \"physical impossibility\", which is wrong, since submerged floating tunnels are a studied concept.\n\nA also misses the buoyant-versus-pillar contradiction. Its tone is hyperbolic (\"geological suicide\", \"hubris\"), and it repeats itself across lenses. Its Cascade lens does have some useful detail, such as the HSR geometry point and the cost escalation estimates. Even so, B is more accurate, more insightful and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Both candidates attack the premise through five lenses. A is more accurate and plan-specific. It spots the real contradiction in the prompt (\"pillar-supported\" versus \"buoyant\" at 100 m in water 300–900 m deep). It also notes that \"transoceanic\" is wrong for a ~14 km strait. Its evidence is mostly sound: SECEGSA/SNED, the Channel Tunnel ~80% overrun, Norway E39 submerged floating tunnel studies, the 1755 Lisbon earthquake, UNCLOS transit passage, and Flyvbjerg. A few details are shaky. One example is the Fehmarnbelt cost and schedule. Another is the Al Hoceima quake's death toll, which was about 628 in 2004. Overall it is credible and decision-useful. Its Accountability and Escalation lenses drift toward rhetorical points, but they stay grounded.\n\nB contains many factual errors and overstatements. It says the Channel Tunnel took \"over 150 years from conception.\" It says UNCLOS has no provision for such infrastructure, which is a weak argument. It claims \"buoyant concrete tunnels\" are \"physically impossible\" and that submerged tunnels only work when buried, which ignores that immersed tube tunnels exist and that floating tunnel concepts are viable in principle. It says a 100 m depth is \"too shallow and impossibly deep\". It cites 10 atmospheres as an impossible pressure, which is wrong because 10 atm is trivial for concrete. It says the Seattle SR-520 bridge sank because of currents, but that was a 2016 storm and different. It says Marmaray was a 13.6 km submerged tunnel with >400% overruns, which is wrong. It says Tokyo Bay Aqua-Line operates at ~60 m depth and describes it as pillar-supported precedent, which is confused. It says quicksand surveys will \"reveal\" things, and it makes invented cost figures of €150–300B. It does not catch the buoyant/pillar contradiction clearly. Its UNESCO/UNEP 2019 citation looks fabricated. It also has a \"[MORAL]\" classification for Attack 1 that doesn't fit well.\n\nA is clearly better in faithfulness, correctness and insight."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 89.1,
+      "structure_problems": [],
+      "judgments": {
+        "premise_attack.md": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate B is clearly stronger.\n\n**Candidate B**\n- Its arguments are specific and quantified. 9 GW is about 79 TWh a year, roughly 17% of French consumption and about 1.7 times Gravelines' 5.4 GW. I checked these figures and they hold.\n- It catches real internal inconsistencies in the plan:\n  - The named sites (Dunkirk, Cambrai, Saint-Omer) are tens of kilometres apart, so no single contiguous square can sit on them.\n  - The halls cover only about 3–10% of the square.\n  - The €100–140B budget cannot include the GPU hardware.\n  - The take-or-pay gate is mismatched against GPU turnover.\n- Its evidence is real and relevant: the EirGrid Dublin constraint, the Zeewolde cancellation, ZAN under the Loi Climat et Résilience, Flamanville 3, Notre-Dame-des-Landes, Foxconn Wisconsin, and Flyvbjerg's work on megaprojects.\n- Its weaknesses are small. It overstates the distances (\"90–100 km apart\" is not true of Valenciennes–Cambrai). Some per-GW cost claims are loose.\n- Each lens follows its intended angle. The Escalation lens follows the cracks → copycats → norms degrade → reckoning arc. The Cascade lens traces effects across several stages.\n\n**Candidate A**\n- It is largely generic. It repeats \"single point of failure\", \"RTE glacial\" and \"land war\" without numbers.\n- Several of its evidence items are fabricated, misapplied or irrelevant:\n  - \"ZEA projects\" delays\n  - \"Greater Manchester Data Centre Cluster\"\n  - \"EDF Power Plant Closures 2019-2021\" as a grid-connection example\n  - GDPR as a physical-footprint issue\n  - the \"Lyon-Turin\" tunnel analogy\n- It states weak claims as fact, such as \"RTE 5-year capacity booking windows\" and \"30-50% footprint shrink around Lille\".\n- It misses the geographic inconsistency, the hardware-cost omission, and the energy-scale arithmetic.\n- Its Spectrum lens even admits an evidence gap.\n\nB is more faithful, insightful and useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is concrete and numerically grounded. It computes 9 GW as about 79 TWh a year, roughly a sixth of French consumption. It compares 9 GW to Gravelines (5.4 GW) and to 5–6 EPR-class reactors. It shows the halls cover only about 3–10% of the square, and that the named towns are tens of kilometres apart so they cannot form one contiguous parcel. It also argues the €100–140B budget leaves out accelerator and networking cost. These are real premise-level flaws that a downstream stage can use. Its evidence is specific and mostly accurate: ZAN and the Climat et Résilience law, EirGrid in Dublin, Meta at Zeewolde, Flamanville 3, Notre-Dame-des-Landes, and Foxconn Wisconsin. It also catches the point that latency matters little for training. Its weaknesses are some repetition across lenses and a few loose figures. For example, its Gravelines claim is correct, but the Dublin pause is described slightly loosely.\n\nCandidate B is generic and abstract. It relies on vague phrases such as \"Monolithic Campus Delusion\" and \"Cadastral Quagmire Effect\", and it quantifies almost nothing. Several evidence items look invented or irrelevant: \"French Special Economic Zone (ZEA) projects\", a Greater Manchester cluster, an RTE \"5-year booking window\" law, and GDPR as a siting constraint. It also admits an \"Evidence Gap\" in one lens. It makes questionable claims, such as \"forced flaring\" of heat and a reading of the take-or-pay gate as \"up to 1 GW\". It misses the physical grid ceiling and the capex omission. The Cascade lens contains some useful ideas, namely the single point of failure, the water risk, and the splintering into smaller sites. Overall it is far less decision-useful and less credible."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 69.9,
+      "structure_problems": [],
+      "judgments": {
+        "premise_attack.md": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A is much stronger. Its five lenses are grounded in this plan's specifics: the proposed (not enacted) regulation versus the 18/30/60-month deadlines, OSDM already existing, the separately priced private IT bill, the public reference distributor competing with Trainline and Omio, missed-connection liability, the four launch corridors, and the point that ticketing doesn't drive the air-versus-rail choice. The lenses are distinct from one another: incentives, accountability and GDPR Art. 9, legislative timing, cascade effects, and escalation. Its evidence is mostly real and relevant: Regulation 2021/782, ECA Special Report 19/2018, Delegated Regulation 2017/1926, the TAP TSI (Reg. 454/2011), Shift2Rail (about €920M), ERTMS, Rail Baltica and Single European Sky. The Lisbon–Tallinn corridor critique is a sharp, plan-specific insight. A few claims are loose, but nothing is badly wrong.\n\nCandidate B is mostly generic \"sovereign national monopolies won't cooperate\" rhetoric repeated across lenses, with little differentiation between them. It contains factual and consistency errors. It cites \"Regulation 1371/2006\" and \"1371/2007\" for passenger rights; the real one is 1371/2007, and it was recast in 2021. It treats API terms as \"voluntary\" even though the plan mandates them. It calls national systems \"1970s-era COBOL\" and \"centuries of protectionism\" without support. It invents a \"€500 million budget overrun\" and says the €1.5B is \"inadequate\" without analysis. Several evidence items are vague (\"Single European Railway Area Initiative Failures\"), and one is an explicit \"Evidence Gap\". It never notices that ticketing doesn't drive modal shift, that the regulation is only proposed, or that the private IT cost is excluded. It is far less useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate A's five lenses all repeat the same generic argument: sovereign incumbents will resist, the timeline is too short, and the budget is too small. They lack variety across the lenses, which is supposed to be the point of the stage. Several claims are loose or wrong. It cites \"Regulation 1371/2006\" and \"1371/2007\" (the real one is 1371/2007, and the current one is 2021/782). It invents a \"€500 million budget overrun\". It says \"nearly thirty\" operators, and describes \"COBOL 1970s\" systems without evidence. The evidence entries are vague (\"Past decades failures\") and one is an \"Evidence Gap\". It also never questions the modal-shift premise, and it attacks \"voluntary\" terms when the plan describes a mandate.\n\nCandidate B is sharper and more insightful. It finds the real premise flaw: ticketing is not the binding constraint on mode choice, which depends on capacity, timetables and price. It points out that the regulation is only a proposal, so binding dates rest on law that doesn't exist yet. It notes that OSDM already exists, so the problem is incentives. It flags the unpriced private IT costs, GDPR Art. 9 for accessibility data, the systemic single point of failure, and the Lisbon–Tallinn / Rail Baltica problem. Its evidence is specific and mostly accurate: Regulation 2021/782, ECA Special Report 19/2018, TAP TSI 454/2011, Delegated Regulation 2017/1926, Shift2Rail, Single European Sky. Each lens takes a distinct angle. B has minor issues. The Shift2Rail budget figure and some claims are approximate, and the Cascade section is long. Overall B is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 85.3,
+      "structure_problems": [],
+      "judgments": {
+        "premise_attack.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate A is tied closely to this plan's specifics. It works out the calendar consequence of a 3 May start: the Month 2 gate falls in early July and the Month 4 gate in early September, so the €1.5M is released after the heat season. It shows that the gates depend on weather luck, with too few alert days in a mild summer. It points out that the 60% contact-rate gate is measured only on enrolled residents. It notes the statistical power problem for mortality in a city of this size. It flags that the implementers grade their own gates. It also covers the GDPR Art. 9 and 35 constraints, EU procurement timelines, and the way opt-in design misses isolated people. Its evidence is real and apt: Chicago 1995 (Klinenberg), the 2003 European heatwave, Ballester et al. 2023, Ahmedabad, and the GDPR articles. Its second-order effects follow logically from the reasons. Some evidence figures are loosely stated, such as roughly 700 vs 739 deaths and 61,000 vs 61,672. The lenses also overlap in their central argument. Even so, it is decision-useful and consistent.\n\nCandidate B is mostly generic \"too compressed, bureaucratic hubris\" rhetoric. It contains questionable or invented claims. One is the \"4,000+ intervention kits\", which the prompt never states. Another is the assertion that €3.5M is \"grossly insufficient\" with no analysis. It also cites vague evidence: \"Multiple US Cities 2010s\", a \"2022 European Heatwave After-Action Review\" that probably doesn't exist, FEMA \"various years\", and COVID analogies. It has an \"Unknown — default: caution\" evidence item that contains no substance. It misses the calendar insight, the statistical power problem and the enrolled-denominator problem. Some of its reasoning is incoherent, for example that low trust causes outreach to fail \"catastrophically\" within 3 months. It is less faithful to the plan's actual design and less useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate B is clearly stronger. It attacks the plan's real weak points using the prompt's own facts. The 3 May start puts the Month 4 gate in early September, after most of the heat season. The ≥60% outreach gate is measured only on opt-in enrollees, which is the wrong denominator. Gates that depend on alert days make funding turn on weather. A single city's mortality counts are too small to show a \"demonstrable\" reduction. The implementers grade their own gate. It also cites relevant evidence: Chicago 1995 (Klinenberg), the 2003 heatwave, Ballester 2023, Ahmedabad, GDPR Art. 9 and 35, and Directive 2014/24/EU. Its second-order effects form coherent narratives and reflect the stage's lens structure. Candidate A is mostly generic \"12 months is too short\" rhetoric. It asserts that €3.5M is \"grossly insufficient\" and invents a \"4,000+ kits\" figure. It ignores the calendar and statistical-power problems. It also contains placeholder-like evidence (\"Unknown — default: caution\", \"Evidence Gap\") and vague or dubious citations (FEMA, COVID analogies). Its lenses repeat the same points. B's Cascade section is long, but it is dense and specific, not padding."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
