@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -17,6 +18,9 @@ R = TypeVar("R")
 
 
 DEFAULT_MAX_WORDS_PER_FIELD = 160
+# PlanExe's own length hints ("50-70 words", "1-2 sentences", "~30 words", "3-5 items") win.
+_LENGTH_HINT = re.compile(r"\b(\d+\s*(-|–|to)\s*\d+|~?\d+|one|two|three)\s+(words?|sentences?)\b|"
+                          r"\bone sentence\b|\bone short sentence\b", re.I)
 
 
 def with_length_budget(schema: dict, max_words: int) -> dict:
@@ -35,7 +39,7 @@ def with_length_budget(schema: dict, max_words: int) -> dict:
     def visit(node):
         if isinstance(node, dict):
             for key, sub in list(node.get("properties", {}).items()):
-                if isinstance(sub, dict) and is_text(sub):
+                if isinstance(sub, dict) and is_text(sub) and not _LENGTH_HINT.search(sub.get("description", "")):
                     desc = sub.get("description", "").rstrip()
                     sub["description"] = (desc + " " if desc else "") + f"At most {max_words} words."
             for v in node.values():

@@ -193,6 +193,7 @@ class LengthBudgetTest(unittest.TestCase):
         from planexe_skill.context import with_length_budget
         schema = {"$defs": {"I": {"type": "object", "properties": {
             "title": {"type": "string", "description": "Title."},
+            "why": {"type": "string", "description": "Concise rationale (30-50 words)."},
             "kind": {"type": "string", "enum": ["a", "b"]},
             "n": {"type": "integer"},
             "note": {"anyOf": [{"type": "string"}, {"type": "null"}]}}}},
@@ -200,6 +201,7 @@ class LengthBudgetTest(unittest.TestCase):
         out = with_length_budget(schema, 50)
         props = out["$defs"]["I"]["properties"]
         self.assertEqual(props["title"]["description"], "Title. At most 50 words.")
+        self.assertEqual(props["why"]["description"], "Concise rationale (30-50 words).")
         self.assertNotIn("description", props["kind"])
         self.assertNotIn("description", props["n"])
         self.assertEqual(props["note"]["description"], "At most 50 words.")
