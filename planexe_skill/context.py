@@ -16,6 +16,37 @@ T = TypeVar("T")
 R = TypeVar("R")
 
 
+DEFAULT_MAX_WORDS_PER_FIELD = 160
+
+
+def with_length_budget(schema: dict, max_words: int) -> dict:
+    """Copy of `schema` where every free-text string field says 'At most N words.'"""
+    import copy
+    schema = copy.deepcopy(schema)
+
+    def is_text(node: dict) -> bool:
+        if "enum" in node or "const" in node:
+            return False
+        if node.get("type") == "string":
+            return True
+        return any(isinstance(a, dict) and a.get("type") == "string" and "enum" not in a
+                   for a in node.get("anyOf", []))
+
+    def visit(node):
+        if isinstance(node, dict):
+            for key, sub in list(node.get("properties", {}).items()):
+                if isinstance(sub, dict) and is_text(sub):
+                    desc = sub.get("description", "").rstrip()
+                    sub["description"] = (desc + " " if desc else "") + f"At most {max_words} words."
+            for v in node.values():
+                visit(v)
+        elif isinstance(node, list):
+            for v in node:
+                visit(v)
+    visit(schema)
+    return schema
+
+
 class SkillContractError(Exception):
     """A skill read or wrote a file it did not declare in SKILL.md."""
 
@@ -106,6 +137,13 @@ class SkillContext:
         """One LLM call. Concurrency across the whole run is bounded by the runner."""
         tier = tier or self.skill.tier
         model = self.backend.model_for(tier)
+        # Length budget for the non-reasoning tiers: without it Haiku writes essays per field,
+        # which makes calls take minutes. Skills can tune it via `max_words_per_field:` (0 = off).
+        budget = int(self.skill.meta.get("max_words_per_field", DEFAULT_MAX_WORDS_PER_FIELD) or 0)
+        if tier != "high" and budget > 0 and schema is not None:
+            schema = with_length_budget(schema, budget)
+            system = (system.rstrip() + f"\n\nBe concise: keep every text field to at most {budget} words; "
+                      "prefer short, specific sentences over essays.")
         cache_file = None
         if self.cache_dir is not None:
             key = hashlib.sha256(json.dumps([model, system, user, schema], sort_keys=True).encode()).hexdigest()[:24]

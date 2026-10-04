@@ -187,5 +187,24 @@ class ResumeCacheTest(unittest.TestCase):
             self.assertFalse((run_dir / ".planexe_skill" / "llm_cache" / "a").exists())
 
 
+
+class LengthBudgetTest(unittest.TestCase):
+    def test_budget_applied_to_text_fields_only(self):
+        from planexe_skill.context import with_length_budget
+        schema = {"$defs": {"I": {"type": "object", "properties": {
+            "title": {"type": "string", "description": "Title."},
+            "kind": {"type": "string", "enum": ["a", "b"]},
+            "n": {"type": "integer"},
+            "note": {"anyOf": [{"type": "string"}, {"type": "null"}]}}}},
+            "type": "object", "properties": {"items": {"type": "array", "items": {"$ref": "#/$defs/I"}}}}
+        out = with_length_budget(schema, 50)
+        props = out["$defs"]["I"]["properties"]
+        self.assertEqual(props["title"]["description"], "Title. At most 50 words.")
+        self.assertNotIn("description", props["kind"])
+        self.assertNotIn("description", props["n"])
+        self.assertEqual(props["note"]["description"], "At most 50 words.")
+        self.assertNotIn("At most", schema["$defs"]["I"]["properties"]["title"]["description"])
+
+
 if __name__ == "__main__":
     unittest.main()
