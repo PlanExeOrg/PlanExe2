@@ -1,0 +1,3299 @@
+{
+  "schema_version": "1.0",
+  "pipeline_name": "planning_pipeline",
+  "description": "DAG for PlanExe, an AI-driven project planning system.",
+  "nodes": [
+    {
+      "id": "candidate_scenarios",
+      "description": "Generate aggressive, moderate, and conservative scenarios from the vital few levers.",
+      "artifacts": [
+        {
+          "path": "candidate_scenarios_raw.json"
+        },
+        {
+          "path": "candidate_scenarios.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "focus_on_vital_few_levers",
+          "artifact_path": "vital_few_levers_raw.json"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/candidate_scenarios.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/candidate_scenarios.py"
+        }
+      ]
+    },
+    {
+      "id": "candidate_scenarios_constraint",
+      "description": "Guardrail: verify generated scenarios respect the user's constraints.",
+      "artifacts": [
+        {
+          "path": "candidate_scenarios_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "candidate_scenarios",
+          "artifact_path": "candidate_scenarios.json"
+        },
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "classify_domain",
+      "description": "Identify a primary domain and zero or more secondary domains for the project.",
+      "artifacts": [
+        {
+          "path": "classify_domain_raw.json"
+        },
+        {
+          "path": "classify_domain.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/classify_domain.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/classify_domain.py"
+        }
+      ]
+    },
+    {
+      "id": "consolidate_assumptions_markdown",
+      "description": "Merge locations, currency, risks, and assumption stages into one reference document.",
+      "artifacts": [
+        {
+          "path": "consolidate_assumptions_full.md"
+        },
+        {
+          "path": "consolidate_assumptions_short.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "classify_domain",
+          "artifact_path": "classify_domain.md"
+        },
+        {
+          "from_node": "currency_strategy",
+          "artifact_path": "currency_strategy.md"
+        },
+        {
+          "from_node": "distill_assumptions",
+          "artifact_path": "distill_assumptions.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "identify_risks",
+          "artifact_path": "identify_risks.md"
+        },
+        {
+          "from_node": "make_assumptions",
+          "artifact_path": "make_assumptions.md"
+        },
+        {
+          "from_node": "physical_locations",
+          "artifact_path": "physical_locations.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "review_assumptions",
+          "artifact_path": "review_assumptions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/consolidate_assumptions_markdown.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/shorten_markdown.py"
+        }
+      ]
+    },
+    {
+      "id": "consolidate_governance",
+      "description": "Consolidate all governance phases into a single markdown document.",
+      "artifacts": [
+        {
+          "path": "consolidate_governance.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "governance_phase1_audit",
+          "artifact_path": "governance_phase1_audit.md"
+        },
+        {
+          "from_node": "governance_phase2_bodies",
+          "artifact_path": "governance_phase2_bodies.md"
+        },
+        {
+          "from_node": "governance_phase3_impl_plan",
+          "artifact_path": "governance_phase3_impl_plan.md"
+        },
+        {
+          "from_node": "governance_phase4_decision_escalation_matrix",
+          "artifact_path": "governance_phase4_decision_escalation_matrix.md"
+        },
+        {
+          "from_node": "governance_phase5_monitoring_progress",
+          "artifact_path": "governance_phase5_monitoring_progress.md"
+        },
+        {
+          "from_node": "governance_phase6_extra",
+          "artifact_path": "governance_phase6_extra.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/consolidate_governance.py"
+        }
+      ]
+    },
+    {
+      "id": "convert_pitch_to_markdown",
+      "description": "Convert the raw pitch JSON into a polished, scannable markdown document.",
+      "artifacts": [
+        {
+          "path": "pitch_to_markdown_raw.json"
+        },
+        {
+          "path": "pitch.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_pitch",
+          "artifact_path": "pitch_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/convert_pitch_to_markdown.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/pitch/convert_pitch_to_markdown.py"
+        }
+      ]
+    },
+    {
+      "id": "create_pitch",
+      "description": "Create a compelling project pitch with target audience, call to action, and risk mitigation.",
+      "artifacts": [
+        {
+          "path": "pitch_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2",
+          "artifact_path": "wbs_project_level1_and_level2.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/create_pitch.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/pitch/create_pitch.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task.py"
+        }
+      ]
+    },
+    {
+      "id": "create_schedule",
+      "description": "Build the project schedule and generate Gantt charts.",
+      "artifacts": [
+        {
+          "path": "schedule_gantt_dhtmlx.html"
+        },
+        {
+          "path": "schedule_gantt_machai.csv"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_wbs_level1",
+          "artifact_path": "wbs_level1.json"
+        },
+        {
+          "from_node": "estimate_task_durations",
+          "artifact_path": "task_durations.json"
+        },
+        {
+          "from_node": "identify_task_dependencies",
+          "artifact_path": "task_dependencies_raw.json"
+        },
+        {
+          "from_node": "start_time",
+          "artifact_path": "start_time.json"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/create_schedule.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/schedule/export_gantt_csv.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/schedule/export_gantt_dhtmlx.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/schedule/schedule.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/schedule/project_schedule_populator.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task_tooltip.py"
+        }
+      ]
+    },
+    {
+      "id": "create_wbs_level1",
+      "description": "Extract the project title and top-level phases (WBS Level 1) from the project plan.",
+      "artifacts": [
+        {
+          "path": "wbs_level1_raw.json"
+        },
+        {
+          "path": "wbs_level1.json"
+        },
+        {
+          "path": "wbs_level1_project_title.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/create_wbs_level1.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/create_wbs_level1.py"
+        }
+      ]
+    },
+    {
+      "id": "create_wbs_level2",
+      "description": "Decompose top-level phases into major tasks (WBS Level 2).",
+      "artifacts": [
+        {
+          "path": "wbs_level2_raw.json"
+        },
+        {
+          "path": "wbs_level2.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_wbs_level1",
+          "artifact_path": "wbs_level1.json"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/create_wbs_level2.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/create_wbs_level2.py"
+        }
+      ]
+    },
+    {
+      "id": "create_wbs_level3",
+      "description": "Break Level 2 tasks into detailed subtasks (WBS Level 3).",
+      "artifacts": [
+        {
+          "path": "wbs_level3.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "estimate_task_durations",
+          "artifact_path": "task_durations.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2",
+          "artifact_path": "wbs_project_level1_and_level2.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/create_wbs_level3.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/create_wbs_level3.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_populate.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task.py"
+        }
+      ]
+    },
+    {
+      "id": "currency_strategy",
+      "description": "Choose the project currency based on physical locations and cross-border needs.",
+      "artifacts": [
+        {
+          "path": "currency_strategy_raw.json"
+        },
+        {
+          "path": "currency_strategy.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "physical_locations",
+          "artifact_path": "physical_locations.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/currency_strategy.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/currency_strategy.py"
+        }
+      ]
+    },
+    {
+      "id": "data_collection",
+      "description": "Specify data-gathering actions needed to validate the plan: market, financial, regulatory, etc.",
+      "artifacts": [
+        {
+          "path": "data_collection_raw.json"
+        },
+        {
+          "path": "data_collection.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/data_collection.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/data_collection.py"
+        }
+      ]
+    },
+    {
+      "id": "distill_assumptions",
+      "description": "Condense verbose assumptions into concise, strategically important ones.",
+      "artifacts": [
+        {
+          "path": "distill_assumptions_raw.json"
+        },
+        {
+          "path": "distill_assumptions.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "make_assumptions",
+          "artifact_path": "make_assumptions.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/distill_assumptions.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/distill_assumptions.py"
+        }
+      ]
+    },
+    {
+      "id": "draft_documents_to_create",
+      "description": "Draft content specs for each document to create: essential info, risks, and scenarios.",
+      "artifacts": [
+        {
+          "path": "draft_documents_to_create.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "filter_documents_to_create",
+          "artifact_path": "filter_documents_to_create_clean.json"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/draft_documents_to_create.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/draft_document_to_create.py"
+        }
+      ]
+    },
+    {
+      "id": "draft_documents_to_find",
+      "description": "Draft content specs for each document to find: essential info, risks, and scenarios.",
+      "artifacts": [
+        {
+          "path": "draft_documents_to_find.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "filter_documents_to_find",
+          "artifact_path": "filter_documents_to_find_clean.json"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/draft_documents_to_find.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/draft_document_to_find.py"
+        }
+      ]
+    },
+    {
+      "id": "enrich_levers",
+      "description": "Add description, synergy, and conflict text to each lever.",
+      "artifacts": [
+        {
+          "path": "enriched_levers_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "triage_levers",
+          "artifact_path": "triaged_levers_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/enrich_levers.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/enrich_potential_levers.py"
+        }
+      ]
+    },
+    {
+      "id": "enrich_team_members_with_background_story",
+      "description": "Develop background story for each team member.",
+      "artifacts": [
+        {
+          "path": "enrich_team_members_background_story_raw.json"
+        },
+        {
+          "path": "enrich_team_members_background_story.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "enrich_team_members_with_contract_type",
+          "artifact_path": "enrich_team_members_contract_type.json"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/enrich_team_background_story.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/enrich_team_members_with_background_story.py"
+        }
+      ]
+    },
+    {
+      "id": "enrich_team_members_with_contract_type",
+      "description": "Determine contract type for each team member.",
+      "artifacts": [
+        {
+          "path": "enrich_team_members_contract_type_raw.json"
+        },
+        {
+          "path": "enrich_team_members_contract_type.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "find_team_members",
+          "artifact_path": "find_team_members.json"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/enrich_team_contract_type.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/enrich_team_members_with_contract_type.py"
+        }
+      ]
+    },
+    {
+      "id": "enrich_team_members_with_environment_info",
+      "description": "Add equipment needs and facility requirements for each team member's role.",
+      "artifacts": [
+        {
+          "path": "enrich_team_members_environment_info_raw.json"
+        },
+        {
+          "path": "enrich_team_members_environment_info.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "enrich_team_members_with_background_story",
+          "artifact_path": "enrich_team_members_background_story.json"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/enrich_team_environment_info.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/enrich_team_members_with_environment_info.py"
+        }
+      ]
+    },
+    {
+      "id": "enriched_levers_constraint",
+      "description": "Guardrail: verify enriched levers still respect the user's constraints.",
+      "artifacts": [
+        {
+          "path": "enriched_levers_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "enrich_levers",
+          "artifact_path": "enriched_levers_raw.json"
+        },
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "estimate_task_durations",
+      "description": "Estimate realistic, minimum, and maximum durations for each WBS task bottom-up.",
+      "artifacts": [
+        {
+          "path": "task_durations.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2",
+          "artifact_path": "wbs_project_level1_and_level2.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/estimate_task_durations.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/estimate_wbs_task_durations.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task.py"
+        }
+      ]
+    },
+    {
+      "id": "executive_summary",
+      "description": "Produce a concise one-pager for decision-makers with key findings and recommendations.",
+      "artifacts": [
+        {
+          "path": "executive_summary_raw.json"
+        },
+        {
+          "path": "executive_summary.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "review_plan",
+          "artifact_path": "review_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/executive_summary.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/executive_summary.py"
+        }
+      ]
+    },
+    {
+      "id": "expert_review",
+      "description": "Assemble a panel of domain experts and have them critique the plan.",
+      "artifacts": [
+        {
+          "path": "expert_criticism.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/expert_review.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/expert/expert_criticism.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/expert/expert_finder.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/expert/expert_orchestrator.py"
+        }
+      ]
+    },
+    {
+      "id": "extract_constraints",
+      "description": "Extract positive/negative constraints from the user's prompt.",
+      "artifacts": [
+        {
+          "path": "extract_constraints_raw.json"
+        },
+        {
+          "path": "extract_constraints.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/extract_constraints.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/extract_constraints.py"
+        }
+      ]
+    },
+    {
+      "id": "filter_documents_to_create",
+      "description": "Narrow the documents-to-create list to the most relevant ones for the current plan.",
+      "artifacts": [
+        {
+          "path": "filter_documents_to_create_raw.json"
+        },
+        {
+          "path": "filter_documents_to_create_clean.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "identify_documents",
+          "artifact_path": "identified_documents.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/filter_documents_to_create.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/filter_documents_to_create.py"
+        }
+      ]
+    },
+    {
+      "id": "filter_documents_to_find",
+      "description": "Narrow the documents-to-find list to the most relevant ones for the current plan.",
+      "artifacts": [
+        {
+          "path": "filter_documents_to_find_raw.json"
+        },
+        {
+          "path": "filter_documents_to_find_clean.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "identify_documents",
+          "artifact_path": "identified_documents.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/filter_documents_to_find.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/filter_documents_to_find.py"
+        }
+      ]
+    },
+    {
+      "id": "find_team_members",
+      "description": "Identify team members required for project execution.",
+      "artifacts": [
+        {
+          "path": "find_team_members_raw.json"
+        },
+        {
+          "path": "find_team_members.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/find_team_members.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/find_team_members.py"
+        }
+      ]
+    },
+    {
+      "id": "focus_on_vital_few_levers",
+      "description": "Select the ~5 highest-impact levers by rating each as critical, high, or medium.",
+      "artifacts": [
+        {
+          "path": "vital_few_levers_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "enrich_levers",
+          "artifact_path": "enriched_levers_raw.json"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/focus_on_vital_few_levers.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/focus_on_vital_few_levers.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase1_audit",
+      "description": "Design the governance structure and compliance requirements for the plan.",
+      "artifacts": [
+        {
+          "path": "governance_phase1_audit_raw.json"
+        },
+        {
+          "path": "governance_phase1_audit.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase1_audit.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase1_audit.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase2_bodies",
+      "description": "Define governance bodies and organizational hierarchy.",
+      "artifacts": [
+        {
+          "path": "governance_phase2_bodies_raw.json"
+        },
+        {
+          "path": "governance_phase2_bodies.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "governance_phase1_audit",
+          "artifact_path": "governance_phase1_audit.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase2_bodies.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase2_bodies.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase3_impl_plan",
+      "description": "Create implementation plan for the governance structure.",
+      "artifacts": [
+        {
+          "path": "governance_phase3_impl_plan_raw.json"
+        },
+        {
+          "path": "governance_phase3_impl_plan.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "governance_phase2_bodies",
+          "artifact_path": "governance_phase2_bodies.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase3_impl_plan.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase3_impl_plan.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase4_decision_escalation_matrix",
+      "description": "Establish decision-making authority and escalation pathways.",
+      "artifacts": [
+        {
+          "path": "governance_phase4_decision_escalation_matrix_raw.json"
+        },
+        {
+          "path": "governance_phase4_decision_escalation_matrix.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "governance_phase2_bodies",
+          "artifact_path": "governance_phase2_bodies.md"
+        },
+        {
+          "from_node": "governance_phase3_impl_plan",
+          "artifact_path": "governance_phase3_impl_plan.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase4_decision_escalation_matrix.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase4_decision_escalation_matrix.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase5_monitoring_progress",
+      "description": "Define monitoring mechanisms and progress tracking.",
+      "artifacts": [
+        {
+          "path": "governance_phase5_monitoring_progress_raw.json"
+        },
+        {
+          "path": "governance_phase5_monitoring_progress.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "governance_phase2_bodies",
+          "artifact_path": "governance_phase2_bodies.md"
+        },
+        {
+          "from_node": "governance_phase3_impl_plan",
+          "artifact_path": "governance_phase3_impl_plan.md"
+        },
+        {
+          "from_node": "governance_phase4_decision_escalation_matrix",
+          "artifact_path": "governance_phase4_decision_escalation_matrix.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase5_monitoring_progress.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase5_monitoring_progress.py"
+        }
+      ]
+    },
+    {
+      "id": "governance_phase6_extra",
+      "description": "Validate prior governance phases with tough questions and a high-level summary.",
+      "artifacts": [
+        {
+          "path": "governance_phase6_extra_raw.json"
+        },
+        {
+          "path": "governance_phase6_extra.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "governance_phase1_audit",
+          "artifact_path": "governance_phase1_audit.md"
+        },
+        {
+          "from_node": "governance_phase2_bodies",
+          "artifact_path": "governance_phase2_bodies.md"
+        },
+        {
+          "from_node": "governance_phase3_impl_plan",
+          "artifact_path": "governance_phase3_impl_plan.md"
+        },
+        {
+          "from_node": "governance_phase4_decision_escalation_matrix",
+          "artifact_path": "governance_phase4_decision_escalation_matrix.md"
+        },
+        {
+          "from_node": "governance_phase5_monitoring_progress",
+          "artifact_path": "governance_phase5_monitoring_progress.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/governance_phase6_extra.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/governance/governance_phase6_extra.py"
+        }
+      ]
+    },
+    {
+      "id": "identify_documents",
+      "description": "List documents the project needs — permits, contracts, specs, research, etc.",
+      "artifacts": [
+        {
+          "path": "identified_documents_raw.json"
+        },
+        {
+          "path": "identified_documents.md"
+        },
+        {
+          "path": "identified_documents_to_find.json"
+        },
+        {
+          "path": "identified_documents_to_create.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/identify_documents.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/identify_documents.py"
+        }
+      ]
+    },
+    {
+      "id": "identify_purpose",
+      "description": "Classify the plan as business, personal, or other to tailor downstream prompts.",
+      "artifacts": [
+        {
+          "path": "identify_purpose_raw.json"
+        },
+        {
+          "path": "identify_purpose.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/identify_purpose.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/identify_purpose.py"
+        }
+      ]
+    },
+    {
+      "id": "identify_risks",
+      "description": "Build a risk register covering strategic, operational, financial, and location-specific risks.",
+      "artifacts": [
+        {
+          "path": "identify_risks_raw.json"
+        },
+        {
+          "path": "identify_risks.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "currency_strategy",
+          "artifact_path": "currency_strategy.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "physical_locations",
+          "artifact_path": "physical_locations.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/identify_risks.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/identify_risks.py"
+        }
+      ]
+    },
+    {
+      "id": "identify_task_dependencies",
+      "description": "Identify prerequisite relationships between WBS tasks for scheduling.",
+      "artifacts": [
+        {
+          "path": "task_dependencies_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_wbs_level2",
+          "artifact_path": "wbs_level2.json"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/identify_task_dependencies.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/identify_wbs_task_dependencies.py"
+        }
+      ]
+    },
+    {
+      "id": "initial_plan_raw",
+      "description": "",
+      "artifacts": [
+        {
+          "path": "plan_raw.json"
+        }
+      ],
+      "inputs": [],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/initial_plan_raw.py"
+        }
+      ]
+    },
+    {
+      "id": "make_assumptions",
+      "description": "Fill information gaps with grounded assumptions about costs, timelines, and resources.",
+      "artifacts": [
+        {
+          "path": "make_assumptions_raw.json"
+        },
+        {
+          "path": "make_assumptions.json"
+        },
+        {
+          "path": "make_assumptions.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "currency_strategy",
+          "artifact_path": "currency_strategy.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "identify_risks",
+          "artifact_path": "identify_risks.md"
+        },
+        {
+          "from_node": "physical_locations",
+          "artifact_path": "physical_locations.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/make_assumptions.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/make_assumptions.py"
+        }
+      ]
+    },
+    {
+      "id": "markdown_with_documents_to_create_and_find",
+      "description": "Format drafted documents into a structured markdown with roles, templates, and approval steps.",
+      "artifacts": [
+        {
+          "path": "documents_to_create_and_find.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "draft_documents_to_create",
+          "artifact_path": "draft_documents_to_create.json"
+        },
+        {
+          "from_node": "draft_documents_to_find",
+          "artifact_path": "draft_documents_to_find.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/markdown_documents.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/document/markdown_with_document.py"
+        }
+      ]
+    },
+    {
+      "id": "physical_locations",
+      "description": "Determine where the project operates — extract or suggest physical locations.",
+      "artifacts": [
+        {
+          "path": "physical_locations_raw.json"
+        },
+        {
+          "path": "physical_locations.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/physical_locations.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/physical_locations.py"
+        }
+      ]
+    },
+    {
+      "id": "plan_type",
+      "description": "Determine if the plan is purely digital or requires physical locations.",
+      "artifacts": [
+        {
+          "path": "plan_type_raw.json"
+        },
+        {
+          "path": "plan_type.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "classify_domain",
+          "artifact_path": "classify_domain.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/plan_type.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/identify_plan_type.py"
+        }
+      ]
+    },
+    {
+      "id": "potential_levers",
+      "description": "Brainstorm actionable levers — knobs the plan can turn to change outcomes.",
+      "artifacts": [
+        {
+          "path": "potential_levers_raw.json"
+        },
+        {
+          "path": "potential_levers.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "classify_domain",
+          "artifact_path": "classify_domain.md"
+        },
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/potential_levers.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/identify_potential_levers.py"
+        }
+      ]
+    },
+    {
+      "id": "potential_levers_constraint",
+      "description": "Guardrail: verify brainstormed levers respect the user's constraints.",
+      "artifacts": [
+        {
+          "path": "potential_levers_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "potential_levers",
+          "artifact_path": "potential_levers.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "pre_project_assessment",
+      "description": "Evaluate project viability and readiness before detailed planning.",
+      "artifacts": [
+        {
+          "path": "pre_project_assessment_raw.json"
+        },
+        {
+          "path": "pre_project_assessment.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/pre_project_assessment.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/expert/pre_project_assessment.py"
+        }
+      ]
+    },
+    {
+      "id": "premise_attack",
+      "description": "Stress-test the plan's premise through five independent lenses to kill bad ideas early.",
+      "artifacts": [
+        {
+          "path": "premise_attack_raw.json"
+        },
+        {
+          "path": "premise_attack.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/premise_attack.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/premise_attack.py"
+        }
+      ]
+    },
+    {
+      "id": "premortem",
+      "description": "Imagine the project has already failed — identify how and why it would happen.",
+      "artifacts": [
+        {
+          "path": "premortem_raw.json"
+        },
+        {
+          "path": "premortem.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "consolidate_governance",
+          "artifact_path": "consolidate_governance.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "markdown_with_documents_to_create_and_find",
+          "artifact_path": "documents_to_create_and_find.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "questions_and_answers",
+          "artifact_path": "questions_and_answers.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "review_plan",
+          "artifact_path": "review_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/premortem.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/premortem.py"
+        }
+      ]
+    },
+    {
+      "id": "project_plan",
+      "description": "Generate the project plan with goals, milestones, deliverables, and success criteria.",
+      "artifacts": [
+        {
+          "path": "project_plan_raw.json"
+        },
+        {
+          "path": "project_plan.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/project_plan.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/project_plan.py"
+        }
+      ]
+    },
+    {
+      "id": "prompt_adherence",
+      "description": "Score how faithfully the final plan follows the user's original prompt.",
+      "artifacts": [
+        {
+          "path": "prompt_adherence_raw.json"
+        },
+        {
+          "path": "prompt_adherence.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "executive_summary",
+          "artifact_path": "executive_summary.md"
+        },
+        {
+          "from_node": "initial_plan_raw",
+          "artifact_path": "plan_raw.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/prompt_adherence.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/prompt_adherence.py"
+        }
+      ]
+    },
+    {
+      "id": "questions_and_answers",
+      "description": "Anticipate stakeholder questions and provide clear answers from the plan.",
+      "artifacts": [
+        {
+          "path": "questions_and_answers_raw.json"
+        },
+        {
+          "path": "questions_and_answers.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "consolidate_governance",
+          "artifact_path": "consolidate_governance.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "markdown_with_documents_to_create_and_find",
+          "artifact_path": "documents_to_create_and_find.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "review_plan",
+          "artifact_path": "review_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/questions_and_answers.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/questions_and_answers/questions_and_answers.py"
+        }
+      ]
+    },
+    {
+      "id": "redline_gate",
+      "description": "Block prompts that cross policy, legal, or ethical red lines.",
+      "artifacts": [
+        {
+          "path": "redline_gate_raw.json"
+        },
+        {
+          "path": "redline_gate.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/redline_gate.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/redline_gate.py"
+        }
+      ]
+    },
+    {
+      "id": "related_resources",
+      "description": "Identify external resources needed: software, APIs, datasets, services, etc.",
+      "artifacts": [
+        {
+          "path": "related_resources_raw.json"
+        },
+        {
+          "path": "related_resources.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/related_resources.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/related_resources.py"
+        }
+      ]
+    },
+    {
+      "id": "report",
+      "description": "Assemble all pipeline outputs into the final HTML and Markdown reports.",
+      "artifacts": [
+        {
+          "path": "report.html"
+        },
+        {
+          "path": "report.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "consolidate_governance",
+          "artifact_path": "consolidate_governance.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "create_schedule",
+          "artifact_path": "schedule_gantt_dhtmlx.html"
+        },
+        {
+          "from_node": "create_wbs_level1",
+          "artifact_path": "wbs_level1.json"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "executive_summary",
+          "artifact_path": "executive_summary.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "markdown_with_documents_to_create_and_find",
+          "artifact_path": "documents_to_create_and_find.md"
+        },
+        {
+          "from_node": "premise_attack",
+          "artifact_path": "premise_attack.md"
+        },
+        {
+          "from_node": "premortem",
+          "artifact_path": "premortem.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "prompt_adherence",
+          "artifact_path": "prompt_adherence.md"
+        },
+        {
+          "from_node": "questions_and_answers",
+          "artifact_path": "questions_and_answers.md"
+        },
+        {
+          "from_node": "redline_gate",
+          "artifact_path": "redline_gate.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "review_plan",
+          "artifact_path": "review_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "screen_planning_prompt",
+          "artifact_path": "screen_planning_prompt.md"
+        },
+        {
+          "from_node": "self_audit",
+          "artifact_path": "self_audit.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/report.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/report/report_generator.py"
+        }
+      ]
+    },
+    {
+      "id": "review_assumptions",
+      "description": "Flag unreasonable, missing, or contradictory assumptions with recommendations.",
+      "artifacts": [
+        {
+          "path": "review_assumptions_raw.json"
+        },
+        {
+          "path": "review_assumptions.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "currency_strategy",
+          "artifact_path": "currency_strategy.md"
+        },
+        {
+          "from_node": "distill_assumptions",
+          "artifact_path": "distill_assumptions.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "identify_risks",
+          "artifact_path": "identify_risks.md"
+        },
+        {
+          "from_node": "make_assumptions",
+          "artifact_path": "make_assumptions.md"
+        },
+        {
+          "from_node": "physical_locations",
+          "artifact_path": "physical_locations.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/review_assumptions.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/assume/review_assumptions.py"
+        }
+      ]
+    },
+    {
+      "id": "review_plan",
+      "description": "Critically review the near-final plan with targeted questions and SMART recommendations.",
+      "artifacts": [
+        {
+          "path": "review_plan_raw.json"
+        },
+        {
+          "path": "review_plan.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/review_plan.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/plan/review_plan.py"
+        }
+      ]
+    },
+    {
+      "id": "review_team",
+      "description": "Review and validate the assembled team composition.",
+      "artifacts": [
+        {
+          "path": "review_team_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "enrich_team_members_with_environment_info",
+          "artifact_path": "enrich_team_members_environment_info.json"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/review_team.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/review_team.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/team_markdown_document.py"
+        }
+      ]
+    },
+    {
+      "id": "scenarios_markdown",
+      "description": "Format the selected scenario and rejected alternatives into a readable document.",
+      "artifacts": [
+        {
+          "path": "scenarios.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "candidate_scenarios",
+          "artifact_path": "candidate_scenarios.json"
+        },
+        {
+          "from_node": "select_scenario",
+          "artifact_path": "selected_scenario.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/scenarios_markdown.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/scenarios_markdown.py"
+        }
+      ]
+    },
+    {
+      "id": "screen_planning_prompt",
+      "description": "Flag prompts as UNUSABLE when there is high confidence the prompt is garbage.",
+      "artifacts": [
+        {
+          "path": "screen_planning_prompt.json"
+        },
+        {
+          "path": "screen_planning_prompt.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "initial_plan_raw",
+          "artifact_path": "plan_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/screen_planning_prompt.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/screen_planning_prompt.py"
+        }
+      ]
+    },
+    {
+      "id": "select_scenario",
+      "description": "Evaluate trade-offs and select the best scenario with a rationale.",
+      "artifacts": [
+        {
+          "path": "selected_scenario_raw.json"
+        },
+        {
+          "path": "selected_scenario.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "candidate_scenarios",
+          "artifact_path": "candidate_scenarios.json"
+        },
+        {
+          "from_node": "focus_on_vital_few_levers",
+          "artifact_path": "vital_few_levers_raw.json"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/select_scenario.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/select_scenario.py"
+        }
+      ]
+    },
+    {
+      "id": "selected_scenario_constraint",
+      "description": "Guardrail: verify the chosen scenario respects the user's constraints before planning begins.",
+      "artifacts": [
+        {
+          "path": "selected_scenario_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "select_scenario",
+          "artifact_path": "selected_scenario.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "self_audit",
+      "description": "Checklist-based diagnostic: find gaps, contradictions, and unsupported claims across all stages.",
+      "artifacts": [
+        {
+          "path": "self_audit_raw.json"
+        },
+        {
+          "path": "self_audit.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "consolidate_governance",
+          "artifact_path": "consolidate_governance.md"
+        },
+        {
+          "from_node": "convert_pitch_to_markdown",
+          "artifact_path": "pitch.md"
+        },
+        {
+          "from_node": "data_collection",
+          "artifact_path": "data_collection.md"
+        },
+        {
+          "from_node": "expert_review",
+          "artifact_path": "expert_criticism.md"
+        },
+        {
+          "from_node": "markdown_with_documents_to_create_and_find",
+          "artifact_path": "documents_to_create_and_find.md"
+        },
+        {
+          "from_node": "premortem",
+          "artifact_path": "premortem.md"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "questions_and_answers",
+          "artifact_path": "questions_and_answers.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "review_plan",
+          "artifact_path": "review_plan.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        },
+        {
+          "from_node": "swot_analysis",
+          "artifact_path": "swot_analysis.md"
+        },
+        {
+          "from_node": "team_markdown",
+          "artifact_path": "team.md"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2_and_level3",
+          "artifact_path": "wbs_project_level1_and_level2_and_level3.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/self_audit.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/self_audit/self_audit.py"
+        }
+      ]
+    },
+    {
+      "id": "setup",
+      "description": "Read plan_raw.json and produce plan.txt from the template.",
+      "artifacts": [
+        {
+          "path": "plan.txt"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "initial_plan_raw",
+          "artifact_path": "plan_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/setup.py"
+        }
+      ]
+    },
+    {
+      "id": "start_time",
+      "description": "Record the pipeline start time.",
+      "artifacts": [
+        {
+          "path": "start_time.json"
+        }
+      ],
+      "inputs": [],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/start_time.py"
+        }
+      ]
+    },
+    {
+      "id": "strategic_decisions_markdown",
+      "description": "Summarize the lever exploration pipeline into a readable strategic-decisions document.",
+      "artifacts": [
+        {
+          "path": "strategic_decisions.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "enrich_levers",
+          "artifact_path": "enriched_levers_raw.json"
+        },
+        {
+          "from_node": "focus_on_vital_few_levers",
+          "artifact_path": "vital_few_levers_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/strategic_decisions_markdown.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/strategic_decisions_markdown.py"
+        }
+      ]
+    },
+    {
+      "id": "swot_analysis",
+      "description": "Identify strengths, weaknesses, opportunities, and threats tailored to the plan's purpose.",
+      "artifacts": [
+        {
+          "path": "swot_analysis_raw.json"
+        },
+        {
+          "path": "swot_analysis.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "consolidate_assumptions_markdown",
+          "artifact_path": "consolidate_assumptions_full.md"
+        },
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "pre_project_assessment",
+          "artifact_path": "pre_project_assessment.json"
+        },
+        {
+          "from_node": "project_plan",
+          "artifact_path": "project_plan.md"
+        },
+        {
+          "from_node": "related_resources",
+          "artifact_path": "related_resources.md"
+        },
+        {
+          "from_node": "scenarios_markdown",
+          "artifact_path": "scenarios.md"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        },
+        {
+          "from_node": "strategic_decisions_markdown",
+          "artifact_path": "strategic_decisions.md"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/swot_analysis.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/swot/swot_analysis.py"
+        }
+      ]
+    },
+    {
+      "id": "team_markdown",
+      "description": "Compile team roles, contracts, backgrounds, and equipment into one team document.",
+      "artifacts": [
+        {
+          "path": "team.md"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "enrich_team_members_with_environment_info",
+          "artifact_path": "enrich_team_members_environment_info.json"
+        },
+        {
+          "from_node": "review_team",
+          "artifact_path": "review_team_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/team_markdown.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/team/team_markdown_document.py"
+        }
+      ]
+    },
+    {
+      "id": "triage_levers",
+      "description": "Triage levers into primary, secondary, or remove.",
+      "artifacts": [
+        {
+          "path": "triaged_levers_raw.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "identify_purpose",
+          "artifact_path": "identify_purpose.md"
+        },
+        {
+          "from_node": "plan_type",
+          "artifact_path": "plan_type.md"
+        },
+        {
+          "from_node": "potential_levers",
+          "artifact_path": "potential_levers.json"
+        },
+        {
+          "from_node": "setup",
+          "artifact_path": "plan.txt"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/triage_levers.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/lever/triage_levers.py"
+        }
+      ]
+    },
+    {
+      "id": "triaged_levers_constraint",
+      "description": "Guardrail: verify triaged levers still respect the user's constraints.",
+      "artifacts": [
+        {
+          "path": "triaged_levers_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "triage_levers",
+          "artifact_path": "triaged_levers_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "vital_few_levers_constraint",
+      "description": "Guardrail: verify the selected vital levers respect the user's constraints.",
+      "artifacts": [
+        {
+          "path": "vital_few_levers_constraint.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "extract_constraints",
+          "artifact_path": "extract_constraints.md"
+        },
+        {
+          "from_node": "focus_on_vital_few_levers",
+          "artifact_path": "vital_few_levers_raw.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/constraint_checker_stages.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/diagnostics/constraint_checker.py"
+        }
+      ]
+    },
+    {
+      "id": "wbs_project_level1_and_level2",
+      "description": "Merge Level 1 and Level 2 into a unified WBS project tree.",
+      "artifacts": [
+        {
+          "path": "wbs_project_level1_and_level2.json"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_wbs_level1",
+          "artifact_path": "wbs_level1.json"
+        },
+        {
+          "from_node": "create_wbs_level2",
+          "artifact_path": "wbs_level2.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/wbs_project_level1_and_level2.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_populate.py"
+        }
+      ]
+    },
+    {
+      "id": "wbs_project_level1_and_level2_and_level3",
+      "description": "Merge all three WBS levels into the complete project hierarchy (JSON + CSV).",
+      "artifacts": [
+        {
+          "path": "wbs_project_level1_and_level2_and_level3.json"
+        },
+        {
+          "path": "wbs_project_level1_and_level2_and_level3.csv"
+        }
+      ],
+      "inputs": [
+        {
+          "from_node": "create_wbs_level3",
+          "artifact_path": "wbs_level3.json"
+        },
+        {
+          "from_node": "wbs_project_level1_and_level2",
+          "artifact_path": "wbs_project_level1_and_level2.json"
+        }
+      ],
+      "source_files": [
+        {
+          "role": "workflow_node",
+          "path": "worker_plan_internal/plan/nodes/wbs_project_level1_level2_level3.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_populate.py"
+        },
+        {
+          "role": "business_logic",
+          "path": "worker_plan_internal/wbs/wbs_task.py"
+        }
+      ]
+    }
+  ]
+}
