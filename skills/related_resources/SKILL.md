@@ -3,7 +3,7 @@ name: related_resources
 description: Suggest real past or existing projects similar to this one, as references (lessons, risks, contacts).
 inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json]
 outputs: [related_resources_raw.json, related_resources.md]
-tier: low
+tier: mid
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (suggestion_list of
@@ -13,3 +13,7 @@ rationale_for_suggestion}, summary). User prompt = "File '<name>':" sections for
 strategic_decisions.md, scenarios.md, assumptions.md (short consolidated assumptions) and
 project-plan.json (compacted project_plan_raw.json). Markdown: "## Suggestion N - <name>" with
 ### subsections per list (items joined by newlines), then "## Summary".
+
+Tweaks vs PlanExe: tier mid (Sonnet, low effort) and one anti-fabrication sentence in the system
+prompt. With Haiku without thinking the stage lost 3/4: invented campuses, contacts, emails and
+statistics (judge: "actively harmful" for a references stage).

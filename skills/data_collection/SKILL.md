@@ -17,3 +17,6 @@ smart_validation_objective, notes} + summary). User prompt = `File 'strategic_de
 data_collection.md: per item `## N. title`, rationale, then Data to Collect / Simulation Steps / Expert
 Validation Steps / Responsible Parties / Assumptions (`**Sensitivity:** text`) / SMART Validation
 Objective / Notes; final `## Summary`.
+
+Tweak vs PlanExe: a scope/length budget (5-7 most critical areas, concise fields). Without it Haiku
+wrote 10-12 long items (25k-58k output tokens, 5-27 minutes, one 900 s timeout); baselines have 3-4.

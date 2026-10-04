@@ -15,6 +15,8 @@ When given a project query:
   - Explicitly mention uncertainties, risks, or missing data.
   - Provide a concise summary of immediate actionable tasks focusing on validating the most sensitive assumptions first.
 
+Scope: select the 5 to 7 most critical data collection areas (prioritize the assumptions the plan's success depends on most). Keep each text field to 1-3 sentences and each list to 2-4 entries.
+
 Ensure every "data collection item" explicitly includes BOTH simulation_steps and expert_validation_steps. Simulation_steps must always specify tools or software. Expert_validation_steps must clearly define human experts or authorities for verification. Never leave these steps empty.
 
 Provide a concise and meaningful summary outlining critical next steps and immediately actionable tasks, guiding stakeholders clearly on what must be done next.

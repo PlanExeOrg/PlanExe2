@@ -66,6 +66,21 @@ class ClaudeCLITest(unittest.TestCase):
         self.assertEqual(r.data, {"x": "1"})
         self.assertEqual(r.metadata["attempts"], 2)
 
+    @mock.patch("planexe_skill.llm.claude_cli.time.sleep")
+    @mock.patch("planexe_skill.llm.claude_cli.shutil.which", return_value="/bin/claude")
+    @mock.patch("planexe_skill.llm.claude_cli.subprocess.run")
+    def test_falls_back_to_text_json(self, run, _which, _sleep):
+        exhausted = fake_proc(json.dumps({"is_error": True, "result": "structured_output_retry_exhausted"}))
+        bad = fake_proc(json.dumps({"is_error": False, "result": '{"y": 1}'}))
+        good = fake_proc(json.dumps({"is_error": False, "result": 'Here:\n```json\n{"x": "ok"}\n```'}))
+        run.side_effect = [exhausted, bad, good]
+        r = ClaudeCLIBackend(retries=3).complete("s", "u", SCHEMA, "low")
+        self.assertEqual(r.data, {"x": "ok"})
+        self.assertEqual(r.metadata["structured_mode"], "text")
+        second_cmd = run.call_args_list[1].args[0]
+        self.assertNotIn("--json-schema", second_cmd)
+        self.assertIn("missing required key", run.call_args_list[2].kwargs["input"])
+
     def test_child_env_strips_host_vars(self):
         with mock.patch.dict(os.environ, {"CLAUDE_CODE_X": "1", "ANTHROPIC_BASE_URL": "u", "KEEP": "k"}):
             env = child_env()
@@ -81,6 +96,19 @@ class ClaudeCLILiveTest(unittest.TestCase):
             "type": "object", "properties": {"purpose": {"type": "string", "enum": ["business", "personal", "other"]}},
             "required": ["purpose"], "additionalProperties": False}, "low")
         self.assertEqual(r.data["purpose"], "business")
+
+
+
+class JsonSchemaLiteTest(unittest.TestCase):
+    def test_validate(self):
+        from planexe_skill.llm.jsonschema_lite import validate
+        schema = {"$defs": {"I": {"type": "object", "properties": {"k": {"enum": ["a", "b"]}}, "required": ["k"]}},
+                  "type": "object", "properties": {"items": {"type": "array", "items": {"$ref": "#/$defs/I"}},
+                                                   "n": {"anyOf": [{"type": "integer"}, {"type": "null"}]}},
+                  "required": ["items"]}
+        self.assertEqual(validate({"items": [{"k": "a"}], "n": None}, schema), [])
+        problems = validate({"items": [{"k": "z"}, {}], "n": "x"}, schema)
+        self.assertEqual(len(problems), 3)
 
 
 if __name__ == "__main__":

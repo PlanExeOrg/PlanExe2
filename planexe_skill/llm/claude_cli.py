@@ -12,6 +12,7 @@ import tempfile
 import time
 
 from planexe_skill.llm.base import Backend, LLMError, LLMResult
+from planexe_skill.llm.jsonschema_lite import extract_json_object, validate
 
 # Tiers: "high" = reasoning (the early, foundational stages); "mid" = strong model, no thinking
 # (later stages where Haiku isn't good enough); "low" = fast model, no thinking.
@@ -133,46 +134,80 @@ class ClaudeCLIBackend(Backend):
         finally:
             os.unlink(system_file)
 
+    def _text_json_files(self, system_file: str, schema: dict) -> str:
+        """System prompt for plain-JSON mode: the original prompt + the schema to follow."""
+        with open(system_file, encoding="utf-8") as f:
+            system = f.read()
+        fd, path = tempfile.mkstemp(prefix="planexe_skill_system_json_", suffix=".md")
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(system + "\n\n# Output format\nRespond with ONLY one JSON object (no prose, no markdown "
+                    "fences) that conforms to this JSON schema:\n" + json.dumps(schema, indent=1))
+        return path
+
     def _complete(self, system_file: str, user: str, schema: dict | None, tier: str) -> LLMResult:
-        cmd = self.build_command(system_file, schema, tier)
+        # Two ways to get structured output: the CLI's schema-enforced tool ("tool"), and, if that gives
+        # up (structured_output_retry_exhausted, seen with long outputs), plain JSON in the reply that we
+        # parse and validate ourselves ("text"), with the validation problems fed back on a retry.
+        mode = "tool"
+        text_system_file: str | None = None
+        feedback = ""
         last_error: LLMError | None = None
-        for attempt in range(self.retries + 1):
-            start = time.time()
-            try:
-                env = self._run_once(cmd, user)
-            except LLMError as e:
-                last_error = e
-                transient = any(t in str(e).lower() for t in _TRANSIENT)
-                if attempt < self.retries and transient:
-                    time.sleep(min(60, 5 * 2 ** attempt))
-                    continue
-                if attempt < self.retries and "no json output" in str(e).lower():
-                    time.sleep(3)
-                    continue
-                break
-            duration = time.time() - start
-            text = env.get("result") or ""
-            data = env.get("structured_output")
-            if schema is not None and data is None:
-                # Fall back to parsing the text result.
+        try:
+            for attempt in range(self.retries + 1):
+                if mode == "tool" or schema is None:
+                    cmd = self.build_command(system_file, schema, tier)
+                    prompt = user
+                else:
+                    if text_system_file is None:
+                        text_system_file = self._text_json_files(system_file, schema)
+                    cmd = self.build_command(text_system_file, None, tier)
+                    prompt = user + feedback
+                start = time.time()
                 try:
-                    data = json.loads(text)
-                except json.JSONDecodeError:
-                    last_error = LLMError(f"model returned no structured output. Text (head): {text[:500]}")
-                    if attempt < self.retries:
+                    env = self._run_once(cmd, prompt)
+                except LLMError as e:
+                    last_error = e
+                    if schema is not None and "structured_output_retry_exhausted" in str(e):
+                        mode = "text"
+                        continue
+                    transient = any(t in str(e).lower() for t in _TRANSIENT)
+                    if attempt < self.retries and transient:
+                        time.sleep(min(60, 5 * 2 ** attempt))
+                        continue
+                    if attempt < self.retries and "no json output" in str(e).lower():
+                        time.sleep(3)
                         continue
                     break
-            usage = env.get("usage") or {}
-            meta = {
-                "model": self.model_for(tier),
-                "backend": self.name,
-                "duration_seconds": round(duration, 3),
-                "input_tokens": (usage.get("input_tokens") or 0) + (usage.get("cache_read_input_tokens") or 0)
-                                + (usage.get("cache_creation_input_tokens") or 0),
-                "output_tokens": usage.get("output_tokens") or 0,
-                "cost_usd": env.get("total_cost_usd"),
-                "attempts": attempt + 1,
-            }
-            return LLMResult(data=data, text=text, metadata=meta)
+                duration = time.time() - start
+                text = env.get("result") or ""
+                data = env.get("structured_output") if mode == "tool" else None
+                if schema is not None and data is None:
+                    try:
+                        data = extract_json_object(text)
+                        problems = validate(data, schema)
+                    except (ValueError, json.JSONDecodeError) as e:
+                        problems = [f"reply is not a JSON object: {e}"]
+                    if problems:
+                        last_error = LLMError("model output does not match the schema: " + "; ".join(problems[:10]))
+                        mode = "text"
+                        feedback = ("\n\n# Your previous reply was rejected\nFix these problems and reply with the "
+                                    "complete JSON object only:\n- " + "\n- ".join(problems[:20]))
+                        continue
+                usage = env.get("usage") or {}
+                meta = {
+                    "model": self.model_for(tier),
+                    "backend": self.name,
+                    "duration_seconds": round(duration, 3),
+                    "input_tokens": (usage.get("input_tokens") or 0) + (usage.get("cache_read_input_tokens") or 0)
+                                    + (usage.get("cache_creation_input_tokens") or 0),
+                    "output_tokens": usage.get("output_tokens") or 0,
+                    "cost_usd": env.get("total_cost_usd"),
+                    "attempts": attempt + 1,
+                    "structured_mode": mode if schema is not None else None,
+                }
+                return LLMResult(data=data, text=text, metadata=meta)
+        finally:
+            if text_system_file:
+                os.unlink(text_system_file)
         assert last_error is not None
         raise LLMError(f"{last_error}\ncommand: {self.describe_command(cmd)}")
