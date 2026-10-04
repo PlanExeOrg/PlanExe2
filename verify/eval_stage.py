@@ -145,8 +145,11 @@ def eval_one(dag: Dag, skill: Skill, baseline: str, args, templates: dict) -> di
     for f in files_to_judge(skill):
         if not (baseline_dir / f).exists() or not (work / f).exists():
             continue
-        judgments[f] = judge_pair(plan, desc, f, load_for_judging(baseline_dir / f), load_for_judging(work / f),
-                                  seed=hash((skill.name, baseline, f)) & 0xFFFF)
+        try:
+            judgments[f] = judge_pair(plan, desc, f, load_for_judging(baseline_dir / f),
+                                      load_for_judging(work / f), seed=hash((skill.name, baseline, f)) & 0xFFFF)
+        except Exception as e:  # a judge failure must not abort the whole evaluation
+            rec.setdefault("judge_errors", {})[f] = str(e)[:500]
     rec["judgments"] = judgments
     return rec
 

@@ -73,7 +73,7 @@ def _user_prompt(plan: str, stage_desc: str, filename: str, a: str, b: str) -> s
 def judge_pair(plan: str, stage_desc: str, filename: str, baseline_text: str, new_text: str,
                backend: ClaudeCLIBackend | None = None, seed: int | None = None) -> dict:
     """Two blind runs with swapped positions. Returns winner in {'new','baseline','tie'}."""
-    backend = backend or ClaudeCLIBackend(models={"high": JUDGE_MODEL}, efforts={"high": None})
+    backend = backend or ClaudeCLIBackend(models={"high": JUDGE_MODEL}, efforts={"high": "high"})
     rnd = random.Random(seed)
     first_new_is_a = rnd.random() < 0.5
     orders = [first_new_is_a, not first_new_is_a]

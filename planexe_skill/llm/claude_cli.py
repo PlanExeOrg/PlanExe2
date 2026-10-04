@@ -16,7 +16,7 @@ from planexe_skill.llm.base import Backend, LLMError, LLMResult
 # Tiers: "high" = reasoning (the early, foundational stages); "mid" = strong model, no thinking
 # (later stages where Haiku isn't good enough); "low" = fast model, no thinking.
 DEFAULT_MODELS = {"high": "claude-sonnet-5-5", "mid": "claude-sonnet-5-5", "low": "claude-haiku-4-5-20251001"}
-DEFAULT_EFFORTS = {"high": "high", "mid": None, "low": None}
+DEFAULT_EFFORTS = {"high": "high", "mid": "low", "low": None}
 _NO_THINKING_SETTINGS = json.dumps({"alwaysThinkingEnabled": False})
 
 # Messages that are worth retrying after a pause.
@@ -75,9 +75,12 @@ class ClaudeCLIBackend(Backend):
         effort = self.efforts.get(tier)
         if effort:
             cmd += ["--effort", effort]
-        else:
+        elif "haiku" in self.model_for(tier):
             # No reasoning: switch extended thinking off (halves latency; see report.md).
             cmd += ["--settings", _NO_THINKING_SETTINGS]
+        else:
+            # Sonnet 5.5 rejects thinking=disabled; low effort is its fastest mode.
+            cmd += ["--effort", "low"]
         if schema is not None:
             cmd += ["--json-schema", json.dumps(schema)]
         return cmd
@@ -94,7 +97,7 @@ class ClaudeCLIBackend(Backend):
 
     def _run_once(self, cmd: list[str], user: str) -> dict:
         env = child_env()
-        if "--effort" not in cmd:
+        if _NO_THINKING_SETTINGS in cmd:
             env["MAX_THINKING_TOKENS"] = "0"
         if shutil.which(self.executable) is None:
             raise LLMError(f"'{self.executable}' was not found on PATH. Install Claude Code "
