@@ -1,11 +1,65 @@
 {
   "stage": "convert_pitch_to_markdown",
-  "evaluated_at": "2026-10-04T18:32:35",
+  "evaluated_at": "2026-10-04T23:02:54",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 57.2,
+      "seconds": 28.9,
+      "structure_problems": [],
+      "judgments": {
+        "pitch.md": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "The stage tweak requires: map each pitch field to a named ## section in a fixed order with Call to Action last, never turn why_this_pitch_works into a section, and prefer bullet lists over dense paragraphs. Candidate A follows all of this. It has no \"Why This Pitch Works\" section, it puts Call to Action last, and it breaks content into bullets and sub-bullets, so it is scannable. Candidate B breaks the explicit rules. It includes a \"## Why This Pitch Works\" meta-commentary section, which the tweak specifically forbids. It puts Call to Action in the middle instead of last. It leaves the Risks section and Long-term Vision as dense paragraphs. It also says \"five dimensions\" and then lists six, an internal inconsistency that A avoids by saying six. A has a few small issues. The title adds a \"Connecting Continents\" subtitle, and the Project Overview is still somewhat prose-heavy. Overall A is clearly better."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "The stage's prompt tweak requires: map each pitch field to a named `##` section in a fixed order with `## Call to Action` last, never turn `why_this_pitch_works` into a section, and prefer bullet lists over dense paragraphs.\n\nCandidate A breaks the first two rules. It includes a \"Why This Pitch Works\" section, which the tweak forbids because it reads as meta-commentary. It also puts Call to Action in the middle, not last. It leaves the Risks, Collaboration and Long-term Vision sections as dense paragraphs, which goes against the preference for bullets. It also says \"five dimensions\" and then lists six metrics, an internal inconsistency.\n\nCandidate B follows the constraints. It has no why_this_pitch_works section, and Call to Action is last. It breaks risks, stakeholders, ethics and collaboration into bullets and sub-headings, so it is easier to scan. It correctly says \"six dimensions\". It has minor flaws: some Collaboration items are still paragraphs, and the Project Overview is a short paragraph. Both candidates carry the same content and the same questionable claims from the source pitch. B is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 8.7,
+      "structure_problems": [],
+      "judgments": {
+        "pitch.md": {
+          "verdict": "baseline",
+          "score_new": 5.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "The two candidates carry almost the same content, the same sections and the same facts: 60% take-or-pay, 25% ecological offset, 80% buffers, 75% local workforce, a 90-day ask and a Q4 2026 FID. Both end with Call to Action as the stage requires, and neither turns why_this_pitch_works into a section. The differences are about format.\n\nA follows the \"prefer bullet lists over dense paragraphs\" instruction better. It turns Target Audience into a list and splits the Overview strategy into bullets. It also tones down the exclamation-heavy, hype-style prose, which suits the skeptical red-team context. Its weakness is the \"(Decision N)\" tags, which refer to internal decisions the reader can't see. In an investor-facing pitch they read as clutter. They do keep traceability to the raw JSON. A's Metrics section also has an awkward lead-in.\n\nB keeps the Overview and Target Audience as dense paragraphs, which goes against the bullet-list instruction. Its tone is more promotional, with \"Stop planning to maybe build...\", an exclamation mark and \"momentum toward national AI leadership\". Its text is cleaner without the Decision tags, and it expands the PUE and FID acronyms, which helps a general reader. Section order differs between the two, and I can't tell which matches the fixed order.\n\nOverall A complies slightly better with the prompt tweak and is a bit more scannable, so I give it a narrow edge."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "The two candidates are nearly identical in content and section order. Both keep Call to Action last, and neither turns why_this_pitch_works into a section. Both reproduce the same raw-pitch claims (60% take-or-pay, 80% preserved footprint, 75% local workforce, Q4 2026 FID, binding RTE allocation before FID), so both inherit the same weak spots against the skeptical plan.\n\nB follows the prompt tweak's preference for bullets better: it breaks the Project Overview strategy into bullets, where A leaves two dense paragraphs. A also adds hype that is not clearly in the source and runs against the plan's skeptical tone (\"Stop planning to maybe build...\", \"We aren't guessing\", \"without bankrupting the venture\", exclamation marks).\n\nB's weakness is the \"(Decision N)\" tags. They appear to come from the raw JSON and keep the text traceable, but they mean nothing to an external pitch reader and clutter it. B also renames two sections and paraphrases the PUE metric less clearly. A has cleaner section names and states PUE directly.\n\nThe difference is small, and B edges ahead on bullet use and restraint."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 9.7,
       "structure_problems": [],
       "judgments": {
         "pitch.md": {
@@ -17,67 +71,13 @@
               "winner": "new",
               "score_new": 8,
               "score_baseline": 6,
-              "analysis": "The two candidates carry nearly identical content, so the comparison comes down to format and fidelity. The stage asks for a polished, scannable markdown document.\n\nCandidate A keeps long dense paragraphs. Its Risks section is one wall of text, and its Collaboration and Vision sections run on without breaks. It includes a \"Why This Pitch Works\" section, which is meta-commentary about the pitch rather than part of it. That reads oddly in a persuasive pitch document. It may reflect the raw JSON, but it hurts polish. A also says \"five dimensions\" and then lists six metrics. That is an internal inconsistency.\n\nCandidate B breaks the text into short paragraphs, bold lead-ins, bullets and a numbered list. The Risks section is organised per risk with sub-bullets. It correctly says \"six dimensions\". It puts Call to Action last, which is the natural place for it, and splits the audience and call-to-action lists into bullets.\n\nB drops the \"Why This Pitch Works\" section. That is a small possible loss of fidelity, but the section is meta content and arguably should not be in the pitch. B's structure is cleaner and more useful for downstream stages, and it has no counting error."
+              "analysis": "Both candidates contain essentially the same content drawn from the raw pitch, follow the stage's structure (named ## sections, Call to Action last, no why_this_pitch_works section), and are faithful. Differences: A uses \"(Decision 12)\", \"(Decision 1)\", \"(Decision 9)\", \"(Decision 10/2)\" references. These are internal artifacts that make little sense to a pitch reader and clutter the text. A also leaves the Project Overview, Ethical, and Call to Action sections in dense paragraphs, which goes against the prompt tweak to prefer bullets over dense paragraphs. A's Call to Action is a paragraph. A adds slight embellishments (\"Immediate, tangible benefits\") and the \"Stakeholder Benefits\" section is placed before Risks. B uses bullets in the Call to Action and in the Collaboration and Long-term sections, uses a numbered list for metrics, and has a punchy hook (\"Stop selling train tickets, start selling seamless journeys!\"). That hook makes it more persuasive and better matches the \"elevator pitch\" purpose. B's Ethical Considerations is still a paragraph, and the benefits wording \"with immediate, tangible benefits\" is a little awkward. B has a minor oddity: it places Stakeholder Benefits after Metrics. The fixed section order is unknown, so neither can be faulted on that. Overall, B is cleaner, more scannable and more persuasive, and it follows the bullet preference better. A's Decision references are a real flaw."
             },
             {
               "winner": "new",
               "score_new": 8,
               "score_baseline": 6,
-              "analysis": "The two candidates carry nearly identical facts: €40B, 20 years, 100 m depth, the contingency and fund figures, and the 2046 operational date. They differ in structure and in a few details.\n\nA is more scannable, which is the stage's stated goal. It breaks risks into bolded categories with bullet mitigations and puts the metrics in a numbered list. It splits stakeholders and collaboration partners into separate paragraphs and shows the call-to-action audiences as a bullet list. It moves Call to Action to the end, which reads logically. It correctly says \"six dimensions\" and lists six. It omits the \"Why This Pitch Works\" section. That section is meta-commentary about the pitch rather than pitch content, so dropping it is defensible, though it could count as lost content.\n\nB keeps \"Why This Pitch Works\", which reads as self-referential filler in a pitch document. It leaves the Overview, Risks, Target Audience, Call to Action and Long-term Vision sections as dense walls of text, which is weak for a \"scannable\" document. It also contains an internal inconsistency: \"five dimensions\" is followed by six bullets. Its Call to Action sits in the middle of the document. It does use bullets for stakeholders and ethics, and it bolds key figures.\n\nA is better overall on formatting fitness and correctness."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260516_datacenter_in_france",
-      "ran_ok": true,
-      "seconds": 21.8,
-      "structure_problems": [],
-      "judgments": {
-        "pitch.md": {
-          "verdict": "tie",
-          "score_new": 5.5,
-          "score_baseline": 5.5,
-          "runs": [
-            {
-              "winner": "baseline",
-              "score_new": 5,
-              "score_baseline": 6,
-              "analysis": "The two candidates carry nearly identical content: the same decisions (1, 3, 4, 6, 8, 10), the same 60% take-or-pay threshold, the same 25% ecological offset, the same 80% preserved footprint, the same ≤1.20 PUE and the same 90-day call to action. The differences are in tone and fidelity.\n\nCandidate A is punchier and a little more scannable, with bold lead-ins on the metrics and a separate Timeline line. It adds hype that looks like embellishment of the source pitch: \"Stop planning to maybe build\", \"massive upside capture\", \"without bankrupting the venture\" and \"Ironclad\". It also adds \"minimizing sprawl and environmental impact\" and \"Immediately budget\". The plan prompt demands a skeptical, non-promotional tone, so this extra puffery works against it, and it risks adding claims the raw pitch did not make. It also drops the \"(Decision 2)\" reference that ties the 80% preserved footprint to a decision.\n\nCandidate B is more measured and stays closer to the likely source content. It keeps the decision references, including Decision 2 for the 80% buffer, which helps traceability for downstream stages. It frames the 90-day requirement as needed to maintain the Q4 2026 Phase 1 Construction FID timeline, which is a faithful restatement. It has an intro sentence and a clean structure, though it is slightly less punchy.\n\nBoth share the same underlying flaws. A Q4 2026 Phase 1 FID within 90 days is unrealistic and conflicts with the plan's Phase 0 timeline. The \"75% of the local workforce\" wording is odd. Neither marks external dependencies as \"uncontrolled\". These flaws come from the raw input and affect both equally.\n\nOverall the two are close. B is slightly better on faithfulness and restraint, and A is slightly better on scannability."
-            },
-            {
-              "winner": "new",
-              "score_new": 6,
-              "score_baseline": 5,
-              "analysis": "The two candidates are almost identical in content. Both share the same flaws against the plan prompt. Neither mentions Hauts-de-France or the red-team skepticism about feasibility. Both state a \"Q4 2026 Phase 1 FID\" within 90 days, which conflicts with a Phase 0 of about a year. Both present \"75% local workforce\" and \"25% ecological offset\" as settled. Both are promotional rather than skeptical. Neither marks external approvals as uncontrolled.\n\nThe differences are small. B keeps the \"red-team filter\" framing from the source, so it has slightly more fidelity to the prompt's skeptical stance. B's Metrics section is a labeled, bolded list, which is easier to scan. Its Call to Action is also cleaner. A has an awkward added line (\"This is defined as controlled, strategic aggression\") and a confusing sentence (\"Success is measured beyond standard operational efficiency goals\"). A also drops the red-team framing and the \"Stop planning to maybe build\" hook. A is slightly more muted, which suits the skeptical brief a little. B has stray trailing whitespace between bullets, but that is only a formatting issue. Overall B is marginally better on scannability and fidelity to the source."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260514_cross_border_rail_ticketing",
-      "ran_ok": true,
-      "seconds": 15.5,
-      "structure_problems": [],
-      "judgments": {
-        "pitch.md": {
-          "verdict": "new",
-          "score_new": 7.5,
-          "score_baseline": 6.0,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "The two candidates carry almost the same content: the same strategy, the same 40% goal, the same risks and mitigations, the same metrics and the same call to action. They also share the same gaps. Neither mentions the €1.5B public budget, the corridors, the 18/30/60-month milestones or the flight-modal-shift goal, so those gaps don't separate them.\n\nThe differences are in polish and fitness for a persuasive, scannable pitch.\n\nA opens with a punchy hook (\"Stop selling train tickets, start selling seamless journeys!\"). It also turns the call to action into a scannable bullet list. It states its risks up front and keeps the text free of internal references.\n\nB leaves internal artifact references in the reader-facing text: \"(Decision 12)\", \"(Decision 1)\", \"(Decision 9)\" and \"(Decision 10/2)\". A pitch reader can't interpret these, so they look like leaked pipeline detail and weaken the polish. B's call to action is a dense paragraph and its opening is flatter. B does state that it is \"consciously avoiding a high-risk, rapid overhaul\". That ties well to the \"realistic scenario\" instruction, but A also frames its approach as a \"realistic path\".\n\nA is slightly better because it is more persuasive, more scannable and free of the cryptic decision references."
-            },
-            {
-              "winner": "new",
-              "score_new": 8,
-              "score_baseline": 6,
-              "analysis": "The two candidates have nearly identical content and structure, since both convert the same raw pitch. They differ in polish and fidelity to the pitch format.\n\nCandidate A leaks internal artifacts into a pitch meant for external decision-makers: \"(Decision 12)\", \"(Decision 1)\", \"(Decision 9)\" and \"(Decision 10/2)\". These references are meaningless to the reader and make the document less polished. A also adds filler such as \"enhancing overall customer experience\" and \"ensuring financial resilience\", mostly as bolded tag phrases. Its Call to Action is a dense paragraph, which is less scannable. The opening is flatter and more descriptive.\n\nCandidate B opens with a punchy hook (\"Stop selling train tickets, start selling seamless journeys!\"), which suits an elevator pitch. It turns the Call to Action into discrete bullets, uses a numbered list for metrics, and has no internal decision IDs. Its Collaboration Opportunities section is clearer, and the Long-term Vision is bulleted. It is more scannable and more persuasive, and its content is just as faithful.\n\nNeither candidate mentions the €1.5B budget, corridors or the 30/60-month milestones. That is probably because the raw pitch lacked them, so it does not separate the two. Overall B better meets the stage goal of a polished, scannable markdown document."
+              "analysis": "Both candidates are complete and faithful to the same content. Candidate A follows the \"prefer bullets over dense paragraphs\" tweak much better: Risks, Long-term Vision, Call to Action and others are bulleted or numbered. Its section order looks like the natural pitch-field order (inferred, since the JSON isn't shown), it ends with Call to Action, and it opens with a strong hook. It has no internal jargon. Candidate B keeps several dense paragraphs (Risks, Long-term Vision, Call to Action). It leaks internal references such as \"(Decision 12)\", \"(Decision 1)\", \"(Decision 9)\" and \"(Decision 10/2)\", which mean nothing to the pitch's external audience. It also places Stakeholder Benefits ahead of Risks, which may deviate from the expected order. A is more scannable and polished."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 37.0,
+      "seconds": 7.7,
       "structure_problems": [],
       "judgments": {
         "pitch.md": {
           "verdict": "new",
-          "score_new": 6.0,
+          "score_new": 6.5,
           "score_baseline": 5.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 6,
+              "score_new": 7,
               "score_baseline": 5,
-              "analysis": "The two candidates are almost identical in substance. They share the same flaws:\n- Both use the odd \"Leipzig Builder Initiative\" framing and \"subsidy vouchers / retrofits\", which contradicts the no-major-construction brief.\n- Both misstate the Month 4 gate as \"securing the full €3.5M tranche\" when only €1.5M is released.\n- Both give \"100% adherence\" and \"guarantee\" claims, and the 60% outreach figure, and omit most of the prompt's detail: staffing, the other gate criteria, equity metrics, and worker protection.\n\nDifferences:\n- A adds a \"Strategic Alignment\" paragraph with meta-commentary (\"The pitch's strength lies in…\"). That reads as filler and is not appropriate in a polished pitch.\n- A claims \"tested, non-construction solutions\", which is an unsupported overclaim for a new pilot.\n- A also adds a rhetorical opener, more bolded emphasis, and an italicised \"*guarantee*\".\n- A's numbered call to action and slightly richer risk phrasing are minor positives.\n- B is tighter and more scannable. It keeps the same facts, adds \"culturally competent outreach\", and has a cleaner call to action without the meta fluff.\n\nOverall B is marginally better because it is cleaner and has fewer unsupported claims, though the gap is small."
+              "analysis": "The two candidates contain almost the same content. They share the same source quirks, such as \"full €3.5M budget tranche\" and the \"triage script bypass\". The differences come down to how well each follows the stage's formatting rules.\n\nCandidate A puts `## Call to Action` last, as the stage tweak requires. It does not turn `why_this_pitch_works` into a section, and its Target Audience section is a plain list of audiences. Its weakness is that some sections, such as Stakeholder Benefits, Ethical Considerations and Collaboration Opportunities, are dense paragraphs. The tweak says to prefer bullets.\n\nCandidate B breaks the fixed-order rule by placing `## Long-Term Vision` after `## Call to Action`. Its \"Target Audience and Strategic Alignment\" section includes \"The pitch's strength lies in its alignment with…\". This is the meta-commentary about the pitch that the tweak explicitly says to avoid. Its advantage is more consistent use of bullets and numbered lists, which makes it more scannable.\n\nThe tweak's explicit rules were call-to-action-last and no meta-commentary. B breaks both, so A follows the stage instructions better, despite B's better bullet use."
             },
             {
               "winner": "new",
               "score_new": 6,
               "score_baseline": 5,
-              "analysis": "The two pitches carry nearly identical content. Both share the same weaknesses: the factual slip \"release of the full €3.5M budget tranche\" at Month 4 (only €1.5M is released then), the odd name \"Leipzig Builder Initiative\", the vague \"triage script bypass\" and \"premium-priced local procurement\", \"guarantee\" overclaims, and an undefined \"Level 2+\". Neither mentions the specific vulnerable-group, equity or worker-protection content from the prompt. The differences are small. A ends with the Call to Action, which suits a persuasive pitch, while B puts the Long-Term Vision after it, which weakens the close. B adds fluff and meta-commentary (\"The pitch's strength lies in its alignment…\", \"complacency is unaffordable\") and overclaims \"tested, non-construction solutions\". B's bolding, bulleted collaboration section and numbered call-to-action list are slightly easier to scan. Overall A is slightly tighter with a better pitch flow; the edge is marginal."
+              "analysis": "Both candidates convert the same pitch content into similar sections, with Call to Action last. The differences are in fidelity and in whether either one adds material.\n\nCandidate A adds content that is not in the source pitch and that distorts it. It adds a \"Target Audience and Strategic Alignment\" paragraph, which is exactly the kind of meta-commentary about the pitch that the prompt tweak warns against (\"The pitch's strength lies in...\"). It adds the words \"*guarantee*\", \"tested\", \"surgical\" and \"decisively\". It also adds \"Level 2+\" and turns \"Month 4 performance audit\" into \"full €3.5M\". Some of this is in B too, because it comes from the source. Beyond that, A makes its own changes:\n- It inserts \"Immediate Resilience Deployment\" into the title.\n- It adds \"Two critical pathways\" to the Call to Action.\n- It adds \"mandatory two-person field teams\".\n- It adds \"GDPR... to bypass immediate digital hurdles\".\n- It adds \"Phase 1 procurement\".\n\nA also uses more bullet lists and bolding, which is more scannable, and it has a slightly different section order. Its \"Target Audience and Strategic Alignment\" section is wordy meta-commentary and a mild violation of the tweak.\n\nCandidate B is more faithful and cleaner. It uses short sections, bullets in the Call to Action, and a closing line, \"Our strategy is built on pragmatic controls, not ambition\", that is a bit of flourish. Its Stakeholder Benefits section is paragraphs, not bullets, which is a small miss on \"prefer bullets\". Its Ethical Considerations and Collaboration sections are dense paragraphs, so it follows the bullet preference less well than A. A uses bullets in Collaboration and Stakeholder Benefits.\n\nBoth contain the same questionable claims from the source. Examples are the \"triage script bypass\", the premium-priced procurement, and the claim that the full €3.5M is released at Month 4, which is factually inconsistent with the plan's staged €2.0M + €1.5M. Neither candidate fixes these, and A repeats the €3.5M claim as well.\n\nOverall, B is more faithful and has less meta-commentary. A is slightly more bullet-heavy but adds the meta-commentary section. I lean slightly toward B."
             }
           ]
         }

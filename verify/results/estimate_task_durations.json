@@ -1,11 +1,38 @@
 {
   "stage": "estimate_task_durations",
-  "evaluated_at": "2026-10-04T18:22:52",
+  "evaluated_at": "2026-10-04T21:38:59",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 119.3,
+      "seconds": 120.1,
+      "structure_problems": [],
+      "judgments": {
+        "task_durations.json": {
+          "verdict": "baseline",
+          "score_new": 5.0,
+          "score_baseline": 7.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 7,
+              "analysis": "Both candidates cover the same task IDs in the same order and use the required schema. They differ in content fidelity and in how realistic the durations are.\n\nCandidate A is richer, with many specific figures. But it shows several faults:\n- **Task misalignment:** Near the end, its content seems to be shifted against the tasks. c718d76a is described as the maintenance trust fund, bc0b951d as corrosion monitoring, and both 52e1f159 and a7d62d66 as oceanographic monitoring. That leaves no handover/acceptance task, which the sequence of licensing, handover, fund capitalization, corrosion-monitoring activation, oceanographic monitoring, commercial launch and decommissioning implies.\n- **Factual errors and invented detail:** \"Typhoon and storm events during monsoon seasons\" does not fit the Strait of Gibraltar. \"IPCC Intergovernmental Oceanographic Commission\" is a garbled name. Hess is named as a subsea engineering firm. It assumes Morocco uses 15kV AC. It invents specific budgets and limits (€500M–€1B surveillance, a €200–400M climate budget).\n- **Internal inconsistency:** The emergency vessel task cites 12–18 month lead times but has a realistic duration of 270 days.\n- **Inflated durations:** Many design and preparatory tasks run 2–4 years, such as corrosion protection design at 720 days and climate design at 600 days. Against a 20-year horizon these look padded.\n\nCandidate B is more concise, but its content lines up with the tasks. For example, 52e1f159 covers the corrosion baseline, bc0b951d the trust fund, c718d76a handover and punch-list, and 958777ce decommissioning with reserve capitalization. It stays consistent with the plan prompt, using the 100 m depth, 10 atm, 500-point sensing and the cetacean windows. Its durations are generally plausible. Some are on the short side, such as the 180-day prototype testing, but they are sensibly ranged. A few phase-2 estimates (2370 days realistic for construction, 1643 days for sealing) are well reasoned. Its risk text is shorter and more generic in places.\n\nOverall, B's better task alignment and fewer factual errors outweigh A's extra detail."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 8,
+              "analysis": "Both candidates cover the same task IDs in the same order, with valid min ≤ realistic ≤ max values and risk and mitigation text for each. They differ in four ways.\n\n1. **Parent/child consistency.** A's durations roll up sensibly.\n   - Initiation is 730 days, and its children (540, 540, 450, 400, 660) all fit inside it.\n   - Design is 850 days, and its children (580, 400, 240, 180, 270) fit.\n   - Mobilization is 900 days, with children of 730, 540, 365 and 540.\n   B's do not.\n   - Initiation is 600 days, but its geotechnical child is 730.\n   - Design is 1095 days, but structural design is 1460.\n   - Mobilization is 550 days, but fabrication yards are 750.\n   - Several operations-phase tasks (e.g., decommissioning plan, 730) are also long for what they cover.\n   These are bottom-up estimation errors that would break the schedule downstream.\n\n2. **Factual errors in B.**\n   - It cites \"typhoon and storm events during monsoon seasons\" in the Strait of Gibraltar.\n   - It cites pressurization testing at \"100+ atmospheres\", when the plan says 10 atm at 100 m.\n   - It claims Morocco uses 15 kV AC and gives Spain a 25 kV AC alternative as a fact.\n   - It invents specific budgets and splits (€500M–1B, €200–400M, €15–20B and others).\n   - It invents named vendors.\n\n3. **Task mapping in B.** In the last chunk, B appears to misassign descriptions. It treats c718d76a as the trust fund, bc0b951d as corrosion monitoring, and 52e1f159 as oceanographic monitoring, which duplicates a7d62d66. A maps these as handover, trust fund and corrosion monitoring, which is distinct and coherent. A's mapping is more plausible, though I can't see the WBS to confirm it.\n\n4. **Plan fidelity.** A ties its risks to prompt facts: 100 m depth, the 14 km corridor, 500 monitoring points, 8,000–12,000 workers, cetacean migration windows, and the EUR/MAD currency pair. Its mitigations are concise and decision-useful. B is more verbose and has some good ideas, but its extra length adds invented specifics and errors.\n\nA also handles short operational tasks better (trust fund 120 days, launch 120 days). B's much wider ranges, such as 365–1095 for the decommissioning plan, are less defensible."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 44.9,
       "structure_problems": [],
       "judgments": {
         "task_durations.json": {
@@ -17,40 +44,13 @@
               "winner": "new",
               "score_new": 7,
               "score_baseline": 6,
-              "analysis": "Both candidates cover all tasks, and the structure is complete and consistent (min < realistic < max). Both cite plan-specific details such as the Strait of Gibraltar, 100 m depth, the 14 km corridor, the 1:50 model, the cetacean windows and the Iberian vs standard gauge.\n\nA is concise, with tighter ranges and some plausible figures. Several durations look optimistic for a first-of-a-kind €40B megaproject. The 1:50 prototype segment testing is 180 days realistic. The maritime traffic system is 240 days. Mobilization of 8,000-12,000 workers plus platforms, yards and energy is 900 days, and the supply-chain and fabrication-yard task is 540 days. The mitigations are generic but reasonable.\n\nB gives longer, more realistic durations for the long-lead items. Prototype testing is about 1,095 days, with 6-12 month test cycles. Mobilization is about 1,825 days. Fabrication yards and supply chain are about 1,825 days. Treaty ratification is about 850 days, in line with its stated 12-18 month parliamentary process. Energy and HVDC cable work is about 1,260 days. Its ranges are wider, which is honest about uncertainty, although a few are very wide. Its risks and mitigations are more detailed and tied to the plan, for example named operators, ports and fabrication sites, and quantified gates. It also has minor flaws: \"monsoon patterns\" in the Strait, a \"10-knot+\" current, an invented rail standard (25kV AC, ERTMS L3), and some verbose text. The durations still fit within the 20-year frame, and the 5x min/max spreads are broad but acceptable.\n\nOverall B is more realistic and more useful for downstream scheduling, so it edges ahead despite its verbosity."
+              "analysis": "The two candidates are close. B has slightly more plan-specific, skeptical content, and its gate durations are more realistic. A is tighter and more conservative on some build tasks. I could not see the WBS task names, so I inferred task scope from the risk text, which makes some of the comparison uncertain.\n\nCandidate A: Ranges are internally consistent and the text is concise. It is more conservative than B on external-authority Phase 0 work (RTE studies 150-300 days vs B's 90-240; Phase 0 land assembly 180-365 vs B's 120-270). It also gives heavier durations to fiber build (365-600 days) and cooling build (450-700 days), which is more realistic for a long terrestrial route to Paris and Brussels. Several estimates look too optimistic for a skeptical red-team plan: the Phase 1 gate review (needs 60% take-or-pay, binding RTE allocation and DGSI sign-off) gets 45-180 days, the Phase 2 FID gets 15-60 days (realistic 30), and PUE validation gets 30-120 days. Some mitigations assume uncontrolled external outcomes (e.g. 'ensure pre-paid status is formally acknowledged to guarantee priority'). Risks and mitigations are generic in places.\n\nCandidate B: Risks and mitigations are more detailed and tied to the plan (Enedis, DREAL, DDETSPP, the 12.5M training commitment, 70% FX hedge, 30% ecological offset, Q4 2026 DGSI meeting, 32.2/128.8 km2 split). Its Phase 1 gate and FID durations are more skeptical and realistic (gate review 365-912 days, FID 120-300 days, PUE validation 120-480 days with a 90-day baseline). Flaws: it sets a Phase 0 'Q1-Q2 2026' regulatory commitment target although the plan date is May 2026, so that window has largely passed; it has a '€X per hectare' placeholder; it proposes weakening the gate to 50% tenant commitment as a contingency, which cuts against gate discipline; it proposes 'permanent representatives from regulatory bodies' and 'binding commitment letters' from heat partners, which are unrealistic assumptions about external parties; fiber at 120-360 days (realistic 210) looks too short; site mobilization at 180 days looks short, though its scope is unclear. The mitigation text is wordy.\n\nVerdict: B's richer specificity and more skeptical treatment of gates and FID outweigh A's better fiber and cooling estimates. B's flaws are real, so the margin is small."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both candidates cover all 48 task ids, use the correct schema, and have min <= realistic <= max for every task. They differ on realism and specificity.\n\nA gives durations that fit a €40B, 20-year megaproject with unprecedented technology. Examples: financing about 900 days, climate design 450 days, corrosion protection 600 days, prototype segment testing about 1095 days, decommissioning plan 360 days. Its ranges are wide, which reflects the uncertainty. Its delay risks and mitigations are plan-specific, citing the Renfe/ONCF gauge issue, cetacean migration windows, Tarifa/Tangier-Med yards, HVDC cable lead times and the 1:50 model testing. That detail is useful downstream. A also has flaws:\n- It invents some facts, such as \"seasonal monsoon patterns\" in the Strait, 10-knot currents, and 2-4% equity sharing.\n- Some mitigation lists are overlong.\n- A few figures are speculative.\n\nB's text is cleaner and shorter, and it ties risks to the plan's own subtasks. Several of its durations are implausibly short for the work involved: prototype segment testing at 180 days, climate design at 180 days, corrosion protection at 240 days, a 90-day decommissioning plan, and a 240-day maritime traffic study and system. Its Phase 2 mobilization at 900 days and its financing at 540 days also look optimistic. Its risk and mitigation text is more generic, though it does reference some plan facts such as 8,000-12,000 personnel and 500 monitoring points.\n\nA is more useful for downstream scheduling and risk work despite a few hallucinated details, so A wins."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260516_datacenter_in_france",
-      "ran_ok": true,
-      "seconds": 57.0,
-      "structure_problems": [],
-      "judgments": {
-        "task_durations.json": {
-          "verdict": "new",
-          "score_new": 7.0,
-          "score_baseline": 4.5,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 4,
-              "analysis": "Both cover the same 19 tasks in the same schema. A gives detailed, plan-specific delay risks and mitigations: DREAL, DGSI/ANSSI, RTE, fragmented parcels, brownfield liabilities, liquid-cooling lead times, RoW/fiber, and tenant thresholds. Its durations are better calibrated for major items, with Phase 1 at 1095 days and wide min/max ranges, and PUE validation spanning seasons. Weaknesses: some invented specifics (€12.5M, Q4 2026, named consulting firms), a \"EUR-denominated hardware\" slip, and an optimistic RTE study estimate. B is terse and generic, with only a few plan-specific touches (SAFER, ICPE, 32.2 km²). It also has clearly implausible durations: Phase 1 at 365 days, PUE validation at 45 days, and a Phase 2 gate at 90 days. Its ranges are narrower, and its RTE study estimate is the more realistic of the two. Overall A is more useful and more realistic."
-            },
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Candidate B is better overall. Its durations are more realistic for a skeptical, externally dependent plan. The task descriptions are inferred from the content of each entry, because the WBS itself is not shown.\n\nWhere A is weaker: the Phase 1 parent task (405106e7) gets 180–540 days, realistic 365. The prompt defines Phase 1 as years 1–3 and a 500 MW–1 GW build, so about 730 days or more is needed. A's mitigation text for that task is about Phase 0 DREAL pre-approval, which suggests it misread the task. RTE allocation (180 days), the Phase 2 gate review (90 days) and PUE validation (45 days) are optimistic. PUE validation under sustained load across seasons takes longer, and the prompt stresses that anything depending on RTE, DGSI or tenants is uncontrolled. Its delay risks and mitigations are concise but thin.\n\nWhere A is stronger: its Phase 0 parent (270 days) and RTE grid impact studies (210 days) are more realistic than B's. It is also less verbose and invents fewer specifics.\n\nWhere B is weaker: several entries are over-detailed or invented. It names \"Ernst & Young, Savills\", cites a specific \"Q4 2026\" checkpoint and a \"€12.5M\" figure, and refers to \"Decision 4\". It calls hardware costs \"EUR-denominated\" even though the prompt treats GPU spend as USD. The Phase 0 parent (210 days) and RTE studies (90 days) are optimistic. The site mobilization estimate (210 days) is possibly low. Its mitigations are very long and occasionally unrealistic, such as \"100% of landholders before construction\".\n\nWhere B is stronger: the Phase 1 parent (730–1400 days, realistic 1095) fits the roadmap. Its RTE allocation (450 days), the Phase 2 gate review (540 days), PUE validation across four seasons (365 days) and tenant commitments (450 days) are more credible. Its min–max ranges are wide and fit the uncertainty of external authorities. It identifies plan-specific risks: RTE's biennial planning cycles, DGSI precedent gaps and competing hyperscalers.\n\nOn balance, the Phase 1 error and the optimistic gate and approval estimates in A outweigh B's verbosity and minor invented details."
+              "analysis": "Both candidates cover all 20 task IDs and use the correct schema. Each task has min ≤ realistic ≤ max. The difference is in depth, plan-specificity and calibration.\n\nCandidate A has detailed, plan-specific delay risks and mitigations. It cites DREAL, DGSI/ANSSI, RTE and Enedis, the 32.2 km² buildable and 128.8 km² buffer split, the 70% forward hedge, the 60% take-or-pay threshold, the Q4 2026 DGSI meeting, the 18-month holding period and heat-reuse fallback gates. Its mitigations are concrete: a gate at 120 days, a contingency gate path, modular RTE studies, and PUE validation in spring and autumn. Its ranges are generally wide and sensible, such as anchor tenants at 180–730 days, and RTE binding allocation, the Phase 1 sign-off and PUE validation all at several months. Weaknesses:\n- Some mitigations are unrealistic or presume external commitments, for example permanent regulator representatives in a Phase 0 office and \"executive-level commitment … within Q1-Q2 2026\". The prompt says not to assume such commitments.\n- The Phase 2 FID gate at 210 days is arguably long.\n- The fiber estimate of 210 days is a bit optimistic.\n\nCandidate B is terse, with one or two generic sentences per task, and it often repeats generic advice such as \"dedicated liaison\" or \"contingency budget\". It does include some useful specifics, such as SAFER approvals and ICPE classification. Its durations are more conservative for fiber (480 days), site mobilization (600 days) and RTE study (210 days). But the 600-day mobilization looks inflated. Other estimates look too optimistic for the stated risks: PUE validation at 45 days realistic, holding-cost modeling at 40 days, and the 60% gate at 90 days. Its risk analysis is thin and less decision-useful. It also contradicts its own skeptical framing, for example by treating \"pre-paid\" as guaranteeing RTE priority.\n\nOverall, A is more specific, more skeptical and more useful downstream, despite some overreaching mitigations. B is cleaner but shallow, and some of its durations are poorly calibrated."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 47.0,
+      "seconds": 40.2,
       "structure_problems": [],
       "judgments": {
         "task_durations.json": {
           "verdict": "new",
           "score_new": 7.0,
-          "score_baseline": 5.0,
+          "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
               "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates cover all 24 task ids in the same order and use the required fields, so format fit is equal. They differ in depth and in how realistic the durations are.\n\nA gives multi-factor delay risks and concrete mitigations that fit the plan: SNCF/DB/ÖBB alignment, DG MOVE and State Aid constraints, BEUC and PRM bodies, and dependencies between tasks. Its duration ranges are wide, roughly 3–4x from min to max. That suits EU multi-stakeholder consensus work such as liability frameworks, clearing cost-attribution agreements and reduction-card recognition. Its realistic values (35–105 days) are plausible for work that needs approval from DG MOVE, national regulators and dozens of operators. A has minor weaknesses. Some mitigations are verbose or add invented detail (\"35+ stakeholders\", Basel III, a 2-FTE integrator), and a few ranges are very wide (240 days).\n\nB gives a single risk and a single mitigation per task. These are plausible and tie to specific plan items (Three Strikes, Emergency Float Reserve, Fast-Track, Phase 2 modes). Many of its durations look too optimistic for EU-level work. Examples are 25 days for a legal liability review, 20 days for the tiered liability model, 25–35 days for reduction-card standardisation, and 18 days for regulatory fast-track criteria. Its ranges are also narrow, about 2–3x, so they under-represent delay risk in a politically complex program. Its mitigations are sometimes unrealistic, for example \"mandate consensus\" or \"DG MOVE mandate\" to force cooperation. It is thinner on risk identification.\n\nOverall, A is more decision-useful and more realistic for downstream scheduling. B is concise but optimistic and shallow."
+              "score_baseline": 6,
+              "analysis": "A: Concise, correctly reads PRM as persons with reduced mobility, and ties to plan-specific concepts (Three Strikes, Emergency Float Reserve, PRD). But many durations are optimistic for EU-level, multi-stakeholder legal and consensus work (e.g. 25 days for liability legal interpretation, 35 days for reduction-card scope), which conflicts with the \"realistic, not aggressive\" instruction. B: More realistic ranges for governance, legal and negotiation tasks, with richer, more actionable risks and mitigations that name specific operators and stakeholders. Weaknesses: it misreads PRM as \"Passenger Rights Management\", invents funding envelopes and a time-zone rotation, and has some parent/child inconsistency (parent 32 days, child 35). Overall B's schedule estimates and risk content are somewhat more decision-useful, but its factual slips keep the margin small."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both candidates cover all 24 tasks with the required fields, and both keep min < realistic < max. The difference is realism and depth.\n\nCandidate A gives short durations with tight ranges. Examples are a 25-day liability framework, 30-day cost-attribution negotiation and 40-day governance design. For an EU multi-stakeholder program involving DG MOVE, 20+ operators and competition/State Aid issues, that is optimistic. The plan asked for a realistic scenario, not an aggressive one. A's risks and mitigations are concise and reference plan elements such as Three Strikes, the float reserve and the Public Reference Distributor.\n\nCandidate B gives longer realistic durations with wide ranges, which better reflect regulatory and political negotiation. Its risks and mitigations are more detailed and catch real issues. These include State Aid compliance, dependency of the clearing-mechanism task on the cost-agreement task, accounting-standard heterogeneity, and benchmarking against Shift2Rail and SESAR. B is more verbose, and a few specifics look invented, such as the latency target and the FTE count. Overall it is more decision-useful and gives better inputs for downstream scheduling."
+              "analysis": "Both cover all 24 tasks with valid schema and ordered min/realistic/max. A gives richer, multi-factor risks and concrete mitigations, and its longer durations fit EU multi-stakeholder work and the \"realistic, not aggressive\" instruction. A has flaws: it expands PRM as \"Passenger Rights Management\", it invents small €20-50M funding envelopes, and it adds an arbitrary 65% threshold. B is concise and ties well to plan-specific terms (Three Strikes, Emergency Float Reserve, Fast-Track, Decision 6) and expands PRM correctly. But it gives only one risk per task, some of its mitigations are assertions rather than ways to reduce delay, and its durations look optimistic for legal and standards negotiation. A has a slight edge on depth and realism."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 69.6,
+      "seconds": 62.4,
       "structure_problems": [],
       "judgments": {
         "task_durations.json": {
-          "verdict": "tie",
+          "verdict": "new",
           "score_new": 6.5,
-          "score_baseline": 6.0,
+          "score_baseline": 5.5,
           "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 6,
+              "analysis": "Both candidates cover all 30 task IDs with valid min ≤ realistic ≤ max. A is concise and its durations fit the Month 2 gate better, but a few mitigations conflict with the plan (multi-year MOUs, \"city-wide rollout\" in a pilot, an incentive scheme for housing managers), and it never names the city (Leipzig). B is more plan-specific, naming Leipzig and the likely languages, and its mitigations are more operational (named roles, day-level checkpoints, contingency sites). However, B is verbose, has some overly long estimates (45–75 days for the facility assessments), and may have mismatched content on task 06c7. B is slightly better overall."
+            },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "The task names are not shown, only IDs, so this comparison rests on the risk and mitigation content and on how plausible the durations look.\n\nCandidate A gives several concrete, plan-specific delay risks per task. These cover GDPR checkpoints, a paper-based registry, multilingual materials, two-person canvassing safety, union constraints, and the Month 2 and Month 4 gates. Its mitigations are actionable, and its min/max/realistic ranges are consistent with each other. Weaknesses: some durations look long for administrative tasks (for example 14 days realistic for what seems to be a Finance Director MCR protocol discussion), and some mitigations are generic.\n\nCandidate B is terse, with one risk and one mitigation per task. Some are sharp, such as the pre-audit simulation and the 50-household voucher pilot. Its durations are tighter and sometimes more realistic. However, it has odd or inconsistent elements: a dangling \"Decision 12, Option 1\" reference, \"multi-year MOUs\" for a 12-month program, scaffolding for installers, and some mitigations that don't match the stated risk. Its thin risk coverage gives downstream stages less to work with.\n\nOverall, A is more thorough and decision-useful, though sometimes padded. B is leaner but shallower, with a few inconsistencies."
-            },
-            {
-              "winner": "baseline",
-              "score_new": 6,
-              "score_baseline": 7,
-              "analysis": "Both candidates cover all 30 task ids and keep days_min <= days_realistic <= days_max.\n\nCandidate A has concise, task-specific delay risks and mitigations. Some examples are the Finance Director sign-off for the MCR release, a 50-household voucher pilot, the 5,000-kit acceptance team, and the \"Decision 12\" supplier pre-vetting. Its durations are tight and fit a plan with a Month 2 gate and a Month 4 gate. Weak points are that a few mitigations are odd for a 12-month pilot, such as \"multi-year MOUs\" and incentives for housing managers. Some ranges also look optimistic, for example 7–15 days for training that includes liability and translation work.\n\nCandidate B has longer, more exhaustive risk lists and wider ranges, and it adds details such as Leipzig, language names, and Cohen's kappa. The mitigations read as generic project-management boilerplate: steering committees, weekly coordination meetings, dedicated coordinators, and escalation protocols. The risk text is verbose, with long semicolon-separated lists. The wide, conservative ranges (for example 12–55 days) are less decision-useful, and several estimates are long enough to threaten the Month 2 gate.\n\nB does reflect that some parent tasks bundle several activities, and its more cautious municipal timings can be realistic. On balance, A's specificity and fit to the timeline make it slightly more useful downstream."
+              "analysis": "Both candidates cover the same 30 task IDs in the same order and use the required schema. A gives detailed, plan-specific risks and actionable mitigations (MCR dual authorization, 95% script-reliability audit, Regional Health Authority data access, Leipzig, Turkish/Polish/Arabic language needs, GDPR/DPO oversight, paper registries). Its durations are mostly plausible. Weaknesses: the 8c62ff42 facility assessments task runs 45-75 days, which is long against a ~60-day Month-2 gate, and the kit procurement task (36110bec) is estimated at 5-14 days while its own mitigation cites a 30-day delivery guarantee. B is concise, with one risk and one mitigation per task. Some of its mitigations are specific (2-day GDPR training, 50-household voucher pilot, penalty clauses), and its kit procurement estimate of 15-35 days is consistent with the 30-day guarantee. But it is thinner and has odd or ill-fitting items: multi-year staffing MOUs in a 12-month pilot, incentives for housing managers, and customs delays inside the EU. Its governance and legal durations (e.g. 3-10 days for the MCR protocol, 2-7 days for fund segregation) look optimistic. Overall A is more useful and better fitted to the plan, despite its own inconsistencies."
             }
           ]
         }

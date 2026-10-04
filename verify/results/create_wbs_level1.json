@@ -1,29 +1,29 @@
 {
   "stage": "create_wbs_level1",
-  "evaluated_at": "2026-10-04T17:55:02",
+  "evaluated_at": "2026-10-04T20:34:41",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 4.5,
+      "seconds": 3.0,
       "structure_problems": [],
       "judgments": {
         "wbs_level1.json": {
-          "verdict": "tie",
-          "score_new": 6.5,
-          "score_baseline": 6.5,
+          "verdict": "baseline",
+          "score_new": 5.5,
+          "score_baseline": 8.0,
           "runs": [
             {
               "winner": "baseline",
               "score_new": 6,
-              "score_baseline": 7,
-              "analysis": "Both candidates have the right structure: a UUID id, a project_title and a final_deliverable, each within the 1-3 word limit. Both identify the Gibraltar link between Spain and Morocco. A's title, \"Gibraltar Subsea Tunnel\", is more descriptive than B's \"Gibraltar Tunnel\", which is plain and could describe any Gibraltar tunnel. A's deliverable, \"Operational Transoceanic Tunnel\", reuses the prompt's own wording (\"transoceanic\") and states the end state. Strictly, the Strait of Gibraltar is not an ocean crossing, but the prompt uses that term. B's deliverable, \"Operational Submerged Tunnel\", is accurate to the floating, submerged design concept. A's title and deliverable together carry more information (subsea plus transoceanic), while B's wording is slightly closer to the design. The difference is small, and I give A a slight edge for the more informative, prompt-aligned title."
+              "score_baseline": 8,
+              "analysis": "Schema requires both fields to be 1-3 words. A: \"Gibraltar Subsea Tunnel\" (3 words), \"Operational Transoceanic Tunnel\" (3 words). Both comply. B: \"Gibraltar Transoceanic Tunnel\" (3 words), \"Operational submerged rail crossing\" (4 words) — violates the 1-3 word constraint. B's deliverable is more descriptive (rail, submerged) but breaks the format limit. A's title uses \"Subsea,\" which fits a submerged tunnel; \"Transoceanic\" in the deliverable echoes the prompt's wording. A is compliant and adequate. B is slightly more informative but non-compliant. A wins on format fitness."
             },
             {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates follow the schema, with 1-3 word fields and a UUID. A's deliverable, \"Operational Submerged Tunnel\", matches the plan's distinctive floating submerged-tunnel concept. B uses \"Subsea\", which can suggest a bored seabed tunnel, and \"Transoceanic\", which echoes the prompt but is geographically off for the Strait of Gibraltar. B's title and deliverable also overlap more. Neither mentions rail. A is slightly more precise."
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 8,
+              "analysis": "The schema requires both fields to be 1-3 words. Candidate A's project_title (\"Gibraltar Transoceanic Tunnel\") is 3 words, which is fine. Its final_deliverable (\"Operational submerged rail crossing\") is 4 words, so it breaks the length constraint. Candidate B meets the limit in both fields: \"Gibraltar Subsea Tunnel\" is 3 words and \"Operational Transoceanic Tunnel\" is 3 words. A is slightly more descriptive because it mentions rail and \"submerged\", but the constraint is explicit and matters for downstream stages. B's wording is also accurate for the plan. \"Subsea\" fits a tunnel under the Strait, and \"Gibraltar\" fits the Spain–Morocco location. B's deliverable omits rail, but the title and the plan context cover that. B follows the format and A does not."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 4.4,
+      "seconds": 3.2,
       "structure_problems": [],
       "judgments": {
         "wbs_level1.json": {
-          "verdict": "new",
-          "score_new": 7.0,
-          "score_baseline": 5.5,
+          "verdict": "tie",
+          "score_new": 6.0,
+          "score_baseline": 5.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 6,
-              "score_baseline": 5,
-              "analysis": "Both candidates match the schema (project_title, final_deliverable, id). A's title, \"Hauts-de-France Buildout\", is vague. It could imply the full 9 GW buildout and doesn't say it is an AI campus. Its deliverable, \"Phase 1 Operational\", is 3 words but doesn't name the thing delivered. B's title, \"Hauts-de-France AI Campus\", is specific and descriptive. Its deliverable, \"Operational Phase 1 Campus\", is clearer, but it is 4 tokens and slightly exceeds the 1-3 word limit if \"1\" counts as a word. Neither captures the red-team, go/no-go feasibility framing. B is more informative for downstream stages, while A follows the word limit more strictly. B is slightly better overall."
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "The schema asks for 1-3 words for each field. Both candidates exceed this a little: A's title has 4 words (\"Hauts-de-France AI Campus\", or 3 if you count the hyphenated name as one), and its deliverable has 4 words. B's title has 2-3 words and its deliverable has 3 words, so B follows the length limit better.\n\nA is more specific and descriptive. \"AI Campus\" names the project's nature. \"Operational 1 GW Data Center\" gives a concrete deliverable. It does hardcode 1 GW, the upper end of the Phase 1 range of 500 MW–1 GW. It also ignores the red-team framing, in which the project may be downsized or cancelled. Even so, a Phase 1 deliverable is a reasonable choice.\n\nB's title, \"Hauts-de-France Buildout\", is vague. It doesn't mention AI or data centers. \"Phase 1 Operational\" is also vague. It says nothing about what is operational, and it only makes sense with the plan in hand. As a WBS Level 1 deliverable it is weak for downstream stages.\n\nOverall, A is more informative and decision-useful, and its slight overrun of the word limit is minor. B follows the limit but is too generic."
             },
             {
-              "winner": "new",
-              "score_new": 8,
+              "winner": "baseline",
+              "score_new": 5,
               "score_baseline": 6,
-              "analysis": "Both candidates are valid, schema-conforming WBS Level 1 outputs and both pick Phase 1 as the final deliverable, which suits a skeptical, gated plan. A's title, \"Hauts-de-France AI Campus\", names the location and the nature of the project. B's title, \"Hauts-de-France Buildout\", is vague and could describe any construction project in the region. A's deliverable, \"Operational Phase 1 Campus\", states what is delivered. B's deliverable, \"Phase 1 Operational\", is terser and doesn't say what is operational. Both fit the 1-3 word limit if \"Hauts-de-France\" counts as one word. A is more informative and more useful to downstream stages."
+              "analysis": "Candidate A: Both fields fit the 1–3 word schema, counting \"Hauts-de-France\" as one hyphenated word. \"Phase 1 Operational\" matches the plan's realistic, gated deliverable. The plan is skeptical and allows downsizing or cancellation, so committing to Phase 1 rather than 9 GW fits. The weakness is vagueness: \"Buildout\" says nothing about AI or a data center and could suggest the full 9 GW campus. \"Phase 1 Operational\" is a status rather than a named deliverable.\n\nCandidate B: The title \"Hauts-de-France AI Campus\" is more descriptive and informative, and it fits the 3-word limit. The final deliverable \"Operational 1 GW Data Center\" is five words, so it clearly breaks the 1–3 word constraint. It also fixes the target at 1 GW, the top of the 500 MW–1 GW Phase 1 range, which slightly overcommits. It does name a concrete deliverable, which helps downstream stages.\n\nComparison: B is more specific and descriptive. A follows the format constraint and avoids implying a full 9 GW campus or committing to 1 GW. Because this is a strict review of format fidelity, B's clear length violation outweighs its extra descriptiveness. A is slightly better, though its vagueness keeps the margin narrow."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 4.2,
+      "seconds": 3.1,
       "structure_problems": [],
       "judgments": {
         "wbs_level1.json": {
-          "verdict": "new",
-          "score_new": 6.5,
-          "score_baseline": 5.5,
+          "verdict": "tie",
+          "score_new": 6.0,
+          "score_baseline": 6.5,
           "runs": [
-            {
-              "winner": "new",
-              "score_new": 6,
-              "score_baseline": 5,
-              "analysis": "Both candidates follow the schema (1-3 word title and deliverable, with an id). B's title, \"Cross-Border Rail Ticketing\", is slightly better because it names the cross-border scope. A's deliverable, \"Interoperable European Ticketing\", is more concrete and plan-specific, since it reflects OSDM interoperability and the European scope. B's \"Seamless Single Ticketing\" is vaguer and marketing-like. A's deliverable is more useful for downstream WBS stages, which gives A a small edge overall."
-            },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 6,
-              "analysis": "Both candidates are valid WBS Level 1 outputs. A's title (\"Cross-Border Rail Ticketing\") keeps the cross-border focus but may count as 4 words if the hyphen is split. Its deliverable (\"Seamless Single Ticketing\") is vague and describes a quality more than an end product. B's title (\"Rail Through-Ticketing\") is 2-3 words under either counting and uses the program's core concept, though it drops \"cross-border\" and \"European\". B's deliverable (\"Interoperable European Ticketing\") is more specific, restores the European scope, and matches the OSDM/interoperability goals. B's two fields are complementary, while A's repeat \"ticketing\". B is slightly better on word-limit compliance and deliverable quality, and A is slightly better on title scope."
+              "analysis": "The schema requires both fields to be 1-3 words. Candidate A has a 3-word title (\"Cross-Border Rail Ticketing\", if hyphenated words count as one) and a 3-word deliverable (\"Seamless Single Ticketing\"). Both fit the limit. A's deliverable is vague marketing language. It says nothing about the system, the platform, or the program.\n\nCandidate B has a 3-word title (\"European Rail Through-Tickets\"). It names Europe and uses the plan's key concept of through-tickets. Its deliverable, \"Unified cross-border ticketing system\", is 4 words, or 3 if \"cross-border\" counts as one. That is borderline. It is more concrete, because it says a system is the deliverable, which matches the plan's technical, commercial and governance arrangements. It is a little more descriptive and fits the plan better, but it risks breaking the word limit.\n\nHyphenated words are usually counted as one word, so B likely complies. B's title is also more distinctive and keeps the \"European\" scope. A's \"Cross-Border Rail Ticketing\" is fine but generic. B is slightly better on specificity and fidelity to the plan's focus on through-tickets, and the word-count risk is small."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 7,
+              "analysis": "The schema requires both fields to be 1-3 words. Candidate A's final_deliverable, \"Unified cross-border ticketing system\", is 4 words (5 if the hyphen is split), so it breaks the limit. Its title, \"European Rail Through-Tickets\", is 3 words only if \"Through-Tickets\" counts as one. Candidate B's title, \"Cross-Border Rail Ticketing\", and its deliverable, \"Seamless Single Ticketing\", are both 3 words, or 4 for the title if the hyphen is split. Content-wise, A is slightly more concrete: its deliverable names a system, and \"Through-Tickets\" fits the plan's through-ticket focus. B's \"Seamless Single Ticketing\" is more of a quality slogan than a deliverable, but it is acceptable and still captures the single through-ticket objective. Because B follows the stage's explicit length constraint and A's deliverable does not, B is modestly better."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 4.0,
+      "seconds": 3.0,
       "structure_problems": [],
       "judgments": {
         "wbs_level1.json": {
           "verdict": "new",
           "score_new": 6.0,
-          "score_baseline": 5.0,
+          "score_baseline": 4.5,
           "runs": [
             {
               "winner": "new",
               "score_new": 6,
-              "score_baseline": 5,
-              "analysis": "Both candidates use the same title, \"Leipzig Heat Response\". Leipzig is a plausible non-capital EU city of about 600k, which is above the 150k–400k range in the prompt. That flaw is shared, so it doesn't separate them. Both final deliverables are three words and fit the schema. The difference is in the final deliverable. A's \"Reduced Heat Impact\" states an outcome or goal, not something delivered. The plan can't guarantee it, and it can't be a WBS root deliverable. B's \"Operational heat response\" names a working capability: the operating heat response program. The plan's end-of-month-12 deliverables include a repeatable Playbook and a functioning response system. B therefore fits better, although it largely repeats the title and isn't as concrete as \"Heat Response Playbook\". B's casing is slightly inconsistent with the title, but that is trivial. B is a bit better."
+              "score_baseline": 4,
+              "analysis": "Both candidates share the same project title, \"Leipzig Heat Response\". They are valid in format, and both final deliverables stay within the 1-3 word limit. The difference is the final_deliverable.\n\nA: \"Reduced Heat Impact\" describes an outcome, not a deliverable. It is a goal, and it is vague. The plan's actual end-of-month-12 deliverables are the Heat Response Playbook, a cost model, an evaluation report and a Year-2 roadmap. A WBS Level 1 final deliverable should be a tangible thing the project produces. \"Reduced Heat Impact\" cannot be handed over, and it can't be verified as a work product.\n\nB: \"Operational Heat-Alert System\" is a tangible, deliverable-like noun phrase. It covers triggering, governance and operations. It leaves out the playbook and the other end-of-project documents. It also slightly overweights alerting and underweights cooling centers and outreach, but it still reads as a system the city could run. It counts as 3 words if the hyphenated \"Heat-Alert\" is read as one word. That fits the limit.\n\nA \"Heat Response Playbook\" would have been the best answer. Of the two, B is closer to a concrete deliverable. A is outcome-oriented but matches the prompt's goal of reducing harm. Even so, B is more useful for downstream WBS decomposition."
             },
             {
               "winner": "new",
               "score_new": 6,
               "score_baseline": 5,
-              "analysis": "The two candidates share the same project title, \"Leipzig Heat Response\". Leipzig is a plausible non-capital EU city of the right size, so both are equally faithful there. Both are also within the 1–3 word limit. The only difference is the final deliverable. A, \"Operational heat response\", describes a deliverable, namely a functioning, executable response program. That fits the plan's emphasis on a municipality being able to \"execute immediately\". It largely repeats the title and does not name the concrete end-of-month-12 outputs: the Heat Response Playbook, cost model, evaluation report and Year-2 roadmap. B, \"Reduced Heat Impact\", states the goal or outcome, not something the project hands over. The plan itself says outcomes can only be shown with caveats, such as attribution of mortality. It is also vaguer, though it does capture the aim of cutting harm. Neither names the Playbook, which would have been the best choice. A is a little closer to a tangible deliverable and to what the pipeline's \"final deliverable\" field is meant to capture. B reads more like an objective. The margin is slim."
+              "analysis": "Both candidates use the same project title, \"Leipzig Heat Response\". It is plausible and concise, and Leipzig is a mid-sized non-capital EU city. The schema asks for 1-3 words in each field. Both titles are 3 words, so both fit.\n\nThe difference is the final deliverable. A gives \"Operational Heat-Alert System\", which is 3 words if the hyphenated \"Heat-Alert\" counts as one. It is a concrete, deliverable-like noun. It is narrower than the plan, though. The plan's end-of-month-12 deliverables are a Heat Response Playbook, a cost model, an evaluation report and a Year-2 roadmap. It also covers cooling centers, outreach, home interventions and worker protection, so an alert system covers only the triggering part.\n\nB gives \"Reduced Heat Impact\", which is an outcome or goal, not a tangible deliverable. It matches the goal of reducing harm, but a WBS Level 1 final deliverable should be something that can be produced. It is vague and cannot be verified. It is also 3 words.\n\nA better fits the deliverable concept, but its scope is narrow. B captures the goal but is not a deliverable. Neither is ideal. A would be a more useful anchor for WBS decomposition, since an operational system could plausibly include centers, outreach and so on. I lean slightly toward A."
             }
           ]
         }

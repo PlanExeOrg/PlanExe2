@@ -1,29 +1,29 @@
 {
   "stage": "prompt_adherence",
-  "evaluated_at": "2026-10-04T18:23:35",
+  "evaluated_at": "2026-10-04T22:44:55",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 53.7,
+      "seconds": 22.7,
       "structure_problems": [],
       "judgments": {
         "prompt_adherence.md": {
           "verdict": "new",
-          "score_new": 7.5,
+          "score_new": 8.0,
           "score_baseline": 3.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 7,
+              "score_new": 8,
               "score_baseline": 4,
-              "analysis": "A's math is consistent (158/185 ≈ 85%), its table is ordered by directive index, and its Issues section is correctly sorted by importance × (6 − adherence). It flags a real budget tension: the plan treats €40B as a capital budget and adds contingency and dedicated budgets on top, for roughly €50–54B in total. It backs this with specific quoted evidence. The issue 8 critique, about pre-construction gates, is more arguable. B's math is correct (190/190), but it gives a suspiciously perfect 100% with no issues and misses the apparent budget overrun. Its directive list also duplicates the anchoring directive and adds \"exclusively\", which the prompt does not say. A is more discerning and gives downstream stages more usable signal."
+              "analysis": "Candidate A's arithmetic is correct (197/215 ≈ 92%). Its table is sorted by directive index, and its Issues section lists every directive below 5 in the correct severity order (12, 10, 10). The issues cite concrete evidence of real tensions with the prompt: mobilization pushed to 2030–31 despite \"ASAP\", supplementary budgets stacked on top of the €40B, and conditional-execution language. I can't see the plan files, but the evidence is specific and plausible. Weaknesses: some directives are redundant, and the \"Softened\" score on directive 9 is arguably harsh. Candidate B's arithmetic is also correct, but it gives a suspiciously perfect 100% with no evidence and no Issues section. It also duplicates the anchoring directive (4 and 8). For a prompt with a hard €40B cap, a 20-year timeline and an ASAP start, a perfect score looks too lenient and is less useful for downstream stages."
             },
             {
               "winner": "new",
               "score_new": 8,
               "score_baseline": 3,
-              "analysis": "Candidate A gives 100% adherence, with every directive scored 5/5 and no Issues section. The arithmetic and format are correct, but the result looks too lenient. Directives 4 and 8 are near-duplicates (anchoring at 100 m). The budget directive is scored 5/5 even though Candidate B's quoted evidence shows the plan adding contingency and extra dedicated budgets on top of the €40B. A perfect score on such an ambitious prompt is not credible and gives downstream stages no signal. Candidate B gives 85%, with budget at 2/5 and the \"execute, not study\" intent at 2/5. Its math is correct (158/185 ≈ 85%) and the table is sorted by index. The Issues section covers every directive below 5, sorted by importance × (6 − adherence), with concrete evidence quoted from the plan. The budget issue is clearly valid. The \"unsolicited caveat\" issue is somewhat debatable, since gating is sensible engineering, but it is still a legitimate observation. B is more faithful to the stage's purpose of surfacing deviations and is more useful downstream."
+              "analysis": "A gives a uniform 100% with correct arithmetic but redundant directives (4 and 8), no ASAP-start directive, and no critical check against the plan. It misses the delayed mobilization and the supplementary budgets outside the €40B envelope. B's math is correct (197/215 ≈ 92%), and its Issues section is correctly limited to directives below 5 and correctly sorted by severity (12, 10, 10). It surfaces real deviations with concrete evidence: softened execution intent, the delayed start versus ASAP, and extra budgets beyond €40B. B's directive list has minor overlap but is more insightful and more useful downstream."
             }
           ]
         }
@@ -32,7 +32,34 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 131.0,
+      "seconds": 50.6,
+      "structure_problems": [],
+      "judgments": {
+        "prompt_adherence.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the required format. The weighted math is correct in each (A: 319/355 = 90%; B: 302/320 = 94%), and the summary tables and issue ordering by importance × (6 − adherence) are correct in each. The difference is in directive extraction and scoring depth. A's 15 directives cover the prompt's main pillars: the \"uncontrolled\" milestone rule, the split-campus analysis, the required output sections, the skeptical tone, the Phase 0 and Phase 1 scopes, the budget in EUR with USD/FX tracking, and the land-use categories. B's directives are fragmentary and omit several of these. B also splits footprint and power into separate directives, which adds little. B's four issues are thinner. Its PUE issue is weak, since 1.20 is within the 1.15–1.25 range. Its Issue 3 refers to an \"Issue 2 analysis\" that does not exist. A's seven issues are more specific and actionable, such as the missing hall counts, the thin FX hedging mechanics, and the sparse kill criteria and open questions. A is a more representative and more discriminating adherence assessment."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates follow the required format: an overall % with the math, a summary table sorted by directive index, and an Issues section for every directive scoring below 5, sorted by importance × (6 − adherence). I recomputed the sums and they are correct. A gives 302/320 = 94%. B gives 319/355 ≈ 90%. Each lists every sub-5 directive in the right severity order.\n\nThe difference is in directive extraction and issue quality. A's 15 directives include trivial or redundant items, such as \"Establish an extreme campus\", \"Location must be Hauts-de-France\" and \"Phase 1 power 500 MW–1 GW\". They omit much of what the prompt asks for. Missing items include the Phase 0 scope, the Phase 1 scope, the required 22-section output list, the \"uncontrolled\" milestone labeling, the single-vs-split-campus analysis, and the skeptical-not-promotional tone requirement. A's issues are also thin and partly confused. Issue 3 refers to an \"Issue 2 analysis\" that doesn't exist, and Issue 8 gives PUE 1.20 only 4/5 for an odd reason, since 1.20 is inside the range.\n\nB's directives are consolidated and cover the prompt more completely. They include the roadmap phases, the full required-output checklist, the decision gate with its tenant conditions, the \"uncontrolled\" labeling rule, the split-campus challenge, and the budget and FX requirements. B's issues give concrete evidence and explanations. They catch the missing building-height rationale, the thin FX hedging detail, the land-use model not being broken down quantitatively, and the missing kill-criteria and 180-day-plan structure. B has a minor typo (\"ANSSY\"), and some of its directives bundle several requirements together. Its more critical scoring also fits the \"strict reviewer\" intent better.\n\nOverall, B is more comprehensive and more useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 32.4,
       "structure_problems": [],
       "judgments": {
         "prompt_adherence.md": {
@@ -44,40 +71,13 @@
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both reports have correct math and correct severity ordering. B extracts the prompt's distinctive directives (no invented RTE/EDF/DGSI commitments, the \"uncontrolled\" label, split-campus challenge, required-analyses list, skeptical tone). A's directives are generic or redundant and omit those. B's issues cite concrete evidence, such as DGSI sign-off and binding RTE commitment listed as deliverables, so it gives more useful downstream feedback. A's 94% looks lenient, and its Issue 3 explanation is muddled. B's minor flaw is labelling 4/5 as \"Fully honored\" for directive 13."
+              "analysis": "Both candidates compute their weighted sums correctly (A: 202/240 = 84%; B: 326/340 ≈ 96%), sort the summary table by index, and sort the Issues by importance × (6 − adherence) correctly. They also cover every directive scored below 5. A's directive extraction is coarser but covers the main prompt elements: stakeholders, pain points such as Lisbon–Tallinn, the budget plus the separate private IT estimate, the success metrics, and the realistic-scenario instruction. B's finer split leaves out or dilutes several of those: stakeholders, reduction cards, the separate private IT estimate, halved complaints and the air-to-rail shift, the 60-month corridor deadline, and Lisbon–Tallinn. B therefore cannot flag gaps in those areas, and its 96% looks inflated. A's issues cite plan content (the Decision 7 de-scope, the T+90 min threshold, the reduction-card grace period, the €900M and €150M allocations) and flag a plausible real gap, that the private IT estimate is not prominently separated. B's issue evidence is weak. Issue 2 quotes the prompt rather than the plan. Issue 15's \"evidence\" describes the language style rather than the plan's content. A's 84% is better calibrated for a plan with a partially deferred integration-hooks scope and a \"realistic scenario\" instruction. A is somewhat generic on Issues 2 and 11, but it is more thorough, better grounded and more useful downstream."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both candidates have correct arithmetic. Their importance×adherence sums, importance sums and percentages check out (A: 270/335 = 81%; B: 302/320 = 94%). Both Issues sections are sorted correctly by importance × (6 − adherence) and cover only directives scoring below 5.\n\nThe difference is in directive extraction and scoring rigor.\n\nCandidate A extracts a broader set of directives that maps well onto the prompt's key requirements:\n- the single-location constraint\n- the footprint, 9 GW and Phase 1 power targets\n- red-team intent\n- no invented commitments\n- the \"uncontrolled\" labelling rule\n- cooling and water\n- the split-campus challenge\n- the land-use model\n- the anchor-tenant gate\n- the EUR/USD treatment\n- the list of mandatory analyses\n\nIts issues are concrete and decision-useful. It notes that the plan lists \"Formal DGSI sign-off\" and \"Binding RTE commitment secured\" as deliverables, which softens the no-invented-commitments rule. It flags that the \"uncontrolled\" labelling is not applied. It flags that building heights and hall sizes are missing. It also notes the plan leans toward a \"Pragmatic Scale-Up\" rather than a genuine red-team stance. Weaknesses: directive 9 lumps PUE together with building heights and hall sizes, directives 5 and 14 overlap, and issue 13 is labelled \"Fully honored\" at 4/5.\n\nCandidate B's directive list is thinner and less well chosen.\n- It includes a vague directive 1 (\"establish an intentionally extreme campus\") and one oddly typed as \"Banned\".\n- It splits red-team intent into two directives.\n- It omits the \"uncontrolled\" labelling rule, the split-campus analysis, the heat-reuse and other mandatory analyses, and the USD/FX hedging detail.\n- Its scoring is lenient: 94%, with 5/5 for the no-invented-commitments directive.\n- Issue 3 is muddled. Its evidence and explanation are confusing, and it penalises the plan for partitioning the footprint, which the prompt explicitly asked for.\n- It does flag the missing building heights.\n\nOverall, A is more faithful to the prompt's requirements and gives more insightful issues. B is more lenient and misses several key directives."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260514_cross_border_rail_ticketing",
-      "ran_ok": true,
-      "seconds": 134.3,
-      "structure_problems": [],
-      "judgments": {
-        "prompt_adherence.md": {
-          "verdict": "new",
-          "score_new": 7.0,
-          "score_baseline": 5.5,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates have correct arithmetic. I recomputed A as 326/340 and B as 308/325. Both tables match their formulas, and both Issues sections are sorted correctly by importance × (6 − adherence). The differences are in directive coverage and in how useful the issues are.\n\nCandidate A has 16 directives, but it skips several substantive ones from the prompt. These include the passenger-rights backstop, the separate estimate of private carrier IT investment, the halving of distributor complaints, and the goal of beating flying on short-haul routes. Its issues are mostly nitpicks. Issue 2 is marked down only because the plan does not quote the list of operators, and Issue 15 rests on weak evidence. It does flag the de-scoping of bus, ferry and air hooks to after the five-year target. It also notes that bicycle reservations are not mentioned, which is a useful catch. However, A scores most items 5/5 and so gives little signal.\n\nCandidate B has 15 directives with broader coverage. It covers the backstop, separate private IT costs, complaint halving and competitiveness with air, and it merges the timeline milestones. Its issues are more decision-useful. It flags the 12-month grace period that delays accessibility and reduction cards to month 30. It flags the de-scoping of bus, ferry and air hooks to after the five-year target as contradicting the prompt. It flags that the 60-month full-corridor milestone is only implicit. Weaknesses: it merges several features into one directive (#8), and it labels the \"realistic scenario\" directive \"Banned\", which is the wrong type. It also repeats the five-year horizon in #12 and #14.\n\nOverall, B is more faithful to the prompt's full directive set and gives more insightful, discriminating findings. A has a slightly cleaner directive split but weaker issue content."
-            },
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates have correct arithmetic (A: 308/325 ≈ 95%; B: 326/340 ≈ 96%), a proper table, and correct severity sorting, so format is not a differentiator. A's directive extraction is more complete: it covers the budget with the separate private IT estimate, the success metrics (40% through-tickets, complaints halved, train versus air) and the realistic-scenario constraint. B omits the complaints-halved and train-versus-air metrics, the private IT estimate and the 60-month milestone. A's issues are substantive: the 60-month corridor milestone is not explicit, accessibility and reduction cards get a 30-month grace period, and bus, ferry and air hooks are deferred past the five-year horizon. B's issues are weaker. Issue 2 penalises the plan for not quoting the full operator list, and Issue 15 has thin evidence. B scores the bus, ferry and air de-scoping 4/5 and rates the timeline directive 5/5 without noting the 60-month or grace-period issues, which is lenient. B's note on missing bicycle reservations is a plausible catch. A is more rigorous and more useful."
+              "analysis": "Both candidates have correct arithmetic and correct issue sorting (A: 326/340 = 95.9%; B: 202/240 = 84.2%). A extracts 16 granular directives but omits several important ones: the separate private carrier IT estimate, the stakeholder list, the complaints-halved and rail-vs-air success metrics, and the Lisbon–Tallinn pain points. Its issues are weak. Issue 2 is marked down for not quoting the operator list, and Issue 15's \"evidence\" is a stylistic remark about the plan's language, not evidence of scenario choice. Its 96% looks inflated. B bundles directives more coarsely, but it covers stakeholders, the private-IT estimate, the pain points and all the success metrics. Its issues are more substantive and decision-useful: bicycle reservations mentioned only in passing, reduction cards given a grace period, the T+90 backstop threshold, the private-IT estimate not being prominent, bus/ferry/air hooks deferred, and the scenario rationale being implicit. B's 84% is more plausible and gives downstream stages more to act on."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 98.4,
+      "seconds": 50.0,
       "structure_problems": [],
       "judgments": {
         "prompt_adherence.md": {
           "verdict": "tie",
-          "score_new": 6.0,
+          "score_new": 5.5,
           "score_baseline": 5.5,
           "runs": [
             {
               "winner": "baseline",
               "score_new": 5,
               "score_baseline": 6,
-              "analysis": "Both candidates follow the required format. The weighted math is correct in each: A is 347/350, and B is 330/350. Both have a summary table and an Issues section for directives scored below 5.\n\nA's strength is a concrete, verifiable catch. The plan picked Leipzig, which has about 616k residents, and the prompt requires 150k–400k. The plan's own \"representative of sub-400k scale\" wording looks like a rationalization. A flags this. It scores it 4/5, which is too lenient for a violated explicit constraint, and it gives the overall plan 99%, which looks inflated. A's directive list also leaves out several explicit prompt elements: the Month 2 and Month 4 gate criteria, the individual scope areas such as worker protection and public comms, and the metrics and deliverables.\n\nB's directive list is broader and closer to the prompt. It includes the gates, the staffing and operational realism, the seven scope areas, and the city selection. It is stricter, with 94% overall and three issues. However, it scores \"select specific EU city, not capital\" as 5/5. That misses the population-bound violation, which is the most checkable defect. Its issues on worker protection and on tailoring to the seven vulnerable groups may be valid, but its evidence quotes are generic and I cannot verify them. The 4/5 for \"worker protection mentioned but not detailed\" on a whole scope area also looks inconsistent.\n\nA catches the one verifiable real violation but is too lenient and misses coverage. B has better coverage and calibration but misses the real violation. A is slightly better on correctness and insight."
+              "analysis": "Both candidates have correct arithmetic, table ordering and issue selection. Candidate A catches a real hard-constraint violation: the plan's Leipzig (~616k) exceeds the 150k–400k range. It understates the severity (4/5, importance 3/5), and its directive list omits the gates, metrics, deliverables, staffing and several scope areas, so the 99% looks inflated. Candidate B extracts a broader and better-structured directive set that covers the gates, metrics, deliverables and scope. It misses the city-size violation and gives city selection 5/5. Its five 4/5 issues are mostly generic or poorly reasoned, such as penalizing the plan for not containing end-of-year deliverables or baselines yet. A's single issue is real and insightful, while B's breadth comes with weak, hedged analysis. A wins narrowly."
             },
             {
               "winner": "new",
-              "score_new": 7,
+              "score_new": 6,
               "score_baseline": 5,
-              "analysis": "I could not see the underlying plan, so this comparison rests on the evidence each candidate cites. Both candidates have correct arithmetic and follow the required format: an overall percentage with the math, a summary table, and an Issues section for every directive scored below 5.\n\nCandidate A extracts a more complete and decision-useful directive set. It includes the Month 4 gate thresholds (80% of cooling-center hours, 60% outreach contact success, under 45 minutes to transport), the month-2/month-4 gate structure, the seven-scope-area requirement, and the realistic-staffing, GDPR, no-apps and no-legislation constraints. Its Issues section flags concrete weaknesses with quoted evidence. Worker protection is only acknowledged, with no schedules, breaks, shaded rest points or employer guidance. Procurement process detail is thin. Some of its scoring is debatable: Issue 3 gives 3/5 for generic treatment of the vulnerable groups, which may be harsh. It also marks the city requirement \"Fully honored\" with no evidence, which could miss a city-size problem.\n\nCandidate B's directive list is coarser. It omits the explicit gate criteria and the metrics and deliverables. It also merges or skips most of the scope areas (worker protection, public comms, health system coordination). It mislabels several constraints as \"Banned\". It reports 99%, and only one issue appears. That issue is a real catch: Leipzig has about 616k residents, above the 150k–400k bound. But B scores it 4/5 with importance 3/5, which understates what looks like a clear violation of a prompt constraint. The near-perfect score looks inflated, and it gives downstream stages less signal about gaps.\n\nOverall, A is more thorough and discriminating in what it checks and more useful for downstream planning. B's Leipzig finding is valuable but under-weighted, and its extraction misses key prompt requirements."
+              "analysis": "Both candidates follow the required format. Each has an overall % with the math shown, a summary table sorted by index, and an Issues section for directives scoring below 5. I checked the arithmetic in both. A: 326/355 = 92%. B: 347/350 = 99%. Both are correct, and both issue lists are in a defensible order.\n\nA's directive extraction is much more complete. It covers the seven scope areas, the two explicit gates and their thresholds, the metrics, the end-of-year deliverables, and the risk register and staffing requirements. It also covers the budget, the city selection, and the banned words and no-apps rule. Its weaknesses:\n- It rates the city choice 5/5 and never notices that the plan's pilot city (Leipzig) is far above the 150k–400k range.\n- Several of its issues are weak. For example, it penalizes the plan because the deliverables aren't \"provided here\".\n- It scores the plan down for an \"unsolicited caveat\" on mortality attribution, even though the prompt asked for that caveat.\n\nB catches the real faithfulness problem: Leipzig has about 616k people, which breaks the 150k–400k constraint. That is a valuable insight. But B's directive list is thin on what the prompt demands. It has no directives for the Month 2 and Month 4 gates, the metrics and baselines, the deliverables, the risk register, or most scope areas (outreach protocol, home interventions, health coordination, worker protection, public communications). Its 99% score is inflated because those items are never tested. It also labels the legislation and pilot-footprint constraints as \"Banned\". The size violation is rated only 4/5 at importance 3, which understates it.\n\nOverall, A is the more thorough and useful adherence audit despite missing the Leipzig size issue. B has one sharp catch but a shallow, inflated assessment."
             }
           ]
         }

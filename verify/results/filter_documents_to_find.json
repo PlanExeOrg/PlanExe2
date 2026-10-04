@@ -1,29 +1,29 @@
 {
   "stage": "filter_documents_to_find",
-  "evaluated_at": "2026-10-04T18:38:27",
+  "evaluated_at": "2026-10-04T22:36:54",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 214.5,
+      "seconds": 85.6,
       "structure_problems": [],
       "judgments": {
         "filter_documents_to_find_raw.json": {
           "verdict": "tie",
           "score_new": 5.0,
-          "score_baseline": 6.0,
+          "score_baseline": 6.5,
           "runs": [
-            {
-              "winner": "baseline",
-              "score_new": 4,
-              "score_baseline": 7,
-              "analysis": "The stage should narrow the list by separating the few truly vital documents from supporting ones. Selection keeps all Critical, then adds High, Medium and Low only until at least 5 are kept.\n\nCandidate A rates 5 Critical and 8 High, and only 2 Medium. Under the selection rule, 13 of 15 documents are kept, so the filter barely narrows anything. A's own rationales call many High documents \"supporting refinement rather than a gate\", which makes the ratings feel inflated. Its summary also miscalculates: it says \"62%\" Critical or High when 13 of 15 is about 87%. Its 80/20 discussion concedes it did not discriminate. The rationales are detailed and well grounded in the plan, and the Critical picks are defensible (geotechnical, oceanographic, rail gauge, cost benchmarks, IMO). But the output does not do the job the stage exists for.\n\nCandidate B rates 1 Critical (ID 0), 2 High (IDs 4 and 13), 7 Medium and 5 Low. Under the selection rule, that keeps 3, then adds Medium to reach 10 documents, dropping the 5 Low ones. That is real prioritization tied to the initial phase. Some ratings are debatable. Rail gauge as Medium is justified by rail being Phase 2. Cost benchmarks as Low and oceanographic data as Medium are arguable, since the plan flags both as gaps. B's summary is a bit loose about which documents are \"vital\". Even so, B's rationales are specific, cite the plan's issues, and stay internally consistent with the phasing logic.\n\nB fits the stage's purpose better and is more useful downstream, because it narrows the list and makes sensible trade-offs. A's more thorough rationales do not make up for the lack of narrowing."
-            },
             {
               "winner": "new",
               "score_new": 6,
               "score_baseline": 5,
-              "analysis": "Selection effect: the code keeps all Critical documents, then adds High, Medium and Low until at least 5 are kept. A has 1 Critical and 2 High, so the 7 Medium documents are also pulled in and 10 of 15 are kept, which barely narrows the list. B has 5 Critical (IDs 0, 2, 6, 9, 11), so exactly 5 are kept. That is a real narrowing, and the set is plausible: seismic and geotechnical data, IMO regulations, rail gauge and interoperability, cost benchmarks and oceanographic data. Rating quality: A is more discriminating and consistent, but some calls are debatable. Oceanographic data is rated Medium and cost benchmarks Low, both questionable for a €40B project at 100 m depth in the Strait. B inflates its ratings, with 13 of 15 High or Critical, and its summary misstates the share as 62% when it is about 87%. B's Critical rationales are well grounded in plan specifics such as lever IDs, risk numbers and cost-overrun precedents. B's output is closer to the stage's purpose of narrowing the list, despite its flaws."
+              "analysis": "The stage's purpose is to narrow the documents list to the most relevant ones, with differentiated ratings. Selection in code keeps all Critical, and only if fewer than 5 are Critical does it add High, then Medium, then Low.\n\nCandidate A rates 1 Critical, 3 High, 7 Medium and 4 Low. Fewer than 5 are kept at Critical, so High is added, giving 4 kept; Medium is then added, giving 11 kept. The filter is only mildly selective. Its rationales are discriminating and tie the ratings to the plan's top issues. They are somewhat over-focused on \"initial phase\" and downplay governance and environmental baseline data, which are real gating items for a cross-border project. Its summary is consistent with its ratings: IDs 1-3, 6-8 and 11 are the Medium ones, and 5, 9, 10, 12 and 14 are the Low ones.\n\nCandidate B rates 5 Critical (IDs 0, 2, 4, 7, 11), 7 High, 2 Medium and 0 Low. It therefore keeps exactly those 5 Critical documents, which does narrow the list. The ratings are plausible: seismic data, IMO framework, climate data, ecosystem baseline and oceanography are all foundational. Its summary has flaws. It says \"Six documents are Critical (IDs 0, 2, 4, 7, 11, and the implicit dependency chain)\", which is an invented sixth. It says \"Eight documents rate High\" when there are 7 (1, 3, 5, 6, 8, 9, 13, 14, which is actually 8; counting them gives 1, 3, 5, 6, 8, 9, 13, 14 = 8). So the 8 is correct, and 5 + 8 + 2 = 15 is consistent. Only the \"six Critical\" claim is wrong. It also says \"no document was rated Low, indicating the list was carefully curated\". That is a weak claim, and it is poor discrimination. Some rationales hedge, for example \"secondary… not strictly blocking\" while still rating High. Some details are unverifiable, such as the Marmaray 80% overrun.\n\nIn the end, B's code outcome keeps 5 documents, a real narrowing. A keeps 11 of 15, so it narrows less. A's ratings are more discriminating in principle, but they are arguably too harsh: rating the IMO framework and the ecosystem baseline Medium for a transboundary megaproject is questionable. B's selection of 5 Critical is sensible for the filter's purpose. B's summary error is minor.\n\nB is better for the stage's output, though its rating discrimination is weaker. Overall I lean B."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 8,
+              "analysis": "Candidate A rates 5 documents Critical, 8 High, 2 Medium and none Low. That barely narrows the list, since the code keeps every Critical item. Its summary is also internally flawed: it says \"Six documents are Critical\" but names only five plus an invented \"implicit dependency chain\", and it calls the lack of Low ratings a sign of careful curation, which undermines the filtering purpose. Candidate B is much more discriminating. It rates only ID 0 Critical, with ID 4 and ID 13 High, and spreads the rest across Medium and Low. Its rationales are specific to the plan: they cite assumptions-review issues, the phasing of rail work into Phase 2, and the point that raw reference data differs from the study actually commissioned. Its summary matches its ratings. Some of B's ratings are arguable, such as IMO framework and marine baseline at Medium, but its overall prioritization is more useful for downstream stages and fits the stage's purpose better."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 170.1,
+      "seconds": 27.2,
       "structure_problems": [],
       "judgments": {
         "filter_documents_to_find_raw.json": {
           "verdict": "new",
-          "score_new": 7.5,
+          "score_new": 6.5,
           "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 6,
-              "analysis": "Both candidates produce the same final kept set under the selection rule (8 of 10 documents, excluding ids 5 and 7), so the comparison rests on rationale and summary quality. A's summary claims four Critical and four High, but its own ratings show 3 Critical and 5 High. It also rates the grid/RTE document only High while calling it a \"vital few\" item. B's ratings and summary are internally consistent (4 Critical, 4 High, 2 Medium). B rates the RTE/grid framework as Critical, which fits the plan's top risk. Its rationales are more specific, citing particular decisions, risks, assumptions and figures. B is verbose and has a stray quote character in its summary, but these flaws are minor next to A's inconsistency."
+              "analysis": "Selection outcome: under the rule, A has 3 Critical (1, 2, 8), which is fewer than 5, so its High documents are added. It keeps 0, 1, 2, 3, 4, 6, 8, 9 and drops 5 and 7. B has 4 Critical (0, 1, 2, 8), also fewer than 5, so its High documents are added. It keeps 0, 1, 2, 3, 4, 5, 6, 8, 9 and drops only 7. The practical difference is small. A narrows slightly more and sensibly demotes heat reuse, which the plan defers.\n\nRating quality: A rates the grid interconnection collateral document (id 0) as only High. Its own rationale calls Grid Integration and Power Procurement \"Critical levers\", so this is internally inconsistent. For a plan whose core question is grid feasibility, B's Critical rating for id 0 is better calibrated. B rates 5 of 10 documents High, so it discriminates somewhat less. A has more spread (3 Critical, 5 High, 2 Medium).\n\nRationales: B's rationales tie more tightly to plan specifics (60% take-or-pay trigger, 32.2 km² buildable area, Risk 9 remediation range, Review Issue 3 workforce point), which is more decision-useful but verbose. B also adds details such as TenneT and the Regional Council that may be inferred from the document descriptions. A's rationales are concise and plan-specific.\n\nSummary accuracy: A's summary says \"four Critical and four High\", but the actual counts are 3 Critical, 5 High and 2 Medium. That is a contained error. B's summary is bloated and self-contradictory. It says 5 Critical (actual 4) and 4 High (actual 5), and it lists ids 6 and 9 in both the Critical and High groups. It is worse than A's on accuracy.\n\nOverall, B has better criticality calibration on the central grid document and richer rationales. A is cleaner and more discriminating on Medium ratings, and its summary is less messy. These roughly offset each other, so B gets a slight edge for the grid rating."
             },
             {
               "winner": "new",
-              "score_new": 7,
+              "score_new": 6,
               "score_baseline": 5,
-              "analysis": "Both candidates produce the same final selection. The code keeps all Critical documents and, because fewer than 5 are Critical, adds all High ones. That gives ids 0,1,2,3,4,6,8,9 in both cases, so downstream output is identical. The comparison therefore rests on rating quality and internal consistency.\n\nCandidate A rates the RTE/Enedis grid-interconnection document Critical. For a 9 GW grid-dominated project that is the right call. Its counts are internally consistent: 4 Critical, 4 High and 2 Medium, and the summary says exactly that. Its rationales are detailed and tied to the plan's decisions, risks and assumptions. They are verbose, and a few claims overreach, such as saying the document \"IS that formal agreement's source\" and quoting a hardware cost figure. Even so, they are decision-useful.\n\nCandidate B rates the grid-financing document only High, yet its summary names it among the \"absolute vital few\". That contradicts its own rating. B's summary also says four documents are Critical and four High, but its list has 3 Critical and 5 High. The rationales are concise and reasonable. They are less specific, and B understates grid risk, which is the main feasibility question in the prompt.\n\nA is more consistent and better prioritised, and its rationales are richer. B is tighter but has factual and logical inconsistencies in the summary."
+              "analysis": "The two candidates rate nearly the same documents highly. Both put the sovereign/security docs (1, 8) and land/zoning (2) at Critical, and both put workforce (7) at Medium. The main differences are the rating of the grid document (0), the rating of the heat-reuse document (5), and the quality of the summaries.\n\nCandidate A rates the grid-interconnection document (0) Critical. That fits a 9 GW project where grid and transmission feasibility is the central question. Its rationales are detailed and tied to specific decisions and risks. Its weaknesses are that it gives little discrimination, with 9 of 10 documents kept after the selection rule, and that its summary miscounts the ratings. The summary says \"5 Critical and 4 High\" when the list has 4 Critical, 5 High and 1 Medium. It also muddles which IDs belong to which tier.\n\nCandidate B rates the grid document (0) only High, even though its own rationale calls grid integration a Critical lever that could strand Phase 1 capital. That is an inconsistency, and it underweights the biggest feasibility risk. B discriminates a little more, with two Medium documents, and its rationales are concise and reasonable. Its summary is also wrong. It claims 4 Critical and 4 High when the list has 3 Critical, 5 High and 2 Medium. It then calls ID 0 a \"vital few\" document even though it rated it High.\n\nBoth summaries have counting errors. A's ratings are more consistent with its reasoning, and it treats grid as critical for this plan. B's filtering is slightly tighter, but its grid rating contradicts its rationale. Overall A is slightly better."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 61.5,
+      "seconds": 20.7,
       "structure_problems": [],
       "judgments": {
         "filter_documents_to_find_raw.json": {
-          "verdict": "new",
-          "score_new": 7.5,
-          "score_baseline": 5.5,
+          "verdict": "baseline",
+          "score_new": 5.0,
+          "score_baseline": 6.0,
           "runs": [
             {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Selection effect: the stage keeps all Critical documents, then adds High ones if fewer than 5 are Critical. Both candidates have fewer than 5 Critical, so High documents are added. A keeps 7 of 9 (Critical 0, 1, 4; High 2, 3, 5, 6) and drops 7 and 8 as Medium. B keeps 8 of 9 (Critical 0, 1, 4, 5; High 3, 6, 7, 8) and drops only 2.\n\nRatings against the plan: A's ratings follow the plan's phasing. Reduction cards (id 8) are deferred to a 30-month grace period, so Medium is sensible, and A explains that the T+5 latency benchmark (id 7) can proceed in parallel with the provisional standard. B rates id 8 High and says \"required immediately\" while its own rationale admits the work is deferred, which is inconsistent. B rates id 5 (cost-attribution policies) Critical, which looks inflated next to the legal text and OSDM spec. B's demotion of id 2 to Medium is defensible but arguable.\n\nInternal consistency: B's summary says \"3 out of 9\" are High when it rated 4. It also puts id 8 in the Critical \"equity floors\" cluster although it rated it High. B's summary is thin on explanation. A's summary matches its ratings (3 Critical, 4 High, 2 Medium). It has a stray trailing quote character and is verbose, but its rationales tie each document to specific decisions, risks and assumptions.\n\nUsefulness: A discriminates more sharply, filters out the deferred and secondary documents, and its summary is accurate. B has the counting error and some rating inflation. A is moderately better."
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Both candidates rate the same nine documents (ids 0–8), and both reference the plan's decisions, risks and assumptions in their rationales. Both summaries contain count errors.\n\nCandidate A discriminates between documents. It rates four as Critical (0, 1, 4, 5), four as High and one (the governance history) as Medium. Under the selection code it would keep eight of the nine and drop the Medium one, so it actually narrows the list. Rating the accessibility/PRM transposition document as Critical is defensible because accessibility is a core regulatory requirement. Its summary has flaws. It says \"3 out of 9\" are High when four are. It also lists ids 3 and 8 among the \"Critical cluster\" even though they are rated High.\n\nCandidate B's rationales are somewhat richer and cite more specific plan details, such as 15 FTEs, a €200M float, the 90-minute threshold and the 5% royalty cap. It rates four documents Critical and five High, so the selection code keeps all nine and nothing is filtered. That is weaker for a stage whose purpose is narrowing. Its summary also has errors:\n- It calls ids 2, 4, 6, 7 and 8 \"the remaining four High-impact documents\", which is five.\n- It claims \"100% of submissions\" are Critical or High.\n- It ends with a stray escaped quote artifact.\n\nCandidate B's specificity is a point in its favour. Candidate A's real prioritization and slightly cleaner output make it marginally better for this stage."
             },
             {
-              "winner": "new",
-              "score_new": 8,
+              "winner": "baseline",
+              "score_new": 5,
               "score_baseline": 6,
-              "analysis": "Both candidates keep several documents (A keeps 8 of 9, B keeps 7 of 9). B's ratings follow the plan's critical path more closely: it rates governance precedent (id 2) High, and it rates the deferred reduction-card work (id 8) and the latency benchmarks (id 7) Medium. A rates the cost-attribution document (id 5) Critical and the deferred reduction-card document (id 8) High, and it rates governance precedent (id 2) Medium, which is hard to justify given the plan's governance and stakeholder-resistance risks. A's summary miscounts its own ratings (\"High 3 out of 9\" when it has 4) and calls ids 4 and 8 \"mandatory equity floors\" in a Critical grouping, but id 8 is rated High. B's summary counts match its ratings, apart from a stray trailing quote. B's rationales tie each document to specific decisions, risks and assumptions in the plan, though they are verbose."
+              "analysis": "Selection rule: all Critical kept; if fewer than 5, High added, then Medium, then Low. A rates 4 Critical and 5 High, so all 9 documents survive and nothing is narrowed. A's summary treats the lack of lower ratings as a virtue, and it miscounts (\"four High\" while listing five IDs, \"100% of submissions\") and ends with a stray quote. A's rationales are detailed and tied to plan decisions. B rates 4 Critical, 4 High and 1 Medium (governance history), so 8 are kept and one is dropped. The Medium rating is argued sensibly from the Builder path. B's rationales are plan-specific too, if somewhat shorter. B's summary also has errors (it says 3 High when there are 4, and it lists ID 8 with the Critical cluster). B's differentiation makes it the better filter."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 84.5,
+      "seconds": 18.7,
       "structure_problems": [],
       "judgments": {
         "filter_documents_to_find_raw.json": {
-          "verdict": "tie",
-          "score_new": 5.0,
-          "score_baseline": 6.0,
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
           "runs": [
             {
-              "winner": "baseline",
-              "score_new": 4,
-              "score_baseline": 7,
-              "analysis": "Candidate A rates only ids 0–6 and never mentions id 7, so it omits a document (the heat-illness escalation/triage script, which B shows exists). Candidate B rates all 8 documents. A rates everything Critical or High, which gives the selection step little to work with. B spreads its ratings across Critical, High, Medium and Low, and ties them to the initial mobilization phase and the Month 2 and Month 4 gates. Some of B's ratings can be argued: id 4 is arguably Critical, and the baseline data at Medium is debatable but defensible. A's rationales are more detailed but verbose, and its summary ends with a stray quote. Overall B is more complete and better calibrated."
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate B is better. Both candidates rate all eight documents and tie them to the plan's decisions, risks and gates. They differ in rating quality and internal consistency.\n\nCandidate A's summary says \"5 Critical, 2 High, 1 Medium, 0 Low\". Its own ratings are 4 Critical (ids 1, 2, 5, 7), 2 High (3, 4), 1 Medium (0) and 1 Low (6). The summary is therefore wrong on the Critical count and on the Low count. A also rates the baseline mortality, EMS and ED data (id 0) as only Medium. The plan's primary outcomes, the Month 4 gate and the Month 12 evaluation all depend on that baseline, so Medium looks too low. A rates the ED/GP workflow document (id 7) as Critical while giving a thinner rationale for it. Its Low rating for id 6 is defensible, but its rationale is generic.\n\nCandidate B's counts match its ratings: 4 Critical (ids 0, 1, 2, 5), 3 High (3, 4, 7) and 1 Medium (6). Its rationales cite specific plan details: the Level 2 threshold of 30°C day max and 19°C night min, the DWD data, the 60% outreach contact rate, the Month 2 and Month 4 gates, and the union and staffing split. Rating the baseline data Critical suits an evaluation-heavy plan. Rating the ED/GP workflow document High is reasonable. B's flaws are minor: a stray trailing quote in the summary and somewhat long rationales.\n\nSelection under the stage's rule gives similar results for both. Each has fewer than 5 Critical documents, so High documents are added. A keeps 6 documents and B keeps 7."
             },
             {
               "winner": "new",
-              "score_new": 6,
+              "score_new": 7,
               "score_baseline": 5,
-              "analysis": "A covers all 8 documents (ids 0–7) but its summary contradicts its own ratings. The summary claims 5 Critical, 1 Medium and 0 Low, while A actually gave 4 Critical, 1 Medium and 1 Low. A also rates the baseline mortality/morbidity document as only Medium. That is questionable, because the prompt requires baselines and a measurement plan, and the effect cannot be shown without them. B has more detailed rationales grounded in the plan (Leipzig, the threshold deadline, the Month 1 assessments, the gate metrics). Its ratings are better calibrated, its summary matches its ratings, and it gives a concrete action sequence. B's weaknesses are that it appears to omit id 7, which A rated Critical, that it rates doc 6 High while quoting that the related decision is Medium, and that it is very verbose with a stray quote character at the end of the summary. Overall B is slightly better, though the missing document is a real risk."
+              "analysis": "Both candidates have exactly 4 Critical documents, so the code adds High documents to reach at least 5. Candidate A keeps docs 0-5 and 7 (7 documents) and drops only doc 6. Candidate B keeps docs 1-5 and 7 (6 documents) and drops docs 0 and 6. Doc 0 (baseline mortality, EMS and ED data) is required by the plan for the primary outcomes and for the month 4 and month 12 evaluation. Baselines must be collected early and cannot be reconstructed later. Candidate A rates it Critical. Candidate B rates it Medium and argues it is only needed for post-operation evaluation, which undervalues it and drops it from the kept set. Candidate A's summary counts (4 Critical, 3 High, 1 Medium) match its ratings, apart from a stray trailing quote character. Candidate B's summary claims 5 Critical, 2 High, 1 Medium and 0 Low, but its actual ratings are 4 Critical, 2 High, 1 Medium and 1 Low. Both rationales are plan-specific. Candidate B's rating of doc 7 as Critical is defensible, but it does not outweigh the doc 0 error and the inconsistent summary."
             }
           ]
         }

@@ -1,11 +1,11 @@
 {
   "stage": "consolidate_assumptions_markdown",
-  "evaluated_at": "2026-10-04T17:58:07",
+  "evaluated_at": "2026-10-04T20:34:25",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 88.3,
+      "seconds": 71.7,
       "structure_problems": [],
       "judgments": {
         "consolidate_assumptions_full.md": {
@@ -17,32 +17,32 @@
               "winner": "tie",
               "score_new": 7,
               "score_baseline": 7,
-              "analysis": "Candidates A and B appear identical. Both contain the same nine documents in the same order, with the same content, headings and formatting. I found no differences in faithfulness, specificity, consistency, completeness or downstream usefulness, so they tie."
+              "analysis": "Candidates A and B appear to be identical, word for word, across all nine sections (Purpose through Review Assumptions). Both use the same deterministic \"# Title\\n\\ncontent\" structure, and both are complete with no truncation. I found no differences in faithfulness, specificity, correctness or fitness for downstream stages, so neither is better."
             },
             {
               "winner": "tie",
               "score_new": 7,
               "score_baseline": 7,
-              "analysis": "Candidates A and B appear identical. Both give the nine upstream documents in order (Purpose, Domain, Plan Type, Physical Locations, Currency Strategy, Identify Risks, Make Assumptions, Distill Assumptions, Review Assumptions). Each is joined as `# <Title>` plus its content, as the full deterministic format requires. I found no differences in content, completeness or faithfulness to the plan prompt."
+              "analysis": "Candidates A and B appear textually identical. Both contain the same nine documents in order, each under a \"# <Title>\" heading. The content, numbers and structure match section by section, and neither is truncated or altered. Neither has an advantage on faithfulness, specificity, correctness, format or downstream usefulness."
             }
           ]
         },
         "consolidate_assumptions_short.md": {
-          "verdict": "new",
-          "score_new": 7.0,
+          "verdict": "tie",
+          "score_new": 6.0,
           "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both candidates cover all nine upstream documents and keep the key facts: the €40B budget, the 20-year timeline, Spain and Morocco, the 18 risks, the 7 review issues and the quantified impacts. The differences are in structure and fidelity.\n\nA keeps a clean structure, with one `# Title` per document and `##` subsections. It preserves the Purpose, Topic, Rationale and Explanation sections. It keeps the full question text and the Assumptions and Assessments split in Make Assumptions, which downstream stages can still parse. Its Risks and Review sections keep the Impact, Likelihood, Severity and Action structure. It also keeps the specific figures.\n\nB has several structural and fidelity flaws. The Purpose section has a duplicated \"# Purpose / # Purpose\" heading, and the original \"Purpose\" value is merged into the \"Purpose Detailed\" bullets. \"Topic\" and \"Primary Domain\" become top-level `#` headings that collide with document titles. The Plan Type document gets renamed \"Physical Location Requirement\". The Review text introduces a \"geotechnic\" typo. B adds new headings to Distill Assumptions that were not in the source, so the section is reorganised rather than shortened.\n\nB's merits are more compact bullets in Make Assumptions and condensed risk entries. But it flattens the assumptions and assessments together, which loses clarity. Its risk summary and review conclusion become dense paragraphs. Both outputs are only lightly shortened, so B's compression advantage is modest.\n\nOverall A is more faithful, better structured and cleaner for downstream use."
+              "analysis": "Both candidates are complete, cover all nine documents in order, and keep the key facts: €40B, 100 m, Spain–Morocco, EUR/MAD, the 18 risks and the 7 review issues. The difference is how well each follows the stage's heading rules. The prompt tweak says to keep the wording and level of existing '#'/'##' headings and to turn section-label lines such as \"Rationale:\" into '##' headings.\n\nCandidate A keeps most original headings and wording, for example \"# Disciplines this project involves\", \"# Requirements for physical locations\" and \"# Domain of the expert reviewer\". In Make Assumptions it keeps the \"Assumptions:\" block and a separate \"## ... Assessment\" heading for each question, plus the Recommendation line. It is also more compact in the risk section. Its weaknesses are a duplicated \"# Purpose\" line, labels such as \"Impact:\" and \"Likelihood:\" left as plain lines instead of '##' headings, and Review Assumptions that are only lightly condensed. Some details are dropped, such as the electrification standards in Issue 5.\n\nCandidate B renames and restructures headings: \"Physical Location Requirement\", \"Physical Locations Plan\", \"Disciplines\" instead of the original title, \"Domain of the Expert Reviewer\" recapitalised, and Distill sections regrouped. It also changes spellings such as \"geotechnic\". It collapses each Make Assumptions question into dense bullets with inline \"Financial Feasibility Assessment:\" labels. That is the opposite of turning label lines into '##' headings, and it makes the section harder to scan. Its risk section is longer and barely shortened. On the plus side, it retains more detail in the review issues, such as the electrification standards and the earthquake probabilities.\n\nA follows the heading-preservation and label-to-heading instructions better and is more compact. B has slightly richer detail but breaks the structure the tweak was meant to protect. A is modestly better."
             },
             {
-              "winner": "new",
-              "score_new": 7,
+              "winner": "baseline",
+              "score_new": 5,
               "score_baseline": 6,
-              "analysis": "Both candidates keep the nine documents in order, preserve the key numbers (€40B, 20 years, 100 m, 10–15% contingency, 70% hedge, issue sensitivities), and contain no truncation. The differences are in structure and in how well each one shortens its documents.\n\nA has structural defects. The Purpose section opens with a duplicated \"# Purpose / # Purpose\" heading. Its sub-headings (\"# Topic\", \"# Primary Domain\", \"# Physical Location Requirement\") are H1, so they collide with the document-level titles that the stage prescribes as `# <Title>`. It also moves \"Business\" under \"Purpose Detailed\", which misstates the original Purpose field. A's strengths are a more compact Make Assumptions (the question text is dropped and each assessment is merged into a bullet) and a Distill section grouped under topic headers. However, A leaves the Risks section nearly verbatim, so it is shortened unevenly.\n\nB keeps heading levels consistent: H1 for the document and H2 for subsections. It keeps the Purpose structure faithful. It trims wording in the Risks and Review sections while keeping all the numbers, and it uses clear Impact, Likelihood, Severity and Action sub-headings. It retains cross-references such as Risk 7 and Decision 13, which help downstream traceability, though the Decisions themselves are not defined here. Its main weakness is that Make Assumptions stays long, with full question text and separate Assumptions and Assessments blocks, so it is less compact than A there. Its Distill section is a flat list with no headers.\n\nOverall, B is cleaner, more faithful to the source structure and more consistent. A is somewhat more compact in one section but has heading collisions and a Purpose misclassification. I give B a slight edge."
+              "analysis": "Both candidates keep all nine documents in the right order and preserve the key facts: €40B, 20 years, Strait of Gibraltar, 100m depth, EUR/MAD, the 18 risks, and the 7 review issues. Neither has factual contradictions, truncation or a \"Problem with document\" chunk. They differ in heading handling, which the prompt tweak targets, and in how much they shorten.\n\nHeading levels and wording:\n- A keeps the original sub-heading levels, such as \"## Risk N\", \"## Question N\", \"## Location N\" and \"## Issue N\". Each document therefore sits cleanly under its \"# Title\". A does promote \"Topic\" to \"#\" in Purpose and \"Primary Domain\" to \"#\" in Domain. It also adds \"Disciplines\" and \"Risk summary\" headings, which may differ slightly from the originals.\n- B promotes Risks, Questions, and the Review's \"Domain of the expert reviewer\" to \"#\". It also lowercases some wording (\"Domain of the expert reviewer\", \"Review conclusion\") and renames headings (\"Disciplines this project involves\"). This is the heading promotion and renaming the tweak was meant to stop. It also flattens the hierarchy, because every risk and question becomes a peer of the document title.\n\nSection label lines:\n- B turns the assessment labels in Make Assumptions into \"##\" headings (\"Financial Feasibility Assessment\", and so on). However, it leaves \"Assumptions:\" and \"Recommendation:\" as plain label lines.\n- A collapses each Make Assumptions question into bullets and drops the assessment headings. That loses structure the tweak wanted to keep.\n\nShortening:\n- A is barely shortened in the Risks and Review sections. It keeps nearly all of the full text.\n- B compresses more, especially in Risks (for example, Risk 8 loses the MAD appreciation point). It does not compress the Make Assumptions section at all. It also keeps more prose.\n- B is somewhat closer to a \"short\" version. A's Make Assumptions is much shorter than B's, though, so overall length is mixed.\n\nOverall A is slightly more faithful on heading levels, which matters for downstream parsing. B is slightly better on assessment-heading conversion. The two are close."
             }
           ]
         }
@@ -51,7 +51,53 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 56.4,
+      "seconds": 36.8,
+      "structure_problems": [],
+      "judgments": {
+        "consolidate_assumptions_full.md": {
+          "verdict": "tie",
+          "score_new": 7.0,
+          "score_baseline": 7.0,
+          "runs": [
+            {
+              "winner": "tie",
+              "score_new": 7,
+              "score_baseline": 7,
+              "analysis": "The two candidates look identical. I compared every section: Purpose, Domain, Plan Type, Physical Locations, Currency Strategy, Identify Risks, Make Assumptions, Distill Assumptions and Review Assumptions. I found no differences in wording, numbers or structure. Both use the deterministic `# <Title>\\n\\n<content>` format with all nine documents in order, and neither is truncated. Both share the same weaknesses. They carry upstream content that conflicts with the plan prompt. Examples are the 80% buffer / 20% buildable model, the 60% tenant threshold where the prompt says 30–50%, and the \"hyper-dense\" framing. But a deterministic merge should reproduce its inputs, so these flaws do not separate the candidates."
+            },
+            {
+              "winner": "tie",
+              "score_new": 7,
+              "score_baseline": 7,
+              "analysis": "Candidates A and B appear to be identical, character for character. Both have the same nine documents in the same order, with the same \"# Title\" headings and the same content. They follow the deterministic full-merge format equally well, and neither has truncation, omissions or added text. Any problems, such as the Distill Assumptions bullets or the Make Assumptions numbers, affect both equally. No criterion separates them."
+            }
+          ]
+        },
+        "consolidate_assumptions_short.md": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more compressed. It keeps the original-looking heading levels (\"## Risk n\", \"## Question n\", \"## Location n\"), which fits the prompt tweak to preserve heading levels. It has several defects. The Domain table is broken: a header row with no rows, followed by pipe-delimited bullets. Q3 now says \"Commitments must be non-binding to maintain efficacy\", which inverts the meaning, since non-binding commitments lose efficacy. Unresolved \"Decision N / Choice N\" cross-references remain in the risks and review sections, and a downstream reader can't resolve them. The Purpose and Domain sections are very thin. Some qualifiers are lost, such as \"Phase 0 remediation\" and \"near Dunkirk\" for the heat-reuse partner.\n\nCandidate B keeps more of the substantive content and reads cleanly. It mostly removes the dangling \"Decision N\" references. It preserves the Q3 meaning correctly. It keeps useful detail: the 50-70 km cluster separation, the €257.6M holding-cost figure, and the heat-reuse partner near Dunkirk. Its main weakness is heading handling. Many \"##\" headings were promoted to \"#\" (Risk n, Question n), and some titles were rewritten (Purpose now carries the project title as its \"#\" heading). This goes against the prompt tweak. The Distill section loses its subheadings and becomes a flat list. The \"€257.6M over 5 years\" figure looks slightly off, since that is the annual figure, but it appears to come from the upstream text.\n\nOverall, A follows the heading-preservation rule better. B is more accurate and complete in content, with no meaning inversion and no broken table, and it is more usable downstream. I weight B's content quality slightly above A's formatting fidelity, but the margin is small."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Stage is the \"short\" variant. A keeps more substance, mostly preserves the original heading wording, and turns label lines such as \"Rationale\" into '##' headings, as instructed. It has a few odd promotions, such as \"# Primary Domain: …\", and one numeric slip: €257.6M is stated \"over 5 years\" when it is the per-year figure. B compresses more but renames headings (\"Project Plan Summary\", \"Project Classification\"), leaves a malformed empty table in the Domain section, and flips the meaning of Q3 with \"Commitments must be non-binding to maintain efficacy\". It also regroups the Distill items and keeps dangling \"Decision X\" references to documents not included. A is more faithful and more useful downstream, and B's semantic reversal and formatting problems are worse than A's single slip."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 30.2,
       "structure_problems": [],
       "judgments": {
         "consolidate_assumptions_full.md": {
@@ -63,78 +109,32 @@
               "winner": "tie",
               "score_new": 5,
               "score_baseline": 5,
-              "analysis": "Candidates A and B are identical, word for word, in every section: Purpose, Domain, Plan Type, Physical Locations, Currency Strategy, Risks, Assumptions, Distill and Review. They share the same strengths and flaws. Neither can be judged better on faithfulness, specificity, correctness, format or downstream usefulness."
+              "analysis": "Candidates A and B look identical, with the same content in every section: Purpose, Domain, Plan Type, Physical Locations, Currency, Risks, Assumptions, Distill, and Review. I found no differences in wording, structure or completeness. Neither is better on any criterion."
             },
             {
               "winner": "tie",
               "score_new": 7,
               "score_baseline": 7,
-              "analysis": "I compared A and B section by section: Purpose, Domain, Plan Type, Physical Locations, Currency Strategy, Identify Risks, Make Assumptions, Distill Assumptions and Review Assumptions. The text is identical in both. Both use the same deterministic `# Title` plus content format, in the expected order, and neither is truncated. They share the same strengths and flaws. Neither is better on faithfulness, specificity, consistency, format or downstream usefulness."
-            }
-          ]
-        },
-        "consolidate_assumptions_short.md": {
-          "verdict": "new",
-          "score_new": 7.0,
-          "score_baseline": 5.5,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates carry the same upstream content, including the same arithmetic slip: 30% × €120B × 10% is €3.6B, not €4.32B. They differ in how faithfully they condense it.\n\nCandidate A is more compact, which suits a \"short\" consolidation. It has three flaws:\n- It inverts a meaning. In Q3 it says \"Commitments must be non-binding to maintain efficacy.\" The source says non-binding commitments lose efficacy, which is why the allocation is mandatory.\n- It labels the €4.32B as the \"unhedged portion\", which implies the 70% hedge was applied. That is inconsistent with the stated math.\n- Its Domain section has a broken, empty table header followed by bullets.\nIt also drops the question context in Make Assumptions and some sensitivity detail, such as the €257.6M/yr holding-cost calculation.\n\nCandidate B keeps the questions, assumptions, assessments, risk structure and review details. It is longer and not very shortened, but it stays accurate and internally consistent. Its Distill section is clean, and it keeps the 3–7 year grid lead time and the 12,880 ha calculation. It also has a minor inconsistency, calling the €4.32B a \"gross cost\" and then a \"residual exposure.\"\n\nB is more faithful and more useful downstream. A's compactness is a modest advantage that its meaning inversion and formatting glitch outweigh."
-            },
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates contain all nine documents in the right order and carry the key plan facts: the 32.2 km² buildable area, the 60% take-or-pay trigger, the 1.20 PUE, the 2 ms RTT limit and the review issues. Neither fixes the arithmetic error inherited from upstream (0.30 × €120B × 10% is €3.6B, not €4.32B).\n\nA keeps the nuance and reads cleanly. It keeps Purpose Detailed and the full Domain rationale. Its risk text still carries the specific mitigation logic, such as the tenant PUE escalator, the 70% hedge and the substation isolation rationale. Its main weakness is that it is barely shortened, so it is long for a \"short\" variant. It also keeps the \"## Risk\" sub-headings, which add some clutter.\n\nB is more compressed, which suits the \"short\" intent. It also has defects. The Domain section has a broken markdown table: a header row with no body rows, followed by bullets using pipes. Q3 says \"Commitments must be non-binding to maintain efficacy\", which inverts the source meaning (non-binding commitments lose efficacy, so a mandatory allocation is needed). That is a substantive error in a reference document. The Q5 summary wrongly implies 70% hedged yields 4.32B \"unhedged\". Several titles were replaced with generic \"Project Plan Summary\" headers, and some detail was dropped, such as the Purpose Detailed text and the hedging and substation-isolation specifics.\n\nA is more faithful and has no new errors. B is tighter but introduces a meaning inversion and formatting breakage. Overall, A is better."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260514_cross_border_rail_ticketing",
-      "ran_ok": true,
-      "seconds": 51.0,
-      "structure_problems": [],
-      "judgments": {
-        "consolidate_assumptions_full.md": {
-          "verdict": "tie",
-          "score_new": 7.0,
-          "score_baseline": 7.0,
-          "runs": [
-            {
-              "winner": "tie",
-              "score_new": 7,
-              "score_baseline": 7,
-              "analysis": "Candidates A and B are identical, section for section and word for word. That includes the Purpose, Domain, Plan Type, Locations, Currency, Risks, Assumptions, Distilled Assumptions and Review sections. They share the same strengths and flaws. For example, the Distill section references decisions that are not otherwise defined, and the plan type is listed as physical. No difference exists on any criterion."
-            },
-            {
-              "winner": "tie",
-              "score_new": 7,
-              "score_baseline": 7,
-              "analysis": "Candidates A and B are identical in every section, from Purpose through Review Assumptions. Each is the deterministic concatenation of the nine upstream documents. They share the same strengths and flaws, so neither is better."
+              "analysis": "Candidates A and B appear to be identical, word for word. Both include all nine upstream documents in the correct order, with the same headings and content, so I found no difference on any criterion."
             }
           ]
         },
         "consolidate_assumptions_short.md": {
           "verdict": "tie",
-          "score_new": 6.5,
-          "score_baseline": 6.5,
+          "score_new": 5.5,
+          "score_baseline": 6.0,
           "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates consolidate the same nine upstream docs into one \"short\" reference. Content is nearly identical in facts. Differences: A preserves more detail and structure (full risk sections with Impact/Likelihood/Severity/Action headings, full assumption/assessment text, sensitivity sections, review conclusion), keeping the original document structure and nuance, e.g., the Purpose Detailed and Topic, the currency note about non-Eurozone, the Risk 3 safety-buffer detail (20% of peak daily settlement), Risk 7's 20% adoption. A is essentially near-full, so it is not much \"shortened\", but it is faithful and useful downstream. B is a genuine shortening: more compact, terser, with some minor degradations (typo \"Monitioring\", garbled \"unreliable data functional failure\", dropped Purpose detail like \"business\" classification, dropped risk safety buffer specifics, Question headings renamed). B's headings also vary (\"Project Structure Summary\", \"Project Planning Summary\") and the Purpose title H1 duplicates, which makes the consolidated format slightly less consistent. B loses some decision-useful details (e.g., Purpose type, 20% buffer, 10-15% etc. retained though). For a \"short\" stage, B's compression is on-spec, but A's retained detail is more useful downstream and has fewer errors. Neither is truncated. A has minor oddity: leftover \"Financial Settlement Systems\" rationale is in both. Overall A is slightly better for fidelity and downstream usefulness; B better follows the shortening spirit but with typos and lost details."
-            },
             {
               "winner": "baseline",
-              "score_new": 6,
+              "score_new": 5,
               "score_baseline": 7,
-              "analysis": "Both candidates keep the same facts: €200M float, T+3, T+5 min latency, 18/30-month milestones, 35 FTEs, 60%/10% budget split, the SNCF/DB/ÖBB enforcement focus, and the three review issues. Neither adds contradictions. The stage is the short variant, where each document is compressed by an LLM call. A is clearly compressed. It drops the long question text and \"Description\" lines, merges rationale, and tightens the risks and review sections. It keeps the decision-relevant numbers, decision references and risk-to-action links. B is only lightly trimmed. It keeps the full question wording, the Description fields and the full risk and review prose, so it is close to the full version and defeats the purpose of a short consolidation. B does keep a bit more nuance, such as the currency note on non-Eurozone countries, the \"staff spread across Brussels HQ and corridor offices\" detail, and the 20% safety buffer example. A has small blemishes: a duplicated heading in Purpose, and the Purpose classification \"business\" dropped. These are minor next to the fit-for-format advantage. Overall A better matches the shortened-reference intent while preserving the key content. B is richer but not really short."
+              "analysis": "Candidate A keeps the sub-document headings at \"##\" level (Risk N, Question N, Location N, Issue N), as the prompt tweak requires. It compresses each document into bullets and keeps all the key numbers and decisions. It converts some labels such as Rationale into \"##\" headings, but not in Physical Locations. It has minor typos and one garbled sentence in the risk summary. Candidate B has cleaner prose and keeps a few extra details. However, it promotes Risk and Question headings to \"#\", which is the promotion the tweak was meant to prevent, so its hierarchy is inconsistent. It is also less condensed, closer to a light paraphrase than a short version. Overall A follows the stage's instructions better."
+            },
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover all nine documents, and both are complete and consistent with the plan. The difference is in how well each follows the shortening rules (keep the existing headings, turn label lines into '##' headings) and how much decision-useful detail each keeps.\n\nCandidate A mostly keeps the apparent original headings. These include 'Primary domain: Financial Clearing Mechanisms', 'This plan requires one or more physical locations…', and the Distill section headings. It also turns the assessment label lines in Make Assumptions into '##' headings, such as '## Financial Mechanism Viability Assessment', which is what the tweak asks for. It keeps more concrete detail, such as the 20% safety-buffer example in Risk 3, the full-sentence Impact/Likelihood/Severity/Action lines, and the Currency rationale. Its flaws are the duplicated '# Purpose' heading and the unconverted 'Business:' label. It also appears to promote the 'Risk N' and 'Question N' headings to '#' (probably from '##'), which is the promotion problem the tweak was meant to prevent.\n\nCandidate B keeps '## Risk N' and '## Question N' at what is probably the original level. However, it appears to invent or rename several top-level headings: 'Project Structure Summary', 'Project Planning Summary', and the Purpose title, which is taken from the Topic. It also rewrites content heavily into terse bullets and re-organises the Distill section. It leaves 'Title:' bullets instead of '##' headings. It does not convert the 'Assumptions:' and 'Assessments:' labels into '##' headings either. It drops some detail, such as the 20% buffer example. It contains a typo ('Monitioring'), a broken sentence ('unreliable data functional failure'), and a redundant Currency section. The Make Assumptions section repeats itself.\n\nOverall, A is somewhat more faithful to the original wording and detail and handles the label-to-heading conversion better. B is better on the Risk and Question heading levels but renames headings and compresses away useful specifics."
             }
           ]
         }
@@ -143,44 +143,44 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 51.1,
+      "seconds": 35.2,
       "structure_problems": [],
       "judgments": {
         "consolidate_assumptions_full.md": {
           "verdict": "tie",
-          "score_new": 5.5,
-          "score_baseline": 5.5,
+          "score_new": 6.0,
+          "score_baseline": 6.0,
           "runs": [
             {
               "winner": "tie",
               "score_new": 5,
               "score_baseline": 5,
-              "analysis": "I compared A and B section by section: Purpose, Domain, Plan Type, Physical Locations, Currency Strategy, Risks, Assumptions, Distill and Review. They are word-for-word identical. Both use the same deterministic `# <Title>\\n\\n<content>` structure and contain the same flaws. Examples are Leipzig's population of ~616k, which is outside the 150k–400k range, and a Level 2 night threshold that reads \"Night < 19°C\" in Distill but \"> 19°C\" in the assumptions. Neither has an advantage on any criterion."
+              "analysis": "Candidates A and B are identical. Both contain the same nine documents in the same order, with the same headings and content. I found no differences in faithfulness, completeness, structure or consistency. Both carry the same upstream flaws, such as Leipzig's population of about 616k exceeding the 150k–400k range. Neither candidate has an edge."
             },
             {
               "winner": "tie",
-              "score_new": 6,
-              "score_baseline": 6,
-              "analysis": "Candidates A and B are textually identical across all nine merged sections (Purpose through Review Assumptions), with the same headings, content and ordering. They share the same strengths and flaws. Both keep the Leipzig population inconsistency (~616k against the 150k–400k requirement). Both keep the \"Level 2 night < 19°C\" threshold error, which should be a minimum above 19°C. Neither differs in format or completeness. No criterion separates them."
+              "score_new": 7,
+              "score_baseline": 7,
+              "analysis": "After comparing the two candidates section by section, I found no differences. Both contain the same nine documents in the same order. The headings, content and formatting match. Both are the full deterministic concatenation in the format `# <Title>\\n\\n<content>`. Both carry the same upstream flaws: Leipzig's population of about 616k is outside the 150k–400k target, and the Distill Assumptions bullet \"Night < 19°C\" contradicts the \"Nighttime Minimum > 19°C\" assumption. Neither candidate fixes or worsens these, so they are equal on every criterion."
             }
           ]
         },
         "consolidate_assumptions_short.md": {
-          "verdict": "new",
-          "score_new": 7.0,
+          "verdict": "tie",
+          "score_new": 5.5,
           "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates keep the nine documents in order with the correct title headers, and neither is truncated or shows a failed-call chunk. They differ in how much each document was condensed. A is tighter, and B stays close to the full text.\n\nA:\n- It is closer to the \"short\" intent, and it cleans up some upstream awkwardness such as the odd \"Purpose: business\" line.\n- It loses useful detail. The Level 2 staffing figures (10 centers, 14 hours a day, 3 people per shift) are reduced to bare totals with no derivation.\n- It drops the Leipzig-specific renter and lease constraint from the review issue on vouchers, and it removes the rationale behind several risks.\n- It says Leipzig (pop. about 616k) \"mirrors the target operational scale\". That contradicts the 150k–400k requirement.\n\nB:\n- It is much less condensed, so it is longer than a \"short\" version should be. It keeps the full questions, the staffing derivation, the Leipzig lease and renter nuance, and the sensitivity details that A cut.\n- It carries over upstream artifacts: \"Purpose: business\", and the Domain rationale line \"Public Health … narrowly beating Public Health\".\n- It hedges the Leipzig population mismatch (\"representative of the sub-400k operational target scale\") and keeps the not-a-capital justification. That is more faithful to the prompt.\n- It keeps the risk summary trade-off, which is useful context for later stages.\n\nOverall, B preserves more decision-useful content and handles the location scale caveat better. A is more concise but loses information, which a downstream reference document cannot afford. The advantage is slight."
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "**Candidate A**\n- It keeps the upstream heading levels and wording. Examples are \"# Question 1 - …\", \"# Risk 1 - …\" and \"## Assumptions\". This follows the prompt tweak to keep existing '#'/'##' headings.\n- It keeps nearly all the substance. That includes the mitigation actions in the risks and the full assumption rationales. Those are useful for later stages.\n- It is barely shortened, so it is weaker as a \"short\" version.\n- It turns the \"Rationale:\" labels in the Locations section into plain prose, not '##' headings. That is a minor deviation.\n- It carries upstream flaws, such as \"narrowly beating Public Health\" and the \"Night < 19°C\" threshold wording. B has the same flaws.\n\n**Candidate B**\n- It is genuinely condensed and bulleted, which fits the \"short\" intent.\n- It breaks the heading instructions the prompt tweak was written to enforce:\n  - It renames headings: \"Primary domain…\" becomes \"Project Planning Summary\", and \"This plan requires one or more physical locations…\" becomes \"Project Location Requirement\".\n  - It demotes heading levels: \"# Question N\" and \"# Risk N\" become \"## Question N\" and \"## Risk N\". It also rewrites the question titles as short labels.\n  - It leaves \"Rationale:\" inline in the Locations section, not as '##' headings.\n- It loses material detail. For example, the risk-mitigation text is truncated.\n- It introduces some garbling in Review Issue 3: \"contracted installation model (Decision 7, Option 2)\" repeats the same option for both mechanisms. It also says \"contradicts goal of isolating social housing protection\", which is incoherent.\n\n**Overall**\n- B is more compact. It disregards the specific heading-preservation instructions and loses some content and clarity.\n- A is more faithful to the stage's structural requirements and gives downstream stages more usable detail, even though its compression is light.\n- A is better overall, but not by a large margin."
             },
             {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates reproduce the nine upstream documents in order and carry the same upstream flaws. Examples are the \"Night < 19°C\" inversion in Distill, and the claim that Leipzig at ~616k represents the 150–400k scale. The differences are in fidelity and detail.\n\nCandidate A keeps more of the decision-useful content:\n- Assumption answers keep their reasoning, such as the 6-week contracting scope, the €30k CRM cost, and the threshold rationale.\n- The Distill section keeps the staffing and threshold detail.\n- Risk actions are largely intact. These include the buddy system, the engineering assessments, and the ring-fenced handyperson budget.\n- Review issues keep their recommendations and sensitivities.\n- Bullet lists are separated by blank lines, as the stage specifies.\n- Its location rationale for Leipzig is slightly better than B's claim that 616k \"mirrors the target operational scale.\"\n\nA also has some oddities, such as the Domain rationale line \"narrowly beating Public Health.\" Most of these appear to come from upstream.\n\nCandidate B is shorter, which is the point of a \"short\" version, but it compresses too hard. It drops several of the assumption details and the liability and opportunity points. It also introduces distortions in the Review section:\n- It says vouchers \"guarantee\" frail residents won't be protected.\n- It says \"isolating social housing protection,\" which garbles the meaning.\n- It says the plan \"bypasses GDPR.\"\n\nIts formatting is less consistent. Several lists lack blank-line padding, and the risk entries are run together as plain lines.\n\nOverall, A is more faithful and more useful downstream, and B's extra concision costs more than it gains."
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "**Stage fit.** This is the \"short\" variant, so each upstream document should be shortened while keeping the wording and level of its existing headings. Section label lines such as \"Rationale:\" or \"Assumptions:\" should become '##' headings.\n\n**Candidate A**\n- It actually shortens the documents, using compact bullets.\n- It keeps the heading levels from the upstream style: \"## Risk 1 - …\", \"## Question 1 - …\", \"## Location 1\", \"## Issue 1 - …\".\n- It keeps the key decision-useful content: the 60/40 funding split; T+6 weeks for Tier 1 centers; 10 centers (42 staff) plus 10 outreach teams (20 staff); the 30°C/19°C thresholds; the CRM cost of €30k; the 15% contingency reserve of €300k; the sensitivity figures.\n- It loses some nuance. The full Question text is gone, as are some opportunity and benefit statements, and the \"3 people per shift, 14 hours/day\" detail. These are minor losses for a reference document.\n- It does not convert \"Rationale:\" or \"Assumptions:\" labels into '##' headings, so it only partly follows the tweak.\n\n**Candidate B**\n- It is barely shortened. Risks, questions and review issues are nearly verbatim.\n- It promotes headings against the instruction. \"## Risk n\" becomes \"# Risk n\", \"## Question n\" becomes \"# Question n - <long question text>\", and the domain title becomes \"# Primary domain: …\". This is the heading-promotion behaviour the prompt tweak was meant to prevent.\n- It drops the \"Rationale\"/\"Assumptions\" labels instead of turning them into headings.\n- It keeps more detail, which helps downstream stages, and a few of its additions are slightly more informative: 14 hours/day at 3 staff per shift; the landlord/tenant constraint on installations; Leipzig's hot-night trend.\n- That extra detail comes mostly at the cost of the stage's purpose, which is a shortened reference.\n\n**Shared flaws.** Both carry upstream errors: \"Night < 19°C\" in the distilled assumptions, which contradicts the \"Night Min > 19°C\" trigger in the Make Assumptions section; \"Decision 7, Option 2\" appearing twice in Issue 3; and Leipzig (~616k) being outside the 150k–400k brief. Neither candidate fixes these.\n\n**Verdict.** A is better aligned with the short-variant purpose and the heading-preservation rule, while keeping the essential facts. B is more informative but largely ignores the shortening goal and violates the heading-level rule."
             }
           ]
         }

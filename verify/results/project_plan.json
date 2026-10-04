@@ -1,29 +1,29 @@
 {
   "stage": "project_plan",
-  "evaluated_at": "2026-10-04T18:03:03",
+  "evaluated_at": "2026-10-04T22:47:38",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 85.5,
+      "seconds": 109.9,
       "structure_problems": [],
       "judgments": {
         "project_plan.md": {
-          "verdict": "tie",
-          "score_new": 6.5,
-          "score_baseline": 7.0,
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
           "runs": [
             {
-              "winner": "baseline",
-              "score_new": 6,
-              "score_baseline": 8,
-              "analysis": "Candidate A is much more detailed and plan-specific. It quantifies risks (delay and € ranges), gives concrete mitigation parameters (5 boreholes, 2%-in-50-years seismic threshold, 70% hedge, 5/10/15% escalation triggers), and correct technical details (1,668 mm vs 1,435 mm gauge, ERTMS). It also sizes the funds (marine mitigation, maintenance, decommissioning, seismic, energy), which downstream stages can use. Its stakeholder classification is sensible, with governments, financier, rail operators and workforce as primary. Weaknesses: the Measurable criterion lacks budget and gate metrics, the phase durations are inconsistent (\"4-5 years per phase\" vs 6-7/5-6/4-5), there are some invented specifics (blockchain tracking, cetacean seasons), a duplicated regulatory body, and fund sizes that may strain the €40B budget. Candidate B is cleaner and has a better Measurable criterion (budget, certification, validation gates), a candid Achievable section, and more realistic named regulators and standards (UNCLOS, Eurocode 8, TSI, Adif, ONCF, Red Eléctrica). But its risks and mitigations are mostly unquantified and generic. It misclassifies internal team roles as primary stakeholders and puts the governments in the secondary list. Its engagement strategies and compliance actions are terse. Overall A is more useful downstream."
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Candidate A is faithful and anchored to September 2026, but its Time-bound section is internally inconsistent (it says 4-5 years per phase, then lists 6-7, 5-6 and 4-5 years). Its Measurable criteria are qualitative, its dependencies have no dates, and its regulatory content is generic. Candidate B anchors the timeline to 2026-09-05 and reconciles the phases with the 20-year horizon: 15-18 years of phases plus 2-3 years of contingency. It adds quantified success metrics, dated milestones across the dependencies, mitigations and compliance actions, and specific laws, agencies and standards. It also has per-stakeholder engagement cadences. B has flaws: an invented €20 billion funding split per government, some questionable standards (OHSAS 18001, ISO 19901, ASME VIII), some padded regulatory items, and minor date inconsistencies. These are smaller than A's weaknesses. B is more specific and more useful for downstream planning."
             },
             {
               "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates follow the GoalDefinition structure and stay faithful to the prompt: Gibraltar, €40B, 20 years, 100 m depth, start September 2026.\n\n**Candidate A**\n- Its SMART criteria are the stronger set. \"Measurable\" gives real success conditions: design depth within tolerance, independent third-party safety certification, spend within the €40B budget including contingency, and validation gates passed. \"Time-bound\" is coherent: three phases, 6–12 month buffers, 2–3 years of schedule contingency, and pre-construction in years 1–3.\n- Its regulatory section is more concrete and accurate. It names UNCLOS, Eurocode 8, the EU Habitats and Marine Strategy directives, TSI/ERTMS, Adif, ONCF, the EU Agency for Railways, Red Eléctrica, ONEE and the Spanish and Moroccan maritime authorities.\n- Its regulatory bodies are real regulators.\n- Weakness: the stakeholder classification is odd. Internal team roles are listed as \"primary\" and the governments as \"secondary\". It also has fewer quantified figures, which gives downstream stages less to work with.\n\n**Candidate B**\n- It adds many quantified items: cost impacts per risk, fund sizes, 5 boreholes, 10 buoys, 50–100 MW of energy demand, escalation triggers and a turnover target. This is more decision-useful on the surface.\n- Its stakeholder classification is more sensible, with governments, the consortium and the financiers as primary.\n- Its internal consistency is weaker:\n  - \"Approximately 4-5 years per phase\" contradicts the listed 6–7, 5–6 and 4–5 year phases.\n  - Its Measurable criterion omits budget and certification.\n  - The funds it stacks (contingency, maintenance, decommissioning, energy, seismic, climate and others) could consume a large share of the €40B, and it never reconciles this.\n  - The Iberian-versus-standard gauge framing is questionable, since Spain's high-speed network is standard gauge.\n  - Blockchain supply-chain tracking is a gimmick.\n  - Its regulatory bodies list includes non-regulators and a duplicate, namely the Joint Coordination Center twice.\n  - Its compliance standards are vaguer and more generic.\n\nOverall, A is cleaner, more correct and better on SMART and compliance, while B is richer in invented numbers but has more internal flaws. I give A a slight edge."
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is far more specific and decision-useful. It anchors the timeline to the stated date and ASAP start, with concrete dated milestones (2026-11-30, 2027-06-30, and so on). The Measurable criteria are quantified. Dependencies, regulatory permits (with laws and timelines), standards, and stakeholder engagement cadences are detailed. Weaknesses in A:\n- Some milestones are internally inconsistent or implausible. Treaty ratification is dated 2027-11-30 but the task force is dated 2026-11-30. Prototype testing is listed in the \"first 12 months\" but runs to 2028. Fabrication yards are expected at full capacity by mid-2027.\n- It states a 25kV AC Spain / 3kV DC Morocco voltage mismatch, which is arguably backwards or unclear.\n- It cites a \"20-year life\" for decommissioning, which is odd.\n- Some standards are questionable (OHSAS 18001 is obsolete, and API RP 2A is for fixed platforms).\n- Phases of 6-7, 5-6, and 4-5 years sum to 15-18 years, leaving 2-3 years of contingency, which is consistent with 20.\n- Measurable item (5) is oddly phrased.\n\nCandidate B is correct but more generic. Its Time-bound says \"approximately 4-5 years per phase\" and then lists 6-7, 5-6, and 4-5, which is inconsistent. It does anchor to September 2026 and ~2046. Its Measurable section has no numeric thresholds. The Regulatory section is generic, with no named laws or timelines. Listing the \"independent environmental oversight board\" and \"legal counsel\" as regulatory bodies is a classification error. It does add useful items such as climate change, the maritime traffic study, and a marine mitigation fund. However, it is less specific and weaker as a project plan with milestones and success criteria.\n\nOverall, A better fulfills the stage purpose of goals, milestones, deliverables, and success criteria."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 120.0,
+      "seconds": 345.4,
       "structure_problems": [],
       "judgments": {
         "project_plan.md": {
           "verdict": "new",
-          "score_new": 8.5,
-          "score_baseline": 4.0,
+          "score_new": 7.0,
+          "score_baseline": 3.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 9,
-              "score_baseline": 4,
-              "analysis": "Candidate A is clearly better. It states the whole red-team goal: phased and gate-controlled, with downsize, split, delay and cancel options kept open. It flags external approvals as \"uncontrolled\", as the prompt requires. Its SMART criteria cover all phases, the 30-50% tenant threshold and the stricter 60% selected-strategy threshold. Its risk section is broad: grid, land, water, brownfield, security, tenants, FX, split-campus latency and holding costs. Each risk is matched to a concrete mitigation. The stakeholder lists are complete, and the regulatory section is detailed and French-specific (PLU, ICPE, Loi sur l'eau, DREAL, Ae, CRE, ARCEP, SecNumCloud). It also has the sections the schema asks for, and it follows the prompt's constraints on EUR budgeting, USD exposure and hedging.\n\nCandidate B narrows the goal to Phase 1 alone, which drops the feasibility and kill-criteria framing. Its goal statement is internally inconsistent. It requires \"legally binding grid commitment for the subsequent 2 GW expansion tranche prior to Phase 1 construction FID\". Yet it also says \"No Grid Pre-Commitment\", and the prompt says grid approvals should be treated as uncertain. It mixes the 30-50% and 60% tenant thresholds without explanation. It cites opaque internal references (\"Decision 4\", \"Review Issue 2\") that mean little on their own. It invents specifics such as a mandatory 75% local hiring clause, a \"Q4 2026\" DGSI meeting, and 18 months of holding costs. It gets the regulatory body wrong (\"DDETSPP\" is not the DDTM). Its stakeholder, regulatory and permit lists are thin. It leaves out the heat-reuse, fiber, water-authority, ARCEP and CRE items. It never says milestones that depend on an external authority are \"uncontrolled\"."
+              "score_new": 7,
+              "score_baseline": 3,
+              "analysis": "Candidate A is complete across all schema groups. It anchors the timeline to the 2026-05-16 start, covers the full program with gates and a 60% take-or-pay trigger, flags RTE as an uncontrolled dependency, and gives detailed stakeholder, regulatory and mitigation content. Its flaws are unrealistically aggressive near-term dates, some inconsistent or invented numbers (the 30%/50% buffer split, the €4.32B unhedged figure, a sub-2ms RTT to Paris), and a somewhat promotional goal statement. Candidate B is thin and has no calendar dates. It relies on cryptic \"Decision N\" references and omits most required analysis areas such as fiber, water and FX. It also contradicts itself by requiring a binding RTE commitment before Phase 1 FID while adhering to \"No Grid Pre-Commitment\". A is far more useful downstream despite its flaws."
             },
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 4,
-              "analysis": "Candidate B is the stronger project plan. It stays faithful to the prompt. It covers the whole campus arc from Phase 0 to Phase 4, the 9 GW target, and the allowance to downsize, split or cancel. It applies the \"uncontrolled\" labelling to external approvals, and it includes the no-build alternative and kill criteria. Its risks are specific to the plan: inter-cluster latency undermining a split campus, brownfield remediation on steel, refinery and military land, USD/EUR hedging, buffer land holding costs, and the unrealistic 161 km² contiguous assembly. The regulatory section is detailed and correct for France (PLU, ICPE, Loi sur l'eau, CRE, ARCEP, Ae, SecNumCloud). B mostly avoids inventing facts. Its weaknesses are length and a primary-stakeholder list made up of internal roles rather than external parties, though the external parties appear under secondary stakeholders.\n\nCandidate A narrows the goal to Phase 1 only, which is defensible for a SMART goal, but it has several problems. Its goal statement requires a legally binding grid commitment before Phase 1 FID, yet its mitigation says \"No Grid Pre-Commitment\", so it contradicts itself. It cites \"Decision 4\", \"Decision 10\" and \"Review Issue 2\" without explanation. It also adds invented specifics, such as a 75% local hiring clause, a 60% tenant threshold stated as fact, and a Q4 2026 DGSI meeting. It mislabels DDETSPP as a Direction Départementale des Territoires et de la Mer. It lacks kill criteria, the no-build option, the split-campus alternative, and the uncontrolled-milestone flagging. It treats the 128.8 km² buffer as land to control without questioning feasibility. The regulatory list is thinner. Its \"Achievable\" statement is also muddled."
+              "analysis": "Candidate A is concise and focused on Phase 1, but it is undated (it says \"3 Years\", which is the failure the prompt tweak was meant to prevent) and it contradicts itself. The goal requires a binding grid commitment for the 2 GW tranche before FID, while the mitigation and Achievable sections say \"No Grid Pre-Commitment\". Its tenant thresholds also conflict, at 30–50% in one place and 60% in another. It has a wrong agency expansion (DDETSPP), shallow regulatory coverage, and no \"uncontrolled\" markings for external approvals. Candidate B anchors the timeline to 2026-05-16, covers the full roadmap, budget, FX exposure, fiber, heat reuse and stakeholders, and gives concrete gates and triggers, so it is more useful downstream. B's flaws are real: unrealistic near-term dates (binding heat-reuse offtake, hardware lock and EIA filing all within months), FID at month 12–18 versus COD at year 3 despite 36+ month RTE lead times, the wrong water agency (Seine-Normandie or Loire-Bretagne instead of Artois-Picardie), and some promotional tone. Even so, it is considerably more complete, specific and date-anchored than A."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 43.0,
+      "seconds": 79.7,
       "structure_problems": [],
       "judgments": {
         "project_plan.md": {
           "verdict": "new",
-          "score_new": 8.5,
-          "score_baseline": 4.5,
+          "score_new": 7.5,
+          "score_baseline": 4.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 9,
+              "score_new": 7,
               "score_baseline": 4,
-              "analysis": "Candidate A is more complete, more specific to the plan, and more useful downstream. It restates the goal with the realistic \"Builder\" scenario, ASAP start from 14 May 2026, the four corridors, the €1.5B budget and the separate private IT estimate. Its SMART section includes the milestones (month 6 provisional standards, month 18 binding standards, month 30 API exposure, month 60 full corridor through-ticketing). Its dependencies, resources, risks and mitigations are detailed, and each mitigation maps to a risk. The risks it covers include the clearing float, liability lobbying by incumbents, inflated cost-recovery claims, security and data protection, scope creep to other modes, and accessibility being deprioritised. The regulatory section is strong: state aid, PSD2, NIS2, GDPR, the Passenger Rights Regulation 2021/782, ECB and financial supervisors, the European Court of Auditors, and procurement rules. Its weaknesses are some invented specifics, such as the €900M/€150M/€200M indicative splits, the 99% T+3 settlement target and the 5-minute latency benchmark. These probably come from the upstream assumptions and are plausible, but the budget split is a little loose. It also does not mention the modal-shift measure beyond a \"measurable shift\".\n\nCandidate B is thin. Its dependencies, resources and stakeholders are sparse, and it omits the corridors, the private IT estimate, the bicycle and reduction-card detail in the specifics, and secondary stakeholders such as national regulators' roles and banks. It leaves out the 60-month milestone. It has a few concrete details taken from upstream decisions: the €300M float reserve, the 150% trigger, the 65% consensus rule and the 90-minute threshold. It also references \"Decision 2/9/13\" and \"OSDM version 1.0\", which are opaque or unexplained. Its regulatory section is minimal, with no GDPR, PSD2, state-aid or procurement. Several risks have no matching mitigation. It is usable but under-developed."
+              "analysis": "A is concise and mostly consistent but thin. Its Time-bound item gives no calendar dates, which misses the stage tweak requiring the timeline to be anchored to the stated current date and \"Project start ASAP\". Its measurable criteria add no operational metrics, and its compliance coverage omits GDPR, payment/financial regulation, competition law, cybersecurity and accessibility standards. B anchors milestones to 2026-05-14 and adds concrete metrics (99% uptime, T+3 settlement, 5% royalty cap). It also gives a budget breakdown, a mitigation tied to each risk, and a comprehensive regulatory section. B has flaws: some near-term dates are very aggressive, regulation adoption by month 6 is unrealistic, and a few odd details appear (SNCF board as regulator, a fine as a share of program budget). It is also verbose. Overall B is far more specific and more useful for downstream stages."
             },
             {
               "winner": "new",
               "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "B is the better project plan. It covers more of the prompt's facts. It includes the 14 May 2026 ASAP start and the four launch corridors. It covers bicycle reservations and the separate estimate of private carrier IT investment. It also has the full 18/30/60-month milestone ladder and the extension to TEN-T. Its measurable criteria are more concrete (99% of settlements within T+3, conformance-certified APIs, spend kept within the €1.5B budget). Its dependencies and resources are specific and usable downstream, with an indicative budget split and float. Its risk section is broader: it adds security and data protection, private-investment overrun and reputational risks, each with a matching mitigation. Its regulatory section is much stronger. It names Regulation (EU) 2021/782, GDPR, PSD2, NIS2, state aid, public procurement, ECB and financial supervisors, and the Court of Auditors. A's regulatory section is thin. A also leaves out bicycle reservations, the corridors, the start date and the private IT estimate. A's Measurable item lists \"making the train more attractive\" as a criterion without a metric. A does show some specifics (the €300M reserve, \"three strikes\", 90-minute threshold), but these are narrow and A has no state-aid or financial-authorisation coverage. B's budget split is only indicative and a few items are vague, such as \"bi-weekly or periodic\". These are minor flaws."
+              "score_baseline": 4,
+              "analysis": "Candidate A follows the stage tweak by anchoring the timeline to 2026-05-14, with concrete month-6/18/30/36/60 dates. It is highly specific, with quantified measures, budget allocations, FTEs, thresholds, stakeholder cadences, and a thorough regulatory section (GDPR/DPIA, PSD2, EN 301 549, DG COMP, ENISA). It has flaws: some near-term dates are unrealistically aggressive for a merely proposed regulation (EDPB approval by Sept 2026, regulation adoption by month 6), the budget split is slightly inconsistent, \"French SNCF board\" is wrongly listed as a regulator, and it gives no private IT estimate. Candidate B is concise and faithful but thin and generic. It has no calendar dates (missing the required anchoring), a bare-list stakeholder analysis, minimal resources and compliance content, and no budget breakdown. A is far more useful for downstream planning."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 120.5,
+      "seconds": 88.1,
       "structure_problems": [],
       "judgments": {
         "project_plan.md": {
           "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 4.5,
+          "score_new": 7.5,
+          "score_baseline": 4.0,
           "runs": [
             {
               "winner": "new",
               "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "Both candidates choose Leipzig, which at about 616k residents is outside the prompt's 150k–400k band. Only B notices this. B flags it and proposes a pilot footprint of a subset of districts, or an alternative city. A ignores the problem.\n\nA is concise and has some concrete specifics: a Level 2 threshold of >30°C day and <19°C night, 5,000 kits, a €300k contingency reserve and a 95% script-fidelity target. Several parts are weak:\n- It misstates the gate metric as \"80% cooling center utilization hours\" rather than 80% of planned hours delivered.\n- It leaves out worker protection, public communications and misinformation, multilingual guidance, the full set of end-of-month-12 deliverables and the equity metrics.\n- It leaks internal references such as \"Decision 12, Option 1\" and \"Financial Risk 2\" into a standalone document.\n- Its regulatory section is thin and has no German or Saxon specifics. It names no data protection authority and does not mention DWD, procurement rules or landlord consent.\n- It adds a €300k reserve without saying where it comes from.\n\nB covers every scope item and restates the gates and metrics exactly as the prompt gives them. Its risk register is richer and matches the prompt's required risks: reputational, GDPR, volunteer safety, surge and low utilization. It also adds an interim operating mode for heat arriving before Month 2. It has Leipzig and Saxony-specific compliance items, such as the Saxon data protection authority and DWD, and covers procurement fast-track justification, landlord consent, works council and transport licensing. It anchors dates to the 2026-05-03 start. It is long and has one typo (\"carry out it\"). It has no concrete thresholds or kit counts, but this stage doesn't require them, and the length comes from real coverage rather than padding.\n\nB is more faithful, more complete and more useful downstream."
+              "score_baseline": 4,
+              "analysis": "Candidate A is much stronger. It follows the stage's tweak by anchoring the timeline to 2026-05-03, with a dated Month 1 milestone, the Month 2 gate (07-03), the Month 4 gate (09-03) and the final deadline (2027-05-03). It also gives dated procurement and contracting deadlines. Its dependencies, resources (5,000 kits, 5 vans, 10 outreach teams, 10 sites) and owner-specific stakeholder engagement are concrete and usable by later stages. Its risk section has ten key risks with mitigations that match them, and its regulatory section is detailed. It has flaws. It gives Leipzig's population as ~616k, which is outside the prompt's 150–400k range. It cites the repealed Directive 95/46/EC. It claims that BDSG requires registering processing activities. It labels a 2026-10-01 audit as \"Month 6\". It names the Saxon Medical Association as a regional health authority. It also leans on Salesforce and on invented \"Decision N\" references. Candidate B is generic and thin. Its Time-bound section has no dates at all, which is exactly what the tweak was meant to prevent. It lacks staffing counts, owners and deadlines. It misstates \"80% cooling center utilization hours\". Its stakeholder, regulatory and risk sections are skeletal. It does include the Level 2 threshold, and it avoids A's population error only because it says nothing about the city. Overall, A's specificity, date anchoring and completeness outweigh its factual slips."
             },
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 4,
-              "analysis": "Candidate A is much more complete and decision-useful. Its goal statement and SMART criteria restate the budget, the staged release, the constraints and the deliverables. It lists all the gate criteria correctly, including the 45-minute transport time and the after-action report. Its dependencies, resources, risks and mitigations cover the prompt's required risk categories: reputational, GDPR, volunteer safety and extreme-event surge. It also covers the staffing roles, MOUs, procurement, interim paper-based data handling and the home-intervention handyperson ring-fence. Its stakeholder, regulatory and compliance sections are detailed and fit Germany and Saxony (DWD, Saxon DPA, DPIA). Its one flaw is choosing Leipzig, which at about 616k is outside the 150k–400k band. It does flag this openly and proposes a district-based footprint or an alternative city. That handling is honest, though the better move would have been to pick a compliant city.\n\nCandidate B also picks Leipzig and never acknowledges the population violation. It is thin. It has only 4 dependencies, 7 resources and 4 key risks, and it omits the reputational, surge and volunteer-safety risks. It misstates the gate as \"80% cooling center utilization hours\" and leaves out the transport-time and after-action criteria. It has a few concrete details, such as the Level 2 threshold of 30°C day / 19°C night, the 5,000 kits and the €300k reserve. However, it leans on opaque cross-references (\"Decision 12, Option 1\", \"Financial Risk 2\", \"Builder strategy\") that a reader can't resolve. Its stakeholder and regulatory sections are sparse. It's less useful for downstream stages.\n\nA is clearly better."
+              "analysis": "Both pick Leipzig and follow the schema structure. Candidate A is concise but vague. Its time-bound field has no dates even though the stage tweak requires anchoring to 2026-05-03. It also has errors: \"80% cooling center utilization hours\" confuses delivered hours with utilization, and it leaves \"(addressing Financial Risk 2)\" style cross-references that don't match its own risk list. It also says to \"mitigate\" the GDPR risk with \"hyper-localized canvassing\", and its engagement strategies are thin. It contains few specific numbers.\n\nCandidate B is much more detailed and plan-specific. It gives dated milestones, with Month 2 as 2026-07-03 and Month 4 as 2026-09-03, which is the anchoring the stage asked for. It gives counts (10 sites, 5,000 kits, 10 outreach teams, 5 vans), a full risk set with mitigations, and a thorough stakeholder and regulatory section. It has flaws:\n- The population figure of ~616k is outside the 150–400k range the prompt requires. This is a real faithfulness violation.\n- It cites the obsolete Directive 95/46/EC.\n- \"Salesforce equivalent\" is vague.\n- It states \"3–5× higher mortality risk\" without a source.\n- The timeline is aggressive: the Month 4 gate at 2026-09-03 sits after most of the summer, and the \"Month 6 follow-up\" date of 2026-10-01 is inconsistent.\n- It invents some regulatory bodies, such as treating the Saxon Medical Association as the regional health authority.\n- It is very long.\n- \"Registration of data-processing activities with supervisory authority\" is not how BDSG works.\n- Its 70% external staffing split is inconsistent: the outreach staffing there is 7 of 10 teams external, and the \"20 external personnel\" figure is roughly consistent.\n\nDespite these flaws, B is considerably more useful and executable downstream, and it follows the date anchoring. A's weaknesses are vagueness and missing dates. Candidate A also doesn't note the Leipzig population issue, but it doesn't state a population at all. B's population error is a notable but not fatal flaw. Overall B is better."
             }
           ]
         }

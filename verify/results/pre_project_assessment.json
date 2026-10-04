@@ -1,29 +1,29 @@
 {
   "stage": "pre_project_assessment",
-  "evaluated_at": "2026-10-04T17:56:00",
+  "evaluated_at": "2026-10-04T22:41:29",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 174.4,
+      "seconds": 94.2,
       "structure_problems": [],
       "judgments": {
         "pre_project_assessment.json": {
           "verdict": "new",
-          "score_new": 8.5,
-          "score_baseline": 4.0,
+          "score_new": 7.0,
+          "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 9,
-              "score_baseline": 4,
-              "analysis": "Candidate A is much stronger. It works through the three recommendation options and gives a reasoned \"Proceed with Caution\" with concrete limits: a €5M cap and two dated gates. It catches real flaws in the plan and assumptions. Pillars would be 200–800 m tall in a strait 300–900 m deep. \"International waters\" is wrong for the narrow Strait, where territorial seas and transit passage apply. The rail gauge and electrification assumptions look wrong. \"20 years\" is a build horizon, not a design life. A's checklists are specific and decision-useful: EMODnet bathymetry extraction, a buckling and tether model, Morison load numbers, breach inflow calculations, AIS data, legacy SECEGSA/SNED data, and a legal opinion. Each item has a dated deliverable and a fallback. Its dates start after the 2026-09-05 plan date and stay consistent with each other. It also keeps to the \"To initiate this project, you must:\" format. B is generic and largely accepts the plan's premises. Its recommendation has no rationale. Several actions are questionable or unrealistic: permanent offshore residential platforms with family accommodation, a full-scale rail prototype at 10 atmospheres external pressure, and a treaty ratified within 18 months. It also builds floating platforms before the geotechnical gate. It has some quantification, but mostly as arbitrary targets. Its seismic and geotechnical items are duplicated across two feedback entries. It misses the geometry contradiction, the legal-premise errors and the gauge issue. A is more faithful, more insightful and more useful downstream."
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "A is more specific and decision-useful, with eight distinct, quantified checklists covering seismic and geotechnical, energy, maritime traffic, rail gauge, governance, flooding, climate and decommissioning. It has flaws: the recommendation field is overloaded, some rail electrification facts are wrong, some deadlines are unrealistic, and it has no prototype validation. B has a clean recommendation label and covers fabrication, workforce, environmental permitting and prototype testing. However, it duplicates the geotechnical and seismic items, has inconsistent borehole counts, uses spurious time-of-day deadlines, and omits energy, rail interoperability, climate and decommissioning. A is moderately better overall."
             },
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 4,
-              "analysis": "Candidate B is clearly stronger on substance. It finds the plan's core contradiction: a tunnel at 100 m depth in a strait that is 300–900 m deep implies 200–800 m pillars. It also challenges the \"international waters\" premise and the rail gauge and electrification assumptions. Its checklists are concrete and decision-useful, with calculations, named data sources (SECEGSA, SNED, EMODnet), dated gates, fallbacks and a spend cap. It reads as a real viability assessment of this plan, and it gives downstream stages a clear pre-feasibility framing.\n\nB's main weakness is format. The go_no_go_recommendation field holds a long rationale, including a literal \"\\\\n\\\\n\", instead of a clean enum value. That could trip a parser or downstream consumer, but the verdict, \"Proceed with Caution\", is stated at the start. The value is also defensible.\n\nCandidate A uses the correct enum value and the right structure, but its content is generic and accepts the premise uncritically. It never questions the pillar height against the strait's depth. It proposes a 14 km corridor, \"permanent offshore residential platforms with family accommodation\", and a 10-atmosphere interior pressure prototype. It sets precise \"17:00\" deadlines with no justification. Its checklists are plausible but boilerplate-like, and the seismic items are duplicated across two entries. Its risk figures (€3–20 billion in earthquake damage) are unsupported.\n\nB's analytical depth outweighs its recommendation-field formatting problem."
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Candidate A: Format is clean. The recommendation is exactly \"Proceed with Caution\", and there are 8 feedback items with the expected checklists. Items 1 and 5 largely duplicate each other and disagree on borehole counts (5 vs 10). It includes odd or invented items (permanent offshore residential platforms with family accommodation, permanent offshore floating platforms) and a generic workforce item. It misses major plan-specific viability issues: rail interoperability, energy supply, climate and buoyancy effects, and decommissioning. The summary is good.\n\nCandidate B: Format flaw: the go_no_go field holds a long paragraph instead of a clean label, though it begins with \"Proceed with Caution\". Content is much more specific and decision-useful. It covers seismic and geotechnical validation, energy supply, maritime traffic, rail gauge and interoperability, governance with an EIA timeline and arbitration, flooding, climate and buoyancy effects, and decommissioning funding. It has technical slips: Spain is not 25kV at 16.7 Hz, Spain does not use ERTMS L3, gauge conversion costs look underestimated, and 25–40 MW offshore turbines are unrealistic. Some deadlines are very aggressive. Overall it offers considerably more insight and useful coverage for downstream stages than A.\n\nB's richer coverage of real viability risks outweighs its schema deviation and factual slips, so B is moderately better."
             }
           ]
         }
@@ -32,61 +32,7 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 165.9,
-      "structure_problems": [],
-      "judgments": {
-        "pre_project_assessment.json": {
-          "verdict": "new",
-          "score_new": 9.0,
-          "score_baseline": 3.5,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 9,
-              "score_baseline": 3,
-              "analysis": "Candidate A is far stronger. It gives a reasoned \"Proceed with Caution\" and explains why not the other two options. It finds real internal inconsistencies: the 161 km² square versus 32.2 km² buildable, the implausible holding-cost line, a budget that probably excludes GPUs, an FX exposure figure that doesn't follow from the stated hedge, a MIN/MAX clause error, and a 1.5 ms Paris RTT that fibre physics can't meet. Its eight checklists are concrete, dated and measurable. They cover RTE queue requests, the fibre latency budget, ground hazards and unexploded ordnance, conditional land options, the ANSSI boundary with detection-only anti-drone measures, and dry cooling under heatwave and flood conditions. It marks external milestones \"uncontrolled\", as the prompt requires, and sets kill triggers. It also notes the date discrepancy and anchors the schedule to the later date. Its weaknesses are length and some figures that may come from other stage inputs. It has eight feedback items where the stage spec asks for two experts with four each, but the output format flattens them, so this is acceptable.\n\nCandidate B has serious flaws. Its deadlines (2026-05-24, 06-15, 06-28, 07-15) fall before the working date of 2026-10-04. It invents a \"pre-paid RTE fee\" to wire, which contradicts the prompt's rule against assuming grid commitments. It requires \"sub-1ms latency across the primary liquid loop\", which is a nonsensical requirement. It confuses power factor with PUE. It asks for \"binding agreements via the Prefecture\" and for tying hardware to unnamed \"watchlists\". It buys a land holding-cost budget of only €30M, even though its own €50k/ha/year figure implies far more. The summary is generic, and the recommendation is a bare phrase with no reasoning. It is less skeptical and less useful downstream."
-            },
-            {
-              "winner": "new",
-              "score_new": 9,
-              "score_baseline": 4,
-              "analysis": "Candidate B is clearly stronger.\n\n**A:**\n- It has only 6 feedback items, where the schema implies 8 (4 per expert).\n- Its content is often technically dubious or incoherent. It asks for \"sub-1ms latency across the primary liquid loop\", which makes no sense. It calls the 0.20 PUE overhead \"waste heat\" that dry coolers must reject. It converts power to apparent power with a \"1.2 power factor\". It treats the \"pre-paid RTE fee\" as an established fact.\n- It is internally inconsistent. It budgets €30M for holding costs on 128.8 km² while citing €50k/ha/year, which would be about €640M a year.\n- It asks the Prefecture for \"binding agreements\" and sets many near-term deadlines, including 2026-05-24, which is already past relative to the working date.\n- Its recommendation is a clean label, and its combined summary is reasonable but thin.\n- It is faithful to the plan's themes but adds little real skepticism.\n\n**B:**\n- It gives 8 feedback items, matching the two-expert, four-item structure.\n- It is highly specific and decision-useful. It catches real internal contradictions in the plan:\n  - the 161 km² square versus the 32.2 km² buildable area\n  - the holding-cost arithmetic\n  - the budget per GW versus the USD GPU share\n  - the FX exposure figure (€4.32B versus €1.08B)\n  - the MIN versus MAX lockout clause\n  - the 1.5 ms RTT to Paris versus fibre physics\n  - the tension between the zero-water mandate and the PUE target\n- It adds realistic French-context items: Géorisques/BASOL, GEODERIS, pyrotechnic pollution, PPRT/Seveso, ZAN, ICPE, SDIS fire-water needs for BESS, the legal limits on anti-drone jamming, and promesses de vente with suspensive conditions.\n- It marks external dependencies as \"uncontrolled\" and sets kill triggers, as the prompt requires.\n- Its weaknesses are that the go_no_go field holds a long text instead of just the label, and that it re-anchors dates to 2026-10-05, though it explains why. It is also long.\n- These are minor next to the substantive quality gap."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260514_cross_border_rail_ticketing",
-      "ran_ok": true,
-      "seconds": 152.0,
-      "structure_problems": [],
-      "judgments": {
-        "pre_project_assessment.json": {
-          "verdict": "new",
-          "score_new": 7.0,
-          "score_baseline": 5.0,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 4,
-              "analysis": "Candidate A is far more specific and insightful than B, but it has one structural defect.\n\n**Candidate A**\n- It gives dated, measurable actions with reasons and fallbacks.\n- It catches real issues in the plan:\n  - The Regulation is only proposed, so \"binding standards at month 6\" has no legal force yet.\n  - The €900M grants raise State aid concerns.\n  - There is Art. 101 competition risk from sharing data between carriers.\n  - There are PSD2 and settlement-finality questions for the clearing entity.\n  - PRM data falls under GDPR Art. 9.\n  - NIS2 applies.\n  - The 90-minute backstop trigger is weaker than the 60-minute threshold in Regulation (EU) 2021/782.\n  - The royalty is called \"cost-recovery\" but capped at 5% of maintenance spend.\n  - Accessibility is deferred to month 30 although it is called non-negotiable.\n- The recommendation, \"Proceed with Caution\", has clear conditions and a re-assessment gate.\n- Defect: the top-level go_no_go_recommendation field is empty. The recommendation text is embedded inside combined_summary through escaped quotes, so a strict parser or downstream stage would see an empty field. The content is still present and readable.\n\n**Candidate B**\n- Its recommendation field is correctly populated, and it has 8 items that reference the upstream decisions.\n- The content is weaker and more generic. It uses placeholders such as \"Brussels Location 1\" and \"Location 2\", and has a typo (\"DGM MOVE\").\n- It codifies the 90-minute threshold without noticing the conflict with the existing 60-minute rights.\n- It omits the legal basis, State aid, GDPR and competition law, which is a significant gap for a compliance and risk expert.\n- Some items are odd, such as \"adjusting the threshold upward\" if equity concerns are raised, and the 5-day recoupment requirement.\n- It does not validate the latency or float assumptions.\n\nOverall, A is much more useful downstream despite the empty field. B is structurally clean but substantively thin."
-            },
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "A is structurally valid but generic in places: it uses placeholder locations like \"Brussels Location 1\", and it misses major risks. These include the legal status of \"binding\" standards under a Regulation that is only proposed, State aid, Article 101 competition risk, GDPR and PSD2 issues, and the inconsistency between the 90-minute and 60-minute thresholds. B is far more insightful and decision-useful. It has concrete, dated, measurable actions with fallbacks, catches the plan's internal contradictions, and sets conditions and a reassessment date for \"Proceed with Caution\". B's main flaw is a format error: the top-level go_no_go_recommendation is empty, and the recommendation text is embedded inside combined_summary with a duplicated key. That is a real deduction, but the substance is clearly superior."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260202_heatwave_resilience",
-      "ran_ok": true,
-      "seconds": 163.6,
+      "seconds": 128.9,
       "structure_problems": [],
       "judgments": {
         "pre_project_assessment.json": {
@@ -97,14 +43,68 @@
             {
               "winner": "new",
               "score_new": 7,
-              "score_baseline": 3,
-              "analysis": "Candidate A is much stronger on specificity and insight. It catches real issues: Leipzig has about 616k residents, outside the 150–400k range. The assumptions contradict each other on the night-minimum sign. The staffing numbers don't add up (62 people on duty against \"12 FTE\"). The voucher-only home route misses frail residents. A also grounds its GDPR points in specific law (Art. 9, Art. 35, §203 StGB, SGB X). Its 8 checklists are concrete, with owners, dates, thresholds and fallbacks. They cover contracts, the triage-script validation, Legionella testing and the Personalrat agreement, and they would feed downstream planning well.\n\nA's main weakness is faithfulness to the prompt's date. The prompt says today is 2026-May-03 and the start is ASAP. A overrides this with a \"real date\" of 2026-10-04 and re-baselines the whole calendar to October. That departs from the stated facts and could confuse later stages. Even so, the \"Proceed with Caution\" call is well reasoned, and the Leipzig and logic findings stand on their own.\n\nCandidate B follows the prompt's dates but is shallow and sometimes wrong. It recommends \"Execute Immediately\" despite obvious problems. It misses the Leipzig size mismatch and keeps the contradictory \"Night Min < 19°C\" trigger. It orders 5,000 \"non-reflective\" window film kits \"overriding cost concerns\", which is a poor choice for heat control. Its other items are odd: running data capture on paper logs, municipal liability for triage, and an unrealistic 15 km² site-mapping step. Its checklists are vaguer and less decision-useful, and its summary is thin.\n\nOverall, A is better despite the date override."
+              "score_baseline": 4,
+              "analysis": "A has 8 items covering the main risk areas (grid, land, sovereign isolation, tenants, brownfield, water, social license, fiber) and a clear go/no-go with stop conditions. It has flaws: \"binding\" vs \"non-binding\" wording, the Seine watershed error, muddled one-way vs RTT latency, October 2026 dates despite an ASAP start, and verbosity. B has only 6 items and a bare go/no-go. It also has technical nonsense: sub-1ms latency across a liquid loop, power factor confused with PUE, 5% of the buildable area allocated to substations, and holding costs that contradict each other (€30M vs about €644M a year). It invents a pre-paid RTE fee. It omits tenants, brownfield, water risk, social license, and fiber. A is more complete and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A has six items rather than the eight the stage specifies. It has a clean recommendation label and early dates that fit \"start ASAP\". Its content is narrow and covers little on tenants, social license, fiber, water or workforce. It also contains technical errors: a 1.2 power factor, \"sub-1ms latency\" across a liquid loop, an arbitrary 5% substation allocation, and an unrealistic binding Prefecture agreement by 2026-09-01. It also invents \"watchlists dating back to 2024\".\n\nCandidate B has eight items covering power/RTE/EDF, land assembly, sovereign isolation, tenant gating, brownfield, water/cooling, social license and fiber. It fits the prompt's skeptical, gated framing, with kill thresholds, quantified risks and handling of uncontrolled dependencies. Its flaws are a bloated recommendation field, some contradictory wording (\"binding\" vs \"non-binding\"), a 60% tenant threshold that differs from the prompt's 30–50%, a questionable Seine reference, muddled RTT wording, and a somewhat late timeline start. Overall B is more complete, more plan-specific and more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 138.0,
+      "structure_problems": [],
+      "judgments": {
+        "pre_project_assessment.json": {
+          "verdict": "tie",
+          "score_new": 5.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 7,
+              "analysis": "Candidate A follows the stage format. The recommendation field holds exactly \"Proceed with Caution\", and the summary is concise. It has 8 feedback items, each starting \"To initiate this project, you must:\", with dated, measurable actions tied to the upstream decisions, assumptions and risks. Its dates fit the 2026-05-14 start. It has minor weaknesses: it reuses \"Location 1/2\" placeholders, and it draws on the upstream inputs without always explaining them. Its checklists are reasonably specific and consistent: €300M reserve, €200M float, 90-minute threshold, 15 FTEs.\n\nCandidate B is longer and in places more insightful, for example on enforcement precedent and liability finality. It breaks the schema, though. The go_no_go field holds a long paragraph instead of the three-value recommendation. The combined summary refers to \"Expert 1, Feedback 1–2\", which leaks expert identities that the pipeline deliberately strips. It adds \"Why:\" sections that the stage does not ask for. It also contains many invented or implausible specifics:\n- Crédit Suisse as an AA-rated guarantor, though it no longer exists as an independent bank.\n- \"Trenitalia Freight subsidiaries\" and \"Go-Ahead\" as second-tier carriers, plus \"Renfe Operadora\" listed separately from Renfe.\n- A €180M guarantee for DB, based on €7.2B of annual cross-border revenue.\n- No appeal to national courts, enforced by an \"EU regulation article override\".\n- Fixed 32-bit seat identifiers and a 200-page specification.\n\nIts thresholds and timelines are muddled. It mixes \"Month 3\" with dates in August 2026. It sets a ratification vote for 2027-06-30 against a Month 6 provisional standard. Its reserve floor, \"yellow/red alert\" and 150% trigger numbers do not fit together. It also skips the Madrid–Barcelona–Lyon corridor in its testing sites. Overall it is aggressive rather than realistic, and over-fabricated. Candidate A is better on faithfulness, format fit and downstream usability."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Candidate B is more rigorous and decision-useful, but it has a real faithfulness problem. It overrides the plan's stated date (2026-May-03, start ASAP) with the reviewer's environment date (2026-10-04). That shifts every deadline, and it declares the Month 4 \"early-season heat days\" gate unachievable. The plan prompt never says the summer is over, so this partly contradicts the brief. Even so, B's findings are largely valid and specific:\n- Leipzig (~616k) is outside the 150–400k range the prompt requires.\n- The night-minimum threshold is contradicted (\">19\" vs \"<19\").\n- The staffing numbers don't reconcile (62 on duty vs \"12 FTE\").\n- The voucher-only home intervention misses frail residents.\n- German legal constraints (§203 StGB, SGB X, Art. 9 GDPR, DPIA) undermine the GP registry design.\n- It gives a scored rubric, backtesting of thresholds, safety certification (Legionella, Bauaufsicht), and metrics and baselines.\nIts recommendation field is overlong, but \"Proceed with Caution\" is well justified.\n\nCandidate A stays on the prompt's calendar, which is faithful. It is thinner and in places questionable:\n- It says \"Execute Immediately\" while ignoring the Leipzig population mismatch and the assumption inconsistencies.\n- It gives odd specifics: \"non-reflective\" window film rated by R-value, 15 km², a municipality assuming liability for triage, and paper-only logs with no symptom detail.\n- It covers less on GDPR legal basis, staffing math and site safety.\n- It misses the key risks a pre-project assessment should catch.\n\nOverall, B's insight and risk detection outweigh its questionable date reframing. A is faithful but shallow and overconfident."
+              "analysis": "A has 8 detailed, dated, plan-specific checklists with rationales covering OSDM baseline, testing, liability, float solvency, enforcement, accessibility and pre-ratification, plus a coherent summary and conditions-based recommendation. It has some invented or shaky details (Crédit Suisse, duplicated Renfe, barring national-court appeals, ratification date vs Month 6) and a verbose go/no-go field. B is more concise and traces to upstream decisions, but is thinner, uses placeholders (\"Location 1/2\"), has a typo, a bare recommendation, and a weak combined summary. A is more decision-useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 86.8,
+      "structure_problems": [],
+      "judgments": {
+        "pre_project_assessment.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "A is more complete, better calibrated and more internally sensible than B. A recommends \"Proceed with Caution\" and explains why. Its eight checklists cover cooling centers, procurement, governance and comms, transport, GDPR, budget, health triage and field-staff safety, with concrete dates, counts and owners. Its flaws are minor: it mentions patient data elements despite the aggregate-only constraint, its inter-rater thresholds are inconsistent (95% target, 85% trigger), and the reserve is due on day zero. B recommends \"Execute Immediately\" with no rationale, which contradicts its own high-severity risks. It also specifies \"non-reflective\" window film, proposes an awkward paper-only data workflow, has odd verbatim-repeat and action-complete logging requirements, uses unexplained internal labels, and has no field-staff safety coverage. B does add some local specifics (Leipzig-Grünau, phone-line languages) and a student-labor fallback for installations."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A uses a clean recommendation label (\"Execute Immediately\"), but the label is poorly supported given the severe risks it lists, and it has substantive flaws. The Level 2 alert trigger is logically backwards (\"Night Min < 19°C\" for hot nights). It specifies \"non-reflective\" window film. Paper-only logging with purge right after the Month 4 gate undermines the evaluation. Coverage is thinner: there is no field-staff safety item and little on accessibility, volunteer safety, or communications. Candidate B puts a long paragraph in the go_no_go field, a format deviation, but it begins with \"Proceed with Caution\", which is better calibrated to the risks. Its alert thresholds are logically correct. Its 8 items cover cooling centers, procurement, governance and comms, transport and accessibility, GDPR, budget contingency, triage QA, and field safety. They include concrete staffing counts, deadlines, and fallback triggers, and they correctly identify the Month 4 binary gate risk and the equity problem with voucher-only interventions. B has minor inconsistencies, such as the 95%/85% agreement thresholds and triage data elements that sit uneasily with the aggregate-data constraint. Overall B is more complete, more insightful, and more useful downstream."
             }
           ]
         }

@@ -1,29 +1,29 @@
 {
   "stage": "identify_task_dependencies",
-  "evaluated_at": "2026-10-04T18:10:55",
+  "evaluated_at": "2026-10-04T22:39:30",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 56.2,
+      "seconds": 23.7,
       "structure_problems": [],
       "judgments": {
         "task_dependencies_raw.json": {
-          "verdict": "baseline",
-          "score_new": 6.0,
-          "score_baseline": 6.5,
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
           "runs": [
             {
-              "winner": "tie",
-              "score_new": 6,
-              "score_baseline": 6,
-              "analysis": "Both candidates give 10 dependencies, use the correct schema, and cite plan-specific facts. Both also split one dependent task across several entries instead of merging them, for example 865e882f in both and d5463471 in A.\n\nCandidate A:\n- Strengths: It captures the central engineering gates.\n  - Geotechnical data gates structural design and foundation installation.\n  - Prototype validation gates foundation installation.\n  - Maritime traffic systems gate segment deployment.\n  - Energy supply and rail corridor design gate the track beds.\n  - Governance, environmental work and financing gate the platforms.\n- Weakness: Almost all links sit in the early and middle phases. Nothing covers Phase 3 sealing, flooding exercises, licensing or operations, so the schedule has no dependency chain to commissioning.\n- Weakness: It misses that physical-model validation (807f0cbf) needs borehole data.\n\nCandidate B:\n- Strengths: It covers the full lifecycle chain, which helps the scheduler.\n  - Sealing and pressure testing lead to flooding exercises, which lead to the operational transition.\n  - Gauge design leads to the terminal gauge-transition construction.\n  - Platforms gate Phase 1.\n  - It also captures that the physical-model validation (807f0cbf) needs the geotechnical data.\n- Weakness: It omits the link from geotechnical data to detailed structural design, one of the most critical dependencies per data_collection.\n- Weakness: It omits the maritime-traffic prerequisite for segment deployment.\n- Weakness: It uses a phase-level ID (e907761d) as a dependent, which mixes granularity.\n- Weakness: It misattributes \"€4-6 billion\" to the platform construction cost, when that figure is the contingency reserve.\n- Weakness: The 13251828 explanation mentions licenses, but licenses are not listed as a dependency.\n\nOverall the two are close. A is stronger on early-stage engineering gates. B is more useful for a full-project schedule and has a more logical end-to-end chain. I give B a slight edge for breadth."
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A gives 10 entries, each with a unique dependent task and a consolidated dependency list. Together they form a connected critical-path chain: governance leads to geotechnical assessment, then pillar validation, then structural design; environmental compliance and financing feed the offshore platforms; platforms and design lead to seabed preparation, then foundation installation; segment deployment and rail corridor design lead to track beds. The result is a valid DAG, and several links match the data_collection notes (for example, the physical model must use borehole-derived seabed data). Weaknesses: environmental baseline studies depending on pillar validation is a stretch, borehole execution depending on platforms that depend on a design that depends on geotechnical assessment is awkward, and A ignores energy, maritime traffic, workforce and supply chain.\n\nCandidate B also gives 10 entries but covers only 6 unique dependents. Dependent IDs repeat (d5463471 three times, 865e882f three times, 48756ccb twice), which risks breaking downstream consumers that expect one entry per dependent. B adds useful cross-cutting links (energy to track beds, maritime systems to segment deployment). It also misses key links: foundation installation does not depend on the structural design, geotechnical assessment has no governance link, and the critical path is not tied together. Its dependents are sparse and fragmented.\n\nOverall, A is better structured, schema-compliant, and gives a more complete critical-path backbone. B's extra cross-cutting dependencies are a real plus but do not outweigh the duplicated dependents and the missing design links."
             },
             {
-              "winner": "baseline",
-              "score_new": 6,
-              "score_baseline": 7,
-              "analysis": "Both candidates give 9 dependency entries. Both use valid WBS IDs, give plan-specific explanations, and carry the query through intact.\n\nA's strengths:\n- It links geotech to physical-model validation, which the data collection file requires: the 1:50 model must use borehole-derived seabed conditions.\n- It chains prototype validation to foundation installation.\n- It covers late-project links: sealing/pressure testing → flooding drills → operational service. This gives it more coverage across the project's span.\n\nA's weaknesses:\n- It uses a major-phase ID (e907761d, \"Phase 1 Construction\") as a dependent task. That is inconsistent with the subtask-level granularity of the other entries.\n- It does not link structural design or foundation installation to the geotechnical assessment. The data collection file calls that assessment \"the absolute prerequisite for all subsequent engineering decisions.\"\n- It misses the maritime traffic prerequisite for segment deployment.\n- Its governance → environmental baseline link is weaker than a governance → platform construction link.\n\nB's strengths:\n- It captures the most critical prerequisites: geotech → structural design, geotech → foundation installation, and prototype validation → foundation installation. It also cites the validation gate and the June 2027 hard stop.\n- It links governance, environmental baseline and financing to offshore platform construction. This matches the strategic emphasis on permitting and funding gates.\n- It adds the maritime traffic system → segment deployment dependency. This reflects a real risk flagged in the data collection file.\n- It links rail corridor design and gauge resolution, and energy supply, to track bed installation.\n- It uses subtask-level IDs consistently.\n\nB's weaknesses:\n- Several dependent tasks have repeated entries (d5463471 three times, 865e882f three times, 48756ccb twice) instead of a merged list. This is slightly awkward for the schema and could cause trouble downstream.\n- It has no late-phase links, so the commissioning and operations tail is not covered.\n\nOverall, B captures more of the genuinely critical early-stage dependencies and is more insightful. A has broader coverage but misses key prerequisites and uses a phase-level ID."
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates reproduce the query and give about 10 dependencies, as the stage asks. The difference is in the dependency graphs.\n\nCandidate A has some real strengths. It links energy infrastructure and maritime traffic systems to later tasks, which B omits. It also makes the geotechnical gate and prototype validation prerequisites for foundation installation. Its weaknesses are larger:\n- It repeats the same dependent_task_id in several separate entries (d5463471 three times, 865e882f three times, 48756ccb twice) instead of one entry with a list. This is awkward for downstream schedule creation.\n- Some links are weak or misplaced. Platform construction depends on governance, environment and finance, but not on the structural design.\n- Deploying buoyant segments (49ec29ff) depends only on the maritime traffic system, not on foundation installation.\n- Track beds depend on energy and rail design, but not on segment deployment.\n- The critical Phase 1 chain (design → foundations → segments → rail) is largely missing.\n- The explanations lean on prompt facts such as the June 2027 hard stop. They are decent but sometimes attach those facts to the wrong dependency.\n\nCandidate B uses one entry per dependent task, with multi-item dependency lists, which matches the schema's intent. It builds a coherent critical path: governance → geotech → validation → structural design → platforms → seabed work → foundations. It also runs segment deployment into track-bed installation in Phase 2. The explanations are specific and use plan facts such as the prototype, seasonal restrictions and the €500M–€1B platform cost.\n\nB has some questionable links:\n- Geotech depends on treaty governance.\n- Financing depends on validation and environmental studies.\n- Borehole execution depends on platforms, although the geotech assessment already covers borehole sampling.\n- The chain is very serial, so it may stretch the schedule.\n- It leaves out energy, maritime and workforce dependencies, and gives 49ec29ff no predecessors.\n\nEven so, B is a more usable and more internally logical backbone for scheduling than A's fragmented list."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 80.9,
+      "seconds": 23.8,
       "structure_problems": [],
       "judgments": {
         "task_dependencies_raw.json": {
           "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 5.0,
+          "score_new": 7.0,
+          "score_baseline": 4.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "Candidate B has a more logical dependency chain and covers more WBS tasks. It sequences the Phase 1 work correctly: land and workforce, then mobilization, then the liquid-cooling build, then hardware, then onboarding, then PUE validation. Its Phase 2 FID depends on all four gates (PUE, 60% tenant commitment, RTE allocation, DGSI sign-off), and it links the heat reuse offtake to its feasibility assessment. Candidate A reverses the PUE and tenant onboarding order, since PUE can only be validated after loads are running. It also uses weak links, such as fiber activation depending on the cooling build and the workforce framework depending on the land strategy. It omits the mobilization and heat reuse tasks, and its FID does not depend directly on the tenant or PUE gates. B's minor gaps are that the grid studies do not feed Phase 1 construction, the holding-cost budgeting task has no dependencies, and \"DGSI approved before hardware\" is slightly overstated."
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A has several illogical or reversed links: workforce depends on land, fiber depends on the cooling build, and binding RTE allocation depends on the 60% tenant commitment. It leaves construction mobilization, hardware procurement, and the heat-reuse tasks without predecessors, and the FID does not list the tenant task directly. Candidate B's chain is mostly logical: hardware and cooling feed PUE validation, cooling and fiber feed tenant onboarding, PUE and tenants feed the 60% commitment, and tenants, RTE, and DGSI all feed the Phase 2 FID. It also correctly makes land, workforce, and holding-cost budgeting prerequisites for construction mobilization, and links heat-reuse contracts to cooling and PUE. B still has gaps: the cooling build is not linked to land or RTE, and the heat-reuse feasibility task is missing. Even so, B has fewer errors and better coverage, so it is the better input for scheduling."
             },
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 5,
-              "analysis": "A provides 10 dependencies forming a coherent, connected chain from land/workforce through mobilization, cooling build, hardware, fiber, tenants, PUE, 60% take-or-pay, RTE allocation, DGSI sign-off to the Phase 2 FID. The FID correctly depends on all four plan gate criteria (PUE, 60% tenants, RTE, DGSI), and the heat reuse link is included. Minor quibbles: DGSI sign-off depending on PUE is a stretch. B has only 9 entries and a likely backwards/circular link (tenant onboarding requires validated PUE, which needs tenant load). The mobilization and hardware tasks are left without predecessors, the FID omits the 60% tenant and PUE gates, heat reuse is omitted, and some links are weakly justified. A is more complete and more faithful to the plan's gate logic."
+              "analysis": "A has a more coherent and complete dependency graph. In A, PUE validation depends on the cooling build and installed hardware. Tenant onboarding depends on cooling and fiber. The Phase 2 gate depends on tenants, RTE allocation and DGSI sign-off. The mobilization task depends on land strategy, workforce and holding costs. B leaves PUE validation with no predecessors even though tenant onboarding depends on it. B also makes fiber wait for the cooling build and omits holding-cost, heat-reuse and mobilization tasks. B's workforce-on-land link and DGSI-on-land link are weaker. A misses a few links, such as mobilization to cooling build and heat-reuse feasibility, but is overall more realistic and more useful for scheduling."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 40.0,
+      "seconds": 18.2,
       "structure_problems": [],
       "judgments": {
         "task_dependencies_raw.json": {
           "verdict": "new",
-          "score_new": 7.5,
-          "score_baseline": 2.0,
+          "score_new": 8.0,
+          "score_baseline": 3.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 7,
-              "score_baseline": 2,
-              "analysis": "Candidate A uses many invalid IDs in depends_on: lever/decision IDs (7e10ade0, c4680d31, 7e412293, 1f32c7c8, 52436de8, bbb8d8f0) that are not WBS task IDs, plus a malformed ID (33ebc01-... instead of 337ebc01-...). This makes most of its dependencies unusable for the scheduler. A few valid pairs are of doubtful logic (test environment depending on governance design). Candidate B uses only valid WBS task IDs and builds coherent chains (standards → test env → load tests → PRM validation / strike criteria → three-strikes pre-approval; liability validation → capital buffer → fee mechanism). It has a few weak or reversed links (audit templates depending on operator agreement, operator agreement depending on liability), but is far more consistent, specific, and usable downstream."
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A uses only valid WBS task IDs and builds mostly logical chains. Standards lead to the test environment, then latency tests, then PRM conformance, then the failure criteria, then the pre-approval. Audit templates lead to the operator agreement, and the buffer calibration plus the operator agreement lead to the fee mechanism. These match the data_collection and project_plan content. A also covers 10 tasks. Candidate B mixes in decision lever IDs that are not WBS task IDs, which would break scheduling. It also contains a malformed ID, \"33ebc01-...\", and several illogical dependencies: legal validation depending on buffer calibration, standards depending on liability, the test environment depending on governance, and load tests depending on commercial terms. B has some sensible links, but its validity and logic problems are serious."
             },
             {
               "winner": "new",
               "score_new": 8,
-              "score_baseline": 2,
-              "analysis": "Candidate A uses valid WBS task IDs throughout and builds plausible, plan-specific dependency chains: liability validation -> capital buffer -> fee mechanism; standards -> test environment -> load tests -> PRM conformance / strike criteria -> pre-approval; cost methodology agreement -> audit templates. Explanations reference the actual decisions and constraints. Candidate B uses lever/decision IDs (e.g., 7e10ade0, c4680d31, 7e412293, 1f32c7c8, 52436de8, bbb8d8f0) that are not WBS task IDs, includes a malformed ID (33ebc01-...), and has several illogical or reversed dependencies (legal validation depending on capital buffer; test environment depending on post-launch governance design; load testing depending on commercial terms). B would break or corrupt downstream scheduling."
+              "score_baseline": 3,
+              "analysis": "Candidate A uses several IDs that are not WBS task IDs: lever IDs from strategic_decisions.md (7e10ade0, c4680d31, 7e412293, 1f32c7c8, 52436de8, bbb8d8f0) and one malformed ID (33ebc01...). These cannot be resolved by the scheduler. Some of its logic is also backwards (legal validation of the liability model depending on capital buffer calibration) or weak (test environment depending on amendment governance). Candidate B uses only valid WBS IDs, and its dependency chains are coherent and acyclic: standards → test env → latency tests → PRM → strike criteria → pre-approval, and liability validation → capital buffer → fee mechanism. It also sensibly links audit templates → operator agreement → fee mechanism. B covers somewhat fewer tasks (9 entries, omitting the ancillary and incentive tasks), but its output is usable and logically grounded. B is clearly better."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 69.8,
+      "seconds": 19.7,
       "structure_problems": [],
       "judgments": {
         "task_dependencies_raw.json": {
-          "verdict": "new",
-          "score_new": 5.5,
-          "score_baseline": 4.5,
+          "verdict": "baseline",
+          "score_new": 4.0,
+          "score_baseline": 6.0,
           "runs": [
             {
-              "winner": "new",
-              "score_new": 5,
-              "score_baseline": 5,
-              "analysis": "Both candidates have a malformed UUID (A: \"063fe5254-…\", B: \"050c7a23c-…\"). A has 10 entries with consistent list lengths, but several dependencies are illogical: MOU depends on MCR segregation, governance depends on the MOU, and staffing model depends on training (the reverse is correct). B has only 9 entries and mixes phase-level IDs with subtask IDs, so some explanations don't match the dependent/prerequisite entities, and some explanation lists are longer than their dependency lists. B's task-level dependencies are mostly more sensible: training after staffing model, M4 review after baseline data, M2 audit after kit delivery and contracts, and cooling-center work after alert governance. However, B reverses the engineering assessment and contract order. Overall the two are close; B's causal logic is slightly better but its structure is sloppier."
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 6,
+              "analysis": "Candidate A has valid IDs and a sensible gate-review dependency on the four prior workstreams. But several of its dependencies are illogical or backwards. Tier 1 contracts depend on the health-data MOU. Engineering assessments depend on contracts, when they should come first. Outreach training depends on canvassing and kit procurement, when training should come before canvassing. Kit procurement depends on canvassing, which would delay lead-time-critical purchase orders. These errors would distort the schedule. Candidate B works at subtask level and most of its logic is sound: canvassing depends on training, Tier 1 contracts depend on engineering assessments, the triage audit depends on the MOU, the coordination schedule depends on identification and installers, and the Month 2 audit depends on engineering readiness and kit delivery. It has some weak links, omits the Month 4 gate and the MCR release decision, and uses a malformed ID (\"063fe5254-…\") in three places, which could break downstream scheduling for those entries. Overall B's dependency logic is better, though the ID typo is a real flaw."
             },
             {
-              "winner": "new",
-              "score_new": 6,
-              "score_baseline": 4,
-              "analysis": "Both candidates have ID errors and flaws, but A's dependencies are more sensible and more useful for scheduling.\n\n**Candidate A**\n- Strong links:\n  - The registry feeds the outreach coordination schedule.\n  - Purchase orders precede installation-crew contracting.\n  - Baseline EMS/ED data feeds the Month 4 review.\n  - Staffing and training depend on the registry and the staffing model.\n- Flaws:\n  - It uses phase-level IDs as dependent or prerequisite tasks in the first two entries. The IDs are valid, but they are coarse.\n  - The first entry has two explanations for one dependency.\n  - It reverses the assessment and contract link (assessments depend on contracts), although the plan says assessments come in Month 1, before contracts.\n  - It has one malformed ID (\"050c7a23c-...\") in the Month 2 audit entry.\n  - The Month 2 audit entry has three dependencies but only two explanations.\n\n**Candidate B**\n- Strong links:\n  - Contracts depend on the engineering assessments, which is correct.\n  - Installation crews depend on purchase orders, which is correct.\n  - The coordination schedule depends on canvassing and crews, which is correct.\n  - The Month 2 audit depends on assessments and kit delivery, which is correct.\n- Flaws:\n  - The malformed ID \"063fe5254-...\" appears three times, so three entries are unusable.\n  - Several dependencies are illogical: the MOU legal ratification depends on MCR segregation, and the alert-system governance depends on the health MOU.\n  - It has a questionable link between purchase orders and the MCR release protocol.\n  - It omits key links such as the baseline data to the Month 4 review.\n  - It has explanation-count mismatches.\n\nOn balance, A has more logically sound and decision-useful dependencies, with fewer invalid IDs and less nonsensical logic. B has more correct task-level granularity but weaker logic and repeated broken IDs."
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 6,
+              "analysis": "A works at the subtask level and has several sensible links: Tier 1 contracts depend on engineering assessments, the outreach–installer coordination depends on identification and installation crews, and the Month 2 audit depends on site readiness and kit delivery. It also has some weak links, such as the MOU depending on MCR segregation. A's main defect is a malformed canvassing task ID (\"063fe5254…\") used in two places, so those links would not resolve downstream. B's IDs are valid, but it mixes in coarse phase-level dependencies and has many reversed or implausible links. Engineering assessments depend on contracts, outreach training depends on completed canvassing and procurement, Tier 1 contracts depend on the health data MOU, and workforce readiness depends on home intervention logistics. These would distort the schedule. A is better overall, with moderate confidence because of its ID error."
             }
           ]
         }

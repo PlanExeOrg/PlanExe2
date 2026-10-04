@@ -1,29 +1,29 @@
 {
   "stage": "review_team",
-  "evaluated_at": "2026-10-04T18:07:44",
+  "evaluated_at": "2026-10-04T22:40:49",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 137.2,
+      "seconds": 63.6,
       "structure_problems": [],
       "judgments": {
         "review_team_raw.json": {
-          "verdict": "tie",
-          "score_new": 6.5,
-          "score_baseline": 6.5,
+          "verdict": "baseline",
+          "score_new": 5.5,
+          "score_baseline": 7.5,
           "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "Both candidates follow the schema (omissions and potential_improvements, each item with issue, explanation and recommendation). Both ground their points in the project context: the 50-100 MW energy gap, cyber risk to surveillance systems, Strait of Gibraltar traffic, legal complexity, stakeholder engagement and innovation.\n\nCandidate A is concise and has 6 omissions and 6 improvements. Its distinctive catches are decommissioning ownership and the lack of a Chief Engineer or technical authority. It also covers climate adaptation and integration of structural and geotechnical monitoring. It misses several important gaps: supply chain and logistics (a Critical strategic lever in the plan), dedicated risk and insurance management, QA and validation gate ownership, and occupational medicine for a workforce of 8,000-12,000 on offshore platforms. It also contains a small internal inconsistency, saying \"eight distinct directors\" and then listing five.\n\nCandidate B has 9 omissions and 9 improvements. It covers the same core gaps as A (energy, cyber, maritime, legal, communications, R&D) and adds supply chain, risk management and insurance, QA and validation, and occupational health and diving medicine. These are real, plan-relevant gaps. Its improvements are also decision-useful. They cover decision rights and escalation, contractor versus full-time continuity (based on the min/max staffing in the team data), ownership of the Environmental Oversight Board, KPIs, the pre-construction to operations baseline handoff, governance of the neutral consortium, succession and knowledge management, and the org chart. Its weaknesses are heavy verbosity and some role bloat, since it proposes many new directors on top of an existing team of about 8. It also misses decommissioning. Even so, it is more thorough and shows closer reading of the team document and the risk register.\n\nOverall B is more complete and more useful downstream. A is tighter but leaves out several significant omissions."
-            },
             {
               "winner": "baseline",
               "score_new": 6,
+              "score_baseline": 8,
+              "analysis": "A has broader coverage (nine omissions), well grounded in plan figures, but several omissions overlap with existing roles, and most of its potential_improvements are generic project-management boilerplate (KPIs, reporting cadence, succession, hiring criteria). It misses maritime traffic and a legal lead. B is more concise and more insightful: it catches maritime traffic safety in the Strait, a legal and contract lead, a Chief Engineer for technical governance, monitoring integration and digital twin, climate adaptation ownership, and consortium-government escalation. These are plan-specific and decision-useful. B misses supply chain, QA and a risk officer, but overall its quality and specificity are higher."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
               "score_baseline": 7,
-              "analysis": "Both candidates identify real gaps tied to the plan: energy infrastructure, cybersecurity, maritime traffic in the Strait, legal, and stakeholder engagement. Both also catch the missing energy plan flagged in the pre-project assessment.\n\nCandidate A is very thorough but bloated. It proposes nine new director-level roles on top of an existing team of about eight. These include Supply Chain, Risk, QA, R&D, Occupational Medicine and others. It does not weigh this against the team's size or the budget, and it never prioritizes among them. Several of its omissions overlap with existing roles or are weakly justified. The occupational medicine item, for example, stretches the plan: the tunnel is a pressurized rail corridor, not a saturation-diving operation. Its improvements are long and partly generic: KPIs, succession planning, an org chart, stakeholder management. The stakeholder item largely duplicates the Communications omission. Some of its recommendations are invented specifics, such as compensation links, approval thresholds in euros, and named firms. It also has a small naming inconsistency, \"Environmental Compliance Director\".\n\nCandidate B is more concise and better prioritized. It has six omissions, all anchored in the plan. Decommissioning is a distinctive and valid catch, since a 20-year project with a €2-4B reserve has no owner for the end-of-life plan. Its improvements are specific and insightful. They cover the missing Chief Engineer or technical authority, integration of structural and geotechnical monitoring, a digital twin and data infrastructure, climate adaptation ownership, and consortium-versus-government escalation. It makes one small error, calling the 20-year project a \"20-year operational lifespan\". Its recommendations are less detailed, but they are actionable and avoid over-expanding the team.\n\nOverall, B is more decision-useful and better calibrated. A is more exhaustive but verbose, repetitive and over-prescriptive."
+              "analysis": "Candidate A is more plan-specific and consistent. Its omissions (energy, cybersecurity, maritime traffic, legal, decommissioning, stakeholder engagement) are tied to the project's own facts, and it acknowledges which responsibilities existing roles already hold. Its improvements are substantive: a Chief Engineer, integrated structural–geotechnical monitoring, climate adaptation ownership, and consortium–government escalation. Minor flaw: it says \"eight directors\" but lists five. Candidate B has detailed omissions, but it contradicts itself by listing supply chain among the existing roles while claiming a Supply Chain Director is missing. Most of its improvements are generic project-management boilerplate (hiring criteria, KPIs, reporting cadence, succession). The cross-border standards interface item is a good catch. B is also very verbose."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 79.4,
+      "seconds": 54.0,
       "structure_problems": [],
       "judgments": {
         "review_team_raw.json": {
           "verdict": "new",
           "score_new": 7.0,
-          "score_baseline": 6.0,
+          "score_baseline": 5.5,
           "runs": [
             {
               "winner": "new",
               "score_new": 7,
-              "score_baseline": 6,
-              "analysis": "A is concise and plan-specific (Decision 2, the 75% local hiring target, the 128.8 km² holding cost, FX variance) but misses key gaps: no physical security/resilience owner and no tenant acquisition owner, even though tenant commitments gate expansion. It also mislabels ARS as the water-rights authority, and some improvements are process add-ons rather than team fixes. B covers the more consequential gaps: environmental/water lead, EPC program manager, tenant/revenue lead, security architect, plus governance, the FTE-vs-IC assignment for Grid & Power, and succession. It ties them to plan specifics (Risk 9 remediation overrun, 60% take-or-pay gate, DREAL). B has some generic padding (digital twin, advisory board, overlapping controls roles), and its workforce-manager omission may partly duplicate an existing role. Overall B is more useful for downstream planning."
+              "score_baseline": 5,
+              "analysis": "A is broader and more tightly tied to the plan's decisions, gates and assumptions. It catches key gaps that B misses: tenant and revenue gate ownership, sovereign hardware provenance, operations readiness, decision authority and governance, and Phase 1 acceptance criteria. Its weaknesses are over-prescription (many new full-time roles), some overlap between items, and minor inconsistencies such as linking the Phase 0 budget to brownfield remediation. B is concise and proportionate, and its construction management gap is real. But it is thinner and omits the tenant, security-provenance and governance gaps that matter most for this plan."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 6,
-              "analysis": "Candidate A names the gaps that matter most for this plan: environmental and water lead, EPC/construction manager, tenant acquisition lead, physical security and resilience architect, and workforce delivery. These tie directly to the prompt's gating items (tenant take-or-pay, DREAL/EIA, brownfield remediation, sabotage resilience, local hiring). It cites plan-specific details such as Decision 4's 60% threshold, Risk 9's remediation overrun and the FTE/IC split. Its weaknesses are bloat and some generic padding. Examples are the digital twin manager, succession planning, advisory board and a separate project controls role that overlaps the EPC manager. The workforce omission may also overlap an existing \"Local Workforce Orchestrator\" role, which B mentions.\n\nCandidate B is tighter and more clever in places. It uses the €4.32B FX variance and the 128.8 km² buffer holding cost. It also proposes useful mechanisms: RFP scoring weights for local hiring, a gate sign-off report, and a security steering committee. But it has fewer omissions and misses tenant strategy ownership and a dedicated security architect, both core to the prompt. Some recommendations are odd: it assigns QA/QC to the Strategist, and the ARS-versus-DREAL water claim is shaky. It also treats water risk as a single medium-risk item without an environmental lead.\n\nOverall, A's coverage of the real structural team gaps is better for downstream use, despite its padding. B is sharper but less complete."
+              "analysis": "Candidate A gives 4 omissions and 4 improvements. They are concise and tied to plan specifics (Decision 2, the buffer holding cost, the 75% local-hiring mandate, the €4.32B FX variance). The construction role is a real gap. However, the water-expert omission overlaps with the existing Cooling Engineer, and the QA/QC recommendation is awkward because it assigns QA to the Strategist. A misses the tenant and revenue gating owner, operations handoff, and project controls. Candidate B is more comprehensive, with 5 omissions and 10 improvements. It cites plan content throughout, and it identifies gaps that matter for this plan: tenant and revenue commitment ownership, security hardware provenance for DGSI/ANSSI, operations and commissioning, fiber right-of-way, project controls, risk and gate auditing, and governance and decision authority. It also proposes concrete acceptance criteria such as PUE thresholds that trigger Phase 2. Its weaknesses are team bloat from many added FTEs, some overlap (hedging and sovereignty appear twice), a few possibly invented details, and no construction management role. Overall B is more decision-useful for downstream stages, so it wins narrowly."
             }
           ]
         }
@@ -59,7 +59,7 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 102.3,
+      "seconds": 57.1,
       "structure_problems": [],
       "judgments": {
         "review_team_raw.json": {
@@ -69,15 +69,15 @@
           "runs": [
             {
               "winner": "new",
-              "score_new": 7,
+              "score_new": 8,
               "score_baseline": 5,
-              "analysis": "Candidate A is more substantive and decision-useful. Its omissions are real gaps tied to the plan. No role owns the public reference distributor, which is a €150M budget item. No role runs the €900M capacity-building and grant program. There is also no national-regulator relations function, no data-quality governance, and no financial operations or billing owner. It cites specific decisions, risks and deadlines. Its improvements are also practical: a RACI matrix, a committee structure, a check of the 35-FTE requirement against the visible team, audit ownership, and an owner for each contingency action. Weaknesses: it is verbose and recommends many new roles, which could bloat the team. It also wrongly lists BEUC as a disability advocacy group. Some improvements overlap.\n\nCandidate B is shorter and more cautious. Several of its points are low-value, such as a logistics assistant for the testing team and a test-wave handoff protocol. Its omissions are narrower. Its suggestion to fold public grant administration into the Financial Specialist's role adds more load to a role that is already stretched. It does flag the accessibility-standards coordination gap and the IT cost audit need, which are useful. Overall it gives less coverage of the major structural gaps."
+              "analysis": "I can't see the team file, so I judged how well each candidate fits the plan and the team it describes. Candidate A cites named team members and specific plan decisions and risks, which suggests it read the team document closely. Its omissions are material: no program director or PMO, no independent audit function, no stakeholder communications owner, no owner for the €900M of capacity-building grants, and no post-launch data-quality monitoring. Its improvements find real ownership ambiguities, such as Emergency Float drawdown authority, the standards-to-testing handoff, accessibility split across roles, Public Reference Distributor governance, reduction-card negotiation and enforcement of the \"three strikes\" policy. Each recommendation names owners, timings and triggers, so downstream stages can use it. Its weaknesses are length and a tendency to add FTEs that may overlap existing roles. Candidate B is shorter and shallower. Some items are low-value, such as a logistics assistant and a standards maintenance engineer. Its fund-manager point reallocates work to the Financial Specialist rather than finding a true gap. Some recommendations are vague, and one refers to another stage. It misses the PMO gap and the float governance ambiguity. It does flag the audit gap and the accessibility coordination gap, but with less depth. A is stronger overall."
             },
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Candidate B finds the larger structural gaps in the team. It notes that no role owns the €900M capacity-building and grant programme. It notes that no one leads the public reference distributor (Decision 11, €150M). It also notes that national regulators have no dedicated liaison, which matters because enforcement depends on them. It adds roles for stakeholder communications, data-quality governance, accessibility design and billing operations. Its improvements are useful for downstream stages: a RACI matrix, committee authority, testing-versus-standards escalation, and a reconciliation of the stated 35 FTE against the visible roster. It also ties actions to the pre-project-assessment deadlines. Weaknesses: it is very long, it recommends many new roles (possible bloat), and it has small slips, such as calling BEUC a disability body and citing a \"15% testing FTE\" figure that may not exist. Candidate A is concise and references the plan's decisions and risks, but its omissions are mostly minor: a logistics assistant, a standards-maintenance engineer, and an IT auditor. It misses the large gaps, namely capacity building, the reference distributor and national regulators. Several of its improvements are thin or just reshuffle existing responsibilities. Overall B is more insightful and more useful, despite its verbosity."
+              "analysis": "Candidate A is concise and tied to plan decisions and risks, but its omissions are mostly minor (a logistics assistant, a vague \"undefined relationship\" item) and it misses larger structural gaps: no PMO or program director, no communications lead, and no clear owner for the €900M capacity-building programme. Candidate B finds those larger gaps, plus the lack of an independent audit function and of post-launch data-quality monitoring for the T+5 latency target. Its improvements use the named team members and cover concrete ownership ambiguities: Emergency Float authority, the standards-to-testing handoff, accessibility integration, reduction-card negotiation, governance of the Public Reference Distributor, and operational ownership of enforcement. B is verbose, invents some thresholds, and adds headcount without weighing the cost. Even so, it is more insightful, specific and useful for downstream planning."
             }
           ]
         }
@@ -86,7 +86,7 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 84.4,
+      "seconds": 45.0,
       "structure_problems": [],
       "judgments": {
         "review_team_raw.json": {
@@ -98,13 +98,13 @@
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Candidate A is thorough and plan-specific. It cites the Month 4 gate KPIs, the €300k contingency, the Leipzig-Grünau outreach base, Review Issues 2 and 3, and Risks 3, 7 and 8. It finds real gaps: no finance owner for the €1.5M release, no real-time KPI monitoring, no volunteer coordination, no succession plan for the single-threaded Incident Commander, and no field-safety incident function. Its weaknesses are role bloat (about seven new roles for an eight-person team, which clashes with the prompt's staffing-realism constraint and ignores cost), some generic boilerplate (org chart, RACI, scorecards), and overlap between items. Candidate B is concise and realistic: a part-time admin to track the budget tranches, a QA sample of installations, volunteer overnight cover, and shifting the Contract Manager to SLA enforcement after Month 2. It is thin. It misses succession, real-time monitoring, and governance authority gaps. It uses placeholder-like references (\"Decision X\"). One recommendation, having the Incident Commander personally approve all misinformation statements, creates a bottleneck. Overall A is more insightful and more useful downstream despite the bloat."
+              "analysis": "Candidate A is more thorough and decision-useful. It identifies five concrete gaps: QA/vendor audit, real-time KPI monitoring, municipal departmental liaison, volunteer coordination, and learning/after-action capture. Each gap comes with a cost and FTE estimate and is tied to the M2/M4 gates. Its improvements are specific and actionable. They cover a decision matrix, cross-training for single-person roles, a comms cadence, a budget authority matrix, risk owners, a GDPR paper-to-digital migration protocol, contractor SOWs, and partner SLA monitoring. They are grounded in plan details such as Leipzig-Grünau, the paper logs held until the CRM audit at M2, and the five single-resource roles. Weaknesses: some items are generic management hygiene, and it adds many roles, which risks bloating a staffing-constrained plan. It also uses \"ADA-compliant\", a US term, in an EU context, and the volunteer role is conditional. Candidate B is concise and has a few sensible points, such as a finance tracker, surge volunteer coverage, sampling QA, and a shift to SLA enforcement after M2. It is thin, though, with only 3 omissions and 3 improvements. It also has a sloppy placeholder reference (\"Decision X\"), vague references (\"Review Issue 3\"), and little cost or staffing detail. Overall A is more useful for downstream planning despite some bloat."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 4,
-              "analysis": "Candidate A gives 3 omissions and 3 improvements. Some are plan-aware (finance tracking, QA sampling of home kits, overnight surge coverage), but it leaves a \"Decision X\" placeholder and recommends that the Incident Commander personally approve all counter-misinformation statements, which would bottleneck a crisis. Its quarterly script review is low-value, and it misses real-time KPI monitoring ahead of the M4 gate, facility operations, volunteer management, and single points of failure. Candidate B gives 6 omissions and 8 improvements, mostly tied to plan specifics: the €3.5M staged budget and €300k contingency, the M4 gate KPIs, Leipzig-Grünau, German Barrierefreiheit, and numbered risks. It finds real gaps (no real-time KPI monitoring before the gate, no facility operations or accessibility owner, no volunteer coordination despite volunteer safety being a named risk, no backup for single-person FTE roles). Its authority matrix and data feedback loop are useful. Weaknesses are that it proposes many new roles, which strains the limited-staffing and budget constraints, and that some items (org chart, RACI, scorecards) are generic padding. Overall B is more thorough, specific and useful downstream."
+              "analysis": "The team file isn't shown, so I judged both reviews on internal plausibility and how well they fit the plan. Candidate A is concise (3 omissions, 3 improvements) and ties to the M2/M4 gates, tranche tracking and home-kit QA. But it has visible sloppiness: a \"Decision X\" placeholder, inconsistent role numbering (\"Legal Officer 5\" vs \"Contractor 5\"), and a vague \"This usually means…\". Its role labels (Contract Manager FTE 3, contractors numbered up to 8) may not match the actual team, since B refers to a \"Partnership Manager\" and five contractors. Some recommendations are weak: having the Incident Commander personally approve all misinformation statements creates a bottleneck, and a quarterly script review is marginal. It misses singleton-role risk, role boundaries and internal-department friction. Candidate B is much more thorough (5 omissions, 11 improvements) with concrete roles, FTE and cost figures, and owners. It covers real team gaps: QA of installations, real-time KPI monitoring for the gate metrics, a municipal-department liaison, volunteer coordination (conditional), after-action ownership, backups for singleton roles, a decision matrix, a budget authority matrix, risk owners and contractor SOWs. It cites plan-specific details such as the Leipzig-Grünau staging base, Decision 9 and Decision 11, and the risk numbers. Its weaknesses: some generic management boilerplate (training framework, performance metrics), the US term \"ADA-compliant\", length, and added part-time roles that could strain the budget. Overall B is more specific, more decision-useful and more complete; A is tidier but thinner, with a placeholder and a likely wrong role reference."
             }
           ]
         }

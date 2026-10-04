@@ -1,29 +1,29 @@
 {
   "stage": "enrich_team_members_with_environment_info",
-  "evaluated_at": "2026-10-04T18:05:13",
+  "evaluated_at": "2026-10-04T21:08:00",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 50.5,
+      "seconds": 45.3,
       "structure_problems": [],
       "judgments": {
         "enrich_team_members_environment_info.json": {
           "verdict": "new",
           "score_new": 7.5,
-          "score_baseline": 5.5,
+          "score_baseline": 6.0,
           "runs": [
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 6,
-              "analysis": "The candidates differ only in equipment_needs and facility_needs. A is closely anchored to prompt numbers (5 boreholes, 2.5 m/s, 1,000 hours, thresholds of 5%, 10% and 15%) but often restates job duties instead of listing equipment or facilities. Examples are \"equity-sharing bonus administration systems\", \"training partnership programs\", \"fund management office\" and \"oversight board office\". Its Program Director equipment is generic. B lists concrete, costable equipment and facility types: Bloomberg terminals, heavy-lift crane vessels, dredging equipment, ROVs, corers, theodolites, ERTMS test benches, hyperbaric chambers, helipads and command centers. B has some dubious details, such as platforms \"at 100m depth\", rail yards in Tarifa, ±3m positioning accuracy and invented counts. Overall B better serves the stage purpose and gives more usable input for downstream resource planning."
+              "analysis": "The candidates are identical except for equipment_needs and facility_needs. A is concise and anchored in plan-specific figures (1:50 models, 2.5 m/s flow, 5 boreholes, 10 buoys), but it blurs equipment and facilities (e.g., residential platforms or oversight board meeting rooms listed as equipment), and its lists for roles 1, 3 and 5 are thin or restate responsibilities. B separates equipment from facilities properly and adds credible role-specific items: cranes, ROVs, GNSS, DP vessels, ERTMS and catenary, cable landing stations, test sections, rail operator liaison offices, and data and archive centers. That makes it more useful for downstream procurement and site planning. B has some invented or questionable specifics (hyperbaric welding for concrete segments, 2,000-3,000 permanent staff, 50-100 kW tidal power, a €100-€1000 decision level) and some filler, and it is verbose. Overall B's depth and clearer separation outweigh those flaws."
             },
             {
               "winner": "new",
               "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "Both candidates carry the same input fields unchanged. They differ only in equipment_needs and facility_needs, which is what this stage adds. Candidate A gives concrete, role-appropriate equipment and facilities, often with quantities (crane vessels minimum 2, semi-submersible barges minimum 3, 500+ sensors, rescue vessels and submersibles) and specific locations (Cádiz lab, Tarifa and Tangier stations, Madrid, Rabat, London and Frankfurt offices). It reads as real equipment and facilities, and it is useful for downstream costing, procurement and site planning. A has a few invented specifics, such as 50+ passenger submersibles, AfDB in Abidjan and helipads, but these are minor and plausible. Candidate B mostly restates each role's activities as if they were equipment or facilities, for example \"equity-sharing and bonus administration systems\", \"partnership programs\", \"fund management office\" and \"enforcement equipment\". It has few quantities, and the Program Director and Rail Lead lists are generic. It has some good items, such as the 1:50 scale basin with a 2.5 m/s current, the gauge test lab and the cybersecurity operations center, but it is less practical overall. A is more concrete and decision-useful."
+              "score_baseline": 6,
+              "analysis": "Both candidates preserve the existing fields and add equipment_needs and facility_needs for all 8 roles, so both are complete and valid. Candidate A is far richer and more decision-useful. It names concrete equipment and facilities: DP research vessels, ROVs, AUVs, a pressure chamber with a 50 m test section, ERTMS labs, cable landing stations, a cyber operations center, and the Tarifa/Tangier bases. It ties these to plan specifics such as the 5/10/15% triggers, EIB/AfDB, 500+ trainees, and the ICC arbitration standard. Its flaws are some padding (travel and expense systems, AP/AR), a few odd or questionable specifics (a \"€100-€1000 decision level\" phrase, 500-tonne lifts for 120 m segments), and verbosity. Candidate B is concise and tied to the plan's wording, but it is thin and often restates activities rather than naming concrete equipment (for example, platforms and \"enforcement equipment\" listed as equipment). It omits key practical items such as ROVs, cranes, GIS and sonar, and detailed test labs. That makes it less useful for downstream planning of equipment and facilities."
             }
           ]
         }
@@ -32,7 +32,61 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 34.4,
+      "seconds": 34.6,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_environment_info.json": {
+          "verdict": "tie",
+          "score_new": 5.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep all the input fields unchanged and add equipment_needs and facility_needs for all 8 roles. The difference is depth and fit.\n\nCandidate A gives itemized, role-specific equipment and facility lists that a later stage could turn into procurement and space requirements. Examples:\n- Land modeler: cadastral/BD Parcellaire, PLU/PLUi, plotters, deed storage.\n- Telecoms architect: fiber test sets, subsea landing-point presence, carrier proximity.\n- Community lead: local offices in Cambrai, Valenciennes and Dunkirk, and a hall for 50–100+ people.\n- Cooling engineer: CFD, a test lab, ASHRAE references.\n- Strategist: GIS and a war room for the 161 km² and 9 GW visuals.\n\nA also has weaknesses:\n- Some tools are mismatched or dubious: Palantir for the strategist, Westlaw for French regulation, \"SATIN\", \"Apptis\", and \"biomass conversion calculators\".\n- Dieppe is not in Hauts-de-France.\n- Several asks are over-specified or inconsistent with the roles. TEMPEST-shielded offices and a \"CFO-level executive office\" appear for what is a Financial Controller, and independent contractors get large facilities.\n- It is bloated, with many generic items.\n\nCandidate B is concise and realistic for a lean team, and it links to plan specifics:\n- 3 GW/9 GW load injection modeling.\n- Heat Reuse Offtake templates.\n- Dry-cooler spec sheets.\n- A firewalled finance room.\n- Separation of terrestrial and subsea route planning.\n\nIt is thin, though. Facility needs are often one vague sentence, and key items are missing, such as a lab or meeting space for several roles and physical locations near RTE, DGSI or the municipalities. Some items are odd, such as \"dedicated liaison communication contracts\" and \"laser communication testing equipment for RTT validation\".\n\nOverall, A is more useful and decision-relevant downstream despite its padding and a few errors. B is cleaner but under-delivers on the stage's purpose of specifying equipment and facility requirements."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 6,
+              "analysis": "Both candidates keep the upstream fields intact and add equipment_needs and facility_needs for all 8 roles. A is concise and tied to the plan: GIS/BIM for the 161 km² layout, power-flow modelling of 3 GW/9 GW load injections into the RTE network, EUR/USD tracking, dry-cooler spec sheets, and community meeting space in Cambrai or Valenciennes. It has some odd phrasing, such as \"contracts for laser communication testing equipment\", and some items are vague, such as \"secure terminal access for DGSI/ANSSI secure networks\". B is far more exhaustive but padded with generic boilerplate (Jira, Monday.com, PowerPoint, SharePoint, Hootsuite, video conferencing repeated across roles). It also has several invented, misapplied or irrelevant items: \"Apptis\", \"BDSOLU\" (the French brownfield database is BASOL), \"SATIN network\", Westlaw for French regulatory law, Palantir for the strategist, biomass calculators for a social-license role, TEMPEST shielding for a regulatory lead, a \"CFO-level executive office\" for a controller, and a networking lab and war rooms for contractors. B does add useful location specifics: municipal registries in Cambrai, Valenciennes and Dunkirk, RTE Lille, and subsea landing points near Dunkirk and Calais. The noise and likely hallucinations lower B's decision-usefulness. A is leaner and more credible, though somewhat thin, so I favor A narrowly."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 21.4,
+      "structure_problems": [],
+      "judgments": {
+        "enrich_team_members_environment_info.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Both candidates keep the same background fields and differ only in equipment_needs and facility_needs.\n\nA is far more detailed. It names specific tools such as Git, OpenAPI, Jenkins and GitLab CI, a collateral management system, and a secure DMS. It gives concrete facility specs: meeting sizes, network speed, segregated finance network, labs at Locations 2 and 3, and liaison offices near the SNCF, DB and ÖBB headquarters. These details give downstream stages usable content. A also has weaknesses. Some items are boilerplate or inflated, such as \"classified briefing room\", \"EUDOC\", and a \"high-performance computing cluster\" for API simulation. It lists Location 2 as \"Lille or Frankfurt\", which is questionable. Its facility needs are heavy for a coordination body, since regional liaison offices and war rooms add cost. It also leaves the €200M/$200M inconsistency from upstream as it was. Even so, it is plausible and actionable.\n\nB is brief, usually one or two sentences per field. It stays reasonably consistent with the project's scale and is more restrained. But it is vague (\"flexible meeting facilities\", \"access to secure EU network infrastructure\"). It misses the testing labs' specifics, and its equipment for the testing coordinator is only a logistics suite and budget tracking. Some entries read oddly, for example the finance specialist's \"shielded working environment\" and \"near central European financial hubs, though Brussels suffices\". It is less useful for downstream planning.\n\nOverall A is more specific and decision-useful, so A is better despite some over-specification."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both preserve the input fields and add equipment_needs and facility_needs. A is concise but thin and generic. Examples are \"secure EU network infrastructure\" for the Regulatory Architect, and a logistics suite for the Testing Coordinator with no testing or latency-monitoring tools. B gives role-specific tooling and facility specs: load testing frameworks, collateral management systems, segregated networks for the finance role, labs at Locations 2 and 3, meeting-room sizes, and operator-HQ proximity for the liaison role. B has minor flaws: an invented \"EUDOC\", Frankfurt as an example for the Paris-Brussels region, production-system connectors that are unrealistic, and some over-provisioning. These are outweighed by its decision-useful detail, which downstream stages like cost and facility planning can use. B better fulfils the stage's purpose."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 22.5,
       "structure_problems": [],
       "judgments": {
         "enrich_team_members_environment_info.json": {
@@ -44,67 +98,13 @@
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Candidate A gives detailed, role-specific equipment and facility lists. The land modeler gets GIS, Civil 3D, surveying gear, and a field office near Cambrai/Dunkirk. Telecoms gets carrier hubs and a fiber test bed. Finance gets multi-currency ERP, hedging platforms, and covenant dashboards. Social license gets a regional liaison office and public forum space. These tie to the plan's locations and authorities (RTE Lille, DGSI/ANSSI/DREAL). A has some overreach: speculative \"Tempête-proofed\" and classified-network items, Westlaw for French regulation, a >100 L/s test facility, a field camp, and a lab for an independent contractor. Its lists are also somewhat padded. Candidate B is shorter and vaguer. It has a few plan-specific touches (3 GW/9 GW load injections, EUR/USD, dry-cooler spec sheets, Cambrai/Valenciennes meeting space), but many facility needs are generic (\"secure coordination hub\", \"temporary secure facility space\"). It has odd items such as laser communication testing contracts, and it omits concrete needs like a field office or surveying gear. A is more decision-useful for downstream planning despite its excess."
+              "analysis": "Candidate A is concise and ties some entries to the plan, such as Leipzig-Grünau, 5,000+ kits, 10 VoIP hotline phones and the paper-based interim data capture. But its facility_needs are one-liners with no sizing. Several \"equipment\" items are not equipment (MSAs, contracts, insurance vaults), and the Incident Commander's separate 24/7 HQ is oversized for a pilot. Candidate B gives much more decision-useful detail. It includes m² sizing, quantities (10,000+ printed scripts, 200 m² warehouse, 2–3 depots), role-appropriate tools (dashboard, GIS, geotagged installation verification, laminated triage scripts, first-aid kits), and named languages. It is somewhat padded and generic in places (fax, climate-controlled server, odd compliance-tool entries) and a bit over-engineered for a €3.5M pilot. Overall, B is more complete and more useful for downstream budgeting and facility planning."
             },
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 5,
-              "analysis": "Both candidates keep identical upstream fields and differ only in equipment_needs and facility_needs. Candidate A is brief, and some entries are plan-specific. Examples: the 161 km² layout, dry cooler specs, Cambrai/Valenciennes meeting space, and the skills academy fund office. Some entries are vague or odd. \"Contracts for laser communication testing equipment\" and \"dedicated liaison communication contracts\" aren't equipment. The finance \"firewalled operations room\" is overkill. Several A items are thin, such as the Grid specialist's temporary facility and the Chief Strategist's office.\n\nCandidate B is much more detailed and covers realistic tools for each role: GIS/Civil 3D, surveying gear and a field office near Cambrai/Dunkirk for the land modeler, CFD and test benches for the cooling engineer, Bloomberg and ERP for finance, and a regional liaison office for social license. That gives downstream stages more usable detail. B has some flaws. \"Tempête-proofed\" is a plausible TEMPEST reference. \"RTE/EDF grid modeling software and technical database access\" is questionable, since RTE data isn't generally available that way. Some facilities are over-specified for independent contractors, such as a thermal lab with more than 100 L/s flow, or a telecoms test bed. A vehicle fleet, \"Westlaw\" for French law, and \"field camp\" are generic or slightly off. Even so, B matches the stage purpose of listing equipment and facility needs better, and it is more complete and consistent in structure. A's thinness is less useful, though A has fewer over-engineered claims. Overall B is better, though not hugely so."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260514_cross_border_rail_ticketing",
-      "ran_ok": true,
-      "seconds": 34.9,
-      "structure_problems": [],
-      "judgments": {
-        "enrich_team_members_environment_info.json": {
-          "verdict": "tie",
-          "score_new": 6.0,
-          "score_baseline": 6.0,
-          "runs": [
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates keep the input fields identical and differ only in equipment_needs and facility_needs, so the comparison rests on those two fields.\n\nA gives concrete, itemised lists for each role. Examples are EUR-Lex/CURIA access and secure document management for the regulatory architect, Monte Carlo and liquidity dashboards for the finance specialist, and a CRM and regional hubs near SNCF/DB/ÖBB for the operator liaison. It also ties facilities to Brussels and the two corridor testing areas, so downstream planning stages can use it directly (workspaces, labs, tooling, connectivity). Its weaknesses are some generic or overblown items: oscilloscopes for T+5 latency checks, \"classified\" policy discussions, 24/7 operations centers for roles that don't need them, and generic tools such as Slack and Jira.\n\nB is much terser, one or two sentences per role. It is more role-tailored in places and uses the project's Location 1/2/3 convention, for example a sandboxed OSDM V0.9 instance for the standards lead and a logistics suite for the testing coordinator. It is also less padded. However, it is thin: it lists little standard equipment such as laptops, collaboration tools or secure connectivity, and it is vague for several roles. Examples are \"flexible collaboration space ... central European hub\" for the distributor strategist and \"ideally near financial hubs, though Brussels suffices\" for the finance specialist. This gives less actionable detail for resourcing.\n\nOverall, A is more complete and decision-useful despite some generic padding. B is accurate and sensible but under-specified."
-            },
-            {
-              "winner": "baseline",
-              "score_new": 5,
-              "score_baseline": 7,
-              "analysis": "Both candidates keep the input fields the same and only change equipment_needs and facility_needs, so the comparison rests on those two fields.\n\nA is tailored to each role and ties its needs to the plan's own elements: DG MOVE reporting portals, a sandboxed OSDM V0.9 instance for T+5 testing, escrow and guarantor bank portals for the float, and Location 2/3 coordination offices. Its needs fit the role. The testing coordinator, who manages people and logistics, gets a logistics suite and travel and permit budgeting. The Operator Liaison gets encrypted lines and travel to France, Germany and Austria. Weaknesses: the entries are brief, with few concrete tools, and the testing coordinator lacks any test or monitoring tooling. \"High-security classification\" and \"shielded environment\" are a bit overblown.\n\nB gives longer, more itemised lists, which looks thorough. Much of it is generic boilerplate that could apply to any program: IDE, Postman, CRM, Slack/Teams, Tableau/Power BI, and Jira or Monday.com. Several items are inappropriate or wrong:\n- It lists oscilloscopes and packet analyzers for verifying a five-minute API data-latency benchmark.\n- It calls for \"classified policy discussions\", \"emergency operations center\" and \"24/7 lab access\" for roles that don't need them.\n- It suggests Frankfurt as a Corridor 1 hub, though Frankfurt is not on Paris–Brussels–Amsterdam–Köln.\n- It puts nearly every role in Brussels offices with \"secure data centers\".\n- Several facility entries repeat equipment items, such as video conferencing.\n\nB's detail is more usable as a procurement checklist, but A is more faithful and insightful, and has fewer errors. A is moderately better."
-            }
-          ]
-        }
-      }
-    },
-    {
-      "baseline": "20260202_heatwave_resilience",
-      "ran_ok": true,
-      "seconds": 31.5,
-      "structure_problems": [],
-      "judgments": {
-        "enrich_team_members_environment_info.json": {
-          "verdict": "tie",
-          "score_new": 6.0,
-          "score_baseline": 6.0,
-          "runs": [
-            {
-              "winner": "baseline",
-              "score_new": 5,
-              "score_baseline": 7,
-              "analysis": "The candidates differ only in equipment_needs and facility_needs. A is plan-specific: it names Leipzig-Grünau, the 5,000+ kit inventory, the M2/M4 gates, Risk 7 and the interim paper-based data capture. It also matches the plan's GDPR posture, giving the analyst audited paper logs or GDPR-compliant servers. Its weaknesses are an overbuilt 24/7 separate HQ and a few odd items, such as weather monitoring equipment for the analyst. B gives longer, generic checklists (Adobe Creative Suite, ICS software, travel budget) and ignores plan constraints in places. For example, it gives the analyst raw EMS/ED data access and baseline health records, which conflicts with the aggregate-signals-only and limited-health-record-access constraint. B does add some concrete specifics (500 m² warehouse, 20–30 seat training room). Overall A is more faithful and more useful downstream."
-            },
-            {
-              "winner": "new",
-              "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates keep the input fields unchanged and only differ in equipment_needs and facility_needs. A gives detailed, role-appropriate lists for every role. Examples are R/Python and GIS with secure EMS/ED data access for the analyst, an e-procurement and RFQ platform for the contract manager, 20+ phones/radios and a training classroom for outreach, and a WMS with a 500 m² warehouse for logistics. These are actionable for downstream budgeting and staffing. Some items are generic or assumed, such as Adobe Creative Suite, an ICS software platform and the 500 m² figure. A also leans toward heavier tooling than a municipal pilot needs, though it respects the GDPR and non-app constraints reasonably well.\n\nB is shorter, with one sentence per field, and ties several items to the plan. It names Leipzig-Grünau, 5,000+ kits, MSAs, radio airtime contracts and the Decision 12 supply route. That is a real strength. However, many entries are thin or poorly matched to the role. The analyst gets \"calibrated weather monitoring equipment.\" The incident commander gets a physically secure 24/7 HQ separate from municipal offices, which is oversized for a pilot. The outreach coordinator gets \"branded pool vehicles\" and \"10 VoIP phones,\" but no training space. The contract manager and legal officer get almost no real equipment. The communications manager gets no production tooling. B's facility_needs for several roles are just meeting rooms.\n\nA is more complete and more useful for downstream planning. B is more contextual but sparse and sometimes odd. Overall A is better."
+              "analysis": "A is more complete, specific and decision-useful, despite some bloat (generic software, over-specified facilities, an archive of historical health records that sits awkwardly with the limited health-data access). Equipment and facility needs have concrete sizes and quantities (40 m² command space, 200 m² warehouse for 5,000+ kits, 10,000+ printed logs) and respect the plan's constraints (paper logs, GDPR caution, multilingual materials). B is concise and tied to plan decisions (Review Issue 3, Decision 12, MSAs), but it is thin and vague. Facility needs are often one sentence with no sizes or quantities. It also has odd choices (weather monitoring equipment for the analyst, a branded pool-vehicle fleet) and overlapping roles (outreach staging area holds kit inventory). It is less useful for downstream budgeting and setup. A is moderately better."
             }
           ]
         }

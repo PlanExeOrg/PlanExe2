@@ -1,29 +1,29 @@
 {
   "stage": "find_team_members",
-  "evaluated_at": "2026-10-04T18:01:52",
+  "evaluated_at": "2026-10-04T20:35:33",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 50.1,
+      "seconds": 34.4,
       "structure_problems": [],
       "judgments": {
         "find_team_members.json": {
           "verdict": "baseline",
-          "score_new": 6.0,
+          "score_new": 5.0,
           "score_baseline": 8.0,
           "runs": [
             {
               "winner": "baseline",
-              "score_new": 6,
+              "score_new": 5,
               "score_baseline": 8,
-              "analysis": "Both give exactly 8 roles in the required schema. A's roles map to the project's main technical and risk areas: geotechnical and seismic (Azores-Gibraltar fault), marine construction, rail systems (including the Iberian 1,668mm vs standard 1,435mm gauge mismatch and pressurization), safety, structural integrity and lifecycle, environmental, finance, and program governance. A's consequences are concrete and plan-specific, and its counts follow a consistent \"min X, max Y\" pattern with a rationale. B has no dedicated geotechnical/seismic or rail systems role. It merges these into a CTO and a structural specialist, which leaves a gap for a project whose biggest unknowns are seismic and rail in a sealed pressurized tube. B's counts are inconsistent and inflated, e.g. \"1 director with min 10-20 specialists\". B's role 1 is governance only, with no program director or overall accountable leader, and its role 2 CTO partly overlaps with the others. B's consequences are more generic, long lists. A is more useful downstream."
+              "analysis": "The stage requires exactly 8 candidate roles. Candidate A lists 9 roles (ids 1–9), which violates the explicit constraint. Candidate B has exactly 8.\n\nOn content, B has a Program Director who owns overall accountability and governance. That is a sensible top-level role for a €40B program, and A has no such role. A has a treaty diplomat, but its other roles are fragmented. A has separate roles for the structural architect, geotechnical engineer and surveillance engineer. It has no safety or emergency role, which is a significant gap for a pressurized tunnel at 100 m depth. B covers safety and emergency response in the Workforce & Safety Director role. B also covers lifecycle maintenance, decommissioning and corrosion, and it includes rail, finance, environment and offshore construction.\n\nB's counts use a \"min X, max Y\" format that varies by role and is plausible. A's counts are mostly fixed numbers with long descriptions, which are less consistent with the schema and sometimes verbose. A's count of 8,000–12,000 personnel is used inconsistently. A's role 9 handles gauge interoperability well, but B also covers it within the rail role. A has some oddities. For example, it says \"mandating a unified gauge standard\". It also states that the gauge incompatibility could cut revenue by \"€500M–1.5B annually\", and B repeats that figure. B's design role is folded into the geotechnical and marine roles, so no structural design lead exists. That is a minor gap. A includes that design role.\n\nOverall, B better follows the exactly-8 constraint and covers the needed functions more completely, including program leadership and safety."
             },
             {
               "winner": "baseline",
-              "score_new": 6,
+              "score_new": 5,
               "score_baseline": 8,
-              "analysis": "Both candidates give exactly 8 roles in the required schema (id, category, explanation, consequences, count). They differ in coverage, specificity, and how well the count field is formatted.\n\nCandidate A has a CTO, a structural specialist, a diplomatic coordinator, and environmental, construction, finance, workforce and operations roles. It has no geotechnical or seismic role. This is a major gap, because the site sits near the Azores-Gibraltar fault zone and the project depends on borehole and seismic validation. It also has no dedicated rail systems or pressurization role, even though the high-speed rail in a sealed corridor is a core part of the project. Its count fields are verbose and inconsistent, such as \"1 lead coordinator, supported by... minimum 12 international attorneys\" and \"min 10-20 ... specialists\". They are less clean for downstream stages that need headcounts. Some content is generic, and the CTO role overlaps with the structural role.\n\nCandidate B covers the main technical risk domains: geotechnical and seismic, marine construction, rail systems and transportation, and structural integrity and lifecycle. It also covers governance and program leadership, environmental, finance, and workforce and safety. It uses plan-specific details: the Iberian 1,668mm versus standard 1,435mm gauge mismatch, 10 atmospheres of external pressure, PSHA, the fiber-optic sensor mesh, the 70% hedging target, and the €4-6 billion contingency reserve. Its consequences are concrete and quantified. Its count fields are consistently \"min X, max Y, to cover ...\", which is cleaner. A weakness is that merging Program Director with governance lead overloads one role, and there is no separate overall technical authority. Even so, B's coverage of the project's real risks is clearly better.\n\nOverall, B is more specific, covers more of the project's critical risk areas, and is more consistent in format."
+              "analysis": "The stage spec says the system prompt requires exactly 8 candidate roles. A has exactly 8 roles. B has 9, which violates the explicit constraint. B also has some inconsistencies. Its explanations are written in the third person with \"This role...\", which is fine. Its \"count\" field gives specific people breakdowns, which is useful. But B's role 1 is a diplomat with no overall program director, so the project has no accountable leader. Its ids run 1-9, which makes the format violation visible. B also splits the workforce role from safety and has no safety or emergency role at all, though the explanation mentions safety. It also has no maintenance or decommissioning role.\n\nA covers governance and program direction, geotech and seismic, marine construction, environmental, finance, rail, workforce and safety, and structural integrity and lifecycle. These cover the plan's main risks, and A's role combos are sensible. A's count fields are strings like \"min 1, max 2\", which fits the schema's string type. A has no dedicated structural design role, though geotech and rail partly cover that.\n\nOverall A follows the format constraint and has better coverage, including leadership and safety. B's extra specificity on staffing is nice but does not outweigh the violation."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 83.6,
+      "seconds": 32.0,
       "structure_problems": [],
       "judgments": {
         "find_team_members.json": {
           "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 5.5,
+          "score_new": 7.0,
+          "score_baseline": 5.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 6,
-              "analysis": "Both candidates give exactly 8 roles in the expected schema, and both tie their roles to the plan's decisions and risks. They differ mainly in coverage and depth.\n\nCandidate A covers strategy/architecture, regulatory and sovereignty, grid, land modeling, cooling design, finance/FX, social license, and telecom. Its strengths are the dedicated connectivity architect and cooling/data-center design engineer, plus a strategist for the red-team mandate. It has real gaps against this plan's requirements:\n- There is no tenant/commercial lead, even though anchor tenants gate every expansion phase.\n- There is no construction or delivery lead for the Phase 1 build of 8–20 halls.\n- There is no dedicated environmental/water or brownfield role.\n- There is no workforce role, though the plan requires a workforce strategy.\n- Security is folded into the regulatory role.\n- Role 4 has an awkward title (\"Model Modeler\").\n- The explanations are decent but thin.\n\nCandidate B covers grid/energy, land acquisition, tenant strategy, security/sovereignty, environmental/regulatory, construction, CFO, and community/workforce. This matches the plan's biggest execution and gating risks: grid, land, tenants, permitting, environment, construction, financing, and social license. The consequences are concrete, with quantified impacts and timeline delays. The count fields explain the team breakdown and its dependence on the split-campus model. Weaknesses:\n- It has no connectivity/fiber role, and cooling design is only partly covered by construction.\n- It is very verbose and includes some invented figures (a €30M holding cost, a \"9 phases\" slip, the 60% tenant trigger versus the prompt's 30–50%). These likely come from upstream decisions, though, and the 60% is a stricter version of the prompt's gate.\n- The \"Chief …\" titles are somewhat inflated.\n\nOverall B gives better coverage of the plan's critical functions, and its content is more specific and more useful downstream. A's omissions of tenant, construction, environment, and workforce roles are more damaging than B's omission of a telecom role."
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates list exactly 8 roles covering similar areas (leadership, grid, land, security, finance, cooling, fiber, community). The differences come from specificity and faithfulness.\n\nA is much more detailed and plan-specific. It cites decisions, thresholds, the 80/20 buffer split, the 32.2 km² buildable area, the 60% take-or-pay trigger, the 70% USD hedge, and the Q4 2026 ANSSI audit. Each role gets quantified consequences. It also covers a broader set of tasks, such as heat reuse, DREAL offsets, and the skills academy. This is useful for downstream stages such as team composition and costing. The weaknesses are that some invented numbers look questionable. Examples are \"DN300 PN16\", \"sub-1ms latency across liquid loop\", \"0.20 PUE waste heat rejection\", and \"€8B–€15B cost overruns\". Some consequences are inflated. It also states a \"€4.32B unhedged FX exposure\" and a \"Power Readiness Lockout Clause\", which probably come from upstream documents. It has a few phrasing oddities, such as \"Chief Infrastructure Officer (CIO)\" and a \"CFO\" title that may be too senior. It also has a slight tension between the \"non-binding hosting consultations\" it describes and the prompt's emphasis on uncontrolled external dependencies. Even so, it is far more decision-useful.\n\nB is concise and generic. Its explanations are short and its consequences are vague, with little quantification. The \"Large-Scale Land & Civil Works Model Modeler\" title is awkward. It has no dedicated permitting role, though the Regulatory lead covers that. It lacks brownfield remediation, environmental, and security-operations depth. Its counts are plausible but more minimal, and it has fewer concrete details. It is consistent with the plan, but thin.\n\nOverall A is better on specificity and usefulness, and it is more thorough. B is safer but weak."
             },
             {
               "winner": "new",
-              "score_new": 8,
+              "score_new": 7,
               "score_baseline": 5,
-              "analysis": "A is better. Its eight roles cover the project's critical-path functions: grid/RTE, land assembly, tenant strategy, security/sovereignty, environment/water/permitting, construction, finance/FX, and community/workforce. Its explanations and consequences are specific. They cite decisions, risks, and figures from the upstream documents, such as the 60% tenant trigger, the €4.32B FX exposure, the €30M land-holding cost and the 75% local-workforce mandate. The headcount rationales are also concrete.\n\nA has weaknesses. Some titles are inflated (\"Chief ...\"). A few details are slightly off: \"9 phases\", and a 60% tenant trigger where the prompt says 30–50% (the strategic decisions file may have set it). It has no dedicated connectivity or cooling role, though construction partly covers cooling.\n\nB is much thinner and more generic. It has no tenant/commercial role, even though the tenant gate is central to the prompt (\"no anchor tenants = no FID\"). It has no dedicated environmental/water permitting lead, which is a major risk for this project. It also has no construction or delivery lead. It does include a connectivity architect and a cooling engineer, and its \"Chief Infrastructure Strategist\" role fits the red-team mandate. Some role names are awkward, for example \"Land & Civil Works Model Modeler\". Its consequence statements are shorter and less decision-useful.\n\nDownstream planning stages would get more from A's coverage and specificity."
+              "analysis": "Both give exactly 8 roles in the right schema. A is concise and consistent with upstream decisions, but it is generic. It has a single Financial Controller for a €100B+ program, an awkward \"Modeler\" land role, and consequences that are vague. B is far more specific and plan-linked: the RTE lead owns the lockout clause and tenant triggers, there is a dedicated security/sovereignty lead, a land assembly role, a CFO owning financing and hedging, and a scaled headcount. Its weaknesses are some invented or unsupported figures (36-month lead time, €10–20B sovereign revenue), technical slips (\"sub-1ms across liquid loop\", \"0.20 PUE waste heat rejection\"), a 60% threshold that differs from the prompt's 30–50%, and verbosity. Even so, B is more decision-useful for downstream stages."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 107.3,
+      "seconds": 23.7,
       "structure_problems": [],
       "judgments": {
         "find_team_members.json": {
           "verdict": "new",
           "score_new": 7.0,
-          "score_baseline": 5.5,
+          "score_baseline": 6.0,
           "runs": [
             {
               "winner": "new",
               "score_new": 7,
               "score_baseline": 6,
-              "analysis": "Both candidates give exactly 8 roles with the required fields. Both tie their roles to the plan's decisions and risks: the OSDM standards, the clearing mechanism with its €300M float, T+3 and T+5, the 90-minute threshold, and the 40% target. Both leave the same gaps. Neither has a role for engineers on the shared data layer or the public reference distributor. Neither covers consumer rollout (apps, multilingual support, complaints) or member-state capacity building.\n\nCandidate A is concise and consistent, and its counts are short and mostly clear. It has no program leadership or executive role. A risk manager stands in for overall direction, and that does not resolve cross-stakeholder deadlocks. Its testing role refers to vague locations (\"Corridor 1 Area, Corridor 2 Area\"). Its consequences are generic and short. Its regulatory and risk roles overlap somewhat.\n\nCandidate B includes an executive/program lead, which this multi-stakeholder, €1.5B program needs. It separates standards, testing, clearing, passenger rights with accessibility, carrier compliance enforcement, commercial terms and regulatory governance. Its explanations and consequences are richer and more decision-useful. They include concrete mechanisms such as the three-strikes policy, the royalty cap, provisional binding at month 6, and carrier technical assistance grants. That detail gives the downstream stages more to work with. Its weaknesses are verbosity and counts written as long conditional prose. It calls BEUC a disability advocacy group, which is wrong because BEUC is a consumer organisation. It also says \"four corridors\" while listing only three testing sites. Some role overlap remains between the executive, standards and governance roles.\n\nOverall B is more complete and more useful downstream, despite its verbosity and a few small inaccuracies."
+              "analysis": "Candidate A: broad role mix, including a distributor-adoption role and a risk manager. But it has no dedicated accessibility (PRM) role, the testing role refers vaguely to \"Corridor 1 Area / Corridor 2 Area\", the consequences are thinner, and the count fields are padded with prose. Candidate B: more specific and plan-grounded. It cites actual deadlines, float amounts, the royalty cap, the three-strikes policy and the named corridors. It has a dedicated accessibility role and a commercial-terms role that covers distributor access, and its consequences are concrete and tied to the 40% target. Weaknesses: one dubious invented fine figure, some overlap between governance and enforcement roles, and no explicit risk manager or distributor-adoption role. Overall B is moderately more specific and decision-useful."
             },
             {
               "winner": "new",
               "score_new": 7,
-              "score_baseline": 5,
-              "analysis": "Both candidates give exactly 8 roles and follow the schema, and both tie their roles to the plan's decisions and risks. A is more detailed, more decision-useful and more consistent with the plan.\n\nA includes an executive program lead (Chief Program Officer), which a €1.5B, five-year, multi-stakeholder program needs and B lacks. A's explanations give concrete responsibilities: provisional and final binding at months 6 and 18, the three-strikes enforcement policy, the €300M float, T+3 settlement, and the 10-person standards team and 15 testing FTEs. Its consequences are specific and tied to named risks and to the 40% and complaint-halving targets. It also covers accessibility and PRM explicitly.\n\nA's weaknesses are that some count fields are very wordy and hedge between ranges, and that it invents figures such as the \"3–7% annual budget fines\". It also lists BEUC as a disability group, when BEUC is the consumer organisation.\n\nB is concise but generic. Its explanations are short. Its testing coordinator role has a sloppy placeholder-like location (\"Corridor 1 Area, Corridor 2 Area\") and lists only three hubs where the plan has four corridors. It has no executive leadership role, and its dedicated risk manager does not make up for that. Its counts are crisper (2 settlement specialists, 3 standards leads), though some of them are unusual. Its consequences are thin.\n\nOverall A gives better downstream value for staffing, governance and cost estimation, despite its verbosity."
+              "score_baseline": 6,
+              "analysis": "Both give exactly 8 roles in the right schema and draw on upstream decisions and risks. A is more detailed and specific: each role has concrete figures (the €200M float, the €300M reserve, 0.01–0.05% fees, T+3 settlement, the 15 testing FTEs, the 2026-11-15 workshop) and links to specific decisions. It also has a dedicated accessibility role, which the plan makes a core requirement, and a stronger consequences section. Its weaknesses are that some details are possibly invented or inconsistent, such as the \"three strikes\" policy and the 3–7% fines under Directive 2019/882. It also folds enforcement and compliance into an \"Officer\" role, and it names SNCF, DB and ÖBB as enforcement targets, which is politically odd. It has no dedicated program/risk manager or distributor-side role. Some of its counts are ranges (\"min 1, max 2\"), which is a minor weakness.\n\nB has broader coverage: a risk manager, an operator liaison, and a distributor strategist. Its explanations and consequences are thinner and vaguer, and it has no dedicated accessibility role (folded into the passenger rights analyst). It also has some odd phrasing (\"Corridor 1 Area\") and leaves out the buses, ferries and air integration. Its counts have justifications, which helps. The \"Builder\" scenario is mentioned in both.\n\nOverall, A is more decision-useful and specific. B offers some useful roles (risk manager, distributor representative) but is shallower."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 86.3,
+      "seconds": 30.7,
       "structure_problems": [],
       "judgments": {
         "find_team_members.json": {
-          "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 5.5,
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "A is better. It has eight plan-specific roles that map to the scope areas and the Month 2 and Month 4 gates. It names the city (Leipzig), the languages (German, Polish, Turkish, Arabic), the neighborhoods, and the 10 cooling sites and 10 outreach teams. It has an operational owner for cooling centers and transport, a field supervisor and safety officer who also covers worker protection, and a separate procurement manager. Its headcount guidance is reasoned, for example deputy coverage for 24/7 alerts and part-time support where that is realistic. Its weaknesses are verbosity, some invented specifics (the €300k MCR, 5,000+ kits, \"Risk 7\"), a \"Month 4 readiness gate\" mislabel, and ranges that vary in format. B is concise, but it leans on opaque internal references (\"L64 Assumption\", \"Decision 5\", \"Review Issue 2\") that do not help a reader or later stages. Several counts are just \"Single Resource\", with little staffing logic. It has no owner for running the cooling centers day to day and no field safety supervision for outreach teams, which are core risks in the plan. Its consequences are generic and short, so it is less useful for downstream planning."
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both give 8 roles in the expected fields. A is concise and fits \"short_explanation\", uses flexible count ranges, and includes a Public Health & Vulnerability Analyst for baselines, equity metrics, and evaluation. But it has no operational owner for cooling centers or transport. It folds them into a contract manager, even though they are core scopes tied directly to the Month 2 and Month 4 gates. B gives dedicated, gate-linked owners for cooling centers, transport, home interventions and procurement, health data loop, outreach, and communications, which is more decision-useful for downstream stages. However, B is very verbose, includes some invented specifics (95% inter-rater reliability, a 15-25% mortality reduction), uses flat counts of \"1\", and lacks an evaluation analyst. On balance B's operational coverage slightly outweighs A's concision and its evaluation role."
             },
             {
-              "winner": "new",
-              "score_new": 8,
-              "score_baseline": 6,
-              "analysis": "Both candidates give exactly 8 roles in the required schema, and both cover the main scope areas. B is better for downstream planning.\n\nCandidate A is concise and has sensible role boundaries. It has a separate Public Health Analyst for metrics and a combined Health System & Worker Liaison. However, it has no one who runs cooling-center operations day to day. Its Contract Manager only handles contracting, so shift staffing, accessibility checks and the 80%-hours KPI have no owner. Its explanations cite internal references such as \"L64 Assumption\", \"Review Issue 2\" and \"Decision 12\". These help traceability but add little standalone value. Its consequences are short and generic. It never names the city, the languages or the scale, so it feels less tied to this plan. Its counts are also inconsistent in format (\"Single Resource\" next to \"min 1, max 2\").\n\nCandidate B is much more specific and uses the plan's details: Leipzig neighborhoods, German, Polish, Turkish and Arabic, about 10 cooling sites, 10 outreach teams, the 5,000+ kits, and the €300k contingency. It ties each role to the Month 2 and Month 4 gate KPIs. It has a dedicated Cooling Centers & Transport Operations Manager and a Field Operations Supervisor & Staff Safety Officer. The latter covers volunteer and staff safety and the worker-protection implementation. Its counts include a staffing rationale, which matches the \"hireable staffing\" requirement. Its weaknesses are heavy verbosity and some hyperbolic consequences, such as every gap leading to forfeiture of the €1.5M. Its role mix is also less distinct: the Public Health role merges clinical integration, and metrics sit with the GDPR role. Even so, the actionable detail and the operational coverage outweigh these."
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Candidate A is richer and more concrete on operations. It has dedicated cooling-center and transport leads, gate-linked detail, and clean counts. It is verbose for a \"short_explanation\" field. It has no role for evaluation, baselines or analytics, and no owner for worker protection (Scope 6). Both are core scope items and deliverables. It also includes possibly invented specifics (95% inter-rater reliability, 15-25% mortality reduction), its legal and health-integration roles overlap, and every role is a count of 1. Candidate B is concise and covers all scope areas plus evaluation. It includes a public health analyst for baselines, thresholds and equity metrics. It has a health and worker liaison, a contract manager for all physical support contracting, and flexible min/max counts that suit a hireable staffing plan. Its weaknesses are no dedicated cooling-center or transport operations lead, internal references such as \"L64 Assumption\", and inconsistent count formatting. A's missing analytics and worker-protection owners are a more serious gap than B's missing operational leads, but A's specificity partly offsets this, so B is only slightly better."
             }
           ]
         }

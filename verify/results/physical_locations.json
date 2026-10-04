@@ -1,29 +1,29 @@
 {
   "stage": "physical_locations",
-  "evaluated_at": "2026-10-04T17:50:48",
+  "evaluated_at": "2026-10-04T20:28:12",
   "records": [
     {
       "baseline": "20250706_gibraltar_tunnel",
       "ran_ok": true,
-      "seconds": 27.5,
+      "seconds": 16.1,
       "structure_problems": [],
       "judgments": {
         "physical_locations.md": {
-          "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 5.0,
+          "verdict": "tie",
+          "score_new": 6.5,
+          "score_baseline": 6.5,
           "runs": [
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "Candidate A is more specific and more useful. Its requirements are concrete and tied to this project: the Camarinal Sill, tides and internal waves, shipping density, seismicity, dry docks, rail links (Al Boraq, ADIF/ONCF), transboundary permitting, and Natura 2000 areas. Its locations are named sites: the Punta Paloma–Malabata corridor, the Port of Algeciras, Tanger Med, Navantia Puerto Real, and a Seville/Madrid HQ. Each has a rationale that fits a pillar-supported, buoyant tunnel. The main weaknesses are that it gives five locations when the prompt asks for three, and that the 14–30 km range and the \"narrowest\" claim for Punta Paloma–Malabata are loose. Even so, the extra sites are relevant, and the Cádiz and HQ sites add decision-useful content for later stages. Candidate B is generic. Most of its \"requirements\" just restate the prompt, such as \"must connect Spain and Morocco\". Its locations are broad zones such as \"Southern Coast, Andalusia\", with no specific port or yard. It also makes a geology claim (\"clay, sand, weathered bedrock\") that is boilerplate and overlooks the actual Strait seabed and sill. It does follow the three-location structure and is internally consistent. It is thin on insight about risks like seismicity, shipping, and currents. For downstream planning, A is clearly stronger."
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates have small factual blemishes, and neither flags the main engineering risk. A is accurate on the strait's physical characteristics (about 14 km at its narrowest, 300–900 m deep) and gives a clean structure. It has no coordinates or distances, calls the strait \"the narrowest span of the Atlantic Ocean\", describes Tangier as a launch point \"heading eastward\", and states the geology is \"suitable\" without any hedging. Its requirements list is also thinner on grid, workforce and governance. B has a broader and more decision-useful requirements list, approximate coordinates and a 30 km staging radius for each hub, a numbered functional breakdown (accommodation, administration, parallel fabrication), and a link to the chosen strategic scenario. B's flaws: it calls Algeciras \"Europe's largest container port\", lists a \"Port of Tarifa\" as a deep-water fabrication port, places Asilah in the Tangier area, and uses \"100 meters below sea level\" as Location 1's address. It also omits the depth range and geology. B is more specific and more useful for downstream planning, so it has a modest edge."
             },
             {
-              "winner": "new",
-              "score_new": 8,
-              "score_baseline": 5,
-              "analysis": "Both candidates follow the expected structure: requirements, locations, and a summary. Both correctly anchor on the Strait of Gibraltar, a Spanish hub and a Moroccan hub.\n\nCandidate A is clean and faithful but generic. Its requirements are mostly restatements of the prompt. Its geology claim (\"clay, sand, weathered bedrock\") is vague. It misses the key Strait-specific risks: Camarinal Sill, strong currents and internal waves, very heavy shipping traffic, and seismicity at the plate boundary. Its Spanish site, \"Tarifa and Algeciras\", is a loose area, since the two are about 20 km apart. The Tangier-Med rationale is odd, calling it a \"launch point heading eastward\" and a \"portal location\". It gives only the three base locations, with no governance or rail-interface site.\n\nCandidate B is much more specific and decision-useful. Its requirements cover seismic activity, tidal currents, shipping lanes, Natura 2000 and the Strait's Natural Park, transboundary permitting, and rail integration with ADIF and Al Boraq/ONCF. It names the historical SECEGSA/SNED studies and the Punta Paloma–Malabata corridor, and it gives coordinates. Its hubs are concrete: Algeciras Bay, Tanger Med, and Navantia Puerto Real for pillars and ballast systems. It also ties its choices to options in the plan's strategic decisions. Its weaknesses are minor. Algeciras–Bobadilla is not a high-speed line. The Seville/Madrid HQ is not really an operating site. It also exceeds the three suggested locations. Even so, these extras are plausible and useful for downstream stages.\n\nOverall B is clearly more insightful and more useful for later planning."
+              "winner": "baseline",
+              "score_new": 6,
+              "score_baseline": 7,
+              "analysis": "Both candidates follow the expected structure with the same three locations: the Strait corridor, the Spanish hub at Tarifa/Algeciras, and the Moroccan hub at Tangier. Both are complete and faithful to the prompt.\n\nA strengths: Its requirements list is richer. It covers workforce, governance, grid and rail, and fabrication capacity. It gives approximate coordinates and a 30 km staging radius, which downstream stages can use.\n\nA weaknesses: It makes factual errors. It says \"Port of Tarifa\" is in Algeciras Bay, but Tarifa is outside the bay. It calls Algeciras \"Europe's largest container port\", which is false. The 5.3°W coordinate for the central strait is off, since Tarifa is at about 5.6°W. Tangier-Med is about 35 km from Tangier, which sits awkwardly with the 30 km claim. It calls \"100 meters below sea level\" a location. It never notes that the strait is much deeper than 100 m.\n\nB strengths: It is more factually careful. It gives the strait's real depth range of about 300–900 m, which matters for a 100 m-depth pillar-supported design. It anchors the Moroccan hub on Tangier-Med and the Spanish hub in the Province of Cádiz. Its requirements include geological suitability and pillar foundations.\n\nB weaknesses: It has no coordinates and fewer logistics, workforce and governance requirements. It glosses over the engineering problem it surfaces, because pillars of 200–800 m are not addressed. The phrase \"launch point heading eastward\" is odd.\n\nOverall, B is somewhat more accurate and insightful. A is more detailed but contains clear factual errors."
             }
           ]
         }
@@ -32,25 +32,25 @@
     {
       "baseline": "20260516_datacenter_in_france",
       "ran_ok": true,
-      "seconds": 27.7,
+      "seconds": 41.2,
       "structure_problems": [],
       "judgments": {
         "physical_locations.md": {
           "verdict": "new",
-          "score_new": 9.0,
-          "score_baseline": 4.0,
+          "score_new": 6.0,
+          "score_baseline": 5.0,
           "runs": [
             {
               "winner": "new",
-              "score_new": 9,
-              "score_baseline": 4,
-              "analysis": "B is clearly stronger. It covers all four zones the prompt names (Cambrai/E-Valley, Valenciennes/Denain/Escaudain, Dunkirk, Saint-Omer) as distinct candidate nodes. Each has specific, plausible detail: the former Cambrai-Épinoy air base BA 103, Gravelines nuclear plant and the 400 kV network, Marais Audomarois wetland sensitivity, Seveso setbacks, and competition for grid capacity from industrial decarbonization projects. It also gives realistic pros and cons for each node and keeps the red-team stance. It says RTE capacity, land control and approvals are uncontrolled until backed by a contract, permit or formal decision. It treats split-campus as a likely outcome and keeps downsizing or cancellation open. Its requirements list is thorough and tied to the prompt: heat-reuse offtakers, DGSI/ANSSI suitability, logistics, labor, UXO, and a 3–5 zone split.\n\nA drops Valenciennes/Denain and Saint-Omer as separate locations. It merges Cambrai and Valenciennes into one cluster. Its third \"location\" is a generic buffer/agricultural zone, not a real place. It states \"80% preserved as non-buildable\" and refers to a \"Skeptical Path (Pragmatic Scale-Up)\" label, which is probably inherited from earlier stages but is not grounded in the prompt. Its rationale text is vaguer and partly dubious: \"Dieppe/Calais alternative\" for Dunkirk, and \"power interconnection through port logistics nodes.\" It does not mention Gravelines or the uncontrolled-approvals framing. It is less useful for downstream stages."
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much more specific and decision-useful. It gives detailed, plan-linked requirements, covers all the named areas (Cambrai/E-Valley, Dunkirk, Valenciennes/Denain/Saint-Omer), assigns roles to the sites, and states trade-offs. It also frames feasibility as a gate. It has real flaws: \"Drapeau\" does not appear to be a real place, Dunkirk is described as \"15–25 km inland\", Dieppe is not within 100 km of Dunkirk, and the latency figures are implausible (65–75 ms to Paris from Valenciennes). Some of its rationale is also promotional (NIMBY mitigation, reduced baseline complexity). Candidate B is concise and fits the split-campus idea, but its requirements are generic with no numbers. Its Location 3 is an abstract \"buffer land\" and not a real place. It omits Denain, Escaudain, and Saint-Omer, merges Cambrai and Valenciennes, and gives thin rationale with no trade-offs. A's depth and coverage outweigh its factual errors."
             },
             {
               "winner": "new",
-              "score_new": 9,
-              "score_baseline": 4,
-              "analysis": "Candidate A is clearly stronger. It covers all four zones the prompt names (Cambrai/E-Valley, Valenciennes/Denain/Escaudain, Dunkirk, Saint-Omer) as separate, concrete locations. Each has a specific area (for example the former BA 103 air base, GPMD/Gravelines, and the Aa canal corridor with the Marais Audomarois). Each rationale gives risks and trade-offs, such as RTE hosting capacity, contamination, Seveso setbacks and wetland sensitivity. It keeps the red-team stance: approvals are \"uncontrolled\", and downsizing or cancellation stay open. Its requirements list is detailed and matches the plan: water, PUE, fiber diversity, heat reuse, security review, brownfield and UXO risk, and the split-campus option. It is useful for later stages. Its weaknesses are length and some unsourced specifics, such as the 30 km² buildable figure, which is probably carried over from earlier stages.\n\nCandidate B is thin and generic. It drops Saint-Omer and treats Valenciennes/Denain/Escaudain only as an aside (\"Cambrai or Valenciennes\"). Its Location 3 is an abstract \"buffer/expansion\" zone, not a physical place. It adds an unexplained \"Skeptical Path (Pragmatic Scale-Up)\" label and an \"80% buffer\" figure. Its requirement \"access to 9 GW of contracted power\" overstates what the plan treats as uncertain. It has little on risks, grid, water or security, so it gives later stages much less to work with."
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "Candidate A is concise and consistent with the red-team framing: it proposes two industrial clusters plus a buffer/reserve zone. Its problems are that it invents a fixed \"80% preserved, ~30 km² buildable\" figure and treats the buffer as a \"location\". It also omits Valenciennes/Denain/Saint-Omer as separate sites, and its \"Dieppe/Calais alternative\" fiber point is vague. Its requirements are thin and generic, though they stay roughly faithful to the prompt. It also frames the buffer as an agricultural location, which is odd for a stage that asks for actual sites.\n\nCandidate B gives three real, distinct industrial locations that cover all the prompt's named areas (Cambrai, Dunkirk, Valenciennes/Denain/Saint-Omer). It has much richer, more specific requirements and a trade-off for each site. It has factual and consistency errors:\n- It claims latency \"under 50 ms to Paris\" and \"65-75 ms\" from Valenciennes, which is implausible because real fiber latency is a few ms.\n- It says \"Drapeau\", which is not a real place.\n- It says Dunkirk is \"15-25 km inland\", which is odd.\n- It calls Saint-Omer \"35 km west of Arras\", which is wrong.\n- It places the Dunkirk node at 2-3 GW in Phase 3, and its phasing is inconsistent.\n- It says binding transmission allocation is required before Phase 1 financing, which is a reasonable gate.\n- It makes optimistic claims such as \"minimize community opposition\", \"North Sea thermal resources\" and \"reduced environmental baseline complexity\", which are somewhat promotional.\n- It also glosses over that the prompt says the grid is uncertain.\n- Its summary says \"five 1 GW nodes\", which is inconsistent with three locations.\n\nEven with these errors, B is more useful downstream. It has concrete candidate sites, specific requirements, and trade-offs, and it directly addresses the split-campus option. A's vagueness and its fabricated 80% buffer figure make it less decision-useful, but A has fewer factual errors. Overall B is somewhat better, though its latency numbers and geography errors are a real weakness."
             }
           ]
         }
@@ -59,25 +59,25 @@
     {
       "baseline": "20260514_cross_border_rail_ticketing",
       "ran_ok": true,
-      "seconds": 21.7,
+      "seconds": 19.7,
       "structure_problems": [],
       "judgments": {
         "physical_locations.md": {
           "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 4.0,
+          "score_new": 7.5,
+          "score_baseline": 4.5,
           "runs": [
             {
               "winner": "new",
               "score_new": 8,
               "score_baseline": 4,
-              "analysis": "Candidate B is stronger overall. Its requirements and locations tie directly to the plan's components. Brussels is the governance hub, with CER and DG MOVE. Valenciennes is where ERA actually sits, so the conformance lab goes there. Paris has UIC, the OSDM custodian. Luxembourg suits the clearing mechanism and reserve fund. Utrecht/Amsterdam suits the public reference distributor and the data layer. The addresses I recognise (ERA in Valenciennes, UIC in Paris, CER on Avenue des Arts) look correct. B also covers the ASAP start, the budget, and distributed delivery across member states. Its weaknesses are minor. It gives five locations when the stage asks for about three, and its requirements list is long. It also doesn't base anything in the Iberian or Nordic corridors, though its summary says member-state work will happen locally.\n\nCandidate A is generic and thin. Its Brussels choice is sound. But it never mentions that ERA is in Valenciennes, and its corridor locations are vague (\"Lille, Frankfurt, or Rotterdam\"). It leaves out clearing and settlement, the reference distributor, and the data layer. It also covers only two of the four corridors, and it has no concrete sites or addresses. It is less useful downstream."
+              "analysis": "Both outputs follow the expected structure. Candidate A is more complete and plan-specific. It covers all four named corridors, lists concrete stations and operators (SNCF, SNCB, NS, DB, ÖBB, SBB, Renfe, DSB), gives a fuller requirements list, and adds a distributed-locations entry that covers capacity building and the 20+ operators. It has minor flaws. The prompt asks for roughly three suggestions, and A gives six. Some rationales are generic or slightly inaccurate, such as the \"multi-currency\" claim for Austria/Germany/Switzerland and the \"Global/EU\" country label. It also puts \"Paris Gare de l'Est\" as a hub when Paris Nord is the Thalys/Eurostar station, and the DB/Köln hub is under a vague country label. Despite this, it is decision-useful.\n\nCandidate B is thin. It covers only two of the four corridors and omits Madrid–Barcelona–Lyon and Copenhagen–Hamburg–Berlin. Its suggested sites are questionable: Frankfurt and Rotterdam are not on the Paris–Brussels–Amsterdam–Köln corridor, and Lille is only loosely on it. It also ignores the EU Agency for Railways (in Valenciennes/Lille), the national regulators, and the public reference distributor and clearing mechanism. It follows the \"three locations\" guidance more literally, but it is less faithful to the plan's scope and less useful downstream. A is better overall."
             },
             {
               "winner": "new",
-              "score_new": 8,
-              "score_baseline": 4,
-              "analysis": "Candidate A is much stronger. Its requirements list is detailed and tied to the plan: EU institutions, ERA conformance, CER/UIC/OSDM custodians, data-centre connectivity, financial and clearing expertise, accessibility and consumer bodies, and the ASAP start. Its locations are concrete and match the program's functions. Brussels hosts DG MOVE and CER for governance. Valenciennes hosts ERA, with a real address, for conformance testing. Paris hosts UIC, the OSDM custodian. Luxembourg suits the clearing mechanism and reserve fund. Utrecht/Amsterdam suits the public reference distributor and the data layer. The summary explains how the sites connect by rail and how rollout extends to the member states. It gives five locations where the prompt asks for about three, but each one is justified. Candidate B is thin and generic. It has only three vague requirements and gives regions rather than sites (\"Lille, Frankfurt, or Rotterdam\"). It omits ERA's actual seat, UIC/OSDM, CER, and any location for the clearing mechanism or the reference distributor. It also ignores the Madrid–Barcelona–Lyon and Copenhagen–Hamburg–Berlin corridors. Its Location 2 and 3 entries are corridor regions rather than physical sites, so they are less useful downstream."
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both follow the expected structure. Candidate A is concise but covers only two of the four named corridors and omits Madrid–Barcelona–Lyon and Copenhagen–Hamburg–Berlin, which the plan names explicitly. It also puts the EU Agency for Railways near Brussels, but the Agency is actually in Valenciennes/Lille, France. A does mention Lille as a testing option, which is a small plus, but it never ties this to the Agency. Its location choices (Lille/Frankfurt/Rotterdam) are loosely specified, and Frankfurt is not on the corridor.\n\nCandidate B covers Brussels, all four corridors and a distributed national/CER location. Its requirements are more comprehensive. It is more complete and faithful to the prompt, and it links locations to the plan's timelines, operators and budget items such as capacity building. Weaknesses: it claims the EU Agency for Railways is in Brussels, which is wrong (Valenciennes), though A makes the same implicit error. \"Global/EU\" is an odd label for Location 6. Some rationales are generic or speculative (\"mountain terrain\", \"multi-currency\" for Austria/Germany/Switzerland, where only Switzerland uses CHF). It is also more verbose. The prompt asked for about three suggestions, so six is more than expected, but here the extra locations are grounded in the plan's four corridors.\n\nOverall B is more faithful and more useful downstream."
             }
           ]
         }
@@ -86,25 +86,25 @@
     {
       "baseline": "20260202_heatwave_resilience",
       "ran_ok": true,
-      "seconds": 30.4,
+      "seconds": 23.6,
       "structure_problems": [],
       "judgments": {
         "physical_locations.md": {
-          "verdict": "new",
-          "score_new": 8.0,
-          "score_baseline": 3.0,
+          "verdict": "baseline",
+          "score_new": 4.5,
+          "score_baseline": 5.0,
           "runs": [
             {
-              "winner": "new",
-              "score_new": 8,
-              "score_baseline": 3,
-              "analysis": "The prompt asks for a specific, plausible non-capital EU city of 150k–400k, and says the plan \"pick a specific city\". Candidate A chooses Leipzig and states a population of ~616k, which violates the 150k–400k constraint. It then excuses this as \"representative of the sub-400k operational target\", which is a weak and inconsistent rationale. It also lists four \"locations\" that are all Leipzig sub-areas or asset types, with generic district descriptions and no concrete addresses. The opening line says the plan implies physical locations, which is correct. Its requirements list is short but relevant. Candidate B opens with \"does not imply any physical location\", which is a factual mismatch with the content that follows, since the plan clearly needs physical sites. However, it then gives a thorough requirements list tied to the prompt's constraints. It proposes three genuinely in-range non-capital cities (Bologna ~390k, Córdoba ~320k, Thessaloniki ~320k). Each has specific pilot districts, municipal assets and hospitals, and a rationale linked to heat exposure, ageing, housing and migrants. The summary compares the options with a default recommendation. Population figures are approximately right (Bologna ~390k, Córdoba ~320k, Thessaloniki municipality ~320k). The stage prompt asks for three location suggestions, which B provides. A's flaw of violating the population constraint is a substantive one. B's flaw is the incorrect has_location flag statement, a minor cosmetic or schema issue, though it could affect downstream use. B is more faithful, specific and useful overall."
+              "winner": "baseline",
+              "score_new": 4,
+              "score_baseline": 5,
+              "analysis": "Candidate A picks one city, Leipzig, and breaks it into four operational site types: central library and community centers, social-housing anchor points in Grünau, and transport and faith/retail hubs. This is concrete and maps well onto the plan's modules (cooling centers, outreach bases, transport contracts, extended-hours sites). Downstream stages could use it directly. Its main flaw is that Leipzig has about 616k residents, well above the required 150k–400k range. The text admits this and then gives a weak excuse (\"representative of the sub-400k operational target\"). Giving four sub-sites of one city, rather than three alternative locations, also departs a little from the \"three suggestions\" instruction.\n\nCandidate B offers three different cities. Only Porto is plausibly in range, since the city proper has about 230–280k residents. Lyon (about 515k) and Seville (about 688k) clearly exceed the range, and B calls Seville \"mid-sized\" and the \"highest-risk\" site. That undercuts the fit-for-purpose requirement. It also contains several dubious or wrong claims: \"Vilarealense districts\" for Porto, Seville night-time temperatures above 30°C and 47°C multi-day events, and a \"Roman theaters district\" in Lyon. It claims robust data-sharing frameworks in Portugal and France that would ease GDPR constraints, which contradicts the plan's assumption of limited data access. Its requirements list is generic. It does not give actionable sub-sites inside the cities, so it is less useful for the later operational stages. Its one advantage is that it follows the \"three alternatives\" format and includes one city that fits the size range.\n\nOverall, both break the population constraint. B does so more often (two of three cities) and with more factual noise. A is more internally coherent and more decision-useful, although its single city is oversized."
             },
             {
-              "winner": "new",
-              "score_new": 8,
-              "score_baseline": 3,
-              "analysis": "Candidate A proposes three distinct, plausible non-capital EU cities, each within the 150k–400k range: Bologna ~390k, Córdoba ~320k and Thessaloniki ~320k. Each comes with plan-specific rationale covering heat exposure, ageing, housing stock, municipal assets, NGO networks and health coordination. Its requirements list is detailed and tied to the prompt: hot nights, top-floor flats, the 45-minute transport target, GDPR opt-in outreach, a 4-week kit supply, and a pilot footprint with Year-2 expansion. The summary compares the options usefully. Its one flaw is the opening line, \"does not imply any physical location\". That is inconsistent with the content, although it is defensible because the prompt names no city. Candidate B picks Leipzig, which it admits has about 616k residents. That breaks the 150k–400k constraint, and the \"representative of sub-400k\" excuse is weak. Its four \"locations\" are all sub-areas or asset types within Leipzig, not alternative sites. Its requirements are more generic. It also refers to a \"Builder strategic path\" that the plan prompt never mentions. It does give some operationally useful location types, such as outreach anchor points and transport hubs. A is clearly more faithful and more useful downstream."
+              "winner": "tie",
+              "score_new": 5,
+              "score_baseline": 5,
+              "analysis": "The plan requires a non-capital EU city with a population of 150k–400k. It also requires a stated reason why the city is a good pilot site.\n\nCandidate A suggests three different cities: Porto, Lyon and Seville. Its own requirements list says the population must be 150k–400k. Its Porto entry gives about 280k for the city centre but ~1.7M for the metro area, which is muddled. Lyon is given as ~515k and Seville as ~688k, so both violate the stated range, and A itself describes Seville as having a 1.54M metro. The rationales contain questionable or invented claims. Examples are \"Maia, Vilarealense\" as Porto districts, Roman theatres as cooling centers, and Estádio do Dragão as a sports hall. Seville is described with \"night-time temperatures above 30°C\", and Lyon with temperatures of \"38–42°C\". The claim that Porto has \"post-2017 adaptation\" experience is dubious. Several of these are inaccurate. Even so, A follows the stage's expected pattern of offering three alternative city options, and its requirements list is thorough and well matched to the plan. Its location summary is fairly generic.\n\nCandidate B picks Leipzig and then lists four sub-locations within it. This gives a coherent single-site basis for downstream planning. However, Leipzig has ~616k residents, which B admits is outside the 150k–400k range. It then rationalises this awkwardly with \"representative of the sub-400k operational target scale\". That is a faithfulness error. B's requirements list is shorter and more operational. The sub-locations (central library, Grünau prefab estates, transport hubs and faith/retail centers) are plausible and tied directly to the plan's gates and strategy. Grünau is a real, apt example of a prefab housing area. B does not offer alternative cities, which departs from the \"three location suggestions\" instruction. Its sub-locations are all in the same city, so it is less diverse, but it is more useful and coherent for execution.\n\nBoth are flawed on population size. A violates the range for two of three cities and its Porto framing is shaky. B violates it for its single city. A's alternatives give downstream stages some choice, but the options are mostly invalid and contain factual errors. B is more internally consistent and actionable, but it makes a questionable claim about the size range. Overall this is close. I slightly prefer B for its coherence and operational specificity. A's breadth and stronger requirements section partly offset that. I judge it close to a tie, with a slight edge to B."
             }
           ]
         }
