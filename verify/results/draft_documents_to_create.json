@@ -1,0 +1,114 @@
+{
+  "stage": "draft_documents_to_create",
+  "evaluated_at": "2026-10-04T18:12:34",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 169.7,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_create.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A gives much more plan-specific, decision-useful content. Each document has detailed essential_information, such as quantified cost breakdowns for the validation program, hedging and contingency mechanics, and energy demand and budget line items with dated gates. Its risks of poor quality come with concrete impacts. Its worst-case and best-case scenarios are narrative and scenario-specific. Its fallbacks are distinct and tied to each document, with timelines and costs. This is what downstream stages need to write the actual documents. Weaknesses: some invented figures, such as a 40-50% chance of a government change, and minor inconsistencies, such as validation budgets of €200-300M versus €500M. There is also a leftover \"€X\" placeholder in the charter, and some dates (Q3 2027) sit awkwardly against the start date. A is also cut off in the displayed text, but that looks like a truncation of the review view and not a flaw in the output itself.\n\nCandidate B is complete across 12 documents and consistent with the inputs, but it is generic. Its essential_information mostly restates the steps_to_create. Its risks have thin, mostly boilerplate impacts. Its worst-case and best-case scenarios are one-paragraph generalities. Its fallbacks are repetitive (\"minimum viable document\", \"focused workshop\", \"engage a consultant\"). It also has small errors, such as \"$\" in a euro plan, and it adds little insight beyond the inputs. Its value is mostly in completeness and not in content specs.\n\nOverall, A better fulfils the stage's purpose of drafting rich content specs, risks and scenarios."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates cover the same documents with the same ids, names, templates and steps, and both stay consistent with the plan (€40B, 20 years, 100m depth, Spain–Morocco, Builder's Foundation path). They differ in how deep the drafted content goes.\n\nCandidate A is clean, complete and compact. Its essential_information often just restates the steps_to_create. Its risks are reasonable and quantified. Its scenarios are short and generic, and its fallbacks are standard ones such as \"workshop\", \"consultant\" and \"minimum viable document\". It has small slips, such as \"$\" figures mixed with € in the Energy document. It also repeats the inherited inconsistency \"4-5 year phases (Phase 1 ~6-7 years)\".\n\nCandidate B is much more specific and decision-useful. Examples:\n- Concrete cost breakdowns for the geotechnical validation program (€80-195M).\n- Energy budget line items.\n- Governance thresholds (€50M decisions, 30/30/180-day escalation).\n- Quantified Monte Carlo percentiles.\n- Gauge harmonisation between Spain's 1,668mm and Morocco's 1,435mm, a real issue A misses in the budget document.\n- Concrete grid-operator timelines.\n- More varied and conditional fallbacks, each with cost and timeline.\n\nThe scenarios are narrative and tied to plan-specific mechanisms.\n\nB's weaknesses:\n- It is very verbose, and the scenario fields are overlong.\n- Some worst-case and best-case strings carry stray quotes and newlines.\n- The Charter has a \"€X\" placeholder.\n- Some invented figures are shaky, such as a 40-50% government-change probability and treaty ratification by Q2 2027, which conflicts with its own 18-month ratification target.\n- The B output is cut off in the displayed text, which I treated as a display truncation rather than a defect in the candidate.\n\nOverall, B's specificity, insight and downstream usefulness outweigh its verbosity and minor inconsistencies. A's content is safe but thinner."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 96.4,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_create.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the same document metadata and differ in the merged response fields. A is far more detailed. It has 9–12 essential_information items per document, 7–9 risks, worst and best cases with quantified impacts, and 5–8 fallbacks. It ties these closely to the plan's decisions, the review issues (RTE 36-month buffer, €1.3B land holding cost, workforce ramp), and the 60% tenant trigger. It adds useful specifics such as the RTE collateral structure, scenario tables for 2 GW versus 3 GW, GIS latency checks, and a red-team challenge section.\n\nA has weaknesses. It is verbose, and some numbers look invented or inconsistent (for example Phase 0 €12.5M–€37.5M against the prompt's €250M–€750M, and remediation costs of €250M–€750M). The Risk Register's \"Security Implementation Steering Committee\" wording is awkward. Some fallbacks are generic or off-target, such as proposing a CCGT. Its best-case scenarios are promotional in places. Even so, it is much more decision-useful for downstream stages.\n\nB is concise and faithful to the upstream decisions, but thin. It has 5 essential items for the Grid, Land and Security documents and 4 risks each. Its scenarios are one sentence each and carry little quantification. It has only 3 fallbacks. Some of its content is vague, such as \"even if the structure itself is implied/omitted\". Its Land worst case contains an odd \"4 GW target\". It stays internally consistent but gives less planning value.\n\nNeither is perfect, but A better fulfils the stage's purpose of specifying essential info, risks and scenarios. The schema does not cap list lengths. A's depth outweighs its few number inconsistencies."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the same five documents and the same fixed fields. They differ only in the drafted content. Both stay tied to the plan's strategic decisions: Pragmatic Scale-Up, the 60% tenant trigger, the 36-month RTE buffer, the 32.2/128.8 km² split, and Substation 1 isolation. Neither invents binding commitments from RTE or DGSI.\n\nA is concise, with 4–8 essential items per document. It is faithful but thin. Several items restate the document description. Some fallbacks are weak or odd, such as using \"open-source hardware stacks\" to cut sovereignty risk. Its GIS worst case mentions a \"4 GW target\" that does not match the rest of the plan. The risks and scenarios are generic and have almost no quantification, so they give downstream stages little to draft from.\n\nB is much more detailed and plan-specific. Its essential information reads as a content outline a writer could follow. Examples: the grid doc's decision matrix, the \"No Grid Pre-Commitment\" operational definition, and what counts as a tenant commitment (LOI vs executed PPA). The GIS doc covers latency between clusters, ROW corridors, ICPE brownfield mapping, and holding-cost sensitivity. The risk register doc adds dependency cascades, a red-team challenge section, and escalation triggers. Its risks and scenarios carry quantified impacts and its fallbacks are varied and actionable. This suits the skeptical, red-team nature of the prompt.\n\nB has weaknesses. It contains many invented figures, and some are shaky. It uses a Phase 0 budget of €12.5M–€37.5M, while the prompt says €250M–€750M, and it then cites €250M–€750M as a remediation range. It lists \"binding RTE capacity allocation\" as a Phase 1 success metric, which sits oddly beside the \"non-binding RTE for Phase 1\" decision. Some worst-case narratives are very long. Even so, B's depth and specificity help downstream document drafting more than A's thin content.\n\nOverall B is better, with some deduction for the invented numbers and verbosity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 113.7,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_create.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A gives deep, plan-specific content for each document: concrete essential-information items, quantified and cascading risks, detailed scenarios and varied fallbacks. It has flaws, including some invented figures, a conflation of the liability pool with the clearing float, a \"Claude Docs\" context leak and over-optimistic best cases. Candidate B stays closer to the decision references but is thin, with 4–6 essential items per document and one-sentence scenarios. Its charter covers decision documentation rather than charter content (scope, budget, governance, metrics), and some fallbacks revert to rejected scenarios. A is far more decision-useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "A is concise and consistent with the Builder scenario, but its essential information is mostly meta (document the levers and trade-offs). It gives little concrete content spec. The charter lacks scope boundaries, budget allocation and a measurement definition for the 40% target. Some fallbacks contradict the Builder logic, such as reverting to Pioneer full public capitalization. B gives far more concrete, decision-useful content specs: charter scope in and out, budget buckets, hard dates and the 40% measurement methodology. It specifies the fee formula and reserve triggers, strike measurement windows, penalties and appeals, and the 5% cap interpretation with worked examples. Its risks are quantified and its fallbacks varied. B's flaws are verbosity, some invented specifics (named consultancies, EN standards, ROI percentages), a stray \"Claude Docs platform\" fallback, over-optimistic best cases, and a conflation of the pool float with the clearing float. Overall B is more useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 130.5,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_create.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Both candidates cover the same seven documents with the same metadata. They differ in the content specs.\n\nCandidate A gives detailed, plan-specific essential information for each document. Examples are the charter's scope, constraints and gates, the MCR's release triggers and ledger segregation, the paper-registry SOP's consent, chain of custody, retention and 72-hour breach rules, and the MOU's cell-size thresholds and liability language. Its risks, worst/best cases and fallbacks are concrete and tied to the Month 2 and Month 4 gates and the €1.5M tranche. The 43% budget-loss figure is correct (1.5/3.5). A would help later stages, such as WBS, team and task planning.\n\nA has flaws:\n- It uses \"January 2026–December 2026\" and \"June 30, 2027\" dates, which are inconsistent with the May 2026 start.\n- It reads the 80% gate as \"utilization\" rather than hours delivered.\n- It suggests a mobile-app fallback despite the prompt's anti-app stance.\n- It is verbose and repetitive.\n\nCandidate B is much thinner, with 3–6 essential items per document and 3–4 risks. The charter spec is wrong for its purpose. Its essential information describes a strategic-decisions summary (\"the 4 critical levers\", Lever IDs, synergies/conflicts) instead of a charter's scope, objectives, budget and governance. The other documents are generic, with little concrete content such as thresholds, retention periods or signatory sequences. B also suggests an encrypted data capture app as a fallback. Some of its fallbacks are sensible, such as the DWD default threshold and an interim command directive. Overall B is much less decision-useful.\n\nA's depth and specificity outweigh its date inconsistencies, so A is the stronger candidate."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A is concise and mostly sensible for documents 2–7, but its Project Charter essential_information describes the strategic-decisions document (levers, Lever IDs, synergies/conflicts) instead of a charter, which is a clear failure. Its other documents are thin, with only 3–6 essential items and 3–4 risks each, and its fallbacks are fairly generic. Candidate B gives much richer, plan-specific content. The charter covers scope, objectives, constraints, gates, alert authority, governance, dependencies and sign-off. The MCR document specifies release triggers, ledger segregation, audit and post-gate disposition. The GDPR paper protocol cites Articles 5, 17 and 33 and covers forms, chain of custody, retention and breach reporting. The MOU covers cell sizes, liability and the relationship to the triage-script option. B has flaws: a ~616k population figure outside the prompt's 150–400k range, a Jan–Dec 2026 timeline that clashes with a May start, a stray June 2027 date, \"80% utilization\" conflated with \"80% of hours delivered\", a mobile-app fallback that sits uneasily with the no-app constraint, and some verbosity. Overall B is far more useful for downstream stages."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

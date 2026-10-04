@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "TaskDependencyDetail": {
+      "description": "Details about the prerequisites for a task.",
+      "properties": {
+        "dependent_task_id": {
+          "description": "UUID that uniquely identifies a major phase or a subtask.",
+          "title": "Dependent Task Id",
+          "type": "string"
+        },
+        "depends_on_task_id_list": {
+          "description": "List of UUIDs that are prerequisites for this task.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On Task Id List",
+          "type": "array"
+        },
+        "depends_on_task_explanation_list": {
+          "description": "List of explanations why these tasks must be completed before this task.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Depends On Task Explanation List",
+          "type": "array"
+        }
+      },
+      "required": [
+        "dependent_task_id",
+        "depends_on_task_id_list",
+        "depends_on_task_explanation_list"
+      ],
+      "title": "TaskDependencyDetail",
+      "type": "object"
+    }
+  },
+  "description": "Understanding the dependencies between tasks is crucial for effective project scheduling and \nensuring that prerequisites are met before commencing subsequent activities.",
+  "properties": {
+    "task_dependency_details": {
+      "description": "List with dependency mappings between tasks.",
+      "items": {
+        "$ref": "#/$defs/TaskDependencyDetail"
+      },
+      "title": "Task Dependency Details",
+      "type": "array"
+    }
+  },
+  "required": [
+    "task_dependency_details"
+  ],
+  "title": "DependencyMapping",
+  "type": "object"
+}

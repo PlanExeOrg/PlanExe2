@@ -1,0 +1,68 @@
+{
+  "properties": {
+    "pitch": {
+      "description": "A compelling pitch for this project.",
+      "title": "Pitch",
+      "type": "string"
+    },
+    "why_this_pitch_works": {
+      "description": "Explanation why this pitch works.",
+      "title": "Why This Pitch Works",
+      "type": "string"
+    },
+    "target_audience": {
+      "description": "Who this pitch is aimed at, such as investors, stakeholders, or the general public.",
+      "title": "Target Audience",
+      "type": "string"
+    },
+    "call_to_action": {
+      "description": "A clear next step for the audience to engage with the project.",
+      "title": "Call To Action",
+      "type": "string"
+    },
+    "risks_and_mitigation": {
+      "description": "Address potential challenges and demonstrate readiness to handle them.",
+      "title": "Risks And Mitigation",
+      "type": "string"
+    },
+    "metrics_for_success": {
+      "description": "Define how the success of the project will be measured beyond its goals.",
+      "title": "Metrics For Success",
+      "type": "string"
+    },
+    "stakeholder_benefits": {
+      "description": "Explicitly state what stakeholders gain from supporting or being involved in the project.",
+      "title": "Stakeholder Benefits",
+      "type": "string"
+    },
+    "ethical_considerations": {
+      "description": "Build trust by showing a commitment to ethical practices.",
+      "title": "Ethical Considerations",
+      "type": "string"
+    },
+    "collaboration_opportunities": {
+      "description": "Highlight ways other organizations or individuals can partner with the project.",
+      "title": "Collaboration Opportunities",
+      "type": "string"
+    },
+    "long_term_vision": {
+      "description": "Show the broader impact and sustainability of the project.",
+      "title": "Long Term Vision",
+      "type": "string"
+    }
+  },
+  "required": [
+    "pitch",
+    "why_this_pitch_works",
+    "target_audience",
+    "call_to_action",
+    "risks_and_mitigation",
+    "metrics_for_success",
+    "stakeholder_benefits",
+    "ethical_considerations",
+    "collaboration_opportunities",
+    "long_term_vision"
+  ],
+  "title": "ProjectPitch",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "identify_documents",
+  "evaluated_at": "2026-10-04T18:29:56",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 345.4,
+      "structure_problems": [],
+      "judgments": {
+        "identified_documents.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected structure and stay faithful to the plan: the €40B budget, 14 km span, 100 m depth, Spain/Morocco, the Builder's Foundation path, and the expert-review gaps. Both inherit the same source-level quirks, such as the gauge and electrification claims.\n\nCandidate A has 26 create documents and 15 find documents. The create documents are concise and tied to the plan's numbers, such as the 2027 geotechnical gate, 5%/10%/15% triggers, and the €200-500M marine fund. The find list is tight and cites real benchmarks, for example the cost overruns of the Channel Tunnel and Marmaray. Its weaknesses:\n- Several find documents feed a \"Rail Systems Integration strategy\" that is not in the create list, so the two lists are inconsistent.\n- It has no create documents for rail systems and gauge, technical specifications and architecture, climate adaptation, cybersecurity, or a baseline transport assessment.\n- The find list is thin on jurisdiction-specific regulation, port and fabrication-yard data, grid capacity, and reference-project lessons.\n- One recency note is odd: \"seismic hazard analysis updated to reflect latest IPCC-era climate projections\".\n\nCandidate B has 23 create documents and 35 find documents. Its create set covers more of the real gaps:\n- a technical specifications and architecture framework\n- rail gauge and interoperability\n- cybersecurity\n- climate adaptation\n- gap analyses for energy, maritime and cross-border transport\n\nIts steps are more detailed and actionable. The find list is much more complete:\n- country-specific policies and environmental law for Spain and Morocco\n- the Barcelona Convention and UNCLOS texts\n- the Tarifa-Algeciras and Tangier-Med ports\n- REE and ONEE grid capacity\n- reference tunnels (Channel Tunnel, Seikan, Marmaray, Øresund, Gotthard)\n- labour costs\n- EU law\n- access timelines\n\nIts weaknesses:\n- Some create documents overlap: the preliminary maritime, energy and rail assessments largely duplicate the corresponding strategy documents.\n- Some find documents overlap, including two BIT entries, two cost-benchmark entries and two seismic entries.\n- It invents specific numbers, such as the energy breakdown and the 60/40 workforce split, and some template choices are odd (the polar-waters guideline for maritime traffic).\n- It wrongly labels the AVE network as Iberian gauge.\n\nOn balance, B is more complete and more useful to downstream stages, despite its redundancy and some invented specifics. A is cleaner but leaves notable gaps."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Candidate A is much more detailed. It has 23 documents to create and 35 to find, each with 7-9 concrete steps, real standards or templates, and plan-specific figures. It covers gaps B omits: rail systems and gauge interoperability, technical specifications, climate adaptation and cybersecurity. Its \"find\" list is thorough and well sourced: separate Spanish and Moroccan regulatory documents, REE and ONEE grid data, port data, and Channel Tunnel, Seikan, Marmaray, Øresund and Gotthard precedents, with recency requirements and access timelines. A has flaws: it states that Spain's AVE network uses Iberian 1,668 mm gauge, when AVE is standard gauge. It uses an inappropriate \"Polar Waters\" template for maritime traffic. It has some overlap between preliminary assessments and full strategies, and some invented energy figures. Candidate B has 26 create documents and 15 find documents, each with concise descriptions and 6 steps. It is faithful to the strategic decisions and adds engineering strategies A lacks (hydrodynamic load mitigation, buoyancy, logistics, geopolitical risk, M&E). However, its template names are mostly generic or invented. It has no rail systems or gauge create document, no technical specifications, climate adaptation or cybersecurity document, and its \"find\" list is thin: it lacks port and grid data and most precedent projects, and access difficulty is a single word with no timelines. Overall A is more complete and decision-useful for downstream planning despite its errors; B is cleaner but shallower and has real coverage gaps."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 496.9,
+      "structure_problems": [],
+      "judgments": {
+        "identified_documents.md": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the expected structure and tie documents to earlier-stage decisions such as the 60% tenant threshold, 80% buffer, DGSI Q4 2026 checkpoint and the €4.32B FX exposure.\n\nCandidate A has 12 documents to create and 10 to find. Strengths: the Gate Fulfillment Sign-Off Report, an FX hedging plan and a dry-cooling/PUE validation plan are decision-useful. Weaknesses:\n- It overlaps with itself: the Fiber Resilience Matrix and the Fiber Latency Benchmarking Report are near-duplicates.\n- It omits documents the prompt requires, namely a tenant strategy, a permitting path, a heat-reuse financial model that is complete, and a stakeholder plan.\n- Its find list has no market/demand data, no permitting precedent timelines and no FX/market data, even though it creates an FX plan. It also has no regional water or climate data beyond ICPE/ARS regulations.\n- Some references are weak, for example SRCAE, which is outdated, and \"Freedom of Information requests\".\n\nCandidate B has 15 documents to create and 17 to find. It covers more of the prompt's required output: stakeholder map, tenant strategy, workforce, heat reuse, cooling, connectivity, security, risk register, land assembly, grid, change management and Phase 0 strategy. Its find list is much more complete and relevant to the feasibility questions:\n- RTE grid data\n- permitting precedent timelines\n- market demand\n- brownfield cost benchmarks\n- FX data\n- climate data\n- labour data\n\nIts descriptions are detailed, with concrete numbers and sources such as BaseSol, INPN and the RTE schéma décennal. Weaknesses:\n- Some steps are generic.\n- Some dates are aggressive, such as a cohort enrolling in Q2 2026.\n- It has a few odd details such as \"Ministry of Armament\".\n- It has no dedicated FX hedging or decision-gate/kill-criteria document to create.\n- It is long.\n\nOverall, B is more complete and more useful for downstream planning, and its find list better matches the skeptical feasibility questions."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is stronger. It has 15 documents to create and 17 to find. They cover most of the required analysis: grid and power, land assembly, security, tenants, workforce, heat reuse, fiber, cooling, risk, stakeholders, change management and Phase 0. The documents to find are concrete and name real sources, such as BRGM, INPN, BaseSol/ADEME, INSEE, ARCEP, TeleGeography, Météo-France, CRE, RTE's SDDR and DREAL. Each has a recency requirement, an access-difficulty rating and actionable steps. They map well to the prompt's open questions: permitting precedents, market demand, brownfield costs, FX exposure and the water and climate data behind the PUE target. A's weaknesses are minor. Some details are wrong or dated: \"DDETSPP\" for the territorial directorate, \"Pole Emploi\" instead of France Travail, and the hosting-consultation timing, which assumes a start date of May 2026. It also builds on figures from earlier stages, such as the 80% buffer, the 60% take-or-pay trigger and 15-year holding costs. These figures differ from the prompt's 30–50% tranche commitment, but they are consistent with the upstream strategic decisions.\n\nCandidate B is thinner, with 12 documents to create and 10 to find. It leaves out several needed documents: tenant strategy, permitting and EIA path, water and environment strategy, stakeholder and communication plan, security operations, and phase roadmap and gate criteria. Its content leans on pipeline-internal jargon (\"Expert Review Issue 2\", \"Team Omission 3\", \"Decision 4\"), which makes the documents less self-contained. It has near-duplicate fiber documents. Its find-list steps refer to invented roles such as \"EU Sovereign AI Policy Advisor\" and \"Regional Industrial Ecosystem Planner\". Some source references are off, such as SRCAE, which has been superseded, and \"RTE/Enedis frameworks\". Its 18-month holding cost for the buffer is thin next to the 15-year horizon. It does add a useful gate-fulfillment sign-off report and an FX hedging plan, but its overall coverage and specificity are weaker."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 1216.7,
+      "structure_problems": [],
+      "judgments": {
+        "identified_documents.md": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more complete and more useful downstream. It has 18 documents to create and 33 to find. The create list covers the core program artefacts: charter, stakeholder and communication plans, risk register, change control, M&E framework, budget allocation, OSDM framework, clearing design, liability backstop, accessibility, commercial terms, governance manual, enforcement plan, capacity-building plan, baseline assessment, technical feasibility study and clearing viability assessment. Each entry is tied to the plan's figures (€1.5B, €900M, €200M float, €300M reserve, 90-minute threshold, T+5, three strikes, month 6/18/30 milestones). The find list targets the data a planner needs: baseline through-ticketing share, modal split, claims data, operator IT costs, reduction-card schemes, and the existing legal texts. Its weaknesses are factual slips and some padding. It expands OSDM as \"Open Specification for Distributed Mobility\" and hedges that OSDM may not exist, but OSDM is an existing UIC standard. It treats Regulation 1371/2007 as current, although it was recast as 2021/782. It calls 2008/164/EC a \"Directive\". It lists some wrong or odd authorities and advocacy bodies (BEUC as a disability body, RATP, Trafikverket as the regulator, Agentschap Ondernemingen). A few find items are low-value (UI preferences, environmental framework).\n\nCandidate B is tighter and more consistent with the strategic-decision framing, for example the revised collective insurance pool and the PRD funding of €150M. However, it has only 6 documents to create beyond the charter, and it omits the risk register, M&E and baseline, change management, conformance testing plan, the broader stakeholder and communication plan, and a feasibility study. Its nine find items are thin and omit the baseline through-ticketing and volume statistics, the current passenger-rights regulation, and claims data. Its descriptions and steps are brief and sometimes vague, with \"implied\" approval authorities. It makes fewer factual errors but gives much less coverage for downstream stages.\n\nOverall A's breadth and specificity outweigh its errors."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates tie documents to the upstream decisions (OSDM timeline, Builder clearing mechanism with €200M float and €300M reserve, the 5% capped royalty, three-strikes enforcement, PRM data, the €900M capacity grants). Both also contain some factual slips.\n\nCandidate A is compact and sharp. It has 10 create documents, each tied to a specific decision, and 9 find documents. Its weakness is coverage. It has no risk register, no monitoring and evaluation framework, no change control, no current-state baseline, no feasibility study and no stress test of the clearing float. It also has no separate budget framework beyond grants and the public reference distributor (PRD). For a €1.5B, five-year program, these gaps matter downstream. The find list is short and omits key data. It has nothing on baseline through-ticket penetration, rail-versus-air modal share, or passenger claims data. It also omits the base regulations (1371/2007, 261/2004). Several role and approval entries are vague, for example \"Legal Counsel (implied)\". It also wrongly points to ERA and Shift2Rail as the source of OSDM, which is a UIC specification.\n\nCandidate B is much more comprehensive. Its create list includes charter, stakeholder and communication plans, risk register, change management, M&E with phased targets, a budget allocation framework and a baseline assessment. It also has an OSDM feasibility study, a clearing-mechanism viability and stress-test assessment, and detailed documents for each decision area (governance, enforcement, liability backstop, accessibility, commercial terms, capacity building). Its steps are concrete, with thresholds, disbursement tranches and escalation paths. Its find list covers the legal base (1371/2007, 261/2004, 2019/882), baseline and volume statistics, modal choice, claims data, IT cost data and operator and distributor data. These feed the later quantitative stages directly, and the finds are mostly well linked to the creates.\n\nB has real flaws. It mislabels 2008/164/EC as a directive. It names some questionable agencies and organizations (Handisocorro, RATP, \"Milieu Institute\", BEUC as a disability body, Trafikverket as the regulator). It treats OSDM as possibly non-existent. It has some padding, such as the environmental framework, the usability research and the \"easyJet Holidays research\". The recency note \"as of 2026 October\" is inconsistent with the stated May date. A has comparable inaccuracies.\n\nOverall, B is more complete and more useful for downstream planning despite the padding and errors. A's focus is a plus, but its coverage gaps are larger."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 609.8,
+      "structure_problems": [],
+      "judgments": {
+        "identified_documents.md": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Both candidates anchor on Leipzig and carry over the earlier strategic decisions: the 3-level alert, the €300k MCR, contracted installation, and the aggregate-data MOU. They differ mainly in coverage and in how decision-useful the documents are.\n\nCandidate A lists only 9 documents to create. It leaves out several of the prompt's required areas and deliverables: no cooling-center operating plan, no transport contract or SLA document, no public communications plan, no Heat Response Playbook, no risk register, no M&E or baseline report, and no budget or cost model. Several details are also wrong for Germany: it cites \"BAFU standards\" (a Swiss body), uses OSHA as the basis for German worker-safety guidance, and uses \"Statistisches Landesamt\" for a city-level request. Its template names are invented and vague, e.g. \"Leipzig City Public Health Initiative Framework\". Its 8 documents to find are reasonable but thin. They omit EMS/ED-specific data, a transport inventory, OHS regulations, accessibility codes, and reference heat plans from other cities.\n\nCandidate B lists 17 documents to create. They map to every scope area and every deliverable: governance and alert framework, outreach strategy, cooling-center operating framework, home-interventions procurement plan, health data loop, worker protection, communications plan, partnership MOU framework, baseline report, risk register, staffing model, M&E framework, budget and contingency, GDPR/DPIA framework, contingency plan, and the Playbook. Its steps are concrete: an onboarding timeline, FTE counts, retention dates, a 72-hour breach notification, and 10% budget-reallocation authority. Its 27 documents to find are specific and include source organizations, access difficulty, and processing times. They cover EMS, ED, mortality, housing, transport, fire code, DIN 18040, DWD data, WHO and other cities' plans, and GP/pharmacy capacity. This gives downstream stages much more to work with.\n\nB has some flaws. It names ICD I63-I64 (stroke) as a heat-mortality code, uses \"Standesamt\" for vital statistics, and misstates the gate as \"80% cooling center utilization\" rather than 80% of planned hours. It also has a few typos and a doubtful DGUV rule number. Some documents to find, such as the cost-sharing precedent, are low-value, and the output is verbose. Even so, its coverage, specificity, and fitness for the stage are clearly stronger than A's, and A's gaps are more serious than B's errors."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Both candidates are tied to Leipzig, which the upstream stages apparently chose. Candidate A is far more complete. It has 17 documents to create and 27 to find. Each entry has a detailed description, concrete steps, approval authorities, and access difficulty and recency notes. It covers every scope area in the prompt: cooling centers, outreach, GDPR and DPIA, home interventions, health data MOU, worker protection, communications, M&E and baselines, budget, risk register, contingency, staffing, and the playbook. It also lists the right data to find: EMS, ED and mortality data, housing, facility inventory, transport, DGUV rules, GDPR guidance, DWD data, and reference plans. Its weaknesses are some invented details, such as specific ICD codes and \"DGUV Regel 215-540\". It also has a few inconsistencies: 80% of planned hours is stated as \"utilization\", and the budget figures vary between documents. Some items are slightly redundant. Even so, it is highly useful downstream.\n\nCandidate B is thin. It has 9 documents to create and 8 to find, each with only 2-3 steps. It omits documents for cooling centers, transport, communications, the risk register, M&E, and the playbook. Its descriptions are terse, with references like \"TIE-RED strategy\" and \"BAFU standards\" (a Swiss body, wrong for Germany). It also has a \"Statistisches Landesamt\" mismatch and a vague \"OSHA\" reference. It does have some useful gate-specific items, such as the MCR governance document and the Month 4 evidence package. But its coverage of the prompt's required scope and deliverables is much worse.\n\nOverall A is clearly better."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

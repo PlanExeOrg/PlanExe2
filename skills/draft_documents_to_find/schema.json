@@ -1,0 +1,47 @@
+{
+  "properties": {
+    "essential_information": {
+      "description": "Bullet points describing the crucial information, key points, sections, data, or answers this document must provide.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Essential Information",
+      "type": "array"
+    },
+    "risks_of_poor_quality": {
+      "description": "Specific negative consequences or project impacts if the document is incomplete, inaccurate, outdated, unclear, or misleading.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Risks Of Poor Quality",
+      "type": "array"
+    },
+    "worst_case_scenario": {
+      "description": "The most severe potential consequence or project risk (e.g., compliance failure, financial loss, major delays, misinformation) if the document is deficient or incorrect.",
+      "title": "Worst Case Scenario",
+      "type": "string"
+    },
+    "best_case_scenario": {
+      "description": "The ideal outcome or positive impact if the document fully meets or exceeds expectations (e.g., accelerated decisions, reduced risk, competitive advantage).",
+      "title": "Best Case Scenario",
+      "type": "string"
+    },
+    "fallback_alternative_approaches": {
+      "description": "Alternative actions or pathways if the desired document/information cannot be found or created to meet the criteria.",
+      "items": {
+        "type": "string"
+      },
+      "title": "Fallback Alternative Approaches",
+      "type": "array"
+    }
+  },
+  "required": [
+    "essential_information",
+    "risks_of_poor_quality",
+    "worst_case_scenario",
+    "best_case_scenario",
+    "fallback_alternative_approaches"
+  ],
+  "title": "DocumentItem",
+  "type": "object"
+}

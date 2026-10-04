@@ -1,0 +1,114 @@
+{
+  "stage": "create_wbs_level3",
+  "evaluated_at": "2026-10-04T18:34:12",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 197.7,
+      "structure_problems": [],
+      "judgments": {
+        "wbs_level3.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates are truncated, and both decompose most leaf tasks into roughly 4–5 subtasks with ids and parent_ids. Both use the plan's facts: the 14 km corridor, 100 m depth, the Gibraltar currents, and the €40B budget with its reserves.\n\nCandidate A gives each subtask a concrete, actionable definition. Most descriptions have Objective, Scope, Steps and Deliverables. They carry specific parameters: 5 boreholes to 200 m, ±5% buoyancy tolerance, 2.5 m/s flow, 1:50 scale, a 50 m prototype, 10 atm, and named dates and tools. Resource lists are detailed. This is more useful for downstream stages such as scheduling, resource assignment and cost estimation.\n\nA has flaws:\n- Some dates contradict each other. The borehole task has \"complete by March 2027\" next to a February–September window. One validation gate has a hard-stop date of June 2027 even though sign-off is in September 2027.\n- The \"ECSС\" typo, a stray \"Item 1 dependency\" reference, and AIS buoys placed at \"1–2 m water depth\" are minor oddities.\n- Description depth and format vary across subtasks. Some of the later ones are noticeably terser.\n\nCandidate B's subtasks are shorter and more generic. Many read like restatements of the parent's risk-mitigation bullets (for example \"pre-qualify alternative suppliers\", \"3–6 month inventory\", \"blockchain tracking\", \"rapid-response team\") pasted into unrelated tasks. This makes some subtasks repetitive and not really decompositions. Some are too broad, such as \"Engage IMO…\", which folds in the environmental baseline studies, buoy deployment and the oversight board. Others are odd: \"MITRE Collision Risk Assessment Tool\", \"NOAA CESM\" and \"IEEE standards committee\" as resources, and a task list that includes \"Conduct 1:50 Scale Physical Model Testing\" more than once. B has no steps or deliverables in most entries, so it is less decision-useful. It does cover more leaves before truncation and keeps good consistency with the plan's roles and names.\n\nOverall, A is more specific and more useful as a WBS Level 3, despite its date inconsistencies."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both outputs are truncated, so I compared the visible portions. A: 4–6 subtasks per parent, concise and faithful to the plan's own details. Named-role resources are specific and useful downstream. Detail is thinner, and boilerplate repeats (inventory, blockchain, ICC, and the 1:50 test appears three times). B: more subtasks per parent, some exceeding the 3–5 limit. Many subtasks have objective, scope, steps and deliverables with quantified acceptance criteria and timelines, which is more decision-useful for scheduling and duration stages. B also adds inconsistent dates (borehole completion March 2027 vs. window through September 2027, analysis sign-off March 2028 vs. the June 2027 hard stop), a few odd details (AIS buoys in 1–2 m water, \"Iberian tunnel gauge\"), and some generic resource lists. Overall B is slightly more useful despite its inconsistencies, but it is close."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 125.9,
+      "structure_problems": [],
+      "judgments": {
+        "wbs_level3.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates decompose the same set of leaf tasks into 3–6 subtasks, with valid parent_ids and the required fields (id, name, description, resources_needed). The difference is depth.\n\nCandidate A is much more detailed. Its descriptions give an objective, scope, steps and deliverables, so downstream stages can use them as working tasks. It is specific to the plan:\n- It uses the 32.2 / 38.6 / 90.2 km² land split.\n- It names SAFER, DREAL, ICPE, DGSI/ANSSI and RTE.\n- It covers PUE validation protocols, with load-ramp steps and a 72-hour full-load data requirement.\n- It covers customs and FX, ring-fencing of holding costs, and Phase 2 FID gating.\n\nIts weaknesses are minor:\n- It sometimes frames external approvals as obtainable deliverables, for example \"SAFER approval letter\" and \"binding RTE allocation contract\". This brushes against the prompt's \"uncontrolled\" caution, though these are task outputs, not claims that the approvals exist.\n- A few odd details, such as \"DDETSPP, local prefectures\" as municipal authorities.\n- Some Phase 2 tasks sit under the heat-reuse and RTE leaves, which stretches them a little.\n\nCandidate B is terse. Most descriptions are a single sentence with no deliverables or steps. Its resources_needed lists often hold non-resources, such as \"Site Survey Data\", \"Risk Assessment Report\", \"Contingency CAPEX Fund\" and \"Executive Reporting Dashboard\". It has a date inconsistency: \"Target Q1 2026 commitment\", when the plan date is May 2026 and the start is ASAP. Some subtasks are vague or meta, such as \"Validate Legal Review Buffer Timeline\" and \"Finalize and validate operational PUE SLA\". Several are plausible and tied to upstream context, but they are less actionable.\n\nOverall A is more useful, more specific and more internally consistent. B is thinner and has a few errors."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates decompose the same 13 parent tasks into roughly 3–6 subtasks each. Both carry over the 60% commitment threshold and the 32.2 / 38.6 / 90.2 km² land split from earlier stages. Neither adds much red-team skepticism.\n\nCandidate A is concise but thin. Each subtask has a 1–2 sentence description and a short resource list. It has some timing and logic slips. One example is \"Target Q1 2026 commitment\" when the plan date is May 2026. Another is placing hardware purchase orders and long-lead cooling reservations inside Phase 0 tasks. Some of its subtasks are vague or mislabelled, such as \"Framework secure for cooling suppliers\". The security subtasks seek \"binding written confirmation\" from DGSI/ANSSI, which sits uneasily with the prompt's rule against assuming external commitments. A does stay close to the parent tasks and gives clear, usable steps. It also has some good touches: the 45-day burn-in, the 70% FX hedge, and tiered tenant pricing.\n\nCandidate B is much richer. Each subtask has an objective, scope, steps and deliverables, which fits downstream planning and scheduling. It adds plan-relevant details that A lacks:\n- SAFER and notaire involvement for agricultural land.\n- DREAL and ICPE for brownfield remediation.\n- A dedicated RTE liaison.\n- A security review cycle with response SLAs.\n- Heat-reuse gate logic.\n- A staged PUE validation with 48-hour and 72-hour test intervals.\n- A ring-fenced holding-cost budget.\n\nB also has flaws:\n- The Phase 2 FID is given as €5B–€10B, which contradicts the 3 GW expansion budget of €25B–€45B.\n- It mentions a 50–100 km heat-reuse radius, which is unrealistic.\n- Some wording is odd, such as the \"RTE Power Purchase & Transmission Agreement\".\n- It uses \"Pôle Emploi\" and \"DDETSPP\" loosely.\n- It is verbose, and a few subtasks, such as full brownfield remediation, are very large.\n\nOverall, B is more specific, more complete and more useful downstream. Its errors are comparable to A's, and A's output is shallower."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 96.4,
+      "structure_problems": [],
+      "judgments": {
+        "wbs_level3.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives each leaf task 4–6 subtasks with objective, scope, steps and deliverables, and with concrete role-based resources. The subtasks are plan-specific (four corridors, SNCF/DB/ÖBB, 5% royalty cap, €300M reserve, T+3, T+5, 40% target) and follow a logical sequence under each parent. Weaknesses are inconsistent description style, some verbose entries and a few invented specifics (Directive 2004/50/EC, a Phase 2 funded outside the €1.5B). Candidate B is thin: one- or two-sentence descriptions with no steps or deliverables. It has misplaced subtasks, such as legal-consultation and insurance-pool tasks under the float-simulation parent and strike-criteria finalization under the load-test parent. A subtask name and description also mismatch (inventory tests described as disruption tests). Its resource lists mix roles with artifacts (e.g. \"Draft Legal Analysis Report\"), and it has the typo \"OSNDM\". A is more useful for downstream planning."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates decompose the same 19 parent tasks and respect the 3–5 subtask range. A is concise and logically sequenced, and it ties into earlier decisions such as the €300M float reserve, T+5 latency and the 5% royalty cap. But its `resources_needed` lists often contain deliverables and artifacts rather than resources. It leaks internal labels such as \"Expert 8\" and \"Task 1\", has a typo (\"OSNDM\"), and its subtasks are thin and sometimes poorly assigned. B gives richer subtasks, most with an objective, scope, steps and deliverables. Its resources are real roles and parties, it covers each parent task's lifecycle more fully (training, escalation, national legal validation, competition and state-aid review), and it is consistent with the plan context. B's weaknesses are verbosity, inconsistent formatting, some invented specifics such as page counts, and a \"template template\" typo. Overall B is more useful for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 108.2,
+      "structure_problems": [],
+      "judgments": {
+        "wbs_level3.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is much more detailed and decision-useful. Most subtasks have Objective, Scope, Steps and Deliverables. They are tied to plan specifics: Leipzig, the €300k MCR, the 2026-08-03 gate date, the 10 Tier 1 sites, the 5,000 kits and the ≥60% contact-rate and 80% hours targets. Resources are concrete and the Month 4 gate logic is coherent. Weaknesses: the MCR protocol appears twice, there is some odd wording (\"multi-year MOUs\", notarization), and a few parents get 6 subtasks. Candidate B is thin, with one-to-two-sentence descriptions and no deliverables. Some tasks sit under mismatched parents (a staffing MOU under the facility assessment, data capture under registry design). It has odd tasks (simulating variance, latency) and placeholder-like artifacts in resources (\"(Missing)\"). It is less actionable for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates follow the schema (name, description, resources_needed, parent_id) and stay within 3–5 subtasks per parent. Both use the Leipzig setting, the M2 and M4 gates, and the MCR (the €300k contingency reserve).\n\nCandidate A:\n- Subtasks are shorter and thinner. Some read as tangential risk-mitigation add-ons rather than a decomposition of the parent: \"Define Real-time Feedback Protocol\", \"Political consensus prep\", and \"Establish bias mitigation for alert triggers\".\n- Several resource lists include odd placeholders such as \"GDPR Compliance Officer (Missing)\" and \"Social Services Operations Manager (Missing)\". Others invoke vague items like \"City Security Personnel (for escort/support)\".\n- Some parents are only partially decomposed. The 4c50ba93 task gets redlines, a pre-scheduled session and a feedback protocol, but no final sign-off or distribution step.\n- The scenario-audit task adds \"Legal sign-off on script reliability... clinical decision support\", which is questionable.\n\nCandidate B:\n- Subtasks follow a logical sequence from draft to review to sign-off to distribution, and nearly all carry objective, scope, steps and deliverables. That gives downstream stages much more concrete, executable content: numbers of partners, team counts, document lengths, 5% sample inspections, and specific dates such as 2026-08-03 and 2026-05-31.\n- It covers the full lifecycle of each parent more completely, for example the Tier 1 contracting chain, the 5,000-kit receipt inspection, the Month 4 review, and the MCR release.\n- Weaknesses: some verbosity and over-engineering, such as professional actors for recorded scenarios, notary services, and an incentive program for housing managers. It also uses a \"70%+\" contact target in places versus the plan's ≥60%. Descriptions are inconsistent in format, with some detailed and some short. A few resource lists are generic.\n\nOverall, B is more specific, more complete and more usable for downstream planning, despite its verbosity."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

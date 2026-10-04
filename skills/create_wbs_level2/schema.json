@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "MajorPhaseDetails": {
+      "description": "A major phase in the project decomposed into smaller tasks.",
+      "properties": {
+        "major_phase_wbs_number": {
+          "description": "The unique identifier assigned to each major phase. Example: ['1.', '2.', '3.', 'Phase 1:', 'Phase 2:', 'P1.', 'P2.'].",
+          "title": "Major Phase Wbs Number",
+          "type": "string"
+        },
+        "major_phase_title": {
+          "description": "Action-oriented title of this primary phase of the project. Example: ['Project Initiation', 'Procurement', 'Construction', 'Operation and Maintenance'].",
+          "title": "Major Phase Title",
+          "type": "string"
+        },
+        "subtasks": {
+          "description": "List of the subtasks or activities.",
+          "items": {
+            "$ref": "#/$defs/SubtaskDetails"
+          },
+          "title": "Subtasks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "major_phase_wbs_number",
+        "major_phase_title",
+        "subtasks"
+      ],
+      "title": "MajorPhaseDetails",
+      "type": "object"
+    },
+    "SubtaskDetails": {
+      "properties": {
+        "subtask_wbs_number": {
+          "description": "The unique identifier assigned to each subtask. Example: ['1.', '2.', '3.', '6.2.2', '6.2.3', '6.2.4', 'Subtask 5:', 'Subtask 6:', 'S3.', 'S4.'].",
+          "title": "Subtask Wbs Number",
+          "type": "string"
+        },
+        "subtask_title": {
+          "description": "Start with a verb to clearly indicate the action required. Example: ['Secure funding', 'Obtain construction permits', 'Electrical installation', 'Commissioning and handover'].",
+          "title": "Subtask Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subtask_wbs_number",
+        "subtask_title"
+      ],
+      "title": "SubtaskDetails",
+      "type": "object"
+    }
+  },
+  "description": "The Work Breakdown Structure (WBS) is a hierarchical decomposition of the total scope of work to accomplish project objectives.\nIt organizes the project into smaller, more manageable components.",
+  "properties": {
+    "major_phase_details": {
+      "description": "List with each major phase broken down into subtasks or activities.",
+      "items": {
+        "$ref": "#/$defs/MajorPhaseDetails"
+      },
+      "title": "Major Phase Details",
+      "type": "array"
+    }
+  },
+  "required": [
+    "major_phase_details"
+  ],
+  "title": "WorkBreakdownStructure",
+  "type": "object"
+}

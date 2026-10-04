@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "TaskTimeEstimateDetail": {
+      "description": "Details about a task duration, lower/upper bounds. Potential risks impacting the duration. ",
+      "properties": {
+        "task_id": {
+          "description": "UUID that uniquely identifies the task.",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "delay_risks": {
+          "description": "Possible issues that may delay the task. Example: ['Weather-related disruptions', 'Third-party vendors might fail to deliver on time', 'Key team members might be unavailable']. **This field MUST be filled with a meaningful description. Do not leave it empty.**",
+          "title": "Delay Risks",
+          "type": "string"
+        },
+        "mitigation_strategy": {
+          "description": "Actions or strategies to minimize the risk of delays. Example: ['Engage backup vendors', 'Schedule regular progress reviews', 'Establish clear communication channels']. **This field MUST be filled with a meaningful and specific strategy. Do not leave it empty.**",
+          "title": "Mitigation Strategy",
+          "type": "string"
+        },
+        "days_min": {
+          "description": "Number of days, the best case scenario. If not applicable use minus 1.",
+          "title": "Days Min",
+          "type": "integer"
+        },
+        "days_max": {
+          "description": "Number of days, the worst case scenario. If not applicable use minus 1.",
+          "title": "Days Max",
+          "type": "integer"
+        },
+        "days_realistic": {
+          "description": "Number of days, in the realistic scenario. If not applicable use minus 1.",
+          "title": "Days Realistic",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "task_id",
+        "delay_risks",
+        "mitigation_strategy",
+        "days_min",
+        "days_max",
+        "days_realistic"
+      ],
+      "title": "TaskTimeEstimateDetail",
+      "type": "object"
+    }
+  },
+  "description": "Estimating realistic durations for each task and appropriately assigning resources \nensures that the project stays on schedule and within budget.",
+  "properties": {
+    "task_details": {
+      "description": "List with tasks with time estimates.",
+      "items": {
+        "$ref": "#/$defs/TaskTimeEstimateDetail"
+      },
+      "title": "Task Details",
+      "type": "array"
+    }
+  },
+  "required": [
+    "task_details"
+  ],
+  "title": "TimeEstimates",
+  "type": "object"
+}

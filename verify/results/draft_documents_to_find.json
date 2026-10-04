@@ -1,0 +1,114 @@
+{
+  "stage": "draft_documents_to_find",
+  "evaluated_at": "2026-10-04T18:15:19",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 149.9,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_find.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is better. Its document specs are detailed and tied to the plan: the 14 km corridor, 100 m depth, the Azores-Gibraltar fault, and the 70% MAD hedging target. Each entry has 8–11 essential-information items. Risks carry quantified cost and schedule impacts. Fallback approaches are concrete and name specific agencies, firms and budgets. Its weaknesses are verbosity and a few odd or invented fallbacks. Examples are Chatham House as an FX consultancy and 500+ MW diesel generators for a 50–100 MW need. Some worst-case numbers are also loosely consistent. These flaws do not undermine its usefulness.\n\nCandidate B is generic and thinner, with 5–8 essential items and short risks that often have no numbers. It also has a serious defect in the \"Strait of Gibraltar Oceanographic and Current Data\" entry. That entry's essential_information, risks, worst case, best case and fallbacks describe strategic-decision levers, lever IDs and the \"Builder's Foundation\" path. None of it concerns oceanographic data. This looks like a context leak or hallucination. It would mislead downstream stages and is a correctness failure in the stage's core output. B also has some items that are not really document-content specs, such as \"Produce a comprehensive regulatory compliance matrix\". Its fallbacks for several documents are weaker, for example asking ITLOS for a legal opinion."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is concise and mostly sound, but its \"Strait of Gibraltar Oceanographic and Current Data\" entry has essential_information, risks, scenarios and fallbacks copied from strategic_decisions.md (strategic levers, lever IDs, \"Builder's Foundation\" and \"Pioneer's Gambit\"). That is unusable for finding oceanographic data and is a serious correctness failure. Its other entries are fine but fairly generic, and the seismic fallbacks partly repeat steps_to_find. Candidate B keeps every entry on topic, including the oceanographic one. Its essential information is detailed (PSHA parameters, three rail-gauge strategies, hedging at multiple coverage levels, EIA timeline), its risks are quantified, and its fallbacks are concrete. It has minor flaws: the Endangered Species Act mention, odd FX consultants such as Chatham House and Citadel, an implausible 500 MW diesel backup, a stray HTML escape, and verbosity. These are small compared with A's mismatched entry."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 92.8,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_find.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Both candidates keep the same document list, descriptions and steps_to_find. They differ in the content specs the stage is meant to produce.\n\nCandidate A is much richer. Each document gets 6–9 essential_information items that are concrete and decision-useful. Examples: collateral by tranche, the legal gap between a non-binding hosting response and a binding allocation, cost-allocation percentages, and a precedent search. Its risks are quantified (€ ranges and delay months) and tied to the plan's decisions and gates. Its worst and best cases are detailed. Its fallbacks are actionable and include costs and timelines. It also asks the skeptical questions the plan prompt demands, such as \"is the ceiling realistically 3–5 GW?\", whether the 80% buffer can be made permanent, and whether pre-certification consultation is available in Phase 0.\n\nA has weaknesses:\n- Some invented specifics: named consulting and law firms, \"Confidentiel Défense/Protégé\" levels, and \"Decision 10 Choice 2 50 km²\".\n- Some mislabelled budget baselines, such as calling €250M–€750M the Phase 1 remediation baseline when it is the Phase 0 budget.\n- Some dates that are already unrealistic given today's date of May 2026, such as \"Phase 0 sign-off by Q2 2026\".\n- Some verbosity.\n\nCandidate B is thin and generic. It has 4–5 essential items per document, 3–4 risks that are mostly unquantified, and short scenarios. It has its own errors:\n- An invented French term, \"Affirmation de Prêt\".\n- A past deadline (\"by Q4 2025\").\n- A confused fallback (\"accepting the PUE degradation to 1.20\" when the target is 1.15–1.25).\n- A questionable \"senior lobbyist\" suggestion.\n- Wrong item types, such as \"Secret Défense\".\n\nIts items are less actionable for a researcher and give downstream stages less to work with.\n\nOverall, A is clearly more useful and insightful despite some hallucinated details. B is too shallow."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same eight documents with identical metadata and follow the schema. The difference is in the generated content.\n\nCandidate A is compact and plan-linked. It references Risk 3, Decision 4, the 60% threshold and the 32.2 km² buildable zone. But the essential-information items are thin, and some are vague or poorly framed. One example is \"Quantify the maximum documented lead time\". It also has some questionable content:\n- It cites a Q4 2025 deadline, which is already in the past given the 2026-05-16 start.\n- It suggests hiring a lobbyist for \"pre-release planning drafts\".\n- It suggests getting \"confidential internal RTE scheduling forecasts\" through the DGSI channel. This is inappropriate and conflicts with the prompt's caution about not assuming commitments from authorities.\n- Its dry-cooling fallback is muddled: it \"accepts PUE degradation to 1.20\" when 1.20 is the target.\n- It has few fallbacks, and the risk and scenario quantification is sparse.\n\nCandidate B is much more detailed and decision-useful.\n- Its essential-information lists are specific. They distinguish a non-binding hosting consultation from binding allocation, ask whether RTE can defer the 3 GW and 6 GW tranches, and cover cost-allocation mechanisms, personnel clearance and mixing rules for sovereign zones.\n- Its risks carry quantified impacts, and its scenarios are concrete.\n- It offers many actionable fallbacks, including Phase 0 pilots, fixed-price remediation contracts, insurance, contingency funds, phased security certification and a Strategic Grid Sensitivity Analysis.\n- It is more skeptical, in line with the red-team framing. Examples are asking whether the realistic ceiling is 3–5 GW and treating 'hosting capacity' letters as non-binding.\n- Its weaknesses are verbosity and invented specifics. It names law firms and vendors, and it cites \"TURPE 7\". Some figures are inconsistent, for example it treats €250M–€750M as a Phase 1 remediation baseline when that is the Phase 0 budget. It suggests alternative regions (Provence, Brittany) despite the Hauts-de-France-only constraint. It has stray quote characters in two scenario strings. Some of its cost multipliers are speculative.\n\nOverall B is richer and more useful for downstream stages, and its flaws are less damaging than A's thinness and its inappropriate suggestions."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 86.5,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_find.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same 8 documents and keep the same metadata fields. They differ in depth. A is much richer. It has 7–10 essential-information items per document, many specific risks, quantified worst-case and best-case scenarios, and several concrete fallbacks. The fallbacks include costs, timelines and named alternatives, such as an ECB study, a legal gap analysis, pilot latency measurement, and an interim discount voucher. A ties its content to the plan's decisions and assumptions (the T+5 latency target, the 18/30-month deadlines, the €200M float and the 5% royalty cap). That makes it directly useful for the later stages that search for the documents and assess risks.\n\nA has flaws. Some figures are invented, for example \"€15-50M fines\" and \"3-7% of €1.5B\". It says \"five primary decisions\" and then lists six. A few details are speculative, such as the Vorteilscard and the airline clearing-house comparison. It is also verbose. Even so, its content is generally plausible and consistent with the plan.\n\nB is thin: 3–4 essential-information items and only 3–4 risks per document. Its scenarios are generic one-sentence statements with little quantification, and it gives only three fallbacks per document. It also contains a questionable item. It asks for the \"final, ratified text\" of a regulation that the prompt says is only proposed. Its fallbacks are reasonable and cite upstream details such as the 35 FTE team and the €300M reserve. Overall it gives less decision-useful detail.\n\nA better fulfils the stage's purpose of drafting content specs with essential information, risks and scenarios."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same ten documents and tie their content to upstream decisions and assumptions. Candidate A is concise but shallow: its essential-information items are often generic \"list the exact value\" asks, and it wrongly asks for the \"final, ratified\" text of a proposed regulation. Its worst cases are generic and some fallbacks are weak, such as a telecom API fee benchmark or a 72-hour default. Candidate B is much richer and more decision-useful. It poses concrete questions, such as whether the regulation allows phased PRM harmonization or fee-based float capitalization, and asks for latency percentiles by operator. It also draws on multi-party clearing comparators (IATA, N-carrier settlement) and gives costed, time-bound fallbacks with several alternatives. Its risks are explained causally and tied to the budget lines. Its weaknesses are some speculative invented figures, a \"five decisions\" miscount (six listed), a vague \"two secondary corridors\" and verbosity. Those are minor against the added specificity and downstream value."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 82.0,
+      "structure_problems": [],
+      "judgments": {
+        "draft_documents_to_find.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same six Leipzig documents with identical metadata. A gives much more specific and decision-useful essential information (kVA headroom, GDPR Article references, a Pearson r with a confidence interval, false-positive and false-negative rates). It ties risks to the Month 2 and Month 4 gates with correct arithmetic (the 43% cut). It offers many costed, actionable fallbacks and quantified scenarios. Its flaws are verbosity, some invented figures, and a few timing slips (March surveys in a May start). B is thin, with 3–5 essential items per document, generic scenarios, and some confusing or incorrect content (HIPAA cited in Germany, essential items that aren't findable documents, a muddled \"1.5M contingency\" fallback). A is more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same six documents with identical ids, names, descriptions, steps and access difficulty. They differ only in the generated fields: essential_information, risks, scenarios and fallbacks.\n\nCandidate A is concise but thin. Each document has 3-5 essential items, and several are not information to find. One asks for the \"finalized, validated textual content of the proposed escalation script\" and its inter-rater results, which is a project deliverable rather than an existing document. The fallbacks contain errors and odd logic. They cite \"HIPAA/GDPR-compatible\" reporting, but HIPAA is a US law and irrelevant in Saxony. They propose using the €1.5M \"contingency\" to license weather statistics, even though that tranche is gated. They also suggest an \"emergency structural engineering assessment\" where an electrical or HVAC audit is what is needed. The scenarios are generic and reuse the plan's decision labels with little concrete detail.\n\nCandidate B is much more thorough and decision-useful:\n- It asks for concrete items such as kVA headroom, water pressure, facility contacts and scheduling conflicts.\n- For GDPR it asks for the Article 6/9 basis, the definition of \"aggregated\" data, whether a DPIA is mandatory, and worked examples.\n- For the DWD data it asks for false-positive and false-negative rates and the frequency distribution of alert days.\n- For the housing registry it asks for accessibility, retrofit history and landlord contacts.\n- The risks and worst/best cases are quantified and tied to the Month 2 and Month 4 gates and the €1.5M tranche.\n- The fallbacks are varied and actionable, with rough costs, timelines, and the Leipzig-specific option of university partnerships.\n\nB also has flaws:\n- Some invented specifics: \"VEB\" as a housing operator, \"Datenportabilität\" as a legal database, and illustrative correlation values and percentages.\n- Minor timeline slips: it refers to a \"March window\" even though the project starts in May.\n- Some very long entries, and a few questionable claims, such as the best case \"eliminating need for formal DPIA\".\n- Both candidates share the \"BAFU\" mislabel, which comes from the shared description.\n\nOverall, B's specificity, coverage of risks and usefulness for downstream stages outweigh its verbosity and minor hallucinations. A's brevity comes with the HIPAA error and less actionable content."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

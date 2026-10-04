@@ -1,0 +1,50 @@
+{
+  "$defs": {
+    "WBSSubtask": {
+      "description": "A subtask.",
+      "properties": {
+        "name": {
+          "description": "Short name of the subtask, such as: Prepare necessary documentation for permits, Conduct interviews with potential contractors, Secure final approval of funds.",
+          "title": "Name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Longer text that describes the subtask in more detail, such as: Objective, Scope, Steps, Deliverables.",
+          "title": "Description",
+          "type": "string"
+        },
+        "resources_needed": {
+          "description": "List of resources needed to complete the subtask. Example: ['Project manager', 'Architect', 'Engineer', 'Construction crew'].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Resources Needed",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "description",
+        "resources_needed"
+      ],
+      "title": "WBSSubtask",
+      "type": "object"
+    }
+  },
+  "description": "A big task in the project decomposed into a few smaller tasks.",
+  "properties": {
+    "subtasks": {
+      "description": "List of subtasks.",
+      "items": {
+        "$ref": "#/$defs/WBSSubtask"
+      },
+      "title": "Subtasks",
+      "type": "array"
+    }
+  },
+  "required": [
+    "subtasks"
+  ],
+  "title": "WBSTaskDetails",
+  "type": "object"
+}

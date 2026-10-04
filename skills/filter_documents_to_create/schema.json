@@ -1,0 +1,58 @@
+{
+  "$defs": {
+    "DocumentItem": {
+      "properties": {
+        "id": {
+          "description": "The ID of the document being evaluated.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "rationale": {
+          "description": "The reason justifying the assigned impact rating, linked to the project plan's critical goals, risks, or initial tasks.",
+          "title": "Rationale",
+          "type": "string"
+        },
+        "impact_rating": {
+          "description": "The assessed impact level of the document for the initial project phase, based on the 80/20 principle.",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "title": "Impact Rating",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "rationale",
+        "impact_rating"
+      ],
+      "title": "DocumentItem",
+      "type": "object"
+    }
+  },
+  "description": "The result of assessing the impact of a list of documents.",
+  "properties": {
+    "document_list": {
+      "description": "List of documents with their assessed impact rating for the initial phase.",
+      "items": {
+        "$ref": "#/$defs/DocumentItem"
+      },
+      "title": "Document List",
+      "type": "array"
+    },
+    "summary": {
+      "description": "A summary highlighting the critical and high impact documents identified as most vital for the project start (80/20).",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "document_list",
+    "summary"
+  ],
+  "title": "DocumentImpactAssessmentResult",
+  "type": "object"
+}

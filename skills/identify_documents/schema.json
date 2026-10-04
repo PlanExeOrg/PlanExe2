@@ -1,0 +1,175 @@
+{
+  "$defs": {
+    "CreateDocumentItem": {
+      "properties": {
+        "document_name": {
+          "description": "The specific name of the document to be created (e.g., 'Project Charter', 'Detailed Financial Model', 'Stakeholder Communication Plan').",
+          "title": "Document Name",
+          "type": "string"
+        },
+        "description": {
+          "description": "A concise yet comprehensive description of the document, including its purpose, document type (e.g., 'Policy Framework', 'International Agreement', 'Project Charter'), the intended primary audience(s), and any special notes such as specific context, constraints, or approvals needed.",
+          "title": "Description",
+          "type": "string"
+        },
+        "responsible_role_type": {
+          "description": "The specific functional role or primary skill type responsible for creating or obtaining this document (e.g., 'Project Manager', 'Financial Analyst', 'Legal Counsel', 'Communication Specialist'). This field is mandatory.",
+          "title": "Responsible Role Type",
+          "type": "string"
+        },
+        "document_template_primary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A suggested source or standard name for a primary template, if widely applicable (e.g., 'PMI Project Charter Template', 'World Bank Logical Framework'). Note that local/industry-specific templates might be required.",
+          "title": "Document Template Primary"
+        },
+        "document_template_secondary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "A suggested source or standard name for a secondary template, if applicable. Note that local/industry-specific templates might be required.",
+          "title": "Document Template Secondary"
+        },
+        "steps_to_create": {
+          "description": "High-level steps required to create this document, based on its purpose and the project context. Mention if key stakeholder input or signatures are typically needed.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Steps To Create",
+          "type": "array"
+        },
+        "approval_authorities": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Specify roles or entities required to formally approve or sign off on this document (e.g., 'Legal Counsel', 'Heads of State', 'Ministry of Finance').",
+          "title": "Approval Authorities"
+        }
+      },
+      "required": [
+        "document_name",
+        "description",
+        "responsible_role_type",
+        "steps_to_create"
+      ],
+      "title": "CreateDocumentItem",
+      "type": "object"
+    },
+    "FindDocumentItem": {
+      "description": "A document that is to be found online or in a physical location, such as existing data, reports, contracts, permits, etc.",
+      "properties": {
+        "document_name": {
+          "description": "The specific name or type of document/data to be found (e.g., 'Participating Nations GDP Data', 'Existing Childcare Support Program Reports', 'Local Zoning Regulations', 'Grid Connection Capacity Study').",
+          "title": "Document Name",
+          "type": "string"
+        },
+        "description": {
+          "description": "A clear description of the existing document or data, including its type or nature (e.g., 'National GDP statistics', 'Mental Health Policy reports'), its purpose within the project context, intended audience, and any relevant constraints such as recency or regulatory considerations.",
+          "title": "Description",
+          "type": "string"
+        },
+        "recency_requirement": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Guidance on how recent the document or data should ideally be, based on its type and purpose (e.g., 'Most recent available year', 'Published within last 2 years', 'Historical data acceptable', 'Current regulations essential').",
+          "title": "Recency Requirement"
+        },
+        "responsible_role_type": {
+          "description": "The specific functional role or primary skill type responsible for creating or obtaining this document (e.g., 'Project Manager', 'Financial Analyst', 'Legal Counsel', 'Communication Specialist'). This field is mandatory.",
+          "title": "Responsible Role Type",
+          "type": "string"
+        },
+        "steps_to_find": {
+          "description": "Likely steps to find the document/data (e.g., 'Contact national statistical offices', 'Search World Bank Open Data', 'Check local municipality website', 'Submit formal request to agency').",
+          "items": {
+            "type": "string"
+          },
+          "title": "Steps To Find",
+          "type": "array"
+        },
+        "access_difficulty": {
+          "description": "Assessment of access difficulty: 'Easy' (e.g., public websites, open data portals), 'Medium' (e.g., requires registration, specific agency contact, freedom of information request), 'Hard' (e.g., requires authentication, negotiation, potential fees, classified). Provide a brief justification.",
+          "title": "Access Difficulty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "document_name",
+        "description",
+        "responsible_role_type",
+        "steps_to_find",
+        "access_difficulty"
+      ],
+      "title": "FindDocumentItem",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "documents_to_create": {
+      "description": "Documents essential for project planning and execution that need to be created. Includes both subject-matter reports and standard project management artifacts.",
+      "items": {
+        "$ref": "#/$defs/CreateDocumentItem"
+      },
+      "title": "Documents To Create",
+      "type": "array"
+    },
+    "documents_to_find": {
+      "description": "Existing documents or datasets that must be obtained to inform the planning process.",
+      "items": {
+        "$ref": "#/$defs/FindDocumentItem"
+      },
+      "title": "Documents To Find",
+      "type": "array"
+    },
+    "documents_to_create_part2": {
+      "description": "Documents that are to be created, that for some reason were not identified in the first pass. Do not repeat documents already identified in the first pass.",
+      "items": {
+        "$ref": "#/$defs/CreateDocumentItem"
+      },
+      "title": "Documents To Create Part2",
+      "type": "array"
+    },
+    "documents_to_find_part2": {
+      "description": "Documents that are to be found online or in a physical location, that for some reason were not identified in the first pass. Do not repeat documents already identified in the first pass.",
+      "items": {
+        "$ref": "#/$defs/FindDocumentItem"
+      },
+      "title": "Documents To Find Part2",
+      "type": "array"
+    }
+  },
+  "required": [
+    "documents_to_create",
+    "documents_to_find",
+    "documents_to_create_part2",
+    "documents_to_find_part2"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}
