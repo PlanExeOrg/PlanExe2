@@ -3,7 +3,7 @@ name: project_plan
 description: Generate the project plan with goals, milestones, deliverables, and success criteria.
 inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json]
 outputs: [project_plan_raw.json, project_plan.md]
-tier: high
+tier: low
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (GoalDefinition:

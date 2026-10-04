@@ -13,8 +13,11 @@ import time
 
 from planexe_skill.llm.base import Backend, LLMError, LLMResult
 
-DEFAULT_MODELS = {"high": "claude-sonnet-5-5", "low": "claude-haiku-4-5-20251001"}
-DEFAULT_EFFORTS = {"high": "high", "low": "low"}
+# Tiers: "high" = reasoning (the early, foundational stages); "mid" = strong model, no thinking
+# (later stages where Haiku isn't good enough); "low" = fast model, no thinking.
+DEFAULT_MODELS = {"high": "claude-sonnet-5-5", "mid": "claude-sonnet-5-5", "low": "claude-haiku-4-5-20251001"}
+DEFAULT_EFFORTS = {"high": "high", "mid": None, "low": None}
+_NO_THINKING_SETTINGS = json.dumps({"alwaysThinkingEnabled": False})
 
 # Messages that are worth retrying after a pause.
 _TRANSIENT = ("overloaded", "rate limit", "rate_limit", "529", "503", "502", "timeout", "timed out",
@@ -72,6 +75,9 @@ class ClaudeCLIBackend(Backend):
         effort = self.efforts.get(tier)
         if effort:
             cmd += ["--effort", effort]
+        else:
+            # No reasoning: switch extended thinking off (halves latency; see report.md).
+            cmd += ["--settings", _NO_THINKING_SETTINGS]
         if schema is not None:
             cmd += ["--json-schema", json.dumps(schema)]
         return cmd
@@ -87,12 +93,15 @@ class ClaudeCLIBackend(Backend):
         return " ".join(out)
 
     def _run_once(self, cmd: list[str], user: str) -> dict:
+        env = child_env()
+        if "--effort" not in cmd:
+            env["MAX_THINKING_TOKENS"] = "0"
         if shutil.which(self.executable) is None:
             raise LLMError(f"'{self.executable}' was not found on PATH. Install Claude Code "
                            f"(https://docs.claude.com/claude-code) and run 'claude auth login'.")
         try:
             proc = subprocess.run(cmd, input=user, capture_output=True, text=True,
-                                  timeout=self.timeout, env=child_env(), cwd=_neutral_cwd())
+                                  timeout=self.timeout, env=env, cwd=_neutral_cwd())
         except subprocess.TimeoutExpired:
             raise LLMError(f"claude CLI timed out after {self.timeout:.0f}s") from None
         envelope = None

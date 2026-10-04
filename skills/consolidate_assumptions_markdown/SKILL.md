@@ -3,7 +3,7 @@ name: consolidate_assumptions_markdown
 description: Merge locations, currency, risks, and assumption stages into one reference document.
 inputs: [identify_purpose.md, classify_domain.md, plan_type.md, physical_locations.md, currency_strategy.md, identify_risks.md, make_assumptions.md, distill_assumptions.md, review_assumptions.md]
 outputs: [consolidate_assumptions_full.md, consolidate_assumptions_short.md]
-tier: high
+tier: low
 est_llm_calls: 9
 parallel_llm: 9
 ---

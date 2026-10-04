@@ -3,7 +3,7 @@ name: filter_documents_to_create
 description: Narrow the documents-to-create list to the most relevant ones for the current plan.
 inputs: [identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, identified_documents_to_create.json]
 outputs: [filter_documents_to_create_raw.json, filter_documents_to_create_clean.json]
-tier: high
+tier: mid
 est_llm_calls: 1
 uses: [planexe_skill/shared/documents.py]
 judge: [filter_documents_to_create_raw.json]

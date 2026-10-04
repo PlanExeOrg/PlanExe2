@@ -15,7 +15,7 @@ from pathlib import Path
 
 from planexe_skill.dag import Dag
 
-DEFAULT_SECS_PER_CALL = {"high": 45.0, "low": 20.0}
+DEFAULT_SECS_PER_CALL = {"high": 45.0, "mid": 30.0, "low": 20.0}
 
 
 def history_path() -> Path:
@@ -65,7 +65,7 @@ class Progress:
         self.started: dict[str, float] = {}
         self.finished: dict[str, float] = {}
         self.calls: dict[str, int] = {s: 0 for s in planned}
-        self.call_secs: dict[str, list[float]] = {"high": [], "low": []}
+        self.call_secs: dict[str, list[float]] = {"high": [], "mid": [], "low": []}
         self.t0 = time.time()
         self._lock = threading.RLock()
         self._last_print = 0.0

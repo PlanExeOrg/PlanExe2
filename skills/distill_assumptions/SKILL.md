@@ -3,7 +3,7 @@ name: distill_assumptions
 description: Condense verbose assumptions into concise, strategically important ones.
 inputs: [plan.txt, identify_purpose.md, strategic_decisions.md, scenarios.md, make_assumptions.json]
 outputs: [distill_assumptions_raw.json, distill_assumptions.md]
-tier: high
+tier: low
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (assumption_list: [str]).

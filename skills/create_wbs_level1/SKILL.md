@@ -3,7 +3,7 @@ name: create_wbs_level1
 description: Extract the project title and final deliverable (WBS Level 1) from the project plan.
 inputs: [project_plan_raw.json]
 outputs: [wbs_level1_raw.json, wbs_level1.json, wbs_level1_project_title.json]
-tier: high
+tier: low
 est_llm_calls: 1
 judge: [wbs_level1.json]
 ---

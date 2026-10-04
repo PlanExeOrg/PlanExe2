@@ -3,7 +3,7 @@ name: pre_project_assessment
 description: Evaluate project viability and readiness before detailed planning.
 inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md]
 outputs: [pre_project_assessment_raw.json, pre_project_assessment.json]
-tier: high
+tier: low
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md` (CURRENT_YEAR_PLACEHOLDER -> current year),

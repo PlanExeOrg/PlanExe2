@@ -44,6 +44,28 @@ rationales are recorded below where they influenced a decision.
 - Smoke run of the first 8 stages through the real runner: 14 LLM calls, 74 s wall clock with
   4 workers; the critical-path ETA started at 1m29s.
 
+- **Child CLI isolation (important).** A plain `claude -p` inherits the user's Claude Code
+  configuration: `effortLevel` from `~/.claude/settings.json` (here "high", so Haiku calls ran with
+  extended thinking and produced 20k-60k output tokens / up to 30 min per call), enabled plugins,
+  SessionStart hooks that inject text into the context (~7k extra input tokens per call), MCP
+  servers and skills. The backend now runs every call with `--setting-sources project` in an empty
+  working directory, `--strict-mcp-config`, `--disable-slash-commands`, `--tools ""` and an
+  explicit `--effort` per tier (high: `high`, low: `low`). Measured on a small call: input tokens
+  7,963 -> 912. System prompts are passed with `--system-prompt-file` (review_plan's system prompt
+  is ~440 KB, close to the OS argument-size limit).
+- **Thinking off outside the reasoning block.** Even with `--effort low`, Haiku spent 2-3x the
+  visible output on hidden thinking (find_team_members: 16k output tokens for ~4k visible). Tiers
+  are now: `high` = Sonnet 5.5 + `--effort high` for the first 19 LLM stages (screening through
+  `selected_scenario_constraint`); `low` = Haiku 4.5 with thinking disabled
+  (`--settings {"alwaysThinkingEnabled": false}` + `MAX_THINKING_TOKENS=0`) for everything after;
+  `mid` = Sonnet without thinking, used only where an eval showed Haiku is not good enough
+  (filter_documents_to_create). On a test call this halved latency (15.9 s -> 7.8 s).
+- **Transient CLI errors.** `structured_output_retry_exhausted` (seen with Haiku on 20k+ token
+  structured outputs) and mid-response server errors are retried with backoff by the backend.
+- **Note on earlier per-stage evals.** Stages evaluated before the isolation fix ran with the
+  user's settings leaking into the child (high effort for Haiku, hook text in context). Their
+  verdicts stand as recorded; the end-to-end runs below use the isolated backend.
+
 ## Stage log
 
 ### Group (a): stages 0-9 — prompt screening and classification (tier high, Sonnet 5.5 + high effort)
@@ -69,6 +91,123 @@ exactly 'The prompt is safe' when verdict=ALLOW", while its system prompt asks f
 sentence explaining your decision". Gemini followed the system prompt; Claude followed the schema
 literally, producing an uninformative rationale. Nothing downstream parses that string, so the
 schema description was aligned with the system prompt. Re-run: 4/4 wins.
+
+
+### Group (b): levers and scenarios (tier high)
+
+All prompts and schemas verbatim. The six `*_constraint` stages share
+`planexe_skill/shared/constraint_checker.py` (PlanExe's ConstraintChecker).
+
+| stage | notes |
+|---|---|
+| potential_levers | Verbatim adaptive loop (up to 5 calls until >= 15 levers, "Generate 5 to 7 MORE levers" follow-ups), pydantic validators re-implemented, per-lever constraint checks with violation history fed back. Tweak: the per-lever checks of one call run concurrently. 4/0/0 |
+| potential_levers_constraint | shared checker. 4/0/0 |
+| triage_levers | verbatim; failed call keeps all levers as secondary (as PlanExe). 4/0/0 |
+| enrich_levers | batches of 5, split-and-retry on failure. Tweaks: batches run concurrently; the stage fails if no lever could be enriched (PlanExe silently wrote an empty list). 4/0/0 |
+| triaged_levers_constraint | shared checker. 4/0/0 |
+| enriched_levers_constraint | shared checker. 3/0/1 — gibraltar loss: same verdicts, judge preferred baseline's citations; one-off stray quote in a summary. |
+| focus_on_vital_few_levers | verbatim incl. batched fallback. 3/0/1 — gibraltar loss traced to PlanExe's own fill rule (5 slots Critical->High->Medium->Low, list order). The baseline file mislabels lever ids on 2 plans; ours match the input. |
+| candidate_scenarios | verbatim. 4/0/0 |
+| strategic_decisions_markdown | deterministic, byte-identical 4/4 |
+| vital_few_levers_constraint | shared checker. 4/0/0 |
+| candidate_scenarios_constraint | shared checker. 4/0/0 |
+| select_scenario | verbatim. 4/0/0 |
+| scenarios_markdown | deterministic, byte-identical 4/4 |
+| selected_scenario_constraint | shared checker. 4/0/0 |
+
+### Group (c): assumptions -> project plan (tier high)
+
+Offline replay check: given baseline inputs every stage rebuilds byte-identical system/user prompts;
+given baseline responses every renderer reproduces the baseline markdown byte-for-byte.
+
+| stage | notes |
+|---|---|
+| physical_locations | verbatim; digital plans skip the LLM and write PlanExe's stub (branch untested: all baselines are physical). 4/0/0 |
+| currency_strategy | verbatim (`CURRENCY_STRATEGY_SYSTEM_PROMPT_2`). 4/0/0 |
+| identify_risks | verbatim. 4/0/0 |
+| make_assumptions | verbatim incl. current-year placeholder. 4/0/0 |
+| distill_assumptions | verbatim; reads `make_assumptions.json` like PlanExe. 4/0/0 |
+| review_assumptions | verbatim, 9 document chunks. 4/0/0 |
+| consolidate_assumptions_markdown | full file deterministic (byte-identical); short file = 9 parallel ShortenMarkdown calls. **Regression -> fixed:** Sonnet renamed/promoted headings, failing the structure check; two lines added to the shorten prompt (keep existing heading wording/level; turn label lines into `##` headings). 0/4/0 |
+| pre_project_assessment | verbatim. 4/0/0 |
+| project_plan | verbatim except one sentence. **Regression -> fixed:** gibraltar lost twice; Sonnet read "no specific date unless specified by the user" literally and gave an undated timeline although plan.txt states today's date and "Project start ASAP". Added: a stated current date plus a stated start counts as specified. 3/1/0 |
+
+### Group (d1): WBS level 1, governance, related resources
+
+| stage | notes |
+|---|---|
+| create_wbs_level1 (high) | verbatim (no system prompt, query preamble as PlanExe). 3/1/0 |
+| governance_phase1_audit (low) | verbatim. 4/0/0 |
+| related_resources (low) | verbatim. 3/0/1 — gibraltar loss: Haiku hallucinated details of real reference projects (model knowledge). |
+| governance_phase2_bodies (low) | verbatim. 2/1/1 — gibraltar: 8 bodies with inconsistent thresholds vs baseline's 6. Intermittent `structured_output_retry_exhausted` -> now retried by the backend. |
+| governance_phase3_impl_plan (low) | verbatim. 3/1/0 |
+| governance_phase4_decision_escalation_matrix (low) | verbatim. 4/0/0 |
+| governance_phase5_monitoring_progress (low) | verbatim. 4/0/0 |
+| governance_phase6_extra (low) | verbatim. 4/0/0 |
+
+### Group (d2): team, SWOT, expert review, data collection (tier low)
+
+| stage | notes |
+|---|---|
+| find_team_members | verbatim. 3/0/1 — gibraltar: missing geotechnical/rail role. |
+| enrich_team_members_with_contract_type | **Regression -> tweak:** Haiku labelled every role full-time on 3/4 plans (1/0/3). Added one generic sentence: decide each role on its merits (workload continuity, count, scale/cancellation risk). 1/2/1 |
+| enrich_team_members_with_background_story | verbatim. 3/0/1. Structure flag on datacenter is a baseline defect (baseline LLM returned ids 101-107 for 1-8, so PlanExe merged nothing); not imitated. |
+| enrich_team_members_with_environment_info | verbatim. 2/2/0 |
+| review_team | verbatim (vendored TeamMarkdownDocumentBuilder). 3/1/0 |
+| team_markdown | deterministic, byte-identical 4/4 |
+| swot_analysis | verbatim purpose-specific prompts. 1/3/0 |
+| expert_review | verbatim; the finder's chat follow-up is embedded as prior conversation; one retry per call (mirrors PlanExe's LLMExecutor). 3/1/0 |
+| data_collection | verbatim. 3/0/1 — gibraltar: Haiku returned 4 items vs 14 (single-run variance). |
+
+### Group (e): documents, WBS level 2/3, durations, pitch
+
+Replay check with a fake backend answering the baseline responses: byte-identical prompts, same
+call counts, identical outputs except uuids/metadata.
+
+| stage | notes |
+|---|---|
+| identify_documents (low) | verbatim, purpose-specific prompts. 4/0/0 |
+| create_wbs_level2 (high) | verbatim + **tweak (run time):** Sonnet produced 11-17 phases / 77-123 subtasks (baselines 3-7 / 17-35), tripling the level-3 and duration fan-out. The preamble now asks for planning granularity (typically 4-8 phases x 3-6 subtasks): 33-44 subtasks. 4/0/0 |
+| filter_documents_to_create | **switched to tier high**: Haiku rated most documents Critical with summary counts inconsistent with its ratings; a calibration prompt didn't fix it. Sonnet, verbatim prompts: 4/0/0 |
+| filter_documents_to_find (low) | verbatim. 2/2/0 |
+| identify_task_dependencies (low) | verbatim. 3/0/1 (gibraltar 6.0 vs 6.5) |
+| draft_documents_to_create (low) | verbatim, per-document calls in parallel. 4/0/0 |
+| draft_documents_to_find (low) | same. 4/0/0 |
+| create_pitch (low) | verbatim. 2/2/0 |
+| estimate_task_durations (low) | verbatim, chunks of 3 in parallel. 3/1/0 |
+| convert_pitch_to_markdown (low) | **tweak:** Haiku turned `why_this_pitch_works` into meta sections and dropped Target Audience (1/0/3); 3 lines fix the field->section mapping. 3/1/0 |
+| create_wbs_level3 (low) | verbatim, one call per level-2 subtask in parallel. 4/0/0 |
+
+### Group (f): final review (tier low)
+
+| stage | notes |
+|---|---|
+| review_plan | verbatim 16 sequential questions (each sees the previous Q&A). **Regression -> tweak:** Haiku's answers grew from ~1K to 5K chars over the conversation, merged bullets and invented "since Version 1" history (1/2/1). A short reminder next to each question (exactly 3 bullets, ~80 words each, no invented facts) fixed it. 4/0/0 |
+| executive_summary | verbatim. 4/0/0 |
+| questions_and_answers | verbatim (2 calls). 3/1/0 |
+| prompt_adherence | verbatim (directive extraction + scoring). 3/1/0 |
+| premortem | verbatim 3-call chat. **Regression -> guard:** gibraltar re-emitted A1-A3 in a follow-up, duplicating failure modes; follow-ups that repeat earlier assumption ids are now de-duplicated. 4/0/0 |
+| self_audit | verbatim (physics check + 19 checklist items; regenerated system prompts identical to the baselines). Sequential: every item sees all previous answers. 4/0/0 |
+
+### Deterministic stages
+
+| stage | notes |
+|---|---|
+| wbs_project_level1_and_level2, wbs_project_level1_and_level2_and_level3 | vendored WBSPopulate/CreateWBSTableCSV; byte-identical 4/4 |
+| create_schedule | vendored PlanExe scheduler + DHTMLX exporter (pandas replaced by `csv`); byte-identical 4/4 |
+| consolidate_governance, markdown_with_documents_to_create_and_find | byte-identical 4/4 |
+| report | Python-Markdown and pandas replaced by a stdlib renderer (`planexe_skill/shared/markdown_html.py`). report.md identical except timestamp; report.html matches the baseline's tag profile (headings, lists, tables, emphasis within 2%) on 3/4. heatwave's baseline report was produced by an older PlanExe report generator (different sections). PlanExe-web's injected Google Analytics tags are ignored in the comparison. |
+
+### Reference DAG discrepancies
+
+`docs/reference/planexe_pipeline_dag.json` (generated by PlanExe's `extract_dag`) lists several
+inputs that the node code does not actually read. The skills follow the node code. Main cases:
+most stages after the assumptions read `consolidate_assumptions_short.md` (not `_full`); many read
+`project_plan_raw.json` / `identify_purpose_raw.json` / earlier `*_raw.json` files instead of the
+markdown; the six constraint stages read `extract_constraints_raw.json`; the final review stages
+read `wbs_project_level1_and_level2_and_level3.csv` and also `review_plan.md`,
+`questions_and_answers.md`, `premortem.md`; `expert_review` also writes `experts_raw.json`,
+`experts.json` and `expert_criticism_{n}_raw.json`.
 
 ## Results
 

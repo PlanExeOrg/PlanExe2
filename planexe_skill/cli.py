@@ -56,6 +56,8 @@ def _backend(args):
             models["high"] = args.model_high
         if args.model_low:
             models["low"] = args.model_low
+        if args.model_mid:
+            models["mid"] = args.model_mid
         return get_backend("claude", models=models)
     return get_backend(args.backend)
 
@@ -65,6 +67,10 @@ def cmd_create(args) -> int:
     if (run_dir / PLAN_RAW).exists() and not args.overwrite:
         print(f"{run_dir / PLAN_RAW} already exists (use --overwrite).", file=sys.stderr)
         return 2
+    for f in (args.prompt_file, args.plan_raw):
+        if f and not Path(f).is_file():
+            print(f"error: file not found: {f}", file=sys.stderr)
+            return 2
     prompt = Path(args.prompt_file).read_text(encoding="utf-8") if args.prompt_file else args.prompt
     if prompt is None and args.plan_raw is None:
         print("give --prompt-file, --prompt or --plan-raw", file=sys.stderr)
@@ -174,6 +180,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--workers", type=int, default=4, help="max concurrent LLM calls (default 4)")
     p.add_argument("--backend", default="claude", choices=["claude", "fake"])
     p.add_argument("--model-high", help="model for tier=high stages")
+    p.add_argument("--model-mid", help="model for tier=mid stages")
     p.add_argument("--model-low", help="model for tier=low stages")
     p.add_argument("--dry-run", action="store_true", help="only print which stages would run")
     p.set_defaults(func=cmd_run)

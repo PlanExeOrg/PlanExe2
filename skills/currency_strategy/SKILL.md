@@ -3,7 +3,7 @@ name: currency_strategy
 description: Choose the project currency based on physical locations and cross-border needs.
 inputs: [plan.txt, identify_purpose.md, plan_type.md, strategic_decisions.md, scenarios.md, physical_locations.md]
 outputs: [currency_strategy_raw.json, currency_strategy.md]
-tier: high
+tier: low
 est_llm_calls: 1
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`

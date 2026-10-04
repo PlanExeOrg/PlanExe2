@@ -3,7 +3,7 @@ name: physical_locations
 description: Determine where the project operates — extract or suggest physical locations.
 inputs: [plan.txt, identify_purpose.md, plan_type_raw.json, plan_type.md, strategic_decisions.md, scenarios.md]
 outputs: [physical_locations_raw.json, physical_locations.md]
-tier: high
+tier: low
 est_llm_calls: 1
 ---
 If `plan_type_raw.json` says the plan is not "physical", no LLM call is made: the raw file is
