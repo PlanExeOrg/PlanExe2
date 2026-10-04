@@ -1,0 +1,65 @@
+{
+  "$defs": {
+    "LeverAssessment": {
+      "description": "An assessment of a single strategic lever's importance.",
+      "properties": {
+        "lever_id": {
+          "description": "The original lever_id from the provided list.",
+          "title": "Lever Id",
+          "type": "string"
+        },
+        "lever_name": {
+          "description": "The name of the lever being assessed.",
+          "title": "Lever Name",
+          "type": "string"
+        },
+        "strategic_importance": {
+          "description": "The assessed strategic importance of this lever, based on the 80/20 principle.",
+          "enum": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "title": "Strategic Importance",
+          "type": "string"
+        },
+        "justification": {
+          "description": "Concise rationale (30-50 words) explaining WHY this lever has the assigned importance. Link it directly to the project's core goals, risks, or fundamental trade-offs. Example: 'Critical because it controls the fundamental go-to-market strategy, directly impacting revenue models and market penetration speed mentioned in the plan.'",
+          "title": "Justification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lever_id",
+        "lever_name",
+        "strategic_importance",
+        "justification"
+      ],
+      "title": "LeverAssessment",
+      "type": "object"
+    }
+  },
+  "description": "The result of assessing and prioritizing a list of strategic levers.",
+  "properties": {
+    "lever_assessments": {
+      "description": "A list containing the assessment for every single lever provided in the input.",
+      "items": {
+        "$ref": "#/$defs/LeverAssessment"
+      },
+      "title": "Lever Assessments",
+      "type": "array"
+    },
+    "summary": {
+      "description": "A strategic overview (50-70 words) of the prioritization. Explain which fundamental project tensions (e.g., 'Speed vs. Scalability', 'Cost vs. Innovation') the selected 'Critical' and 'High' impact levers address as a group. Mention if any key strategic dimensions seem to be missing from the provided levers.",
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "lever_assessments",
+    "summary"
+  ],
+  "title": "VitalLeversAssessmentResult",
+  "type": "object"
+}

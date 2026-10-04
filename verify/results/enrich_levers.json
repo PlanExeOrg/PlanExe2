@@ -1,0 +1,114 @@
+{
+  "stage": "enrich_levers",
+  "evaluated_at": "2026-10-04T17:51:37",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 30.9,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates return the same levers with the same consequences, options and review fields. They differ only in the description, synergy_text and conflict_text that this stage adds.\n\nCandidate A follows the length limits. Descriptions run about 50–65 words, and synergy and conflict texts run about 25–40 words. Its descriptions add content that isn't in the consequences field, such as success metrics (current load margin, segments placed per season, weighted cost of capital, fault detection lead time). That makes the levers more useful for downstream planning. Its synergy and conflict links are insightful and specific:\n- Rail precision conflicts with the flexible joints in Hydrodynamic Load Mitigation.\n- Financing conditions limit spending on durability and surveillance.\n- Parallel dual-coast building strains logistics and workforce.\n- Investor timelines clash with slow, careful geological staging.\n\nA has minor quirks, such as the \"100-year maintenance interval\" and \"century of operation\" wording, which the prompt doesn't state. It is mostly consistent otherwise.\n\nCandidate B's descriptions mostly restate the consequences text with a \"This lever...\" framing, and they add little new content. They often run 75–95 words, above the 50–70 limit. Its synergy and conflict texts typically run 45–60 words, above the 20–40 limit. They are also verbose and formulaic (\"X constrains Y because...\"). Some of the links are weaker or oddly framed. For example, the Buoyancy-versus-Surveillance conflict is thin, and the Corrosion-with-Hydrodynamic synergy is arguable. The links are still valid and name other levers.\n\nA is stricter on format, more concise, and more decision-useful. B is more repetitive and breaks the word limits."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates keep the input fields (consequences, options, review) unchanged and add description, synergy_text and conflict_text for all 15 levers, with no errors. They differ in length compliance and insight.\n\n**Length compliance.** The stage asks for descriptions of 50-70 words and synergy and conflict texts of 20-40 words each.\n- A routinely exceeds these limits. Its descriptions often run about 70-85 words, and many synergy and conflict texts run about 40-50 words.\n- A's descriptions also mostly paraphrase the \"consequences\" field, so they add little new information. The Pillar Architecture and Construction Deployment descriptions even repeat its sentences nearly verbatim.\n- B's descriptions are about 50-65 words and its synergy and conflict texts about 25-40 words, so it largely stays within the limits.\n\n**Specificity and insight.**\n- B's descriptions add success metrics and scope detail, which is new information for later stages. Examples are the load margin and seabed footprint for pillars, and the segments placed per season for deployment.\n- B's cross-lever links are sharper and more plausible. Rail track precision conflicts with the flexible joints in Hydrodynamic Load Mitigation. Distributed yards complicate Cross-Border Governance through customs and standards. Surveillance data validates the hydrodynamic and anchoring designs. Maglev locks in technology early and so strains phasing.\n- A's links are valid but more generic. One is questionable: it says Rail Systems Integration \"enables\" Hydrodynamic Load Mitigation.\n- A is wordy and sometimes reuses review text for the conflicts.\n- A's conflict texts name the conflicting levers well, but sometimes strain the logic. An example is \"Cross-Border Governance trades off against Construction Deployment\".\n\n**Faithfulness.** B introduces a \"100-year maintenance interval\" and a \"century of operation\", which the plan doesn't state. This is a minor unsupported addition, and it somewhat conflicts with the 20-year framing. A stays closer to the prompt but is repetitive.\n\n**Overall.** B follows the format constraints better, adds more decision-useful content, and has stronger, more varied cross-lever relationships."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 19.3,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same 10 levers with identical consequences, options and reviews. They differ only in the description, synergy_text and conflict_text fields.\n\nCandidate A's descriptions are concise and decision-oriented. They state what the lever decides and give concrete metrics, and they flag external authorities as \"uncontrolled\", which matches the plan's rule. Its synergy and conflict texts each name two or more other levers and give plausible mechanisms. Examples are PPAs needing a confirmed connection point, substation siting depending on parcels, hardened perimeters clashing with community openness, and trenching capital competing with grid pre-funding. This gives later stages a usable cross-lever interaction map. A's descriptions run slightly under 50 words in a few cases, which is a minor length miss.\n\nCandidate B's descriptions are more narrative and lean toward the 60–70 word target. They are less metric-driven and sometimes go beyond the lever, for example the NIMBYism framing. Its synergy and conflict texts usually name only one lever, and several of the pairings are weak or implausible:\n- Workforce conflicts with Power Procurement, via training overhead delaying PPA activation.\n- Fiber Redundancy conflicts with Workforce.\n- Tenant Threshold conflicts with Fiber Ownership.\n- National Security \"directly enables\" Heat Reuse.\n\nB's synergy for the Grid lever is also thin. Its Social License vs Land Assembly pairing is reasonable, but the Land Assembly synergy with Social License is more speculative.\n\nOverall, A is more specific, more internally coherent and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "The two candidates are identical except for the three generated fields: description, synergy_text and conflict_text. B is better on those fields.\n\nCandidate A:\n- Several descriptions follow only one of the lever's options. The Grid lever's description reflects option 1 alone. The Fiber ownership description pushes full ownership.\n- Many synergy and conflict links are weak or illogical. \"Local Workforce... severely constrains Power Procurement Sequencing\" and \"Fiber Redundancy trades off against Local Workforce\" are tenuous. National Security \"directly enables Heat Reuse\" is a stretch.\n- Most entries name only one other lever.\n- The Fiber ownership description mentions \"minimizing USD exposure associated with long-term international fiber leases\", which is invented.\n- The \"uncontrolled\" labelling the prompt requires for external authorities appears in none of the descriptions.\n\nCandidate B:\n- Descriptions cover the lever's whole option space and give concrete metrics, such as contracted MW per phase, buildable-to-total ratio and local labor-hour share.\n- Several descriptions apply the prompt's rule that milestones depending on an external authority stay \"uncontrolled\". This applies to the Fiber, Power Procurement and National Security levers.\n- Synergy and conflict texts usually name two levers each. They give mechanisms that make sense, for example:\n  - PPAs need a confirmed connection point.\n  - Substation siting depends on parcels.\n  - Heat export temperature may compromise PUE.\n  - Splitting the campus multiplies connection points.\n- These links are more decision-useful and more internally consistent for downstream planning.\n\nB is not flawless. Some texts run slightly long, and a few cross-references are a bit generic. It is still clearly stronger."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 42.8,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is better. Its descriptions are specific, with scope and concrete success metrics. Each synergy and conflict text names other levers from the list and gives a plausible mechanism, such as the shared €1.5B budget competition, fault-attribution data needs, and the clearing rails recouping payouts. The cross-references are coherent and useful for downstream planning.\n\nCandidate B has clear correctness defects. The \"Adoption Strategy for Non-Core Transport Modes\" lever lists itself as its own synergy. The \"Accessibility Reservations\" lever also lists itself as its own synergy, and its conflict with the reference distributor's cost is weak. Several of B's descriptions are generic and give only a single metric. Some of its synergy and conflict links are thin or odd, for example \"Capacity Building\" is not a lever name, and the Financing vs Enforcement conflict is tenuous. B also gives only one lever reference per text, so it is less informative. Both candidates copied the input fields unchanged, so the difference lies in the new fields, where A is clearly stronger."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "The two candidates share identical consequences, options and reviews. They differ only in the added description, synergy_text and conflict_text.\n\nCandidate A has clear defects. The \"Adoption Strategy for Non-Core Transport Modes\" lever's synergy text names itself as its own synergy partner. The \"Accessibility Reservations Infrastructure\" lever's synergy text does the same. Its descriptions are fairly generic and mostly restate the lever's consequences. Several links are weak or strained. One example is the Reference Distributor Cost lever, which is said to back up Enforcement Posture. Another is Continuity Thresholds, said to conflict with Commercial Terms. A also names few other levers.\n\nCandidate B has no self-references. Its links are logical and cross-cutting. For example, several levers compete for the same €1.5B budget (Early Participation, Clearing, Commercial Terms and Reference Distributor Cost). Fault attribution needs complete data records. A public reference distributor with approval power creates a conflict of interest. Enforcement and liability risk double penalties. Its descriptions name concrete scope and success metrics tied to the plan, such as month 18 and month 30 milestones, the four corridors, BEUC and disability-rights bodies. Some of its synergy and conflict texts run slightly over the 20–40 word guideline, but this is minor next to A's errors.\n\nB is clearly better on specificity, correctness and usefulness for downstream planning."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 26.9,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is better. Its descriptions are tied to this plan. They cite the Month 2 and Month 4 gates, the 80% planned-hours target, the 60% contact-success target, the €2.0M tranche, and the 65+, migrant and top-floor segments. They also give concrete success metrics. Its synergy and conflict texts name two or three other levers each, and the links are sensible. Examples are the budget competition among cooling centers, home kits and workforce protection, and the Month 2 timeline risk from registry onboarding. A has no obvious self-references.\n\nCandidate B's descriptions are more generic. They often read as restatements of the lever and are weaker on metrics and plan specifics. Its synergy and conflict texts usually name only one lever. Some links are questionable, such as the Staffing vs Workforce Protection conflict and the claim that Vulnerable Population Identification conflicts with the Health System data loop. B also has a clear error: the Health System Integration and Data Loop lever's synergy text says it \"informs Health System Integration and Data Loop requirements\", which is a self-reference. Its Home Intervention Distribution Strategy description wrongly stresses \"fans\". Its Triggering conflict text says \"conservative trigger (e.g., deploying maximum response early)\", which is muddled.\n\nBoth candidates keep the unchanged fields identical, so the difference lies in the added text. A's added text is more specific, more consistent and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates keep the same lever IDs, names, consequences, options and reviews, so they differ only in the generated description, synergy_text and conflict_text. Both have no errors and cover all 13 levers.\n\nCandidate A has several flaws:\n- The Health System Integration lever says it \"informs Health System Integration and Data Loop\", which is a self-reference.\n- Some synergy and conflict text is weak or illogical. For example, the claim that a successful distribution strategy makes centers underused is a stretch. Another conflict claims Home Intervention Material Procurement Strategy conflicts with staffing because of \"slow, cost-effective options\".\n- A few conflicts are cross-referenced oddly. The Public Information lever \"directly constrains\" the governance model, which reverses the dependency.\n- Descriptions are fairly generic and sometimes drift from the plan, for example the utility-billing distribution framing.\n- Some lever names appear in only one direction, so the links are less coherent.\n\nCandidate B is better on these points:\n- Descriptions are tied to the plan's specifics: the 80% hours gate, ≥60% contact success, the Month 2 gate, the €2.0M tranche, hot nights, and the 65+ and migrant groups.\n- Success metrics are concrete and decision-useful.\n- Synergy and conflict text names other levers, usually two or more, with plausible and mostly bidirectionally consistent trade-offs. Examples are the budget competition for the €2.0M, shared staffing pools, and registry onboarding versus the Month 2 gate.\n- It avoids self-reference and illogical conflicts.\n- Length stays within the 20-40 word guidance, though some conflict texts run slightly long.\n\nB is the stronger input for downstream planning stages."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

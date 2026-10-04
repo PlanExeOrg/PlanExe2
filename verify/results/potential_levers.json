@@ -1,0 +1,114 @@
+{
+  "stage": "potential_levers",
+  "evaluated_at": "2026-10-04T17:56:03",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 269.2,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers.json": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is plan-specific and decision-useful. Its levers cover the main strategic dimensions: concept and support architecture, route, binational governance, funding and risk allocation, prototype pathway, environment and shipping, fabrication logistics, rail and operating concept, seismic design, safety doctrine, procurement, durability, security, demand and tariff, buoyancy trim, materials, metocean data, workforce, phased opening, stakeholders, and spoil and carbon. Each has three distinct, realistic options and a review that names a real trade-off. It reflects the Strait of Gibraltar context: seismicity, shipping density, internal waves, Tarifa–Tangier, the Channel Tunnel safe-haven principle, and Spain–Morocco–EU politics. It also challenges the premise that the concept is unproven. Some levers overlap slightly, such as the prototype and phased-opening levers, but the set is coherent.\n\nCandidate B has several weaker or implausible levers. \"Deep-Ocean Material Sourcing\" proposes deep-water quarries for buoyant concrete and seawater-electrolysis fabrication. \"Offshore Workforce Resilience\" proposes luxury offshore residential platforms. \"Hydrodynamic Load Mitigation\" proposes aerodynamic ridges and a counter-oscillating shell. Another lever has zinc anodes inside the concrete mix. Its reviews are sometimes copied almost verbatim from the consequences or options. The International Consortium Financing review repeats its consequences text, and the Marine Habitat Restoration Protocol review does the same. Some statements are incoherent, such as a \"20-year lifespan\" for a tunnel and a pillar-anchoring review about \"increased vertical buoyancy forces\". The levers also overlap heavily: pillar architecture, geotechnical anchoring, three construction and logistics levers, and two habitat levers. B omits important levers such as seismic design, safety and evacuation, route selection, demand, and security. Its option sets are often generic, and some assume a pillar approach without questioning feasibility.\n\nA is clearly better on faithfulness, insight, consistency, and downstream usefulness."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate B is clearly stronger. Its levers are specific to a Strait of Gibraltar submerged floating tunnel. They cover seismic and tectonic hazard, route and alignment selection, safety and evacuation, security and geopolitics, demand and tariffs, prototype maturation, metocean data and a digital twin, watertight joints and concrete mix, procurement and localisation, and stakeholder legitimacy. These are the real decision points for a first-of-a-kind €40B project. B's options are distinct strategic alternatives, and its review lines surface real tensions, such as stage-gating versus contractor demobilisation, and the panel veto versus accountability to funders. It is also internally coherent and gives downstream stages useful material.\n\nCandidate A is thinner and more generic, with some overlap and weak or implausible content. Pillar Architecture overlaps with Geotechnical Anchoring. Environmental Compliance overlaps with Marine Habitat Restoration. The two logistics levers overlap, as do the two assembly levers. Some options are physically dubious: \"aerodynamic ridges\" for underwater currents, quarries on the deep seabed, seawater-electrolysis concrete, luxury offshore residential platforms, and zinc anodes inside the concrete mix. The \"International Consortium Financing\" review line repeats its consequences text. A also omits major issues such as seismic hazard, safety and evacuation, security, demand and revenue, and route selection. A's first few levers (pillars, buoyancy, rail, governance) are reasonable, but the set is weaker overall."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 391.4,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers.json": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is stronger. It gives 19 distinct levers that cover the plan's main decision areas: topology, grid, tenants, land, social license, capital and FX, cooling, hardware refresh, construction logistics, security, heat, workforce, permitting, kill criteria, fiber, workload mix, equipment procurement, agriculture and biodiversity, backup power, and fiscal incentives. Each lever has three plausible, plan-specific options. The consequences name real trade-offs, and the review lines are skeptical and often note that external approvals are uncontrolled. The levers respect the prompt's constraints: dry or low-water cooling, EUR as the main currency with USD hardware tracked separately, the gates, and the kill criteria. Gaps are minor. A few levers overlap in theme, such as the two on workload and rack density, and some options echo the prompt's own language.\n\nCandidate B has serious problems.\n- It has 14 levers, and several are near-duplicates: three on tenant triggers, two on heat reuse, two on fiber, and two on land and topology.\n- It contradicts the prompt by referring to a \"high-rise mandate\" when the plan specifies low-to-mid-rise halls.\n- Many options are implausible or inconsistent with the prompt, for example:\n  - counting only USD-denominated contracts toward the expansion trigger, which conflicts with EUR as the primary currency\n  - 6 GW of decoupled microgrids on BESS\n  - a 2 GW pre-built sovereign zone\n  - 90°C water from liquid-cooled halls\n  - hydrogen cracking\n  - flywheels covering 200 MW\n  - deep-well geothermal recharge, which hints at freshwater use\n  - cutting the whole project to 3 GW\n- Some options use invented, arbitrary numbers, such as 60%, 75%, and 80% of the footprint.\n- Some levers have four options, and some review lines contradict their own lever's logic.\n- Several options are not decision-useful.\n\nB has a few good points: it flags Dunkirk and E-Valley, names RTE as an uncontrolled risk, and treats the national-security review as a long path. These are outweighed by its weaknesses."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "B is clearly better.\n\n**Candidate A**\n- It has 15 levers, but many overlap. Land assembly appears twice, heat reuse twice, fiber twice, and tenant and compute triggers three times. That inflates the count without adding real coverage.\n- Several options or consequences contradict the prompt. It mentions a \"high-rise mandate\", though the prompt calls for low-to-mid-rise halls. One option counts only USD-denominated contracts toward the trigger, which conflicts with EUR as the primary currency. Another option cuts the whole project to 3 GW.\n- Other options are odd or unrealistic: 6 GW of \"decoupled microgrids\" charged by BESS, flywheel storage standing in for grid access, and \"hydrogen cracking\".\n- It misses whole areas: cooling and water, financing and FX, permitting, kill criteria, backup generation, and agricultural and biodiversity offsets.\n\n**Candidate B**\n- It has 20 distinct levers across topology, grid, tenants, land, social license, capital structure and FX, cooling, silicon obsolescence, construction logistics, security, heat, workforce, permitting, kill criteria, fiber, workload mix, equipment procurement, agriculture and biodiversity, backup and resilience, and state aid.\n- It stays faithful to the prompt. It uses the named locations, treats RTE and EDF as uncontrolled, keeps EUR for infrastructure and separates USD for hardware, and builds in gating and downsizing.\n- Its options are realistic and meaningfully different, and its review fields name real trade-offs.\n- Its consequences are concise and decision-useful."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 405.9,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers.json": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is clearly stronger. Its 20 levers are distinct and cover the plan's main decision areas: standards governance, clearing and settlement, the public reference distributor's role, corridor sequencing, the passenger-rights backstop, funding allocation, conformance certification, legacy IT migration, fare construction, disruption data, modal shift, accessibility, data rights, data-layer topology, merchant of record, reduction cards, complaints, capacity building, non-rail connectors and data protection. Each lever has three genuinely different strategic options. The consequences and review text name real trade-offs, such as central clearing as a point of failure, adapters becoming permanent crutches, and rail-first display rules conflicting with distributor neutrality. The levers respect the prompt's facts: the 18/30/60-month milestones, the €1.5B public budget, OSDM, the four named corridors and the modal-shift goal. A few options overlap slightly, for example the settlement and merchant-of-record levers, but that is minor.\n\nCandidate B has many redundant levers. Liability and the backstop appear in about four levers (Defining Liability, Incomplete Journey Data, Continuity Accountability Thresholds, Failure Thresholds). Settlement capitalisation appears twice (Financing the Clearing Mechanism Capitalization and Settlement Risk Buffer). Governance amendments appear twice, and non-rail integration appears twice. Several options are odd or contradict the prompt: a 12-month binding deadline against the stated 18 months, de-scoping bus, ferry and air hooks that the prompt puts in scope, and a \"Regulatory Fast-Track\" that simplifies national permitting. Others are unrealistic: replacing national cards with an EU voucher, a fee \"below €0.01 per booking\", and \"three strikes\" suspension of operators. The wording is also verbose and awkward (\"private sector monopolies\", \"distress code\"). The prompt asks for a realistic scenario, but B leans toward extreme options. B's coverage is also narrower, with nothing on topology, certification, fare construction, data protection or complaints. Its levers are less useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate B is clearly stronger. It has 20 distinct levers that cover the whole plan scope. These include OSDM governance, clearing and settlement architecture, merchant of record, data layer topology, the public reference distributor role, corridor sequencing, the passenger-rights backstop, funding design, conformance certification, legacy IT migration, fare construction, disruption data exchange, modal shift measurement, accessibility and bicycle reservations, data rights, reduction cards, complaint handling, capacity building, bus/ferry onboarding and privacy. Each lever has three genuinely different strategic options. Each review names real trade-offs, such as the insolvency exposure of whoever holds the funds, the risk of a central lab becoming a bottleneck, and the point that the complaint portal may lack authority to assign liability. The levers are plan-specific, covering the 30-month API deadline, the roughly 30 carriers, Trainline and Omio, and air competition.\n\nCandidate A has a lot of redundancy. Three levers cover liability and continuity thresholds: the backstop scope, the incomplete-journey data mechanism and the continuity-of-journey accountability thresholds. A fourth, the failure-threshold lever, is also on continuity of journey. There are two non-rail modal-hook levers, two settlement capitalization levers, two amendment-governance levers and two timeline-pacing levers. This looks like a failure to avoid near-duplicate themes. It also leaves out important areas: data layer architecture, conformance testing, legacy IT, fare logic, complaints, capacity building and modal-shift measurement. Some options are odd or weak. Examples are the \"distress code\", the EU discount voucher, the fee \"below €0.01\", and options that duplicate each other across levers. Some levers are mostly about binary de-scoping. Its levers are less decision-useful and less diverse."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 367.4,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers.json": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate B is clearly stronger. Its 20 levers are distinct and map directly onto the plan's scope, gates and metrics. They cover alert triggers and command authority, enrollment pathways under GDPR, the balance between cooling centers and home protection, transport, outreach staffing, gate and evidence design, the health-system loop, a hot-night refuge, volunteer safety, landlord leverage, procurement lead time, language mediation and playbook replication. Each lever has real trade-offs, and the reviews name concrete risks tied to the Month 2 and Month 4 gates, the €2.0M tranche, ethical and reputational issues, and the ban on new legislation. The options are realistic and stay within municipal powers and GDPR limits.\n\nCandidate A has 17 levers, but many overlap. Cooling centers appear three times, home interventions three times, the health data loop twice and staffing twice. Several options are weak or conflict with the plan's constraints:\n- a \"mandatory opt-out registry\" run through GPs, which conflicts with the opt-in, GDPR-careful framing;\n- a trigger set at the historical absolute maximum, which is unrealistic;\n- an SMS-only communications layer, which ignores that many vulnerable residents are not phone users;\n- passive data feeds such as electricity-use anomalies;\n- hiring temporary outdoor staff to cover worker protection;\n- a \"GP appointment misses\" data scheme.\n\nSome review fields don't match their lever, for example the SMS discussion under a medium-weighting lever whose options include other channels. A also misses key areas: hot-night coverage as a distinct lever, evaluation and attribution design, language mediation, volunteer safety and landlord leverage. B is the better base for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Candidate A is stronger. It has 20 distinct levers that cover every scope area: triggers and command, cooling sites, hot-night refuge, transport, outreach staffing, volunteer safety, identification and GDPR, home-kit targeting, landlord leverage, procurement, health-system loop, worker protection, communications, language access, evaluation design, pilot footprint and the playbook. Its options are realistic and stay within the prompt's constraints: normal municipal powers, opt-in or intermediary consent, no reliance on apps, and a phased pilot. Its review notes name real tensions, such as the Month 2 and Month 4 gates, ethical risk from staggered rollout, GDPR exposure, and private landlords having no incentive without new legal powers. It also reflects the hot-night driver and the gate metrics. Its main weakness is that the pilot-footprint, gate-design and attribution levers overlap on staggered rollout.\n\nCandidate B has serious problems:\n- It has near-duplicate levers: two cooling-center levers plus a third on utilization, two on the health data loop, and two on home distribution.\n- Several options violate the constraints or are implausible. These include a \"mandatory opt-out registry\" via GPs, electricity-use anomaly feeds, an SMS-only communication layer, and a trigger set at the historical absolute maximum for the week, which would miss most dangerous events. Others include GP-appointment-miss data sharing, which is a GDPR red flag, and a \"100% NGO\" outreach option.\n- Some options read as strawmen or are unrealistic, such as reflective blankets and ice packs, and a binary trigger claimed to have \"zero false-negative risk\".\n- Some review notes are inconsistent with their levers.\n- It misses several scope areas: transport, multilingual access, metrics and evaluation, volunteer safety, and the playbook.\n\nOverall, B is weaker on faithfulness, coverage, and internal consistency."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

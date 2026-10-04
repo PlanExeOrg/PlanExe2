@@ -1,0 +1,114 @@
+{
+  "stage": "selected_scenario_constraint",
+  "evaluated_at": "2026-10-04T17:56:39",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 9.8,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 7,
+              "analysis": "The two candidates reach the same verdicts. Both mark six constraints satisfied, mark high-speed rail and ASAP start as unclear, and give an overall pass. A lists several quoted fragments per constraint, which gives broader evidence. But for the unclear constraints its \"evidence\" is a description of what the output lacks, not a quote, and it says the transportation purpose is \"implied\", which is a mild stretch. B uses a direct quote as evidence for every constraint, which is cleaner and easier to verify. B also addresses the possible tension between the hybrid floating-pillar approach and the \"buoyant concrete\" constraint, and cites the \"balance speed against fiscal sustainability\" phrase as the nearest evidence on ASAP. B's summary is clearer. B is slightly more precise and insightful, but the margin is small."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "The two candidates reach the same verdicts. Both mark six constraints satisfied, mark high-speed rail and ASAP start as unclear, and give an overall \"pass\". The difference is in the quality of the evidence and explanations.\n\nCandidate A uses direct quotations as evidence, such as \"A €40 billion, 20-year megaproject\" and \"anchored at 100 meters below open ocean\". This is what a guardrail check needs, because a reviewer can verify each claim against the stage output. For the buoyant concrete structure constraint, it notes that the chosen scenario's hybrid floating-pillar approach does not contradict the constraint. That addresses the main tension in the scenario. Its explanations are short and to the point.\n\nCandidate B uses paraphrased evidence in many places, for example \"The output repeatedly references…\" and \"The output states…\". That is weaker and harder to verify. It lists more supporting phrases, such as \"hybrid pillar architecture\" and \"two-nation scope\", which add some value but also add verbosity. Its explanations for the unclear items are slightly more thorough, and its summary is clear. It does not say whether the hybrid floating-pillar approach conflicts with the constraint. It treats \"floating-pillar system\" as supporting evidence without discussing the tension.\n\nA's verbatim evidence and its direct handling of the hybrid-scenario nuance make it slightly better for a constraint checker."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 56.9,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Both candidates reach overall_status \"pass\", and no hard violation is visible in the quoted scenario text. They differ in how honestly they judge each constraint.\n\nCandidate A marks many constraints \"satisfied\" on weak inference. Examples:\n- Phase 1 power of 500 MW–1 GW is \"satisfied\" only because the output mentions \"non-binding RTE for Phase 1\".\n- The AI use-case list is \"satisfied\" from the phrase \"sovereign zone\".\n- The land-use model is \"satisfied\" even though A admits the components are not listed.\n- The Phase 3 activities are \"satisfied\" from a passing mention of liquid cooling.\n- The water strategy is \"satisfied\" by implication.\n- A cites \"hardened perimeter\" as evidence, which B's quotes suggest may not appear in the output.\nA also marks the 12.7 km × 12.7 km dimensions satisfied from the 161 km² area alone. It is internally inconsistent, since it marks the Phase 0 budget \"unclear\" but the phases \"satisfied\". This leniency defeats the purpose of a guardrail and gives downstream stages false assurance.\n\nCandidate B uses \"unclear\" for constraints the scenario does not actually address. It quotes evidence accurately and notes details such as the \"$9 GW\" typo. It flags a tension between dismissing the Consolidator option and the downsizing requirement. It marks \"identify what would make the project infeasible\" as unclear because no explicit kill conditions are given, which is a sound call. Its judgments are more calibrated and more useful as a guardrail.\n\nB is better."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both pass overall, but A is the more faithful and stricter guardrail. A marks \"satisfied\" only where the scenario output actually states the item (9 GW, 161 km², 10–15+ years, PUE, €100B+, skeptical/non-binding framing) and marks \"unclear\" for everything the stage doesn't address. A's weak points: it calls the 12.7 km dimensions unclear, and it marks \"identify what would make the project infeasible\" unclear, which is arguably too harsh. B inflates \"satisfied\" by loose inference: Phase 1 power range from a mention of Phase 1, a 14-item land-use model from a \"hyper-dense\" phrase, Phase 0 and Phase 3 from generic feasibility or sovereign-zone wording, and the water strategy from liquid cooling. Its own explanations admit the content is absent (\"strongly implies\", \"components are not listed\"). B also cites evidence like \"hardened perimeter\" and \"heat-reuse pilots\" that A's quotes don't show, and it quotes the sovereign-zone phrase differently from A, so some of its evidence looks stretched or fabricated. B does handle the 12.7 km ≈ 161 km² point better. Overall, A's accurate labelling is more useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 26.4,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 3.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A marks about 18 constraints unclear and returns overall \"fail\" although nothing is marked violated, which would wrongly block the pipeline. Some of its evidence is weak or looks invented. For example, it cites \"Budget covers standards work, conformance testing, the clearing mechanism\" as evidence, but B finds no budget breakdown in the scenario. It also treats \"Tone is urgent\" as satisfying \"ASAP\". Candidate B quotes specific, traceable scenario text such as \"capped cost recovery for data\", \"tiered liability model\", \"provisional binding at 6 months\", and the Consolidator deferring accessibility. It marks unaddressed items unclear while noting they are not contradicted. It returns a sensible pass, since the realistic Builder scenario was chosen over the aggressive Pioneer. B has a few generous satisfied calls, such as using \"five years total\" to satisfy the 60-month through-ticketing constraint. These are minor next to A's weak evidence and its fail on unclear items alone."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A is better. It quotes specific text from the selected scenario as evidence, such as \"capped cost recovery for data\", \"18 months for binding standards\", \"five years total\" and the 40% single-ticketing goal. It marks constraints as unclear only when the scenario really doesn't mention them (reduction cards, bicycles, the 30-month API milestone). It also notes that the Pioneer was rejected as too aggressive and the Consolidator was criticised for deferring accessibility. Its overall \"pass\" fits a guardrail that checks for violations, because no constraint is actually violated and unclear items are not violations. A is slightly generous in a few places. For example, it marks some corridor, stakeholder and 60-month items satisfied on thin evidence.\n\nCandidate B has weaker and sometimes questionable evidence. It cites \"balancing ambition with operational reality\" for distributor access, and it marks the budget-coverage constraint satisfied with a quote that doesn't appear to be in the scenario. It says the scenario \"explicitly rejected\" aggressive options based on \"the instruction\", which is not evidence from the scenario. It also marks stakeholder involvement satisfied from a generic phrase. Meanwhile it misses evidence A found, leaving the 40% goal, the modal shift goal and accessibility as unclear. Its \"fail\" verdict rests only on unclear items with no actual violation, which misapplies the stage's pass/fail logic and would block downstream planning without cause. Its summary is also thin."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 26.2,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates reach the same overall \"pass\" and mostly the same classifications, so the difference is in how accurate and well-supported each one is. A marks the detail-level positives (staffing plan, multilingual communication, procurement, risk register, ASAP start) as \"unclear\", which is right for a scenario-selection stage that doesn't cover them. A's evidence quotes are short and generally match the selected scenario. A's \"Do not rely on apps\" evidence cites canvassing and the warning system, which is reasonable. B is less careful in several places. It marks the risk register \"satisfied\" from a GDPR mention alone, which is a stretch since the risk register also requires reputational risk, volunteer safety and surge. It marks \"ASAP start\" \"satisfied\" because of a \"tight 12-month window\", which is weak inference. It cites \"triage scripts\" as evidence for the legislation and apps constraints, and for multilingual communication, which is loose. Its evidence strings also contain formatting artifacts such as \"$€1.5M\" and stray quote fragments. B's \"Avoid most aggressive\" evidence is solid. A is more consistent and better calibrated, so A is the better guardrail check."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates cover the same constraint list and both reach \"pass\". The difference is in how accurately each judges the constraints.\n\nCandidate A overclaims in several places:\n- It marks the risk register \"satisfied\". Its only evidence is that GDPR is mentioned, which does not show a risk register covering reputational risk, volunteer safety and extreme-event surge.\n- It marks \"Project start ASAP\" satisfied because of a \"tight 12-month window\", which is a stretch.\n- It uses \"limited staff\" to mark the negative staffing constraint satisfied, yet marks the positive staffing-plan constraint unclear. That is fine on its own, but the evidence is thinner than B's.\n- Its evidence strings are often long, partly garbled and mis-quoted, such as stray quote marks and the \"$€1.5M\" typo. In some places the evidence is only loosely tied to the claim, for example the \"Gate two\" and \"no new legislation\" entries.\n- Its explanations lean on inference, such as \"implying\" and \"suggests\".\n\nCandidate B is more disciplined:\n- It uses short, direct quotes as evidence.\n- It marks items \"unclear\" when the selected-scenario stage does not address them: risk register, ASAP start, multilingual communication, staffing plan and procurement. It also notes that nothing contradicts them.\n- Its summary is concise and states the logic of the stage clearly.\n- Its \"Public administration/Municipal Operations\" evidence for the legislation constraint is weak, but that is a small flaw.\n\nB is more accurate and better calibrated, so it is more useful as a guardrail."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

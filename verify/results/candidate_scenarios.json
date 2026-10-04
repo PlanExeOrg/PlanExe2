@@ -1,0 +1,114 @@
+{
+  "stage": "candidate_scenarios",
+  "evaluated_at": "2026-10-04T17:53:11",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 18.3,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates copy lever option text verbatim, and their Pioneer and Consolidator scenarios are nearly identical. The differences are in the environmental lever and the middle scenario.\n\nCandidate A: The Pioneer and Consolidator scenarios both use the same ecosystem-restoration option, so they are less differentiated on that lever. The Builder scenario uses offshore floating platforms with permanent offshore infrastructure in the Strait. That is a fairly aggressive choice for a \"moderate\" path. A's strategic logic is richer and explains each scenario's rationale in more detail.\n\nCandidate B: The Pioneer scenario uses the IMO-led transboundary EIA. This fits the speed-oriented logic and makes the environmental lever differ across all three scenarios. The Builder scenario uses dry-dock fabrication with a neutral engineering lead and an elevated alignment, which is more clearly moderate. The result is a cleaner aggressive-to-conservative gradient. B's logic is shorter but still accurate, and it notes cross-lever interactions, such as avoiding dependence on an IMO negotiation. B's title is also more specific, naming the €40B, the 20-year timeline and the high-speed rail link.\n\nOverall, B has better scenario differentiation and a more coherent gradient. A has a richer narrative but weaker lever coherence in the moderate scenario and less differentiation on the environmental lever."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates share nearly identical lever settings for the Pioneer and Consolidator scenarios; they differ in a few choices and in the strategic_logic text.\n\nA, Pioneer: it picks an IMO-led transboundary EIA. This is a coherent aggressive choice, since a single regime speeds things up. It is also internally consistent with the strategic logic, which names the IMO regime. A's Moderate and Conservative scenarios both use the same dry-dock Construction Deployment. That reduces differentiation, but it is plausible for a Builder that favors proven logistics.\n\nA, Consolidator: it names the proactive restoration lever and explains why it avoids dependence on an IMO negotiation. The logic matches the settings.\n\nB, Pioneer: it picks the proactive restoration program. Its strategic logic is internally consistent (restoration preempts opposition). However, the same restoration setting also appears in the Consolidator, so the environmental lever is less differentiated. Pairing the Pioneer with a restoration program that \"exceeds compliance\" is arguably less aggressive and less coherent with a speed-first stance. The IMO regime fits the aggressive archetype better.\n\nB, Builder: it uses offshore floating platforms as the construction strategy. That adds differentiation across the three scenarios (three distinct construction approaches). Offshore platforms in the Strait's strong currents are risky and are not clearly a moderate choice, but the logic says \"without venturing into unproven territory\", which is arguable. B's logic also says \"offshore platform construction ... modernize the build\" and is consistent with the settings.\n\nScenario names: B uses the archetype names (Builder, Consolidator), which matches the stage spec (Pioneer / Builder / Consolidator). A uses different names (\"Pragmatic Foundation\", \"Proven Crossing\"), though they still fit the archetypes.\n\nStrategic logic: A's logic is concise and tied to the levers. B's is longer and somewhat generic, with phrases like \"engineering elegance\" and \"absolute stability\".\n\nTitle: A's title is more specific, naming the €40B, 20-year rail link. B's title is generic.\n\nOverall, A has better differentiation of environmental strategy and a more coherent aggressive profile, plus a more specific title and tighter logic. B has better differentiation of construction approaches and matches the archetype names. A slight edge goes to A for coherence and specificity."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 39.0,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates use the same Pioneer settings, so the difference lies in the Builder and Consolidator scenarios and in the strategic logic text.\n\nCandidate A has specific, plan-faithful strategic logic. It refers to 'uncontrolled' external milestones (RTE, prefecture, DGSI), judicial-review risk, a 3 GW contracted-nuclear core with the remaining 6 GW as a separately budgeted option, and spending capital only once approvals become contracts or permits. Its lever settings fit its logic. Its weakness is that Builder and Consolidator share identical Land and Tenant settings, which reduces differentiation. The Builder's 6 GW microgrid grid option is also somewhat odd.\n\nCandidate B's scenarios are more differentiated on land and grid, but several choices are incoherent. The Builder grid setting is a 500 MW phase backed only by a non-binding RTE consultation, 'prioritizing land over power certainty'. That cuts against the red-team skepticism and the plan's grid-first logic. The Consolidator's tenant setting counts only USD-denominated sovereign-AI contracts. That conflicts with EUR as the primary currency and with the same scenario's choice to forgo sovereign classification for 24 months. B's strategic_logic is also generic and does not mention uncontrolled milestones or the plan's specific risks.\n\nOverall, A is more coherent, more specific and better tied to the prompt. B has internal contradictions."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates take lever settings that appear to be verbatim options from the lever lists, so the main differences are in the framing and in which options each scenario combines.\n\nCandidate A has short, generic strategic_logic, and several of its combinations are incoherent.\n- The Builder's logic says it manages grid exposure \"commensurate with secured revenue\". Its settings, however, tie Phase 1 to only a non-binding RTE consultation and put land mobilization ahead of power certainty.\n- The Consolidator accepts only USD-denominated sovereign AI contracts. This clashes with the prompt's EUR-primary budgeting and with the sovereign-AI purpose, and it is not a conservative choice.\n- A's Builder has a distinctive land model (30 km² buildable). It is better differentiated from the Consolidator than B's Builder, but it is less internally consistent.\n\nCandidate B has richer strategic_logic that matches the lever settings. It also reflects the prompt's red-team stance: it mentions \"uncontrolled\" milestones, judicial-review risk, stranded capital and the \"option, not commitment\" framing for 9 GW. Its Builder and Consolidator share several settings (land, tenant threshold, and similar fiber and security choices), so the middle and conservative scenarios are less distinct. Its Builder grid option (3 GW core plus 6 GW microgrids) is also somewhat speculative. Even so, each scenario reads as a coherent strategy. The tenant lever avoids A's USD-only oddity. B is more useful downstream and more faithful to the prompt."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 26.9,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates use the same structure and the same Pioneer/Builder/Consolidator archetypes. Their Builder scenarios are identical in lever settings. The differences are in the other two scenarios and in the narrative.\n\nA's strategic_logic is specific to the plan. It mentions the pooled fund, free API access, the EU Agency's operational role, the four priority corridors, third-party platforms and the 40% target. It also says explicitly that the Builder is the realistic scenario, which the prompt asked for. Its Consolidator relies on existing national frameworks, fault-based carrier liability and cost-recovery fees. That is coherent, low-risk and low public spend, and it does not conflict with the goal of halving distributor complaints. One weakness is that the Consolidator shares two lever settings with the Builder, so the scenarios overlap somewhat. A's Pioneer pairs the pooled fund with a tiered carrier-liability model, which is a little redundant but acceptable.\n\nB's strategic_logic is generic and could apply to any program. It uses phrases like \"Maximum Dominance\" and never identifies a realistic choice. Its Consolidator also has real problems. It makes the distributor liable for 100% of the journey regardless of fault, on two separate levers, with uncapped liability. That would drive out third-party platforms such as Trainline and Omio, contradicting the plan's non-discrimination and distributor-complaint goals. It also adds a regulator fee cap enforced by barring carriers from clearing. These look like the most extreme options picked to make the scenario differ, not a coherent conservative path. Calling uncapped distributor liability \"stability\" is inconsistent.\n\nA is more faithful, more coherent and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates use the same schema and the same lever option texts. They differ in how the options are combined and in how the logic is explained.\n\nCandidate A:\n- The Pioneer is coherent, but it stacks two overlapping risk-pooling mechanisms: a pooled fund for the backstop and a collective insurance pool for incomplete data.\n- The Consolidator makes the initial distributor liable for 100% of the journey, uncapped and irrespective of fault. It uses this setting on two separate levers, so the setting is redundant. It also works against the plan's goal of letting third-party distributors such as Trainline and Omio sell through-tickets, because few distributors could carry that risk.\n- The Consolidator's fee lever, which bars carriers that exceed the fee cap from the clearing mechanism, is a strange and punitive setting.\n- Its strategic logic is generic and does not tie back to the 40% target or the corridors.\n- It does not identify which scenario is the realistic one, even though the prompt asks for a realistic scenario.\n\nCandidate B:\n- The Pioneer is coherent: a pooled fund, free API access, binding standards in 12 months and a public float. Its logic names the trade-offs of specification rework, fiscal concentration and a heavy role for the EU Agency for Railways.\n- The Builder is explicitly labelled the realistic scenario. It combines a targeted backstop, cost-recovery fees, a collective pool for unknown-cause failures, phased standards and carrier-posted guarantees. This answers the prompt's \"pick a realistic scenario\" instruction and gives later stages a clear anchor.\n- The Consolidator is coherent and plausible, built on national frameworks, fault-based liability, carrier collateral and deferred reduction-card and accessibility schemas. Its logic links to the 40% target and states the equity cost.\n- Its weakness is that the Consolidator shares two lever settings (backstop and API terms) with the Builder, so the scenarios are less differentiated on those levers.\n- The core tension is more plan-specific, mentioning modal shift and distributor adoption.\n\nOverall, B is more usable and more faithful to the prompt, despite some overlap between its Builder and Consolidator. A contains questionable, internally redundant settings in its Consolidator."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 28.5,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Both candidates return the required structure: three scenarios, with lever settings drawn from the offered options. They differ in the quality of the scenario logic and in how realistic the chosen option combinations are.\n\nCandidate A has detailed, plan-specific strategic_logic. It ties choices to the Month 2 gate, the Month 4 gate, the €2.0M initial funding, and the reasons for each trade-off. It uses the three-level trigger in every scenario and says why: the binary option wastes budget, and the record-breaking-threshold option misses most dangerous events. That is a defensible judgment, though it reduces differentiation on that lever. Builder and Consolidator also share the cooling-center setting, and Pioneer and Builder share the home-intervention setting. Even so, each scenario is internally coherent and executable. The Builder pairs social-housing window film and awnings with floor canvassing, so identification and home interventions reinforce each other. The Consolidator is lean, with a hotline and drop-in point, kits, and subsidized transport.\n\nCandidate B spreads the options more evenly across scenarios, so the three look more distinct. Several of its choices are poor for this plan.\n- The Consolidator uses an outdoor \"micro-cooling point\" network, which is a bad fit for frail, heat-vulnerable people during hot nights.\n- The Consolidator's trigger activates only above the all-time recorded maximum for the calendar week, which would miss most dangerous heat events. That works against the program's goal.\n- The Builder gives fan and cooler vouchers and leaves installation to the individual. That is unsuitable for non-smartphone, mobility-limited, isolated residents, and it ignores the handyperson and installation-support requirement.\n\nB's strategic_logic is also thin and generic. It barely connects to the gates, the budget, or GDPR.\n\nOverall, A is more decision-useful and more faithful to the plan's constraints. B has more variety but weaker, riskier scenarios and less insight."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates use verbatim lever options and the required three-archetype structure. They differ in how they combine the options and how well they explain the choices.\n\nA gives each scenario a distinct set of options, so the three are clearly different. Several choices are poorly suited to this plan, though:\n- The Consolidator trigger fires only when the forecast exceeds the all-time record for that calendar week. That would miss most dangerous multi-day, hot-night events. It would also make it unlikely that the Month 4 gate gets real heat days to test against.\n- The Pioneer uses a single binary trigger, which wastes budget on a full response.\n- The Consolidator's outdoor \"micro-cooling points\" suit vulnerable, frail people poorly.\n- The Builder relies on fan vouchers and leaves installation to the homeowner. That works against the \"fast, safe, handyperson support\" requirement.\n- A's strategic_logic text is short and ignores the €3.5M, gate, and Month 2 constraints.\n\nB repeats the same options across scenarios. All three use the three-level trigger, and two share the cooling and home-intervention options. That reduces differentiation. However, B explains why. It says the binary trigger wastes budget, and the record-breaking trigger misses the most dangerous events and so would undermine the program's goals. Its core_tension and strategic_logic tie directly to the €2.0M initial funding, the Month 2 readiness gate, and the Month 4 scale gate. It also notes how choices reinforce each other, for example canvassing combined with window film in social housing blocks. Each scenario is internally coherent and downstream-usable. The cost is some loss of strategic range.\n\nOverall, B is more faithful to the prompt's constraints and more decision-useful. A's extra diversity comes partly from choosing options that conflict with the plan's goals."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "vital_few_levers_constraint",
+  "evaluated_at": "2026-10-04T17:54:28",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 10.4,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure and the same classifications: seven constraints satisfied, ASAP unclear, overall pass. The difference is in evidence and reasoning. A uses short verbatim quotes and adds useful judgement. It notes that the Medium rating on Rail Systems Integration does not contradict the rail purpose, and that the cost-overrun caution is a risk note and not a budget contradiction. On ASAP it points to options with multi-year delays (a negotiation timeline that \"could exceed five years\"), which explains the unclear status and helps downstream stages. B cross-references more levers per constraint, but much of its evidence is paraphrase, and its ASAP entry has no quoted evidence. B also cites a \"project context\" that may not be in the stage input. Its quoted phrasing differs from A's for the same passages, so at least one of the two is probably inexact. A is slightly more precise and insightful."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates list the same eight constraints, classify them all as positive, and mark seven satisfied and \"Project start ASAP\" unclear. Both give overall_status \"pass\". The structure and verdicts match, so the difference is in the evidence and the reasoning.\n\nA cites lever names and paraphrases, such as \"Multiple references to '20-year' throughout\". That is plausible but less verifiable. Its explanations mostly restate that the constraint is \"consistently referenced\". Its ASAP reasoning only says the output doesn't mention ASAP.\n\nB uses short direct quotes, which are easier to check and more guardrail-like. It also adds judgment about edge cases:\n- The cost-overrun caution is treated as a risk note, not a budget contradiction.\n- Gravity-based pillars are treated as alternatives within the buoyant concrete design.\n- Rail Systems Integration is rated only Medium, which doesn't contradict the high-speed rail purpose.\n- For ASAP, it notes that some options carry multi-year delays, such as a negotiation timeline that \"could exceed five years\". That is a real tension a downstream stage should know about.\n\nB is more precise and decision-useful. A is acceptable but more generic."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 49.8,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A gives a lenient \"pass\" with weak or irrelevant evidence. Its timeline evidence is an EUR/USD quote, Phase 3 and 4 are marked satisfied because they are \"implied\", and the industrial-belt focus is marked unclear even though B found quotes naming Cambrai, Dunkirk, Valenciennes and E-Valley. A also misses the \"high-rise mandate\" quote that B cites, which contradicts the 14–20 m low-to-mid-rise building model. Candidate B backs each judgment with direct quotes. It uses \"unclear\" appropriately for items the levers do not address. It catches the \"high-rise mandate\" contradiction and flags the USD-only contract option against EUR primacy. The currency flag is somewhat harsh because it is only one option among several, but it is defensible. B's \"fail\" verdict is better grounded and more useful for a guardrail stage."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "A is the stronger guardrail output. Its evidence is specific, verbatim quotes from the lever file, and it catches two real problems. The first is a \"high-rise mandate\", which contradicts the low-to-mid-rise building model (typical 14–20 m). The second is an option that counts only USD-denominated contracts toward the expansion trigger, which undermines EUR as the primary currency. It also correctly credits the named industrial zones, the 50–100+ buildings, and the phase references, and it marks unaddressed items (cooling, budget, hall sizes) as unclear. B's evidence is mostly lever names or \"N/A\". It misses the high-rise statement. It marks building height unclear and USD tracking satisfied, although the USD-only option cited as evidence conflicts with the EUR-primary constraint. It also marks the focus on named industrial zones unclear, where A found quotes naming them. B marks several constraints satisfied on weak or implicit grounds: the date, the timeline (its evidence is about EUR/USD volatility), Phase 3 and Phase 4. Its \"pass\" is therefore less trustworthy and less useful downstream. A's \"fail\" is better justified, and it points to concrete fixes."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 35.7,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 6,
+              "score_baseline": 5,
+              "analysis": "I can't see the underlying vital_few_levers_raw.json, so I judged each candidate on how well grounded and consistent it looks.\n\nCandidate A: It passes the lever set on all 30 constraints except two marked \"unclear\" (bicycle reservations, full TEN-T extension). Its evidence is mostly generic inference (\"implied\", \"the context mentions\", \"the selection suggests\"), and it cites a \"plan.txt\" the checker should not rely on. It marks \"Project start ASAP\" and \"Full corridor through-ticketing within sixty months\" as satisfied on thin or invented grounds, such as \"aggressive timelines chosen to maximize speed\" and \"the end goal drives all levers\". This is lenient and not well supported. It treats the negative constraints as satisfied because the levers \"counter\" them, which is reasonable but shallow. It also says it checked 30 constraints while returning a list of 35, a minor inconsistency.\n\nCandidate B: Its evidence is mostly direct quotes from the lever output (the 30-month API deadline, the €1.5 billion budget, the phased standardization option), which makes it more verifiable and checker-like. It is more honest about gaps: bicycle reservations, the sixty-month milestone and the ASAP start are marked unclear because the output has no explicit mention. It flags one violation, where lever options would leave parameters and compensation under non-harmonized national frameworks. That is a real tension with the \"avoid fragmentation\" constraint and a useful catch for downstream stages. It is arguably strict, since these are options and not the selected recommendation, and B excuses the similar narrower-backstop option as \"not a recommendation\", which is slightly inconsistent. The \"fail\" is still defensible under the stage's rule that synonyms of banned concepts count as violations, and it surfaces an actionable risk.\n\nOverall, B is better grounded, more specific and more discriminating. A is more generic and over-credits constraints that are not demonstrably addressed. B's one questionable violation call is a smaller flaw than A's unsupported \"satisfied\" findings."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A cites concrete quotes from the levers output, such as \"30 months for API exposure\", \"€1.5 billion public coordination budget\", \"full TEN-T network integration phase\" and the phased-standardization option. Its judgments are well grounded. It marks bicycle reservations, the sixty-month milestone and the ASAP start as unclear because the output doesn't address them, which is honest. It finds a real tension: some lever options would leave nationally negotiated, non-harmonized parameters and national compensation frameworks. Calling that a violation is somewhat strict, since these are alternative options and not the recommendation. But it is a defensible catch and it is specific.\n\nCandidate B's evidence is mostly vague inference (\"implied\", \"the overall thrust\", \"the context in plan.txt\"). Several of its \"satisfied\" verdicts are weak. Sixty-month through-ticketing is satisfied because the end goal drives the levers. Project start ASAP is satisfied because \"aggressive timelines\" were chosen. That conflicts with the constraint to pick a realistic scenario and not the most aggressive one. The modal-shift goal is tied only to reduction cards. B marks TEN-T extension as unclear even though A found explicit evidence of it in the output. B finds no negative-constraint violations and passes the output. Its reasoning there is generic and does not engage with the lever options that preserve national parameters.\n\nOverall, A is more precise, better evidenced and more useful as a guardrail. B is more rubber-stamp."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 28.3,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both reach \"pass\" with similar coverage of the constraints. A gives concrete quoted evidence, correctly marks the risk register, city, and total budget as unclear (not addressed at this stage), identifies climate/hot-nights evidence, and notes that aggressive options are only listed as alternatives with warnings. B has weaker, inferential evidence (\"suggests\", \"seems\"), marks the risk register satisfied merely because GDPR is mentioned, misses the hot-nights evidence for the climate constraint, miscalculates \"60% of the budget\" released at Month 4 (it is about 43%), and uses a questionable citation (\"Bypass formal data sharing\") for the legislation constraint. A is more accurate and more decision-useful."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach overall \"pass\" and cover the same constraint list. They differ in how well they ground each verdict.\n\nCandidate A:\n- Its evidence is often paraphrased or loosely linked to the constraint. It cites lever UUIDs, but the reasoning is thin.\n- It marks the risk register \"satisfied\" on the strength of GDPR being mentioned. That is not a risk register, so \"unclear\" would be correct.\n- It marks \"Cooling access & transport\" satisfied by citing only cooling-center levers. It never checks whether transport is covered.\n- It marks the climate/hot-nights context \"unclear\" even though the levers refer to hot nights and multi-day events.\n- It treats \"Bypass formal data sharing\" as evidence for the legislation constraint. This is a stretch and arguably misreads the lever.\n- It justifies \"avoid aggressive scenario\" with the budget gate, not with what the levers actually recommend.\n\nCandidate B:\n- It uses direct quotes from the stage output as evidence, which makes each verdict checkable.\n- It handles the climate context correctly: hot nights and multi-day events appear in the levers.\n- It marks the risk register \"unclear\" and notes that no register appears at this stage.\n- It notes that transport appears only marginally, which is an honest caveat.\n- It addresses the \"avoid aggressive scenario\" constraint by observing that aggressive options are listed as alternatives with drawbacks flagged.\n- It gives better evidence for the construction, GDPR and apps constraints, such as \"non-structural\" assets, aggregate-only metrics, and radio/print weighting.\n- Its summary is more accurate.\n\nB is more faithful, better calibrated on satisfied versus unclear, and more useful for downstream checking."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

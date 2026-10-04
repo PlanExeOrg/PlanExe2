@@ -1,0 +1,61 @@
+{
+  "$defs": {
+    "Scenario": {
+      "properties": {
+        "scenario_name": {
+          "description": "A descriptive, memorable name for the scenario (e.g., 'The Pioneer's Gambit', 'The Pragmatic Foundation').",
+          "title": "Scenario Name",
+          "type": "string"
+        },
+        "strategic_logic": {
+          "description": "A brief (2-3 sentences) explanation of the scenario's core philosophy and how it resolves key project tensions.",
+          "title": "Strategic Logic",
+          "type": "string"
+        },
+        "lever_settings": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "A dictionary mapping each vital lever name to a specific chosen option. The chosen option MUST be one of the provided options for that lever.",
+          "title": "Lever Settings",
+          "type": "object"
+        }
+      },
+      "required": [
+        "scenario_name",
+        "strategic_logic",
+        "lever_settings"
+      ],
+      "title": "Scenario",
+      "type": "object"
+    }
+  },
+  "description": "The complete set of strategic scenarios.",
+  "properties": {
+    "analysis_title": {
+      "description": "A fitting title for the overall strategic analysis.",
+      "title": "Analysis Title",
+      "type": "string"
+    },
+    "core_tension": {
+      "description": "A one-sentence summary of the central trade-off the scenarios are designed to explore (e.g., 'The central tension is between maximizing long-term technological dominance and ensuring short-term project viability and cost control.').",
+      "title": "Core Tension",
+      "type": "string"
+    },
+    "scenarios": {
+      "description": "A list of exactly 3 distinct strategic scenarios.",
+      "items": {
+        "$ref": "#/$defs/Scenario"
+      },
+      "title": "Scenarios",
+      "type": "array"
+    }
+  },
+  "required": [
+    "analysis_title",
+    "core_tension",
+    "scenarios"
+  ],
+  "title": "ScenarioAnalysisResult",
+  "type": "object"
+}

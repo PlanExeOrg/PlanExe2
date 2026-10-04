@@ -1,0 +1,114 @@
+{
+  "stage": "enriched_levers_constraint",
+  "evaluated_at": "2026-10-04T17:53:24",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 12.6,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_constraint.json": {
+          "verdict": "baseline",
+          "score_new": 7.0,
+          "score_baseline": 7.5,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 7,
+              "score_baseline": 8,
+              "analysis": "The two candidates reach the same verdict. Both mark seven constraints satisfied, mark \"Project start ASAP\" unclear, and give overall_status pass. That classification is reasonable, since the levers never commit to an immediate start. The differences are in evidence quality and polish. A cites several lever references per constraint (for example the 20-year horizon in three levers, and the 100 m depth in Pillar, Buoyancy and Construction). That makes it more convincing and more useful as an audit trail. B gives one or two quoted snippets per constraint. These read as verbatim and are concise, and its ASAP evidence quote (\"compress the overall timeline\") is relevant. B's summary ends with a stray escaped quote (`unclear.\\\"`), a small formatting glitch. A's ASAP evidence is paraphrased rather than quoted, and one of its 20-year references is to an \"operational horizon\", which is slightly loose. Overall A is marginally more thorough and cleaner."
+            },
+            {
+              "winner": "tie",
+              "score_new": 7,
+              "score_baseline": 7,
+              "analysis": "Both candidates list the same eight constraints. Both mark seven as satisfied and \"Project start ASAP\" as unclear, and both give an overall \"pass\". The classifications match, so the difference is in the quality of the evidence. I could not see the enriched_levers file, so I could not check any quote against it.\n\nCandidate A uses short verbatim quotes, which are easy to verify. Each constraint gets one quote, and several of those are thin. For example, the duration evidence is a single sentence. A's summary ends with a stray escaped quote (`.\\\"`), which is a small formatting flaw. Its ASAP explanation is reasonable. It cites schedule compression and says nothing contradicts an ASAP start.\n\nCandidate B cites several levers per constraint, such as Phasing and Risk Strategy, Corrosion and Durability Management, and International Consortium Financing for the 20-year duration. For the Spain–Morocco link it cites Cross-Border Governance, Construction Deployment, and Subsea Logistics. That shows the constraints hold across the whole output, which is what this guardrail is meant to check. Its evidence is more paraphrased than quoted, and its ASAP evidence is a description rather than a quote. Its summary is clean and accurate.\n\nB's broader cross-lever evidence makes its verdicts better supported, and A is slightly better only on verbatim quoting. B is slightly better overall, but the gap is small."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 46.7,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Both candidates return overall_status \"pass\", and that verdict is plausible. They differ in how accurate the per-constraint judgments are.\n\nCandidate A uses direct quotes as evidence and marks \"unclear\" when the levers don't address a constraint. That covers budgets, cooling architecture, water, hall sizes, building heights, the full land-use model and the Phase 0/1/3/4 specifics. It treats the USD-denominated tenant-contract lever as a possible tension with the EUR-primary constraint and correctly says it is not a clear violation. It notes that the 12.7 km dimension is never stated and that Amsterdam and Marseille are omitted. It keeps the negative constraints tied to specific quotes. Its one weakness is the cancellation point, which it concedes is not explicit.\n\nCandidate B inflates \"satisfied\" ratings with weak or irrelevant evidence:\n- EUR as primary currency is \"satisfied\" because a USD-contract lever \"inherently assumes\" EUR.\n- USD exposure tracking is \"satisfied\" because USD contracts are a gating metric. That is a different thing from tracking hardware exposure.\n- The Phase 0, 1, 3 and 4 constraints are \"satisfied\" by loose inference.\n- The land-use model is \"satisfied\" on the basis of \"nearly every\" category.\n- The 12.7 km footprint is \"satisfied\" because 161 is the square of 12.7.\n\nB also has internal inconsistencies and errors:\n- \"50–100+ buildings\" is marked \"unclear\" while the explanation says it is satisfied.\n- Several \"unclear\" items cite irrelevant quotes, such as the H/R offices quote for water and the labor quote for PUE.\n- It drops Amsterdam from the connectivity constraint text and has a garbled \"‚c140B+\".\n- It treats the water negative constraint confusingly.\n\nA is more faithful, more precise and more useful downstream. B is sloppier and overstates satisfaction."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach overall \"pass\" and judge the negative constraints correctly as satisfied, so the difference is in how accurate and calibrated the per-constraint judgments are.\n\nCandidate A is internally inconsistent and too lenient.\n- It marks \"50–100+ buildings\" as \"unclear\" while its own explanation says the constraint is satisfied.\n- It marks \"12.7 km × 12.7 km\" satisfied with a strained argument: 161 km² is \"the square of 12.7 km\".\n- It marks \"EUR as primary currency\" and \"track USD exposure separately\" satisfied on weak inference. The evidence is only a USD-denominated tenant-contract option. The explanation reasons that this \"inherently assumes EUR is the primary baseline\".\n- It marks Phase 3, Phase 4, Phase 0 and the timeline satisfied on vague implication (\"implies\", \"strongly supports\").\n- It marks the full land-use model satisfied by stitching together fragments from three levers.\n- It garbles the budget text (\"€100B–‚c140B+\") and drops Amsterdam from the connectivity constraint.\n- Some of its evidence quotes are loose or tangential, for example citing workforce text as evidence for PUE and hall size.\n\nCandidate B is better calibrated.\n- It marks items \"unclear\" when the levers do not address them (cooling architecture, budgets, hall sizes, phase detail, USD tracking, EUR as primary currency).\n- It states the reason, namely that this is the lever stage rather than the full plan.\n- It uses precise quotes that support its verdicts, and it correctly marks the building count satisfied.\n- It notes that Amsterdam and Marseille are omitted from connectivity but not contradicted.\n- It notes that cancellation is not explicit but the alternatives suffice.\n- Its summary explains why many constraints are \"unclear\".\n\nFor a guardrail check, B's more honest and consistent classification is more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 39.0,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "A passes the levers with loose reasoning: it counts \"aggressive pacing\" as satisfying ASAP, which conflicts with the \"realistic, not most aggressive\" instruction. It also marks stakeholders satisfied with only the EU Agency for Railways shown, and its negative-constraint checks are generic. B uses precise quoted evidence and is better calibrated: it marks stakeholders, ASAP, the realistic scenario and the unstated numeric goals as unclear. It flags two negative constraints as violated by quoting options that keep national, non-harmonised parameters or give preferential inventory access. That is a real guardrail catch, though judging unchosen options as violations is debatable and B applies that standard inconsistently. Overall B is more rigorous and decision-useful."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "A grounds almost every judgment in quoted text from the levers, such as \"thirty-month mandatory exposure deadline\", \"the four initial launch corridors\" and \"full TEN-T network integration phase\". Its \"unclear\" calls are narrow and plausible: the 40% and halved-complaints targets, the stakeholders BEUC, CER and disability-rights bodies, and the ASAP start. It flags two negative constraints as violated, citing options that keep national or non-harmonised parameters and options that give preferential inventory access. Those quotes show real tension with the harmonisation and non-discrimination aims, which is the guardrail's purpose. However, A is somewhat inconsistent. For the buses/ferries/air constraint it says an option that de-scopes them is \"only an option\", yet it treats other options as violations. A \"fail\" based on unselected options may be over-strict.\n\nB's evidence is vague and refers to lever IDs and titles instead of quoting text. It makes several questionable claims. It says there is no direct mention of the regulation, and that the full TEN-T extension and the 60-month target are unclear, although A found supporting quotes. It marks \"Project start ASAP\" satisfied because the plan is \"aggressive\", which is weak reasoning and sits awkwardly with the \"not the most aggressive\" constraint. It marks the stakeholder constraint satisfied even though it names only some of the stakeholders. It passes all four negative constraints with generic reasoning and never checks whether any option works against them. It reports \"pass\" while leaving about nine constraints unclear. B is more lenient but less evidence-based and less useful for downstream stages.\n\nA is more specific, better grounded and more insightful, despite its debatable strictness."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 27.7,
+      "structure_problems": [],
+      "judgments": {
+        "enriched_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates return \"pass\" with no violations and cover the same constraints. The difference is how well each judges the unclear cases.\n\nCandidate A marks several constraints \"satisfied\" on stretched inferences:\n- Risk register: it counts passing mentions of GDPR and liability as satisfying a register. A lever-stage output cannot contain one, so \"unclear\" is the right call, which B gives.\n- Cooling access & transport: it cites only cooling-center levers and ignores the transport part of the scope item.\n- \"Do not rely on apps\": it argues from SMS being preferred over a \"less-defined\" app, which is weak.\n- Pilot footprint: it cites a budget-exhaustion review comment as evidence that the aggressive scenario is avoided.\n- Gate two: it infers compliance from a metrics reference.\n\nA also marks \"realistic program\", \"program goal\" and \"demonstrable reduction\" as unclear even though the levers clearly aim at reducing heat harm. Its \"unclear\" for location is defensible, because the levers never name the city or its size.\n\nCandidate B gives mostly direct-quote evidence, which is easier to verify. It marks the risk register, the total budget and the pilot footprint as unclear, which is the better calibration for a lever-stage output. It also notes that transport is only partly covered, through transit subsidies. Its weakest call is marking location satisfied on general consistency. Its explanations are terse but accurate.\n\nOverall B is better calibrated on the key borderline items. A is over-lenient on several and over-strict on others."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates return \"pass\" over the same constraint list, and both mark every banned word satisfied. The difference is calibration. I could not see the enriched_levers file, so I judged from the evidence each candidate quotes.\n\nCandidate A quotes the levers directly and flags the real gaps. It marks the €3.5M total as unclear and the risk register as unclear, which is correct because a risk register is not a lever-stage artifact. It marks \"avoid the most aggressive scenario\" as unclear, noting that the aggressive options are only alternatives and none is selected. It also notes that transport is covered thinly, through transit subsidies only. Its weak point is marking location satisfied on thin evidence, since nothing in the quoted levers states the city size.\n\nCandidate B cites lever IDs, which makes its evidence traceable. It marks several clearly satisfied items unclear, such as the realistic program and the program goal. It overclaims on the risk register, which it marks satisfied because risks are \"mentioned\". It marks the pilot-footprint constraint satisfied on a review that only warns about budget exhaustion. It marks \"cooling access & transport\" satisfied while citing only cooling-center levers. Its \"no apps\" evidence is a stretched inference from an SMS option. Marking location unclear is arguably more correct than A's choice.\n\nOverall, A is better calibrated and more precise about what the stage output can show, and it catches the transport thinness. B overclaims in several places and marks obvious items unclear."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

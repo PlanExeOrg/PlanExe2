@@ -1,0 +1,52 @@
+{
+  "$defs": {
+    "LeverClassificationDecision": {
+      "description": "Classification decision for a single lever.",
+      "properties": {
+        "lever_id": {
+          "description": "The lever_id being classified.",
+          "title": "Lever Id",
+          "type": "string"
+        },
+        "classification": {
+          "description": "primary: essential strategic decision, secondary: useful but supporting, remove: redundant, overlapping with another lever, or irrelevant to this plan.",
+          "enum": [
+            "primary",
+            "secondary",
+            "remove"
+          ],
+          "title": "Classification",
+          "type": "string"
+        },
+        "justification": {
+          "description": "Concise justification for the classification (~20-30 words).",
+          "title": "Justification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lever_id",
+        "classification",
+        "justification"
+      ],
+      "title": "LeverClassificationDecision",
+      "type": "object"
+    }
+  },
+  "description": "Complete deduplication result for all levers in a single call.",
+  "properties": {
+    "decisions": {
+      "description": "One classification per input lever. Must cover every lever_id from the input.",
+      "items": {
+        "$ref": "#/$defs/LeverClassificationDecision"
+      },
+      "title": "Decisions",
+      "type": "array"
+    }
+  },
+  "required": [
+    "decisions"
+  ],
+  "title": "DeduplicationResult",
+  "type": "object"
+}

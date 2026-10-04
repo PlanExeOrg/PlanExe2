@@ -1,0 +1,53 @@
+{
+  "$defs": {
+    "LeverCharacterization": {
+      "description": "Structured response for a single lever's enrichment from the LLM.",
+      "properties": {
+        "lever_id": {
+          "description": "The id of the lever — copy it verbatim from the prompt, without XML tags",
+          "title": "Lever Id",
+          "type": "string"
+        },
+        "description": {
+          "description": "A concise description (50-70 words) of the lever's purpose, scope, and key success metrics. Add new insight beyond what consequences and review already state.",
+          "title": "Description",
+          "type": "string"
+        },
+        "synergy_text": {
+          "description": "A brief text (20-40 words) naming one or two other levers this lever amplifies or enables, and why.",
+          "title": "Synergy Text",
+          "type": "string"
+        },
+        "conflict_text": {
+          "description": "A brief text (20-40 words) naming one or two other levers this lever constrains or trades off against, and why.",
+          "title": "Conflict Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lever_id",
+        "description",
+        "synergy_text",
+        "conflict_text"
+      ],
+      "title": "LeverCharacterization",
+      "type": "object"
+    }
+  },
+  "description": "The expected JSON structure for a batch of characterizations from the LLM.",
+  "properties": {
+    "characterizations": {
+      "description": "A list containing the full characterization for each requested lever in the batch.",
+      "items": {
+        "$ref": "#/$defs/LeverCharacterization"
+      },
+      "title": "Characterizations",
+      "type": "array"
+    }
+  },
+  "required": [
+    "characterizations"
+  ],
+  "title": "BatchCharacterizationResult",
+  "type": "object"
+}

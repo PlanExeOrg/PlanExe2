@@ -1,0 +1,115 @@
+{
+  "$defs": {
+    "FinalChoice": {
+      "description": "The final selection and justification.",
+      "properties": {
+        "chosen_scenario_name": {
+          "description": "The name of the single best-fit scenario.",
+          "title": "Chosen Scenario Name",
+          "type": "string"
+        },
+        "justification": {
+          "description": "A comprehensive justification (100-150 words) for the chosen scenario. This text MUST explain *why* it's the best fit by explicitly referencing the plan's characteristics (ambition, risk, etc.) and why the other scenarios are less suitable. Use markdown bullet points for clarity.",
+          "title": "Justification",
+          "type": "string"
+        }
+      },
+      "required": [
+        "chosen_scenario_name",
+        "justification"
+      ],
+      "title": "FinalChoice",
+      "type": "object"
+    },
+    "PlanCharacteristics": {
+      "description": "A structured analysis of the input plan's core nature.",
+      "properties": {
+        "ambition_and_scale": {
+          "description": "Analysis of the plan's level of ambition and its scale (e.g., personal, local, global, revolutionary).",
+          "title": "Ambition And Scale",
+          "type": "string"
+        },
+        "risk_and_novelty": {
+          "description": "Assessment of the inherent risk and novelty. Is it a proven formula, an experimental pilot, or a groundbreaking endeavor?",
+          "title": "Risk And Novelty",
+          "type": "string"
+        },
+        "complexity_and_constraints": {
+          "description": "Evaluation of the plan's operational complexity and stated constraints (e.g., budget, timeline, technical requirements).",
+          "title": "Complexity And Constraints",
+          "type": "string"
+        },
+        "domain_and_tone": {
+          "description": "The plan's subject matter and overall tone (e.g., corporate, scientific, personal, creative).",
+          "title": "Domain And Tone",
+          "type": "string"
+        },
+        "holistic_profile_of_the_plan": {
+          "default": "",
+          "description": "A concise, holistic summary synthesizing the above characteristics into a single profile of the plan's strategic intent.",
+          "title": "Holistic Profile Of The Plan",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ambition_and_scale",
+        "risk_and_novelty",
+        "complexity_and_constraints",
+        "domain_and_tone"
+      ],
+      "title": "PlanCharacteristics",
+      "type": "object"
+    },
+    "ScenarioFitAssessment": {
+      "description": "An assessment of how well a single scenario fits the plan.",
+      "properties": {
+        "scenario_name": {
+          "description": "The name of the scenario being assessed.",
+          "title": "Scenario Name",
+          "type": "string"
+        },
+        "fit_score": {
+          "description": "A numerical score from 1 (poor fit) to 10 (perfect fit) indicating how well this scenario aligns with the plan's holistic profile.",
+          "title": "Fit Score",
+          "type": "integer"
+        },
+        "fit_assessment": {
+          "description": "A brief (1-2 sentences) rationale for the assigned fit score.",
+          "title": "Fit Assessment",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scenario_name",
+        "fit_score",
+        "fit_assessment"
+      ],
+      "title": "ScenarioFitAssessment",
+      "type": "object"
+    }
+  },
+  "description": "The root model for the entire analysis output.",
+  "properties": {
+    "plan_characteristics": {
+      "$ref": "#/$defs/PlanCharacteristics"
+    },
+    "scenario_assessments": {
+      "description": "An assessment for every single scenario provided.",
+      "items": {
+        "$ref": "#/$defs/ScenarioFitAssessment"
+      },
+      "title": "Scenario Assessments",
+      "type": "array"
+    },
+    "final_choice": {
+      "$ref": "#/$defs/FinalChoice"
+    }
+  },
+  "required": [
+    "plan_characteristics",
+    "scenario_assessments",
+    "final_choice"
+  ],
+  "title": "ScenarioSelectionResult",
+  "type": "object"
+}

@@ -1,0 +1,114 @@
+{
+  "stage": "triage_levers",
+  "evaluated_at": "2026-10-04T17:50:38",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 21.1,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure, and the classifications are nearly identical. They agree on the 8 primary levers: pillar, buoyancy, deployment, governance, environment, rail, phasing and financing. They also agree on most secondaries and on removing float-down sequencing, deep-water quarries, habitat restoration and marine energy. The one real difference is the Geotechnical Anchoring lever (dd160a01). A removes it as a duplicate of Pillar Architecture. B keeps it as secondary.\n\nA's removal is defensible. Pillar Architecture already lists tension-leg drilled foundations versus gravity-based pillars, and the anchoring lever's drilled/gravity/grouted options overlap those. The anchoring lever does add the cement-injection option, though, and anchoring is safety-critical at 100 m depth, so B's cautious choice is also reasonable.\n\nA's justifications are tighter and more insightful. It names the lever each removed one overlaps with, for example \"essentially repeats the Construction Deployment lever's options\". It also calls the quarries lever \"unrealistic and conceptually flawed\", which is a real quality judgement. B's quarries justification says it is \"a subset of the Subsea Logistics and Supply Chain lever\", which is weaker because the quarries idea is a flawed premise, not just a subset. B's justifications are longer, and they often restate the lever's consequences text. B's marine energy justification, \"tangential to the tunnel's core transportation function\", is fine.\n\nNeither response is truncated, and both carry the survivors' fields correctly. A drops one more lever, which is better for deduplication, but it risks losing the anchoring detail. Overall A is slightly sharper and more decision-useful."
+            },
+            {
+              "winner": "tie",
+              "score_new": 6,
+              "score_baseline": 6,
+              "analysis": "The two candidates classify 14 of the 18 levers identically. Both give primary to pillar architecture, buoyancy, construction deployment, governance, environmental compliance, rail, phasing and financing. Both give secondary to logistics, hydrodynamics, corrosion, workforce and surveillance. Both remove float-down sequencing, deep-ocean sourcing, habitat restoration and marine energy. Both also have valid structure, with the same lever list and classifications attached.\n\nThe only classification difference is Geotechnical Anchoring. A keeps it as secondary. B removes it as a duplicate of Pillar Architecture. B's reasoning has some basis, because Pillar Architecture's options already cover drilled tension-leg versus gravity foundations. But foundations on the Gibraltar seabed are a distinct engineering decision, so removing it risks losing a downstream decision area. A's choice is the safer one here.\n\nOn justifications, B's are shorter but more insightful in places. It says float-down sequencing is \"subsumed\" by Construction Deployment, which makes the deduplication link explicit. It also calls deep-water quarries \"unrealistic and conceptually flawed\", which is a real catch. A's justifications are longer and more generic, though they are still plan-specific. A also makes a small conceptual slip by tying corrosion to the \"20-year structural lifespan\". The 20 years is the construction horizon, not the design life of the tunnel.\n\nOverall they are close. A is more conservative about keeping levers. B's justifications are sharper and its deduplication logic is clearer. I give B a very slight edge."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 18.0,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Coverage: B classifies all 13 levers with real justifications. A leaves one lever (e28bc006) unclassified, with the placeholder \"Not classified by LLM\", so the model skipped it and the code defaulted it to secondary. Deduplication: A keeps both fiber levers (a4c4412a and b50b7c15) even though they overlap heavily on terrestrial vs. subsea routes and carrier dependency, and A itself says b50b7c15 falls under a4c4412a. B removes b50b7c15 as a duplicate. B also removes the power sequencing lever (e28bc006) as subsumed by the grid integration lever, which is defensible. A removes d5452c61 as overlapping the tenant threshold lever, while B keeps it as secondary for its distinct Phase 1 contract-structure content. Either choice is reasonable. Both pick the same five primaries (grid, land assembly, security/sovereignty, tenant threshold, and the sovereign alignment lever). B's justifications tie more closely to the plan's gates, for example \"explicit in the plan's phase gates\" and \"longest uncontrolled path\". Overall B is more complete and dedups more coherently."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "A classifies all 14 levers. B leaves out e28bc006, which falls back to the default secondary with a placeholder \"Not classified by LLM\" justification. A also deduplicates more thoroughly, because it removes the near-duplicate fiber lever b50b7c15. B keeps it as secondary even though its own justification says it falls under the broader connectivity lever a4c4412a, which is internally inconsistent. Both candidates pick the same primary levers (grid, land, security, tenant trigger), and those picks are well justified. A's justifications are slightly more plan-specific, for example \"longest uncontrolled path\" for security. A's removal of e28bc006 as overlapping the grid lever is debatable, since power procurement and hedging is somewhat distinct. It is still a reasoned call, whereas B never made one. B's removal of d5452c61 is defensible, and so is A's choice to keep it. Overall A is more complete, more consistent, and has less redundancy."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 22.9,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates cover every lever, and their triaged_levers lists are consistent with their own classifications. They differ in how well they deduplicate and how selective they are about primaries.\n\nCandidate A keeps 7e10ade0 (handling incomplete journey data) as a primary lever next to 1f32c7c8 (backstop liability scope). The options in those two levers largely overlap: a pooled insurance fund, distributor-borne full liability, and fault-based carrier liability. A even calls 7e10ade0 \"intertwined with liability structuring\". That is a duplicate left in, and it is a primary. A also marks the early-adopter incentive lever (bbb8d8f0) as primary, which is weak. It is a supporting tactic that overlaps with enforcement and API pacing. A ends up with 7 primaries out of 14 survivors, so the triage is less discriminating. A's justifications are also fairly generic.\n\nCandidate B removes 7e10ade0 as a substantial overlap with the backstop lever. It also removes the four other near-duplicates: 2d40e902, 598bad2e, a17bbcb9 and 8621508d. Its justifications name which overlapping lever is kept. It demotes bbb8d8f0 to secondary. It points out that the 30-month API deadline is already fixed by the plan, so the pacing lever is only a delivery-level choice. It also ties pacing to the plan's \"realistic scenario\" instruction. It ends with 5 primaries (backstop liability, commercial terms, binding-standards pacing, clearing capitalization, enforcement). That set matches the program's core pillars better. B's justifications are more specific to this plan and more decision-useful for later stages.\n\nB's removal of 7e10ade0 is debatable, but it is defensible and applied consistently. Overall B has the sharper, better-reasoned triage."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates classify 14 of the 17 levers identically and remove the same four duplicates (2d40e902, 598bad2e, a17bbcb9, 8621508d). They differ on 7e10ade0 and bbb8d8f0. A removes 7e10ade0 as a duplicate of the passenger-rights backstop lever, which is correct because its liability-allocation options largely restate the backstop's. B keeps it as primary, calling it \"intertwined with liability structuring\". That contradicts B's own removal of 598bad2e on overlap grounds and leaves two near-identical primary liability levers. A treats early-adopter incentives as a secondary adoption tactic, since enforcement and the mandatory deadlines are the real drivers. B marks it primary with a generic rationale. A ends with a tighter set of 5 primary levers against B's 7, and its justifications are more plan-specific (30-month deadline, €1.5B envelope). A is therefore better at deduplication and prioritisation."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 21.2,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 5.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates classify all levers with consistent structure and mostly agree on removals. A's primary set (cooling network, home interventions, health data loop, alert/governance, identification modality, cooling-center staffing) better matches the prompt's critical scope and constraints: the health-system data loop under GDPR is a required scope element, and the staffing model underpins the \"could actually be hired\" constraint and the Month 2 gate. A's justifications cite concrete plan gates and constraints. B demotes the health data loop and staffing model to secondary, leaving only 4 primaries, and its justifications are more generic (\"supports the broader goal\"). A's removal of the home distribution lever is defensible overlap, though that lever has some distinct content; B keeping it as secondary is also reasonable. Overall A is more plan-specific and better calibrated."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "The two candidates differ only in their classification decisions. The lever text is identical.\n\nWhere they differ:\n- Health System Integration and Data Loop (8e8d25a0): A makes it secondary, calling it merely \"supporting coordination\". The prompt makes this a required scope item with explicit GDPR constraints, and it is central to protecting healthcare capacity and measuring outcomes. B makes it primary, which fits the plan better.\n- Operational Staffing Model Selection (260b3717): A makes it secondary. B makes it primary, tying it to the \"could actually be hired\" constraint, the Month 2 readiness gate and cost. This is better aligned with the prompt's realism requirements.\n- Home Intervention Distribution Strategy (56adcb41): A keeps it as secondary. B removes it as overlapping with the Deployment Focus lever. The overlap is plausible, because both choose how kits reach homes. Removal does lose a distinct distribution and installation-support dimension, which the prompt asks for explicitly, so A's choice is also defensible.\n- Worker-related lever (8357fc55): both remove it as a subset of Workforce Protection, so they agree here.\n\nJustification quality:\n- B's justifications tie directly to the plan's gates (Month 2, Month 4), the GDPR constraint and the hiring-feasibility constraint.\n- A's justifications are more generic. They also embed raw lever IDs in the text, which is less readable.\n\nBalance:\n- A has 4 primary levers, which leaves out health-system data and staffing, both core to the prompt.\n- B has 6 primary levers, which is more sensible.\n- B's single questionable call is removing the distribution lever, and that is a weaker error than A's demotion of health-system integration.\n\nOverall, B is better."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

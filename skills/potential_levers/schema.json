@@ -1,0 +1,75 @@
+{
+  "$defs": {
+    "Lever": {
+      "description": "Schema sent to the LLM for structured output generation.\n\nField names and descriptions here directly influence LLM output quality.\nRenaming fields or changing descriptions is a prompt change — test with\na self_improve iteration before merging. See OPTIMIZE_INSTRUCTIONS above.",
+      "properties": {
+        "lever_index": {
+          "description": "Index of this lever.",
+          "title": "Lever Index",
+          "type": "integer"
+        },
+        "name": {
+          "description": "Name of this lever.",
+          "title": "Name",
+          "type": "string"
+        },
+        "consequences": {
+          "description": "What happens when this lever is pulled? Describe the direct effect and at least one downstream implication or trade-off. Be concise and grounded — only cite numbers if the project context provides evidence for them. Do NOT include 'Controls ... vs.', 'Weakness:', or other review/critique text in this field — those belong exclusively in review_lever. Target length: 2–4 sentences.",
+          "title": "Consequences",
+          "type": "string"
+        },
+        "options": {
+          "description": "Exactly 3 options for this lever. No more, no fewer. Each option must be a complete strategic approach (a full sentence with an action verb), not a label.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Options",
+          "type": "array"
+        },
+        "review_lever": {
+          "description": "Critical review of this lever (one sentence, 20–40 words). See system prompt section 4 for examples. Do not use square brackets or placeholder text.",
+          "title": "Review Lever",
+          "type": "string"
+        }
+      },
+      "required": [
+        "lever_index",
+        "name",
+        "consequences",
+        "options",
+        "review_lever"
+      ],
+      "title": "Lever",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "strategic_rationale": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "A concise strategic analysis (around 100 words) of the project's core tensions and trade-offs. This rationale must JUSTIFY why the selected levers are the most critical levers for decision-making. For example, explain how the chosen levers navigate the fundamental conflicts between speed, cost, scope, and quality.",
+      "title": "Strategic Rationale"
+    },
+    "levers": {
+      "description": "Propose 5 to 7 levers.",
+      "items": {
+        "$ref": "#/$defs/Lever"
+      },
+      "minItems": 5,
+      "title": "Levers",
+      "type": "array"
+    }
+  },
+  "required": [
+    "levers"
+  ],
+  "title": "DocumentDetails",
+  "type": "object"
+}

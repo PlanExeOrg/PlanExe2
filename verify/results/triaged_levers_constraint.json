@@ -1,0 +1,114 @@
+{
+  "stage": "triaged_levers_constraint",
+  "evaluated_at": "2026-10-04T17:52:25",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 14.0,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure and give the same verdicts. Seven constraints are marked satisfied, ASAP is marked unclear, and the overall status is pass. The difference is in the quality of the reasoning. A quotes the stage output directly. A also notes two nuances: the fixed-buoyancy option accepts some positional variance against the 100 m depth, and some review notes mention multi-year delays against the ASAP start. It judges both to be risk notes rather than contradictions. That is a more careful guardrail check. B's evidence is mostly descriptive paraphrase (\"The output repeatedly references...\") with a few quotes. It gives no sign that it checked for tension with the constraints and mostly says the output mentions them. B's summary is more verbose but adds nothing. A is slightly stronger on specificity and insight."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure and reach the same verdicts: seven constraints satisfied, ASAP unclear, overall pass. The difference is in the quality of the evidence and the reasoning.\n\nA gives several quotes per constraint, which looks thorough. But some are weak or mismatched. For the 20-year duration it cites \"20-year structural lifespan\" and \"20-year lifecycle\", which are not the same thing as project duration. It also never addresses the tension in the 100 m depth constraint. Its ASAP explanation is generic.\n\nB picks a single, precise quote for each constraint. It also reasons about edge cases. It says cost-overrun warnings are risk notes, not contradictions of the budget. It says the fixed-buoyancy option's positional variance does not contradict the 100 m constraint, because it is only one option. It says the multi-year delay notes do not actively contradict ASAP. This is the kind of judgment a guardrail check is meant to make. B is also more concise.\n\nB is slightly better on correctness and insight. A's extra quotes add little and include some imprecise matches."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 85.6,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach overall \"pass\" with the same constraint list, so the difference is how accurate the individual judgments are.\n\nCandidate A has several weak or inconsistent judgments:\n- It marks the PUE target as satisfied because PUE is mentioned as a benchmark. The 1.15–1.25 range is never confirmed.\n- It marks the water strategy as satisfied by inference from heat reuse. B correctly sees that no lever covers water.\n- It marks the land-use model as satisfied, which overstates what the levers cover.\n- It marks \"Today's date\" as satisfied with vague evidence.\n- It marks Phase 0 as unclear even though its own explanation says the levers confirm Phase 0 relevance.\n- It treats the USD-only tenant-contract lever as evidence that EUR is the default currency. That reasoning is backwards.\n- Its evidence is mostly paraphrase with lever IDs, not verbatim quotes.\n- It marks \"50–100+ buildings\" as unclear and misses the lever text that cites it.\n\nCandidate B is more faithful and better calibrated:\n- It uses verbatim quotes as evidence.\n- It marks PUE, water, cooling and the land-use model as unclear, which fits a stage where the levers do not cover those topics.\n- It finds the \"50–100+ buildings\" reference.\n- It flags the real tensions: the USD-denominated tenant contract option against EUR as primary currency, the option to delay heat reuse to Phase 3 against the Phase 2 heat-reuse pilots, and the \"high-rise mandate\" phrasing.\n- It judges these tensions fairly, as scenario options and not violations.\n- Its summary is accurate and useful for downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach \"pass\", which looks right: no constraint is clearly violated. They differ in how carefully they judge each constraint.\n\nCandidate A quotes the lever text directly as evidence, which makes its judgments checkable. It marks constraints \"unclear\" when the levers don't address them: water strategy, cooling, PUE target, budgets, and hall sizes. It correctly notes that the water gap is \"a gap, not a contradiction\". It flags two real tensions with the brief without overcalling them as violations. One is the USD-denominated tenant-contract option against EUR as primary currency. The other is the option to delay heat reuse to Phase 3 against the Phase 2 heat-reuse pilots. It also notes that the \"high-rise mandate\" phrase loosely mischaracterizes the low-to-mid-rise model. It finds a quote for the 50–100+ buildings constraint.\n\nCandidate B relies on lever IDs and paraphrases, and several \"satisfied\" verdicts rest on weak inference:\n- Water strategy is marked satisfied by \"implying alignment\".\n- PUE target is marked satisfied because the levers mention \"predictable PUE metrics\", though the 1.15–1.25 range is never stated.\n- Today's date is marked satisfied \"implicitly\".\n- Separate USD exposure tracking for hardware is marked satisfied because of a lever about USD tenant contracts. That is a misreading, since the lever is not about hardware exposure.\n- The land-use model is marked satisfied on thin evidence.\n\nB misses the currency tension that A caught. It also marks the 50–100+ buildings constraint unclear, although A found a direct quote for it. B's evidence is vaguer and its verdicts are more generous.\n\nA is more rigorous, more precise, and more useful for downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 43.5,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach \"pass\", which seems right. They differ in how well their evidence is grounded and how well they calibrate.\n\nCandidate A quotes the stage output directly, for example 'initial four corridors', 'until the full TEN-T network integration phase' and 'the thirty-month mandatory exposure deadline'. It marks as \"unclear\" the items the levers don't address: the regulation is never named, bicycles appear only in passing, the 40% and complaints-halved goals aren't mentioned, and the ASAP start isn't covered. That is honest and useful. It also notes that some options, such as de-scoping the hooks or delaying exposure by 18 months, are alternatives and not the recommended direction. Its one weak spot is that it calls the stakeholder constraint satisfied even though BEUC, CER and disability-rights bodies aren't named, though it flags this itself.\n\nCandidate B leans on lever UUIDs and generic inferences. It has several errors or overreaches:\n- It cites the reduction-cards lever (a9fb8a6d) as evidence for harmonised refunds, which is a misattribution.\n- It marks the 40% and complaints-halved goals \"satisfied\" with only speculative links.\n- It marks \"Project start ASAP\" satisfied because of \"aggressive timelines\". That contradicts the constraint to pick a realistic scenario, not the most aggressive one.\n- It marks the regulation alignment \"satisfied\" based on the \"known objectives\" of the regulation, not on anything in the output.\n- It marks TEN-T extension \"unclear\" although the output does mention the full TEN-T integration phase.\n- It credits the stakeholder constraint to stakeholder concerns that it doesn't show in the output.\n\nA is more accurate, better calibrated and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates use the same structure and reach \"pass\". Candidate A inflates its statuses: it rates \"satisfied\" several constraints it admits are not explicitly addressed (60-month through-ticketing, 40% goal, complaints halved, ASAP). It also contains inconsistencies, such as citing the reduction-cards lever as evidence for harmonised refunds, and it marks TEN-T extension \"unclear\" when the output apparently mentions the TEN-T integration phase. Candidate B grounds its evidence in direct quotes and marks weakly addressed items (regulation alignment, refunds, bicycles, 40% goal, complaints, ASAP) as \"unclear\". It also checks the risky alternative options inside levers, such as delayed exposure and de-scoping hooks, and explains why they are not the recommended direction. B's calibration is better and more useful downstream. Its minor weakness is a lenient \"satisfied\" on stakeholders and on the 60-month item."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 62.6,
+      "structure_problems": [],
+      "judgments": {
+        "triaged_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both return \"pass\" with the same constraint list, but they differ in how well each verdict is supported.\n\nCandidate A has thin or stretched evidence. It marks the €3.5M total budget \"satisfied\" from a mention of the initial €2.0M. It marks the risk register \"satisfied\" from fragments such as \"alert fatigue\", which is not extreme-event surge. It claims a lever option \"is marked 'remove' ... via overlap\", which looks shaky or invented. It treats multilingual communication as implicitly covered by NGO trust and visual posters. Its banned-word checks do not look for synonyms, although the stage says synonyms count.\n\nCandidate B quotes specific lever language such as \"multilingual telephone hotline\", \"temporary shade structures\" and \"specialist installation crew\". It is better calibrated: the total budget and the risk register are \"unclear\" because they are not stated at this stage, and it notes that transport coverage is thin. It checks banned-word synonyms. It also flags the GP-managed opt-out registry as a mild GDPR friction point, which is useful for later stages. Its summary is more honest about residual concerns.\n\nB is more faithful to the stage output, better calibrated and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach overall_status \"pass\" and cover the same constraint list, so the difference is in how accurate and well supported each judgment is.\n\nCandidate A quotes the lever text directly as evidence. It marks the constraints that this stage can't verify as \"unclear\": the city location, the €3.5M total budget, and the risk register. It correctly says a risk register belongs to a later deliverable. It also notes the real GDPR friction in the opt-out registry option and the 24/7 hub option's cost trade-offs, without treating either as a violation. For the banned terms, it checks synonyms as the stage instructions require (distributed ledger, virtual reality and so on). For the \"no apps\" constraint, it cites the channels the levers actually propose. Its one weak point is that it counts transport as \"satisfied\" on thin evidence (\"transit subsidies\"), but it admits the coverage is brief.\n\nCandidate B's evidence is looser, and some of its judgments are overstated.\n- It marks the €3.5M total budget \"satisfied\" on the strength of a single mention of the €2.0M initial budget.\n- It marks the risk register \"satisfied\" because the levers mention GDPR, staff safety and alert fatigue. That is an inference, and no risk register exists at this stage.\n- Its multilingual evidence is weak: it cites visual posters for low-literacy populations and calls multilingual needs \"addressed implicitly\".\n- It claims lever d14039b5 option 2 is \"marked 'remove' in the triage section via overlap with the primary option\". That is dubious and seems partly invented.\n- It describes the gate-release constraint by pointing to context outside the stage output.\n- It does cite lever IDs, which helps traceability, but the explanations are more generic.\n\nOverall A is more precise, more calibrated and more useful as a guardrail check."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

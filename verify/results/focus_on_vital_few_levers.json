@@ -1,0 +1,114 @@
+{
+  "stage": "focus_on_vital_few_levers",
+  "evaluated_at": "2026-10-04T17:52:16",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 22.4,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_raw.json": {
+          "verdict": "baseline",
+          "score_new": 5.0,
+          "score_baseline": 8.0,
+          "runs": [
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 8,
+              "analysis": "Both candidates have the same structure. Each rates all 14 levers and gives a summary. Each outputs five levers in enriched-list order, consistent with the code's selection rule (Critical first, then High, up to five).\n\nA rates 3 Critical and 2 High, with the rest Medium. That gives exactly five vital levers: Pillar Architecture, Construction Deployment, Cross-Border Governance, Environmental Compliance and Phasing. The selection is clean, with no tie-breaking by list order. Environmental Compliance is a real permitting gate for this project. A's justifications are concrete and tied to the lever relationships. A does not use Low for anything, and it rates Financing Medium, which is arguable. Its summary clearly explains the five picks.\n\nB rates 4 Critical and 4 High, plus 1 Low. This is the inflation the 80/20 stage is meant to prevent. Four Criticals already fill most of the five slots. The fifth slot then goes to whichever High comes first in list order, which is Buoyancy Engineering. B's own justification calls Buoyancy \"largely downstream\". Environmental Compliance, Financing and Anchoring are all rated High and are left out. So the final selection is arbitrary and weaker. B also appears to have swapped the IDs for Hydrodynamic Load Mitigation and Geotechnical Anchoring relative to A. That would be a correctness risk, though I can't verify which is right. B's summary does flag missing dimensions (safety, demand forecasting, seismic risk), which is useful. That doesn't make up for the weaker prioritisation and the rating inflation.\n\nOverall A produces the more decision-useful, discriminating selection."
+            },
+            {
+              "winner": "baseline",
+              "score_new": 5,
+              "score_baseline": 8,
+              "analysis": "Stage needs ~5 vital levers, with selection in code by Critical→High→Medium order until 5 are chosen. A rates 4 Critical + 4 High, so the code picks 4 Critical plus the first High in list order (Buoyancy), which A itself calls \"largely downstream.\" That drops Environmental Compliance and Financing, the stronger High levers, and contradicts A's own summary. A also rates Anchoring High while calling it partly redundant. A's note on missing dimensions (safety, demand, seismic) is a plus. B rates exactly 3 Critical + 2 High, so the 5 selected are Pillar, Construction, Governance, Environmental and Phasing. That set is sensible and consistent with the summary and the redundancy reasoning. B's weaknesses: Financing is arguably underrated, and the Medium group is large. B is better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 17.4,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 3.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 3,
+              "analysis": "Candidate B is better. The deciding issue is that Candidate A mismatches lever IDs and names.\n\nCandidate A's assessments pair IDs with the wrong names. b50b7c15 is labeled \"Power Procurement Sequencing\" and rated Critical. In A's own levers list, though, that ID is the fiber redundancy lever. Likewise e28bc006 is labeled \"Social License\", and e2aeb220 is labeled \"Fiber Redundancy\". Selection in code works by lever_id. So A's \"Critical\" rating for Power Procurement actually selects the fiber redundancy lever as one of the five vital levers. The real Power Procurement lever (e28bc006) is never rated as intended. A's justifications also contradict its own ratings. It calls fiber \"Medium\" under one ID but picks the fiber lever as a top-five lever through another ID. A rates five levers Critical, which weakens the 80/20 prioritization. It also marks Heat Reuse and Workforce as High, which is generous. Its summary does not flag any missing dimensions.\n\nCandidate B's IDs, names and content line up. Grid, Land and Tenant Trigger are Critical. Security, Power Procurement and Social License are High. Heat reuse, workforce and fiber ownership are Medium. The redundant fiber redundancy lever is Low. Code selection yields grid, land, security, tenant and power procurement, which is a sensible vital few. B's justifications are concise and plan-specific. They note overlap between the grid and power procurement levers and between the two fiber levers. They also flag that the 161 km² assumption may be infeasible. B's summary names gaps: financing structure, water/cooling strategy, and FX/USD exposure. These are real gaps against the prompt."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 3,
+              "analysis": "Candidate A's lever IDs match their names, and its ratings are discriminating. Three levers are Critical (Grid, Land, Tenant Trigger) and three are High. The selection rule yields Grid, Land, Security, Tenant, and Power Sequencing, which is a coherent vital few. Its justifications weigh overlap between levers, and its summary notes missing dimensions. Candidate B mismatches several IDs and names: e28bc006, e2aeb220, and b50b7c15 each carry the wrong lever's name and justification. The code selects by ID, so B's selection includes Fiber Redundancy (b50b7c15 rated Critical) and drops the real Power Procurement and Social License levers. B also rates five levers High, which dilutes the focus, and its output levers list contradicts its own summary. A is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 24.8,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A discriminates well: 5 Critical, 5 High, 3 Medium and 1 Low. The five Critical levers (backstop scope, commercial terms, clearing capitalization, enforcement, API exposure pacing) are exactly the five levers in its output list, so the code-based selection is consistent with the ratings. The justifications are specific. They cite hub connections, tensions and overlaps, for example that the failure thresholds are a parameter of the backstop and that the incomplete-data lever overlaps with the backstop. They also flag weak synergy texts and note gaps in the lever set. The summary matches the ratings.\n\nCandidate B rates six levers Critical, which weakens the \"vital few\" idea. The selection step therefore drops one Critical lever, enforcement, from its five output levers, and that lever is not the lowest-ranked of the six. Its summary is inconsistent with its own ratings and output. It names \"enforcing Data Exposure (25)\" and \"Pacing Standard Adoption (12)\" with odd numbers, and it lists the commercial-terms lever as \"for Operators\". It rates the incomplete-data lever Critical even though that lever largely overlaps with the backstop, and it rates the Low-leaning non-core hooks lever Medium. Its justifications are more generic and show less awareness of lever interdependencies. It uses no Low rating at all.\n\nA is more faithful to the stage's purpose, more internally consistent and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate B is better. It selects exactly five Critical levers and its output is consistent with that. Candidate A over-rates and is internally inconsistent.\n\n**Candidate A**\n- It rates six levers Critical: backstop scope, commercial terms, incomplete data, binding pacing, clearing financing and enforcement. It also rates six High, so little is differentiated.\n- Its summary names a different top five. It lists pacing, data-exposure enforcement, clearing, liability and commercial terms, and leaves out incomplete-data handling. It also contains stray numbers like \"(12), (25), (7), (1), (4)\".\n- The selected levers in its output are 1f32, c468, 7e10, aabd and 7e41. The code takes the first five Critical in list order, so enforcement (2562) is dropped even though the summary highlights it. This is the inconsistency that matters for downstream stages.\n- The justifications are generic and mostly restate the lever. The one Medium rating, for the non-core modes lever, is reasonable.\n\n**Candidate B**\n- It rates exactly five levers Critical: backstop scope, commercial terms, clearing capitalization, enforcement and API exposure pacing. These match the selected levers in its output and its summary.\n- It uses the full scale, including a Low for the peripheral non-core modes lever and Medium for reduction cards, accessibility and incomplete data.\n- Its justifications are specific. They note hub connectivity, overlap between levers (incomplete data overlaps the backstop; binding pacing overlaps API pacing), and self-referential synergy texts.\n- Its summary also flags gaps: no lever covers stakeholder alignment, and none covers rollout beyond the four corridors.\n- Rating accessibility only Medium is debatable, since it is a legal requirement. The reasoning given is defensible, though."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 20.0,
+      "structure_problems": [],
+      "judgments": {
+        "vital_few_levers_raw.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates rate all 13 levers and output five selected levers. B is better. Its ratings are internally consistent. It rates exactly five levers Critical (Cooling Activation, Home Deployment Focus, Triggering/Governance, Identification, Operational Staffing), and its summary names those same five. Selection is therefore clean, and the five output levers match the Critical set. B's justifications are specific to this plan: they cite the Month 2 and Month 4 gates, the home-vs-center trade-off, and GDPR vs coverage. They also flag redundancy among the Distribution, Procurement and Utilization levers, which is the kind of judgment an 80/20 pass should make. B's summary also notes missing dimensions (evaluation design, surge risk, equity targeting). That is useful for downstream stages.\n\nA rates only three levers Critical. Its summary then claims \"four 'Critical' levers\" and lists Outreach Staffing Model Composition as one of them, although A rated that lever High. That is a clear internal inconsistency. A also rates Cooling Center Activation and Home Deployment only High, even though its own justifications call them central, and it rates Staffing High despite saying it determines the gates. As a result, code-based selection fills the last two slots with the first Highs in list order, which is arbitrary. A's justifications are decent, but the Critical/High split is less discriminating and the summary is wrong. A does keep Health System Integration as Critical, which is defensible. The selected set it produces is less well supported."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A rates exactly five levers Critical: Triggering/Governance, Cooling Center Activation, Identification, Home Deployment Focus, and Operational Staffing. The selection step therefore produces a clean, unambiguous top five, which is the stage's purpose. These are the levers that decide the Month 2 and Month 4 gates, the GDPR-versus-coverage tension, the centers-versus-home trade-off and staffing feasibility. Its justifications cite plan-specific gates and trade-offs. It recognizes that the Utilization Mandate and Distribution Strategy overlap with other levers and rates them Medium. Its summary matches its ratings and names the missing dimensions (evaluation, surge, equity). The one weakness is that Health Integration is only High, though that is defensible given its narrower leverage.\n\nCandidate B rates only three levers Critical and five High. The code must then pick two of the five High levers by list order, which is arbitrary. Cooling Center Activation and Home Deployment are High, so this ordering happens to select them, but Operational Staffing, which B itself calls crucial for the gates, is left out. Cooling centers are arguably the core of the program, so rating them below the Health Data Loop is questionable. B's summary says four Critical levers and lists Outreach Staffing Model Composition among them, but the assessments rate that lever High, so the summary contradicts the ratings. B also rates Home Distribution Strategy High while the Deployment Focus and Procurement levers overlap with it, which dilutes prioritization. Its justifications are reasonable but less discriminating.\n\nOverall, A is more consistent and gives a more decision-useful selection."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

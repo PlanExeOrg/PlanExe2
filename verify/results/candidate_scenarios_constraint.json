@@ -1,0 +1,114 @@
+{
+  "stage": "candidate_scenarios_constraint",
+  "evaluated_at": "2026-10-04T17:55:27",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 21.4,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios_constraint.json": {
+          "verdict": "new",
+          "score_new": 6.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the correct structure, cover the same eight constraints, and reach \"pass\". They differ on two judgments and on how careful the evidence is.\n\nASAP start: A marks it \"unclear\". It notes that the scenarios don't discuss a start date and that the Consolidator's Anchor is deliberately slower. B marks it \"satisfied\" because the Pioneer's Gambit stresses \"speed-to-completion\". That conflates completion speed with an immediate start, and it ignores the scenario that trades speed away. B is the weaker call here.\n\nHigh-speed rail: B marks it \"unclear\" because only \"rail infrastructure\" appears and \"high-speed\" is never stated. That is the stricter reading. A marks it \"satisfied\" while admitting that \"High-speed is not stated explicitly\", which is slightly inconsistent and lenient. B is better on this one.\n\nEvidence quality: A's quotes are more precise. It notes that \"concrete\" is never named but nothing contradicts it, and it ties the 20-year and €40 billion constraints to the core tension without overclaiming. B's evidence is generic in places, such as \"all scenarios describe cross-border construction\". B's summary also says constraints are \"explicitly satisfied\" where the support is thin.\n\nOverall, each has one lenient call. B's ASAP error is the larger logical stretch. A's evidence is better grounded, so A is slightly better."
+            },
+            {
+              "winner": "tie",
+              "score_new": 6,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure, list the same eight constraints, and reach overall_status \"pass\". Each makes one questionable call.\n\nA marks \"high-speed rail\" as unclear. That is the correct, cautious call, because the scenarios mention only \"rail infrastructure\". A also marks \"ASAP start\" as satisfied. That is a stretch. \"Speed-to-completion\" in one scenario says nothing about when the project starts, and the Consolidator scenario is deliberately slower. A also marks the buoyant concrete structure as satisfied without noting that concrete is never named.\n\nB marks the ASAP start as unclear. It gives a better reason: the scenarios don't discuss the start date, and the Consolidator is slower. B also admits that concrete isn't named. But B marks \"high-speed rail\" as satisfied while saying \"High-speed is not stated explicitly.\" This contradicts its own reasoning for the 100 m depth, which it marks unclear because it isn't mentioned. B's evidence quotes are more precise, and its explanations are more transparent.\n\nOverall, A is better on the rail constraint and B is better on ASAP and in the quality of its evidence and explanations. They are about equal."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 42.0,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both candidates return \"fail\", but B's reasoning is sounder.\n\nCandidate A covers more constraints, including budget lines, building specs and phases. Many of its verdicts are weak:\n- It marks \"Currency: EUR primary\" and \"Track USD exposure separately\" as satisfied. Its only support is the Consolidator's mandate that USD contracts trigger Phase 2, which cuts against EUR being primary.\n- It marks water strategy and the \"water cooling\" negative constraint as satisfied by loose inference from \"water retention\".\n- It marks the 9 GW target as satisfied even though the Consolidator drops it to 3 GW.\n- It marks the land-use model as satisfied although the evidence covers only a few components.\n- It marks the Pioneer's \"negotiate a firm, contracted connection point\" as inventing a binding commitment. That scenario only proposes to negotiate one, so this verdict is dubious.\n- It leaves many unclear entries for items a scenario-level stage would not detail, which adds noise.\n\nCandidate B is shorter and more decisive, and its verdicts match the evidence:\n- It flags that the Consolidator abandons the 12.7 km square, 161 km² and 9 GW, and caps the timeline at about 8 years.\n- It flags that the Builder and Consolidator narrow fiber diversity.\n- It flags that the Pioneer pulls the sovereign zone forward to Day 1, against the specified phasing.\n- It flags the promotional tone and the missing no-build gate or kill criteria.\n- It correctly treats \"negotiate\" language as not inventing commitments.\n- It correctly marks water and cooling as unclear because the scenarios don't discuss them.\n\nB omits some constraints, mainly budget and building specs. That omission is acceptable at this stage, and it makes the output more decision-useful. Its strictness on scenarios that deviate from the baseline is defensible for a guardrail."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A is concise and mostly well-grounded. It quotes the scenario text and reaches defensible findings: the Consolidator contradicts the 9 GW target, the 161 km² footprint and the 10–15+ year timeline; its USD-only trigger conflicts with EUR as primary currency; the Builder and Consolidator narrow fiber diversity; the Pioneer is promotional and assumes approvals; and there is no no-build gate or infeasibility criteria. It marks water, cooling and the full land-use list as unclear. It is somewhat strict, since the prompt allows downsizing and splitting, but its \"fail\" is well supported. Candidate B is longer and covers more constraints, but many of its judgments are unsound. It marks EUR primary and USD tracking satisfied because a scenario mandates USD-only contracts, which is the opposite of the correct reading. It marks 9 GW satisfied even though one scenario drops it. It marks fiber, water, land-use, \"skeptical\" and \"do not assume feasibility\" satisfied on weak or inferential evidence. It also pads the list with many unclear entries (heights, budgets) that a scenarios file would not cover. It does not flag the Consolidator's abandonment of the square footprint. Its \"firm, contracted\" binding-commitment violation is arguable. As a guardrail, B is too lenient and inconsistent, and A is more accurate and more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 40.2,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "Candidate A is lenient and inconsistent. It marks continuity-of-journey satisfied using a quote that narrows the backstop. It marks the 18-month binding standards constraint satisfied despite the Consolidator's deferral. It marks the negative constraints satisfied even where its own quotes show non-harmonised national parameters. It also treats ASAP and \"pick a realistic scenario\" as satisfied, although this stage selects nothing. Its overall \"pass\" is weakly supported. Candidate B is stricter and grounded in quotes. It flags the Consolidator's deferral of binding standards, the national non-harmonised handling, the inconsistent distributor access, and the Builder's narrowed passenger-rights backstop. It marks unaddressable items (ASAP, realistic pick, single-payment) as unclear instead of over-claiming. Its \"fail\" follows from its violations and is more useful downstream. B is slightly harsh on negative constraints that are really problem descriptions, but it is far more accurate and insightful overall."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "A is more rigorous and more internally consistent. It marks items as \"unclear\" when the scenarios don't mention them (bicycles, multimodal hooks, KPIs, timelines, single-payment, harmonised refunds). It flags real problems that its own quoted evidence supports. The Consolidator defers binding standards past 18 months. Non-harmonised national parameters and carrier-by-carrier negotiations appear in some scenarios. The Builder's narrowed backstop leaves missed-connection gaps. Its \"fail\" verdict follows from those findings. A few calls are generous, such as continuity and the corridor rollout, but they are reasonable.\n\nB is sloppy and sometimes self-contradictory. For the negative constraint about national operators keeping their own fares and booking systems, it quotes evidence of \"nationally negotiated, non-harmonized parameters\" and still marks it satisfied, on the grounds that the \"overall plan structure\" moves away from that state. It marks single-payment settlement satisfied just because a clearing mechanism exists. It marks \"Project start ASAP\" satisfied because the Pioneer has a fast standards timeline. It marks continuity-of-journey rights satisfied from generic backstop language. It marks the budget-coverage constraint satisfied with very weak evidence. It declares \"pass\" even though the Consolidator and Builder clearly contain constraint tensions. This undermines the guardrail's purpose. B also marks \"Pick a realistic scenario\" satisfied by inference, though this stage doesn't select one.\n\nFor downstream stages, A's fail verdict and specific violations are more decision-useful, because they show which scenarios to avoid or fix."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 41.2,
+      "structure_problems": [],
+      "judgments": {
+        "candidate_scenarios_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.0,
+          "score_baseline": 4.5,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "Candidate A is the more rigorous and honest checker. It uses \"unclear\" where the scenarios don't address a requirement (worker protection, risk register, staffing plan, public communications). It spots the GDPR-sensitive Pioneer features (mandatory GP-run opt-out registry, daily data transmission) and calls them unclear rather than violated, which is balanced. It flags the Pioneer \"Blitz\" scenario against the \"avoid the most aggressive scenario\" constraint; this is arguable, since listing an option isn't choosing it, but it is defensible and cautious for a guardrail. Its evidence quotes are specific and its summary matches the per-constraint results. Candidate B is too lenient and gives some circular or weak justifications. It marks the risk register, staffing plan, ASAP start and demonstrable-harm-reduction constraints \"satisfied\" on thin evidence. Its risk-register justification cites \"via negative constraint check\", which is circular. It cites the Pioneer's mandatory opt-out registry as evidence of GDPR-safe design. It dismisses the aggressive-scenario constraint because a Builder scenario exists. Its final \"pass\" rests on this lenient reading, even though its own summary admits several scope items are unclear."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 5,
+              "analysis": "Both outputs use the right structure and cover the same constraints. Both correctly find no banned words, no app-first approach and no major construction. The difference is calibration.\n\nA is too lenient and sometimes makes up its support. It marks the risk register \"satisfied\" while admitting that no register is shown. It marks the staffing plan \"satisfied\" from passing mentions. It marks \"Project start ASAP\" satisfied from the word \"Blitz\". It cites \"Scenario 2 mention of GDPR constraints (via negative constraint check)\", which is weak and circular. It passes the \"avoid the most aggressive scenario\" constraint by inference only. It also ignores that the Pioneer scenario depends on a GP-run mandatory registry and a strong data-sharing MOU, which are GDPR-sensitive. Because of this, A's overall \"pass\" is not well supported.\n\nB is more careful. It marks the risk register, staffing plan, multilingual plan, worker protection and public communications as \"unclear\", because the scenario stage doesn't contain them. It flags the Pioneer's GDPR sensitivity and its heavy staffing as \"unclear\", and it supports each with specific quotes. It also catches that the Pioneer is the aggressive option the user said to avoid. Marking this \"violated\" is debatable, because a scenario stage legitimately lists options and the aggressive one need not be chosen. That makes B's overall \"fail\" somewhat harsh. Even so, B's judgments are better evidenced and more decision-useful for a guardrail. B does mark \"demonstrably reduce harm\" as unclear, which is reasonable. B has a minor inconsistency in marking \"Design a realistic program\" as satisfied while noting that Pioneer is less realistic.\n\nOverall, B is the more rigorous and honest guardrail output."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

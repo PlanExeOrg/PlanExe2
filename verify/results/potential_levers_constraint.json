@@ -1,0 +1,114 @@
+{
+  "stage": "potential_levers_constraint",
+  "evaluated_at": "2026-10-04T17:49:59",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 13.3,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same eight constraints and the same overall \"pass\". They differ in how carefully they judge each constraint.\n\nCandidate A marks \"Project start ASAP\" as satisfied. Its evidence is only that levers discuss compressing the timeline, and that does not show an immediate start. A's evidence entries are also mostly paraphrases or lists of keywords, such as \"references to … appear throughout\". It cites a \"20-year lifespan\" as support for the 20-year project duration without noting that lifespan and construction horizon are different things.\n\nCandidate B uses direct quotes as evidence. It notes that some levers treat 20 years as a lifespan rather than a construction period, but none contradict the duration. It marks ASAP as \"unclear\" because the levers never commit to an immediate start. It also says nothing contradicts ASAP, so the overall result stays \"pass\". This is more accurate and more useful for downstream stages, because it flags a real gap without inventing a violation.\n\nCandidate B is more rigorous and better calibrated."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates use the same structure, cover the same eight constraints, and reach \"pass\". They differ in how they handle \"Project start ASAP\" and in the quality of their evidence.\n\nOn \"Project start ASAP\", A marks it \"unclear\". It says the levers never state an immediate start and only discuss timeline compression and permitting delays. A also quotes a lever saying offshore platforms \"require years of permitting and infrastructure setup\", which is a mild tension with ASAP. B marks it \"satisfied\". Its reasoning is that strategies to compress timelines are \"consistent with an ASAP start\". That is a weak inference, because compressing a timeline is not the same as starting immediately. A's \"unclear\" fits the checker's satisfied/violated/unclear scheme better and is more honest.\n\nOn evidence, A quotes specific strings from the levers, such as \"calibrated for the mean 100-meter depth\" and \"Fabricate all tunnel segments in dry-dock facilities along the Spanish and Moroccan coasts\". B mostly paraphrases and summarizes (\"Multiple references to…\"). A's quotes are easier to verify and more useful downstream.\n\nA also notes that some levers use \"20-year lifespan\" rather than a construction period. That is a small but real nuance. B's summary claims \"strategies oriented toward rapid project initiation\", which overstates what the levers say.\n\nA is the more careful and precise of the two."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 44.6,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 2.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 2,
+              "analysis": "Candidate B is better. It grounds each verdict in direct quotes from the levers, such as \"RTE may deny or heavily condition\", \"hard kill criteria\", and the 80% ecological preservation option. It reads the negative constraints correctly, and it marks constraints the levers don't address as \"unclear\" rather than violated. It also flags the one real tension, a USD-denominated contract option set against EUR as the primary currency, and it still reaches a reasonable pass.\n\nCandidate A has vague evidence (\"the output discusses…\") and marks seven negative constraints as violated, apparently on a misreading. Its claim that the output \"does not recommend downsizing or cancelling\" and \"lacks skepticism\" is contradicted by the quotes in B, which show skeptical, gate-driven levers with downsizing, split-campus and kill-criteria options. It treats \"securing binding, contracted capacity\" as an invented RTE commitment, though that phrase describes a goal to be negotiated, not an existing commitment. It marks the date constraint satisfied without evidence. It also gives \"unclear\" for items B could tie to quoted text, such as the 50–100+ buildings. Its overall \"fail\" is therefore unreliable and would mislead downstream stages."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 2,
+              "analysis": "A is better. It gives verbatim quotes as evidence for each judgment, and those quotes are specific to this plan, for example \"RTE may deny or heavily condition\", \"hard kill criteria\" and \"80% of the 161 km² ... permanent ecological preservation\". It marks constraints as unclear when the levers don't address them (budgets, heights, hall sizes, immersion pilot, USD tracking). It also notices a real tension: a USD-denominated contract lever sits awkwardly with EUR as the primary currency. Its pass verdict fits the skeptical, gate-driven content that its quotes show.\n\nB gives generic evidence with no quotes, and several of its findings contradict A's quoted evidence. It says the output lacks skepticism, doesn't identify infeasibility factors, and assumes feasibility. It flags \"securing binding, contracted capacity allocation\" as an invented RTE commitment, but that phrase describes a goal to obtain, not a claim that the commitment exists. It marks the immersion pilot and the date as satisfied on thin or invented evidence. It also treats \"high-density development\" as implying most of the land is built. Its fail verdict looks wrong, and it would block the pipeline for no good reason."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 39.6,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 7.5,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 4,
+              "analysis": "A grounds almost every verdict in specific quoted evidence from the levers. Examples are \"initial four corridors\", \"until the full TEN-T network integration phase\", \"fulfilling the modal shift objective\", and the €1.5B budget. It also finds real tensions. Some lever options preserve nationally negotiated, non-harmonized thresholds. Others give the public reference distributor preferential inventory access, or create a priority window that favours some carriers. A correctly marks the unaddressed items as unclear: single-payment, refunds, complaint-halving, BEUC/CER/disability bodies, and the start date. It also notes that some lever options would exceed the 30-month deadline. Its \"violated\" calls on the two negative constraints may be somewhat strict, because they rest on individual options rather than a committed path. Even so, they are defensible under a guardrail that is meant to be strict, and they give downstream stages something actionable.\n\nB is mostly generic and hand-wavy. It marks single-payment settlement and harmonised refunds as satisfied by \"strongly implying\" from the clearing and backstop levers. It also treats the negative constraints as satisfied on the grounds that \"the entire thrust\" of the levers is to avoid them, with no check of the actual options. It marks the modal-shift goal and the TEN-T extension as unclear even though A finds supporting text. It marks \"Project start ASAP\" satisfied from an inferred reading of the timelines. It says all listed stakeholders are covered, including BEUC, by implication. It also marks several top-level items unclear for weak reasons, such as \"does not explicitly confirm delivery\". It garbles \"Köln\" as \"Køln\". Its overall pass misses the specific problematic options and is less reliable as a guardrail."
+            },
+            {
+              "winner": "new",
+              "score_new": 7,
+              "score_baseline": 4,
+              "analysis": "I could not see potential_levers.json, so I judged each candidate on how well its evidence holds up. B's evidence is more specific and more plausible.\n\nA passes almost everything, and many of its \"satisfied\" verdicts rest on weak inference:\n- It marks single-payment settlement satisfied because the levers discuss a clearing mechanism. That is inter-carrier settlement, not passenger single payment.\n- It marks harmonised refunds satisfied because of the passenger-rights backstop.\n- It marks \"Project start ASAP\" satisfied from the presence of 12–18 month actions.\n- It marks Lisbon–Tallinn satisfied from general intent.\n- It marks the stakeholder constraint satisfied by \"implying\" BEUC and CER.\nA also marks bicycle reservations and the TEN-T extension unclear, and \"pick a realistic scenario\" unclear. B's verdicts on these are more defensible. Overall, A looks like a rubber-stamp pass with vague or stretched evidence.\n\nB quotes specific text from the levers. Its verdicts on the weak points are sensible:\n- Single-payment and refunds are unclear because they are never mentioned.\n- Stakeholders are unclear because BEUC, CER and disability-rights bodies are absent.\n- Project start is unclear because no lever discusses it.\nB also flags two negative-constraint violations with concrete quotes:\n- Options that leave nationally negotiated, non-harmonized parameters or delegate disruption thresholds to national regulators.\n- Preferential inventory access for the public reference distributor, and a priority window for some carriers.\nThese are real tensions with the user's constraints. A guardrail should catch them. B's strictness may be slightly harsh, because the flagged items are options inside levers rather than commitments. Even so, B is more insightful and more faithful to the checker's purpose."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 31.0,
+      "structure_problems": [],
+      "judgments": {
+        "potential_levers_constraint.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 5.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Both candidates reach overall_status \"pass\", and both correctly find no banned words and no violated negative constraints. They differ in how accurate and well-evidenced the individual judgments are.\n\nCandidate A has several weak or questionable calls:\n- It marks \"12-month program\", \"Location: mid-sized European city\" and \"Goal: demonstrably reduce harm\" as unclear. It faults a lever list for not being a timeline, which is a category error at this stage. Its claim of \"no mention of European context\" is also doubtful, since GDPR, a regional health authority and EU tendering all appear.\n- It marks multilingual communication satisfied on evidence that only \"implies\" it (laundromat and faith-center posters). The levers contain explicit references to a multilingual hotline and multilingual flyers, which A missed.\n- It marks the risk register satisfied from scattered risk mentions in lever consequences. That is overgeneralized, because no risk register exists at this stage.\n- Its \"Gate two\" and \"avoid aggressive scenario\" justifications are thin.\n\nCandidate B is more precise and better grounded:\n- It cites concrete evidence for the multilingual hotline and flyers, for the target groups, and for the EU and municipal context.\n- It correctly marks the total budget and the risk register as unclear, since they can't be assessed from a lever list. It adds that nothing contradicts them.\n- It honestly notes that transport appears only as transit subsidies and that the GP safe-harbor option carries legal risk.\n- Its summary is consistent with the item-level statuses.\n\nB is more accurate and more useful as a guardrail, so B is better."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 5,
+              "analysis": "Candidate A is more accurate and more useful. Its evidence quotes are specific (e.g., \"multilingual telephone hotline\", GDPR, regional health authority). It correctly marks the risk register as unclear, since a lever list cannot contain one. It reads the pilot-footprint constraint correctly, noting that aggressive options appear only as alternatives. It also flags the legal risk in the GP safe-harbor option. Candidate B marks several constraints unclear for reasons that misread the stage: the 12-month timeline, location and demonstrable-reduction measurement are not expected in a lever list. It marks the risk register as satisfied on thin evidence. Its multilingual evidence is only inferred from poster locations, and its gate-two reasoning is weak. Both reach overall \"pass\", but A's judgments are better grounded and more consistent."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

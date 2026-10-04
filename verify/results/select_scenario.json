@@ -1,0 +1,114 @@
+{
+  "stage": "select_scenario",
+  "evaluated_at": "2026-10-04T17:53:41",
+  "records": [
+    {
+      "baseline": "20250706_gibraltar_tunnel",
+      "ran_ok": true,
+      "seconds": 17.5,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates choose The Builder's Foundation and follow the required structure (characteristics, per-scenario scores, final choice with bullet justification). The difference is in specificity and calibration.\n\nCandidate A has a grandiose, generic tone (\"revolutionary and globally transformative\", \"historic proportions\"). It never mentions the ASAP start. It scores the Pioneer's Gambit 7, which looks inflated next to its own critique that the scenario \"overcorrects toward recklessness\" and carries compounding financial and political vulnerabilities. It also says the Consolidator's gravity pillars \"may be insufficient\" without saying why. Its justification is sound but wordy and partly repeats the assessments.\n\nCandidate B is grounded in the plan's facts. It names the Strait's currents, seismic activity and heavy shipping, the ASAP start, and the fixed €40B budget with the 20-year horizon. It ties the levers together, for example how pillar type affects permitting. It cites the Pioneer's specific high-risk elements: tension-leg drilling, robotic underwater welding, parallel build and private BOT. It also notes a real mismatch in the Consolidator: gravity pillars and sediment displacement conflict with the buoyant, pillar-supported concept and with environmental permitting. It admits Builder's own execution risks (offshore platforms, hybrid pillars). Its scoring (3/8/6) is better calibrated. It also frames phasing as funding tranches, which downstream stages can use. The justification is concise and each bullet is clear, including the \"why not\" bullets.\n\nB is more insightful, more consistent and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both choose The Builder's Foundation, with similar structure and complete content. A is more grounded and decision-useful. It names concrete risks (Strait currents, seismic activity, shipping), ties phasing to funding tranches, and notes that gravity pillars conflict with the buoyant, pillar-supported concept. Its Pioneer's Gambit score of 3 is defensible, given the stacked unproven choices and budget risk. Its justification is concise bullets, as the stage asks. B is more rhetorical (\"revolutionary\", \"historic proportions\", \"design elegance\") and has less concrete insight. B's Pioneer score of 7 sits oddly with its own criticism that the scenario is reckless and destabilizing. Its claim that the hybrid pillar architecture avoids \"venturing into unproven territory\" is dubious for a first-of-a-kind tunnel. Its justification is longer, with a prose preamble, and says \"all four dimensions\" when five profile aspects were listed. B does note that the Consolidator's Anchor could be too conservative for the plan's purpose, which is reasonable. Overall A is more internally consistent and more useful downstream."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260516_datacenter_in_france",
+      "ran_ok": true,
+      "seconds": 19.5,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario.json": {
+          "verdict": "new",
+          "score_new": 9.0,
+          "score_baseline": 4.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Both candidates choose The Builder, which is the right choice. They differ in quality.\n\nCandidate A is complete and specific. It fills every plan_characteristics field, including holistic_profile. It scores Pioneer at 2, which fits a skeptical, gate-driven red-team plan that says not to assume approvals. Its assessments cite scenario details: the exceptional decree, the pre-built 2 GW sovereign zone, single-carrier fiber, and the 60% take-or-pay gate against the plan's 30–50%. It names the Builder's weaknesses (non-binding RTE basis, thin fiber diversity, 5×1 GW reaching only 5 GW) and treats them as Phase 0 conditions. It reads the land model as mostly buffer with about 30 km² buildable, which matches the plan's instruction not to treat 161 km² as buildings. The justification is in bullets, as the stage requires.\n\nCandidate B has several flaws:\n- holistic_profile_of_the_plan is empty.\n- It gives Pioneer an 8, calling it a match for \"intentionally extreme\". That contradicts its own later criticism of Pioneer and ignores the plan's skeptical framing. An 8 against 9 barely separates the two.\n- It writes \"$9 GW\", a currency typo.\n- It describes the Builder's \"hyper-dense development model\" as a way of rationalizing the footprint. That is a questionable reading of the land use, because the plan says not to assume most of the 161 km² is built.\n- Its assessments are thinner and more generic.\n- Its justification is only loosely bulleted."
+            },
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 4,
+              "analysis": "Both candidates choose The Builder, so the difference is in quality of analysis. A leaves \"holistic_profile_of_the_plan\" empty, which is an incomplete required field in the three-step schema. A also scores the Pioneer 8 and the Builder 9. That is poorly differentiated, since the Pioneer's forced contiguous assembly clashes with the skeptical framing, and its justification calls the Pioneer a violation of skepticism. This is internally inconsistent. A also writes \"$9 GW\", which is a typo/currency slip. A's Consolidator critique is fine but generic. A's assessments are thin and don't engage with scenario details beyond a few phrases.\n\nB fills in the holistic profile. Its characteristics are more plan-specific: the ASAP start, the 1-year Phase 0, the EUR/USD exposure, and the take-or-pay 30–50% gate. Its scores (2/8/5) are consistent with its reasoning. It notes real weaknesses in the Builder, including the non-binding RTE basis, thin fiber diversity, 5×1 GW nodes only reaching 5 GW, and a 60% gate that is stricter than the plan's. It also notes that the Pioneer's fiber resilience does fit. Its justification is a clear bullet list, as the stage requires, and it proposes fixing the weaknesses as Phase 0 conditions, which helps downstream stages.\n\nB is clearly better."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260514_cross_border_rail_ticketing",
+      "ran_ok": true,
+      "seconds": 17.0,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario.json": {
+          "verdict": "new",
+          "score_new": 8.0,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates select The Builder, which is the right choice for the \"realistic, not most aggressive\" instruction. They differ in depth and calibration.\n\nCandidate A is accurate but generic. It scores Pioneer 6, Builder 10 and Consolidator 3. A 6 for a scenario it says the prompt explicitly rejects is generous, and a perfect 10 for Builder is overclaimed. Its fit assessments name few concrete mechanisms.\n\nCandidate B is more specific and covers more of the prompt: ~27 member states, the €1.5B public budget with private IT investment estimated separately, and the 18/30/60-month milestones. It flags a risk A misses: legislative uncertainty, since the regulation is only proposed. Its scores (4, 9, 3) are better calibrated. It gives concrete reasons for each rejection. The Pioneer fails on 12-month binding standards, free APIs and a publicly funded float. The Consolidator fails on uncapped distributor liability, deferred accessibility and reduction-card harmonization, and initiating-carrier collateral. Its bulleted justification covers timeline fit, market and budget balance, accountability and why not each alternative. Its only flaw is a stray \"**\" at the end.\n\nB is more specific, better calibrated and more useful downstream."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both candidates choose The Builder, which is the right pick for a plan that asks for a realistic scenario and not the most aggressive one. They differ in depth and specificity.\n\nCandidate A ties the plan's facts to the scenario's levers. It cites the €1.5B budget, the 6-month provisional and 18-month final standards, cost-recovery API fees for Trainline and Omio, fault-based carrier liability, and a fee-funded reserve with bank guarantees. Its plan characteristics are detailed and specific to the plan: the 18/30/60-month milestones, the legislative uncertainty because the regulation is only proposed, and the incumbent resistance. It explains why each rejected scenario fails, including the Consolidator's uncapped distributor liability and its deferred accessibility. Its fit scores (4, 9, 3) are well differentiated. The Pioneer gets a low score because the plan rules out the aggressive option. One small flaw is a stray \"**\" at the end of the justification.\n\nCandidate B reaches the same conclusion but is more generic. Its characteristics are thin and miss the milestones, the private IT investment and the legislative risk. Its justification is correct but less concrete. It does not mention the reserve or bank guarantees, and it refers to \"tiered liability\" and \"capped cost recovery\" without the detail A gives. Scoring the Pioneer 6 and the Builder 10 is less discriminating, since the Pioneer is explicitly ruled out by the prompt. It does restate the 'realistic' constraint clearly.\n\nA is more insightful and more useful to downstream stages."
+            }
+          ]
+        }
+      }
+    },
+    {
+      "baseline": "20260202_heatwave_resilience",
+      "ran_ok": true,
+      "seconds": 16.0,
+      "structure_problems": [],
+      "judgments": {
+        "selected_scenario.json": {
+          "verdict": "new",
+          "score_new": 8.5,
+          "score_baseline": 6.0,
+          "runs": [
+            {
+              "winner": "new",
+              "score_new": 9,
+              "score_baseline": 6,
+              "analysis": "Both choose The Builder, which is clearly right. The difference is in the quality of the analysis. Candidate A is more specific and faithful to the plan. It names the actual Month 4 gate thresholds. It explains why the Pioneer fails: it would burn the €2.0M tranche early, and its mandatory GP/pharmacy opt-out registry conflicts with GDPR. It also explains why the Consolidator fails: a record-breaking bio-climatic trigger would rarely activate, so the gate could not be shown. Its fit scores (3/9/3) separate the options sharply and consistently, and its justification is a clear bullet list as the stage requires. Candidate B is more generic. It gives the Consolidator a 7 even though it says that scenario risks failing the primary health goal, and a 5 for the Pioneer, so its scoring is less discriminating and less consistent with its own critique. It has a garbled \"$€1.5M\" and some questionable reasoning: it calls canvassing \"guaranteeing contact\" and describes the novelty as integration. Its justification mixes bold text and bullets and is less tied to scenario details. A is stronger on specificity, consistency and usefulness."
+            },
+            {
+              "winner": "new",
+              "score_new": 8,
+              "score_baseline": 6,
+              "analysis": "Both choose The Builder, which is correct. The difference is in the quality of the analysis. B is more specific and better grounded. It cites the May 2026 start and the exact gate thresholds. It names concrete risks: alert fatigue, voucher exposure, and surge events. It also explains why Pioneer and Consolidator fail. Pioneer's 24/7 hubs would burn the €2.0M before Month 4, and its mandatory opt-out registry conflicts with GDPR. Consolidator's record-breaking trigger would rarely fire, so the gate couldn't be demonstrated. Its scores (9/3/3) discriminate better. A's scores (5/10/7) are less discriminating, and a perfect 10 is overconfident. A's justification has weaknesses. It treats the Consolidator as a \"monitoring kits\" scenario, and it calls Pioneer's binary trigger \"Level 3 immediately\". It also uses \"$€1.5M\" and says \"hyper-localized canvassing (guaranteeing contact)\", which overclaims. A's plan characteristics are more generic. B's \"Business-purpose\" label for the domain is a small oddity. Overall B is stronger and more decision-useful."
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
