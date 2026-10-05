@@ -57,6 +57,38 @@ def with_length_budget(schema: dict, max_words: int) -> dict:
     return schema
 
 
+EPISTEMIC_INSTRUCTION = (
+    "\n\n# Numbers and provenance\nDo not present invented numbers as facts. For any figure that is not a "
+    "user constraint or an externally established benchmark, mark what it is, e.g. \"(proposed threshold)\" or "
+    "\"(estimate)\"; mark user-given figures \"(user constraint)\" only when that helps. Never turn an example "
+    "value from the input documents (\"e.g. ...\") into a requirement.")
+
+
+def project_start(run_dir: Path):
+    from datetime import date
+    try:
+        utc = json.loads((run_dir / "start_time.json").read_text(encoding="utf-8")).get("server_iso_utc", "")
+        return date.fromisoformat(utc[:10])
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+
+
+def calendar_reference(run_dir: Path) -> str:
+    """'Month N = date' table from the run's start date, so milestone dates are computed, not guessed."""
+    p = run_dir / "start_time.json"
+    try:
+        utc = json.loads(p.read_text(encoding="utf-8")).get("server_iso_utc", "")
+        y, m, d = (int(x) for x in utc[:10].split("-"))
+    except (OSError, ValueError, json.JSONDecodeError):
+        return ""
+    rows = []
+    for n in list(range(0, 13, 1)) + list(range(15, 121, 3)):
+        yy, mm = y + (m - 1 + n) // 12, (m - 1 + n) % 12 + 1
+        rows.append(f"Month {n} = {yy:04d}-{mm:02d}-{min(d, 28 if mm == 2 else 30 if mm in (4, 6, 9, 11) else 31):02d}")
+    return ("\n\n# Calendar reference\nThe project starts on Month 0. When you give both a month number and a calendar "
+            "date, they must agree with this table (Month N = start date + N months):\n" + "; ".join(rows))
+
+
 class SkillContractError(Exception):
     """A skill read or wrote a file it did not declare in SKILL.md."""
 
@@ -80,6 +112,8 @@ class SkillContext:
         # question 15 of 16) the re-run replays the finished calls instantly. The runner deletes
         # the cache once the stage succeeds, so a later --force gets fresh answers.
         self.cache_dir = cache_dir
+        self._calendar = calendar_reference(run_dir)
+        self._start = project_start(run_dir)
 
     # ---------- files ----------
     def _check_read(self, name: str) -> None:
@@ -152,6 +186,10 @@ class SkillContext:
         web_search = bool(self.skill.meta.get("fact_check", tier == "high")) and tier == "high"
         if web_search:
             system = system.rstrip() + FACT_CHECK_INSTRUCTION
+        # Applies to every LLM call: month->date table in the system prompt; the provenance rule goes
+        # at the end of the user message, where models without reasoning reliably notice it.
+        system = system.rstrip() + self._calendar
+        user = user.rstrip() + EPISTEMIC_INSTRUCTION
         # Length budget for the non-reasoning tiers: without it Haiku writes essays per field,
         # which makes calls take minutes. Skills can tune it via `max_words_per_field:` (0 = off).
         budget = int(self.skill.meta.get("max_words_per_field", DEFAULT_MAX_WORDS_PER_FIELD) or 0)
@@ -186,6 +224,14 @@ class SkillContext:
                                                         "duration_seconds": time.time() - start,
                                                         "metadata": result.metadata if result else {}})
         assert result is not None
+        if self._start is not None:
+            # Calendar dates next to "Month N" are derived, not guessed: recompute them.
+            from planexe_skill.calendar_fix import fix_text, fix_value
+            data, n1 = fix_value(result.data, self._start)
+            text, n2 = fix_text(result.text or "", self._start)
+            if n1 or n2:
+                self.log(f"calendar fix: corrected {max(n1, n2)} month/date pair(s)")
+                result = LLMResult(data=data, text=text, metadata={**result.metadata, "calendar_fixes": max(n1, n2)})
         self.llm_calls += 1
         if cache_file is not None:
             try:

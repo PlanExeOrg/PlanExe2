@@ -278,10 +278,9 @@ stages (the runner now stops the whole run on an auth error instead of letting s
 Section-level comparison of the generated report against the baseline report (metrics + targeted reading;
 no LLM judge). Ordered by severity.
 
-1. **Schedule violates the 7-year constraint (critical).** The Gantt spans 26.1 years (baseline: 7.0).
-   estimate_task_durations sees chunks of 3 tasks without the plan's overall timeline; with 56 level-2
-   tasks (baseline 30) and a higher median (120 vs 87.5 days) the waterfall sums to 13,074 task-days.
-   Fix: give the duration estimator the total timeline/deadline; keep WBS level 2 nearer 30 tasks.
+1. **Gantt length (not a defect).** The Gantt spans 26.1 years vs 7.0 because it is a deliberate
+   unoptimized waterfall (no information about resources for parallel work) and this run has 56
+   level-2 tasks (baseline 30) with a higher median duration (120 vs 87.5 days).
 2. **Unverified numbers harden into specs (high).** identify_risks (Haiku, no thinking, no fact
    check) wrote an illustrative "e.g. no runaway onset <60 °C"; downstream stages turned it into
    specs ("≥62 °C ±3 °C", "≥70 °C") that reach the Executive Summary. Physically dubious (60 °C is
@@ -305,6 +304,24 @@ no LLM judge). Ordered by severity.
 What holds up: budget (USD 300M), location (Austin) and the 7-year horizon are stated consistently
 across executive summary, pitch, project plan, SWOT and premortem; structure matches the baseline on
 71/71 stages; content is far more specific than the baseline (named precedents, measurable criteria).
+
+### External review (Codex) of the same two reports
+
+Codex scored the new report 8.9/10 vs 6.0/10 for the baseline (portfolio optionality, validation
+rigor, anti-sunk-cost governance, budget discipline all much stronger), with three regressions:
+calendar arithmetic ("Month 72 (February 2033)" for a May 2026 start), falsely precise numbers
+presented as facts, and lower signal-to-noise (verbosity).
+
+Responses:
+- **Calendar:** every LLM call now gets a "Month N = date" table computed from `start_time.json`,
+  and every LLM result is post-processed by `planexe_skill/calendar_fix.py`, which recomputes the date
+  attached to "Month N (...)" as start + N months (keeps the model's date style). Prompting alone did
+  not work: a re-generated project_plan (Haiku, no thinking) still had 14/22 wrong pairs.
+- **Provenance:** a rule asking to tag non-user, non-benchmark figures as "(proposed threshold)" /
+  "(estimate)" and never to promote "e.g." values to requirements is appended to every user message.
+  Haiku without reasoning largely ignores it (1 tag in an 8,000-word project plan); a structural fix
+  (e.g. a `basis` field next to numeric fields in the schemas of the assumption stages) is still open.
+- **Verbosity:** open (list-length caps).
 
 ## Results
 
