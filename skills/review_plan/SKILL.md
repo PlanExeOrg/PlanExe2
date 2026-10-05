@@ -1,7 +1,7 @@
 ---
 name: review_plan
 description: Critically review the near-final plan with targeted questions and SMART recommendations.
-inputs: [strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv]
 outputs: [review_plan_raw.json, review_plan.md]
 tier: low
 est_llm_calls: 16

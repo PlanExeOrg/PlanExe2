@@ -1,7 +1,7 @@
 ---
 name: filter_documents_to_find
 description: Narrow the documents-to-find list to the most relevant ones for the current plan.
-inputs: [identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, identified_documents_to_find.json]
+inputs: [canonical_facts.json, identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, identified_documents_to_find.json]
 outputs: [filter_documents_to_find_raw.json, filter_documents_to_find_clean.json]
 tier: low
 est_llm_calls: 1

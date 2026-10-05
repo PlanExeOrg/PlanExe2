@@ -1,7 +1,7 @@
 ---
 name: self_audit
 description: Checklist-based diagnostic — find gaps, contradictions, and unsupported claims across all stages.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md, questions_and_answers.md, premortem.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md, questions_and_answers.md, premortem.md]
 outputs: [self_audit_raw.json, self_audit.md]
 tier: low
 est_llm_calls: 20

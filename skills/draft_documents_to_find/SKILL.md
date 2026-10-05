@@ -1,7 +1,7 @@
 ---
 name: draft_documents_to_find
 description: Draft content specs for each document to find: essential info, risks, and scenarios.
-inputs: [identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, filter_documents_to_find_clean.json]
+inputs: [canonical_facts.json, identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, filter_documents_to_find_clean.json]
 outputs: [draft_documents_to_find.json, draft_documents_to_find_{n}_raw.json]
 tier: low
 est_llm_calls: 5

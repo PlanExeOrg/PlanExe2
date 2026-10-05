@@ -1,7 +1,7 @@
 ---
 name: enrich_team_members_with_contract_type
 description: Determine contract type for each team member.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, find_team_members.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, find_team_members.json]
 outputs: [enrich_team_members_contract_type_raw.json, enrich_team_members_contract_type.json]
 tier: low
 est_llm_calls: 1

@@ -1,7 +1,7 @@
 ---
 name: questions_and_answers
 description: Anticipate stakeholder questions and provide clear answers from the plan.
-inputs: [strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md]
 outputs: [questions_and_answers_raw.json, questions_and_answers.md]
 tier: low
 est_llm_calls: 2

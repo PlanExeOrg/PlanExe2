@@ -1,7 +1,7 @@
 ---
 name: review_team
 description: Review and validate the assembled team composition.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_environment_info.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_environment_info.json]
 outputs: [review_team_raw.json]
 tier: low
 est_llm_calls: 1

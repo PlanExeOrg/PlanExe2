@@ -1,7 +1,7 @@
 ---
 name: identify_documents
 description: List documents the project needs — permits, contracts, specs, research, etc.
-inputs: [identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, related_resources.md, swot_analysis.md, team.md, expert_criticism.md]
+inputs: [canonical_facts.json, identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, related_resources.md, swot_analysis.md, team.md, expert_criticism.md]
 outputs: [identified_documents_raw.json, identified_documents.md, identified_documents_to_find.json, identified_documents_to_create.json]
 tier: low
 est_llm_calls: 1

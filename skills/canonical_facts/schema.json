@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "properties": {
+    "facts": {
+      "type": "array",
+      "description": "15-40 canonical facts.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {"type": "string", "description": "snake_case name, e.g. phase1_capacity_mw"},
+          "value": {"type": "string", "description": "Number with unit and qualifier, e.g. '500 MW (Phase 1a)' or 'Month 15'."},
+          "kind": {"type": "string", "enum": ["user_constraint", "decision", "proposed_threshold", "estimate"]},
+          "basis": {"type": "string", "description": "One sentence: where it comes from; rejected alternatives if the documents disagreed."}
+        },
+        "required": ["key", "value", "kind", "basis"]
+      }
+    },
+    "reconciliation_notes": {"type": "string", "description": "2-4 sentences on the main conflicts resolved."}
+  },
+  "required": ["facts", "reconciliation_notes"]
+}

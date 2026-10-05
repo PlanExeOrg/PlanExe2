@@ -1,7 +1,7 @@
 ---
 name: convert_pitch_to_markdown
 description: Convert the raw pitch JSON into a polished, scannable markdown document.
-inputs: [pitch_raw.json]
+inputs: [canonical_facts.json, pitch_raw.json]
 outputs: [pitch_to_markdown_raw.json, pitch.md]
 tier: low
 est_llm_calls: 1

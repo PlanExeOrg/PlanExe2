@@ -1,7 +1,7 @@
 ---
 name: governance_phase2_bodies
 description: Define the internal governance bodies (steering, operational, advisory/assurance) with membership, decision rights and escalation paths.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, governance_phase1_audit.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, governance_phase1_audit.md]
 outputs: [governance_phase2_bodies_raw.json, governance_phase2_bodies.md]
 tier: low
 est_llm_calls: 1

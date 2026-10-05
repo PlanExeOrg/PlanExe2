@@ -1,7 +1,7 @@
 ---
 name: enrich_team_members_with_background_story
 description: Develop background story for each team member.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_contract_type.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_contract_type.json]
 outputs: [enrich_team_members_background_story_raw.json, enrich_team_members_background_story.json]
 tier: low
 est_llm_calls: 1

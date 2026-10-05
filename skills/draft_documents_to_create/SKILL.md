@@ -1,7 +1,7 @@
 ---
 name: draft_documents_to_create
 description: Draft content specs for each document to create: essential info, risks, and scenarios.
-inputs: [identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, filter_documents_to_create_clean.json]
+inputs: [canonical_facts.json, identify_purpose_raw.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, filter_documents_to_create_clean.json]
 outputs: [draft_documents_to_create.json, draft_documents_to_create_{n}_raw.json]
 tier: low
 est_llm_calls: 5

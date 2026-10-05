@@ -1,7 +1,7 @@
 ---
 name: expert_review
 description: Assemble a panel of domain experts and have them critique the plan.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, pre_project_assessment.json, project_plan.md, swot_analysis.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, pre_project_assessment.json, project_plan.md, swot_analysis.md]
 outputs: [experts_raw.json, experts.json, expert_criticism_{n}_raw.json, expert_criticism.md]
 tier: low
 est_llm_calls: 4

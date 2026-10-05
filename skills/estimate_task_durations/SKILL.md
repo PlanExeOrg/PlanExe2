@@ -1,7 +1,7 @@
 ---
 name: estimate_task_durations
 description: Estimate realistic, minimum, and maximum durations for each WBS task bottom-up.
-inputs: [project_plan_raw.json, wbs_project_level1_and_level2.json]
+inputs: [canonical_facts.json, project_plan_raw.json, wbs_project_level1_and_level2.json]
 outputs: [task_durations.json, task_durations_{n}_raw.json]
 tier: low
 est_llm_calls: 14

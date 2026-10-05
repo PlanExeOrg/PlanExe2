@@ -185,6 +185,16 @@ class SkillContext:
             with open(self._log_path, "a", encoding="utf-8") as f:
                 f.write(f"[{time.strftime('%H:%M:%S')}] {msg}\n")
 
+    def _canonical_facts_block(self) -> str:
+        try:
+            facts = json.loads(self._resolve("canonical_facts.json").read_text(encoding="utf-8")).get("facts") or []
+        except (OSError, json.JSONDecodeError):
+            return ""
+        lines = [f"- {f.get('key')}: {f.get('value')} ({str(f.get('kind', '')).replace('_', ' ')})" for f in facts]
+        return ("\n\n# Canonical facts\nThese values were reconciled for this plan. Whenever you mention one of these "
+                "quantities, use exactly this value; do not introduce a different number for it. Label any other figure "
+                "you need as (estimate) or (proposed threshold).\n" + "\n".join(lines))
+
     # ---------- llm ----------
     def llm(self, system: str, user: str, schema: dict | None = None, tier: str | None = None,
             label: str = "") -> LLMResult:
@@ -200,6 +210,9 @@ class SkillContext:
             if fact_check == "required":
                 system += (" For this task, searching is required: run 1-2 web searches to verify the real-world "
                            "precedents, organizations and figures you cite before answering.")
+        # Canonical facts (see skills/canonical_facts): stages that declare the file must use these values.
+        if "canonical_facts.json" in self.skill.inputs and self._resolve("canonical_facts.json").exists():
+            system = system.rstrip() + self._canonical_facts_block()
         # Applies to every LLM call: month->date table in the system prompt; the provenance rule goes
         # at the end of the user message, where models without reasoning reliably notice it.
         system = system.rstrip() + self._calendar

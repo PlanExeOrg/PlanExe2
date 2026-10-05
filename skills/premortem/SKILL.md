@@ -1,7 +1,7 @@
 ---
 name: premortem
 description: Imagine the project has already failed — identify how and why it would happen.
-inputs: [strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md, questions_and_answers.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md, questions_and_answers.md]
 outputs: [premortem_raw.json, premortem.md]
 tier: low
 est_llm_calls: 3

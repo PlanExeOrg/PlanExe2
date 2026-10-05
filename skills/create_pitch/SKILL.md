@@ -1,7 +1,7 @@
 ---
 name: create_pitch
 description: Create a compelling project pitch with target audience, call to action, and risk mitigation.
-inputs: [strategic_decisions.md, scenarios.md, project_plan.md, wbs_project_level1_and_level2.json, related_resources.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, project_plan.md, wbs_project_level1_and_level2.json, related_resources.md]
 outputs: [pitch_raw.json]
 tier: low
 est_llm_calls: 1

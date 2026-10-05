@@ -1,7 +1,7 @@
 ---
 name: governance_phase6_extra
 description: Validate the prior governance phases (consistency, gaps), pose tough questions, and summarize the governance approach.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json, governance_phase1_audit_raw.json, governance_phase2_bodies_raw.json, governance_phase3_impl_plan_raw.json, governance_phase4_decision_escalation_matrix_raw.json, governance_phase5_monitoring_progress_raw.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json, governance_phase1_audit_raw.json, governance_phase2_bodies_raw.json, governance_phase3_impl_plan_raw.json, governance_phase4_decision_escalation_matrix_raw.json, governance_phase5_monitoring_progress_raw.json]
 outputs: [governance_phase6_extra_raw.json, governance_phase6_extra.md]
 tier: low
 est_llm_calls: 1

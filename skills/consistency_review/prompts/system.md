@@ -26,4 +26,6 @@ plan review, premortem, self-audit, pitch). Do two things.
    two figures can both be true (e.g. one is an energy-only price component and the other a total
    price), say so only if the documents fail to make that clear, and rate it accordingly.
 
+If canonical facts are given, also flag any document that contradicts them.
+
 Finish with a short summary of the plan's overall internal consistency.

@@ -1,7 +1,7 @@
 ---
 name: enrich_team_members_with_environment_info
 description: Add equipment needs and facility requirements for each team member's role.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_background_story.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md, enrich_team_members_background_story.json]
 outputs: [enrich_team_members_environment_info_raw.json, enrich_team_members_environment_info.json]
 tier: low
 est_llm_calls: 1

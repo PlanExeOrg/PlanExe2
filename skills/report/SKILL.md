@@ -1,7 +1,7 @@
 ---
 name: report
 description: Assemble all stage outputs into the final report.html (collapsible sections, Gantt) and report.md.
-inputs: [plan.txt, consistency_review.md, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, project_plan.md, review_plan.md, executive_summary.md, schedule_gantt_dhtmlx.html, questions_and_answers.md, premortem.md, self_audit.md, prompt_adherence.md]
+inputs: [plan.txt, consistency_review.md, canonical_facts.md, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, project_plan.md, review_plan.md, executive_summary.md, schedule_gantt_dhtmlx.html, questions_and_answers.md, premortem.md, self_audit.md, prompt_adherence.md]
 outputs: [report.html, report.md]
 tier: low
 est_llm_calls: 0

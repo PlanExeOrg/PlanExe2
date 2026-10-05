@@ -1,7 +1,7 @@
 ---
 name: find_team_members
 description: Identify team members required for project execution.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md]
 outputs: [find_team_members_raw.json, find_team_members.json]
 tier: low
 est_llm_calls: 1

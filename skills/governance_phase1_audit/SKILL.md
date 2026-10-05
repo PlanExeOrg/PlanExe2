@@ -1,7 +1,7 @@
 ---
 name: governance_phase1_audit
 description: Governance audit framework - corruption risks, misallocation risks, audit procedures, transparency measures.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md]
 outputs: [governance_phase1_audit_raw.json, governance_phase1_audit.md]
 tier: low
 est_llm_calls: 1

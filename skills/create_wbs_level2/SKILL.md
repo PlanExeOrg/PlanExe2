@@ -1,7 +1,7 @@
 ---
 name: create_wbs_level2
 description: Decompose top-level phases into major tasks (WBS Level 2).
-inputs: [strategic_decisions.md, scenarios.md, project_plan.md, wbs_level1.json, data_collection.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, project_plan.md, wbs_level1.json, data_collection.md]
 outputs: [wbs_level2_raw.json, wbs_level2.json]
 tier: low
 est_llm_calls: 1

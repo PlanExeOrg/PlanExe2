@@ -1,7 +1,7 @@
 ---
 name: swot_analysis
 description: Identify strengths, weaknesses, opportunities, and threats tailored to the plan's purpose.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, identify_purpose_raw.json, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, identify_purpose_raw.json, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md]
 outputs: [swot_analysis_raw.json, swot_analysis.md]
 tier: mid
 est_llm_calls: 1

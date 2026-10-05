@@ -1,7 +1,7 @@
 ---
 name: related_resources
 description: Suggest real past or existing projects similar to this one, as references (lessons, risks, contacts).
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json]
 outputs: [related_resources_raw.json, related_resources.md]
 tier: mid
 est_llm_calls: 1

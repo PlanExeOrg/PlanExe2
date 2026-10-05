@@ -1,7 +1,7 @@
 ---
 name: governance_phase3_impl_plan
 description: Step-by-step plan for setting up the governance bodies (who drafts ToR, appoints members, holds kick-offs).
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json, governance_phase2_bodies_raw.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan_raw.json, governance_phase2_bodies_raw.json]
 outputs: [governance_phase3_impl_plan_raw.json, governance_phase3_impl_plan.md]
 tier: low
 est_llm_calls: 1

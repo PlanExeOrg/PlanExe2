@@ -1,7 +1,7 @@
 ---
 name: data_collection
 description: Specify data-gathering actions needed to validate the plan: market, financial, regulatory, etc.
-inputs: [strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, related_resources.md, swot_analysis.md, team.md, expert_criticism.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, related_resources.md, swot_analysis.md, team.md, expert_criticism.md]
 outputs: [data_collection_raw.json, data_collection.md]
 tier: low
 est_llm_calls: 1

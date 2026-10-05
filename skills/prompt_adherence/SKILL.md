@@ -1,7 +1,7 @@
 ---
 name: prompt_adherence
 description: Score how faithfully the final plan follows the user's original prompt.
-inputs: [plan_raw.json, project_plan.md, executive_summary.md, consolidate_assumptions_full.md]
+inputs: [canonical_facts.json, plan_raw.json, project_plan.md, executive_summary.md, consolidate_assumptions_full.md]
 outputs: [prompt_adherence_raw.json, prompt_adherence.md]
 tier: low
 est_llm_calls: 2

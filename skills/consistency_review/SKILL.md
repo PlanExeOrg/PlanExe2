@@ -1,7 +1,7 @@
 ---
 name: consistency_review
 description: Final cross-report pass. Distill the plan into a one-page decision kernel (the few go/no-go questions) and list contradictions between documents (prices and units, gate thresholds, deadlines vs today, phase criteria).
-inputs: [plan.txt, executive_summary.md, project_plan.md, consolidate_assumptions_short.md, review_plan.md, premortem.md, self_audit.md, pitch.md]
+inputs: [canonical_facts.json, plan.txt, executive_summary.md, project_plan.md, consolidate_assumptions_short.md, review_plan.md, premortem.md, self_audit.md, pitch.md]
 outputs: [consistency_review_raw.json, consistency_review.md]
 tier: high
 fact_check: false

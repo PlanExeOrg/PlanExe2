@@ -1,7 +1,7 @@
 ---
 name: identify_task_dependencies
 description: Identify prerequisite relationships between WBS tasks for scheduling.
-inputs: [strategic_decisions.md, scenarios.md, project_plan.md, wbs_level2.json, data_collection.md]
+inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, project_plan.md, wbs_level2.json, data_collection.md]
 outputs: [task_dependencies_raw.json]
 tier: low
 est_llm_calls: 1

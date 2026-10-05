@@ -1,7 +1,7 @@
 ---
 name: create_wbs_level3
 description: Break Level 2 tasks into detailed subtasks (WBS Level 3).
-inputs: [project_plan_raw.json, wbs_project_level1_and_level2.json, task_durations.json, data_collection.md]
+inputs: [canonical_facts.json, project_plan_raw.json, wbs_project_level1_and_level2.json, task_durations.json, data_collection.md]
 outputs: [wbs_level3.json, wbs_level3_{n}_raw.json]
 tier: low
 est_llm_calls: 40
