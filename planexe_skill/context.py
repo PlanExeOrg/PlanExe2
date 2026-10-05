@@ -85,7 +85,8 @@ def calendar_reference(run_dir: Path) -> str:
     for n in list(range(0, 13, 1)) + list(range(15, 121, 3)):
         yy, mm = y + (m - 1 + n) // 12, (m - 1 + n) % 12 + 1
         rows.append(f"Month {n} = {yy:04d}-{mm:02d}-{min(d, 28 if mm == 2 else 30 if mm in (4, 6, 9, 11) else 31):02d}")
-    return ("\n\n# Time references\nRefer to points in time as month offsets from the project start: "
+    return (f"\n\n# Time references\nIn this plan, today is {y:04d}-{m:02d}-{d:02d} (Month 0, the project start). Ignore any "
+            "other notion of the current date. Refer to points in time as month offsets from the project start: "
             "\"Month 3\", \"Month 3.5\", \"Months 48-72\". Do not write calendar dates yourself; they are added "
             "automatically. For orientation only (Month N = start date + N months):\n" + "; ".join(rows))
 

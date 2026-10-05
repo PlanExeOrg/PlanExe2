@@ -368,6 +368,28 @@ with the calendar normalizer and the "Month N only" rule.
   4.7x (1,973 vs 422 words). Provenance tags are almost unused (1x "proposed threshold", 4x
   "estimate"). Fact-checking ran 0 web searches.
 
+### Codex review of the datacenter run
+
+Codex: 8.8/10 vs 7.4/10 for the PlanExe baseline ("here is a system for determining whether this
+enormous project deserves to exist" vs "a plausible strategy"). Strongest gains: gates/kill criteria,
+governance (independent gate authority), execution depth (272 vs 89 WBS rows), scenario/fallback
+quality. Weaknesses it found:
+
+1. **Two clocks.** "Month 5 (October 2026), immediately" next to deadlines in July 2026. Cause: the
+   run reused the baseline's start date (2026-05-16) for comparability, while the `claude` CLI tells
+   the model the real date (2026-10-05). In normal use (`create` stamps today's date) they agree.
+   Fixed anyway: every call now states the plan's "today" (= Month 0) and to ignore any other date.
+2. **Unreconciled financials.** EUR 70-80/MWh tenant pricing vs EUR 140-160/MWh electricity vs
+   >EUR 3B/yr Phase 1 revenue and 10-12% IRR are not consistent (energy-only price component vs
+   total price never distinguished). Open.
+3. **Conflicting gate thresholds** across sections (Phase 1 vs Phase 2 criteria occasionally mixed).
+   Open.
+4. **Signal-to-noise:** ~3.3x the baseline's text; the central decision tree gets buried.
+
+Codex's proposals (not implemented): a final cross-report consistency pass (prices, units, gate
+percentages, deadlines vs "now") and a one-page "decision kernel" up front (the 4-5 yes/no
+questions whose NO means delay/split/downsize/stop).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
