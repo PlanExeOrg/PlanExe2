@@ -462,6 +462,22 @@ compiler-style diagnostics in consistency_review.
   where violations concentrate. Candidate fixes: tier mid for premortem (3 calls), or a repair pass
   that regenerates only the documents named by HIGH diagnostics, with the diagnostics as input.
 
+### Enforcement: repair loop + premortem on Sonnet (2026-10-06)
+
+Following Codex ("0 HIGH -> publish; 1+ HIGH -> regenerate offending sections; still HIGH -> publish
+only with FAILED CONSISTENCY status"):
+- `consistency_review` (lint pass 1) -> new `consistency_repair` -> new `consistency_recheck` (lint
+  pass 2) -> report. The repair asks Sonnet, per document named in a HIGH/MEDIUM diagnostic, for exact
+  find/replace edits (verbatim excerpt -> corrected text); Python applies them, so unrelated text stays
+  verbatim and nothing is re-typed. Repaired copies (`repaired_*.md`) of the 7 reader-facing documents
+  feed the report; PlanExe's original files are untouched. Remaining HIGH items after pass 2 show a
+  "Consistency lint FAILED" banner. Shared review prompt/schema: `planexe_skill/shared/consistency/`.
+- premortem moved to tier mid (Sonnet, low effort); it was the most frequent offender (6 of 12).
+- Tested on a copy of the Gibraltar run (lint 1 from the full run; 6 LLM calls, 3m47s): 48 edits
+  applied to executive summary, pitch, review plan, premortem and self-audit, 0 failed to match;
+  high-severity contradictions 6 -> 2 (medium 6 -> 10: pass 2 also finds new, smaller issues).
+  The premortem-on-Sonnet change is not yet validated in a full run.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge

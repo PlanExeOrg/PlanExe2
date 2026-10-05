@@ -6,6 +6,7 @@ outputs: [consistency_review_raw.json, consistency_review.md]
 tier: high
 fact_check: false
 est_llm_calls: 1
+uses: [planexe_skill/shared/consistency]
 ---
 Not part of the original PlanExe pipeline (added after the Codex reviews of the battery and
 datacenter reports, which found the main remaining weakness to be cross-document consistency:
@@ -17,4 +18,6 @@ deadlines already in the past). One reasoning call reads the core documents and 
 - `contradictions`: pairs of statements that cannot both be true, where each was found, why they
   conflict and the suggested resolution, with severity.
 
-The report renders it as its first section ("Decision Kernel and Consistency Check").
+This is lint pass 1. `consistency_repair` fixes the documents it names and `consistency_recheck` (lint
+pass 2) re-checks the repaired documents; the report shows the recheck. Prompt and schema live in
+`planexe_skill/shared/consistency/`.

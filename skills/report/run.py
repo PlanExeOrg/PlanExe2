@@ -143,32 +143,32 @@ class Report:
 
 def lint_banner(ctx, r: "Report") -> None:
     """Consistency lint: surface high-severity contradictions at the very top of the report."""
-    items = ctx.read_json("consistency_review_raw.json").get("contradictions") or []
+    items = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
     high = [c for c in items if c.get("severity") == "high"]
     if not high:
         return
     topics = "; ".join(escape(c.get("topic", "")) for c in high[:6])
     r.top_banner_html += f"""
         <div class="prompt-quality-warning">
-            <strong>&#9888; Consistency lint: {len(high)} high-severity contradiction(s)</strong>
+            <strong>&#9888; Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair</strong>
             <p>Some sections disagree on numbers or dates that change a decision: {topics}.
             See "Decision Kernel and Consistency Check" for the canonical values and resolutions.</p>
         </div>
 """
     r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
-        f"> **⚠ Consistency lint: {len(high)} high-severity contradiction(s)**\n>\n"
+        f"> **⚠ Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair**\n>\n"
         f"> {'; '.join(c.get('topic', '') for c in high[:6])}. See \"Decision Kernel and Consistency Check\".")
 
 
 def run(ctx):
     title = ctx.read_text("wbs_level1_project_title.json")
     r = Report(ctx)
-    r.markdown("Decision Kernel and Consistency Check", "consistency_review.md")
+    r.markdown("Decision Kernel and Consistency Check", "consistency_recheck.md")
     r.markdown("Canonical Facts", "canonical_facts.md")
-    r.markdown("Executive Summary", "executive_summary.md")
+    r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
-    r.markdown("Pitch", "pitch.md")
-    r.markdown("Project Plan", "project_plan.md")
+    r.markdown("Pitch", "repaired_pitch.md")
+    r.markdown("Project Plan", "repaired_project_plan.md")
     r.markdown("Strategic Decisions", "strategic_decisions.md")
     r.markdown("Scenarios", "scenarios.md")
     r.markdown("Assumptions", "consolidate_assumptions_full.md")
@@ -180,10 +180,10 @@ def run(ctx):
     r.markdown("Team", "team.md")
     r.markdown("Expert Criticism", "expert_criticism.md")
     r.csv_table("Work Breakdown Structure", "wbs_project_level1_and_level2_and_level3.csv")
-    r.markdown("Review Plan", "review_plan.md")
-    r.markdown("Questions & Answers", "questions_and_answers.md")
-    r.markdown("Premortem", "premortem.md")
-    r.markdown("Self Audit", "self_audit.md")
+    r.markdown("Review Plan", "repaired_review_plan.md")
+    r.markdown("Questions & Answers", "repaired_questions_and_answers.md")
+    r.markdown("Premortem", "repaired_premortem.md")
+    r.markdown("Self Audit", "repaired_self_audit.md")
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
     lint_banner(ctx, r)

@@ -1,0 +1,18 @@
+{
+  "type": "object",
+  "properties": {
+    "edits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "diagnostic": {"type": "string"},
+          "find": {"type": "string"},
+          "replace": {"type": "string"}
+        },
+        "required": ["diagnostic", "find", "replace"]
+      }
+    }
+  },
+  "required": ["edits"]
+}

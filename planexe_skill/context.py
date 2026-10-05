@@ -124,6 +124,7 @@ class SkillContext:
         self.cache_dir = cache_dir
         self._calendar = calendar_reference(run_dir)
         self._start = project_start(run_dir)
+        self.project_start = self._start  # date of Month 0, or None
 
     # ---------- files ----------
     def _check_read(self, name: str) -> None:
@@ -258,7 +259,7 @@ class SkillContext:
                                                         "duration_seconds": time.time() - start,
                                                         "metadata": result.metadata if result else {}})
         assert result is not None
-        if self._start is not None:
+        if self._start is not None and self.skill.meta.get("calendar_fix", True) is not False:
             # Calendar dates next to "Month N" are derived, not guessed: recompute them.
             from planexe_skill.calendar_fix import fix_text, fix_value
             data, n1 = fix_value(result.data, self._start)
