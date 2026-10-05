@@ -431,6 +431,19 @@ What the iterations showed (datacenter prompt):
   that this partial check did not regenerate. consistency_review now treats assumption-vs-fact
   differences as expected unless a later document follows the old value.
 
+### Full run with facts before project_plan: datacenter_in_france (`runs/datacenter3`)
+
+- 73/73 stages, 0 failures, 212 LLM calls, 18 web searches, **1h16m**; 43 canonical facts;
+  report 132k words (previous full run 152k), executive summary 793 words.
+- consistency_review: 12 contradictions, **5 high** (previous full runs: 7 high), 6 medium, 1 low.
+  Its summary: the main structure is coherent (Month 12 go/no-go, the four gate criteria, the
+  one-deferral rule, Dunkirk core with satellites); "contradictions appear where the later review,
+  premortem and self-audit documents follow older assumptions instead of the canonical facts".
+  Executive summary and project plan side with the canonical facts.
+- Remaining work: the late critique stages (review_plan, premortem, self_audit; Haiku without
+  thinking) still adopt values from the pre-reconciliation assumptions. Options: give them the
+  assumptions with a "superseded where canonical facts differ" label, or move premortem to tier mid.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
