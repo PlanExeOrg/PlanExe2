@@ -3,7 +3,7 @@ from collections import Counter
 
 from planexe_skill.calendar_fix import fix_text
 from planexe_skill.planexe import structured
-from planexe_skill.shared.consistency import review, to_markdown
+from planexe_skill.shared.consistency import needs_decision, review, to_markdown
 
 # repairable document -> keywords that identify it in a diagnostic's `offending_document`
 REPAIRABLE = {
@@ -20,8 +20,8 @@ REPAIRABLE = {
 def diagnostics_by_document(review: dict) -> dict[str, list[dict]]:
     out: dict[str, list[dict]] = {}
     for i, c in enumerate(review.get("contradictions") or [], start=1):
-        if c.get("severity") not in ("high", "medium"):
-            continue
+        if c.get("severity") not in ("high", "medium") or needs_decision(c):
+            continue  # only repairable items; missing decisions must not be "repaired" by invention
         where = f"{c.get('offending_document', '')}".lower()
         for doc, keys in REPAIRABLE.items():
             if any(k in where for k in keys):
@@ -63,7 +63,8 @@ RECHECK_DOCUMENTS = [
 
 
 def severities(review: dict) -> Counter:
-    return Counter(c.get("severity") for c in review.get("contradictions") or [])
+    """Counts of *repairable* contradictions by severity (missing decisions can't be repaired)."""
+    return Counter(c.get("severity") for c in review.get("contradictions") or [] if not needs_decision(c))
 
 
 def run(ctx):

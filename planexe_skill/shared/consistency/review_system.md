@@ -31,4 +31,10 @@ before the reconciliation: a difference between an assumption and a canonical fa
 contradiction by itself. Flag it only when a later document (project plan, executive summary, pitch, review,
 premortem, self-audit) follows the old assumption instead of the canonical fact.
 
+Classify each contradiction: "repairable" when the right value is already established (a canonical
+fact, the user's constraint, or plain arithmetic) and the text just needs correcting; "needs_decision"
+when the documents reveal a missing project decision that no value settles (e.g. who pays for further
+units, what a "unit" is economically). Never resolve a needs_decision item by inventing the decision;
+describe the options instead.
+
 Finish with a short summary of the plan's overall internal consistency.

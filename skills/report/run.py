@@ -160,23 +160,30 @@ def split_consistency(md: str) -> tuple[str, str]:
 
 
 def lint_banner(ctx, r: "Report") -> None:
-    """Consistency lint: surface high-severity contradictions at the very top of the report."""
+    """Consistency lint: repairable high-severity contradictions = FAILED; missing decisions = decisions required."""
     items = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
-    high = [c for c in items if c.get("severity") == "high"]
-    if not high:
-        return
-    decisions = sum(1 for c in high if "canonical" in str(c.get("offending_document", "")).lower())
-    topics = "; ".join(escape(c.get("topic", "")) for c in high[:6])
-    r.top_banner_html += f"""
+    def is_decision(c: dict) -> bool:
+        return c.get("resolution_type") == "needs_decision" or "canonical" in str(c.get("offending_document", "")).lower()
+    failed = [c for c in items if c.get("severity") == "high" and not is_decision(c)]
+    decisions = [c for c in items if c.get("severity") in ("high", "medium") and is_decision(c)]
+    for kind, rows in (("failed", failed), ("decisions", decisions)):
+        if not rows:
+            continue
+        topics = "; ".join(c.get("topic", "") for c in rows[:6])
+        if kind == "failed":
+            title = f"Consistency lint FAILED: {len(rows)} high-severity contradiction(s) remain after repair"
+            body = "Some sections disagree on numbers or dates that change a decision"
+        else:
+            title = f"Decisions required: {len(rows)} issue(s) reveal a missing project decision"
+            body = "These are not text errors; the plan needs a decision before they can be resolved"
+        r.top_banner_html += f"""
         <div class="prompt-quality-warning">
-            <strong>&#9888; Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair</strong>
-            <p>Some sections disagree on numbers or dates that change a decision: {topics}.
-            {f"{decisions} of them are conflicts inside the canonical facts and need a decision. " if decisions else ""}See the "Consistency Check" section for the canonical values and resolutions.</p>
+            <strong>&#9888; {escape(title)}</strong>
+            <p>{body}: {escape(topics)}. See the "Consistency Check" section.</p>
         </div>
 """
-    r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
-        f"> **⚠ Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair**\n>\n"
-        f"> {'; '.join(c.get('topic', '') for c in high[:6])}. See \"Consistency Check\".")
+        r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
+            f"> **⚠ {title}**\n>\n> {body}: {topics}. See \"Consistency Check\".")
 
 
 def run(ctx):

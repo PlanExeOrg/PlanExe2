@@ -5,7 +5,7 @@ inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions
 outputs: [canonical_facts.json, canonical_facts.md]
 tier: high
 fact_check: false
-est_llm_calls: 1
+est_llm_calls: 2
 ---
 Not part of the original PlanExe pipeline. Added after the Codex review of the datacenter run: stages
 invented their own values for the same quantity (RTE gate 250/300/500 MW, tenant price vs power cost,
@@ -20,3 +20,6 @@ the rule to use these values and not introduce different ones (`planexe_skill/co
 
 History: first placed after project_plan; a full datacenter run then showed later stages siding with the
 unreconciled project plan (e.g. FID at Month 12 vs canonical Month 24), so it moved before it.
+
+A second reasoning call (`prompts/verify.md`) recomputes the table's arithmetic and removes internal
+conflicts (e.g. a reserve counted inside and outside the contingency) before any later stage uses it.

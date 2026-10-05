@@ -18,6 +18,10 @@ Rules:
 - Make values mutually consistent: totals must equal their parts, revenue must follow from price x
   volume, a prerequisite must come before what depends on it, Phase 1 and Phase 2 criteria must be
   distinct.
+- Define the economic units first: what a "unit" (plant, module, site, product) is, its capacity and
+  cost, how many are built and WHO FINANCES EACH ONE (program budget vs customer/partner money). Only
+  program-financed items may be counted against the budget cap; if the documents leave this open, state
+  it as an open decision instead of choosing silently.
 - Close the economic chain. Include facts for demand (volume and when it is reached), price/fare or
   tariff (with unit and what it covers), annual revenue, annual operating and maintenance cost, financing
   (debt amount and annual debt service), and the resulting annual surplus or required subsidy. Revenue

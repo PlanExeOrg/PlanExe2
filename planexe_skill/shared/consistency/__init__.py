@@ -41,8 +41,7 @@ def to_markdown(r: dict) -> str:
                      f"    observed:  {c.get('observed_value', '')}"]
         rows += ["```", ""]
     for i, c in enumerate(items, start=1):
-        needs_decision = "canonical" in str(c.get("offending_document", "")).lower()
-        tag = " — needs a decision (the canonical facts themselves conflict)" if needs_decision else ""
+        tag = " — needs a project decision" if needs_decision(c) else ""
         rows += [f"### {i}. {c['topic']} ({SEVERITY_ICON.get(c['severity'], c['severity'])}){tag}", "",
                  f"- **{c['where_a']}:** {c['statement_a']}",
                  f"- **{c['where_b']}:** {c['statement_b']}",
@@ -52,6 +51,12 @@ def to_markdown(r: dict) -> str:
     return "\n".join(rows)
 
 
+
+
+def needs_decision(c: dict) -> bool:
+    """A contradiction that reveals a missing decision (not fixable by editing text)."""
+    return (c.get("resolution_type") == "needs_decision"
+            or "canonical" in str(c.get("offending_document", "")).lower())
 
 
 def review(ctx, documents: list[tuple[str, str]], raw_name: str, md_name: str, preface: str = "",

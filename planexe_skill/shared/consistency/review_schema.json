@@ -89,6 +89,14 @@
           "observed_value": {
             "type": "string",
             "description": "The conflicting value as written in the offending document."
+          },
+          "resolution_type": {
+            "type": "string",
+            "enum": [
+              "repairable",
+              "needs_decision"
+            ],
+            "description": "'repairable' if correcting text to an already-established value fixes it (incl. arithmetic errors); 'needs_decision' if no document or canonical fact settles it and a project decision is missing (e.g. who finances additional units)."
           }
         },
         "required": [
@@ -103,7 +111,8 @@
           "offending_document",
           "canonical_key",
           "canonical_value",
-          "observed_value"
+          "observed_value",
+          "resolution_type"
         ]
       }
     },

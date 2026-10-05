@@ -530,6 +530,26 @@ program-control dossier"), with consistency *management* 9.5 but final consisten
 - Remaining after repair on Delhi: unit count/capacity vs deployment budget and revenue model; wrong
   financial sensitivities in two review answers.
 
+### Repairable vs missing decision; canonical-fact invariants (2026-10-06)
+
+Codex on the converging repair loop: 8.9/10 (internal consistency 6.0 -> 7.5); the two remaining highs
+were "one genuine unresolved business-model decision + one calculation bug". Its list, and what changed:
+1. Lexicographic selection of repair rounds (high, then medium): done in the previous commit.
+2. "Contradiction that can be repaired" vs "contradiction revealing a missing decision": the reviewer
+   classifies each item (`resolution_type`); only repairable items are repaired and only repairable highs
+   fail the lint; missing decisions get a separate "Decisions required" banner and are never
+   "repaired" by inventing the decision.
+3. Canonical facts must pass their own invariants: a second reasoning call (`prompts/verify.md`)
+   recomputes every product/sum/ratio/annuity, removes double counting and adds missing closing facts.
+   On the Delhi copy it corrected the DSCR-1.3 tariff (1.29 -> 1.28 USD/m3), compounded inflation
+   (25-40% -> 28-47%), the ZLD cost claim, and separated free contingency (USD 18.75M) from the
+   FX reserve.
+4. Unit/economic ontology before downstream generation: canonical_facts must define what a unit is,
+   its cost and who finances each one (program vs customer money). On Delhi: "who finances each plant"
+   is now an explicit open decision, program-financed plants are 2-3 x 20-30 MLD within the USD 70M
+   deployment line (not 5-8 x 50 MLD).
+5. Deterministic arithmetic checking: open (the invariant pass re-checks arithmetic with the LLM).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
