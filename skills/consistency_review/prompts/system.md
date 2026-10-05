@@ -26,6 +26,9 @@ plan review, premortem, self-audit, pitch). Do two things.
    two figures can both be true (e.g. one is an energy-only price component and the other a total
    price), say so only if the documents fail to make that clear, and rate it accordingly.
 
-If canonical facts are given, also flag any document that contradicts them.
+If canonical facts are given, they are the reconciled values and win. The assumptions document was written
+before the reconciliation: a difference between an assumption and a canonical fact is expected and is not a
+contradiction by itself. Flag it only when a later document (project plan, executive summary, pitch, review,
+premortem, self-audit) follows the old assumption instead of the canonical fact.
 
 Finish with a short summary of the plan's overall internal consistency.

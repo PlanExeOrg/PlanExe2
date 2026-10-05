@@ -412,6 +412,25 @@ questions whose NO means delay/split/downsize/stop).
 - **Plan date:** past/future plan dates are supported by design; every call states the plan's
   "today" (Month 0).
 
+### Canonical facts (2026-10-05)
+
+Codex's next step after the consistency check: repair, don't just report. New stage `canonical_facts`
+(1 reasoning call) reconciles 15-40 key facts (gates, prices with unit and meaning, caps, milestones as
+Month N; each tagged user constraint / decision / proposed threshold / estimate). It runs right before
+project_plan; all later LLM stages declare `canonical_facts.json` as input and get the table appended to
+their user message with "the canonical fact wins". project_plan moved to tier mid (Sonnet, low effort).
+
+What the iterations showed (datacenter prompt):
+- Facts placed *after* project_plan (full run `runs/datacenter2`, 73 stages, 0 failures, 233 calls,
+  1h12m, 15 web searches, 47 facts): 13 contradictions remained; later stages sided with the
+  unreconciled project plan (Phase 1 FID Month 12 vs canonical Month 24).
+- Facts *before* project_plan, in the system prompt, project_plan on Haiku: still 12; Haiku ignored them.
+- Facts in the *user message*, project_plan on Sonnet (targeted re-run of 5 stages): the executive
+  summary, project plan and pitch now agree with the canonical facts; the 12 remaining conflicts are
+  against the pre-reconciliation assumptions (by design) and against review/premortem/self-audit files
+  that this partial check did not regenerate. consistency_review now treats assumption-vs-fact
+  differences as expected unless a later document follows the old value.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge

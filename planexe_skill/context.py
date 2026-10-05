@@ -192,7 +192,8 @@ class SkillContext:
             return ""
         lines = [f"- {f.get('key')}: {f.get('value')} ({str(f.get('kind', '')).replace('_', ' ')})" for f in facts]
         return ("\n\n# Canonical facts\nThese values were reconciled for this plan. Whenever you mention one of these "
-                "quantities, use exactly this value; do not introduce a different number for it. Label any other figure "
+                "quantities, use exactly this value; do not introduce a different number for it. If an input document "
+                "states a different value, the canonical fact wins: do not repeat the document's value. Label any other figure "
                 "you need as (estimate) or (proposed threshold).\n" + "\n".join(lines))
 
     # ---------- llm ----------
@@ -211,12 +212,15 @@ class SkillContext:
                 system += (" For this task, searching is required: run 1-2 web searches to verify the real-world "
                            "precedents, organizations and figures you cite before answering.")
         # Canonical facts (see skills/canonical_facts): stages that declare the file must use these values.
+        # They go at the end of the user message: models without reasoning ignore them at the end of a long
+        # system prompt (measured on the datacenter run).
+        facts_block = ""
         if "canonical_facts.json" in self.skill.inputs and self._resolve("canonical_facts.json").exists():
-            system = system.rstrip() + self._canonical_facts_block()
+            facts_block = self._canonical_facts_block()
         # Applies to every LLM call: month->date table in the system prompt; the provenance rule goes
         # at the end of the user message, where models without reasoning reliably notice it.
         system = system.rstrip() + self._calendar
-        user = user.rstrip() + EPISTEMIC_INSTRUCTION
+        user = user.rstrip() + facts_block + EPISTEMIC_INSTRUCTION
         # Length budget for the non-reasoning tiers: without it Haiku writes essays per field,
         # which makes calls take minutes. Skills can tune it via `max_words_per_field:` (0 = off).
         budget = int(self.skill.meta.get("max_words_per_field", DEFAULT_MAX_WORDS_PER_FIELD) or 0)

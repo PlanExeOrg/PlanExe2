@@ -1,9 +1,9 @@
 ---
 name: project_plan
 description: Generate the project plan with goals, milestones, deliverables, and success criteria.
-inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json]
+inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, pre_project_assessment.json]
 outputs: [project_plan_raw.json, project_plan.md]
-tier: low
+tier: mid
 est_llm_calls: 1
 max_words_per_field: 80
 max_items_per_list: 5

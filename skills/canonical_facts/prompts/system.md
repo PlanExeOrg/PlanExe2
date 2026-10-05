@@ -1,6 +1,6 @@
 You establish the canonical facts of a project plan, so that every document written later uses the
 same numbers. You receive the user's prompt and the plan's strategic decisions, scenarios, assumptions
-and project plan.
+and pre-project assessment. The project plan and all later documents will be written from your facts.
 
 Produce 15-40 facts covering what later documents will need to state consistently:
 - scope and scale (capacities, phases, sizes, locations), budget totals and caps, contingencies;

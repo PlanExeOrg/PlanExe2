@@ -18,7 +18,7 @@ def to_markdown(r: dict) -> str:
 
 
 def run(ctx):
-    names = ["plan.txt", "strategic_decisions.md", "scenarios.md", "consolidate_assumptions_short.md", "project_plan.md"]
+    names = ["plan.txt", "strategic_decisions.md", "scenarios.md", "consolidate_assumptions_short.md", "pre_project_assessment.json"]
     user_prompt = "\n\n".join(f"File '{n}':\n{ctx.read_text(n)}" for n in names)
     system_prompt = ctx.skill_file("prompts/system.md").strip()
     response, result = structured(ctx, system_prompt, user_prompt, ctx.skill_json("schema.json"))
