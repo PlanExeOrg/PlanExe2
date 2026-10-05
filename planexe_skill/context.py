@@ -193,7 +193,9 @@ class SkillContext:
         lines = [f"- {f.get('key')}: {f.get('value')} ({str(f.get('kind', '')).replace('_', ' ')})" for f in facts]
         return ("\n\n# Canonical facts\nThese values were reconciled for this plan. Whenever you mention one of these "
                 "quantities, use exactly this value; do not introduce a different number for it. If an input document "
-                "states a different value, the canonical fact wins: do not repeat the document's value. Label any other figure "
+                "states a different value, the canonical fact wins: do not repeat the document's value. In particular, the "
+                "assumptions documents were written before these facts and are superseded wherever they differ. "
+                "Label any other figure "
                 "you need as (estimate) or (proposed threshold).\n" + "\n".join(lines))
 
     # ---------- llm ----------

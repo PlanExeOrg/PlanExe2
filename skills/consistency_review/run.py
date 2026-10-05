@@ -26,6 +26,14 @@ def to_markdown(r: dict) -> str:
     items = r.get("contradictions") or []
     if not items:
         rows.append("No contradictions found between the core documents.")
+    diag = [c for c in items if c.get("canonical_key")]
+    if diag:
+        rows += ["Diagnostics (document vs canonical fact):", "", "```text"]
+        for i, c in enumerate(diag, start=1):
+            rows += [f"{c['severity'].upper()} CF-{i:03d}  document: {c.get('offending_document', '')}",
+                     f"    canonical: {c['canonical_key']} = {c.get('canonical_value', '')}",
+                     f"    observed:  {c.get('observed_value', '')}"]
+        rows += ["```", ""]
     for i, c in enumerate(items, start=1):
         rows += [f"### {i}. {c['topic']} ({SEVERITY_ICON.get(c['severity'], c['severity'])})", "",
                  f"- **{c['where_a']}:** {c['statement_a']}",

@@ -7,12 +7,29 @@
       "items": {
         "type": "object",
         "properties": {
-          "question": {"type": "string", "description": "A yes/no question, one sentence."},
-          "threshold": {"type": "string", "description": "The concrete pass threshold, from the documents."},
-          "evidence": {"type": "string", "description": "What evidence answers it and when (Month N)."},
-          "if_no": {"type": "string", "description": "What a NO means: delay, split, downsize or stop, and how."}
+          "question": {
+            "type": "string",
+            "description": "A yes/no question, one sentence."
+          },
+          "threshold": {
+            "type": "string",
+            "description": "The concrete pass threshold, from the documents."
+          },
+          "evidence": {
+            "type": "string",
+            "description": "What evidence answers it and when (Month N)."
+          },
+          "if_no": {
+            "type": "string",
+            "description": "What a NO means: delay, split, downsize or stop, and how."
+          }
         },
-        "required": ["question", "threshold", "evidence", "if_no"]
+        "required": [
+          "question",
+          "threshold",
+          "evidence",
+          "if_no"
+        ]
       }
     },
     "contradictions": {
@@ -21,19 +38,83 @@
       "items": {
         "type": "object",
         "properties": {
-          "topic": {"type": "string", "description": "Short label, e.g. 'Tenant price vs electricity cost'."},
-          "severity": {"type": "string", "enum": ["high", "medium", "low"]},
-          "statement_a": {"type": "string", "description": "Brief quote or paraphrase of the first statement."},
-          "where_a": {"type": "string", "description": "Document/section of the first statement."},
-          "statement_b": {"type": "string", "description": "Brief quote or paraphrase of the conflicting statement."},
-          "where_b": {"type": "string", "description": "Document/section of the second statement."},
-          "why_inconsistent": {"type": "string", "description": "One or two sentences."},
-          "suggested_resolution": {"type": "string", "description": "Which value to keep and why, or what must be clarified."}
+          "topic": {
+            "type": "string",
+            "description": "Short label, e.g. 'Tenant price vs electricity cost'."
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          },
+          "statement_a": {
+            "type": "string",
+            "description": "Brief quote or paraphrase of the first statement."
+          },
+          "where_a": {
+            "type": "string",
+            "description": "Document/section of the first statement."
+          },
+          "statement_b": {
+            "type": "string",
+            "description": "Brief quote or paraphrase of the conflicting statement."
+          },
+          "where_b": {
+            "type": "string",
+            "description": "Document/section of the second statement."
+          },
+          "why_inconsistent": {
+            "type": "string",
+            "description": "One or two sentences."
+          },
+          "suggested_resolution": {
+            "type": "string",
+            "description": "Which value to keep and why, or what must be clarified."
+          },
+          "offending_document": {
+            "type": "string",
+            "description": "The later document that should change (e.g. 'premortem FM5'), or 'canonical_facts' if the canonical value itself is wrong."
+          },
+          "canonical_key": {
+            "type": "string",
+            "description": "The violated canonical fact key, or '' if none applies."
+          },
+          "canonical_value": {
+            "type": "string",
+            "description": "The canonical value, or ''."
+          },
+          "observed_value": {
+            "type": "string",
+            "description": "The conflicting value as written in the offending document."
+          }
         },
-        "required": ["topic", "severity", "statement_a", "where_a", "statement_b", "where_b", "why_inconsistent", "suggested_resolution"]
+        "required": [
+          "topic",
+          "severity",
+          "statement_a",
+          "where_a",
+          "statement_b",
+          "where_b",
+          "why_inconsistent",
+          "suggested_resolution",
+          "offending_document",
+          "canonical_key",
+          "canonical_value",
+          "observed_value"
+        ]
       }
     },
-    "summary": {"type": "string", "description": "2-4 sentences on the plan's overall internal consistency."}
+    "summary": {
+      "type": "string",
+      "description": "2-4 sentences on the plan's overall internal consistency."
+    }
   },
-  "required": ["decision_questions", "contradictions", "summary"]
+  "required": [
+    "decision_questions",
+    "contradictions",
+    "summary"
+  ]
 }
