@@ -346,6 +346,28 @@ Responses:
   (e.g. a `basis` field next to numeric fields in the schemas of the assumption stages) is still open.
 - **Verbosity:** open (list-length caps).
 
+### End-to-end run: datacenter_in_france (2026-10-05)
+
+Same prompt and start date as the PlanExe baseline, generated alone with 4 workers, first full run
+with the calendar normalizer and the "Month N only" rule.
+
+- **Completes end to end:** 71/71 stages, 0 failures, 208 LLM calls, 748k output tokens,
+  **1h29m** (target 45 min). Slowest: review_assumptions 13m08s, self_audit 9m45s,
+  data_collection 9m36s, premortem 6m32s, identify_documents 5m57s, review_plan 5m31s,
+  potential_levers 5m26s.
+- **Structure:** 67/71 stages identical in shape to the baseline. Flags: candidate_scenarios
+  (lever names as keys: content), background_story/environment_info (baseline defect, see group d2),
+  and consolidate_assumptions_short dropped the "## Location 1/2" headings (minor regression).
+- **Dates:** 260/260 month/date pairs correct; 2,438 month offsets annotated with computed dates.
+- **Strategy:** both pick a staged, gate-driven scenario. The new plan carries the red-team brief
+  through the whole report (kill criteria mentioned 125x vs 3x, "no-build" alternative 13x vs 1x,
+  downsizing 182x vs 6x) and names plausible local specifics (RTE connection queue, Gravelines,
+  CNIL); the Cattenom misplacement seen in an earlier SWOT eval is absent.
+- **Prompt adherence:** 15 directives in both; 99% vs 94%, both with an issues section.
+- **Weak:** length. The report is 3.1x the baseline (152k vs 48.5k words), the executive summary
+  4.7x (1,973 vs 422 words). Provenance tags are almost unused (1x "proposed threshold", 4x
+  "estimate"). Fact-checking ran 0 web searches.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
