@@ -5,6 +5,8 @@ inputs: [plan.txt, strategic_decisions.md, scenarios.md, consolidate_assumptions
 outputs: [project_plan_raw.json, project_plan.md]
 tier: low
 est_llm_calls: 1
+max_words_per_field: 80
+max_items_per_list: 5
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (GoalDefinition:
 goal_statement, smart_criteria{specific, measurable, achievable, relevant, time_bound}, dependencies,

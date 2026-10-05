@@ -29,8 +29,12 @@ _LENGTH_HINT = re.compile(r"\b(\d+\s*(-|–|to)\s*\d+|~?\d+|one|two|three)\s+(wo
                           r"\bone sentence\b|\bone short sentence\b", re.I)
 
 
-def with_length_budget(schema: dict, max_words: int) -> dict:
-    """Copy of `schema` where every free-text string field says 'At most N words.'"""
+_COUNT_HINT = re.compile(r"\b(\d+\s*(-|–|to)\s*\d+|exactly \d+|at least \d+|at most \d+|\d+\s+items?)\b", re.I)
+
+
+def with_length_budget(schema: dict, max_words: int, max_items: int = 0) -> dict:
+    """Copy of `schema` where every free-text string field says 'At most N words.' and, when
+    max_items > 0, every list without its own count hint says 'At most N items.'"""
     import copy
     schema = copy.deepcopy(schema)
 
@@ -48,6 +52,10 @@ def with_length_budget(schema: dict, max_words: int) -> dict:
                 if isinstance(sub, dict) and is_text(sub) and not _LENGTH_HINT.search(sub.get("description", "")):
                     desc = sub.get("description", "").rstrip()
                     sub["description"] = (desc + " " if desc else "") + f"At most {max_words} words."
+                if (max_items > 0 and isinstance(sub, dict) and sub.get("type") == "array"
+                        and not _COUNT_HINT.search(sub.get("description", ""))):
+                    desc = sub.get("description", "").rstrip()
+                    sub["description"] = (desc + " " if desc else "") + f"At most {max_items} items."
             for v in node.values():
                 visit(v)
         elif isinstance(node, list):
@@ -185,9 +193,13 @@ class SkillContext:
         model = self.backend.model_for(tier)
         # The reasoning tier fact-checks with web search (skills can opt out with `fact_check: false`),
         # so the foundational stages hand verified facts to the many single-shot stages downstream.
-        web_search = bool(self.skill.meta.get("fact_check", tier == "high")) and tier == "high"
+        fact_check = self.skill.meta.get("fact_check", tier == "high")
+        web_search = bool(fact_check) and tier == "high"
         if web_search:
             system = system.rstrip() + FACT_CHECK_INSTRUCTION
+            if fact_check == "required":
+                system += (" For this task, searching is required: run 1-2 web searches to verify the real-world "
+                           "precedents, organizations and figures you cite before answering.")
         # Applies to every LLM call: month->date table in the system prompt; the provenance rule goes
         # at the end of the user message, where models without reasoning reliably notice it.
         system = system.rstrip() + self._calendar
@@ -195,8 +207,9 @@ class SkillContext:
         # Length budget for the non-reasoning tiers: without it Haiku writes essays per field,
         # which makes calls take minutes. Skills can tune it via `max_words_per_field:` (0 = off).
         budget = int(self.skill.meta.get("max_words_per_field", DEFAULT_MAX_WORDS_PER_FIELD) or 0)
+        max_items = int(self.skill.meta.get("max_items_per_list", 0) or 0)
         if tier != "high" and budget > 0 and schema is not None:
-            schema = with_length_budget(schema, budget)
+            schema = with_length_budget(schema, budget, max_items)
             system = (system.rstrip() + f"\n\nBe concise: keep every text field to at most {budget} words; "
                       "prefer short, specific sentences over essays.")
         cache_file = None

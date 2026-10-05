@@ -6,6 +6,7 @@ outputs: [governance_phase5_monitoring_progress_raw.json, governance_phase5_moni
 tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/governance.py]
+max_items_per_list: 6
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`
 (monitoring_progress: approach, monitoring_tools_platforms, frequency, responsible_role,

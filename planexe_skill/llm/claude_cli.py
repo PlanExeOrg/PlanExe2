@@ -52,7 +52,7 @@ class ClaudeCLIBackend(Backend):
 
     def __init__(self, models: dict[str, str] | None = None, efforts: dict[str, str | None] | None = None,
                  timeout: float = 600.0, retries: int = 3, executable: str = "claude",
-                 idle_timeout: float = 90.0, max_structured_rejections: int = 1):
+                 idle_timeout: float = 90.0, max_structured_rejections: int = 0):
         self.models = {**DEFAULT_MODELS, **(models or {})}
         self.efforts = {**DEFAULT_EFFORTS, **(efforts or {})}
         self.timeout = timeout
@@ -118,7 +118,7 @@ class ClaudeCLIBackend(Backend):
                            f"(https://docs.claude.com/claude-code) and run 'claude auth login'.")
         proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                 text=True, env=env, cwd=_neutral_cwd())
-        state = {"last": time.time(), "chars": 0, "result": None, "rejections": 0, "lines": []}
+        state = {"last": time.time(), "chars": 0, "result": None, "rejections": 0, "lines": [], "searches": 0}
         stderr_chunks: list[str] = []
 
         def read_stdout() -> None:
@@ -134,6 +134,12 @@ class ClaudeCLIBackend(Backend):
                 if etype == "stream_event":
                     delta = (event.get("event") or {}).get("delta") or {}
                     state["chars"] += len(delta.get("text") or delta.get("partial_json") or "")
+                elif etype == "assistant":
+                    # The CLI runs WebSearch as its own tool: count the tool calls (the API usage
+                    # counter `server_tool_use.web_search_requests` stays 0 for these).
+                    for block in ((event.get("message") or {}).get("content") or []):
+                        if isinstance(block, dict) and block.get("type") == "tool_use" and block.get("name") == "WebSearch":
+                            state["searches"] += 1
                 elif etype == "user":
                     # A tool_result with is_error = the CLI rejected the structured output.
                     for block in ((event.get("message") or {}).get("content") or []):
@@ -179,6 +185,8 @@ class ClaudeCLIBackend(Backend):
         if failure:
             raise LLMError(failure)
         envelope = state["result"]
+        if envelope is not None:
+            envelope["_web_searches"] = state["searches"]
         if envelope is None:
             raise LLMError(f"claude CLI exited with code {proc.returncode} and no JSON output.\n"
                            f"stderr (tail):\n{stderr[-2000:]}\nstdout (tail):\n{''.join(state['lines'])[-1000:]}")
@@ -285,7 +293,7 @@ class ClaudeCLIBackend(Backend):
                     "cost_usd": env.get("total_cost_usd"),
                     "attempts": attempt + 1,
                     "structured_mode": mode if schema is not None else None,
-                    "web_searches": ((usage.get("server_tool_use") or {}).get("web_search_requests") or 0),
+                    "web_searches": env.get("_web_searches", 0),
                 }
                 return LLMResult(data=data, text=text, metadata=meta)
         finally:

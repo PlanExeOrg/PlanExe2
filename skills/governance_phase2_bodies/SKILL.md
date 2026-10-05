@@ -6,6 +6,7 @@ outputs: [governance_phase2_bodies_raw.json, governance_phase2_bodies.md]
 tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/governance.py]
+max_items_per_list: 6
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`
 (internal_governance_bodies: name, rationale_for_inclusion, responsibilities, initial_setup_actions,

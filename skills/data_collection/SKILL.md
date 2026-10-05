@@ -6,6 +6,7 @@ outputs: [data_collection_raw.json, data_collection.md]
 tier: low
 est_llm_calls: 1
 max_words_per_field: 80
+max_items_per_list: 5
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (data_collection_list of
 {item_index, title, data_to_collect, simulation_steps, expert_validation_steps, rationale,

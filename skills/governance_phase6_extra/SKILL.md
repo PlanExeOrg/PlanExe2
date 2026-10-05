@@ -6,6 +6,7 @@ outputs: [governance_phase6_extra_raw.json, governance_phase6_extra.md]
 tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/governance.py]
+max_items_per_list: 6
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`
 (governance_validation_checks, tough_questions, summary). User prompt = "File '<name>':" sections

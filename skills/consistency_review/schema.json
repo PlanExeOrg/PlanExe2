@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "properties": {
+    "decision_questions": {
+      "type": "array",
+      "description": "3-6 go/no-go questions, ordered by when they can be answered.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {"type": "string", "description": "A yes/no question, one sentence."},
+          "threshold": {"type": "string", "description": "The concrete pass threshold, from the documents."},
+          "evidence": {"type": "string", "description": "What evidence answers it and when (Month N)."},
+          "if_no": {"type": "string", "description": "What a NO means: delay, split, downsize or stop, and how."}
+        },
+        "required": ["question", "threshold", "evidence", "if_no"]
+      }
+    },
+    "contradictions": {
+      "type": "array",
+      "description": "At most 12 contradictions, most severe first. Empty if none.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "topic": {"type": "string", "description": "Short label, e.g. 'Tenant price vs electricity cost'."},
+          "severity": {"type": "string", "enum": ["high", "medium", "low"]},
+          "statement_a": {"type": "string", "description": "Brief quote or paraphrase of the first statement."},
+          "where_a": {"type": "string", "description": "Document/section of the first statement."},
+          "statement_b": {"type": "string", "description": "Brief quote or paraphrase of the conflicting statement."},
+          "where_b": {"type": "string", "description": "Document/section of the second statement."},
+          "why_inconsistent": {"type": "string", "description": "One or two sentences."},
+          "suggested_resolution": {"type": "string", "description": "Which value to keep and why, or what must be clarified."}
+        },
+        "required": ["topic", "severity", "statement_a", "where_a", "statement_b", "where_b", "why_inconsistent", "suggested_resolution"]
+      }
+    },
+    "summary": {"type": "string", "description": "2-4 sentences on the plan's overall internal consistency."}
+  },
+  "required": ["decision_questions", "contradictions", "summary"]
+}

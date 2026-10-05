@@ -6,6 +6,8 @@ outputs: [executive_summary_raw.json, executive_summary.md]
 tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/final_review.py]
+max_words_per_field: 60
+max_items_per_list: 5
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json` (audience_tailoring,
 focus_and_context, purpose_and_goals, key_deliverables_and_outcomes, timeline_and_budget,

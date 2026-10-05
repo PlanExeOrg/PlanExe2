@@ -6,6 +6,7 @@ outputs: [governance_phase4_decision_escalation_matrix_raw.json, governance_phas
 tier: low
 est_llm_calls: 1
 uses: [planexe_skill/shared/governance.py]
+max_items_per_list: 6
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`
 (decision_escalation_matrix: issue_type, escalation_level, approval_process, rationale,

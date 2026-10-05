@@ -241,6 +241,8 @@ read `wbs_project_level1_and_level2_and_level3.csv` and also `review_plan.md`,
 
 ### Fact-checking in the reasoning tier (2026-10-05)
 
+**Correction (2026-10-05):** the "0 web searches" figures below were a measurement bug: the backend read `usage.server_tool_use.web_search_requests`, which stays 0 because the CLI runs WebSearch as its own tool. The count now comes from the WebSearch tool calls in the stream; with searching required, premise_attack makes 2-3 searches per lens. Whether the earlier runs searched is unknown.
+
 Reasoning-tier calls may use the `WebSearch` tool (`--tools WebSearch`, at most 3 searches per call,
 only for claims the answer depends on and the model is unsure of). Enabled for the stages that make
 real-world claims: premise_attack, potential_levers, enrich_levers, candidate_scenarios,
@@ -389,6 +391,26 @@ quality. Weaknesses it found:
 Codex's proposals (not implemented): a final cross-report consistency pass (prices, units, gate
 percentages, deadlines vs "now") and a one-page "decision kernel" up front (the 4-5 yes/no
 questions whose NO means delay/split/downsize/stop).
+
+### Fixes after the datacenter review (2026-10-05)
+
+- **New stage `consistency_review`** (1 reasoning call, not in the original PlanExe): a decision
+  kernel (3-6 go/no-go questions with thresholds, evidence, and what a NO means) and up to 12
+  cross-document contradictions with severity and suggested resolution. Rendered as the report's first
+  section. On the datacenter run it surfaced e.g. committee seated Month 1 (project plan) vs Month 5
+  (executive summary), RTE >250 MW (pitch) vs >=500 MW (executive summary) vs <300 MW fail line
+  (premortem), and three different small-scale fallback sizes.
+- **Length:** list-length caps (`max_items_per_list`) for project_plan, executive_summary,
+  governance phases (except the implementation plan), data_collection, review_assumptions; executive
+  summary at 60 words per field. Re-generated on the datacenter run: executive summary 1,973 -> 935
+  words (baseline 422), project plan 6,702 -> 4,357 words.
+- **Structured-output failover on the first rejection** (was: after the CLI's own retry). The 13-minute
+  review_assumptions call had consumed 93k input tokens for 16k output tokens, i.e. the CLI regenerated
+  the whole answer about twice.
+- **Fact-checking:** `fact_check: required` for premise_attack (verify cited precedents); measured
+  2-3 searches per lens. Search counting fixed (see correction above).
+- **Plan date:** past/future plan dates are supported by design; every call states the plan's
+  "today" (Month 0).
 
 ## Results
 

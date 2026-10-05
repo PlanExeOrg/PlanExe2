@@ -144,6 +144,7 @@ class Report:
 def run(ctx):
     title = ctx.read_text("wbs_level1_project_title.json")
     r = Report(ctx)
+    r.markdown("Decision Kernel and Consistency Check", "consistency_review.md")
     r.markdown("Executive Summary", "executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
     r.markdown("Pitch", "pitch.md")

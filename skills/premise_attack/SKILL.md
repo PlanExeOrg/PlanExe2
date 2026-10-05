@@ -6,6 +6,7 @@ outputs: [premise_attack_raw.json, premise_attack.md]
 tier: high
 est_llm_calls: 5
 parallel_llm: 5
+fact_check: required
 ---
 Five independent structured calls, one per lens; each lens has its own system prompt in
 `prompts/lens_*.md`, the user prompt is plan.txt, and every call uses `schema.json`

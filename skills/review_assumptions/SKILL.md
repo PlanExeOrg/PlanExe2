@@ -5,6 +5,7 @@ inputs: [identify_purpose.md, plan_type.md, strategic_decisions.md, scenarios.md
 outputs: [review_assumptions_raw.json, review_assumptions.md]
 tier: low
 est_llm_calls: 1
+max_items_per_list: 6
 ---
 One structured call: system prompt `prompts/system.md`, schema `schema.json`
 (expert_domain, domain_specific_considerations[], issues[{issue, explanation, recommendation,
