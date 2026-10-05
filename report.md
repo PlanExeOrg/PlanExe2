@@ -273,6 +273,39 @@ stages (the runner now stops the whole run on an auth error instead of letting s
   fact-checking in 2 stages, then judge this plan against its baseline (`python3 -m verify.eval_run
   runs/battery 20250724_battery_breakthrough`, ~140 Sonnet judge calls) if the token budget allows.
 
+### Report comparison: battery_breakthrough vs PlanExe baseline (2026-10-05)
+
+Section-level comparison of the generated report against the baseline report (metrics + targeted reading;
+no LLM judge). Ordered by severity.
+
+1. **Schedule violates the 7-year constraint (critical).** The Gantt spans 26.1 years (baseline: 7.0).
+   estimate_task_durations sees chunks of 3 tasks without the plan's overall timeline; with 56 level-2
+   tasks (baseline 30) and a higher median (120 vs 87.5 days) the waterfall sums to 13,074 task-days.
+   Fix: give the duration estimator the total timeline/deadline; keep WBS level 2 nearer 30 tasks.
+2. **Unverified numbers harden into specs (high).** identify_risks (Haiku, no thinking, no fact
+   check) wrote an illustrative "e.g. no runaway onset <60 °C"; downstream stages turned it into
+   specs ("≥62 °C ±3 °C", "≥70 °C") that reach the Executive Summary. Physically dubious (60 °C is
+   around a cell's normal upper operating temperature). Fix: fact-check in the assumptions block
+   (identify_risks, make_assumptions), and tell downstream stages not to promote examples to
+   requirements.
+3. **No fact-checking happened (high).** 0 web searches; premise_attack's evidence uses real cases
+   (DOE Battery500, Oxis Energy, Cuberg/Northvolt) but details contradict each other across lenses
+   (launch 2016 vs 2017; 223/192/196 layoffs; August vs October 2024). Fix: mandatory 1-2 searches
+   for evidence/key facts.
+4. **Prompt adherence rubber-stamps (medium).** Extracts 6 directives (baseline 9: separately
+   checkable budget/timeline/location constraints) and scores 100% with no issues (baseline 98% with
+   one partial). Fix: tier mid, or ask for atomic directives.
+5. **Report length / reading burden (medium).** Total report ~2x the baseline; project_plan 17x,
+   governance 6x, documents 7x, data_collection 7x, WBS 4.6x. Lists are unbounded even with the
+   per-field word budget. The per-stage judge liked the depth, but an executive reader won't.
+   Fix: list-length caps (e.g. maxItems hints) and a tighter executive_summary (1,539 vs 460 words).
+6. **Small date-arithmetic slips (low).** Executive summary: "month 72 (February 2033)" for a May 2026
+   start (should be ~May 2032).
+
+What holds up: budget (USD 300M), location (Austin) and the 7-year horizon are stated consistently
+across executive summary, pitch, project plan, SWOT and premortem; structure matches the baseline on
+71/71 stages; content is far more specific than the baseline (named precedents, measurable criteria).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
