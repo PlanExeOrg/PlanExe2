@@ -249,6 +249,30 @@ Everything downstream stays single-shot without tools. The four longest single-c
 (data_collection, identify_documents, questions_and_answers, premortem) got a tighter budget of
 80 words per field (not re-verified per stage, to save tokens).
 
+### End-to-end run: battery_breakthrough (2026-10-05)
+
+One plan, generated alone with 4 workers (`runs/battery`, not committed). The CLI login was revoked
+mid-run (401), which failed 3 stages; after `claude auth login` the run resumed with the remaining 20
+stages (the runner now stops the whole run on an auth error instead of letting stages fail one by one).
+
+- **Complete:** 71/71 stages, `report.html` (1.75 MB) and `report.md`; 0 failures after resuming.
+- **LLM calls:** 231 successful (fan-out made it a little above the ~200 estimate); 581k output tokens.
+- **Wall clock:** ~34 min (51 stages) + 40.5 min (20 stages) ≈ 75 min, including time lost to the
+  revoked login. Still above the 45-minute target.
+- **Structure vs the PlanExe baseline (no LLM):** same file set (plus report.md, which the older
+  baseline predates) and 71/71 stages with the same JSON/markdown structure; the only flagged
+  difference is candidate_scenarios' `lever_settings`, whose keys are lever names (content).
+- **Fact-checking:** 0 web searches. Searching was optional ("none if you are confident") and the
+  model never chose to search. To actually fact-check, make it mandatory for premise_attack's
+  evidence and potential_levers' key facts.
+- **Slowest stages (critical path candidates):** data_collection 9m55s (1 call; the per-field budget
+  doesn't limit its many list fields), premortem 9m23s (3 sequential calls), identify_documents
+  6m16s (1 call), self_audit 6m10s (19 sequential calls), review_plan 4m39s (16 sequential calls),
+  create_wbs_level3 3m59s (48 calls), expert_review 3m30s, potential_levers 3m32s.
+- **Next:** cap list lengths in data_collection / identify_documents / premortem, mandatory
+  fact-checking in 2 stages, then judge this plan against its baseline (`python3 -m verify.eval_run
+  runs/battery 20250724_battery_breakthrough`, ~140 Sonnet judge calls) if the token budget allows.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
