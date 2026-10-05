@@ -165,12 +165,13 @@ def lint_banner(ctx, r: "Report") -> None:
     high = [c for c in items if c.get("severity") == "high"]
     if not high:
         return
+    decisions = sum(1 for c in high if "canonical" in str(c.get("offending_document", "")).lower())
     topics = "; ".join(escape(c.get("topic", "")) for c in high[:6])
     r.top_banner_html += f"""
         <div class="prompt-quality-warning">
             <strong>&#9888; Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair</strong>
             <p>Some sections disagree on numbers or dates that change a decision: {topics}.
-            See the "Consistency Check" section for the canonical values and resolutions.</p>
+            {f"{decisions} of them are conflicts inside the canonical facts and need a decision. " if decisions else ""}See the "Consistency Check" section for the canonical values and resolutions.</p>
         </div>
 """
     r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (

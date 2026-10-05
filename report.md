@@ -514,6 +514,22 @@ repair loop, Decision Dashboard). Baseline prompt and plan date (2026-09-06).
 - Weaknesses: length (visible report text ~120k words vs ~31k; executive summary 805 vs 240 words) and
   4 remaining high-severity contradictions.
 
+### Converging consistency repair (2026-10-06)
+
+Codex on the Delhi run: 8.5/10 vs 5.7/10 for the baseline ("an early investment committee /
+program-control dossier"), with consistency *management* 9.5 but final consistency 6.0; next target:
+"repeat until zero high-severity contradictions" and compression.
+- The repair now loops (at most 3 rounds): repair -> re-lint -> repair. A first version oscillated on
+  the Delhi copy (high 5 -> 4 -> 2 -> 4) because every re-lint was a fresh review that found new
+  issues. Fixes: re-lints run in verification mode (re-check the previous list; add new items only if
+  clear and material); the round with the fewest (high, medium) issues is published, not the last one;
+  stop when a round doesn't reduce the high count. Result on the Delhi copy: 5 -> 3 -> 2 -> 2 high,
+  126 edits applied, 0 missed; ~11 minutes, 20 calls.
+- Contradictions inside the canonical facts themselves are tagged "needs a decision" (they can't be
+  repaired by editing documents); the banner counts them separately.
+- Remaining after repair on Delhi: unit count/capacity vs deployment budget and revenue model; wrong
+  financial sensitivities in two review answers.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
