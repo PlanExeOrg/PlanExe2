@@ -141,6 +141,25 @@ class Report:
         return "\n".join(parts)
 
 
+def lint_banner(ctx, r: "Report") -> None:
+    """Consistency lint: surface high-severity contradictions at the very top of the report."""
+    items = ctx.read_json("consistency_review_raw.json").get("contradictions") or []
+    high = [c for c in items if c.get("severity") == "high"]
+    if not high:
+        return
+    topics = "; ".join(escape(c.get("topic", "")) for c in high[:6])
+    r.top_banner_html += f"""
+        <div class="prompt-quality-warning">
+            <strong>&#9888; Consistency lint: {len(high)} high-severity contradiction(s)</strong>
+            <p>Some sections disagree on numbers or dates that change a decision: {topics}.
+            See "Decision Kernel and Consistency Check" for the canonical values and resolutions.</p>
+        </div>
+"""
+    r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
+        f"> **⚠ Consistency lint: {len(high)} high-severity contradiction(s)**\n>\n"
+        f"> {'; '.join(c.get('topic', '') for c in high[:6])}. See \"Decision Kernel and Consistency Check\".")
+
+
 def run(ctx):
     title = ctx.read_text("wbs_level1_project_title.json")
     r = Report(ctx)
@@ -167,6 +186,7 @@ def run(ctx):
     r.markdown("Self Audit", "self_audit.md")
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
+    lint_banner(ctx, r)
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     ctx.write_text("report.html", r.html_report(title, now))
     ctx.write_text("report.md", r.markdown_report(title, now))

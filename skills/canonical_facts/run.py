@@ -8,7 +8,8 @@ KIND_LABEL = {"user_constraint": "user constraint", "decision": "decision",
 
 def to_markdown(r: dict) -> str:
     rows = ["## Canonical Facts", "",
-            "Single source of truth for key numbers and dates; later documents were generated from these values.", "",
+            "Single source of truth for key numbers and dates. All later documents were instructed to use these values; the "
+            "Consistency Check above lists any document that does not.", "",
             "| Fact | Value | Kind | Basis |", "|---|---|---|---|"]
     for f in r.get("facts") or []:
         cells = [f["key"], f["value"], KIND_LABEL.get(f["kind"], f["kind"]), f["basis"]]
