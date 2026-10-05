@@ -495,6 +495,25 @@ the consistency/repair loop. Remaining weaknesses, both addressed at the source:
   (decision kernel + consistency summary); the full Consistency Check and Canonical Facts sections move
   to the analysis part of the report.
 
+### Full run: delhi_water (`runs/delhi`, 2026-10-06)
+
+First full run with the complete pipeline (canonical facts incl. economic chain, premortem on Sonnet,
+repair loop, Decision Dashboard). Baseline prompt and plan date (2026-09-06).
+- 75/75 stages, 0 failures, 208 LLM calls, 14 web searches, **57 minutes** (fastest full run so far).
+- Consistency: lint pass 1 found 5 high / 7 medium; 49 repair edits applied (0 missed); pass 2 still
+  4 high / 8 medium -> report carries the FAILED banner (hub-plant retention vs debt-service economics,
+  early spend before the first tranche, idle-factory carrying cost, fallback vs kill dates).
+- vs baseline: the baseline picks the "Pragmatic Foundation" and summarizes in 240 words ("secure $250M
+  green bond funding ... 5,000 m3/day ... 80% community acceptance"), without an economic model. The new
+  plan has a 6-question decision kernel (concessional first tranche, four-agency protocol, concentrate
+  disposal route, DJB multi-plant framework incl. hub-plant retention, Gate 1 at Month 12 with >=5 binding
+  units, Gate 2 treatment-train performance) and a closed economic chain that exposes the core problem:
+  USD 0.80/m3 service tariff x 16.67M m3 = USD 13.3M revenue, opex USD 8.3M, debt service USD 7.4M ->
+  DSCR 0.68x, a USD 2.4M/yr shortfall that module sales must cover; fallbacks are costed against the cap
+  (on-site ZLD would consume 36-67% of contingency; a 12-month DJB delay strands USD 50-80M of capex).
+- Weaknesses: length (visible report text ~120k words vs ~31k; executive summary 805 vs 240 words) and
+  4 remaining high-severity contradictions.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
