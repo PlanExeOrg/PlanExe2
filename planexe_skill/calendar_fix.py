@@ -1,32 +1,44 @@
-"""Make 'Month N (date)' pairs in LLM output agree with the project start date.
+"""Make calendar dates in LLM output agree with the project start date.
 
 Models without reasoning are bad at calendar arithmetic ("Month 72 (February 2033)" for a May 2026
-start). The month number is the plan's own logic; the calendar date is derived, so we recompute it
-mechanically: date = start + N months, written in the same style the model used.
+start). The month offset is the plan's own logic; the calendar date is derived, so it is computed
+mechanically (date = start + N months, fractional months allowed) and never trusted from the model:
+
+1. dates the model wrote next to a "Month N" (either order) are recomputed, keeping its date style;
+   fuzzy forms ("mid-July 2026") become an exact ISO date;
+2. every remaining bare "Month N" / "Months A-B" gets its date(s) appended: "Month 3 (2026-08-02)".
+
+Prompts additionally ask models to write time as "Month N" only; dates without a month offset
+("through February 2033") can't be checked mechanically.
 """
 from __future__ import annotations
 
 import re
-from datetime import date
+from datetime import date, timedelta
 from typing import Any
 
 MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
           "October", "November", "December"]
 _MONTH_RX = "|".join(MONTHS + [m[:3] for m in MONTHS])
+_N = r"(?P<n>\d{1,3}(?:\.\d+)?)"
+_NOT_RANGE = r"(?!\d|\.\d|\s*(?:[-–]|to)\s*\d)"
+_DATE = (r"(?P<date>(?P<fuzzy>(?:early|mid|late)[- ])?(?P<mname>" + _MONTH_RX + r")\.?(?:\s+(?P<day>\d{1,2}),?)?"
+         r"\s+(?P<y1>\d{4})|(?P<y2>\d{4})-(?P<m2>\d{2})(?:-(?P<d2>\d{2}))?)")
+_DATE_NAMED = (r"(?P<date>(?P<fuzzy>(?:early|mid|late)[- ])?(?P<mname>" + _MONTH_RX + r")\.?"
+               r"(?:\s+(?P<day>\d{1,2}),?)?\s+(?P<y1>\d{4}))")
 
-# "Month 24 (April 30, 2028" / "month 24, April 2028" / "Month 3 (2026-07" / "M24 (Apr 2028" /
-# "month 18 = May 2028" / "month 24 gate (April 2028"
+# "Month 24 (April 30, 2028" / "month 24, April 2028" / "Month 3 (2026-07" / "month 18 = May 2028" /
+# "month 24 gate (April 2028" / "month 3.5 (mid-July 2026"
 _PAIR = re.compile(
-    r"(?P<lead>\b(?:[Mm]onth|M)\s?(?P<n>\d{1,3})(?!\d|\s*[-–]\s*\d)(?:\s+[A-Za-z][\w-]{1,15})?"
-    r"\s*(?:\(|,\s*|:\s*|—\s*|-\s+|~\s*|≈\s*|=\s*|is\s+))"
-    r"(?P<date>(?P<mname>" + _MONTH_RX + r")\.?(?:\s+(?P<day>\d{1,2}),?)?\s+(?P<y1>\d{4})"
-    r"|(?P<y2>\d{4})-(?P<m2>\d{2})(?:-(?P<d2>\d{2}))?)")
-
-
-# Reverse order: "July 2, 2026 (month 3" / "August 2026, month 4" / "March 31, 2027, Month 12"
-_REVERSE = re.compile(
-    r"(?P<date>(?P<mname>" + _MONTH_RX + r")\.?(?:\s+(?P<day>\d{1,2}),?)?\s+(?P<y1>\d{4}))"
-    r"(?P<trail>\s*(?:\(|,\s*|;\s*)\s*[Mm]onth\s?(?P<n>\d{1,3})\b(?!\s*[-–]\s*\d))")
+    r"(?P<lead>\b(?:[Mm]onth|M)\s?" + _N + _NOT_RANGE + r"(?:\s+[A-Za-z][\w-]{1,15})?"
+    r"\s*(?:\(|,\s*|:\s*|—\s*|-\s+|~\s*|≈\s*|=\s*|is\s+))" + _DATE)
+# Reverse order: "July 2, 2026 (month 3" / "August 2026, month 4"
+_REVERSE = re.compile(r"(?<!\x01)" + _DATE_NAMED + r"(?P<trail>\s*(?:\(|,\s*)\s*[Mm]onth\s?" + _N + _NOT_RANGE + r")")
+# Bare offsets not already followed by a date.
+_FOLLOWED_BY_DATE = (r"(?!(?:\s+[A-Za-z][\w-]{1,15})?\s*(?:\(|,|:|—|=|~|≈)?\s*"
+                     r"(?:\d{4}-\d{2}|(?:early|mid|late)[- ]|(?:" + _MONTH_RX + r")\b))")
+_RANGE = re.compile(r"\b[Mm]onths\s?(?P<a>\d{1,3})\s*(?:[-–]|to)\s*(?P<b>\d{1,3})\b" + _FOLLOWED_BY_DATE)
+_BARE = re.compile(r"\b[Mm]onth\s?" + _N + _NOT_RANGE + r"\b" + _FOLLOWED_BY_DATE)
 
 
 def add_months(start: date, n: int) -> date:
@@ -36,60 +48,86 @@ def add_months(start: date, n: int) -> date:
     return date(y, m, min(start.day, dim))
 
 
-def fix_text(text: str, start: date) -> tuple[str, int]:
+def offset_date(start: date, n: float) -> date:
+    whole = int(n)
+    return add_months(start, whole) + timedelta(days=round((n - whole) * 30.44))
+
+
+def _styled(d: date, m: re.Match) -> str:
+    gd = m.groupdict()
+    if gd.get("fuzzy"):
+        return d.isoformat()
+    if gd.get("mname"):
+        mname = MONTHS[d.month - 1] if gd["mname"] in MONTHS else MONTHS[d.month - 1][:3]
+        if gd.get("day"):
+            return f"{mname} {d.day}, {d.year}"
+        return f"{mname}, {d.year}" if "," in gd["date"] else f"{mname} {d.year}"
+    return f"{d.year:04d}-{d.month:02d}" + (f"-{d.day:02d}" if gd.get("d2") else "")
+
+
+def fix_text(text: str, start: date, annotate: bool = True) -> tuple[str, int]:
     count = 0
+
+    def in_range(n: float) -> bool:
+        return 0 <= n <= 240
 
     def repl(m: re.Match) -> str:
         nonlocal count
-        n = int(m.group("n"))
-        if n > 240:
+        n = float(m.group("n"))
+        if not in_range(n):
             return m.group(0)
-        d = add_months(start, n)
-        if m.group("mname"):
-            name = m.group("mname")
-            full = name in MONTHS  # "May" is a full name, not an abbreviation
-            mname = MONTHS[d.month - 1] if full else MONTHS[d.month - 1][:3]
-            new = f"{mname} {d.day}, {d.year}" if m.group("day") else f"{mname} {d.year}"
-            if not m.group("day") and "," in m.group("date"):
-                new = f"{mname}, {d.year}"
-        else:
-            new = f"{d.year:04d}-{d.month:02d}" + (f"-{d.day:02d}" if m.group("d2") else "")
-        if new != m.group("date"):
-            count += 1
-        return m.group("lead") + new
+        new = _styled(offset_date(start, n), m)
+        count += new != m.group("date")
+        return m.group("lead") + "\x01" + new  # marker: this date is taken, the reverse rule must skip it
 
     def repl_reverse(m: re.Match) -> str:
         nonlocal count
-        n = int(m.group("n"))
-        if n > 240:
+        n = float(m.group("n"))
+        if not in_range(n):
             return m.group(0)
-        d = add_months(start, n)
-        name = m.group("mname")
-        mname = MONTHS[d.month - 1] if name in MONTHS else MONTHS[d.month - 1][:3]
-        new = f"{mname} {d.day}, {d.year}" if m.group("day") else f"{mname} {d.year}"
-        if new != m.group("date"):
-            count += 1
+        new = _styled(offset_date(start, n), m)
+        count += new != m.group("date")
         return new + m.group("trail")
 
+    def repl_range(m: re.Match) -> str:
+        nonlocal count
+        a, b = int(m.group("a")), int(m.group("b"))
+        if not (in_range(a) and in_range(b)) or a >= b:
+            return m.group(0)
+        count += 1
+        return f"{m.group(0)} ({add_months(start, a).isoformat()} to {add_months(start, b).isoformat()})"
+
+    def repl_bare(m: re.Match) -> str:
+        nonlocal count
+        n = float(m.group("n"))
+        if not in_range(n):
+            return m.group(0)
+        count += 1
+        return f"{m.group(0)} ({offset_date(start, n).isoformat()})"
+
     text = _PAIR.sub(repl, text)
-    return _REVERSE.sub(repl_reverse, text), count
+    text = _REVERSE.sub(repl_reverse, text).replace("\x01", "")
+    if annotate:
+        text = _RANGE.sub(repl_range, text)
+        text = _BARE.sub(repl_bare, text)
+    return text, count
 
 
-def fix_value(value: Any, start: date) -> tuple[Any, int]:
+def fix_value(value: Any, start: date, annotate: bool = True) -> tuple[Any, int]:
     """Apply fix_text to every string inside a JSON-like value."""
     if isinstance(value, str):
-        return fix_text(value, start)
+        return fix_text(value, start, annotate)
     if isinstance(value, list):
         out, total = [], 0
         for v in value:
-            fv, c = fix_value(v, start)
+            fv, c = fix_value(v, start, annotate)
             out.append(fv)
             total += c
         return out, total
     if isinstance(value, dict):
         out, total = {}, 0
         for k, v in value.items():
-            fv, c = fix_value(v, start)
+            fv, c = fix_value(v, start, annotate)
             out[k] = fv
             total += c
         return out, total

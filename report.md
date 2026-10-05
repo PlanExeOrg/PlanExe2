@@ -324,6 +324,15 @@ Responses:
   number). Handled forms: "Month N (date)", "month N, date", "month N = date", "month N gate (date)",
   and reversed "date (month N)", in full-name, abbreviated and ISO styles. In new runs the same pass
   runs on every LLM result.
+- **Second Codex review** (of the corrected report): schedule consistency 4-5 -> 8.0, overall ~9.1.
+  Remaining leaks were fractional/fuzzy months ("month 3.5 (mid-July 2026)") and dates with no month
+  offset ("by July 2", "through February 2033"). Following Codex's suggestion the model now writes
+  time only as "Month N" (fractions and ranges allowed; prompt rule) and the normalizer appends the
+  computed date to every bare offset ("Month 3 (2026-08-02)", "Months 48-72 (2030-05-02 to
+  2032-05-02)"), recomputes paired dates incl. fractional and mid-/early-/late- forms, and no longer
+  lets a date paired with one offset be re-assigned to the next one. On the battery copy: 187 correct,
+  3 scanner false positives. Dates without any month offset in the existing report (9x "by July 2",
+  1x "through February 2033") can't be fixed after the fact; the prompt rule addresses new runs.
 - **Provenance:** a rule asking to tag non-user, non-benchmark figures as "(proposed threshold)" /
   "(estimate)" and never to promote "e.g." values to requirements is appended to every user message.
   Haiku without reasoning largely ignores it (1 tag in an 8,000-word project plan); a structural fix
