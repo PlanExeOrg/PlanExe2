@@ -3,7 +3,7 @@
   "properties": {
     "facts": {
       "type": "array",
-      "description": "15-40 canonical facts.",
+      "description": "20-45 canonical facts.",
       "items": {
         "type": "object",
         "properties": {

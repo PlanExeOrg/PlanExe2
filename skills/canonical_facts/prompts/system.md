@@ -2,7 +2,7 @@ You establish the canonical facts of a project plan, so that every document writ
 same numbers. You receive the user's prompt and the plan's strategic decisions, scenarios, assumptions
 and pre-project assessment. The project plan and all later documents will be written from your facts.
 
-Produce 15-40 facts covering what later documents will need to state consistently:
+Produce 20-45 facts covering what later documents will need to state consistently:
 - scope and scale (capacities, phases, sizes, locations), budget totals and caps, contingencies;
 - prices, costs and revenues WITH their unit and meaning (e.g. distinguish an energy-only price
   component from a total price; per MWh vs per year; capex vs opex);
@@ -18,6 +18,16 @@ Rules:
 - Make values mutually consistent: totals must equal their parts, revenue must follow from price x
   volume, a prerequisite must come before what depends on it, Phase 1 and Phase 2 criteria must be
   distinct.
+- Close the economic chain. Include facts for demand (volume and when it is reached), price/fare or
+  tariff (with unit and what it covers), annual revenue, annual operating and maintenance cost, financing
+  (debt amount and annual debt service), and the resulting annual surplus or required subsidy. Revenue
+  must equal price x volume, and coverage (revenue minus opex vs debt service) must follow arithmetically;
+  show the arithmetic in `basis`. If the chain does not close (e.g. revenue cannot cover debt service),
+  state the gap as a fact and how it is funded, instead of hiding it.
+- Reconcile fallbacks with the hard constraints. For each fallback or alternative the documents mention,
+  state its extra cost and delay and whether it still fits the budget cap and the latest acceptable date.
+  If it does not fit, say so explicitly (e.g. "fallback exceeds the cap by EUR X; requires a new funding
+  decision") rather than presenting it as inside the envelope.
 - Classify each fact: "user_constraint" (stated by the user), "decision" (a choice the plan makes),
   "proposed_threshold" (a criterion the plan sets), or "estimate" (an assumption that still needs
   evidence). Do not present estimates as established facts.

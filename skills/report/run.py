@@ -25,6 +25,10 @@ class Report:
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
 
+    def markdown_text(self, title: str, md: str) -> None:
+        self.html_items.append((title, md_to_html(md)))
+        self.md_items.append((title, md))
+
     def csv_table(self, title: str, name: str) -> None:
         text = self.ctx.read_text(name)
         first = text.splitlines()[0] if text else ""
@@ -141,6 +145,20 @@ class Report:
         return "\n".join(parts)
 
 
+def split_consistency(md: str) -> tuple[str, str]:
+    """Decision kernel (short, for the top of the report) vs the long consistency check (analysis part)."""
+    i = md.find("## Consistency Check")
+    if i < 0:
+        return md, ""
+    j = md.find("## Summary", i)
+    kernel = md[:i].rstrip()
+    check = md[i:].replace("## Consistency Check", "", 1).strip()
+    if j >= 0:  # keep the one-paragraph summary with the dashboard as well
+        kernel += "\n\n## Consistency\n\n" + md[j:].replace("## Summary", "", 1).strip()
+        kernel += "\n\nDetails: see the \"Consistency Check\" and \"Canonical Facts\" sections."
+    return kernel, check
+
+
 def lint_banner(ctx, r: "Report") -> None:
     """Consistency lint: surface high-severity contradictions at the very top of the report."""
     items = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
@@ -152,19 +170,19 @@ def lint_banner(ctx, r: "Report") -> None:
         <div class="prompt-quality-warning">
             <strong>&#9888; Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair</strong>
             <p>Some sections disagree on numbers or dates that change a decision: {topics}.
-            See "Decision Kernel and Consistency Check" for the canonical values and resolutions.</p>
+            See the "Consistency Check" section for the canonical values and resolutions.</p>
         </div>
 """
     r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
         f"> **⚠ Consistency lint FAILED: {len(high)} high-severity contradiction(s) remain after repair**\n>\n"
-        f"> {'; '.join(c.get('topic', '') for c in high[:6])}. See \"Decision Kernel and Consistency Check\".")
+        f"> {'; '.join(c.get('topic', '') for c in high[:6])}. See \"Consistency Check\".")
 
 
 def run(ctx):
     title = ctx.read_text("wbs_level1_project_title.json")
     r = Report(ctx)
-    r.markdown("Decision Kernel and Consistency Check", "consistency_recheck.md")
-    r.markdown("Canonical Facts", "canonical_facts.md")
+    dashboard, consistency = split_consistency(ctx.read_text("consistency_recheck.md"))
+    r.markdown_text("Decision Dashboard", dashboard)
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
     r.markdown("Pitch", "repaired_pitch.md")
@@ -184,6 +202,8 @@ def run(ctx):
     r.markdown("Questions & Answers", "repaired_questions_and_answers.md")
     r.markdown("Premortem", "repaired_premortem.md")
     r.markdown("Self Audit", "repaired_self_audit.md")
+    r.markdown_text("Consistency Check", consistency)
+    r.markdown("Canonical Facts", "canonical_facts.md")
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
     lint_banner(ctx, r)

@@ -478,6 +478,23 @@ only with FAILED CONSISTENCY status"):
   high-severity contradictions 6 -> 2 (medium 6 -> 10: pass 2 also finds new, smaller issues).
   The premortem-on-Sonnet change is not yet validated in a full run.
 
+### Codex comparison of the Gibraltar run with the 2025 baseline
+
+Codex: **8.4/10 vs 6.6/10** ("beginning to look like a planning engine rather than a report
+generator"; ~25-30% better planning quality, 50%+ better decision usefulness and epistemic discipline).
+Biggest gains: falsifiable gates with "If NO" consequences, numbers with provenance (canonical facts),
+the consistency/repair loop. Remaining weaknesses, both addressed at the source:
+- **Economics not one closed model** (demand -> revenue -> opex -> debt service -> subsidy) and the
+  fallback presented as fitting the EUR 40B cap. canonical_facts must now close that chain with the
+  arithmetic in `basis`, state any funding gap, and say whether each fallback fits the cap/deadline.
+  Re-generated on the Gibraltar copy (1 call): 4.5M pax x EUR 100 = EUR 450M + EUR 100M ancillary;
+  opex EUR 75M; EUR 8B debt -> EUR 346M/yr service, DSCR 1.37x (1.11x at -20% demand, below the 1.2x
+  threshold); EUR 32B non-repayable sponsor capital stated as the gap; fallback +EUR 5-15B exceeds the
+  cap by up to EUR 9B and needs a new funding decision.
+- **Information density for casual readers.** The report now opens with a short "Decision Dashboard"
+  (decision kernel + consistency summary); the full Consistency Check and Canonical Facts sections move
+  to the analysis part of the report.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
