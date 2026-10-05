@@ -444,6 +444,24 @@ What the iterations showed (datacenter prompt):
   thinking) still adopt values from the pre-reconciliation assumptions. Options: give them the
   assumptions with a "superseded where canonical facts differ" label, or move premortem to tier mid.
 
+### Full run: gibraltar_tunnel (`runs/gibraltar`, 2026-10-06)
+
+Baseline prompt and plan date (2026-09-05); assumptions explicitly superseded by canonical facts;
+compiler-style diagnostics in consistency_review.
+- 73/73 stages, 0 failures, 213 LLM calls, 11 web searches, **1h20m**; 42 canonical facts;
+  report 161k words; executive summary 806 words (baseline 1,969).
+- Structure vs baseline: 3 flags, all content-derived (lever names as keys; "## Location 1" heading
+  in the shortened assumptions; an assumptions-derived risk heading in report.md).
+- consistency_review: 12 contradictions, 6 high / 6 medium. Its summary: the core spine (EUR 40bn
+  cap = 34bn base + 6bn contingency, phase tranches 2.5+4.5+15+12 = 34, the Month 12/18/24/30/36/72/180
+  milestones, the hybrid concept) is consistent across executive summary, project plan and pitch;
+  calendar arithmetic checks out. Every diagnostic names its offending document: premortem (6),
+  review_plan (3), self_audit (3), pitch (2), executive summary (1).
+- Conclusion: the reconciled facts now hold in the documents written directly from them; the late
+  critique stages (premortem, review_plan, self_audit; Haiku, no thinking, long chained prompts) are
+  where violations concentrate. Candidate fixes: tier mid for premortem (3 calls), or a repair pass
+  that regenerates only the documents named by HIGH diagnostics, with the diagnostics as input.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
