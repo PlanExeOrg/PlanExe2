@@ -19,12 +19,17 @@ class CalendarFixTest(unittest.TestCase):
             "Month 36 (November 30, 2027)": "Month 36 (May 2, 2029)",
             "Month 18 (Jan 2027)": "Month 18 (Nov 2027)",
             "by Month 6 (November 2026)": "by Month 6 (November 2026)",
+            "month 18 = May 15, 2028": "month 18 = November 2, 2027",
+            "month 24 gate (April 2028)": "month 24 gate (May 2028)",
+            "July 2, 2026 (month 3)": "August 2, 2026 (month 3)",
+            "August 2026, month 4": "September 2026, month 4",
         }
         for src, want in cases.items():
             self.assertEqual(fix_text(src, START)[0], want, src)
 
     def test_leaves_ranges_and_unpaired_dates(self):
-        for s in ["Months 6-12 (2027)", "Month 6–12 (November 2026)", "in April 2028 we review", "Month 3 of testing"]:
+        for s in ["Months 6-12 (2027)", "Month 6–12 (November 2026)", "in April 2028 we review", "Month 3 of testing",
+                  "May 2, 2026) through Month 84"]:
             self.assertEqual(fix_text(s, START)[0], s)
 
     def test_fix_value_counts(self):

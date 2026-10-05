@@ -317,6 +317,13 @@ Responses:
   and every LLM result is post-processed by `planexe_skill/calendar_fix.py`, which recomputes the date
   attached to "Month N (...)" as start + N months (keeps the model's date style). Prompting alone did
   not work: a re-generated project_plan (Haiku, no thinking) still had 14/22 wrong pairs.
+- **Calendar fix measured on the existing battery report (no LLM calls):** applying
+  `calendar_fix` to a copy of the run's stage outputs and regenerating only the deterministic
+  `report` stage took month/date pairs in report.md from 67 correct / 123 wrong to 186 correct /
+  4 flagged (the 4 are scanner false positives: ranges and dates belonging to a neighbouring month
+  number). Handled forms: "Month N (date)", "month N, date", "month N = date", "month N gate (date)",
+  and reversed "date (month N)", in full-name, abbreviated and ISO styles. In new runs the same pass
+  runs on every LLM result.
 - **Provenance:** a rule asking to tag non-user, non-benchmark figures as "(proposed threshold)" /
   "(estimate)" and never to promote "e.g." values to requirements is appended to every user message.
   Haiku without reasoning largely ignores it (1 tag in an 8,000-word project plan); a structural fix
