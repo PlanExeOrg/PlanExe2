@@ -333,6 +333,13 @@ Responses:
   lets a date paired with one offset be re-assigned to the next one. On the battery copy: 187 correct,
   3 scanner false positives. Dates without any month offset in the existing report (9x "by July 2",
   1x "through February 2033") can't be fixed after the fact; the prompt rule addresses new runs.
+- **Third Codex review:** schedule consistency ~9/10; "the remaining problems look like
+  post-processing/parser coverage and stale redundant prose, not reasoning failures". Its edge cases
+  are now handled: lists ("months 18, 36, 54, 72 (2027-11-02, ...)"), singular ranges
+  ("month 9-12"), "= date" instead of nested parentheses inside an existing parenthesis, and a stale
+  date-only parenthetical directly after a computed date is dropped ("(through February 2033)").
+  Still unfixable after the fact: absolute dates with no month offset ("lock protocol by July 2,
+  2026"); new runs are told to write "Month N" only.
 - **Provenance:** a rule asking to tag non-user, non-benchmark figures as "(proposed threshold)" /
   "(estimate)" and never to promote "e.g." values to requirements is appended to every user message.
   Haiku without reasoning largely ignores it (1 tag in an 8,000-word project plan); a structural fix

@@ -37,7 +37,14 @@ _REVERSE = re.compile(r"(?<!\x01)" + _DATE_NAMED + r"(?P<trail>\s*(?:\(|,\s*)\s*
 # Bare offsets not already followed by a date.
 _FOLLOWED_BY_DATE = (r"(?!(?:\s+[A-Za-z][\w-]{1,15})?\s*(?:\(|,|:|—|=|~|≈)?\s*"
                      r"(?:\d{4}-\d{2}|(?:early|mid|late)[- ]|(?:" + _MONTH_RX + r")\b))")
-_RANGE = re.compile(r"\b[Mm]onths\s?(?P<a>\d{1,3})\s*(?:[-–]|to)\s*(?P<b>\d{1,3})\b" + _FOLLOWED_BY_DATE)
+_RANGE = re.compile(r"\b[Mm]onths?\s?(?P<a>\d{1,3})\s*(?:[-–]|to)\s*(?P<b>\d{1,3})\b" + _FOLLOWED_BY_DATE)
+# "months 18, 36, 54, 72" / "months 6 and 12"
+_LIST = re.compile(r"\b[Mm]onths\s?(?P<items>\d{1,3}(?:\.\d+)?(?:\s*,\s*\d{1,3}(?:\.\d+)?)*,?\s*(?:,|and|&)\s*"
+                   r"\d{1,3}(?:\.\d+)?)\b(?!\s*(?:[-–]|to)\s*\d)" + _FOLLOWED_BY_DATE)
+# A stale date-only parenthetical right after a computed date: "(2030-05-02 to 2032-05-02) (through February 2033)"
+_STALE_AFTER = re.compile(r"(?P<keep>\(\d{4}-\d{2}-\d{2}(?: to \d{4}-\d{2}-\d{2})?\))\s*\((?:through|by|until|to|ending|ends|"
+                          r"from|in|approx\.?|about|~|≈)?\s*(?:early|mid|late)?[- ]?(?:" + _MONTH_RX +
+                          r")\.?(?:\s+\d{1,2},?)?\s+\d{4}\)")
 _BARE = re.compile(r"\b[Mm]onth\s?" + _N + _NOT_RANGE + r"\b" + _FOLLOWED_BY_DATE)
 
 
@@ -89,13 +96,30 @@ def fix_text(text: str, start: date, annotate: bool = True) -> tuple[str, int]:
         count += new != m.group("date")
         return new + m.group("trail")
 
+    def inside_parens(m: re.Match) -> bool:
+        line_start = m.string.rfind("\n", 0, m.start()) + 1
+        before = m.string[line_start:m.start()]
+        return before.count("(") > before.count(")")
+
+    def annotated(m: re.Match, dates: str) -> str:
+        # Inside an existing parenthesis use "= date" to avoid nested "( ... (date) ... )".
+        return f"{m.group(0)} = {dates}" if inside_parens(m) else f"{m.group(0)} ({dates})"
+
     def repl_range(m: re.Match) -> str:
         nonlocal count
         a, b = int(m.group("a")), int(m.group("b"))
         if not (in_range(a) and in_range(b)) or a >= b:
             return m.group(0)
         count += 1
-        return f"{m.group(0)} ({add_months(start, a).isoformat()} to {add_months(start, b).isoformat()})"
+        return annotated(m, f"{add_months(start, a).isoformat()} to {add_months(start, b).isoformat()}")
+
+    def repl_list(m: re.Match) -> str:
+        nonlocal count
+        nums = [float(x) for x in re.findall(r"\d{1,3}(?:\.\d+)?", m.group("items"))]
+        if not all(in_range(n) for n in nums):
+            return m.group(0)
+        count += 1
+        return annotated(m, ", ".join(offset_date(start, n).isoformat() for n in nums))
 
     def repl_bare(m: re.Match) -> str:
         nonlocal count
@@ -103,14 +127,16 @@ def fix_text(text: str, start: date, annotate: bool = True) -> tuple[str, int]:
         if not in_range(n):
             return m.group(0)
         count += 1
-        return f"{m.group(0)} ({offset_date(start, n).isoformat()})"
+        return annotated(m, offset_date(start, n).isoformat())
 
     text = _PAIR.sub(repl, text)
     text = _REVERSE.sub(repl_reverse, text).replace("\x01", "")
     if annotate:
         text = _RANGE.sub(repl_range, text)
+        text = _LIST.sub(repl_list, text)
         text = _BARE.sub(repl_bare, text)
-    return text, count
+    text, stale = _STALE_AFTER.subn(lambda m: m.group("keep"), text)
+    return text, count + stale
 
 
 def fix_value(value: Any, start: date, annotate: bool = True) -> tuple[Any, int]:
