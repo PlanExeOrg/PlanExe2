@@ -12,6 +12,10 @@ Formerly PlanExe-skill.
 
 ## Quick start
 
+With a coding agent: open this repo in Claude Code and ask for a plan ("make a plan for a bakery in
+Lyon"). The `make-plan` skill asks a few questions, drafts and checks the prompt, and launches only after
+you confirm. By hand:
+
 ```bash
 claude auth login                      # once
 python3 -m planexe_skill create runs/my_plan --prompt-file my_prompt.txt
@@ -28,7 +32,8 @@ A full plan is ~180-250 LLM calls and takes roughly 15-45 minutes. The final rep
 
 | command | what it does |
 |---|---|
-| `create RUN_DIR --prompt-file F` | create a run dir (`plan_raw.json`, `start_time.json`) |
+| `check-prompt --prompt-file F` | pre-flight check of a prompt (1 LLM call): usability, completeness, questions |
+| `create RUN_DIR --prompt-file F [--start-date D]` | create a run dir (`plan_raw.json`, `start_time.json`); D = Month 0 |
 | `run RUN_DIR` | run every dirty stage; resumes where it left off |
 | `run RUN_DIR --only STAGE` | run one stage (its inputs must already exist) |
 | `run RUN_DIR --until STAGE` | run a stage and everything it depends on |

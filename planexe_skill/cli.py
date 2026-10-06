@@ -78,7 +78,14 @@ def cmd_create(args) -> int:
     if prompt is None and args.plan_raw is None:
         print("give --prompt-file, --prompt or --plan-raw", file=sys.stderr)
         return 2
-    create_run_dir(run_dir, prompt=prompt, plan_raw=Path(args.plan_raw) if args.plan_raw else None)
+    start = None
+    if getattr(args, "start_date", None):
+        try:
+            start = datetime.fromisoformat(args.start_date)
+        except ValueError:
+            print(f"error: --start-date must be YYYY-MM-DD, got {args.start_date!r}", file=sys.stderr)
+            return 2
+    create_run_dir(run_dir, prompt=prompt, plan_raw=Path(args.plan_raw) if args.plan_raw else None, start=start)
     print(f"Created {run_dir}. Next: python -m planexe_skill run {run_dir}")
     return 0
 
@@ -141,6 +148,20 @@ def cmd_explain(args) -> int:
     return 0
 
 
+def cmd_check_prompt(args) -> int:
+    from planexe_skill.prompt_check import check_prompt, format_result
+    if args.prompt_file and not Path(args.prompt_file).is_file():
+        print(f"error: file not found: {args.prompt_file}", file=sys.stderr)
+        return 2
+    prompt = Path(args.prompt_file).read_text(encoding="utf-8") if args.prompt_file else args.prompt
+    if not prompt or not prompt.strip():
+        print("give --prompt-file or --prompt", file=sys.stderr)
+        return 2
+    result = check_prompt(prompt, get_backend("claude"))
+    print(json.dumps(result, indent=2, ensure_ascii=False) if args.json else format_result(result))
+    return 0 if result.get("ready") else 1
+
+
 def cmd_graph(args) -> int:
     dag = _dag(args)
     if args.dot:
@@ -165,6 +186,7 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--prompt-file", help="text file with the plan prompt")
         p.add_argument("--prompt", help="plan prompt text")
         p.add_argument("--plan-raw", help="copy an existing plan_raw.json (keeps its date)")
+        p.add_argument("--start-date", help="plan start date (Month 0), YYYY-MM-DD; past or future; default today")
 
     p = sub.add_parser("create", help="create a run dir from a prompt")
     p.add_argument("run_dir")
@@ -196,6 +218,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("run_dir")
     p.add_argument("stage")
     p.set_defaults(func=cmd_explain)
+
+    p = sub.add_parser("check-prompt", help="pre-flight check of a plan prompt (1 LLM call); exit 0 = ready")
+    p.add_argument("--prompt-file", help="text file with the plan prompt")
+    p.add_argument("--prompt", help="plan prompt text")
+    p.add_argument("--json", action="store_true", help="print the raw result as JSON")
+    p.set_defaults(func=cmd_check_prompt)
 
     p = sub.add_parser("graph", help="print stages in topological order")
     p.add_argument("--dot", action="store_true", help="graphviz output")

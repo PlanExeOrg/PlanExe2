@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "verdict": {"type": "string", "enum": ["USABLE", "UNUSABLE"]},
+    "verdict_reason": {"type": "string", "description": "One sentence."},
+    "dimensions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string", "enum": ["objective", "location", "budget", "timeline", "scale", "stakeholders", "constraints", "success_criteria"]},
+          "status": {"type": "string", "enum": ["present", "partial", "missing"]},
+          "note": {"type": "string", "description": "At most 25 words."}
+        },
+        "required": ["name", "status", "note"]
+      }
+    },
+    "ready": {"type": "boolean"},
+    "questions": {
+      "type": "array",
+      "description": "At most 5, most important first.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {"type": "string"},
+          "suggestions": {"type": "array", "items": {"type": "string"}, "description": "2-4 concrete options."}
+        },
+        "required": ["question", "suggestions"]
+      }
+    }
+  },
+  "required": ["verdict", "verdict_reason", "dimensions", "ready", "questions"]
+}
