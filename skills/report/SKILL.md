@@ -21,4 +21,4 @@ repaired copies from consistency_repair.
 Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_html.py`
 (PlanExe used Python-Markdown; tables are rendered in every section).
 
-Provenance: the line under the title names the generator (PlanExe2, version = git tag or commit date + short commit, repo, commit) and the plan start date; the final "Provenance" section lists per stage which generator version produced it, when, with which models, plus hand-edited and adopted files. Source: `planexe_provenance.json`, maintained by the runner (read via `ctx.run_provenance()`, not a declared input).
+Provenance: the line under the title names the generator (PlanExe2, version = `git describe --tags`, e.g. v2.0.0 or v2.0.0-3-gabc1234, repo, commit) and the plan start date; the final "Provenance" section lists per stage which generator version produced it, when, with which models, plus hand-edited and adopted files. Source: `planexe_provenance.json`, maintained by the runner (read via `ctx.run_provenance()`, not a declared input).

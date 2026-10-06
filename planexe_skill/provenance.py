@@ -52,7 +52,9 @@ def generator_info() -> dict:
     dirty = bool(_git("status", "--porcelain", "--untracked-files=no"))
     commit_date = _git("show", "-s", "--format=%cd", "--date=short", "HEAD")
     short = commit[:7]
-    version = tag or f"{commit_date}+{short}"
+    # `git describe`: "v2.0.0" on the tag, "v2.0.0-3-gabc1234" three commits later, the short commit if
+    # there is no tag yet; "+modified" when the working tree has uncommitted changes.
+    version = _git("describe", "--tags", "--always") or short
     if dirty:
         version += "+modified"
     return {

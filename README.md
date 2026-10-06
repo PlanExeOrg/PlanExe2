@@ -45,8 +45,8 @@ Create `RUN_DIR/.planexe_skill/stop` to stop gracefully; progress is mirrored to
 
 ## Versioning and provenance
 
-Every report names its generator under the title: **PlanExe2 + version** (the git tag at HEAD, or
-the commit date + short commit, with `+modified` for uncommitted changes) and the repo/commit. A run can
+Every report names its generator under the title: **PlanExe2 + version** (`git describe`: `v2.0.0` on the tag,
+`v2.0.0-3-gabc1234` three commits later, `+modified` for uncommitted changes) and the repo/commit. A run can
 mix code versions (resumed runs, stages regenerated after an edit), so provenance is kept per stage:
 `RUN_DIR/planexe_provenance.json` lists, for every stage, the generator version and commit, when it ran,
 which models it used and how many LLM calls it made, plus hand-edited intermediary files and adopted
