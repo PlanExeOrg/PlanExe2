@@ -6,6 +6,7 @@ import math
 from typing import Any
 
 from planexe_skill.llm.base import LLMResult
+from planexe_skill.provenance import generator_brief
 
 CONTEXT_WINDOWS = {"sonnet": 1_000_000, "opus": 1_000_000, "haiku": 200_000}
 
@@ -24,6 +25,7 @@ def planexe_metadata(result: LLMResult) -> dict:
         "llm_classname": f"{result.metadata.get('backend', 'claude')}_cli",
         "duration": int(math.ceil(float(result.metadata.get("duration_seconds") or 0))),
         "response_byte_count": len((result.text or "").encode("utf-8")),
+        "generator": generator_brief(),  # repo, commit, git tag of the code that wrote this file
     }
 
 

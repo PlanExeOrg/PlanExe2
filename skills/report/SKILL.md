@@ -8,10 +8,10 @@ est_llm_calls: 0
 uses: [planexe_skill/shared/markdown_html.py]
 ---
 Deterministic. Sections, in order: Decision Dashboard (decision kernel + consistency summary; added in
-PlanExe-skill), Executive Summary, Gantt (embedded dhtmlx HTML), Pitch, Project
+PlanExe2), Executive Summary, Gantt (embedded dhtmlx HTML), Pitch, Project
 Plan, Strategic Decisions, Scenarios, Assumptions, Governance, Related Resources, Data Collection,
 Documents to Create and Find, SWOT Analysis, Team, Expert Criticism, Work Breakdown Structure (CSV
-table), Review Plan, Questions & Answers, Premortem, Self Audit, Consistency Check and Canonical Facts (added in PlanExe-skill), Initial Prompt Vetted (prompt +
+table), Review Plan, Questions & Answers, Premortem, Self Audit, Consistency Check and Canonical Facts (added in PlanExe2), Initial Prompt Vetted (prompt +
 screening + redline gate + premise attack), Prompt Adherence. Title = wbs_level1_project_title.json.
 An UNUSABLE screening verdict adds a warning banner at the top, and so do high-severity contradictions
 found by consistency_recheck (the "consistency lint"; FAILED when any remain). The
@@ -20,3 +20,5 @@ repaired copies from consistency_repair.
 
 Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_html.py`
 (PlanExe used Python-Markdown; tables are rendered in every section).
+
+Provenance: the line under the title names the generator (PlanExe2, version = git tag or commit date + short commit, repo, commit) and the plan start date; the final "Provenance" section lists per stage which generator version produced it, when, with which models, plus hand-edited and adopted files. Source: `planexe_provenance.json`, maintained by the runner (read via `ctx.run_provenance()`, not a declared input).

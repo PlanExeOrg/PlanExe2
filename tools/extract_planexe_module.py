@@ -1,7 +1,7 @@
-"""Dev-only porting aid. Run with PlanExe's venv (NOT a runtime dependency of PlanExe-skill):
+"""Dev-only porting aid. Run with PlanExe's venv (NOT a runtime dependency of PlanExe2):
 
     cd ~/git/PlanExeGroup/PlanExe/worker_plan
-    .venv/bin/python ~/git/PlanExe-skill/tools/extract_planexe_module.py \
+    .venv/bin/python ~/git/PlanExeGroup/PlanExe2/tools/extract_planexe_module.py \
         worker_plan_internal.assume.identify_purpose OUT_DIR
 
 Writes OUT_DIR/schemas/<Model>.json (pydantic JSON schema) and OUT_DIR/prompts/<CONST>.txt for every

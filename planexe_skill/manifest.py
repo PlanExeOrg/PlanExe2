@@ -114,7 +114,7 @@ class Manifest:
     def _input_hashes(self, skill: Skill, run_dir: Path) -> dict[str, str | None]:
         return {i: (hash_file(run_dir / i) if (run_dir / i).exists() else None) for i in skill.inputs}
 
-    def record_completed(self, skill: Skill, run_dir: Path, adopted: bool = False) -> None:
+    def record_completed(self, skill: Skill, run_dir: Path, adopted: bool = False, extra: dict | None = None) -> None:
         entry = {
             "skill_hash": skill_hash(skill),
             "inputs": self._input_hashes(skill, run_dir),
@@ -122,6 +122,8 @@ class Manifest:
             "completed_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "adopted": adopted,
         }
+        if extra:
+            entry.update(extra)  # provenance: generator, models, llm_calls
         with self._lock:
             self.data["stages"][skill.name] = entry
 

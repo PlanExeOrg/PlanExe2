@@ -1,4 +1,4 @@
-"""Compare a complete PlanExe-skill run against the PlanExe baseline made from the same prompt.
+"""Compare a complete PlanExe2 run against the PlanExe baseline made from the same prompt.
 
     python3 -m planexe_skill create runs/euro --plan-raw .verify_work/baselines/20260129_euro_adoption/plan_raw.json
     python3 -m planexe_skill run runs/euro

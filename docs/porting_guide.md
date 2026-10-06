@@ -18,7 +18,7 @@ Read this before porting. Look at the already-ported skills in `skills/` (e.g.
 
 ```bash
 cd ~/git/PlanExeGroup/PlanExe/worker_plan
-.venv/bin/python ~/git/PlanExe-skill/tools/extract_planexe_module.py worker_plan_internal.<pkg>.<module> /tmp/x
+.venv/bin/python ~/git/PlanExeGroup/PlanExe2/tools/extract_planexe_module.py worker_plan_internal.<pkg>.<module> /tmp/x
 ```
 
 This writes every pydantic model's JSON schema and every `*PROMPT*` string constant. Prompts

@@ -1,5 +1,6 @@
-# PlanExe-skill
+# PlanExe2
 
+Formerly PlanExe-skill.
 [PlanExe](https://github.com/PlanExeOrg/PlanExe)'s plan-generation pipeline, rewritten as
 **skills** executed by a tiny, dependency-free Python DAG runner.
 
@@ -41,6 +42,19 @@ Options: `--workers N` (concurrent LLM calls, default 4), `--model-high`, `--mod
 Create `RUN_DIR/.planexe_skill/stop` to stop gracefully; progress is mirrored to
 `RUN_DIR/.planexe_skill/progress.json`, per-stage logs (every prompt and response) live in
 `RUN_DIR/.planexe_skill/logs/`.
+
+## Versioning and provenance
+
+Every report names its generator under the title: **PlanExe2 + version** (the git tag at HEAD, or
+the commit date + short commit, with `+modified` for uncommitted changes) and the repo/commit. A run can
+mix code versions (resumed runs, stages regenerated after an edit), so provenance is kept per stage:
+`RUN_DIR/planexe_provenance.json` lists, for every stage, the generator version and commit, when it ran,
+which models it used and how many LLM calls it made, plus hand-edited intermediary files and adopted
+stages; the report's last section renders it. Each `*_raw.json` also carries `metadata.generator`
+(repo, commit, git tag). The plan's start date (Month 0, `start_time.json`) is independent of when the
+plan is generated, so plans can be dated in the past or the future.
+
+To release a version: `git tag v2.0.0 && git push --tags`.
 
 ## Failures and resuming
 
