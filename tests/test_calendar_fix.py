@@ -46,6 +46,14 @@ class CalendarFixTest(unittest.TestCase):
                          "(down-select at month 24 = 2028-05-02, then scale)")
         self.assertEqual(fix("Months 48–72 (through February 2033): verify", True),
                          "Months 48–72 (2030-05-02 to 2032-05-02): verify")
+        self.assertEqual(fix("gates (Month 0.5, 1, 1.5, 2) met", True),
+                         "gates (Month 0.5, 1, 1.5, 2 = 2026-05-17, 2026-06-02, 2026-06-17, 2026-07-02) met")
+        self.assertEqual(fix("partner audit at Month 0.5 or 2.", True),
+                         "partner audit at Month 0.5 or 2 (2026-05-17, 2026-07-02).")
+        self.assertEqual(fix("funding for Month 13+ if needed", True), "funding for Month 13+ if needed")
+        for s in ["gates (Month 0.5, 1, 1.5, 2) met", "Month 0.5 or 2.", "Months 48–72: x", "Month 3."]:
+            once = fix(s, True)
+            self.assertEqual(fix(once, True), once, s)  # idempotent
         once = fix("Month 3", True)
         self.assertEqual(fix(once, True), once)  # idempotent
 

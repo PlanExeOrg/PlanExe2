@@ -39,13 +39,15 @@ _FOLLOWED_BY_DATE = (r"(?!(?:\s+[A-Za-z][\w-]{1,15})?\s*(?:\(|,|:|—|=|~|≈)?\
                      r"(?:\d{4}-\d{2}|(?:early|mid|late)[- ]|(?:" + _MONTH_RX + r")\b))")
 _RANGE = re.compile(r"\b[Mm]onths?\s?(?P<a>\d{1,3})\s*(?:[-–]|to)\s*(?P<b>\d{1,3})\b" + _FOLLOWED_BY_DATE)
 # "months 18, 36, 54, 72" / "months 6 and 12"
-_LIST = re.compile(r"\b[Mm]onths\s?(?P<items>\d{1,3}(?:\.\d+)?(?:\s*,\s*\d{1,3}(?:\.\d+)?)*,?\s*(?:,|and|&)\s*"
-                   r"\d{1,3}(?:\.\d+)?)\b(?!\s*(?:[-–]|to)\s*\d)" + _FOLLOWED_BY_DATE)
+_LIST_SEP = r"\s*(?:,\s*(?:and|or)?|and|or|&|/)\s*"
+_LIST = re.compile(r"\b[Mm]onths?\s?(?P<items>\d{1,3}(?:\.\d+)?(?:" + _LIST_SEP + r"\d{1,3}(?:\.\d+)?)+)\b"
+                   r"(?!\s*(?:[-–]|to)\s*\d|\+|\.\d|" + _LIST_SEP + r"\d)" + _FOLLOWED_BY_DATE)
 # A stale date-only parenthetical right after a computed date: "(2030-05-02 to 2032-05-02) (through February 2033)"
 _STALE_AFTER = re.compile(r"(?P<keep>\(\d{4}-\d{2}-\d{2}(?: to \d{4}-\d{2}-\d{2})?\))\s*\((?:through|by|until|to|ending|ends|"
                           r"from|in|approx\.?|about|~|≈)?\s*(?:early|mid|late)?[- ]?(?:" + _MONTH_RX +
                           r")\.?(?:\s+\d{1,2},?)?\s+\d{4}\)")
-_BARE = re.compile(r"\b[Mm]onth\s?" + _N + _NOT_RANGE + r"\b" + _FOLLOWED_BY_DATE)
+# Not part of a list ("Month 0.5, 1, 1.5" / "Month 0.5 or 2" are handled by _LIST) and not "Month 13+".
+_BARE = re.compile(r"\b[Mm]onth\s?" + _N + _NOT_RANGE + r"\b(?!\+|" + _LIST_SEP + r"\d)" + _FOLLOWED_BY_DATE)
 
 
 def add_months(start: date, n: int) -> date:

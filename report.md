@@ -565,6 +565,21 @@ converging repair loop. Baseline prompt and plan date (2026-05-03).
   Month 5 long-stop; accountable roles not in funded staffing.
 - Length: visible report text ~155k words vs ~50k for the baseline (3.1x); executive summary 798 vs 391.
 
+### Codex review of the heatwave run
+
+Codex: **8.3/10 vs 7.3/10** for the baseline (same prompt). Gains: prompt fidelity (the baseline
+silently picked a 616k-resident city against a 150k-400k constraint; the new plan flags its 145k city
+with a Month 0.5 verification gate), decision/gate quality, assumption management, WBS depth (258 vs
+114 rows), financial reconciliation (it found the reserve can't both be a Level-3 reserve and fund
+routine alert days), consistency 0 high after repair with 7 explicit decisions. Weaknesses:
+- **Gantt runs to 2032 for a 12-month plan.** Kept as is (user decision): the Gantt is deliberately an
+  unoptimized waterfall without resource information, and its subtitle says so.
+- **Signal-to-noise:** 3.1x longer than the baseline.
+- **Duplicated date annotations** ("Month 0.5 = 2026-05-18 or 2 = 2026-05-18 ...",
+  "Month 13 (2027-06-03)+"): normalizer bugs, fixed. Month lists with "or" or singular "Month"
+  ("Month 0.5, 1, 1.5, 2") are annotated as a whole, "Month N+" is left alone, and the normalizer is
+  idempotent on its own output (tests added).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
