@@ -550,6 +550,21 @@ were "one genuine unresolved business-model decision + one calculation bug". Its
    deployment line (not 5-8 x 50 MLD).
 5. Deterministic arithmetic checking: open (the invariant pass re-checks arithmetic with the LLM).
 
+### Full run: heatwave_resilience (`runs/heatwave`, 2026-10-06)
+
+First full run with self-verifying canonical facts, repairable-vs-decision classification and the
+converging repair loop. Baseline prompt and plan date (2026-05-03).
+- 74/74 stages, 0 failures, 234 LLM calls, 10 web searches, **1h21m**; 51 canonical facts.
+- Consistency pass 1: 4 high + 4 medium repairable, 2 high + 2 medium needing a decision.
+  Repair: round 1: 29 edits -> 3 high; round 2: 27 edits -> 1 high; round 3: 27 edits -> **0 high**
+  (83 edits, 0 missed). First run to reach zero repairable high-severity contradictions; the report
+  shows "Decisions required" instead of "Consistency lint FAILED".
+- Remaining decisions (3 high, 4 medium): routine alert-day activation cost vs reserve and funding line;
+  pilot-city population check with three incompatible fallbacks; data minimisation vs equity metrics;
+  what a Month 2 gate miss means and how it is defined (12 sites vs 3 of 4 hubs); gate-miss delay vs the
+  Month 5 long-stop; accountable roles not in funded staffing.
+- Length: visible report text ~155k words vs ~50k for the baseline (3.1x); executive summary 798 vs 391.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
