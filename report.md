@@ -580,6 +580,26 @@ routine alert days), consistency 0 high after repair with 7 explicit decisions. 
   ("Month 0.5, 1, 1.5, 2") are annotated as a whole, "Month N+" is left alone, and the normalizer is
   idempotent on its own output (tests added).
 
+### Full run: rubber_resilience (`runs/rubber_resilience`, 2026-10-06)
+
+Prompt and plan date (Month 0 = 2026-04-04) taken from the older-format PlanExe-web zip (numbered file
+names, no plan_raw.json; rebuilt from `001-2-plan.txt`). Generator v2.0.0-2-ga630d29 (first run with
+provenance).
+- check-prompt: USABLE and ready (146 words; location, scale, stakeholders, success criteria partial).
+- 74/74 stages, 0 failures, 220 LLM calls, 8 web searches, **1h14m**.
+- One premise_attack lens (Accountability) was refused by the model ("Sonnet 5 can't help with this");
+  as in PlanExe, a failed lens is skipped, so premise_attack has 4 of 5 lenses. Not worked around.
+- Consistency: pass 1 had 2 high + 5 medium repairable and 1 high + 4 medium decisions; repair reached
+  0 repairable high in 2 rounds (27 + 53 edits). Report banner: "Decisions required: 4" (plant-2
+  financing; USD 4.5B spendable at Month 0 vs the Month 6 launch go/no-go and funding status).
+- vs baseline: the baseline executive summary (301 words) restates the prompt with generic mitigations
+  ("proactive stakeholder engagement"). The new plan's decision kernel has six gates with thresholds and
+  If-NO paths (launch preconditions incl. Brazil ABS agreement; OEM pull for alternative rubber; a
+  >=10,000-farmer replant-finance pilot; Month 36 containment gate; Month 60 cultivar checkpoint;
+  contingency and open financing), and canonical facts define tranche releases per gate, the unit of
+  alternative-rubber capacity (50,000 t/yr plant, ~USD 1B) and who finances which plant.
+- Length: visible report ~127k words vs ~46k (2.8x); executive summary 863 vs 301 words.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
