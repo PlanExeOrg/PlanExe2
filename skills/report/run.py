@@ -12,6 +12,14 @@ EXECUTE_PLAN_SECTION_HIDDEN = True
 PART = "\x00part"  # marker title for part headings in html_items / md_items
 
 
+def strip_repeated_title(title: str, md: str) -> str:
+    """Drop a leading heading that repeats the section title ("Canonical Facts" > "## Canonical Facts")."""
+    m = re.match(r"\s*#{1,6}\s+(.+?)\s*#*\s*(?:\n|$)", md)
+    if m and m.group(1).strip().lower() == title.strip().lower():
+        return md[m.end():].lstrip("\n")
+    return md
+
+
 def slug(title: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
 
@@ -38,6 +46,7 @@ class Report:
         self.markdown_text(title, self.ctx.read_text(name))
 
     def markdown_text(self, title: str, md: str) -> None:
+        md = strip_repeated_title(title, md)
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
 

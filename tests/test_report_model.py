@@ -59,6 +59,14 @@ class DecisionRegisterTest(unittest.TestCase):
         self.assertIn("No open decisions were found", md)
 
 
+class RepeatedTitleTest(unittest.TestCase):
+    def test_strip(self):
+        strip = load("report").strip_repeated_title
+        self.assertEqual(strip("Canonical Facts", "## Canonical Facts\n\nSingle source"), "Single source")
+        self.assertEqual(strip("Scenarios", "# Choosing Our Path\n\nx"), "# Choosing Our Path\n\nx")
+        self.assertEqual(strip("Pitch", "Text first\n## Pitch"), "Text first\n## Pitch")
+
+
 class ValidationStatusTest(unittest.TestCase):
     def ctx(self):
         contradiction = {"topic": "t", "severity": "high", "resolution_type": "repairable", "offending_document": "pitch"}

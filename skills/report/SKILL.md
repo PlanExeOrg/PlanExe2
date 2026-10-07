@@ -30,7 +30,9 @@ deterministic arithmetic check (`arithmetic_check.json`, every remaining error l
 schedule; then a per-section table (web searches, linted or not, arithmetic checked/wrong, status:
 partly source-checked / consistency-checked / unchecked model output).
 
-Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
+A leading heading inside a section that repeats the section title (canonical_facts.md starts with
+"## Canonical Facts") is dropped; fixed here rather than in the stage, so existing runs need no
+regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`);
 "Decisions required: N" from the decision register. Banners link to their section (sections have ids).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
