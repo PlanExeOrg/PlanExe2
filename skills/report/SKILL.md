@@ -17,7 +17,7 @@ Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
    Related Resources, Data Collection, Documents to Create and Find, SWOT Analysis, Team, Expert
    Criticism, Work Breakdown Structure (CSV table), Review Plan, Questions & Answers, Premortem, Self Audit.
 3. **Audit trail**: Consistency Check, Initial Prompt Vetted (prompt + screening + redline gate + premise
-   attack), Prompt Adherence, Report Metadata.
+   attack), Prompt Adherence, Metadata.
 
 Why: a Codex comparison of v1 and v2 reports summed up the difference as "v1: generate an unusually
 comprehensive expert planning workshop; v2: construct a partially validated model of the project, then
@@ -36,7 +36,7 @@ these values"). The model's reconciliation notes (process notes) go to the Consi
 The SWOT section's headings are shown without PlanExe's emoji ("Strengths 👍💪🦾" -> "Strengths");
 `swot_analysis.md` keeps them, like PlanExe. The v2 sections open with a one-line subtitle, in the style of PlanExe's "Persuasive elevator pitch.",
 "Why this fails." and the Gantt's "Unoptimized waterfall. Parallel work not modelled here.": Decision
-Dashboard, Decisions Required, Canonical Facts, Validation Status, Consistency Check, Report Metadata.
+Dashboard, Decisions Required, Canonical Facts, Validation Status, Consistency Check, Metadata.
 All one-line subtitles are italic, like the Team section's "*Roles Needed & Example People*": PlanExe's
 own (pitch, premortem, self audit, Gantt, "Why this fails.") and the v2 ones; the documents keep them as
 plain lines, as in PlanExe. Expert Criticism drops PlanExe's two opening headings ("Project Expert Review & Recommendations", "A
@@ -53,7 +53,7 @@ Reader-facing text only: the Decision Dashboard is the decision-kernel table alo
 moves to the Consistency Check; the consistency summary and "see ..." pointers were dropped as
 repetition), the Consistency Check omits the compiler-style diagnostics block (same items as its numbered
 list; kept in consistency_recheck.md), parts have no intro sentences, the header line names only
-generator and version (repo and commit are in Report Metadata) and the plan start (plus hand-edited files,
+generator and version (repo and commit are in Metadata) and the plan start (plus hand-edited files,
 if any).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
 the repaired copies from consistency_repair.
@@ -62,7 +62,7 @@ Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_
 (PlanExe used Python-Markdown; tables are rendered in every section).
 
 Report metadata: the line under the title names the generator (PlanExe2, version = `git describe --tags`,
-e.g. v2.0.0 or v2.0.0-3-gabc1234) and the plan start date; the final "Report Metadata" section lists per
+e.g. v2.0.0 or v2.0.0-3-gabc1234) and the plan start date; the final "Metadata" section (titled "Report Metadata" briefly) lists per
 stage which generator version produced it, when, with which models, plus hand-edited and adopted files.
 Source: `planexe_report_metadata.json`, maintained by the runner (read via `ctx.run_metadata()`, not a
 declared input). Named "Provenance" / `planexe_provenance.json` until 2026-10-07; that read like a

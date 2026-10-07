@@ -74,7 +74,7 @@ Every report names its generator under the title: **PlanExe2 + version** (`git d
 (resumed runs, stages regenerated after an edit), so this is kept per stage:
 `RUN_DIR/planexe_report_metadata.json` lists, for every stage, the generator version and commit, when it
 ran, which models it used, how many LLM calls and web searches it made, plus hand-edited intermediary
-files and adopted stages; the report's last section, "Report Metadata", renders it (runs made before
+files and adopted stages; the report's last section, "Metadata", renders it (runs made before
 2026-10-07 have `planexe_provenance.json`, which the next `run` replaces). Each `*_raw.json` also carries `metadata.generator`
 (repo, commit, git tag). The plan's start date (Month 0, `start_time.json`) is independent of when the
 plan is generated, so plans can be dated in the past or the future.
