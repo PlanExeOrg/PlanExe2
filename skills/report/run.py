@@ -103,7 +103,7 @@ class Report:
         keep = [i for i in range(len(header)) if any(r[i].strip() for r in body)] if body else list(range(len(header)))
         header = [header[i] for i in keep]
         body = [[r[i] for i in keep] for r in body]
-        out = ['<table border="1" class="dataframe dataframe">', "  <thead>", '    <tr style="text-align: right;">']
+        out = ['<table class="dataframe dataframe">', "  <thead>", '    <tr style="text-align: right;">']
         out += [f"      <th>{escape(h)}</th>" for h in header]
         out += ["    </tr>", "  </thead>", "  <tbody>"]
         for r in body:
