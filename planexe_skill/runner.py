@@ -12,7 +12,7 @@ from concurrent.futures import FIRST_COMPLETED, Future, ThreadPoolExecutor, wait
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from planexe_skill import provenance
+from planexe_skill import report_metadata
 from planexe_skill.context import SkillContext
 from planexe_skill.dag import Dag, DagError
 from planexe_skill.llm.base import Backend, LLMAuthError
@@ -74,7 +74,7 @@ class Runner:
         self.meta_dir = self.run_dir / MANIFEST_DIRNAME
         self.log_dir = self.meta_dir / "logs"
         self._usage_lock = threading.Lock()
-        self._provenance_lock = threading.Lock()
+        self._metadata_lock = threading.Lock()
 
     # ---------- planning ----------
     def plan(self) -> list[str]:
@@ -168,23 +168,23 @@ class Runner:
             os.replace(f, self.run_dir / f.name)
         shutil.rmtree(staging, ignore_errors=True)
         self.manifest.record_completed(skill, self.run_dir, extra={
-            "generator": provenance.generator_brief(), "models": sorted(models), "llm_calls": ctx.llm_calls,
+            "generator": report_metadata.generator_brief(), "models": sorted(models), "llm_calls": ctx.llm_calls,
             "web_searches": searches[0]})
         self.manifest.save()
-        self._write_provenance()
+        self._write_report_metadata()
         shutil.rmtree(cache_dir, ignore_errors=True)
         if ctx.cache_hits:
             with open(log_path, "a", encoding="utf-8") as f:
                 f.write(f"resumed: {ctx.cache_hits} of {ctx.llm_calls} LLM calls replayed from the resume cache\n")
         return ctx.llm_calls
 
-    def _write_provenance(self) -> None:
-        """Keep RUN_DIR/planexe_provenance.json current (the report stage renders it)."""
-        with self._provenance_lock:
+    def _write_report_metadata(self) -> None:
+        """Keep RUN_DIR/planexe_report_metadata.json current (the report stage renders it)."""
+        with self._metadata_lock:
             try:
-                provenance.write(self.run_dir, self.dag, self.manifest)
+                report_metadata.write(self.run_dir, self.dag, self.manifest)
             except OSError as e:
-                print(f"warning: could not write {provenance.PROVENANCE_FILENAME}: {e}", file=self.stream)
+                print(f"warning: could not write {report_metadata.METADATA_FILENAME}: {e}", file=self.stream)
 
     def _failure_report(self, name: str, exc: BaseException) -> str:
         skill = self.dag.skills[name]
@@ -215,7 +215,7 @@ class Runner:
             if name in self.targets and name not in planned and self.manifest.entry(name) is None:
                 self.manifest.record_completed(self.dag.skills[name], self.run_dir, adopted=True)
         self.manifest.save()
-        self._write_provenance()
+        self._write_report_metadata()
         if not planned:
             print("Nothing to do: all selected stages are up to date.", file=self.stream)
             return result

@@ -2,8 +2,9 @@
 
 A run can mix code versions: stages are re-generated when inputs or skills change, runs are resumed,
 intermediary files are hand-edited and their downstream re-generated, and a whole plan can be
-re-generated later from the same prompt. So provenance is recorded per stage (in the manifest) and
-summarized in the run dir as `planexe_provenance.json`, which the report renders.
+re-generated later from the same prompt. So this is recorded per stage (in the manifest) and
+summarized in the run dir as `planexe_report_metadata.json`, which the report renders as its "Report
+Metadata" section. (Called planexe_provenance.json until 2026-10-07; `write` removes that old file.)
 
 Plan dates are separate from generation dates: the plan's start date (Month 0, `start_time.json`)
 may be in the past or the future relative to when it is generated.
@@ -22,7 +23,8 @@ from pathlib import Path
 from planexe_skill import REPO_ROOT
 
 GENERATOR_NAME = "PlanExe2"
-PROVENANCE_FILENAME = "planexe_provenance.json"
+METADATA_FILENAME = "planexe_report_metadata.json"
+LEGACY_FILENAME = "planexe_provenance.json"
 
 
 def _git(*args: str) -> str | None:
@@ -101,7 +103,7 @@ def _searches_from_usage(run_dir: Path) -> dict[str, int]:
 
 
 def build(run_dir: Path, dag, manifest) -> dict:
-    """Summarize provenance from the manifest (per stage) plus the run's plan dates."""
+    """Summarize the manifest (per stage: generator, models, calls, searches) plus the run's plan dates."""
     stages = {}
     usage_searches = None
     hand_edited = []
@@ -147,5 +149,6 @@ def write(run_dir: Path, dag, manifest) -> dict:
     fd, tmp = tempfile.mkstemp(dir=run_dir, suffix=".tmp")
     with os.fdopen(fd, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    os.replace(tmp, run_dir / PROVENANCE_FILENAME)
+    os.replace(tmp, run_dir / METADATA_FILENAME)
+    (run_dir / LEGACY_FILENAME).unlink(missing_ok=True)
     return data

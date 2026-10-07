@@ -202,12 +202,12 @@ class SkillContext:
                 "Label any other figure "
                 "you need as (estimate) or (proposed threshold).\n" + "\n".join(lines))
 
-    def run_provenance(self) -> dict:
-        """RUN_DIR/planexe_provenance.json as maintained by the runner (not a declared input: it describes
+    def run_metadata(self) -> dict:
+        """RUN_DIR/planexe_report_metadata.json as maintained by the runner (not a declared input: it describes
         how the run was produced, like the run's start date)."""
-        from planexe_skill.provenance import PROVENANCE_FILENAME
+        from planexe_skill.report_metadata import METADATA_FILENAME
         try:
-            return json.loads((self.run_dir / PROVENANCE_FILENAME).read_text(encoding="utf-8"))
+            return json.loads((self.run_dir / METADATA_FILENAME).read_text(encoding="utf-8"))
         except (OSError, json.JSONDecodeError):
             return {}
 

@@ -25,7 +25,7 @@ expose what humans still have to decide". The report leads with the model and th
 workshop material is supporting analysis.
 
 Validation Status says what "validated" means: which stages used web search (per-stage counts from
-`planexe_provenance.json`), the canonical facts by kind, the consistency lint before/after repair, the
+`planexe_report_metadata.json`), the canonical facts by kind, the consistency lint before/after repair, the
 deterministic arithmetic check (`arithmetic_check.json`, every remaining error listed), calendar and
 schedule; then a per-section table (web searches, linted or not, arithmetic checked/wrong, status:
 partly source-checked / consistency-checked / not checked).
@@ -55,4 +55,9 @@ the repaired copies from consistency_repair.
 Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_html.py`
 (PlanExe used Python-Markdown; tables are rendered in every section).
 
-Provenance: the line under the title names the generator (PlanExe2, version = `git describe --tags`, e.g. v2.0.0 or v2.0.0-3-gabc1234, repo, commit) and the plan start date; the final "Report Metadata" section (named "Provenance" until 2026-10-07; that read like a history of superseded plans) lists per stage which generator version produced it, when, with which models, plus hand-edited and adopted files. Source: `planexe_provenance.json`, maintained by the runner (read via `ctx.run_provenance()`, not a declared input).
+Report metadata: the line under the title names the generator (PlanExe2, version = `git describe --tags`,
+e.g. v2.0.0 or v2.0.0-3-gabc1234) and the plan start date; the final "Report Metadata" section lists per
+stage which generator version produced it, when, with which models, plus hand-edited and adopted files.
+Source: `planexe_report_metadata.json`, maintained by the runner (read via `ctx.run_metadata()`, not a
+declared input). Named "Provenance" / `planexe_provenance.json` until 2026-10-07; that read like a
+history of superseded plans.

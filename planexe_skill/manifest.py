@@ -123,7 +123,7 @@ class Manifest:
             "adopted": adopted,
         }
         if extra:
-            entry.update(extra)  # provenance: generator, models, llm_calls
+            entry.update(extra)  # report metadata: generator, models, llm_calls, web_searches
         with self._lock:
             self.data["stages"][skill.name] = entry
 

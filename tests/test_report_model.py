@@ -16,9 +16,9 @@ def load(skill: str):
 
 
 class StubCtx:
-    def __init__(self, files: dict, provenance: dict | None = None):
+    def __init__(self, files: dict, metadata: dict | None = None):
         self.files = files
-        self.provenance = provenance or {}
+        self.metadata = metadata or {}
 
     def read_text(self, name):
         v = self.files[name]
@@ -28,8 +28,8 @@ class StubCtx:
         v = self.files[name]
         return json.loads(v) if isinstance(v, str) else v
 
-    def run_provenance(self):
-        return self.provenance
+    def run_metadata(self):
+        return self.metadata
 
 
 DECISION = {"title": "Plant 2 financing", "question": "Who finances plant 2?", "why_open": "Pitch says financed.",

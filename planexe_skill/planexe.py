@@ -6,7 +6,7 @@ import math
 from typing import Any
 
 from planexe_skill.llm.base import LLMResult
-from planexe_skill.provenance import generator_brief
+from planexe_skill.report_metadata import generator_brief
 
 CONTEXT_WINDOWS = {"sonnet": 1_000_000, "opus": 1_000_000, "haiku": 200_000}
 

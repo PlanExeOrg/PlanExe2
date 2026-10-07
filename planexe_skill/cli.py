@@ -43,7 +43,7 @@ def create_run_dir(run_dir: Path, prompt: str | None = None, plan_raw: Path | No
           "server_iso_local": local.replace(microsecond=0).isoformat(),
           "server_timezone_name": local.tzname() or "unknown"}
     (run_dir / START_TIME).write_text(json.dumps(st, indent=2), encoding="utf-8")
-    from planexe_skill.provenance import generator_brief
+    from planexe_skill.report_metadata import generator_brief
     meta = {"pipeline_version": PIPELINE_VERSION, "created_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "generator": generator_brief()}
     (run_dir / METADATA).write_text(json.dumps(meta, indent=2), encoding="utf-8")
