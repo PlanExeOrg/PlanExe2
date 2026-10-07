@@ -59,6 +59,11 @@ files (the plan date is in the prompt and in Metadata).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
 the repaired copies from consistency_repair.
 
+Look (`template.html`, PlanExe2): a consulting-report style instead of PlanExe's blue buttons: white page,
+navy ink (#051C2C), serif title and section names, sections separated by hairline rules with a chevron,
+part headings as small uppercase labels in the one accent colour (#2251FF), tables with horizontal rules
+only; a viewport meta tag and a small-screen layout (wide tables scroll inside their section).
+
 Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_html.py`
 (PlanExe used Python-Markdown; tables are rendered in every section).
 
