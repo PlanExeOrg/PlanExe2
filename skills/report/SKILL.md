@@ -33,7 +33,8 @@ partly source-checked / consistency-checked / not checked).
 Canonical Facts is rendered from `canonical_facts.json` for readers (a legend for the Kind column + the
 table); `canonical_facts.md` is worded for the later stages ("All later documents were instructed to use
 these values"). The model's reconciliation notes (process notes) go to the Consistency Check in Part 3.
-A leading heading inside a section that repeats the section title is dropped. Both are done here rather
+The SWOT section's headings are shown without PlanExe's emoji ("Strengths 👍💪🦾" -> "Strengths");
+`swot_analysis.md` keeps them, like PlanExe. A leading heading inside a section that repeats the section title is dropped. Both are done here rather
 than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`).
 Banners link to their section (sections have ids). There is no banner for open decisions: Decisions

@@ -20,6 +20,15 @@ def strip_repeated_title(title: str, md: str) -> str:
     return md
 
 
+# Emoji, pictographs and their joiners/modifiers ("🤷‍♂️", "☢︎", "⚠️").
+_EMOJI = re.compile("[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2190-\u21FF\u200D\uFE0E\uFE0F]+")
+
+
+def strip_heading_emoji(md: str) -> str:
+    """'## Strengths 👍💪🦾' -> '## Strengths' (PlanExe's SWOT headings; swot_analysis.md keeps them)."""
+    return re.sub(r"^(#{1,6} .*?)\s*$", lambda m: _EMOJI.sub("", m.group(1)).rstrip(), md, flags=re.M)
+
+
 def slug(title: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
 
@@ -390,7 +399,7 @@ def run(ctx):
     r.markdown("Related Resources", "related_resources.md")
     r.markdown("Data Collection", "data_collection.md")
     r.markdown("Documents to Create and Find", "documents_to_create_and_find.md")
-    r.markdown("SWOT Analysis", "swot_analysis.md")
+    r.markdown_text("SWOT Analysis", strip_heading_emoji(ctx.read_text("swot_analysis.md")))
     r.markdown("Team", "team.md")
     r.markdown("Expert Criticism", "expert_criticism.md")
     r.csv_table("Work Breakdown Structure", "wbs_project_level1_and_level2_and_level3.csv")

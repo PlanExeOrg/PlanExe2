@@ -67,6 +67,14 @@ class RepeatedTitleTest(unittest.TestCase):
         self.assertEqual(strip("Pitch", "Text first\n## Pitch"), "Text first\n## Pitch")
 
 
+class HeadingEmojiTest(unittest.TestCase):
+    def test_strip(self):
+        strip = load("report").strip_heading_emoji
+        md = ("## Strengths 👍💪🦾\n- Brazil leads 💪\n## Threats ☠️🛑🚨☢︎💩☣︎\n## Missing Information 🧩🤷‍♂️🤷‍♀️\n"
+              "## Weaknesses 👎😱🪫⚠️")
+        self.assertEqual(strip(md), "## Strengths\n- Brazil leads 💪\n## Threats\n## Missing Information\n## Weaknesses")
+
+
 class ValidationStatusTest(unittest.TestCase):
     def ctx(self):
         contradiction = {"topic": "t", "severity": "high", "resolution_type": "repairable", "offending_document": "pitch"}
