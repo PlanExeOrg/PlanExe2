@@ -29,6 +29,12 @@ def italic_subtitle(md: str) -> str:
     return md
 
 
+def heading_to_subtitle(md: str, heading: str) -> str:
+    """A leading '# <heading>' becomes the italic subtitle '*<heading>*' (scenarios.md keeps the heading)."""
+    m = re.match(r"\s*#{1,6}\s+" + re.escape(heading) + r"\s*\n", md)
+    return f"*{heading}*\n\n" + md[m.end():] if m else md
+
+
 def strip_expert_headings(md: str) -> str:
     """Drop PlanExe's two opening headings of expert_criticism.md ("Project Expert Review & Recommendations",
     "A Compilation of Professional Feedback ..."): they repeat the section title (an italic subtitle replaces
@@ -422,7 +428,7 @@ def run(ctx):
     r.markdown("Pitch", "repaired_pitch.md")
     r.markdown("Project Plan", "repaired_project_plan.md")
     r.markdown("Strategic Decisions", "strategic_decisions.md")
-    r.markdown("Scenarios", "scenarios.md")
+    r.markdown_text("Scenarios", heading_to_subtitle(ctx.read_text("scenarios.md"), "Choosing Our Strategic Path"))
     r.markdown("Assumptions", "consolidate_assumptions_full.md")
     r.markdown("Governance", "consolidate_governance.md")
     r.markdown("Related Resources", "related_resources.md")

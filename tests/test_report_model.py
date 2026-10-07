@@ -75,6 +75,14 @@ class SubtitleTest(unittest.TestCase):
         self.assertEqual(italic("Some other first line.\n"), "Some other first line.\n")
 
 
+class HeadingToSubtitleTest(unittest.TestCase):
+    def test_convert(self):
+        f = load("report").heading_to_subtitle
+        self.assertEqual(f("# Choosing Our Strategic Path\n## The Strategic Context\n", "Choosing Our Strategic Path"),
+                         "*Choosing Our Strategic Path*\n\n## The Strategic Context\n")
+        self.assertEqual(f("# Other\n", "Choosing Our Strategic Path"), "# Other\n")
+
+
 class ExpertHeadingsTest(unittest.TestCase):
     def test_strip(self):
         strip = load("report").strip_expert_headings
