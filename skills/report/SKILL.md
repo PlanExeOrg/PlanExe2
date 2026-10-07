@@ -53,8 +53,8 @@ Reader-facing text only: the Decision Dashboard is the decision-kernel table alo
 moves to the Consistency Check; the consistency summary and "see ..." pointers were dropped as
 repetition), the Consistency Check omits the compiler-style diagnostics block (same items as its numbered
 list; kept in consistency_recheck.md), parts have no intro sentences, the header line names only
-generator and version (repo and commit are in Metadata) and the plan start (plus hand-edited files,
-if any).
+generator and version (repo and commit are in Metadata); a second line appears only for hand-edited
+files (the plan date is in the prompt and in Metadata).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
 the repaired copies from consistency_repair.
 
@@ -62,7 +62,7 @@ Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_
 (PlanExe used Python-Markdown; tables are rendered in every section).
 
 Report metadata: the line under the title names the generator (PlanExe2, version = `git describe --tags`,
-e.g. v2.0.0 or v2.0.0-3-gabc1234) and the plan start date; the final "Metadata" section (titled "Report Metadata" briefly) lists per
+e.g. v2.0.0 or v2.0.0-3-gabc1234); the final "Metadata" section (titled "Report Metadata" briefly) lists per
 stage which generator version produced it, when, with which models, plus hand-edited and adopted files.
 Source: `planexe_report_metadata.json`, maintained by the runner (read via `ctx.run_metadata()`, not a
 declared input). Named "Provenance" / `planexe_provenance.json` until 2026-10-07; that read like a
