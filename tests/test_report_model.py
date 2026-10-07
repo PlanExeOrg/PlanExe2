@@ -78,9 +78,9 @@ class SubtitleTest(unittest.TestCase):
 class HeadingToSubtitleTest(unittest.TestCase):
     def test_convert(self):
         f = load("report").heading_to_subtitle
-        self.assertEqual(f("# Choosing Our Strategic Path\n## The Strategic Context\n", "Choosing Our Strategic Path"),
-                         "*Choosing Our Strategic Path*\n\n## The Strategic Context\n")
-        self.assertEqual(f("# Other\n", "Choosing Our Strategic Path"), "# Other\n")
+        self.assertEqual(f("# Choosing Our Strategic Path\n## The Strategic Context\n", "Choosing Our Strategic Path",
+                           "Choosing our strategic path."), "*Choosing our strategic path.*\n\n## The Strategic Context\n")
+        self.assertEqual(f("# Other\n", "Choosing Our Strategic Path", "x."), "# Other\n")
 
 
 class ExpertHeadingsTest(unittest.TestCase):
