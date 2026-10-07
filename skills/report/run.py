@@ -12,6 +12,23 @@ EXECUTE_PLAN_SECTION_HIDDEN = True
 PART = "\x00part"  # marker title for part headings in html_items / md_items
 
 
+# PlanExe's one-line section subtitles, written as plain first lines into the documents; the report shows
+# them in italics, like the Team section's "*Roles Needed & Example People*".
+PLANEXE_SUBTITLES = (
+    "Persuasive elevator pitch.",
+    "A premortem assumes the project has failed and works backward to identify the most likely causes.",
+    "Reality check: fix before go.",
+)
+
+
+def italic_subtitle(md: str) -> str:
+    stripped = md.lstrip()
+    for sub in PLANEXE_SUBTITLES:
+        if stripped.startswith(sub + "\n") or stripped == sub:
+            return f"*{sub}*" + stripped[len(sub):]
+    return md
+
+
 def strip_repeated_title(title: str, md: str) -> str:
     """Drop a leading heading that repeats the section title ("Canonical Facts" > "## Canonical Facts")."""
     m = re.match(r"\s*#{1,6}\s+(.+?)\s*#*\s*(?:\n|$)", md)
@@ -56,9 +73,9 @@ class Report:
 
     def markdown_text(self, title: str, md: str, subtitle: str | None = None) -> None:
         """`subtitle`: a one-line context sentence above the content, like PlanExe's "Why this fails."."""
-        md = strip_repeated_title(title, md)
+        md = italic_subtitle(strip_repeated_title(title, md))
         if subtitle:
-            md = f"{subtitle}\n\n{md}"
+            md = f"*{subtitle}*\n\n{md}"
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
 
@@ -89,7 +106,7 @@ class Report:
 
     def embedded_html(self, title: str, name: str, subtitle: str | None = None) -> None:
         raw = self.ctx.read_text(name)
-        sub = f"<p>{escape(subtitle)}</p>\n" if subtitle else ""
+        sub = f"<p><em>{escape(subtitle)}</em></p>\n" if subtitle else ""
         m = re.search(r"<!--HTML_HEAD_START-->(.*)<!--HTML_HEAD_END-->", raw, re.DOTALL)
         if m:
             self.head.append(m.group(1))
@@ -131,12 +148,12 @@ class Report:
         <h2>Redline Gate</h2>
         {md_to_html(redline_md)}
         <h2>Premise Attack</h2>
-        <p>Why this fails.</p>
+        <p><em>Why this fails.</em></p>
         {md_to_html(premise_md)}
         """
         self.html_items.append((title, html))
         parts = ["## Initial Prompt", "", "```text", prompt, "```", "", "## Prompt Screening", "", screening_md, "",
-                 "## Redline Gate", "", redline_md, "", "## Premise Attack", "", "Why this fails.", "", premise_md]
+                 "## Redline Gate", "", redline_md, "", "## Premise Attack", "", "*Why this fails.*", "", premise_md]
         self.md_items.append((title, "\n".join(parts)))
 
     def html_report(self, title: str, now: str) -> str:

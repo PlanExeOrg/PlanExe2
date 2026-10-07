@@ -67,6 +67,14 @@ class RepeatedTitleTest(unittest.TestCase):
         self.assertEqual(strip("Pitch", "Text first\n## Pitch"), "Text first\n## Pitch")
 
 
+class SubtitleTest(unittest.TestCase):
+    def test_planexe_subtitles_italic(self):
+        italic = load("report").italic_subtitle
+        self.assertEqual(italic("Persuasive elevator pitch.\n\n# Title"), "*Persuasive elevator pitch.*\n\n# Title")
+        self.assertEqual(italic("Reality check: fix before go.\n\n### Summary"), "*Reality check: fix before go.*\n\n### Summary")
+        self.assertEqual(italic("Some other first line.\n"), "Some other first line.\n")
+
+
 class HeadingEmojiTest(unittest.TestCase):
     def test_strip(self):
         strip = load("report").strip_heading_emoji

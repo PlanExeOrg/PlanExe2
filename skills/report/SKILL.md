@@ -37,7 +37,9 @@ The SWOT section's headings are shown without PlanExe's emoji ("Strengths üëçü
 `swot_analysis.md` keeps them, like PlanExe. The v2 sections open with a one-line subtitle, in the style of PlanExe's "Persuasive elevator pitch.",
 "Why this fails." and the Gantt's "Unoptimized waterfall. Parallel work not modelled here.": Decision
 Dashboard, Decisions Required, Canonical Facts, Validation Status, Consistency Check, Report Metadata.
-A leading heading inside a section that repeats the section title is dropped. Both are done here rather
+All one-line subtitles are italic, like the Team section's "*Roles Needed & Example People*": PlanExe's
+own (pitch, premortem, self audit, Gantt, "Why this fails.") and the v2 ones; the documents keep them as
+plain lines, as in PlanExe. A leading heading inside a section that repeats the section title is dropped. Both are done here rather
 than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`).
 Banners link to their section (sections have ids). There is no banner for open decisions: Decisions
