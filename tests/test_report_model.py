@@ -83,12 +83,12 @@ class ValidationStatusTest(unittest.TestCase):
 
     def test_validation_status(self):
         md = load("report").validation_status(self.ctx())
-        self.assertIn("premise_attack (8)", md)
-        self.assertIn("Before repair: 2 high / 0 medium. After: 0 high / 0 medium repairable, plus 1", md)
+        self.assertIn("Sections that searched: Premise Attack (8) | 8 searches.", md)
+        self.assertIn("Before repair: 2 high / 0 medium. After: 0 high / 0 medium, plus 1", md)
         self.assertIn("12 checked, 1 wrong", md)
         self.assertIn("| Self Audit | - | yes | 3 / 1 | Consistency-checked; 1 arithmetic error |", md)
         self.assertIn("| Premise Attack | 8 | - | 0 / 0 | Partly source-checked |", md)
-        self.assertIn("| Team | - | - | 0 / 0 | Unchecked model output |", md)
+        self.assertIn("| Team | - | - | 0 / 0 | Not checked |", md)
         self.assertIn("## Arithmetic errors", md)
 
     def test_banners(self):

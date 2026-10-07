@@ -267,7 +267,7 @@ SECTION_STAGES = {
 LINTED = {"Executive Summary", "Project Plan", "Review Plan", "Premortem", "Self Audit", "Pitch"}
 FIXED_STATUS = {
     "Decisions Required": "Derived from the consistency check",
-    "Canonical Facts": "Model-reconciled; its arithmetic re-checked by a second call",
+    "Canonical Facts": "Reconciled; arithmetic re-checked",
 }
 
 
@@ -287,29 +287,24 @@ def validation_status(ctx) -> str:
     arith = ctx.read_json("arithmetic_check.json")
     mism = arith.get("mismatches") or []
 
-    src = ("; ".join(f"{n} ({k})" for n, k in searched.items()) if searched else "none")
+    section_of = {stage: title for title, stages in SECTION_STAGES.items() for stage in stages}
+    src = ("; ".join(f"{section_of.get(n, n)} ({k})" for n, k in searched.items()) if searched else "none")
     rows = [
-        "This plan was written by language models. Part of it was checked, most of it was not. "
-        "\"Validated\" in this report means one of the checks below, nothing more.", "",
         "| Check | Method | Covers | Result |", "|---|---|---|---|",
-        f"| Against sources | Web search by the model | Stages that searched: {src} | "
-        f"{sum(searched.values())} searches. All other real-world figures (prices, costs, market sizes, laws, "
-        f"precedents) are model knowledge and were not verified. |",
-        f"| Canonical facts | Two model calls: reconcile, then re-check the table's own arithmetic | {len(facts)} key "
-        f"numbers and dates, which every later stage was told to use | {kinds['user_constraint']} from your prompt, "
-        f"{kinds['decision']} decisions, {kinds['proposed_threshold']} proposed thresholds, {kinds['estimate']} "
-        f"estimates. Decisions and thresholds were proposed by the model; estimates are unverified. |",
-        f"| Internal consistency | Model lint against the canonical facts, then targeted repair and re-lint | "
+        f"| Against sources | Web search | Sections that searched: {src} | {plural(sum(searched.values()), 'search', 'searches')}. "
+        f"Other real-world figures (prices, costs, market sizes, laws, precedents) were not verified. |",
+        f"| Canonical facts | Reconciled, then the table's own arithmetic re-checked | {len(facts)} key numbers and "
+        f"dates | {kinds['user_constraint']} from your prompt, {kinds['decision']} decisions, "
+        f"{kinds['proposed_threshold']} proposed thresholds, {kinds['estimate']} estimates. |",
+        f"| Internal consistency | Lint against the canonical facts, then repair and re-lint | "
         f"{', '.join(sorted(LINTED))}, and the short assumptions | Before repair: {r1['high']} high / {r1['medium']} "
-        f"medium. After: {rn['high']} high / {rn['medium']} medium repairable, plus {dn['high'] + dn['medium']} "
-        f"that need a decision (see Decisions Required). Other sections were not linted. |",
-        f"| Arithmetic | Deterministic re-computation (no model) | Every explicit calculation (\"a x b = c\") in "
-        f"{len(arith.get('by_section') or {})} sections | {arith.get('checked', 0)} checked, {len(mism)} wrong. "
-        f"Calculations the text does not write out are not checked. |",
+        f"medium. After: {rn['high']} high / {rn['medium']} medium, plus {dn['high'] + dn['medium']} "
+        f"that need a decision (see Decisions Required). |",
+        f"| Arithmetic | Deterministic re-computation | Every written calculation (\"a x b = c\") in "
+        f"{len(arith.get('by_section') or {})} sections | {arith.get('checked', 0)} checked, {len(mism)} wrong. |",
         "| Calendar | Deterministic | Every \"Month N\" paired with a date | Dates recomputed from the plan start "
         "(Month 0). |",
-        "| Schedule | Deterministic | Gantt and WBS | Computed from model-estimated durations and dependencies; "
-        "the durations themselves are unverified. |", "",
+        "| Schedule | Deterministic | Gantt and WBS | Computed from the estimated durations and dependencies. |", "",
         "## By section", "",
         "| Section | Web searches | Consistency lint | Arithmetic (checked / wrong) | Status |", "|---|---|---|---|---|",
     ]
@@ -325,14 +320,14 @@ def validation_status(ctx) -> str:
         elif linted:
             status = "Consistency-checked"
         else:
-            status = "Unchecked model output"
+            status = "Not checked"
         if a.get("mismatches"):
             status += f"; {plural(a['mismatches'], 'arithmetic error')}"
         rows.append(f"| {title} | {n_search or '-'} | {'yes' if linted else '-'} | "
                     f"{a.get('checked', 0)} / {a.get('mismatches', 0)} | {status} |")
     if mism:
         rows += ["", "## Arithmetic errors", "",
-                 "Stated results that do not match their own calculation (re-computed without a model):", "",
+                 "Stated results that do not match their own calculation:", "",
                  "| Section | Statement | Stated | Computed |", "|---|---|---|---|"]
         rows += [f"| {m['section']} | {str(m['excerpt']).replace('|', '/')} | {m['stated']} | {m['computed']} |"
                  for m in mism]

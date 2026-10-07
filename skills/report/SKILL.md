@@ -28,7 +28,7 @@ Validation Status says what "validated" means: which stages used web search (per
 `planexe_provenance.json`), the canonical facts by kind, the consistency lint before/after repair, the
 deterministic arithmetic check (`arithmetic_check.json`, every remaining error listed), calendar and
 schedule; then a per-section table (web searches, linted or not, arithmetic checked/wrong, status:
-partly source-checked / consistency-checked / unchecked model output).
+partly source-checked / consistency-checked / not checked).
 
 Canonical Facts is rendered from `canonical_facts.json` for readers (a legend for the Kind column + the
 table); `canonical_facts.md` is worded for the later stages ("All later documents were instructed to use
