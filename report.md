@@ -612,10 +612,11 @@ consistency lint) sat inside ~127k words of workshop material, open decisions we
 and "validated" was undefined. Changes:
 
 - **Report in three parts.** Part 1, "The model and what you must decide": Decision Dashboard and
-  Decisions Required (both open by default), Canonical Facts, Validation Status, Executive Summary,
+  Decisions Required, Canonical Facts, Validation Status, Executive Summary,
   Gantt. Part 2, "Supporting analysis": the PlanExe workshop documents. Part 3, "Audit trail":
   Consistency Check, prompt vetting, prompt adherence, provenance. Sections have ids and the banners
-  link to them. On the rubber run Part 1 is ~9.2k words (dashboard 1.2k, decisions 2.4k, canonical
+  link to them. All sections start collapsed (Part 1 was briefly open by default; the user prefers
+  collapsed). On the rubber run Part 1 is ~9.2k words (dashboard 1.2k, decisions 2.4k, canonical
   facts 4.0k, validation 0.6k, executive summary 0.9k) out of ~133k.
 - **`decision_register` (new stage, 1 Sonnet call).** Each open decision: question, why it is open,
   2-4 options with downstream consequences (budget, Month N, gates, scope) and which canonical facts or

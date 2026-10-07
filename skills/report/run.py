@@ -27,21 +27,18 @@ class Report:
         self.generator_line = "PlanExe2"
         self.repo_url = "https://github.com/PlanExeOrg/PlanExe2"
         self.provenance_line = ""
-        self.open_sections: set[str] = set()
 
     def part(self, title: str, intro: str) -> None:
         """A heading that groups the following sections (model / supporting analysis / audit trail)."""
         self.html_items.append((PART, f'<h2 class="report-part">{escape(title)}</h2>\n<p class="report-part-intro">{escape(intro)}</p>'))
         self.md_items.append((PART, f"# {title}\n\n_{intro}_"))
 
-    def markdown(self, title: str, name: str, open_: bool = False) -> None:
-        self.markdown_text(title, self.ctx.read_text(name), open_)
+    def markdown(self, title: str, name: str) -> None:
+        self.markdown_text(title, self.ctx.read_text(name))
 
-    def markdown_text(self, title: str, md: str, open_: bool = False) -> None:
+    def markdown_text(self, title: str, md: str) -> None:
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
-        if open_:
-            self.open_sections.add(title)
 
     def csv_table(self, title: str, name: str) -> None:
         text = self.ctx.read_text(name)
@@ -139,11 +136,10 @@ class Report:
             if section_title == PART:
                 parts.append(content)
                 continue
-            is_open = section_title in self.open_sections
             parts.append(f"""
             <div class="section" id="{slug(section_title)}">
-                <button class="collapsible{' active' if is_open else ''}">{escape(section_title)}</button>
-                <div class="content"{' style="max-height: none"' if is_open else ''}>
+                <button class="collapsible">{escape(section_title)}</button>
+                <div class="content">
                     {content}
                 </div>
             </div>
@@ -373,8 +369,8 @@ def run(ctx):
     r.part("Part 1: The model and what you must decide",
            "The plan's go/no-go gates, the decisions it cannot make by itself, the canonical numbers and dates "
            "every section was told to use, and what was and was not checked.")
-    r.markdown_text("Decision Dashboard", dashboard, open_=True)
-    r.markdown("Decisions Required", "decision_register.md", open_=True)
+    r.markdown_text("Decision Dashboard", dashboard)
+    r.markdown("Decisions Required", "decision_register.md")
     r.markdown("Canonical Facts", "canonical_facts.md")
     r.markdown_text("Validation Status", validation_status(ctx))
     r.markdown("Executive Summary", "repaired_executive_summary.md")

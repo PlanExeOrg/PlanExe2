@@ -9,9 +9,10 @@ uses: [planexe_skill/shared/markdown_html.py]
 ---
 Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
 
-1. **The model and what you must decide**: Decision Dashboard (decision kernel + consistency summary,
-   open by default), Decisions Required (`decision_register.md`, open by default), Canonical Facts,
+1. **The model and what you must decide**: Decision Dashboard (decision kernel + consistency summary),
+   Decisions Required (`decision_register.md`), Canonical Facts,
    Validation Status, Executive Summary, Gantt (embedded dhtmlx HTML).
+   All sections start collapsed, as in PlanExe v1.
 2. **Supporting analysis**: Pitch, Project Plan, Strategic Decisions, Scenarios, Assumptions, Governance,
    Related Resources, Data Collection, Documents to Create and Find, SWOT Analysis, Team, Expert
    Criticism, Work Breakdown Structure (CSV table), Review Plan, Questions & Answers, Premortem, Self Audit.
