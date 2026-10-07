@@ -3,7 +3,6 @@ import uuid
 
 from planexe_skill.planexe import format_json_for_query, planexe_metadata, structured
 
-MAX_EXPERT_COUNT = 2
 EXPERT_KEYS = ["expert_title", "expert_knowledge", "expert_why", "expert_what", "expert_relevant_skills",
                "expert_search_query"]
 
@@ -140,22 +139,23 @@ def rows_criticism(section_index: int, c: dict) -> list[str]:
     return rows
 
 
-def to_markdown(expert_list: list[dict], criticisms: list[dict]) -> str:
+def to_markdown(expert_list: list[dict], criticisms: list[dict | None]) -> str:
+    """criticisms[i] belongs to expert_list[i]; None = that expert gave no feedback (the call failed)."""
     rows = ["# Project Expert Review & Recommendations\n",
             "## A Compilation of Professional Feedback for Project Planning and Execution\n\n"]
-    for i, c in enumerate(criticisms):
-        if i > 0:
+    given = [(i, c) for i, c in enumerate(criticisms) if c is not None]
+    for n, (i, c) in enumerate(given):
+        if n > 0:
             rows.append("\n---\n")
         rows.extend(rows_expert_info(i + 1, expert_list[i]))
         rows.extend(rows_criticism(i + 1, c))
-    if len(criticisms) != len(expert_list):
+    missing = [i for i in range(len(expert_list)) if i >= len(criticisms) or criticisms[i] is None]
+    if missing:
         rows.append("\n---\n")
         rows.append("# The following experts did not provide feedback:")
-        for i, e in enumerate(expert_list):
-            if i < len(criticisms):
-                continue
+        for i in missing:
             rows.append("")
-            rows.extend(rows_expert_info(i + 1, e))
+            rows.extend(rows_expert_info(i + 1, expert_list[i]))
     return "\n".join(rows)
 
 
@@ -181,8 +181,9 @@ def run(ctx):
         system_prompt = format_system(template, expert)
         try:
             response, result = call_with_retry(ctx, system_prompt, query, schema, f"expert {index + 1}")
-        except Exception as e:
-            raise ValueError(f"Expert {index + 1} criticism LLM interaction failed.") from e
+        except Exception as e:  # one failed critic is listed as "did not provide feedback"
+            ctx.log(f"expert {index + 1} criticism failed: {e}")
+            return None
         response = normalize_criticism(response)
         meta = planexe_metadata(result)
         meta.pop("response_byte_count", None)
@@ -192,5 +193,9 @@ def run(ctx):
         ctx.write_json(f"expert_criticism_{index + 1}_raw.json", raw)
         return response
 
-    criticisms = ctx.map(criticize, list(enumerate(expert_list[:MAX_EXPERT_COUNT])))
+    # Every expert critiques the plan. PlanExe capped this at 2 (max_expert_count) to limit the LLM cost
+    # of its hosted service; here the user runs the plan on their own subscription.
+    criticisms = ctx.map(criticize, list(enumerate(expert_list)))
+    if expert_list and all(c is None for c in criticisms):
+        raise ValueError("Every expert criticism LLM interaction failed.")
     ctx.write_text("expert_criticism.md", to_markdown(expert_list, criticisms))

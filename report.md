@@ -669,6 +669,16 @@ call gains a "Voice" rule (impersonal planning-document voice, no "I"/"my knowle
 defines, such as the experts in expert criticism, may speak in role). Applies to new runs; existing
 outputs keep their wording until regenerated.
 
+### All experts critique (2026-10-07)
+
+PlanExe let only the first 2 of the ~8 experts it finds critique the plan (max_expert_count), to limit
+the LLM cost of its hosted service; the rest were listed under "The following experts did not provide
+feedback". Users now run plans on their own subscription, so `expert_review` lets every expert critique
+(+~6 Haiku calls per plan, run 4 at a time). A failed critic is listed as "did not provide feedback"
+instead of failing the stage; the stage fails only if every critic fails. expert_criticism.md feeds
+executive_summary, review_plan, questions_and_answers, premortem, self_audit, data_collection and
+identify_documents, which now see all critiques.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge

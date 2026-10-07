@@ -4,8 +4,8 @@ description: Assemble a panel of domain experts and have them critique the plan.
 inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, pre_project_assessment.json, project_plan.md, swot_analysis.md]
 outputs: [experts_raw.json, experts.json, expert_criticism_{n}_raw.json, expert_criticism.md]
 tier: low
-est_llm_calls: 4
-parallel_llm: 2
+est_llm_calls: 10
+parallel_llm: 4
 ---
 Query = `File 'initial-plan.txt'`, `strategic_decisions.md`, `scenarios.md`, `pre-project assessment.json`,
 `project_plan.md`, `SWOT Analysis.md` sections.
@@ -16,10 +16,14 @@ response; here the first response is embedded in the user message as the prior c
 both calls are merged, given uuid4 ids and renamed (title, knowledge, why, what, skills, search_query) ->
 experts.json; experts_raw.json = merged response + metadata {result1, result2} + prompts.
 
-Phase 2 (ExpertCriticism): the first 2 experts (max_expert_count) each critique the query with
+Phase 2 (ExpertCriticism): every expert (typically 8) critiques the query with
 `prompts/expert_criticism.md` (PLACEHOLDER_ROLE/KNOWLEDGE/SKILLS filled from the expert), schema
 `schema_criticism.json`; independent calls run concurrently. expert_criticism_{n}_raw.json = response +
-metadata + query. A failing critic fails the stage (as in PlanExe).
+metadata + query. Differs from PlanExe: PlanExe let only the first 2 experts critique
+(max_expert_count), to limit the LLM cost of its hosted service; with users running plans on their own
+subscription the cap is gone. A failing critic is listed under "The following experts did not provide
+feedback" instead of failing the stage (more critics, more chances of one failing); the stage fails
+only if all of them fail.
 
 expert_criticism.md: per expert an info block + Primary/Secondary Actions, Follow Up Consultation, and
-per issue A-E subsections; then the experts without feedback are listed.
+per issue A-E subsections; then the experts without feedback (failed calls) are listed, if any.

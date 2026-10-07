@@ -75,6 +75,21 @@ class HeadingEmojiTest(unittest.TestCase):
         self.assertEqual(strip(md), "## Strengths\n- Brazil leads 💪\n## Threats\n## Missing Information\n## Weaknesses")
 
 
+class ExpertReviewTest(unittest.TestCase):
+    def test_all_experts_and_failed_ones(self):
+        mod = load("expert_review")
+        experts = [{"title": f"Expert {k}"} for k in "ABC"]
+        crit = {"user_primary_actions": ["Do X"], "user_secondary_actions": [], "follow_up_consultation": "",
+                "negative_feedback_list": []}
+        md = mod.to_markdown(experts, [crit, None, crit])
+        self.assertIn("# 1 Expert: Expert A", md)
+        self.assertIn("# 3 Expert: Expert C", md)
+        self.assertIn("## 3.1 Primary Actions", md)
+        tail = md.split("# The following experts did not provide feedback:")[1]
+        self.assertIn("# 2 Expert: Expert B", tail)
+        self.assertNotIn("did not provide feedback", mod.to_markdown(experts, [crit, crit, crit]))
+
+
 class ValidationStatusTest(unittest.TestCase):
     def ctx(self):
         contradiction = {"topic": "t", "severity": "high", "resolution_type": "repairable", "offending_document": "pitch"}
