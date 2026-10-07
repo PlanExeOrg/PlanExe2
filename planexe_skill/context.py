@@ -23,7 +23,7 @@ FACT_CHECK_INSTRUCTION = (
     "(laws and regulations, geography, prices and costs, technology readiness, named organizations or "
     "precedents) that you are not certain about, and verify them with web search (at most 3 searches; "
     "none if you are confident). Do not invent facts, names or numbers; if something could not be verified, "
-    "say so briefly in the relevant field.")
+    "mark it \"(not verified)\" in the relevant field.")
 # PlanExe's own length hints ("50-70 words", "1-2 sentences", "~30 words", "3-5 items") win.
 _LENGTH_HINT = re.compile(r"\b(\d+\s*(-|–|to)\s*\d+|~?\d+|one|two|three)\s+(words?|sentences?)\b|"
                           r"\bone sentence\b|\bone short sentence\b", re.I)
@@ -69,7 +69,10 @@ EPISTEMIC_INSTRUCTION = (
     "\n\n# Numbers and provenance\nDo not present invented numbers as facts. For any figure that is not a "
     "user constraint or an externally established benchmark, mark what it is, e.g. \"(proposed threshold)\" or "
     "\"(estimate)\"; mark user-given figures \"(user constraint)\" only when that helps. Never turn an example "
-    "value from the input documents (\"e.g. ...\") into a requirement.")
+    "value from the input documents (\"e.g. ...\") into a requirement.\n\n# Voice\nWrite in the impersonal voice "
+    "of a planning document. Never refer to yourself or your own process (no \"I\", \"my knowledge\", \"I could not "
+    "verify\", \"I recomputed\"): write \"(not verified)\", \"not confirmed\" or \"recomputed:\" instead. A persona "
+    "that the task defines (e.g. an expert giving feedback) may speak in its role.")
 
 
 def project_start(run_dir: Path):

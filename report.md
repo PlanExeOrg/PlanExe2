@@ -657,6 +657,18 @@ and "validated" was undefined. Changes:
 - README: the v1/v2 tagline, a "What the report contains" overview, the added stages. make-plan step 6
   now leads the summary with the open decisions and choices to ratify.
 
+### First-person voice (2026-10-07)
+
+The user noticed "I also noted the declining implied annual release profile." in the rubber report's
+Canonical Facts. A survey of all runs found first-person sentences in premise_attack (14 runs),
+scenarios (10), canonical_facts (5) and a few others: "I could not verify ...", "I found no precedent
+...", "I recomputed every sum". Cause: the runtime's own fact-check instruction ("if something could not
+be verified, say so") invites the model to talk about itself. Fix in `planexe_skill/context.py`: the
+fact-check instruction now asks for a "(not verified)" marker, and the instruction appended to every
+call gains a "Voice" rule (impersonal planning-document voice, no "I"/"my knowledge"; personas the task
+defines, such as the experts in expert criticism, may speak in role). Applies to new runs; existing
+outputs keep their wording until regenerated.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
