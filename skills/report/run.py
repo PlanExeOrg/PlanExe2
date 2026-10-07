@@ -383,7 +383,7 @@ def run(ctx):
     r.generator_line, r.repo_url, r.metadata_line, metadata_md = metadata_texts(ctx)
     dashboard, consistency = split_consistency(ctx.read_text("consistency_recheck.md"))
 
-    r.part("Part 1: The model and what you must decide")
+    r.part("Part 1: Key decisions and facts")
     r.markdown_text("Decision Dashboard", dashboard, "Go/no-go gates, in the order they can be answered.")
     r.markdown("Decisions Required", "decision_register.md", "Decisions the plan cannot make by itself.")
     facts = ctx.read_json("canonical_facts.json")

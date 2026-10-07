@@ -9,7 +9,7 @@ uses: [planexe_skill/shared/markdown_html.py]
 ---
 Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
 
-1. **The model and what you must decide**: Decision Dashboard (decision kernel + consistency summary),
+1. **Key decisions and facts**: Decision Dashboard (decision kernel + consistency summary),
    Decisions Required (`decision_register.md`), Canonical Facts,
    Validation Status, Executive Summary, Gantt (embedded dhtmlx HTML).
    All sections start collapsed, as in PlanExe v1.
@@ -21,7 +21,7 @@ Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
 
 Why: a Codex comparison of v1 and v2 reports summed up the difference as "v1: generate an unusually
 comprehensive expert planning workshop; v2: construct a partially validated model of the project, then
-expose what humans still have to decide". The report leads with the model and the open decisions; the
+expose what humans still have to decide". The report leads with the open decisions and key facts; the
 workshop material is supporting analysis.
 
 Validation Status says what "validated" means: which stages used web search (per-stage counts from

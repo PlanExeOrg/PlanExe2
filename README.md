@@ -33,9 +33,9 @@ A full plan is ~180-250 LLM calls and takes roughly 15-45 minutes. The final rep
 
 ## What the report contains
 
-The report leads with the model, not the workshop:
+The report leads with the decisions and key facts, not the workshop:
 
-1. **The model and what you must decide**: the Decision Dashboard (the go/no-go gates), **Decisions
+1. **Key decisions and facts**: the Decision Dashboard (the go/no-go gates), **Decisions
    Required** (each open decision with options, downstream consequences, owner and decide-by month, plus
    the strategic choices the generator made on your behalf, to ratify), the Canonical Facts (the numbers
    and dates every section must use), **Validation Status** (what "validated" means here: which stages

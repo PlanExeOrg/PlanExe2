@@ -611,7 +611,8 @@ But the v2 report still read like v1 with extras: the model (canonical facts, de
 consistency lint) sat inside ~127k words of workshop material, open decisions were a one-line banner,
 and "validated" was undefined. Changes:
 
-- **Report in three parts.** Part 1, "The model and what you must decide": Decision Dashboard and
+- **Report in three parts.** Part 1, "Key decisions and facts" (first titled "The model and what you must decide"; readers took
+  "the model" to mean the AI model): Decision Dashboard and
   Decisions Required, Canonical Facts, Validation Status, Executive Summary,
   Gantt. Part 2, "Supporting analysis": the PlanExe workshop documents. Part 3, "Audit trail":
   Consistency Check, prompt vetting, prompt adherence, provenance. Sections have ids and the banners
