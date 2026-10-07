@@ -6,7 +6,7 @@ outputs: [decision_register_raw.json, decision_register.md]
 tier: mid
 fact_check: false
 max_words_per_field: 70
-max_items_per_list: 8
+max_items_per_list: 10
 est_llm_calls: 1
 ---
 Not part of the original PlanExe pipeline. Added after a Codex comparison of v1 and v2 reports:
@@ -24,6 +24,13 @@ decision/escalation matrix (who may decide what). It returns:
   inputs show are open: it must not invent new ones or pick an answer.
 - `ratify`: the strategic choices the generator made for the user (the chosen scenario's lever
   settings), each with the strongest rejected alternative and when to revisit it.
+
+The candidate open items are enumerated deterministically first (needs_decision contradictions as C1,
+C2, ...; OPEN canonical facts as F1, or F1a, F1b, ... when one fact lists several items separated by ';')
+and given to the model with ids; each decision names the ids it `covers`. A first version without
+this merged unrelated decisions ("breach reserve size and indexing") and dropped one (host identity).
+Candidates no decision covers are listed under "Also open" in the markdown (`uncovered_candidates`
+in the raw JSON), so nothing is dropped silently.
 
 The report shows this as "Decisions Required", right after the Decision Dashboard. The "Decisions
 required" banner counts these decisions.

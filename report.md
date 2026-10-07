@@ -600,6 +600,62 @@ provenance).
   alternative-rubber capacity (50,000 t/yr plant, ~USD 1B) and who finances which plant.
 - Length: visible report ~127k words vs ~46k (2.8x); executive summary 863 vs 301 words.
 
+### Codex: "v1 = workshop, v2 = model + open decisions" (2026-10-07)
+
+After comparing several old and new plans, Codex summed up the difference:
+
+> PlanExe v1: "Generate an unusually comprehensive expert planning workshop."
+> PlanExe v2: "Construct a partially validated model of the project, then expose what humans still have to decide."
+
+But the v2 report still read like v1 with extras: the model (canonical facts, decision kernel,
+consistency lint) sat inside ~127k words of workshop material, open decisions were a one-line banner,
+and "validated" was undefined. Changes:
+
+- **Report in three parts.** Part 1, "The model and what you must decide": Decision Dashboard and
+  Decisions Required (both open by default), Canonical Facts, Validation Status, Executive Summary,
+  Gantt. Part 2, "Supporting analysis": the PlanExe workshop documents. Part 3, "Audit trail":
+  Consistency Check, prompt vetting, prompt adherence, provenance. Sections have ids and the banners
+  link to them. On the rubber run Part 1 is ~9.2k words (dashboard 1.2k, decisions 2.4k, canonical
+  facts 4.0k, validation 0.6k, executive summary 0.9k) out of ~133k.
+- **`decision_register` (new stage, 1 Sonnet call).** Each open decision: question, why it is open,
+  2-4 options with downstream consequences (budget, Month N, gates, scope) and which canonical facts or
+  documents would change, default if undecided, owner (from the escalation matrix), decide-by month,
+  what it blocks. Plus "Choices made on your behalf": the selected scenario's lever settings with the
+  strongest rejected alternative and when to revisit, to be ratified by the user. Three iterations on
+  the rubber run: the first merged unrelated decisions ("Price-floor gap and host identity"); a prompt
+  rule alone did not stop it ("Breach reserve size and indexing", host identity dropped). Fix: the
+  candidate open items are enumerated deterministically (needs_decision contradictions C1..; OPEN
+  canonical facts F1a.., split on ';'), each decision lists the ids it `covers`, and uncovered
+  candidates are rendered under "Also open". The model's summary also miscounted its own list ("seven
+  decisions, four high" for 8 / 6), so the count is now written by code. Final: 8 decisions (5 high),
+  all 11 candidates covered, e.g. host identity and ring-fencing (Month 1), pre-launch spending
+  envelope for the USD 4.5B Month 0 release (Month 1), gate decision authority (Month 2), breach
+  reserve size (Month 4), inflation indexing (Month 6), plant 2 financing (Month 24).
+- **Deterministic arithmetic check** (`planexe_skill/shared/arithmetic.py`, stage `arithmetic_check`,
+  no LLM). Finds `expression = value` statements (chains, value-first, ranges such as "EUR 30-50",
+  k/M/B/bn/million, percents, units after numbers) and re-computes them with the rounding of each
+  written number propagated through interval arithmetic. Precision first: dates, slash lists ("Months
+  36/84"), numbers glued to a parenthetical, label words inside a sum and products restated in other
+  units are skipped; a statement passes on any reasonable reading (with/without multipliers, power-of-
+  1000 unit shift, complement of a single percent). Over all earlier runs: 189 statements, 4 flagged,
+  all real or misleading: datacenter3 self-audit "EUR 50-100M + 300-500M + 200-300M = EUR 850M-1.4B"
+  (it is 550-900M), battery premortem "24-36 positions x 6-12 weeks = 12-36 weeks", rubber Q&A
+  "2.5-3.5% annually x 25 years = USD 10.5-18 billion" (base missing). `consistency_repair` round 1
+  now also gets these as `AR-nnn` diagnostics; on the rerun it fixed the rubber Q&A one, and the final
+  check found 15 statements, 0 wrong.
+- **Validation Status section.** What "validated" means here: web search (per stage, now recorded in
+  the manifest; on the rubber run only premise_attack searched, 8 times), canonical facts by kind (4
+  from the prompt, 15 decisions, 14 proposed thresholds, 13 estimates), consistency lint before/after
+  repair, arithmetic, calendar, schedule; then a per-section table (partly source-checked /
+  consistency-checked / unchecked model output). Most sections are honestly labelled "unchecked model
+  output".
+- Rubber rerun of the tail (consistency_repair, decision_register, arithmetic_check, report): two
+  repair samples. One stopped at 2 high / 3 medium (round 2 did not reduce the high count). The
+  published one reached 0 high / 8 medium in one round (35 edits). This is LLM variance in the repair
+  loop. Cost of all reruns today: ~20 LLM calls.
+- README: the v1/v2 tagline, a "What the report contains" overview, the added stages. make-plan step 6
+  now leads the summary with the open decisions and choices to ratify.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge

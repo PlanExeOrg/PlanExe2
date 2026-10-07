@@ -12,11 +12,14 @@ You get:
 
 Return:
 
-`decisions`: the open decisions, most consequential first. Sources, in this order: contradictions
-marked `needs_decision` (high and medium severity), canonical facts whose value is OPEN, and gates in
-the decision kernel whose "if NO" path depends on a choice nobody has made. Merge items that are the
-same decision. Do not invent decisions that the inputs do not show to be open, and do not choose the
-answer: present the options neutrally. For each decision:
+`decisions`: the open decisions, most consequential first. The user message lists the candidate open
+items with ids (C1, C2, ... from the consistency check; F1a, F1b, ... from canonical facts marked
+OPEN). Every candidate must be covered by exactly one decision (`covers` lists its ids). Two candidates
+belong in the same decision only if one answer settles both; otherwise they are separate decisions
+(one question per decision: "breach reserve size" and "inflation indexing" are two decisions). A gate
+in the decision kernel whose "if NO" path depends on a choice nobody has made may add a decision with
+an empty `covers`. Do not invent other decisions, and do not choose the answer: present the options
+neutrally. For each decision:
 - `question`: the decision as one question a board can answer.
 - `why_open`: what is unsettled, and which documents currently assume different answers.
 - `options`: 2-4 realistic options, including "defer" or "downsize" where that is a real choice. For
@@ -35,7 +38,7 @@ One entry per lever setting of the chosen scenario: the lever, the chosen settin
 strongest alternative from the rejected scenarios, why the choice matters, and when to revisit it
 (Month N or a gate). The user did not make these choices; they should confirm or change them.
 
-`summary`: 2-3 sentences: how many decisions are open, which ones are urgent, and what the plan can
-safely do before they are made.
+`summary`: 2-3 sentences: which decisions are urgent, and what the plan can safely do before they are
+made. Do not count the decisions; the report states the count.
 
 Use months relative to the plan start (Month 0). Keep each field short and concrete.
