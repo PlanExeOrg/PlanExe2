@@ -419,7 +419,7 @@ def run(ctx):
     r.markdown("Decisions Required", "decision_register.md", "Decisions the plan cannot make by itself.")
     facts = ctx.read_json("canonical_facts.json")
     r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []),
-                    "The key numbers and dates the plan is built on.")
+                    "Key numbers and dates.")
     r.markdown_text("Validation Status", validation_status(ctx), "What was checked, and how.")
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
