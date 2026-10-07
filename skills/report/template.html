@@ -68,7 +68,7 @@
             background: none;
             color: var(--ink);
             cursor: pointer;
-            padding: 18px 40px 18px 0;
+            padding: 18px 48px 18px 12px;
             width: 100%;
             border: none;
             text-align: left;
@@ -77,13 +77,13 @@
             font-size: 22px;
             font-weight: 400;
             position: relative;
-            transition: color 0.15s ease;
+            transition: background-color 0.15s ease;
         }
-        .collapsible:hover, .collapsible:focus-visible { color: var(--accent); }
+        .collapsible:hover, .collapsible:focus-visible { background-color: #E6EBF1; }
         .collapsible:after {
             content: "";
             position: absolute;
-            right: 6px;
+            right: 18px;
             top: 50%;
             width: 9px;
             height: 9px;
@@ -96,7 +96,7 @@
             transform: translateY(-30%) rotate(-135deg);
         }
         .content {
-            padding: 0 2px;
+            padding: 0 12px;
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.2s ease-out;
