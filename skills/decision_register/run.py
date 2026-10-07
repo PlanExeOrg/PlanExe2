@@ -1,7 +1,7 @@
 import json
 import re
 
-from planexe_skill.planexe import format_json_for_query, raw_document, structured
+from planexe_skill.planexe import format_json_for_query, plural, raw_document, structured
 
 # Non-breaking space: the Severity column of the table must not wrap between the dot and the word.
 SEVERITY_ICON = {"high": "🔴\u00a0High", "medium": "🟡\u00a0Medium"}
@@ -14,8 +14,8 @@ def cell(text) -> str:
 def to_markdown(r: dict) -> str:
     decisions = r.get("decisions") or []
     high = sum(1 for d in decisions if d.get("severity") == "high")
-    count = (f"**{len(decisions)} open decision(s): {high} high, {len(decisions) - high} medium severity.**"
-             if decisions else "")
+    parts = [f"{k} {label}" for k, label in ((high, "high"), (len(decisions) - high, "medium")) if k]
+    count = f"**{plural(len(decisions), 'open decision')}: {' and '.join(parts)} severity.**" if decisions else ""
     rows = [f"{count} {r.get('summary', '')}".strip(), ""]
     if decisions:
         rows += ["| # | Decision | Severity | Owner | Decide by | Blocks |", "|---|---|---|---|---|---|"]

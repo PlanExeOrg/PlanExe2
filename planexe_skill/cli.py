@@ -18,6 +18,7 @@ from planexe_skill import SKILLS_ROOT
 from planexe_skill.dag import Dag, DagError
 from planexe_skill.llm import get_backend
 from planexe_skill.manifest import Manifest
+from planexe_skill.planexe import plural
 from planexe_skill.runner import Runner, StageFailure
 from planexe_skill.skill import load_skills
 
@@ -106,7 +107,7 @@ def cmd_run(args) -> int:
                     force=args.force, force_downstream=args.force_downstream)
     if args.dry_run:
         planned = runner.plan()
-        print(f"{len(planned)} stage(s) would run:")
+        print(f"{plural(len(planned), 'stage')} would run:")
         for p in planned:
             print("  " + p)
         return 0

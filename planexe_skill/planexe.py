@@ -47,6 +47,11 @@ def structured(ctx, system_prompt: str, user_prompt: str, schema: dict, tier: st
     return result.data, result
 
 
+def plural(n: int, singular: str, plural_form: str | None = None) -> str:
+    """'1 open decision', '8 open decisions' (no "decision(s)" in reader-facing text)."""
+    return f"{n} {singular if n == 1 else (plural_form or singular + 's')}"
+
+
 def format_json_for_query(obj: Any) -> str:
     """Compact JSON for embedding in prompts (PlanExe's format_json_for_use_in_query):
     drops metadata/query/user_prompt/system_prompt keys from a top-level dict."""

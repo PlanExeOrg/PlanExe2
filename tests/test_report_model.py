@@ -49,6 +49,10 @@ class DecisionRegisterTest(unittest.TestCase):
         self.assertIn("| A. OEM co-investment | Needs 4 OEMs by Month 18. | pitch |", md)
         self.assertIn("**If nobody decides:** Plant 2 deferred.", md)
         self.assertIn("## Choices made on your behalf", md)
+        self.assertIn("**1 open decision: 1 high severity.**", md)
+        two = load("decision_register").to_markdown(
+            {"decisions": [DECISION, dict(DECISION, severity="medium")], "ratify": [], "summary": ""})
+        self.assertIn("**2 open decisions: 1 high and 1 medium severity.**", two)
 
     def test_markdown_no_decisions(self):
         md = load("decision_register").to_markdown({"decisions": [], "ratify": [], "summary": ""})
@@ -74,7 +78,7 @@ class ValidationStatusTest(unittest.TestCase):
         self.assertIn("premise_attack (8)", md)
         self.assertIn("Before repair: 2 high / 0 medium. After: 0 high / 0 medium repairable, plus 1", md)
         self.assertIn("12 checked, 1 wrong", md)
-        self.assertIn("| Self Audit | - | yes | 3 / 1 | Consistency-checked; 1 arithmetic error(s) |", md)
+        self.assertIn("| Self Audit | - | yes | 3 / 1 | Consistency-checked; 1 arithmetic error |", md)
         self.assertIn("| Premise Attack | 8 | - | 0 / 0 | Partly source-checked |", md)
         self.assertIn("| Team | - | - | 0 / 0 | Unchecked model output |", md)
         self.assertIn("## Arithmetic errors", md)
@@ -83,7 +87,7 @@ class ValidationStatusTest(unittest.TestCase):
         mod = load("report")
         r = mod.Report(self.ctx())
         mod.lint_banner(self.ctx(), r)
-        self.assertIn("Decisions required: 1 open decision(s), 1 high-severity", r.top_banner_markdown)
+        self.assertIn("Decisions required: 1 open decision, 1 high-severity", r.top_banner_markdown)
         self.assertIn('href="#decisions-required"', r.top_banner_html)
         self.assertNotIn("FAILED", r.top_banner_markdown)
 

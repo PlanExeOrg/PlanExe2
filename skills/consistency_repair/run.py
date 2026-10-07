@@ -2,7 +2,7 @@ import json
 from collections import Counter
 
 from planexe_skill.calendar_fix import fix_text
-from planexe_skill.planexe import structured
+from planexe_skill.planexe import plural, structured
 from planexe_skill.shared.arithmetic import check_text
 from planexe_skill.shared.consistency import needs_decision, review, to_markdown
 
@@ -151,7 +151,7 @@ def run(ctx):
     n_arith = sum(len(v) for v in arithmetic.values())
     preface = (f"_Consistency: first pass found {s1.get('high', 0)} high / {s1.get('medium', 0)} medium / "
                f"{s1.get('low', 0)} low contradictions"
-               + (f", and the arithmetic check found {n_arith} wrong calculation(s)" if n_arith else "")
+               + (f", and the arithmetic check found {plural(n_arith, 'wrong calculation')}" if n_arith else "")
                + f". Repair{(': ' + steps) if steps else ' was not needed'}. "
                + (f" Published: round {best[1]} (fewest high-severity issues)." if best else "")
                + f" Shown below: the final check of the repaired documents "
