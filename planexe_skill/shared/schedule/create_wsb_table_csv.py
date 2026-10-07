@@ -1,3 +1,5 @@
+import csv
+import io
 import json
 from planexe_skill.shared.schedule.wbs_task import WBSTask, WBSProject
 
@@ -26,8 +28,7 @@ class CreateWBSTableCSV:
                 s = task.description
             columns.append(s)
         columns.append(task.id)
-        csv_row = self.separator.join(columns)
-        self.csv_rows.append(csv_row)
+        self.csv_rows.append(self._row(columns))
         for child in task.task_children:
             self.visit_task(child, number_of_levels, level + 1)
 
@@ -37,10 +38,16 @@ class CreateWBSTableCSV:
         for i in range(number_of_levels):
             columns.append(f"Level {i+1}")
         columns.append("Task ID")
-        csv_row = self.separator.join(columns)
-        self.csv_rows.append(csv_row)
+        self.csv_rows.append(self._row(columns))
 
         self.visit_task(self.wsb_project.root_task, number_of_levels)
+
+    def _row(self, columns: list[str]) -> str:
+        """One CSV line. PlanExe joined the fields with ';' unquoted, so a task description containing ';'
+        shifted the columns; csv quoting changes only such fields (others stay byte-identical)."""
+        buf = io.StringIO()
+        csv.writer(buf, delimiter=self.separator, lineterminator="").writerow(columns)
+        return buf.getvalue()
 
     def to_csv_string(self):
         return '\n'.join(self.csv_rows)

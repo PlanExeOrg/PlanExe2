@@ -91,6 +91,29 @@ class ExpertHeadingsTest(unittest.TestCase):
         self.assertEqual(strip(md), "# 1 Expert: Plant Pathologist")
 
 
+class WbsCsvTest(unittest.TestCase):
+    def test_writer_quotes_separator(self):
+        from planexe_skill.shared.schedule.create_wsb_table_csv import CreateWBSTableCSV
+        from planexe_skill.shared.schedule.wbs_task import WBSProject, WBSTask
+        root = WBSTask("r1", "Program")
+        root.task_children.append(WBSTask("t1", "Establish committee; recruit chair"))
+        root.task_children.append(WBSTask("t2", "Plain task"))
+        c = CreateWBSTableCSV(WBSProject(root))
+        c.execute()
+        self.assertEqual(c.to_csv_string().splitlines(), [
+            "Level 1;Level 2;Task ID", "Program;;r1", ';"Establish committee; recruit chair";t1', ";Plain task;t2"])
+
+    def test_report_rejoins_unquoted_rows(self):
+        mod = load("report")
+        ctx = StubCtx({"wbs.csv": "Level 1;Level 2;Task ID\nProgram;;r1\n;Establish committee; recruit chair;t1\n"})
+        r = mod.Report(ctx)
+        r.csv_table("Work Breakdown Structure", "wbs.csv")
+        html = r.html_items[-1][1]
+        self.assertIn("<td>Establish committee; recruit chair</td>", html)
+        self.assertIn("<td>t1</td>", html)
+        self.assertNotIn('border="1"', html)
+
+
 class HeadingEmojiTest(unittest.TestCase):
     def test_strip(self):
         strip = load("report").strip_heading_emoji

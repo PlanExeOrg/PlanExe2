@@ -98,7 +98,16 @@ class Report:
         first = text.splitlines()[0] if text else ""
         delimiter = max([",", ";", "\t", "|"], key=lambda d: first.count(d))
         rows = list(csv.reader(io.StringIO(text), delimiter=delimiter))
-        header, body = rows[0], [r + [""] * (len(rows[0]) - len(r)) for r in rows[1:]]
+        header = rows[0]
+        # Runs made before the WBS writer quoted its fields: a ';' inside a task name split it into extra cells.
+        # The last cell is the task id; rejoin the overflow into the task name.
+        def unsplit(r: list[str]) -> list[str]:
+            if len(r) <= len(header):
+                return r
+            extra = len(r) - len(header)
+            i = next((k for k, c in enumerate(r[:-1]) if c.strip()), 0)
+            return r[:i] + [delimiter.join(r[i:i + extra + 1])] + r[i + extra + 1:]
+        body = [r + [""] * (len(header) - len(r)) for r in (unsplit(r) for r in rows[1:])]
         body = [r[:len(header)] for r in body if any(c.strip() for c in r)]
         keep = [i for i in range(len(header)) if any(r[i].strip() for r in body)] if body else list(range(len(header)))
         header = [header[i] for i in keep]
