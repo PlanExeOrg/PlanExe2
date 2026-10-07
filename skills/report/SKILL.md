@@ -39,7 +39,9 @@ The SWOT section's headings are shown without PlanExe's emoji ("Strengths üëçü
 Dashboard, Decisions Required, Canonical Facts, Validation Status, Consistency Check, Report Metadata.
 All one-line subtitles are italic, like the Team section's "*Roles Needed & Example People*": PlanExe's
 own (pitch, premortem, self audit, Gantt, "Why this fails.") and the v2 ones; the documents keep them as
-plain lines, as in PlanExe. A leading heading inside a section that repeats the section title is dropped. Both are done here rather
+plain lines, as in PlanExe. Expert Criticism drops PlanExe's two opening headings ("Project Expert Review & Recommendations", "A
+Compilation of Professional Feedback ...", both repeating the section title) for the subtitle "Critique and
+recommended actions from domain experts."; expert_criticism.md keeps them. A leading heading inside a section that repeats the section title is dropped. Both are done here rather
 than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`).
 Banners link to their section (sections have ids). There is no banner for open decisions: Decisions

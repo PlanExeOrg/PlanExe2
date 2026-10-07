@@ -75,6 +75,14 @@ class SubtitleTest(unittest.TestCase):
         self.assertEqual(italic("Some other first line.\n"), "Some other first line.\n")
 
 
+class ExpertHeadingsTest(unittest.TestCase):
+    def test_strip(self):
+        strip = load("report").strip_expert_headings
+        md = ("# Project Expert Review & Recommendations\n\n## A Compilation of Professional Feedback for Project "
+              "Planning and Execution\n\n\n# 1 Expert: Plant Pathologist")
+        self.assertEqual(strip(md), "# 1 Expert: Plant Pathologist")
+
+
 class HeadingEmojiTest(unittest.TestCase):
     def test_strip(self):
         strip = load("report").strip_heading_emoji

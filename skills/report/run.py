@@ -29,6 +29,14 @@ def italic_subtitle(md: str) -> str:
     return md
 
 
+def strip_expert_headings(md: str) -> str:
+    """Drop PlanExe's two opening headings of expert_criticism.md ("Project Expert Review & Recommendations",
+    "A Compilation of Professional Feedback ..."): they repeat the section title (an italic subtitle replaces
+    them)."""
+    return re.sub(r"\A\s*# Project Expert Review & Recommendations\s*\n+"
+                  r"(## A Compilation of Professional Feedback[^\n]*\n+)?", "", md)
+
+
 def strip_repeated_title(title: str, md: str) -> str:
     """Drop a leading heading that repeats the section title ("Canonical Facts" > "## Canonical Facts")."""
     m = re.match(r"\s*#{1,6}\s+(.+?)\s*#*\s*(?:\n|$)", md)
@@ -422,7 +430,8 @@ def run(ctx):
     r.markdown("Documents to Create and Find", "documents_to_create_and_find.md")
     r.markdown_text("SWOT Analysis", strip_heading_emoji(ctx.read_text("swot_analysis.md")))
     r.markdown("Team", "team.md")
-    r.markdown("Expert Criticism", "expert_criticism.md")
+    r.markdown_text("Expert Criticism", strip_expert_headings(ctx.read_text("expert_criticism.md")),
+                    "Critique and recommended actions from domain experts.")
     r.csv_table("Work Breakdown Structure", "wbs_project_level1_and_level2_and_level3.csv")
     r.markdown("Review Plan", "repaired_review_plan.md")
     r.markdown("Questions & Answers", "repaired_questions_and_answers.md")
