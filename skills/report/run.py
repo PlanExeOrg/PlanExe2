@@ -8,6 +8,11 @@ from html import escape
 from planexe_skill.shared.markdown_html import render as md_to_html
 
 EXECUTE_PLAN_SECTION_HIDDEN = True
+PART = "\x00part"  # marker title for part headings in html_items / md_items
+
+
+def slug(title: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
 
 
 class Report:
@@ -22,15 +27,21 @@ class Report:
         self.generator_line = "PlanExe2"
         self.repo_url = "https://github.com/PlanExeOrg/PlanExe2"
         self.provenance_line = ""
+        self.open_sections: set[str] = set()
 
-    def markdown(self, title: str, name: str) -> None:
-        md = self.ctx.read_text(name)
+    def part(self, title: str, intro: str) -> None:
+        """A heading that groups the following sections (model / supporting analysis / audit trail)."""
+        self.html_items.append((PART, f'<h2 class="report-part">{escape(title)}</h2>\n<p class="report-part-intro">{escape(intro)}</p>'))
+        self.md_items.append((PART, f"# {title}\n\n_{intro}_"))
+
+    def markdown(self, title: str, name: str, open_: bool = False) -> None:
+        self.markdown_text(title, self.ctx.read_text(name), open_)
+
+    def markdown_text(self, title: str, md: str, open_: bool = False) -> None:
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
-
-    def markdown_text(self, title: str, md: str) -> None:
-        self.html_items.append((title, md_to_html(md)))
-        self.md_items.append((title, md))
+        if open_:
+            self.open_sections.add(title)
 
     def csv_table(self, title: str, name: str) -> None:
         text = self.ctx.read_text(name)
@@ -125,10 +136,14 @@ class Report:
         if self.top_banner_html:
             parts.append(self.top_banner_html)
         for section_title, content in self.html_items:
+            if section_title == PART:
+                parts.append(content)
+                continue
+            is_open = section_title in self.open_sections
             parts.append(f"""
-            <div class="section">
-                <button class="collapsible">{section_title}</button>
-                <div class="content">        
+            <div class="section" id="{slug(section_title)}">
+                <button class="collapsible{' active' if is_open else ''}">{escape(section_title)}</button>
+                <div class="content"{' style="max-height: none"' if is_open else ''}>
                     {content}
                 </div>
             </div>
@@ -145,6 +160,9 @@ class Report:
         if self.top_banner_markdown:
             parts += [self.top_banner_markdown, ""]
         for section_title, content in self.md_items:
+            if section_title == PART:
+                parts += [content, ""]
+                continue
             parts += [f"# {section_title}", "", content, ""]
         return "\n".join(parts)
 
@@ -159,35 +177,144 @@ def split_consistency(md: str) -> tuple[str, str]:
     check = md[i:].replace("## Consistency Check", "", 1).strip()
     if j >= 0:  # keep the one-paragraph summary with the dashboard as well
         kernel += "\n\n## Consistency\n\n" + md[j:].replace("## Summary", "", 1).strip()
-        kernel += "\n\nDetails: see the \"Consistency Check\" and \"Canonical Facts\" sections."
+        kernel += ("\n\nOpen decisions: see \"Decisions Required\". Details: see the \"Consistency Check\" "
+                   "and \"Canonical Facts\" sections.")
     return kernel, check
 
 
-def lint_banner(ctx, r: "Report") -> None:
-    """Consistency lint: repairable high-severity contradictions = FAILED; missing decisions = decisions required."""
-    items = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
-    def is_decision(c: dict) -> bool:
-        return c.get("resolution_type") == "needs_decision" or "canonical" in str(c.get("offending_document", "")).lower()
-    failed = [c for c in items if c.get("severity") == "high" and not is_decision(c)]
-    decisions = [c for c in items if c.get("severity") in ("high", "medium") and is_decision(c)]
-    for kind, rows in (("failed", failed), ("decisions", decisions)):
-        if not rows:
-            continue
-        topics = "; ".join(c.get("topic", "") for c in rows[:6])
-        if kind == "failed":
-            title = f"Consistency lint FAILED: {len(rows)} high-severity contradiction(s) remain after repair"
-            body = "Some sections disagree on numbers or dates that change a decision"
-        else:
-            title = f"Decisions required: {len(rows)} issue(s) reveal a missing project decision"
-            body = "These are not text errors; the plan needs a decision before they can be resolved"
-        r.top_banner_html += f"""
+def is_decision(c: dict) -> bool:
+    return c.get("resolution_type") == "needs_decision" or "canonical" in str(c.get("offending_document", "")).lower()
+
+
+def banner(r: "Report", title: str, body: str, anchor: str, anchor_title: str) -> None:
+    r.top_banner_html += f"""
         <div class="prompt-quality-warning">
             <strong>&#9888; {escape(title)}</strong>
-            <p>{body}: {escape(topics)}. See the "Consistency Check" section.</p>
+            <p>{escape(body)} See <a href="#{anchor}">{escape(anchor_title)}</a>.</p>
         </div>
 """
-        r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + (
-            f"> **⚠ {title}**\n>\n> {body}: {topics}. See \"Consistency Check\".")
+    r.top_banner_markdown += ("\n\n" if r.top_banner_markdown else "") + f"> **⚠ {title}**\n>\n> {body} See \"{anchor_title}\"."
+
+
+def lint_banner(ctx, r: "Report") -> None:
+    """Consistency lint: repairable high-severity contradictions = FAILED; open decisions = decisions required."""
+    items = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
+    failed = [c for c in items if c.get("severity") == "high" and not is_decision(c)]
+    if failed:
+        topics = "; ".join(c.get("topic", "") for c in failed[:6])
+        banner(r, f"Consistency lint FAILED: {len(failed)} high-severity contradiction(s) remain after repair",
+               f"Some sections disagree on numbers or dates that change a decision: {topics}.",
+               slug("Consistency Check"), "Consistency Check")
+    decisions = ctx.read_json("decision_register_raw.json").get("decisions") or []
+    if decisions:
+        high = sum(1 for d in decisions if d.get("severity") == "high")
+        topics = "; ".join(d.get("title", "") for d in decisions[:6])
+        banner(r, f"Decisions required: {len(decisions)} open decision(s)" + (f", {high} high-severity" if high else ""),
+               f"The plan cannot settle these by itself; each has options, consequences, an owner and a deadline: {topics}.",
+               slug("Decisions Required"), "Decisions Required")
+
+
+# Which stages produced each report section (for the per-section validation table).
+SECTION_STAGES = {
+    "Decisions Required": ["decision_register"],
+    "Canonical Facts": ["canonical_facts"],
+    "Executive Summary": ["executive_summary"],
+    "Pitch": ["create_pitch", "convert_pitch_to_markdown"],
+    "Project Plan": ["project_plan"],
+    "Strategic Decisions": ["potential_levers", "enrich_levers", "focus_on_vital_few_levers", "strategic_decisions_markdown"],
+    "Scenarios": ["candidate_scenarios", "select_scenario"],
+    "Assumptions": ["make_assumptions", "distill_assumptions", "review_assumptions", "identify_risks",
+                    "physical_locations", "currency_strategy"],
+    "Governance": ["governance_phase1_audit", "governance_phase2_bodies", "governance_phase3_impl_plan",
+                   "governance_phase4_decision_escalation_matrix", "governance_phase5_monitoring_progress",
+                   "governance_phase6_extra"],
+    "Related Resources": ["related_resources"],
+    "Data Collection": ["data_collection"],
+    "Documents to Create and Find": ["identify_documents", "draft_documents_to_create", "draft_documents_to_find"],
+    "SWOT Analysis": ["swot_analysis"],
+    "Team": ["find_team_members", "enrich_team_members_with_contract_type",
+             "enrich_team_members_with_background_story", "enrich_team_members_with_environment_info", "review_team"],
+    "Expert Criticism": ["expert_review"],
+    "Review Plan": ["review_plan"],
+    "Questions & Answers": ["questions_and_answers"],
+    "Premortem": ["premortem"],
+    "Self Audit": ["self_audit"],
+    "Premise Attack": ["premise_attack"],
+}
+# Sections whose document is part of the consistency lint (repaired copies; assumptions: the short version).
+LINTED = {"Executive Summary", "Project Plan", "Review Plan", "Premortem", "Self Audit", "Pitch"}
+FIXED_STATUS = {
+    "Decisions Required": "Derived from the consistency check",
+    "Canonical Facts": "Model-reconciled; its arithmetic re-checked by a second call",
+}
+
+
+def validation_status(ctx) -> str:
+    """What was checked, how, and what was not: sources, consistency, arithmetic, calendar."""
+    prov = ctx.run_provenance()
+    stages = prov.get("stages") or {}
+    searched = {n: st.get("web_searches", 0) for n, st in stages.items() if st.get("web_searches")}
+    first = ctx.read_json("consistency_review_raw.json").get("contradictions") or []
+    final = ctx.read_json("consistency_recheck_raw.json").get("contradictions") or []
+    def count(items, decision):
+        sev = [c.get("severity") for c in items if is_decision(c) == decision]
+        return {k: sev.count(k) for k in ("high", "medium", "low")}
+    r1, rn, dn = count(first, False), count(final, False), count(final, True)
+    facts = ctx.read_json("canonical_facts.json").get("facts") or []
+    kinds = {k: sum(1 for f in facts if f.get("kind") == k) for k in ("user_constraint", "decision", "proposed_threshold", "estimate")}
+    arith = ctx.read_json("arithmetic_check.json")
+    mism = arith.get("mismatches") or []
+
+    src = ("; ".join(f"{n} ({k})" for n, k in searched.items()) if searched else "none")
+    rows = [
+        "This plan was written by language models. Part of it was checked, most of it was not. "
+        "\"Validated\" in this report means one of the checks below, nothing more.", "",
+        "| Check | Method | Covers | Result |", "|---|---|---|---|",
+        f"| Against sources | Web search by the model | Stages that searched: {src} | "
+        f"{sum(searched.values())} searches. All other real-world figures (prices, costs, market sizes, laws, "
+        f"precedents) are model knowledge and were not verified. |",
+        f"| Canonical facts | Two model calls: reconcile, then re-check the table's own arithmetic | {len(facts)} key "
+        f"numbers and dates, which every later stage was told to use | {kinds['user_constraint']} from your prompt, "
+        f"{kinds['decision']} decisions, {kinds['proposed_threshold']} proposed thresholds, {kinds['estimate']} "
+        f"estimates. Decisions and thresholds were proposed by the model; estimates are unverified. |",
+        f"| Internal consistency | Model lint against the canonical facts, then targeted repair and re-lint | "
+        f"{', '.join(sorted(LINTED))}, and the short assumptions | Before repair: {r1['high']} high / {r1['medium']} "
+        f"medium. After: {rn['high']} high / {rn['medium']} medium repairable, plus {dn['high'] + dn['medium']} "
+        f"that need a decision (see Decisions Required). Other sections were not linted. |",
+        f"| Arithmetic | Deterministic re-computation (no model) | Every explicit calculation (\"a x b = c\") in "
+        f"{len(arith.get('by_section') or {})} sections | {arith.get('checked', 0)} checked, {len(mism)} wrong. "
+        f"Calculations the text does not write out are not checked. |",
+        "| Calendar | Deterministic | Every \"Month N\" paired with a date | Dates recomputed from the plan start "
+        "(Month 0). |",
+        "| Schedule | Deterministic | Gantt and WBS | Computed from model-estimated durations and dependencies; "
+        "the durations themselves are unverified. |", "",
+        "## By section", "",
+        "| Section | Web searches | Consistency lint | Arithmetic (checked / wrong) | Status |", "|---|---|---|---|---|",
+    ]
+    by_section = arith.get("by_section") or {}
+    for title, names in SECTION_STAGES.items():
+        n_search = sum(searched.get(n, 0) for n in names)
+        a = by_section.get(title) or {}
+        linted = title in LINTED
+        if title in FIXED_STATUS:
+            status = FIXED_STATUS[title]
+        elif n_search:
+            status = "Partly source-checked"
+        elif linted:
+            status = "Consistency-checked"
+        else:
+            status = "Unchecked model output"
+        if a.get("mismatches"):
+            status += f"; {a['mismatches']} arithmetic error(s)"
+        rows.append(f"| {title} | {n_search or '-'} | {'yes' if linted else '-'} | "
+                    f"{a.get('checked', 0)} / {a.get('mismatches', 0)} | {status} |")
+    if mism:
+        rows += ["", "## Arithmetic errors", "",
+                 "Stated results that do not match their own calculation (re-computed without a model):", "",
+                 "| Section | Statement | Stated | Computed |", "|---|---|---|---|"]
+        rows += [f"| {m['section']} | {str(m['excerpt']).replace('|', '/')} | {m['stated']} | {m['computed']} |"
+                 for m in mism]
+    return "\n".join(rows)
 
 
 def provenance_texts(ctx) -> tuple[str, str, str, str]:
@@ -242,9 +369,20 @@ def run(ctx):
     r = Report(ctx)
     r.generator_line, r.repo_url, r.provenance_line, provenance_md = provenance_texts(ctx)
     dashboard, consistency = split_consistency(ctx.read_text("consistency_recheck.md"))
-    r.markdown_text("Decision Dashboard", dashboard)
+
+    r.part("Part 1: The model and what you must decide",
+           "The plan's go/no-go gates, the decisions it cannot make by itself, the canonical numbers and dates "
+           "every section was told to use, and what was and was not checked.")
+    r.markdown_text("Decision Dashboard", dashboard, open_=True)
+    r.markdown("Decisions Required", "decision_register.md", open_=True)
+    r.markdown("Canonical Facts", "canonical_facts.md")
+    r.markdown_text("Validation Status", validation_status(ctx))
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
+
+    r.part("Part 2: Supporting analysis",
+           "The detailed planning documents the model was built from. They were written to follow the canonical "
+           "facts; see Validation Status for which of them were checked.")
     r.markdown("Pitch", "repaired_pitch.md")
     r.markdown("Project Plan", "repaired_project_plan.md")
     r.markdown("Strategic Decisions", "strategic_decisions.md")
@@ -262,8 +400,10 @@ def run(ctx):
     r.markdown("Questions & Answers", "repaired_questions_and_answers.md")
     r.markdown("Premortem", "repaired_premortem.md")
     r.markdown("Self Audit", "repaired_self_audit.md")
+
+    r.part("Part 3: Audit trail", "How the plan was checked and produced: the full consistency check, the "
+           "vetting of your prompt, prompt adherence and provenance.")
     r.markdown_text("Consistency Check", consistency)
-    r.markdown("Canonical Facts", "canonical_facts.md")
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
     r.markdown_text("Provenance", provenance_md)

@@ -83,9 +83,27 @@ def _read_json(path: Path) -> dict:
         return {}
 
 
+def _searches_from_usage(run_dir: Path) -> dict[str, int]:
+    """Web searches per stage from usage_metrics.jsonl (runs recorded before the manifest kept the count)."""
+    out: dict[str, int] = {}
+    try:
+        lines = (run_dir / "usage_metrics.jsonl").read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return out
+    for line in lines:
+        try:
+            row = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if row.get("success") and row.get("web_searches"):
+            out[row["stage"]] = out.get(row["stage"], 0) + int(row["web_searches"])
+    return out
+
+
 def build(run_dir: Path, dag, manifest) -> dict:
     """Summarize provenance from the manifest (per stage) plus the run's plan dates."""
     stages = {}
+    usage_searches = None
     hand_edited = []
     for name in dag.order():
         entry = manifest.entry(name)
@@ -98,6 +116,12 @@ def build(run_dir: Path, dag, manifest) -> dict:
             "models": entry.get("models", []),
             "llm_calls": entry.get("llm_calls", 0),
         }
+        if "web_searches" in entry:
+            stages[name]["web_searches"] = entry["web_searches"]
+        elif entry.get("llm_calls"):
+            if usage_searches is None:
+                usage_searches = _searches_from_usage(run_dir)
+            stages[name]["web_searches"] = usage_searches.get(name, 0)
         st = manifest.status(dag.skills[name], run_dir)
         hand_edited += [{"stage": name, "file": f} for f in st.edited_outputs]
     versions = sorted({(s["generator"] or {}).get("version", "unknown") for s in stages.values()

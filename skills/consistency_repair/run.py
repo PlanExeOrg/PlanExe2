@@ -3,6 +3,7 @@ from collections import Counter
 
 from planexe_skill.calendar_fix import fix_text
 from planexe_skill.planexe import structured
+from planexe_skill.shared.arithmetic import check_text
 from planexe_skill.shared.consistency import needs_decision, review, to_markdown
 
 # repairable document -> keywords that identify it in a diagnostic's `offending_document`
@@ -50,6 +51,23 @@ def apply_edits(text: str, edits: list[dict]) -> tuple[str, list[dict]]:
     return text, log
 
 
+def arithmetic_diagnostics(ctx) -> dict[str, list[dict]]:
+    """Deterministic arithmetic mismatches in the repairable documents, as repair diagnostics."""
+    out: dict[str, list[dict]] = {}
+    for doc in REPAIRABLE:
+        bad = [f for f in check_text(doc, ctx.read_text(f"repaired_{doc}")) if not f.ok]
+        for n, f in enumerate(bad, start=1):
+            out.setdefault(doc, []).append({
+                "id": f"AR-{n:03d}", "severity": "medium", "topic": "Arithmetic mismatch",
+                "canonical_key": "arithmetic (deterministic re-computation)",
+                "canonical_value": f"{f.expression} = {f.computed}",
+                "observed_value": f"stated {f.stated} in: {f.excerpt}",
+                "suggested_resolution": "Correct the stated result. If the expression was not meant literally (an "
+                                        "implicit base, quantities that do not add up this way), reword the sentence "
+                                        "so it no longer states a wrong equation."})
+    return out
+
+
 MAX_ROUNDS = 3
 RECHECK_DOCUMENTS = [
     ("Executive Summary", "repaired_executive_summary.md"),
@@ -93,8 +111,12 @@ def run(ctx):
     first = ctx.read_json("consistency_review_raw.json")
     current, rounds = first, []
     best = None  # (high count, round, snapshot of repaired docs, review)
+    arithmetic = arithmetic_diagnostics(ctx)
     for rnd in range(1, MAX_ROUNDS + 1):
         todo = diagnostics_by_document(current)
+        if rnd == 1:
+            for doc, diags in arithmetic.items():
+                todo.setdefault(doc, []).extend(diags)
         if not todo:
             break
         docs = repair_round(todo, rnd)
@@ -126,10 +148,14 @@ def run(ctx):
     s1, sn = severities(first), severities(current)
     steps = "; ".join(f"round {r['round']}: {r['edits_applied']} edits -> {r['after'].get('high', 0)} high / "
                       f"{r['after'].get('medium', 0)} medium" for r in rounds)
+    n_arith = sum(len(v) for v in arithmetic.values())
     preface = (f"_Consistency: first pass found {s1.get('high', 0)} high / {s1.get('medium', 0)} medium / "
-               f"{s1.get('low', 0)} low contradictions. Repair{(': ' + steps) if steps else ' was not needed'}. "
+               f"{s1.get('low', 0)} low contradictions"
+               + (f", and the arithmetic check found {n_arith} wrong calculation(s)" if n_arith else "")
+               + f". Repair{(': ' + steps) if steps else ' was not needed'}. "
                + (f" Published: round {best[1]} (fewest high-severity issues)." if best else "")
                + f" Shown below: the final check of the repaired documents "
                f"({sn.get('high', 0)} high / {sn.get('medium', 0)} medium / {sn.get('low', 0)} low)._")
     ctx.write_text("consistency_recheck.md", preface + "\n\n" + ctx.read_text("consistency_recheck.md"))
-    ctx.write_text("consistency_repair_raw.json", json.dumps({"rounds": rounds}, indent=2, ensure_ascii=False))
+    ctx.write_text("consistency_repair_raw.json", json.dumps({"arithmetic_diagnostics": arithmetic, "rounds": rounds},
+                                                             indent=2, ensure_ascii=False))

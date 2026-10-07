@@ -142,6 +142,7 @@ class Runner:
         log_path.write_text(f"stage {skill.name} started {time.strftime('%Y-%m-%dT%H:%M:%S')}\n")
 
         models: set[str] = set()
+        searches = [0]
 
         def on_call(stage: str, info: dict) -> None:
             progress.llm_call(stage, info)
@@ -149,6 +150,7 @@ class Runner:
             model = (info.get("metadata") or {}).get("model")
             if model:
                 models.add(model)
+            searches[0] += int((info.get("metadata") or {}).get("web_searches") or 0)
 
         cache_dir = self.meta_dir / "llm_cache" / skill.name
         if skill.name in self.forced:
@@ -166,7 +168,8 @@ class Runner:
             os.replace(f, self.run_dir / f.name)
         shutil.rmtree(staging, ignore_errors=True)
         self.manifest.record_completed(skill, self.run_dir, extra={
-            "generator": provenance.generator_brief(), "models": sorted(models), "llm_calls": ctx.llm_calls})
+            "generator": provenance.generator_brief(), "models": sorted(models), "llm_calls": ctx.llm_calls,
+            "web_searches": searches[0]})
         self.manifest.save()
         self._write_provenance()
         shutil.rmtree(cache_dir, ignore_errors=True)

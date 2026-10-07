@@ -9,7 +9,7 @@ fact_check: false
 max_words_per_field: 0
 est_llm_calls: 12
 parallel_llm: 4
-uses: [planexe_skill/shared/consistency, planexe_skill/calendar_fix.py]
+uses: [planexe_skill/shared/consistency, planexe_skill/calendar_fix.py, planexe_skill/shared/arithmetic.py]
 ---
 Not part of the original PlanExe pipeline (Codex: "make high-severity lint errors fail the build ...
 regenerate offending sections"). For each reader-facing document named in a HIGH or MEDIUM diagnostic
@@ -20,4 +20,5 @@ to fix); the original PlanExe files are not modified. The assumptions document i
 predates the canonical facts by design. After each repair round the repaired copies are linted again (same review as consistency_review,
 `planexe_skill/shared/consistency/`); rounds repeat until no high-severity contradiction remains or 3
 rounds have run (Codex: "repeat until zero high-severity contradictions"). The final check is written
-to `consistency_recheck.md` / `consistency_recheck_raw.json`, which the report shows.
+to `consistency_recheck.md` / `consistency_recheck_raw.json`, which the report shows. Round 1 also gets the deterministic arithmetic mismatches
+(`planexe_skill/shared/arithmetic.py`, diagnostics `AR-nnn`) found in the documents it repairs.

@@ -67,5 +67,8 @@ polling constantly. On failure the runner prints the failing stage, the error, t
 command (re-running resumes; finished stages and completed LLM calls are kept). If authentication fails,
 ask the user to run `claude auth login`, then resume.
 
-When it finishes, give the user `runs/<name>/report.html` and summarize: the Decision Dashboard, any
-"Decisions required" or "Consistency lint" banner at the top, and the run's time and call count.
+When it finishes, give the user `runs/<name>/report.html` and summarize, leading with what the user
+must decide: the open decisions from "Decisions Required" (`decision_register.md`: question, options,
+owner, decide-by month) and the "Choices made on your behalf" to ratify; then the Decision Dashboard
+gates; what "Validation Status" says was and was not checked (web searches, consistency lint result,
+arithmetic errors); any "Consistency lint FAILED" banner; and the run's time and call count.

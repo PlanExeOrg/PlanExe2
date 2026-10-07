@@ -12,3 +12,8 @@ Return a list of edits. Each edit has:
 Fix every place in the document where a diagnostic applies, including repeated mentions. Do not
 rewrite unrelated text, do not add new claims, and do not change values that agree with the canonical
 facts. If a diagnostic is wrong about this document, return no edit for it.
+
+Diagnostics with an id starting with "AR-" come from a deterministic re-computation of a calculation
+written in the document: the stated result does not match the expression. Fix the stated result (and
+anything derived from it in the same passage), or reword the sentence if the expression was not meant
+literally.

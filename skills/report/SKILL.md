@@ -1,22 +1,39 @@
 ---
 name: report
 description: Assemble all stage outputs into the final report.html (collapsible sections, Gantt) and report.md.
-inputs: [plan.txt, consistency_recheck.md, consistency_recheck_raw.json, canonical_facts.md, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, repaired_pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, repaired_project_plan.md, repaired_review_plan.md, repaired_executive_summary.md, schedule_gantt_dhtmlx.html, repaired_questions_and_answers.md, repaired_premortem.md, repaired_self_audit.md, prompt_adherence.md]
+inputs: [plan.txt, consistency_recheck.md, consistency_recheck_raw.json, consistency_review_raw.json, canonical_facts.md, canonical_facts.json, decision_register.md, decision_register_raw.json, arithmetic_check.json, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, repaired_pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, repaired_project_plan.md, repaired_review_plan.md, repaired_executive_summary.md, schedule_gantt_dhtmlx.html, repaired_questions_and_answers.md, repaired_premortem.md, repaired_self_audit.md, prompt_adherence.md]
 outputs: [report.html, report.md]
 tier: low
 est_llm_calls: 0
 uses: [planexe_skill/shared/markdown_html.py]
 ---
-Deterministic. Sections, in order: Decision Dashboard (decision kernel + consistency summary; added in
-PlanExe2), Executive Summary, Gantt (embedded dhtmlx HTML), Pitch, Project
-Plan, Strategic Decisions, Scenarios, Assumptions, Governance, Related Resources, Data Collection,
-Documents to Create and Find, SWOT Analysis, Team, Expert Criticism, Work Breakdown Structure (CSV
-table), Review Plan, Questions & Answers, Premortem, Self Audit, Consistency Check and Canonical Facts (added in PlanExe2), Initial Prompt Vetted (prompt +
-screening + redline gate + premise attack), Prompt Adherence. Title = wbs_level1_project_title.json.
-An UNUSABLE screening verdict adds a warning banner at the top, and so do high-severity contradictions
-found by consistency_recheck (the "consistency lint"; FAILED when any remain). The
-executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use the
-repaired copies from consistency_repair.
+Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
+
+1. **The model and what you must decide**: Decision Dashboard (decision kernel + consistency summary,
+   open by default), Decisions Required (`decision_register.md`, open by default), Canonical Facts,
+   Validation Status, Executive Summary, Gantt (embedded dhtmlx HTML).
+2. **Supporting analysis**: Pitch, Project Plan, Strategic Decisions, Scenarios, Assumptions, Governance,
+   Related Resources, Data Collection, Documents to Create and Find, SWOT Analysis, Team, Expert
+   Criticism, Work Breakdown Structure (CSV table), Review Plan, Questions & Answers, Premortem, Self Audit.
+3. **Audit trail**: Consistency Check, Initial Prompt Vetted (prompt + screening + redline gate + premise
+   attack), Prompt Adherence, Provenance.
+
+Why: a Codex comparison of v1 and v2 reports summed up the difference as "v1: generate an unusually
+comprehensive expert planning workshop; v2: construct a partially validated model of the project, then
+expose what humans still have to decide". The report leads with the model and the open decisions; the
+workshop material is supporting analysis.
+
+Validation Status says what "validated" means: which stages used web search (per-stage counts from
+`planexe_provenance.json`), the canonical facts by kind, the consistency lint before/after repair, the
+deterministic arithmetic check (`arithmetic_check.json`, every remaining error listed), calendar and
+schedule; then a per-section table (web searches, linted or not, arithmetic checked/wrong, status:
+partly source-checked / consistency-checked / unchecked model output).
+
+Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
+lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`);
+"Decisions required: N" from the decision register. Banners link to their section (sections have ids).
+The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
+the repaired copies from consistency_repair.
 
 Markdown is rendered with the stdlib renderer in `planexe_skill/shared/markdown_html.py`
 (PlanExe used Python-Markdown; tables are rendered in every section).

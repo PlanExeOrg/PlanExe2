@@ -1,5 +1,8 @@
 # PlanExe2
 
+> **PlanExe v1:** generate an unusually comprehensive expert planning workshop.
+> **PlanExe2:** construct a partially validated model of the project, then expose what humans still have to decide.
+
 Formerly PlanExe-skill.
 [PlanExe](https://github.com/PlanExeOrg/PlanExe)'s plan-generation pipeline, rewritten as
 **skills** executed by a tiny, dependency-free Python DAG runner.
@@ -27,6 +30,21 @@ A full plan is ~180-250 LLM calls and takes roughly 15-45 minutes. The final rep
 
 > Running inside a sandboxed agent (e.g. Claude Code desktop with sandbox on)? The child
 > `claude` process needs keychain access for auth, so run the command outside the sandbox.
+
+## What the report contains
+
+The report leads with the model, not the workshop:
+
+1. **The model and what you must decide**: the Decision Dashboard (the go/no-go gates), **Decisions
+   Required** (each open decision with options, downstream consequences, owner and decide-by month, plus
+   the strategic choices the generator made on your behalf, to ratify), the Canonical Facts (the numbers
+   and dates every section must use), **Validation Status** (what "validated" means here: which stages
+   searched the web, the consistency lint before and after repair, a deterministic re-computation of
+   every written calculation, and which sections are unchecked model output), the Executive Summary and
+   the Gantt.
+2. **Supporting analysis**: PlanExe's planning documents (pitch, project plan, assumptions,
+   governance, SWOT, team, expert criticism, WBS, premortem, ...).
+3. **Audit trail**: the full consistency check, prompt vetting, prompt adherence and provenance.
 
 ## Commands
 
@@ -90,6 +108,12 @@ skills/identify_purpose/
 `tier: high` stages (the foundational early stages) use Sonnet with high effort,
 `tier: low` stages use Haiku. Edges in the DAG are derived from file names: a stage depends
 on whichever stage produces one of its inputs.
+
+Stages added by PlanExe2 (not in PlanExe v1): `canonical_facts` (one table of key numbers and dates,
+before the project plan), `consistency_review` and `consistency_repair` (lint the core documents against
+the canonical facts and repair them with exact edits, including deterministic arithmetic fixes),
+`decision_register` (the open decisions as options/consequences/owner/deadline, and the choices to
+ratify) and `arithmetic_check` (deterministic re-computation of every written calculation).
 
 ## Tests
 

@@ -1,0 +1,53 @@
+{
+  "type": "object",
+  "properties": {
+    "decisions": {
+      "type": "array",
+      "description": "Open decisions, most consequential first. At most 8. Empty if none.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": {"type": "string", "description": "Short label, e.g. 'Plant 2 financing'."},
+          "question": {"type": "string", "description": "The decision as one question."},
+          "why_open": {"type": "string", "description": "What is unsettled and which documents disagree."},
+          "severity": {"type": "string", "enum": ["high", "medium"]},
+          "options": {
+            "type": "array",
+            "description": "2-4 options.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "option": {"type": "string", "description": "The option, one sentence."},
+                "consequences": {"type": "string", "description": "What changes downstream: budget, Month N, gates, scope."},
+                "plan_changes": {"type": "string", "description": "Canonical facts or documents that would change."}
+              },
+              "required": ["option", "consequences", "plan_changes"]
+            }
+          },
+          "default_if_undecided": {"type": "string", "description": "What happens if nobody decides in time."},
+          "owner": {"type": "string", "description": "Body or role that decides."},
+          "decide_by": {"type": "string", "description": "Month N, and why."},
+          "blocks": {"type": "string", "description": "Gate, milestone or tranche that waits for it."}
+        },
+        "required": ["title", "question", "why_open", "severity", "options", "default_if_undecided", "owner", "decide_by", "blocks"]
+      }
+    },
+    "ratify": {
+      "type": "array",
+      "description": "Lever settings the generator chose; at most 8.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "lever": {"type": "string"},
+          "chosen": {"type": "string", "description": "The chosen setting, one short sentence."},
+          "main_alternative": {"type": "string", "description": "The strongest rejected alternative, one short sentence."},
+          "why_it_matters": {"type": "string", "description": "One sentence."},
+          "revisit_by": {"type": "string", "description": "Month N or gate."}
+        },
+        "required": ["lever", "chosen", "main_alternative", "why_it_matters", "revisit_by"]
+      }
+    },
+    "summary": {"type": "string", "description": "2-3 sentences."}
+  },
+  "required": ["decisions", "ratify", "summary"]
+}
