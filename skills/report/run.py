@@ -415,7 +415,7 @@ def run(ctx):
     dashboard, consistency = split_consistency(ctx.read_text("consistency_recheck.md"))
 
     r.part("Part 1: Key decisions and facts")
-    r.markdown_text("Decision Dashboard", dashboard, "Go/no-go gates, in the order they can be answered.")
+    r.markdown_text("Decision Dashboard", dashboard, "Go/no-go gates, earliest first.")
     r.markdown("Decisions Required", "decision_register.md", "Decisions the plan cannot make by itself.")
     facts = ctx.read_json("canonical_facts.json")
     r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []),
