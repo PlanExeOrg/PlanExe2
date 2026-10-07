@@ -146,14 +146,14 @@ def run(ctx):
         ctx.write_text("consistency_recheck.md", to_markdown(first))
 
     s1, sn = severities(first), severities(current)
-    steps = "; ".join(f"round {r['round']}: {r['edits_applied']} edits -> {r['after'].get('high', 0)} high / "
+    steps = "; ".join(f"round {r['round']}: {r['edits_applied']} edits → {r['after'].get('high', 0)} high / "
                       f"{r['after'].get('medium', 0)} medium" for r in rounds)
     n_arith = sum(len(v) for v in arithmetic.values())
     preface = (f"_Consistency: first pass found {s1.get('high', 0)} high / {s1.get('medium', 0)} medium / "
                f"{s1.get('low', 0)} low contradictions"
                + (f", and the arithmetic check found {plural(n_arith, 'wrong calculation')}" if n_arith else "")
-               + f". Repair{(': ' + steps) if steps else ' was not needed'}. "
-               + (f" Published: round {best[1]} (fewest high-severity issues)." if best else "")
+               + f". Repair{(': ' + steps) if steps else ' was not needed'}."
+               + (f" Published: round {best[1]} (fewest high-severity issues)." if best and len(rounds) > 1 else "")
                + f" Shown below: the final check of the repaired documents "
                f"({sn.get('high', 0)} high / {sn.get('medium', 0)} medium / {sn.get('low', 0)} low)._")
     ctx.write_text("consistency_recheck.md", preface + "\n\n" + ctx.read_text("consistency_recheck.md"))
