@@ -1,7 +1,7 @@
 ---
 name: report
 description: Assemble all stage outputs into the final report.html (collapsible sections, Gantt) and report.md.
-inputs: [plan.txt, consistency_recheck.md, consistency_recheck_raw.json, consistency_review_raw.json, canonical_facts.md, canonical_facts.json, decision_register.md, decision_register_raw.json, arithmetic_check.json, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, repaired_pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, repaired_project_plan.md, repaired_review_plan.md, repaired_executive_summary.md, schedule_gantt_dhtmlx.html, repaired_questions_and_answers.md, repaired_premortem.md, repaired_self_audit.md, prompt_adherence.md]
+inputs: [plan.txt, consistency_recheck.md, consistency_recheck_raw.json, consistency_review_raw.json, canonical_facts.json, decision_register.md, decision_register_raw.json, arithmetic_check.json, screen_planning_prompt.json, screen_planning_prompt.md, redline_gate.md, premise_attack.md, strategic_decisions.md, scenarios.md, consolidate_assumptions_full.md, team.md, related_resources.md, consolidate_governance.md, swot_analysis.md, repaired_pitch.md, data_collection.md, documents_to_create_and_find.md, wbs_level1_project_title.json, wbs_project_level1_and_level2_and_level3.csv, expert_criticism.md, repaired_project_plan.md, repaired_review_plan.md, repaired_executive_summary.md, schedule_gantt_dhtmlx.html, repaired_questions_and_answers.md, repaired_premortem.md, repaired_self_audit.md, prompt_adherence.md]
 outputs: [report.html, report.md]
 tier: low
 est_llm_calls: 0
@@ -30,9 +30,11 @@ deterministic arithmetic check (`arithmetic_check.json`, every remaining error l
 schedule; then a per-section table (web searches, linted or not, arithmetic checked/wrong, status:
 partly source-checked / consistency-checked / unchecked model output).
 
-A leading heading inside a section that repeats the section title (canonical_facts.md starts with
-"## Canonical Facts") is dropped; fixed here rather than in the stage, so existing runs need no
-regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
+Canonical Facts is rendered from `canonical_facts.json` for readers (a legend for the Kind column + the
+table); `canonical_facts.md` is worded for the later stages ("All later documents were instructed to use
+these values"). The model's reconciliation notes (process notes) go to the Consistency Check in Part 3.
+A leading heading inside a section that repeats the section title is dropped. Both are done here rather
+than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`);
 "Decisions required: N" from the decision register. Banners link to their section (sections have ids).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use

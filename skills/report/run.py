@@ -173,6 +173,21 @@ class Report:
         return "\n".join(parts)
 
 
+KIND_LABEL = {"user_constraint": "user constraint", "decision": "decision",
+              "proposed_threshold": "proposed threshold", "estimate": "estimate"}
+
+
+def canonical_facts_markdown(facts: list[dict]) -> str:
+    """The canonical facts table for readers (canonical_facts.md is worded for the later stages)."""
+    rows = ["Kind: *user constraint* = from your prompt; *decision* = chosen in this plan; *proposed threshold* = "
+            "a pass/fail line proposed in this plan, to be confirmed; *estimate* = not verified.", "",
+            "| Fact | Value | Kind | Basis |", "|---|---|---|---|"]
+    for f in facts:
+        cells = [f.get("key", ""), f.get("value", ""), KIND_LABEL.get(f.get("kind", ""), f.get("kind", "")), f.get("basis", "")]
+        rows.append("| " + " | ".join(str(c).replace("|", "\\|").replace("\n", " ") for c in cells) + " |")
+    return "\n".join(rows)
+
+
 def split_consistency(md: str) -> tuple[str, str]:
     """Decision kernel (short, for the top of the report) vs the long consistency check (analysis part)."""
     i = md.find("## Consistency Check")
@@ -382,7 +397,8 @@ def run(ctx):
            "every section was told to use, and what was and was not checked.")
     r.markdown_text("Decision Dashboard", dashboard)
     r.markdown("Decisions Required", "decision_register.md")
-    r.markdown("Canonical Facts", "canonical_facts.md")
+    facts = ctx.read_json("canonical_facts.json")
+    r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []))
     r.markdown_text("Validation Status", validation_status(ctx))
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
@@ -410,6 +426,9 @@ def run(ctx):
 
     r.part("Part 3: Audit trail", "How the plan was checked and produced: the full consistency check, the "
            "vetting of your prompt, prompt adherence and provenance.")
+    notes = (facts.get("reconciliation_notes") or "").strip()
+    if notes:
+        consistency += "\n\n## How the canonical facts were reconciled\n\n" + notes
     r.markdown_text("Consistency Check", consistency)
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
