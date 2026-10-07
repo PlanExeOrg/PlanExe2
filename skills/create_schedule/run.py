@@ -15,8 +15,10 @@ def run(ctx):
     duration_list = ctx.read_json("task_durations.json")
     wbs_project = WBSProject.from_dict(ctx.read_json("wbs_project_level1_and_level2_and_level3.json"))
     st = ctx.read_json("start_time.json")
-    utc = st.get("server_iso_utc") or st.get("utc_timestamp", "")
-    project_start = datetime.fromisoformat(utc.replace("Z", "+00:00")).date()
+    project_start = ctx.project_start  # the local start date (Month 0), as in every other stage
+    if project_start is None:
+        utc = st.get("server_iso_utc") or st.get("utc_timestamp", "")
+        project_start = datetime.fromisoformat(utc.replace("Z", "+00:00")).date()
 
     html_tooltips = WBSTaskTooltip.html_tooltips(wbs_project)
     text_tooltips = WBSTaskTooltip.text_tooltips(wbs_project)

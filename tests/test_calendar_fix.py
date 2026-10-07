@@ -67,5 +67,22 @@ class CalendarFixTest(unittest.TestCase):
         self.assertEqual(v["a"][0], "Month 72 (May 2032)")
 
 
+
+class StartDateTest(unittest.TestCase):
+    def test_local_date_wins_over_utc(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from planexe_skill.context import project_start
+        with tempfile.TemporaryDirectory() as tmp:
+            d = Path(tmp)
+            # 00:00 CEST on 2026-10-08 is 22:00 UTC on 2026-10-07; Month 0 is the local date
+            (d / "start_time.json").write_text(json.dumps({"server_iso_utc": "2026-10-07T22:00:00Z",
+                                                           "server_iso_local": "2026-10-08T00:00:00+02:00"}))
+            self.assertEqual(project_start(d), date(2026, 10, 8))
+            (d / "start_time.json").write_text(json.dumps({"server_iso_utc": "2026-04-04T10:00:00Z"}))
+            self.assertEqual(project_start(d), date(2026, 4, 4))
+
+
 if __name__ == "__main__":
     unittest.main()

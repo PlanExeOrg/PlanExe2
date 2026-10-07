@@ -75,22 +75,29 @@ EPISTEMIC_INSTRUCTION = (
     "that the task defines (e.g. an expert giving feedback) may speak in its role.")
 
 
+def start_date_text(run_dir: Path) -> str:
+    """'YYYY-MM-DD' of Month 0 from start_time.json: the local date (the date the prompt shows); the UTC date
+    can be the day before (00:30 CEST is 22:30 UTC). Falls back to the UTC date for files without it."""
+    try:
+        st = json.loads((run_dir / "start_time.json").read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ""
+    return (st.get("server_iso_local") or st.get("server_iso_utc") or "")[:10]
+
+
 def project_start(run_dir: Path):
     from datetime import date
     try:
-        utc = json.loads((run_dir / "start_time.json").read_text(encoding="utf-8")).get("server_iso_utc", "")
-        return date.fromisoformat(utc[:10])
-    except (OSError, ValueError, json.JSONDecodeError):
+        return date.fromisoformat(start_date_text(run_dir))
+    except ValueError:
         return None
 
 
 def calendar_reference(run_dir: Path) -> str:
     """'Month N = date' table from the run's start date, so milestone dates are computed, not guessed."""
-    p = run_dir / "start_time.json"
     try:
-        utc = json.loads(p.read_text(encoding="utf-8")).get("server_iso_utc", "")
-        y, m, d = (int(x) for x in utc[:10].split("-"))
-    except (OSError, ValueError, json.JSONDecodeError):
+        y, m, d = (int(x) for x in start_date_text(run_dir).split("-"))
+    except ValueError:
         return ""
     rows = []
     for n in list(range(0, 13, 1)) + list(range(15, 121, 3)):

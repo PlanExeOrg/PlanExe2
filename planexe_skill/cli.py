@@ -82,7 +82,7 @@ def cmd_create(args) -> int:
     start = None
     if getattr(args, "start_date", None):
         try:
-            start = datetime.fromisoformat(args.start_date)
+            start = datetime.fromisoformat(args.start_date).replace(hour=12)  # midday: same date in UTC
         except ValueError:
             print(f"error: --start-date must be YYYY-MM-DD, got {args.start_date!r}", file=sys.stderr)
             return 2

@@ -128,7 +128,8 @@ def build(run_dir: Path, dag, manifest) -> dict:
         hand_edited += [{"stage": name, "file": f} for f in st.edited_outputs]
     versions = sorted({(s["generator"] or {}).get("version", "unknown") for s in stages.values()
                        if not s["adopted"]})
-    start = _read_json(run_dir / "start_time.json").get("server_iso_utc", "")[:10] or None
+    from planexe_skill.context import start_date_text
+    start = start_date_text(run_dir) or None
     meta = _read_json(run_dir / "planexe_metadata.json")
     return {
         "generator": generator_info(),
