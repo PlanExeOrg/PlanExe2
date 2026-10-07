@@ -425,7 +425,7 @@ def run(ctx):
 
     r.part("Part 1: Key decisions and facts")
     r.markdown_text("Decision Dashboard", dashboard, "Go/no-go gates. A NO at an early gate costs the least.")
-    r.markdown("Decisions Required", "decision_register.md", "Decisions the plan cannot make by itself.")
+    r.markdown("Decisions Required", "decision_register.md", "Decisions a human must make; the plan cannot make them by itself.")
     facts = ctx.read_json("canonical_facts.json")
     r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []),
                     "Key numbers and dates.")
