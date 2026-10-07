@@ -34,7 +34,10 @@ Canonical Facts is rendered from `canonical_facts.json` for readers (a legend fo
 table); `canonical_facts.md` is worded for the later stages ("All later documents were instructed to use
 these values"). The model's reconciliation notes (process notes) go to the Consistency Check in Part 3.
 The SWOT section's headings are shown without PlanExe's emoji ("Strengths 👍💪🦾" -> "Strengths");
-`swot_analysis.md` keeps them, like PlanExe. A leading heading inside a section that repeats the section title is dropped. Both are done here rather
+`swot_analysis.md` keeps them, like PlanExe. The v2 sections open with a one-line subtitle, in the style of PlanExe's "Persuasive elevator pitch.",
+"Why this fails." and the Gantt's "Unoptimized waterfall. Parallel work not modelled here.": Decision
+Dashboard, Decisions Required, Canonical Facts, Validation Status, Consistency Check, Provenance.
+A leading heading inside a section that repeats the section title is dropped. Both are done here rather
 than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
 lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`).
 Banners link to their section (sections have ids). There is no banner for open decisions: Decisions

@@ -51,11 +51,14 @@ class Report:
         self.html_items.append((PART, f'<h2 class="report-part">{escape(title)}</h2>'))
         self.md_items.append((PART, f"# {title}"))
 
-    def markdown(self, title: str, name: str) -> None:
-        self.markdown_text(title, self.ctx.read_text(name))
+    def markdown(self, title: str, name: str, subtitle: str | None = None) -> None:
+        self.markdown_text(title, self.ctx.read_text(name), subtitle)
 
-    def markdown_text(self, title: str, md: str) -> None:
+    def markdown_text(self, title: str, md: str, subtitle: str | None = None) -> None:
+        """`subtitle`: a one-line context sentence above the content, like PlanExe's "Why this fails."."""
         md = strip_repeated_title(title, md)
+        if subtitle:
+            md = f"{subtitle}\n\n{md}"
         self.html_items.append((title, md_to_html(md)))
         self.md_items.append((title, md))
 
@@ -381,11 +384,12 @@ def run(ctx):
     dashboard, consistency = split_consistency(ctx.read_text("consistency_recheck.md"))
 
     r.part("Part 1: The model and what you must decide")
-    r.markdown_text("Decision Dashboard", dashboard)
-    r.markdown("Decisions Required", "decision_register.md")
+    r.markdown_text("Decision Dashboard", dashboard, "Go/no-go gates, in the order they can be answered.")
+    r.markdown("Decisions Required", "decision_register.md", "Decisions the plan cannot make by itself.")
     facts = ctx.read_json("canonical_facts.json")
-    r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []))
-    r.markdown_text("Validation Status", validation_status(ctx))
+    r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []),
+                    "The key numbers and dates the plan is built on.")
+    r.markdown_text("Validation Status", validation_status(ctx), "What was checked, and how.")
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
 
@@ -412,10 +416,10 @@ def run(ctx):
     notes = (facts.get("reconciliation_notes") or "").strip()
     if notes:
         consistency += "\n\n## How the canonical facts were reconciled\n\n" + notes
-    r.markdown_text("Consistency Check", consistency)
+    r.markdown_text("Consistency Check", consistency, "Contradictions between the core documents, after repair.")
     r.initial_prompt_vetted("Initial Prompt Vetted")
     r.markdown("Prompt Adherence", "prompt_adherence.md")
-    r.markdown_text("Provenance", provenance_md)
+    r.markdown_text("Provenance", provenance_md, "Which generator version and models produced each part.")
     lint_banner(ctx, r)
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     ctx.write_text("report.html", r.html_report(title, now))
