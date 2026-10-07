@@ -379,7 +379,7 @@ def metadata_texts(ctx) -> tuple[str, str, str, str]:
     versions = meta.get("generator_versions_used") or []
     edited = meta.get("hand_edited_files") or []
     adopted = meta.get("adopted_stages") or []
-    line = f"Plan start (Month 0): {start}." if start else "Plan start: unknown."
+    line = f"Plan start: {start}." if start else "Plan start: unknown."
     if edited:
         line += f" Includes {plural(len(edited), 'hand-edited intermediary file')} (see Metadata)."
 
