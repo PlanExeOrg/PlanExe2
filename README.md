@@ -44,7 +44,8 @@ The report leads with the model, not the workshop:
    the Gantt.
 2. **Supporting analysis**: PlanExe's planning documents (pitch, project plan, assumptions,
    governance, SWOT, team, expert criticism, WBS, premortem, ...).
-3. **Audit trail**: the full consistency check, prompt vetting, prompt adherence and provenance.
+3. **Audit trail**: the full consistency check, prompt vetting, prompt adherence and report metadata (generator
+   version, commit, models per stage).
 
 ## Commands
 
