@@ -3,7 +3,8 @@ import re
 
 from planexe_skill.planexe import format_json_for_query, raw_document, structured
 
-SEVERITY_ICON = {"high": "🔴 High", "medium": "🟡 Medium"}
+# Non-breaking space: the Severity column of the table must not wrap between the dot and the word.
+SEVERITY_ICON = {"high": "🔴\u00a0High", "medium": "🟡\u00a0Medium"}
 
 
 def cell(text) -> str:
