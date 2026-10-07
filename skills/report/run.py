@@ -374,7 +374,7 @@ def metadata_texts(ctx) -> tuple[str, str, str, str]:
     meta = ctx.run_metadata()
     repo = g.get("repo") or "PlanExeOrg/PlanExe2"
     repo_url = f"https://github.com/{repo}"
-    generator_line = f"{g['name']} {g['version']}"
+    generator_line = g["name"]  # the version is in the Metadata section
     start = meta.get("plan_start_date")
     versions = meta.get("generator_versions_used") or []
     edited = meta.get("hand_edited_files") or []
