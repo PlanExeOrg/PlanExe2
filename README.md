@@ -38,14 +38,13 @@ The report leads with the decisions and key facts, not the workshop:
 1. **Key decisions and facts**: the Decision Dashboard (the go/no-go gates), **Decisions
    Required** (each open decision with options, downstream consequences, owner and decide-by month, plus
    the strategic choices the generator made on your behalf, to ratify), the Canonical Facts (the numbers
-   and dates every section must use), **Validation Status** (what "validated" means here: which stages
-   searched the web, the consistency lint before and after repair, a deterministic re-computation of
-   every written calculation, and which sections are unchecked model output), the Executive Summary and
-   the Gantt.
+   and dates every section must use), the Executive Summary and the Gantt.
 2. **Supporting analysis**: PlanExe's planning documents (pitch, project plan, assumptions,
    governance, SWOT, team, expert criticism, WBS, premortem, ...).
-3. **Audit trail**: the full consistency check, prompt vetting, prompt adherence and report metadata (generator
-   version, commit, models per stage).
+3. **Audit trail**: **Validation Status** (what "validated" means here: which sections searched the web,
+   the consistency lint before and after repair, a deterministic re-computation of every written
+   calculation, and which sections were not checked), the full consistency check, prompt vetting, prompt
+   adherence and metadata (generator version, commit, models per stage).
 
 ## Commands
 

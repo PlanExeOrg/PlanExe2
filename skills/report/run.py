@@ -429,7 +429,6 @@ def run(ctx):
     facts = ctx.read_json("canonical_facts.json")
     r.markdown_text("Canonical Facts", canonical_facts_markdown(facts.get("facts") or []),
                     "Key numbers and dates.")
-    r.markdown_text("Validation Status", validation_status(ctx), "What was checked, and how.")
     r.markdown("Executive Summary", "repaired_executive_summary.md")
     r.embedded_html("Gantt", "schedule_gantt_dhtmlx.html", subtitle="Unoptimized waterfall. Parallel work not modelled here.")
 
@@ -455,6 +454,7 @@ def run(ctx):
     r.markdown("Self Audit", "repaired_self_audit.md")
 
     r.part("Part 3: Audit trail")
+    r.markdown_text("Validation Status", validation_status(ctx), "What was checked, and how.")
     notes = (facts.get("reconciliation_notes") or "").strip()
     if notes:
         consistency += "\n\n## How the canonical facts were reconciled\n\n" + notes

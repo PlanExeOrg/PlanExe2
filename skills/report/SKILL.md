@@ -10,13 +10,14 @@ uses: [planexe_skill/shared/markdown_html.py]
 Deterministic. Three parts (PlanExe2; PlanExe v1 had one flat list of sections):
 
 1. **Key decisions and facts**: Decision Dashboard (decision kernel + consistency summary),
-   Decisions Required (`decision_register.md`), Canonical Facts,
-   Validation Status, Executive Summary, Gantt (embedded dhtmlx HTML).
+   Decisions Required (`decision_register.md`), Canonical Facts, Executive Summary, Gantt (embedded
+   dhtmlx HTML).
    All sections start collapsed, as in PlanExe v1.
 2. **Supporting analysis**: Pitch, Project Plan, Strategic Decisions, Scenarios, Assumptions, Governance,
    Related Resources, Data Collection, Documents to Create and Find, SWOT Analysis, Team, Expert
    Criticism, Work Breakdown Structure (CSV table), Review Plan, Questions & Answers, Premortem, Self Audit.
-3. **Audit trail**: Consistency Check, Initial Prompt Vetted (prompt + screening + redline gate + premise
+3. **Audit trail**: Validation Status (moved here from Part 1: it describes how the plan was checked),
+   Consistency Check, Initial Prompt Vetted (prompt + screening + redline gate + premise
    attack), Prompt Adherence, Metadata.
 
 Why: a Codex comparison of v1 and v2 reports summed up the difference as "v1: generate an unusually
