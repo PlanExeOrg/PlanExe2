@@ -84,20 +84,35 @@ class ValidationStatusTest(unittest.TestCase):
     def test_validation_status(self):
         md = load("report").validation_status(self.ctx())
         self.assertIn("Sections that searched: Premise Attack (8) | 8 searches.", md)
-        self.assertIn("Before repair: 2 high / 0 medium. After: 0 high / 0 medium, plus 1", md)
+        self.assertIn("Before repair: 2 high / 0 medium. After: 0 high / 0 medium, plus 1 needing a decision", md)
         self.assertIn("12 checked, 1 wrong", md)
-        self.assertIn("| Self Audit | - | yes | 3 / 1 | Consistency-checked; 1 arithmetic error |", md)
-        self.assertIn("| Premise Attack | 8 | - | 0 / 0 | Partly source-checked |", md)
-        self.assertIn("| Team | - | - | 0 / 0 | Not checked |", md)
+        self.assertIn("| Self Audit | consistency lint and repair; arithmetic (3 calculations, 1 wrong) |", md)
+        self.assertIn("| Premise Attack | web search (8 searches) |", md)
+        self.assertIn("| Team | none |", md)
         self.assertIn("## Arithmetic errors", md)
 
     def test_banners(self):
         mod = load("report")
         r = mod.Report(self.ctx())
         mod.lint_banner(self.ctx(), r)
-        self.assertIn("Decisions required: 1 open decision, 1 high-severity", r.top_banner_markdown)
-        self.assertIn('href="#decisions-required"', r.top_banner_html)
-        self.assertNotIn("FAILED", r.top_banner_markdown)
+        self.assertEqual("", r.top_banner_markdown)  # no repairable high left; decisions have their own section
+        failing = self.ctx()
+        failing.files["consistency_recheck_raw.json"] = {"contradictions": [
+            {"topic": "Price vs cost", "severity": "high", "resolution_type": "repairable", "offending_document": "pitch"}]}
+        r = mod.Report(failing)
+        mod.lint_banner(failing, r)
+        self.assertIn("Consistency lint FAILED: 1 high-severity contradiction remains after repair", r.top_banner_markdown)
+        self.assertIn('href="#consistency-check"', r.top_banner_html)
+
+    def test_split_consistency(self):
+        md = ("_Consistency: first pass found 2 high._\n\n## Decision Kernel\n\nAny NO means delay, split, downsize or "
+              "stop, as described.\n\n| # | Question |\n|---|---|\n| 1 | Q |\n\n## Consistency Check\n\n"
+              "Diagnostics (document vs canonical fact):\n\n```text\nHIGH CF-001\n```\n\n### 1. Topic\n\n## Summary\n\nOK.")
+        dashboard, check = load("report").split_consistency(md)
+        self.assertEqual(dashboard, "| # | Question |\n|---|---|\n| 1 | Q |")
+        self.assertTrue(check.startswith("_Consistency: first pass found 2 high._"))
+        self.assertNotIn("CF-001", check)
+        self.assertIn("### 1. Topic", check)
 
 
 if __name__ == "__main__":

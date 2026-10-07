@@ -44,8 +44,7 @@ def to_markdown(r: dict) -> str:
     ratify = r.get("ratify") or []
     if ratify:
         rows += ["## Choices made on your behalf", "",
-                 "The generator picked a scenario and set these levers itself. They are assumptions, not your "
-                 "decisions: confirm or change them.", "",
+                 "Set when the scenario was selected, not by you. Confirm or change them.", "",
                  "| Lever | Chosen | Strongest alternative | Why it matters | Revisit by |", "|---|---|---|---|---|"]
         for c in ratify:
             rows.append(f"| {cell(c['lever'])} | {cell(c['chosen'])} | {cell(c['main_alternative'])} | "

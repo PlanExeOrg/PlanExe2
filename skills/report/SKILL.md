@@ -35,8 +35,16 @@ table); `canonical_facts.md` is worded for the later stages ("All later document
 these values"). The model's reconciliation notes (process notes) go to the Consistency Check in Part 3.
 A leading heading inside a section that repeats the section title is dropped. Both are done here rather
 than in the stages, so existing runs need no regeneration. Title = wbs_level1_project_title.json. Banners at the top: an UNUSABLE screening verdict; "Consistency
-lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`);
-"Decisions required: N" from the decision register. Banners link to their section (sections have ids).
+lint FAILED" when repairable high-severity contradictions remain after repair (`consistency_recheck`).
+Banners link to their section (sections have ids). There is no banner for open decisions: Decisions
+Required is the second section, and a banner repeated it.
+
+Reader-facing text only: the Decision Dashboard is the decision-kernel table alone (the repair summary
+moves to the Consistency Check; the consistency summary and "see ..." pointers were dropped as
+repetition), the Consistency Check omits the compiler-style diagnostics block (same items as its numbered
+list; kept in consistency_recheck.md), parts have no intro sentences, the header line names only
+generator and version (repo and commit are in Provenance) and the plan start (plus hand-edited files,
+if any).
 The executive summary, project plan, pitch, review plan, Q&A, premortem and self-audit sections use
 the repaired copies from consistency_repair.
 
