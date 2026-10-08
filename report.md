@@ -704,6 +704,25 @@ critique and the report changes of 2026-10-07.
   latency x $500M-$1B tranches = $250M-$500M cost" (a delay-cost estimate written as a product).
 - Report ~146k words (previous 133k; mostly the 6 extra expert critiques).
 
+### Full run: the_consortium dated today (`runs/the_consortium_2026-10-08`, 2026-10-08)
+
+Prompt (859 words) from PlanExe-web `20260829_the_consortium.zip` (plan_raw.json, originally dated
+2026-Sep-04), start date (Month 0) 2026-10-08, generator v2.0.1-2-g4d4e66b.
+- 76/76 stages, 0 failed, 251 LLM calls (all successful), 11 web searches, **1h17m**. All 8 experts critiqued.
+- Consistency: first pass 3 high / 6 medium; three repair rounds (62, 36, 21 edits) -> 1 high / 3 medium,
+  round 3 published. The remaining repairable high ("vendor, examiner, forensic and instrument dates precede
+  their prerequisites") gives the "Consistency lint FAILED" banner; three further highs are needs_decision.
+- Decision register: 8 decisions (3 high: who owns a contingency shortfall under the hard cap; the
+  reference date of the 75-day funding Stop; the decision date after a late start and the pause clauses),
+  all candidates covered. Six gates in the kernel, from the signed instrument and matched sites to the
+  Phase One exercises.
+- Arithmetic: 22 statements, 0 wrong.
+- Banned word "blockchain": appears in the prompt itself and in Prompt Adherence's quote of the rule (the
+  baseline report has 3 such mentions too), but also in a canonical-fact basis ("The word 'blockchain' is
+  not used.") and in distill_assumptions ("No blockchain-based systems"): the model mentions the word to
+  say it avoids it. Not fixed.
+- Report ~138k words.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
