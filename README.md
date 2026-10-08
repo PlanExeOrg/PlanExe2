@@ -3,7 +3,6 @@
 > **PlanExe v1:** generate an unusually comprehensive expert planning workshop.
 > **PlanExe2:** construct a partially validated model of the project, then expose what humans still have to decide.
 
-Formerly PlanExe-skill.
 [PlanExe](https://github.com/PlanExeOrg/PlanExe)'s plan-generation pipeline, rewritten as
 **skills** executed by a tiny, dependency-free Python DAG runner.
 
