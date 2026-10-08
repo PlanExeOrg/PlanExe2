@@ -58,16 +58,19 @@ Do not run step 6 without an explicit yes in this conversation.
 
 ```bash
 python3 -m planexe_skill create runs/<name> --prompt-file runs/<name>.prompt.txt [--start-date YYYY-MM-DD]
-python3 -m planexe_skill run runs/<name>     # in the background, outside any sandbox
+python3 -m planexe_skill run runs/<yyyymmdd>_<name>     # in the background, outside any sandbox
 ```
 
+`create` names the run dir `runs/<yyyymmdd>_<name>` (the date it is created, e.g.
+`runs/20261008_bakery_lyon`) and prints the path; use that path for `run` and when reporting back.
+
 The child `claude` CLI needs keychain access, so the run must not be sandboxed. Progress lines include an
-ETA; `runs/<name>/.planexe_skill/progress.json` has the same data. Check in occasionally rather than
+ETA; `runs/<yyyymmdd>_<name>/.planexe_skill/progress.json` has the same data. Check in occasionally rather than
 polling constantly. On failure the runner prints the failing stage, the error, the log path and a retry
 command (re-running resumes; finished stages and completed LLM calls are kept). If authentication fails,
 ask the user to run `claude auth login`, then resume.
 
-When it finishes, give the user `runs/<name>/report.html` and summarize, leading with what the user
+When it finishes, give the user `runs/<yyyymmdd>_<name>/report.html` and summarize, leading with what the user
 must decide: the open decisions from "Decisions Required" (`decision_register.md`: question, options,
 owner, decide-by month) and the "Choices made on your behalf" to ratify; then the Decision Dashboard
 gates; what "Validation Status" says was and was not checked (web searches, consistency lint result,

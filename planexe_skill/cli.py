@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -66,8 +67,22 @@ def _backend(args):
     return get_backend(args.backend)
 
 
+_DATE_PREFIX = re.compile(r"^\d{8}_")
+
+
+def dated_run_dir(run_dir: Path, today: datetime | None = None) -> Path:
+    """'runs/cross_border_rail' -> 'runs/20261008_cross_border_rail' (the date the run is created, yyyymmdd).
+    A name that already starts with 8 digits and '_' is kept as it is."""
+    if _DATE_PREFIX.match(run_dir.name):
+        return run_dir
+    return run_dir.with_name(f"{(today or datetime.now()).strftime('%Y%m%d')}_{run_dir.name}")
+
+
 def cmd_create(args) -> int:
     run_dir = Path(args.run_dir)
+    if not getattr(args, "no_date_prefix", False):
+        run_dir = dated_run_dir(run_dir)
+        args.run_dir = str(run_dir)  # `run --prompt-file` continues with the dated path
     if (run_dir / PLAN_RAW).exists() and not args.overwrite:
         print(f"{run_dir / PLAN_RAW} already exists (use --overwrite).", file=sys.stderr)
         return 2
@@ -99,6 +114,7 @@ def cmd_run(args) -> int:
             rc = cmd_create(args)
             if rc:
                 return rc
+            run_dir = Path(args.run_dir)
     if not run_dir.exists():
         print(f"run dir {run_dir} does not exist. Create it with: python -m planexe_skill create {run_dir} "
               f"--prompt-file PROMPT.txt", file=sys.stderr)
@@ -189,10 +205,12 @@ def main(argv: list[str] | None = None) -> int:
         p.add_argument("--plan-raw", help="copy an existing plan_raw.json (keeps its date)")
         p.add_argument("--start-date", help="plan start date (Month 0), YYYY-MM-DD; past or future; default today")
 
-    p = sub.add_parser("create", help="create a run dir from a prompt")
-    p.add_argument("run_dir")
+    p = sub.add_parser("create", help="create a run dir from a prompt (named yyyymmdd_<name>)")
+    p.add_argument("run_dir", help="e.g. runs/my_plan; created as runs/<yyyymmdd>_my_plan unless the name "
+                                   "already starts with a date")
     add_prompt_args(p)
     p.add_argument("--overwrite", action="store_true")
+    p.add_argument("--no-date-prefix", action="store_true", help="use run_dir exactly as given")
     p.set_defaults(func=cmd_create)
 
     p = sub.add_parser("run", help="run all dirty stages")

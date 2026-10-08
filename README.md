@@ -35,8 +35,8 @@ Then ask for a plan, e.g. "make a plan for a bakery in Lyon". The `make-plan` sk
 with `check-prompt`, and launches only after you confirm. Codex and other agents follow the same steps via
 `AGENTS.md`.
 
-Plans are written to `runs/<name>/` inside the clone (ignored by git); the result is
-`runs/<name>/report.html`. Update with `git pull`; each report's Metadata section names the PlanExe2 version
+Plans are written to `runs/<yyyymmdd>_<name>/` inside the clone (ignored by git), e.g.
+`runs/20261008_cross_border_rail_ticketing/`; the result is its `report.html`. Update with `git pull`; each report's Metadata section names the PlanExe2 version
 that produced it (`git describe`, e.g. `v2.0.2`).
 
 ### Without git: let the agent fetch it
@@ -55,10 +55,12 @@ more reliable.
 ```bash
 python3 -m planexe_skill check-prompt --prompt-file my_prompt.txt   # optional: is the prompt usable?
 python3 -m planexe_skill create runs/my_plan --prompt-file my_prompt.txt [--start-date YYYY-MM-DD]
-python3 -m planexe_skill run runs/my_plan                    # resumable; prints progress with an ETA
+python3 -m planexe_skill run runs/20261008_my_plan           # resumable; prints progress with an ETA
 ```
 
-The prompt is flowing prose: objective, scope, location, budget, timeline, stakeholders, constraints and
+`create` names the run dir after the date it is created (`runs/my_plan` becomes `runs/20261008_my_plan`) and
+prints the path; a name that already starts with `yyyymmdd_` is kept, and `--no-date-prefix` uses the path as
+given. The prompt is flowing prose: objective, scope, location, budget, timeline, stakeholders, constraints and
 success criteria. The start date (Month 0) defaults to today and may be in the past or the future.
 
 > Running inside a sandboxed agent (e.g. Claude Code desktop with sandbox on)? The child

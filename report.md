@@ -580,7 +580,7 @@ routine alert days), consistency 0 high after repair with 7 explicit decisions. 
   ("Month 0.5, 1, 1.5, 2") are annotated as a whole, "Month N+" is left alone, and the normalizer is
   idempotent on its own output (tests added).
 
-### Full run: rubber_resilience (`runs/rubber_resilience`, 2026-10-06)
+### Full run: rubber_resilience (`runs/20261006_rubber_resilience`, 2026-10-06)
 
 Prompt and plan date (Month 0 = 2026-04-04) taken from the older-format PlanExe-web zip (numbered file
 names, no plan_raw.json; rebuilt from `001-2-plan.txt`). Generator v2.0.0-2-ga630d29 (first run with
@@ -680,7 +680,7 @@ instead of failing the stage; the stage fails only if every critic fails. expert
 executive_summary, review_plan, questions_and_answers, premortem, self_audit, data_collection and
 identify_documents, which now see all critiques.
 
-### Full run: rubber_resilience dated today (`runs/rubber_resilience_2026-10-08`, 2026-10-08)
+### Full run: rubber_resilience dated today (`runs/20261008_rubber_resilience`, 2026-10-08)
 
 Same prompt as the 2026-10-06 run, start date (Month 0) 2026-10-08. Generator v2.0.1-1-ge5e423f, one version
 for every stage. First full run with the decision register, the arithmetic check, the voice rule, all-expert
@@ -704,7 +704,7 @@ critique and the report changes of 2026-10-07.
   latency x $500M-$1B tranches = $250M-$500M cost" (a delay-cost estimate written as a product).
 - Report ~146k words (previous 133k; mostly the 6 extra expert critiques).
 
-### Full run: the_consortium dated today (`runs/the_consortium_2026-10-08`, 2026-10-08)
+### Full run: the_consortium dated today (`runs/20261008_the_consortium`, 2026-10-08)
 
 Prompt (859 words) from PlanExe-web `20260829_the_consortium.zip` (plan_raw.json, originally dated
 2026-Sep-04), start date (Month 0) 2026-10-08, generator v2.0.1-2-g4d4e66b.
@@ -723,7 +723,7 @@ Prompt (859 words) from PlanExe-web `20260829_the_consortium.zip` (plan_raw.json
   say it avoids it. Not fixed.
 - Report ~138k words.
 
-### Full run: faraday_enclosure dated today (`runs/faraday_enclosure_2026-10-08`, 2026-10-08)
+### Full run: faraday_enclosure dated today (`runs/20261008_faraday_enclosure`, 2026-10-08)
 
 Prompt (69 words) from PlanExe-web `20250720_faraday_enclosure.zip` (originally dated 2026-May-03), start date
 (Month 0) 2026-10-08, generator v2.0.1-3-g70b03a7.
@@ -741,7 +741,7 @@ Prompt (69 words) from PlanExe-web `20250720_faraday_enclosure.zip` (originally 
   real or misleading (several are the same sentence in more than one file).
 - Report ~139k words.
 
-### Full run: heatwave_resilience dated today (`runs/heatwave_resilience_2026-10-08`, 2026-10-08)
+### Full run: heatwave_resilience dated today (`runs/20261008_heatwave_resilience`, 2026-10-08)
 
 Prompt (797 words) from PlanExe-web `20260202_heatwave_resilience.zip` (originally dated 2026-May-03), start
 date (Month 0) 2026-10-08, generator v2.0.1-6-g83c333a. Pilot city chosen: Castellón.
@@ -760,7 +760,7 @@ date (Month 0) 2026-10-08, generator v2.0.1-6-g83c333a. Pilot city chosen: Caste
   over 9 runs: 305 checked, all remaining flags real or misleading.
 - Report ~144k words.
 
-### Full run: cross_border_rail_ticketing dated today (`runs/cross_border_rail_ticketing_2026-10-08`, 2026-10-08)
+### Full run: cross_border_rail_ticketing dated today (`runs/20261008_cross_border_rail_ticketing`, 2026-10-08)
 
 Prompt (339 words) from PlanExe-web `20260514_cross_border_rail_ticketing.zip` (originally dated
 2026-May-14), start date (Month 0) 2026-10-08, generator v2.0.2 (first run on that tag).
