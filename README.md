@@ -108,3 +108,7 @@ python3 -m unittest discover -s tests -t .
 ```
 
 Verification against PlanExe baselines lives in `verify/`; findings are in `report.md`.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Includes code and prompts from [PlanExe v1](https://github.com/PlanExeOrg/PlanExe), also MIT.
