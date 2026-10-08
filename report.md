@@ -760,6 +760,21 @@ date (Month 0) 2026-10-08, generator v2.0.1-6-g83c333a. Pilot city chosen: Caste
   over 9 runs: 305 checked, all remaining flags real or misleading.
 - Report ~144k words.
 
+### Full run: cross_border_rail_ticketing dated today (`runs/cross_border_rail_ticketing_2026-10-08`, 2026-10-08)
+
+Prompt (339 words) from PlanExe-web `20260514_cross_border_rail_ticketing.zip` (originally dated
+2026-May-14), start date (Month 0) 2026-10-08, generator v2.0.2 (first run on that tag).
+- 76/76 stages, 0 failed, 234 LLM calls (all successful), 14 web searches, **1h19m**. All 8 experts critiqued.
+- Consistency: first pass 2 high / 6 medium, plus 2 arithmetic mismatches (the same sentence twice in
+  Review Plan: "EUR 290 million = EUR 234M grants + EUR 44M hubs", which is 278M). One repair round (38
+  edits) -> 0 high / 4 medium; the sum was repaired by naming the missing EUR 12M item. Final arithmetic
+  check: 20 statements, all correct. No "lint FAILED" banner.
+- Decision register: 7 decisions (4 high: who pays beyond the fixed EUR 1.5B cap; the scope of the public
+  reference distributor; the meaning and timing of the Month 24 through-ticket share gate; the demand
+  thresholds). Six gates, from the delegation of binding technical authority to the arbitration panel to
+  hubs and settlement carrying real traffic.
+- Report ~176k words (the longest so far; 8 expert critiques of a broad multi-stakeholder program).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
