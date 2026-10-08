@@ -41,7 +41,8 @@ def run(ctx):
     ctx.write_json("arithmetic_check.json", {"checked": checked, "mismatches": mismatches, "by_section": by_section})
     n = len(mismatches)
     rows = [f"{plural(checked, 'explicit calculation')} found in the documents re-computed without an LLM; "
-            f"{n} {'does' if n == 1 else 'do'} not match {'its' if n == 1 else 'their'} stated result.", ""]
+            + ("all match their stated result." if n == 0 else
+               f"{n} {'does' if n == 1 else 'do'} not match {'its' if n == 1 else 'their'} stated result."), ""]
     if mismatches:
         rows += ["| Section | Statement | Stated | Computed |", "|---|---|---|---|"]
         rows += [f"| {cell(m['section'])} | {cell(m['excerpt'])} | {cell(m['stated'])} | {cell(m['computed'])} |"
