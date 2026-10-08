@@ -1,4 +1,4 @@
-# PlanExe2 (formerly PlanExe-skill): conversion report
+# PlanExe2: conversion report
 
 This report tracks the port of PlanExe's Luigi pipeline (73 stages) to skills run by the
 `planexe_skill` DAG, with the verification results and every regression/tweak found on the way.
