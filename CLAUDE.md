@@ -3,7 +3,7 @@
 To generate a plan for the user, use the `make-plan` skill (`.claude/skills/make-plan/SKILL.md`): it
 interviews the user to turn a vague idea into a concrete prompt, checks it with
 `python3 -m planexe_skill check-prompt`, and asks for explicit confirmation before launching (a full plan is
-~200 LLM calls, ~1 hour). The launch steps:
+~220-260 LLM calls, ~65-90 minutes). The launch steps:
 
 1. Write the agreed prompt to a text file (flowing prose, ~300-800 words: objective, scope, location,
    budget, timeline, stakeholders, constraints, success criteria).

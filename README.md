@@ -13,23 +13,64 @@ Formerly PlanExe-skill.
 - Edit any intermediary file and re-run: your edit is kept and everything downstream is regenerated.
 - Progress bar with an ETA based on the DAG's critical path.
 
-## Quick start
+## Getting started
 
-With a coding agent: open this repo in Claude Code and ask for a plan ("make a plan for a bakery in
-Lyon"). The `make-plan` skill asks a few questions, drafts and checks the prompt, and launches only after
-you confirm. By hand:
+You need:
+
+- **Python 3.11 or newer** (standard library only; nothing to `pip install`).
+- **The Claude Code CLI, logged in**: `claude auth login`. PlanExe2 makes its LLM calls through it, on
+  your Claude subscription.
+- **Usage budget**: a full plan is about 220-260 LLM calls and takes roughly 65-90 minutes.
+
+### Recommended: clone the repo and ask your coding agent
 
 ```bash
-claude auth login                      # once
-python3 -m planexe_skill create runs/my_plan --prompt-file my_prompt.txt
-python3 -m planexe_skill run runs/my_plan
+git clone https://github.com/PlanExeOrg/PlanExe2.git
+cd PlanExe2
+claude
 ```
 
-A full plan is ~180-250 LLM calls and takes roughly 15-45 minutes. The final report is
-`runs/my_plan/report.html`.
+Then ask for a plan, e.g. "make a plan for a bakery in Lyon". The `make-plan` skill
+(`.claude/skills/make-plan/`) takes over: it asks a few questions, drafts a 300-800 word prompt, checks it
+with `check-prompt`, and launches only after you confirm. Codex and other agents follow the same steps via
+`AGENTS.md`.
+
+Plans are written to `runs/<name>/` inside the clone (ignored by git); the result is
+`runs/<name>/report.html`. Update with `git pull`; each report's Metadata section names the PlanExe2 version
+that produced it (`git describe`, e.g. `v2.0.2`).
+
+### Without git: let the agent fetch it
+
+In any Claude Code session, paste:
+
+> Clone https://github.com/PlanExeOrg/PlanExe2, read its CLAUDE.md, and use its make-plan skill to make
+> me a plan for a bakery in Lyon.
+
+This works, but a session started outside the repo does not load the repo's skill on its own, so the
+agent has to find and read `CLAUDE.md` first. Cloning and starting the agent inside the repo (above) is
+more reliable.
+
+### By hand
+
+```bash
+python3 -m planexe_skill check-prompt --prompt-file my_prompt.txt   # optional: is the prompt usable?
+python3 -m planexe_skill create runs/my_plan --prompt-file my_prompt.txt [--start-date YYYY-MM-DD]
+python3 -m planexe_skill run runs/my_plan                    # resumable; prints progress with an ETA
+```
+
+The prompt is flowing prose: objective, scope, location, budget, timeline, stakeholders, constraints and
+success criteria. The start date (Month 0) defaults to today and may be in the past or the future.
 
 > Running inside a sandboxed agent (e.g. Claude Code desktop with sandbox on)? The child
 > `claude` process needs keychain access for auth, so run the command outside the sandbox.
+
+### Why there is no pip package
+
+There are no dependencies to install, and the skills, prompts and schemas live in the repo next to the
+agent instructions that drive them. A pip package would move the `make-plan` skill out of the user's
+project and need a separate install step for the guided flow. A Claude Code plugin (bundling `make-plan`
+and the runner, installed with `/plugin install`) is the likely route if PlanExe2 should work from any
+folder without cloning.
 
 ## What the report contains
 

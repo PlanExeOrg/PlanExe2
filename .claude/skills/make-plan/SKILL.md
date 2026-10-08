@@ -5,7 +5,7 @@ description: Turn a user's planning idea into a strong PlanExe2 prompt through a
 
 # Make a plan with PlanExe2
 
-A full plan costs about 200 LLM calls and roughly an hour on the user's Claude subscription. A vague
+A full plan costs about 220-260 LLM calls and roughly 65-90 minutes on the user's Claude subscription. A vague
 prompt ("make me a restaurant") produces a generic plan full of invented details, so first help the user
 get to a concrete prompt, and launch only after they explicitly say go.
 
@@ -48,7 +48,7 @@ twice is usually enough).
 ## 5. Confirm before launching
 
 Show the user the final prompt (or a summary plus the file path if it is long), the check result, the
-plan start date, and what launching costs: about 200 LLM calls, roughly an hour, on their Claude
+plan start date, and what launching costs: about 220-260 LLM calls, roughly 65-90 minutes, on their Claude
 subscription, in the background. Then ask explicitly, e.g. with AskUserQuestion:
 "Launch the full plan generation now?" with options Launch / Revise the prompt / Cancel.
 
