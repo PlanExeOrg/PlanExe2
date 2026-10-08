@@ -9,7 +9,7 @@ It is built for precision over recall: anything ambiguous (dates, slash lists su
 statement passes if any reasonable reading matches (with or without k/M/B multipliers, percent as
 x/100 or x, ranges evaluated end-point-wise or as intervals, rounding of the stated value).
 
-Supported: + - x × * / ÷ ^, parentheses, currency prefixes (USD, EUR, $, €, ...), multipliers (k, M,
+Supported: + - x × * / ÷ ^ √, parentheses, currency prefixes (USD, EUR, $, €, ...), multipliers (k, M,
 B, bn, million, billion), percents, ranges ("30-50", "150k–400k", "3.6–9.6M"), units after numbers
 ("m3/d", "t/yr", "alert days"), chains ("a x b = c x d = e").
 """
@@ -40,7 +40,7 @@ TOKEN_RE = re.compile(r"""
            (?P<bm>bn|mn|[kKMB](?![A-Za-z]))?)?
         (?P<pct>\s?%)?
     )
-  | (?P<op>[+×*÷^−=≈]|/(?![A-Za-z])|(?<=\s)-(?=\s)|\bx\b|\bX\b|(?<=\d)x(?=\d))
+  | (?P<op>[+×*÷^−=≈√]|/(?![A-Za-z])|(?<=\s)-(?=\s)|\bx\b|\bX\b|(?<=\d)x(?=\d))
   | (?P<lp>\()
   | (?P<rp>\))
   | (?P<word>US\$|[A-Za-z][A-Za-z0-9'³²]*(?:/[A-Za-z0-9³²]+)*|/[A-Za-z][A-Za-z0-9³²]*)
@@ -154,7 +154,7 @@ def _classify(toks: list[Tok]) -> list[Tok]:
     approx_next = False
     for i, t in enumerate(toks):
         nxt = next((u for u in toks[i + 1:] if not (u.kind == "word" and u.text in CURRENCY_WORDS)), None)
-        if t.kind == "op" and t.text == "*" and not (nxt and nxt.kind in ("num", "lp")):
+        if t.kind == "op" and t.text == "*" and not (nxt and (nxt.kind in ("num", "lp") or nxt.text == "√")):
             # a trailing "x"/"×" ("1.5×", "0.68x") is a unit, not an operator
             t = Tok("unit", t.text, t.start, t.end, t.space_before)
         if t.kind == "word":
@@ -248,6 +248,9 @@ class _Parser:
         if t is not None and t.kind == "op" and t.text == "-":
             self.take()
             return ("neg", self.unary())
+        if t is not None and t.kind == "op" and t.text == "√":
+            self.take()
+            return ("sqrt", self.unary())
         return self.atom()
 
     def atom(self):
@@ -276,6 +279,11 @@ def _eval(node, use_mult: bool, end: str, with_err: bool) -> tuple[float, float]
     if node[0] == "neg":
         lo, hi = _eval(node[1], use_mult, end, with_err)
         return -hi, -lo
+    if node[0] == "sqrt":
+        lo, hi = _eval(node[1], use_mult, end, with_err)
+        if lo < 0:
+            raise ValueError("square root of a negative number")
+        return lo ** 0.5, hi ** 0.5
     (a, b), (c, d) = _eval(node[1], use_mult, end, with_err), _eval(node[2], use_mult, end, with_err)
     op = node[0]
     if op == "+":
@@ -320,7 +328,7 @@ Candidate = tuple[Interval, Interval]
 def _relative_pct(node):
     """'EUR 70 + 10%' read as a 10% increase: X + p% -> X * (1 + p%), X - p% -> X * (1 - p%).
     Returns None when the expression has no such term."""
-    if isinstance(node, Num) or node[0] == "neg":
+    if isinstance(node, Num) or node[0] in ("neg", "sqrt"):
         return None
     op, left, right = node
     if op in "+-" and isinstance(right, Num) and right.pct and not (isinstance(left, Num) and left.pct):

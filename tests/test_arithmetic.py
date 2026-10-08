@@ -26,6 +26,7 @@ class ArithmeticTest(unittest.TestCase):
             "surplus 90 - 60-90 = 0-30M",
             "If the fabricator raises the price >10% (EUR 70 unit cost + 10% = EUR 77)",
             "a 20% discount: EUR 150 - 20% = EUR 120",
+            "margin of error 1.96×√(0.6×0.4/300) = 0.055",
         ]
         for line in ok:
             r = results(line)
