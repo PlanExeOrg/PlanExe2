@@ -1,3 +1,4 @@
+from planexe_skill.planexe import plural
 from planexe_skill.shared.arithmetic import check_text
 
 DOCUMENTS = [
@@ -38,8 +39,9 @@ def run(ctx):
         mismatches += [{"section": title, "file": name, "line": f.line, "expression": f.expression,
                         "stated": f.stated, "computed": f.computed, "excerpt": f.excerpt} for f in bad]
     ctx.write_json("arithmetic_check.json", {"checked": checked, "mismatches": mismatches, "by_section": by_section})
-    rows = [f"{checked} explicit calculations found in the documents were re-computed without an LLM; "
-            f"{len(mismatches)} do not match their stated result.", ""]
+    n = len(mismatches)
+    rows = [f"{plural(checked, 'explicit calculation')} found in the documents re-computed without an LLM; "
+            f"{n} {'does' if n == 1 else 'do'} not match {'its' if n == 1 else 'their'} stated result.", ""]
     if mismatches:
         rows += ["| Section | Statement | Stated | Computed |", "|---|---|---|---|"]
         rows += [f"| {cell(m['section'])} | {cell(m['excerpt'])} | {cell(m['stated'])} | {cell(m['computed'])} |"
