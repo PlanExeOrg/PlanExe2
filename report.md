@@ -723,6 +723,24 @@ Prompt (859 words) from PlanExe-web `20260829_the_consortium.zip` (plan_raw.json
   say it avoids it. Not fixed.
 - Report ~138k words.
 
+### Full run: faraday_enclosure dated today (`runs/faraday_enclosure_2026-10-08`, 2026-10-08)
+
+Prompt (69 words) from PlanExe-web `20250720_faraday_enclosure.zip` (originally dated 2026-May-03), start date
+(Month 0) 2026-10-08, generator v2.0.1-3-g70b03a7.
+- 76/76 stages, 0 failed, 220 LLM calls (all successful), 10 web searches, **1h05m**. The expert finder
+  returned 5 experts this time; all 5 critiqued.
+- Consistency: first pass 2 high / 6 medium; one repair round (38 edits) -> 0 high / 7 medium repairable, so
+  no "lint FAILED" banner. Two highs need decisions.
+- Decision register: 4 decisions (2 high: the deposit share and deposit-use rule, by Month 0.5; the source
+  of the gate-quarter sales volume, by Month 5). Six gates, from the signed cash-flow gate convention to
+  the trailing-quarter cash surplus that releases the EUR 350k follow-on.
+- Arithmetic: 36 statements. First 3 flagged; two were false positives ("EUR 70 unit cost + 10% = EUR 77",
+  a 10% increase, read as adding 0.10), fixed in the checker (e3811ec: "X + p%" may mean X x (1+p)). The
+  remaining one is real: Expert Criticism quotes "750 units x EUR 67 = EUR 30.25k", a misquote of the
+  canonical "750 x 67 - 20,000 = EUR 30.25k". Survey over 8 runs after the fix: 275 checked, 8 flagged, all
+  real or misleading (several are the same sentence in more than one file).
+- Report ~139k words.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
