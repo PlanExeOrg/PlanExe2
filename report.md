@@ -741,6 +741,25 @@ Prompt (69 words) from PlanExe-web `20250720_faraday_enclosure.zip` (originally 
   real or misleading (several are the same sentence in more than one file).
 - Report ~139k words.
 
+### Full run: heatwave_resilience dated today (`runs/heatwave_resilience_2026-10-08`, 2026-10-08)
+
+Prompt (797 words) from PlanExe-web `20260202_heatwave_resilience.zip` (originally dated 2026-May-03), start
+date (Month 0) 2026-10-08, generator v2.0.1-6-g83c333a. Pilot city chosen: Castellón.
+- 76/76 stages, 0 failed, 260 LLM calls (all successful), 10 web searches, **1h30m**. All 8 experts critiqued.
+- Season: with Month 0 in October, the prompt's Month 4 scale gate (2027-02-08) cannot use "early-season heat
+  days". The plan noticed: its first gate asks whether the funder has signed an amendment accepting
+  drill-based evidence for the Month 4 gates (and a EUR 750k partial-release rule).
+- Consistency: first pass 3 high / 6 medium; three repair rounds (44, 33, 30 edits) -> 0 high / 4 medium,
+  no "lint FAILED" banner. Two highs need decisions.
+- Decision register: 4 decisions (2 high: gap financing if tranche 2 is released late, against the plan's
+  grant-only/no-debt model; the staffing basis for the Month 3.2 drill when staff are not yet hired).
+- Banned words (blockchain, NFT, VR, AR, "fully automated", "AI-driven diagnosis") appear only in the
+  prompt itself and in Prompt Adherence's quote of the rule.
+- Arithmetic: 26 statements. The one flag was a false positive ("1.96×√(0.6×0.4/300) = 0.055": the checker
+  did not know √). Fixed (square root supported; a "×" before "√" is multiplication): 0 wrong now. Survey
+  over 9 runs: 305 checked, all remaining flags real or misleading.
+- Report ~144k words.
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
