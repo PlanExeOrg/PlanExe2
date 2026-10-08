@@ -44,5 +44,12 @@ class MarkdownHtmlTest(unittest.TestCase):
         self.assertEqual(render("a\n\n---\n\nb"), "<p>a</p>\n<hr />\n<p>b</p>")
 
 
+    def test_less_than_before_text_is_not_a_tag(self):
+        out = render("**KPI 2: report at <EUR 20k total lab cost.** Target: <5 days, a<b; keep <em>x</em> and <br>.")
+        self.assertIn("<strong>KPI 2: report at &lt;EUR 20k total lab cost.</strong>", out)
+        self.assertIn("&lt;5 days, a&lt;b", out)
+        self.assertIn("<em>x</em>", out)
+        self.assertIn("<br>", out)
+
 if __name__ == "__main__":
     unittest.main()

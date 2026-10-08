@@ -9,7 +9,11 @@ from __future__ import annotations
 import html
 import re
 
-_TAG = re.compile(r"</?[A-Za-z][A-Za-z0-9-]*(\s[^<>]*)?/?>|<!--.*?-->")
+# Inline HTML is kept only for real tag names: LLM text like "at <EUR 20k total" or "<5 days" is text, and
+# treating "<EUR ...>" as a tag swallowed a closing </strong> so the rest of the report rendered bold.
+_TAG_NAMES = ("a|abbr|b|blockquote|br|code|dd|del|details|div|dl|dt|em|h[1-6]|hr|i|img|ins|kbd|li|mark|ol|p|"
+              "pre|s|section|small|span|strong|sub|summary|sup|table|tbody|td|th|thead|tr|u|ul")
+_TAG = re.compile(r"</?(?:" + _TAG_NAMES + r")(?=[\s/>])(\s[^<>]*)?/?>|<!--.*?-->", re.I)
 _ENTITY = re.compile(r"&(#\d+|#x[0-9a-fA-F]+|[A-Za-z][A-Za-z0-9]*);")
 _HEADING = re.compile(r"^(#{1,6})[ \t]+(.*?)[ \t]*#*[ \t]*$")
 _HR = re.compile(r"^ {0,3}([-*_])([ \t]*\1){2,}[ \t]*$")
