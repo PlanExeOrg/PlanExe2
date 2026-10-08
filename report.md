@@ -680,6 +680,30 @@ instead of failing the stage; the stage fails only if every critic fails. expert
 executive_summary, review_plan, questions_and_answers, premortem, self_audit, data_collection and
 identify_documents, which now see all critiques.
 
+### Full run: rubber_resilience dated today (`runs/rubber_resilience_2026-10-08`, 2026-10-08)
+
+Same prompt as the 2026-10-06 run, start date (Month 0) 2026-10-08. Generator v2.0.1-1-ge5e423f, one version
+for every stage. First full run with the decision register, the arithmetic check, the voice rule, all-expert
+critique and the report changes of 2026-10-07.
+- Creating the run exposed a start-date bug: `create --start-date` stored local midnight, which is the
+  previous day in UTC (CEST), and Month 0 was read from the UTC date, so Month 0 would have been 2026-10-07
+  while the prompt said 2026-Oct-08. Month 0 is now the local date (`server_iso_local`), `--start-date`
+  stores midday, and the schedule uses the same date (e5e423f). Calendar annotations in this run: Month 6 =
+  2027-04-08, Month 36 = 2029-10-08, Month 84 = 2033-10-08.
+- 76/76 stages, 0 failed, 229 LLM calls (all successful), 10 web searches, **1h18m** (previous run: 220
+  calls, 1h14m; +6 expert critiques).
+- All 8 experts critiqued; no "did not provide feedback". premise_attack: all 5 lenses this time (the
+  previous run had one refused). No first-person "I could not verify / I recomputed" sentences in the report.
+- Consistency: first pass 3 high / 6 medium; repair round 1 (28 edits) -> 1 high / 6 medium, round 2 (19
+  edits) -> 1 high / 8 medium, so round 1 was published. One repairable high remains ("Outbreak reserve
+  target vs USD 1.0B ceiling": USD 1.5B reserve vs a USD 1.0B ceiling inside the cap), so the report carries
+  the "Consistency lint FAILED" banner. Two further highs are needs_decision.
+- Decision register: 3 decisions (2 high: who pays the USD 7.0B development-bank lending and whether it sits
+  inside the cap; the alternative-rubber hub gate and its financing), all candidates covered.
+- Arithmetic: 31 statements checked, 1 flagged in Assumptions (not a repairable document): "3-6 month
+  latency x $500M-$1B tranches = $250M-$500M cost" (a delay-cost estimate written as a product).
+- Report ~146k words (previous 133k; mostly the 6 extra expert critiques).
+
 ## Results
 
 See `verify/results/SUMMARY.md` (regenerate with `python3 -m verify.summary`); raw judge
