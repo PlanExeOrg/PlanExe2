@@ -1,0 +1,17 @@
+.copy-all-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 0.75rem 0;
+}
+
+.copy-all-button {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.copy-all-button--done {
+  background-color: var(--md-accent-fg-color, #1a73e8);
+  color: #fff;
+}

@@ -88,75 +88,18 @@ The report leads with the decisions and key facts, not the workshop:
    calculation, and which sections were not checked), the full consistency check, prompt vetting, prompt
    adherence and metadata (generator version, commit, models per stage).
 
-## Commands
+## Documentation
 
-| command | what it does |
-|---|---|
-| `check-prompt --prompt-file F` | pre-flight check of a prompt (1 LLM call): usability, completeness, questions |
-| `create RUN_DIR --prompt-file F [--start-date D]` | create a run dir (`plan_raw.json`, `start_time.json`); D = Month 0 |
-| `run RUN_DIR` | run every dirty stage; resumes where it left off |
-| `run RUN_DIR --only STAGE` | run one stage (its inputs must already exist) |
-| `run RUN_DIR --until STAGE` | run a stage and everything it depends on |
-| `run RUN_DIR --force-downstream STAGE` | regenerate a stage and everything after it |
-| `run RUN_DIR --dry-run` | list stages that would run |
-| `status RUN_DIR` | which stages are dirty and why |
-| `explain RUN_DIR STAGE` | details for one stage |
-| `graph [--dot]` | stages in topological order |
+Full documentation: [docs.planexe.org](https://docs.planexe.org)
 
-Options: `--workers N` (concurrent LLM calls, default 4), `--model-high`, `--model-low`.
-Create `RUN_DIR/.planexe_skill/stop` to stop gracefully; progress is mirrored to
-`RUN_DIR/.planexe_skill/progress.json`, per-stage logs (every prompt and response) live in
-`RUN_DIR/.planexe_skill/logs/`.
+- [Getting started](https://docs.planexe.org/getting_started/)
+- [The report](https://docs.planexe.org/report/): what each section is for
+- [Commands](https://docs.planexe.org/commands/): command reference, options, stopping, failures and
+  resuming, versioning and report metadata
+- [How it works](https://docs.planexe.org/how_it_works/): the DAG, skill folders, tiers, dirtiness, editing
+  intermediary files, stages added by PlanExe2
 
-## Versioning and report metadata
-
-Every report's Metadata section names its generator version (`git describe`: `v2.0.0` on the tag,
-`v2.0.0-3-gabc1234` three commits later, `+modified` for uncommitted changes), repo and commit. A run can mix code versions
-(resumed runs, stages regenerated after an edit), so this is kept per stage:
-`RUN_DIR/planexe_report_metadata.json` lists, for every stage, the generator version and commit, when it
-ran, which models it used, how many LLM calls and web searches it made, plus hand-edited intermediary
-files and adopted stages; the report's last section, "Metadata", renders it (runs made before
-2026-10-07 have `planexe_provenance.json`, which the next `run` replaces). Each `*_raw.json` also carries `metadata.generator`
-(repo, commit, git tag). The plan's start date (Month 0, `start_time.json`) is independent of when the
-plan is generated, so plans can be dated in the past or the future.
-
-To release a version: `git tag v2.0.0 && git push --tags`.
-
-## Failures and resuming
-
-LLM calls stream their output; a call that produces nothing for 90 s is killed and retried once,
-and no call may run longer than 10 minutes. Completed LLM calls inside a stage are cached, so
-re-running after a failure only repeats the calls that didn't finish.
-
-## How dirtiness works
-
-`RUN_DIR/.planexe_skill/manifest.json` stores, for every stage, hashes of its skill folder,
-its input files and its output files. A stage re-runs when an output is missing, its skill
-folder changed, or one of its inputs changed. Hand-edited outputs are kept and make the
-downstream stages dirty. Output files without a manifest record are adopted as clean, so you
-can drop a PlanExe run's files into a run dir and regenerate selected stages.
-
-## Skills
-
-Each stage is a folder in `skills/`:
-
-```
-skills/identify_purpose/
-  SKILL.md        frontmatter (inputs, outputs, tier, est_llm_calls) + description
-  prompts/        system prompts, verbatim from PlanExe unless noted in report.md
-  schema.json     JSON schema for structured output
-  run.py          def run(ctx): reads inputs, calls ctx.llm(...), writes outputs
-```
-
-`tier: high` stages (the foundational early stages) use Sonnet with high effort,
-`tier: low` stages use Haiku. Edges in the DAG are derived from file names: a stage depends
-on whichever stage produces one of its inputs.
-
-Stages added by PlanExe2 (not in PlanExe v1): `canonical_facts` (one table of key numbers and dates,
-before the project plan), `consistency_review` and `consistency_repair` (lint the core documents against
-the canonical facts and repair them with exact edits, including deterministic arithmetic fixes),
-`decision_register` (the open decisions as options/consequences/owner/deadline, and the choices to
-ratify) and `arithmetic_check` (deterministic re-computation of every written calculation).
+The site is built from `docs/website/` by [PlanExe-docs](https://github.com/PlanExeOrg/PlanExe-docs).
 
 ## Tests
 
