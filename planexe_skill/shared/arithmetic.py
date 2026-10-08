@@ -317,8 +317,25 @@ Interval = tuple[float, float]
 Candidate = tuple[Interval, Interval]
 
 
+def _relative_pct(node):
+    """'EUR 70 + 10%' read as a 10% increase: X + p% -> X * (1 + p%), X - p% -> X * (1 - p%).
+    Returns None when the expression has no such term."""
+    if isinstance(node, Num) or node[0] == "neg":
+        return None
+    op, left, right = node
+    if op in "+-" and isinstance(right, Num) and right.pct and not (isinstance(left, Num) and left.pct):
+        return ("*", left, (op, Num(1.0, 1.0, text="1"), right))
+    new_left, new_right = _relative_pct(left), _relative_pct(right)
+    if new_left is None and new_right is None:
+        return None
+    return (op, new_left or left, new_right or right)
+
+
 def computed_candidates(node) -> list[Candidate]:
     out = _candidates(node)
+    relative = _relative_pct(node)
+    if relative is not None:
+        out += _candidates(relative)
     pcts = _pct_nums(node)
     if len(pcts) == 1 and _only_products(node):
         # "20 requests x 60% availability = 8 escalated" reads the complement (40%); accept that reading

@@ -24,6 +24,8 @@ class ArithmeticTest(unittest.TestCase):
             "funded from the envelope: about USD 75M/yr x 25 = about USD 1.9B",
             "(6 × 900 MW = 5.4 GW)",
             "surplus 90 - 60-90 = 0-30M",
+            "If the fabricator raises the price >10% (EUR 70 unit cost + 10% = EUR 77)",
+            "a 20% discount: EUR 150 - 20% = EUR 120",
         ]
         for line in ok:
             r = results(line)
@@ -35,6 +37,7 @@ class ArithmeticTest(unittest.TestCase):
             ("Contingency (€50M–100M contamination + €300M–500M power + €200M–300M retrofit) = €850M–1.4B", "€850M–1.4B"),
             ("Total: 4.5 + 6.0 + 6.5 = 18.5B", "18.5B"),
             ("Staff: 9 x 45k = 450k", "450k"),
+            ("the gate needs 750 units × EUR 67 = EUR 30.25k", "30.25k"),
         ]
         for line, stated in bad:
             self.assertIn((stated, False), results(line), line)

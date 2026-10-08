@@ -14,7 +14,7 @@ statements of the form `expression = value` (also chains, value-first statements
 It is tuned for precision: anything ambiguous (dates, slash lists like "Months 36/84", numbers glued to
 a parenthetical, a product restated in other units) is skipped, and a statement passes if any
 reasonable reading matches (rounding of the stated value, with or without multipliers, a power-of-1000
-unit shift, the complement of a single percent). Checked against all earlier runs: 189 statements,
+unit shift, the complement of a single percent, "X + p%" as an increase by p%: "EUR 70 + 10% = EUR 77"). Checked against all earlier runs: 189 statements,
 4 flagged, all real or misleading (e.g. "EUR 50-100M + 300-500M + 200-300M = EUR 850M-1.4B", which is
 EUR 550-900M).
 
