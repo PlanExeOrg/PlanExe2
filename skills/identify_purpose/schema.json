@@ -16,6 +16,7 @@
       "enum": [
         "personal",
         "business",
+        "public_good",
         "other"
       ],
       "title": "Purpose",

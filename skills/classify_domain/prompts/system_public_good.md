@@ -29,9 +29,11 @@ A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of prac
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
-# Purpose-specific guidance: business projects
+# Purpose-specific guidance: public-good projects
 
-This project is commercial, professional, entrepreneurial, or profit-oriented, including commercially financed infrastructure.
+This project is public-good: a government or public-sector initiative, public infrastructure, a non-profit, NGO, charity, foundation, humanitarian or community-led programme, a public-interest research or engineering programme, or an open-source or commons project. It exists to create public value rather than profit.
+
+Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, the policy area or non-profit specialty whose practitioners would lead it is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
 
 Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 

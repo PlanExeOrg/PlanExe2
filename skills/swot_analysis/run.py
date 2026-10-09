@@ -20,6 +20,8 @@ def select_system_prompt(ctx, purpose_info: dict) -> str:
     purpose = purpose_info.get("purpose")
     if purpose == "business":
         system_prompt = ctx.skill_file("prompts/business.md")
+    elif purpose == "public_good":
+        system_prompt = ctx.skill_file("prompts/public_good.md")
     elif purpose == "personal":
         system_prompt = ctx.skill_file("prompts/personal.md")
     elif purpose == "other":
@@ -27,7 +29,7 @@ def select_system_prompt(ctx, purpose_info: dict) -> str:
         system_prompt = system_prompt.replace("INSERT_USER_TOPIC_HERE", purpose_info["topic"])
         system_prompt = system_prompt.replace("INSERT_USER_SWOTTYPEDETAILED_HERE", purpose_info["purpose_detailed"])
     else:
-        raise ValueError(f"Invalid purpose: {purpose}, must be one of 'business', 'personal', or 'other'. "
+        raise ValueError(f"Invalid purpose: {purpose}, must be one of 'business', 'public_good', 'personal', or 'other'. "
                          f"Cannot perform SWOT analysis.")
     return system_prompt.strip()
 

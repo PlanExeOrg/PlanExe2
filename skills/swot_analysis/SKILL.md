@@ -7,7 +7,7 @@ tier: mid
 est_llm_calls: 1
 ---
 The purpose from identify_purpose_raw.json selects the system prompt: `prompts/business.md`,
-`prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
+`prompts/public_good.md`, `prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
 INSERT_USER_SWOTTYPEDETAILED_HERE replaced by topic / purpose_detailed). One structured call, schema
 `schema.json` (strengths, weaknesses, opportunities, threats, recommendations, strategic_objectives,
 assumptions, missing_information, user_questions). User prompt = `File 'initial-plan.txt'`,

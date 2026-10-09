@@ -10,7 +10,7 @@ uses: [planexe_skill/shared/documents.py]
 ---
 Shared logic in `planexe_skill/shared/documents.py` (run_draft). One independent structured call
 per document in filter_documents_to_find_clean.json (they run concurrently). The purpose in
-identify_purpose_raw.json selects the system prompt (`prompts/business.md` / `personal.md` /
+identify_purpose_raw.json selects the system prompt (`prompts/business.md` / `public_good.md` / `personal.md` /
 `other.md`). User prompt = strategic_decisions.md, scenarios.md, assumptions.md
 (= consolidate_assumptions_short.md), project-plan.md and `File 'document.json'` (python repr of
 the document dict, as in PlanExe). Schema `schema.json` (essential_information[],

@@ -6,7 +6,7 @@ from planexe_skill.planexe import planexe_metadata, structured
 TARGET_CANDIDATES = 9
 BATCH_SIZE = 3
 MAX_CALLS = 3
-PURPOSE_LABEL_KEYS = {"personal", "business", "other"}
+PURPOSE_LABEL_KEYS = {"personal", "business", "public_good", "other"}
 _WS = re.compile(r"\s+")
 
 

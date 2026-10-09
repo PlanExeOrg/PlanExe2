@@ -6,8 +6,11 @@ def to_markdown(r: dict) -> str:
         rows = ["**Purpose:** personal"]
     elif r["purpose"] == "business":
         rows = ["**Purpose:** business"]
+    elif r["purpose"] == "public_good":
+        rows = ["**Purpose:** public_good. This plan is meant to create public value, not profit; judge it by public "
+                "value delivered and funding accountability, not by revenue or return on investment."]
     elif r["purpose"] == "other":
-        rows = ["**Purpose:** other. This plan doesn't clearly fit into personal or business categories."]
+        rows = ["**Purpose:** other. This plan doesn't clearly fit into personal, business or public_good categories."]
     else:
         rows = [f"Invalid plan purpose. {r['purpose']}"]
     rows.append(f"\n**Purpose Detailed:** {r['purpose_detailed']}")

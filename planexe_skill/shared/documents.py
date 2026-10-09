@@ -9,7 +9,7 @@ import json
 
 from planexe_skill.planexe import planexe_metadata, raw_document, structured
 
-PURPOSES = ("business", "personal", "other")
+PURPOSES = ("business", "public_good", "personal", "other")
 
 # The number of documents to keep. It may be less or greater than this number (PlanExe PREFERRED_DOCUMENT_COUNT).
 PREFERRED_DOCUMENT_COUNT = 5
@@ -18,10 +18,10 @@ IMPACT_RATINGS = ("Critical", "High", "Medium", "Low")
 
 
 def select_system_prompt(ctx, identify_purpose_dict: dict, action: str) -> str:
-    """PlanExe picks one of three system prompts based on identify_purpose_raw.json's purpose."""
+    """Pick the system prompt for identify_purpose_raw.json's purpose (PlanExe has three; public_good is added)."""
     purpose = (identify_purpose_dict or {}).get("purpose")
     if purpose not in PURPOSES:
-        raise ValueError(f"Invalid purpose: {purpose}, must be one of 'business', 'personal', or 'other'. "
+        raise ValueError(f"Invalid purpose: {purpose}, must be one of {', '.join(PURPOSES)}. "
                          f"Cannot {action}.")
     return ctx.skill_file(f"prompts/{purpose}.md").strip()
 

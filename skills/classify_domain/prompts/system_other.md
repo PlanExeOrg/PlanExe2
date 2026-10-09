@@ -31,7 +31,7 @@ The right test is: who would I hire to lead this project? Answer with the specia
 
 # Purpose-specific guidance: other projects
 
-This project is in the "other" bucket — a catch-all that includes academic studies, hypothetical scenarios, technical inquiries, government and public-sector initiatives, non-profit organisations, NGOs, charities, foundations, community-led initiatives, AND projects that the upstream pre-pass could not confidently place in business or personal. The pre-pass picks "other" when in doubt, so the bucket sometimes contains projects that would naturally belong in business or personal but lacked clear identifying signals.
+This project is in the "other" bucket — a catch-all that includes academic studies, hypothetical scenarios, technical inquiries, public-sector or non-profit initiatives that the pre-pass did not place in public_good, AND projects that the upstream pre-pass could not confidently place in business or personal. The pre-pass picks "other" when in doubt, so the bucket sometimes contains projects that would naturally belong in business, public_good or personal but lacked clear identifying signals.
 
 Money flow is not a purpose signal. Most projects involving multiple people or longer time spans involve real money — budgets, grants, donations, sponsorship, fundraising, volunteer-time-as-cost — regardless of which bucket they sit in. The notable exception is a small personal project (a lifestyle change, a hobby, a single-household task) which can be near-zero cost. The presence of money signals in the prompt does not by itself promote a project into the business bucket; what matters is whether the outcome is profit-seeking.
 
