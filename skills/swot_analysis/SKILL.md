@@ -7,8 +7,8 @@ uses: [planexe_skill/shared/purpose.py]
 tier: mid
 est_llm_calls: 1
 ---
-The purpose from identify_purpose_raw.json selects the system prompt: `prompts/business.md`,
-`prompts/business_non_profit.md`, `prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
+The purpose and profit_motive from identify_purpose_raw.json select the system prompt: `prompts/business_for_profit.md`,
+`prompts/business_non_profit.md`, `prompts/business_other.md`, `prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
 INSERT_USER_SWOTTYPEDETAILED_HERE replaced by topic / purpose_detailed). One structured call, schema
 `schema.json` (strengths, weaknesses, opportunities, threats, recommendations, strategic_objectives,
 assumptions, missing_information, user_questions). User prompt = `File 'initial-plan.txt'`,

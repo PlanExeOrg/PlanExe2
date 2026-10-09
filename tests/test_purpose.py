@@ -35,10 +35,10 @@ class PurposeTest(unittest.TestCase):
         def variant(purpose, motive=None):
             d = {"purpose": purpose} if motive is None else {"purpose": purpose, "profit_motive": motive}
             return prompt_variant(d, "x")
-        self.assertEqual(variant("business", "for_profit"), "business")
+        self.assertEqual(variant("business", "for_profit"), "business_for_profit")
         self.assertEqual(variant("business", "non_profit"), "business_non_profit")
-        self.assertEqual(variant("business", "other"), "business_non_profit")
-        self.assertEqual(variant("business"), "business")
+        self.assertEqual(variant("business", "other"), "business_other")
+        self.assertEqual(variant("business"), "business_for_profit")
         self.assertEqual(variant("personal", "other"), "personal")
         self.assertEqual(variant("other", "non_profit"), "other")
         with self.assertRaises(ValueError):
@@ -52,7 +52,7 @@ class PurposeTest(unittest.TestCase):
 
     def test_classify_domain_drops_every_purpose_label(self):
         from skills.classify_domain.run import PURPOSE_LABEL_KEYS
-        self.assertTrue(set(PROMPT_VARIANTS) <= PURPOSE_LABEL_KEYS)
+        self.assertTrue(set(PURPOSES) | set(PROMPT_VARIANTS) <= PURPOSE_LABEL_KEYS)
 
     def test_profit_motive_markdown(self):
         from skills.identify_purpose.run import to_markdown
@@ -64,7 +64,7 @@ class PurposeTest(unittest.TestCase):
         self.assertTrue(md("for_profit").startswith("**Purpose:** business\n"))
 
     def test_swot_killer_app_is_decided_per_plan(self):
-        for variant in ("business", "business_non_profit"):
+        for variant in ("business_for_profit", "business_non_profit", "business_other"):
             text = (SKILLS / "swot_analysis" / "prompts" / f"{variant}.md").read_text()
             with self.subTest(variant=variant):
                 self.assertNotIn("Include “killer application”", text)

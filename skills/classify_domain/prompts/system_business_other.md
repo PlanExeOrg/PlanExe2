@@ -29,11 +29,11 @@ A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of prac
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
-# Purpose-specific guidance: non-profit business projects
+# Purpose-specific guidance: business projects that are neither for profit nor non-profit
 
-This project is business run as a non-profit: a non-profit, NGO, charity, foundation, humanitarian or community-led programme, an industry consortium establishing a shared standard, a public-interest research or engineering programme, or an open-source or commons project. It exists to deliver value to its members, beneficiaries or the public rather than profit for its owners.
+This project is business that is neither run for profit nor run as a non-profit: a government or public-sector initiative, public infrastructure, an agreement between countries, or a public-private hybrid. No owner profits from it; it exists to deliver outcomes for the parties involved.
 
-Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, the policy area or non-profit specialty whose practitioners would lead it is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
+Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, the policy area whose practitioners would lead it is a candidate; for an agreement between countries, the field of the agreement (e.g., trade policy, arms control) is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
 
 Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 

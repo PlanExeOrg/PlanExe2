@@ -10,10 +10,11 @@ est_llm_calls: 4
 ---
 Two passes.
 
-1. Candidate generation: up to 3 batched calls (system prompt `prompts/system_<purpose>.md`, schema
+1. Candidate generation: up to 3 batched calls (system prompt `prompts/system_<variant>.md`, schema
    `schema_fits.json`), 3 candidates per batch, until 9 distinct candidates. User message = plan.txt +
    "Plan purpose" + "Extracted constraints" sections. Cleanup in code: normalize labels, drop
-   purpose-tag labels (business/business_non_profit/non-profit/personal/other), duplicates and 1x1 (importance=1, specificity=1) fits,
+   labels that are purpose tags rather than disciplines (business, business_for_profit, business_non_profit,
+   business_other, personal, other, for-profit, non-profit), duplicates and 1x1 (importance=1, specificity=1) fits,
    clamp Likert scores to 1..5. An empty first batch means the prompt is too vague -> "Unclear".
 2. Primary selection: one call (`prompts/primary_select.md`, `schema_primary.json`) choosing the index
    of the primary candidate. Falls back to a deterministic ranking on failure.

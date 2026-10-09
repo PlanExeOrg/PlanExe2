@@ -7,7 +7,7 @@ from planexe_skill.shared.purpose import PROMPT_VARIANTS, PURPOSES, prompt_varia
 TARGET_CANDIDATES = 9
 BATCH_SIZE = 3
 MAX_CALLS = 3
-PURPOSE_LABEL_KEYS = set(PROMPT_VARIANTS) | {"non_profit", "non-profit"}
+PURPOSE_LABEL_KEYS = set(PURPOSES) | set(PROMPT_VARIANTS) | {"for-profit", "non-profit"}
 _WS = re.compile(r"\s+")
 
 
@@ -81,7 +81,7 @@ def run(ctx):
     user_prompt = augment_with_context(plan, ctx.read_text("identify_purpose.md"),
                                        ctx.read_text("extract_constraints.md"))
     system_prompt = ctx.skill_file(
-        f"prompts/system_{purpose or 'business'}.md").strip()
+        f"prompts/system_{purpose or 'business_for_profit'}.md").strip()
     fits_schema = ctx.skill_json("schema_fits.json")
 
     fits: list[dict] = []
