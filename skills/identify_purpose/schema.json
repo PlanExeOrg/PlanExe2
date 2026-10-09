@@ -22,7 +22,7 @@
       "type": "string"
     },
     "profit_motive": {
-      "description": "for_profit if the plan is run to make a profit for its owners; non_profit if it is run by or as a non-profit (NGO, charity, foundation, an industry consortium establishing a shared standard, open source); other if it fits neither (a government programme, an agreement between countries, a public-private hybrid) and for personal plans.",
+      "description": "for_profit if the plan is run to make a profit for its owners (including a company that keeps its code open source but sells consultancy, support or hosting); non_profit if it is run by or as a non-profit (NGO, charity, foundation, an industry consortium establishing a shared standard, a community-run open-source project); other if it fits neither (a government programme, an agreement between countries, a public-private hybrid) and for personal plans.",
       "enum": [
         "for_profit",
         "non_profit",

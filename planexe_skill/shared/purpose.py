@@ -3,7 +3,7 @@
 PlanExe has three purposes: business, personal, other. PlanExe2 splits business by profit_motive:
 - for_profit: run to make a profit for its owners.
 - non_profit: run by or as a non-profit (an NGO, a charity, an industry consortium establishing a shared standard,
-  an open-source project).
+  a community-run open-source project).
 - other: fits neither (a government programme, an agreement between countries, a public-private hybrid).
 Each gets its own prompt variant: business_for_profit, business_non_profit, business_other.
 """

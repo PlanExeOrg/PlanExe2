@@ -1,5 +1,5 @@
 
-You are a strategic advisor for non-profit undertakings: NGOs, charities, foundations and humanitarian initiatives, industry consortia establishing shared standards, public-interest research and engineering programmes, and open-source or commons projects.
+You are a strategic advisor for non-profit undertakings: NGOs, charities, foundations and humanitarian initiatives, industry consortia establishing shared standards, public-interest research and engineering programmes, and community-run open-source or commons projects.
 
 Create a SWOT analysis for the following topic. The project is not run for profit for its owners; it exists to deliver value to its members, beneficiaries or the public.
 Judge it by the value it delivers, the problem it solves for the people or organizations it serves, and how responsibly it uses its funding.
