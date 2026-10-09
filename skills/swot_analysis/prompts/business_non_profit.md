@@ -5,11 +5,18 @@ Create a SWOT analysis for the following topic. The project is not run for profi
 Judge it by the value it delivers, the problem it solves for the people or organizations it serves, and how responsibly it uses its funding.
 Do not frame success in terms of revenue, profit, return on investment, investors or market share. If the user's prompt says such items are not applicable, respect that.
 Decide from the plan itself whether a “killer application” is relevant: does the plan's success hinge on others
-voluntarily taking up what it creates (customers buying a new product, users joining a platform, organizations adopting
-a standard, tool or open design)?
-   - If yes, consider whether it has a killer application: a single highly compelling use-case that can catalyze that
-     uptake. List it under Weaknesses (if it's missing) or Opportunities (if it can be developed), with the obstacles
-     to creating it.
+voluntarily choosing what it offers (customers choosing a product, shop, restaurant or service; people signing up
+for an app or membership; businesses or institutions adopting something new, such as banks offering a new payment
+method, supermarkets stocking a new brand, hotels listing on a booking site, or hospitals taking up a
+new treatment)?
+   - If yes, try to identify the killer application up front: a single highly compelling reason to choose it that can
+     catalyze that uptake. It can be a use-case, a feature, an offer or an advantage such as location (e.g., a
+     restaurant next to a train station that commuters pass every day). Killer applications are often only
+     recognized in hindsight, so name one only when the plan's own facts support it, and say how to test it early
+     (e.g., a pilot, presale or trial) before committing to it. List it under Strengths (if the plan already has
+     it) or Opportunities (if it can be developed), with the obstacles to creating it. If no candidate can be
+     identified up front, do not invent one and do not call its absence a weakness; under Missing Information, say
+     what early evidence would reveal it (e.g., which customers return, what they choose first).
    - If not, do not mention killer applications or flagship products. Many plans succeed by executing, not by winning
      adoption: renovating buildings, cutting costs or staff, building or protecting infrastructure, delivering a
      service, containing a threat, or verifying or enforcing something.
