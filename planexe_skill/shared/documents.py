@@ -17,7 +17,7 @@ IMPACT_RATINGS = ("Critical", "High", "Medium", "Low")
 
 
 def select_system_prompt(ctx, identify_purpose_dict: dict, action: str) -> str:
-    """Pick the system prompt for identify_purpose_raw.json's purpose (and non_profit flag)."""
+    """Pick the system prompt for identify_purpose_raw.json's purpose (and profit_motive)."""
     return ctx.skill_file(f"prompts/{prompt_variant(identify_purpose_dict, action)}.md").strip()
 
 

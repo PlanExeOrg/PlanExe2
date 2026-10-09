@@ -21,17 +21,22 @@
       "title": "Purpose",
       "type": "string"
     },
-    "non_profit": {
-      "description": "True if the plan is not run to make a profit for its owners (public sector, non-profit, an industry consortium establishing a shared standard, open source). False if it is profit-seeking, and for personal plans.",
-      "title": "Non Profit",
-      "type": "boolean"
+    "profit_motive": {
+      "description": "for_profit if the plan is run to make a profit for its owners; non_profit if it is run by or as a non-profit (NGO, charity, foundation, an industry consortium establishing a shared standard, open source); other if it fits neither (a government programme, an agreement between countries, a public-private hybrid) and for personal plans.",
+      "enum": [
+        "for_profit",
+        "non_profit",
+        "other"
+      ],
+      "title": "Profit Motive",
+      "type": "string"
     }
   },
   "required": [
     "topic",
     "purpose_detailed",
     "purpose",
-    "non_profit"
+    "profit_motive"
   ],
   "title": "PlanPurposeInfo",
   "type": "object"

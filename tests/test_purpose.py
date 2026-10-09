@@ -2,7 +2,7 @@ import json
 import unittest
 from pathlib import Path
 
-from planexe_skill.shared.purpose import PROMPT_VARIANTS, PURPOSES, prompt_variant
+from planexe_skill.shared.purpose import PROFIT_MOTIVES, PROMPT_VARIANTS, PURPOSES, prompt_variant
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
@@ -27,18 +27,22 @@ class PurposeTest(unittest.TestCase):
     def test_purposes_match_schema(self):
         self.assertEqual(sorted(PURPOSES), sorted(schema()["properties"]["purpose"]["enum"]))
 
-    def test_schema_requires_non_profit(self):
-        self.assertEqual(schema()["properties"]["non_profit"]["type"], "boolean")
-        self.assertIn("non_profit", schema()["required"])
+    def test_schema_requires_profit_motive(self):
+        self.assertEqual(sorted(PROFIT_MOTIVES), sorted(schema()["properties"]["profit_motive"]["enum"]))
+        self.assertIn("profit_motive", schema()["required"])
 
     def test_prompt_variant(self):
-        self.assertEqual(prompt_variant({"purpose": "business", "non_profit": False}, "x"), "business")
-        self.assertEqual(prompt_variant({"purpose": "business", "non_profit": True}, "x"), "business_non_profit")
-        self.assertEqual(prompt_variant({"purpose": "business"}, "x"), "business")
-        self.assertEqual(prompt_variant({"purpose": "personal", "non_profit": True}, "x"), "personal")
-        self.assertEqual(prompt_variant({"purpose": "other", "non_profit": True}, "x"), "other")
+        def variant(purpose, motive=None):
+            d = {"purpose": purpose} if motive is None else {"purpose": purpose, "profit_motive": motive}
+            return prompt_variant(d, "x")
+        self.assertEqual(variant("business", "for_profit"), "business")
+        self.assertEqual(variant("business", "non_profit"), "business_non_profit")
+        self.assertEqual(variant("business", "other"), "business_non_profit")
+        self.assertEqual(variant("business"), "business")
+        self.assertEqual(variant("personal", "other"), "personal")
+        self.assertEqual(variant("other", "non_profit"), "other")
         with self.assertRaises(ValueError):
-            prompt_variant({"purpose": "public_good"}, "x")
+            variant("public_good")
 
     def test_every_variant_has_a_prompt(self):
         for skill, pattern in PER_VARIANT_PROMPTS.items():
@@ -50,12 +54,14 @@ class PurposeTest(unittest.TestCase):
         from skills.classify_domain.run import PURPOSE_LABEL_KEYS
         self.assertTrue(set(PROMPT_VARIANTS) <= PURPOSE_LABEL_KEYS)
 
-    def test_non_profit_markdown(self):
+    def test_profit_motive_markdown(self):
         from skills.identify_purpose.run import to_markdown
-        md = to_markdown({"purpose": "business", "non_profit": True, "purpose_detailed": "d", "topic": "t"})
-        self.assertTrue(md.startswith("**Purpose:** business, non-profit."))
-        md = to_markdown({"purpose": "business", "non_profit": False, "purpose_detailed": "d", "topic": "t"})
-        self.assertTrue(md.startswith("**Purpose:** business\n"))
+
+        def md(motive):
+            return to_markdown({"purpose": "business", "profit_motive": motive, "purpose_detailed": "d", "topic": "t"})
+        self.assertTrue(md("non_profit").startswith("**Purpose:** business, non-profit."))
+        self.assertTrue(md("other").startswith("**Purpose:** business, neither for profit nor non-profit"))
+        self.assertTrue(md("for_profit").startswith("**Purpose:** business\n"))
 
     def test_swot_killer_app_is_decided_per_plan(self):
         for variant in ("business", "business_non_profit"):
