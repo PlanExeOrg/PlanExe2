@@ -3,20 +3,29 @@ import unittest
 from pathlib import Path
 
 from planexe_skill.shared.purpose import PROFIT_MOTIVES, PROMPT_VARIANTS, PURPOSES, prompt_variant
+from planexe_skill.skill import load_skills
 
 ROOT = Path(__file__).resolve().parent.parent
 SKILLS = ROOT / "skills"
+PURPOSE_MODULE = "planexe_skill/shared/purpose.py"
+PURPOSE_IMPORT = "planexe_skill.shared.purpose"
 
-# Skills that pick a system prompt per purpose variant, and the file name pattern they use.
-PER_VARIANT_PROMPTS = {
-    "swot_analysis": "prompts/{}.md",
-    "identify_documents": "prompts/{}.md",
-    "filter_documents_to_create": "prompts/{}.md",
-    "filter_documents_to_find": "prompts/{}.md",
-    "draft_documents_to_create": "prompts/{}.md",
-    "draft_documents_to_find": "prompts/{}.md",
-    "classify_domain": "prompts/system_{}.md",
-}
+# Prompt file name pattern per skill; every other variant-using skill uses "prompts/{}.md".
+PROMPT_PATTERN = {"classify_domain": "prompts/system_{}.md"}
+
+
+def skills_declaring_purpose() -> set[str]:
+    """Skills whose SKILL.md lists planexe_skill/shared/purpose.py under `uses:`."""
+    return {name for name, skill in load_skills(SKILLS).items() if PURPOSE_MODULE in skill.uses}
+
+
+def skills_importing_purpose() -> set[str]:
+    """Skills whose run.py imports purpose.py, directly or through a shared module that imports it."""
+    shared = [f"planexe_skill.shared.{p.stem}" for p in (ROOT / "planexe_skill" / "shared").glob("*.py")
+              if PURPOSE_IMPORT in p.read_text()]
+    modules = [PURPOSE_IMPORT] + shared
+    return {name for name, skill in load_skills(SKILLS).items()
+            if any(m in (skill.dir / "run.py").read_text() for m in modules)}
 
 
 def schema() -> dict:
@@ -44,8 +53,15 @@ class PurposeTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             variant("public_good")
 
+    def test_purpose_users_declare_it(self):
+        # `uses:` feeds the dirtiness hash, and the prompt-file test below relies on it.
+        self.assertEqual(skills_declaring_purpose(), skills_importing_purpose())
+
     def test_every_variant_has_a_prompt(self):
-        for skill, pattern in PER_VARIANT_PROMPTS.items():
+        skills = skills_declaring_purpose()
+        self.assertGreaterEqual(len(skills), 7)
+        for skill in sorted(skills):
+            pattern = PROMPT_PATTERN.get(skill, "prompts/{}.md")
             for variant in PROMPT_VARIANTS:
                 with self.subTest(skill=skill, variant=variant):
                     self.assertTrue((SKILLS / skill / pattern.format(variant)).is_file())
