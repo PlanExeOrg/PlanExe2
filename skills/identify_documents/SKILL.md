@@ -5,12 +5,12 @@ inputs: [canonical_facts.json, identify_purpose_raw.json, strategic_decisions.md
 outputs: [identified_documents_raw.json, identified_documents.md, identified_documents_to_find.json, identified_documents_to_create.json]
 tier: low
 est_llm_calls: 1
-uses: [planexe_skill/shared/documents.py]
+uses: [planexe_skill/shared/documents.py, planexe_skill/shared/purpose.py]
 judge: [identified_documents.md]
 max_words_per_field: 80
 ---
 The purpose in identify_purpose_raw.json selects the system prompt (`prompts/business.md`,
-`prompts/personal.md`, `prompts/other.md`). One structured call, schema `schema.json`
+`prompts/business_non_profit.md`, `prompts/personal.md`, `prompts/other.md`). One structured call, schema `schema.json`
 (DocumentDetails: documents_to_create, documents_to_find, documents_to_create_part2,
 documents_to_find_part2). User prompt = `File '<name>':` sections for strategic_decisions.md,
 scenarios.md, assumptions.md (= consolidate_assumptions_short.md), project-plan.md,

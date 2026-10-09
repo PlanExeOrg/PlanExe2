@@ -4,6 +4,10 @@ from planexe_skill.planexe import raw_document, structured
 def to_markdown(r: dict) -> str:
     if r["purpose"] == "personal":
         rows = ["**Purpose:** personal"]
+    elif r["purpose"] == "business" and r.get("non_profit"):
+        rows = ["**Purpose:** business, non-profit. This plan is not run for profit; judge it by the value it delivers "
+                "to its members, beneficiaries or the public and by funding accountability, not by revenue or return "
+                "on investment."]
     elif r["purpose"] == "business":
         rows = ["**Purpose:** business"]
     elif r["purpose"] == "other":

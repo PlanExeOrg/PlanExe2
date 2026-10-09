@@ -6,11 +6,11 @@ outputs: [draft_documents_to_find.json, draft_documents_to_find_{n}_raw.json]
 tier: low
 est_llm_calls: 5
 parallel_llm: 5
-uses: [planexe_skill/shared/documents.py]
+uses: [planexe_skill/shared/documents.py, planexe_skill/shared/purpose.py]
 ---
 Shared logic in `planexe_skill/shared/documents.py` (run_draft). One independent structured call
 per document in filter_documents_to_find_clean.json (they run concurrently). The purpose in
-identify_purpose_raw.json selects the system prompt (`prompts/business.md` / `personal.md` /
+identify_purpose_raw.json selects the system prompt (`prompts/business.md` / `business_non_profit.md` / `personal.md` /
 `other.md`). User prompt = strategic_decisions.md, scenarios.md, assumptions.md
 (= consolidate_assumptions_short.md), project-plan.md and `File 'document.json'` (python repr of
 the document dict, as in PlanExe). Schema `schema.json` (essential_information[],

@@ -2,11 +2,12 @@ import re
 import time
 
 from planexe_skill.planexe import planexe_metadata, structured
+from planexe_skill.shared.purpose import PROMPT_VARIANTS, PURPOSES, prompt_variant
 
 TARGET_CANDIDATES = 9
 BATCH_SIZE = 3
 MAX_CALLS = 3
-PURPOSE_LABEL_KEYS = {"personal", "business", "other"}
+PURPOSE_LABEL_KEYS = set(PROMPT_VARIANTS) | {"non_profit", "non-profit"}
 _WS = re.compile(r"\s+")
 
 
@@ -75,11 +76,12 @@ def to_markdown(primary: str, secondaries: list[str], rationale: str, fits: list
 
 def run(ctx):
     plan = ctx.read_text("plan.txt")
-    purpose = str(ctx.read_json("identify_purpose_raw.json").get("purpose", "") or "").strip().lower()
+    purpose_dict = ctx.read_json("identify_purpose_raw.json")
+    purpose = prompt_variant(purpose_dict, "classify domain") if purpose_dict.get("purpose") in PURPOSES else ""
     user_prompt = augment_with_context(plan, ctx.read_text("identify_purpose.md"),
                                        ctx.read_text("extract_constraints.md"))
     system_prompt = ctx.skill_file(
-        f"prompts/system_{purpose if purpose in PURPOSE_LABEL_KEYS else 'business'}.md").strip()
+        f"prompts/system_{purpose or 'business'}.md").strip()
     fits_schema = ctx.skill_json("schema_fits.json")
 
     fits: list[dict] = []
@@ -156,7 +158,7 @@ def run(ctx):
         rationale = "No candidates emitted; the prompt is too vague to identify a project."
     else:
         t = time.time()
-        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n" if purpose in PURPOSE_LABEL_KEYS else ""
+        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n" if purpose else ""
         sel_msg = f"{user_prompt}\n\n---\n\n{purpose_section}## Candidate domains\n{format_candidate_list(fits)}\n"
         try:
             sel, _ = structured(ctx, ctx.skill_file("prompts/primary_select.md").strip(), sel_msg,

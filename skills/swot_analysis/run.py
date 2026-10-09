@@ -1,4 +1,5 @@
 from planexe_skill.planexe import format_json_for_query, planexe_metadata, structured
+from planexe_skill.shared.purpose import prompt_variant
 
 LIST_KEYS = ["strengths", "weaknesses", "opportunities", "threats", "recommendations", "strategic_objectives",
              "assumptions", "missing_information", "user_questions"]
@@ -17,18 +18,11 @@ SECTIONS = [
 
 
 def select_system_prompt(ctx, purpose_info: dict) -> str:
-    purpose = purpose_info.get("purpose")
-    if purpose == "business":
-        system_prompt = ctx.skill_file("prompts/business.md")
-    elif purpose == "personal":
-        system_prompt = ctx.skill_file("prompts/personal.md")
-    elif purpose == "other":
-        system_prompt = ctx.skill_file("prompts/other.md")
+    variant = prompt_variant(purpose_info, "perform SWOT analysis")
+    system_prompt = ctx.skill_file(f"prompts/{variant}.md")
+    if variant == "other":
         system_prompt = system_prompt.replace("INSERT_USER_TOPIC_HERE", purpose_info["topic"])
         system_prompt = system_prompt.replace("INSERT_USER_SWOTTYPEDETAILED_HERE", purpose_info["purpose_detailed"])
-    else:
-        raise ValueError(f"Invalid purpose: {purpose}, must be one of 'business', 'personal', or 'other'. "
-                         f"Cannot perform SWOT analysis.")
     return system_prompt.strip()
 
 

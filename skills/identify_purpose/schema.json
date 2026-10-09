@@ -20,12 +20,18 @@
       ],
       "title": "Purpose",
       "type": "string"
+    },
+    "non_profit": {
+      "description": "True if the plan is not run to make a profit for its owners (public sector, non-profit, an industry consortium establishing a shared standard, open source). False if it is profit-seeking, and for personal plans.",
+      "title": "Non Profit",
+      "type": "boolean"
     }
   },
   "required": [
     "topic",
     "purpose_detailed",
-    "purpose"
+    "purpose",
+    "non_profit"
   ],
   "title": "PlanPurposeInfo",
   "type": "object"

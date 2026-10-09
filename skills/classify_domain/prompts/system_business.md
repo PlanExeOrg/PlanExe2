@@ -31,7 +31,7 @@ The right test is: who would I hire to lead this project? Answer with the specia
 
 # Purpose-specific guidance: business projects
 
-This project is commercial, professional, infrastructure, public-welfare, governmental, entrepreneurial, or large-scale societal.
+This project is commercial, professional, entrepreneurial, or profit-oriented, including commercially financed infrastructure.
 
 Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 

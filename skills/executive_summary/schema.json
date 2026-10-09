@@ -36,7 +36,7 @@
       "type": "string"
     },
     "overall_takeaway": {
-      "description": "A final, concise statement emphasizing the main point or value of the plan (e.g., expected benefits, ROI, key success metric).",
+      "description": "A final, concise statement emphasizing the main point or value of the plan (e.g., expected benefits or key success metric).",
       "title": "Overall Takeaway",
       "type": "string"
     },

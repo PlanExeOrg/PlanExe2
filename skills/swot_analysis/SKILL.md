@@ -3,11 +3,12 @@ name: swot_analysis
 description: Identify strengths, weaknesses, opportunities, and threats tailored to the plan's purpose.
 inputs: [canonical_facts.json, plan.txt, strategic_decisions.md, scenarios.md, identify_purpose_raw.json, consolidate_assumptions_short.md, pre_project_assessment.json, project_plan.md, related_resources.md]
 outputs: [swot_analysis_raw.json, swot_analysis.md]
+uses: [planexe_skill/shared/purpose.py]
 tier: mid
 est_llm_calls: 1
 ---
 The purpose from identify_purpose_raw.json selects the system prompt: `prompts/business.md`,
-`prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
+`prompts/business_non_profit.md`, `prompts/personal.md` or `prompts/other.md` (the latter with INSERT_USER_TOPIC_HERE /
 INSERT_USER_SWOTTYPEDETAILED_HERE replaced by topic / purpose_detailed). One structured call, schema
 `schema.json` (strengths, weaknesses, opportunities, threats, recommendations, strategic_objectives,
 assumptions, missing_information, user_questions). User prompt = `File 'initial-plan.txt'`,

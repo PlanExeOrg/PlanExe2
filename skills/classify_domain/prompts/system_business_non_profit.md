@@ -29,40 +29,17 @@ A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of prac
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
-# Purpose-specific guidance: other projects
+# Purpose-specific guidance: non-profit business projects
 
-This project is in the "other" bucket — a catch-all that includes academic studies, hypothetical scenarios, technical inquiries, public-sector or non-profit initiatives that the pre-pass did not place in business, AND projects that the upstream pre-pass could not confidently place in business or personal. The pre-pass picks "other" when in doubt, so the bucket sometimes contains projects that would naturally belong in business or personal but lacked clear identifying signals.
+This project is business that is not run for profit: a government or public-sector initiative, public infrastructure, a non-profit, NGO, charity, foundation, humanitarian or community-led programme, an industry consortium establishing a shared standard, a public-interest research or engineering programme, or an open-source or commons project. It exists to deliver value to its members, beneficiaries or the public rather than profit for its owners.
 
-Money flow is not a purpose signal. Most projects involving multiple people or longer time spans involve real money — budgets, grants, donations, sponsorship, fundraising, volunteer-time-as-cost — regardless of which bucket they sit in. The notable exception is a small personal project (a lifestyle change, a hobby, a single-household task) which can be near-zero cost. The presence of money signals in the prompt does not by itself promote a project into the business bucket; what matters is whether the outcome is profit-seeking.
+Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, the policy area or non-profit specialty whose practitioners would lead it is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
 
-## Step 1 — the concreteness rule (always answer this first)
+Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 
-Before identifying any discipline, identify whether the prompt describes a concrete project. A concrete project names at least one of:
+Broad umbrella labels — the catch-all categories that subsume many subfields under one banner — are appropriate only when the prompt produces no named subfield, technique, instrument, substance, or medium. When specific names are present, use the specialist discipline; the umbrella, if relevant at all, becomes a secondary entry rather than the primary.
 
-- a tangible or intangible deliverable (something the project will produce or hand off)
-- a specific question to investigate (a hypothesis, a measurement, a comparison, a phenomenon, a relationship between variables)
-- a measurable outcome the project aims to produce (a finding, a proof, an answer, an improvement in a named metric, an operational state to reach)
-- a named entity to study or act on (a named species, place, population, substance, historical event, text, artifact, beneficiary group, or market segment)
-
-If none of those is named in the prompt, the prompt has not yet described a project. The correct output is `domain_fits = []`. The downstream pipeline supplies the human-readable explanation in that case; you do not need to.
-
-In that case, the empty-list answer is the final answer; step 2 only applies when step 1 yields a concrete project. A project description must name what is being delivered, investigated, produced, or studied or acted on. Prompts that pair generic imperative verbs with abstract or pronominal objects fall short of this requirement, and the right output is the empty-list answer.
-
-## Step 2 — the discipline pick (only when step 1 yields a concrete project)
-
-When step 1 yields a concrete project, pick the narrowest specialist expert discipline the prompt's signals support — what a specialist who would lead the project calls themselves. The same load-bearing principle as the business prompt applies here: a project that landed in "other" because of an upstream confidence call still gets classified by what it actually is, not by the bucket it arrived through.
-
-For specific project shapes:
-
-- **Academic study** → the field of inquiry whose journals would publish the resulting work. Use `"Research"` as fallback only when the study names no identifiable field.
-- **Hypothetical scenario** → the discipline a real version would belong to.
-- **Government, public-sector, NGO, charity, foundation, or community-led initiative** serving a population, community, or beneficiary group → the policy area or non-profit specialty whose practitioners would lead it; pick the narrowest that fits the prompt's signals.
-- **Philosophical argument, ethical question, or conceptual framework** → the relevant philosophical sub-discipline. Apply this only when the prompt names a specific philosophical question, not as a default for unspecific prompts.
-- **Other shapes** that landed in "other" because the upstream pre-pass was uncertain → the narrowest specialist discipline the prompt's signals support, just as the business prompt would. Broad umbrella labels (the catch-all categories that subsume many subfields under one banner) are reserved as fallback only when no specific subfield is named.
-
-## Final check
-
-Before emitting your JSON, re-read the prompt one more time and locate the specific named deliverable, question, outcome, or entity. When you can point to one, step 2 applies and you pick the discipline accordingly. When you cannot, the answer is `domain_fits = []`.
+When two specialist disciplines fit equally well, pick the one that owns the project's main success criterion as the primary outcome and put the others in method, constraint, market, stakeholder, or tool roles.
 
 ## importance
 
