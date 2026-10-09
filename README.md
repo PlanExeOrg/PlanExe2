@@ -8,7 +8,7 @@
 
 - No pip install. Python >= 3.11 standard library only.
 - LLM calls go through the headless Claude Code CLI (`claude -p`), using your Claude subscription.
-- Every stage writes the same intermediary files as PlanExe (same names, same JSON/markdown structure).
+- Every stage writes plain JSON and markdown intermediary files.
 - Edit any intermediary file and re-run: your edit is kept and everything downstream is regenerated.
 - Progress bar with an ETA based on the DAG's critical path.
 

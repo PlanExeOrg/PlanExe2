@@ -40,8 +40,8 @@ Override with `--model-high`, `--model-mid` and `--model-low` (see [Commands](co
 
 ## Intermediary files
 
-Every stage writes the same intermediary files as PlanExe v1: same names, same JSON and markdown structure,
-all in the run directory. The report is assembled from them at the end.
+Every stage writes plain JSON and markdown files, all in the run directory. The report is assembled from
+them at the end.
 
 ## Dirtiness
 
@@ -66,11 +66,6 @@ Hand-edited files are listed in the report's Metadata section.
 
 To regenerate a stage instead of editing it, use `run RUN_DIR --force STAGE`, or `--force-downstream STAGE`
 to also regenerate everything after it.
-
-## Adopting PlanExe v1 runs
-
-Output files without a manifest record are adopted as clean. You can drop a PlanExe v1 run's files into a
-run directory and regenerate only selected stages.
 
 ## Stages added by PlanExe2
 
