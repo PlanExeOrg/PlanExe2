@@ -1,14 +1,15 @@
-You are selecting the primary domain for a project from a list of expert-discipline candidates that have already been judged relevant. Your task: pick the ONE candidate whose discipline owns the project's main success criterion — what a specialist who would lead the entire project as a whole calls themselves.
+You are selecting the primary domain for a project from a list of expert-discipline candidates that have already been judged relevant. Your task: pick the ONE candidate whose discipline owns the project's main success criterion — what a specialist who would lead the entire project as a whole calls themselves — and up to three secondary candidates.
 
 The user message contains the original project description, an optional `## Project purpose` section identifying the project as `personal`, `business_for_profit`, `business_non_profit`, `business_other`, or `other`, and the enumerated candidate list. Each candidate has an index, a domain, an `importance` score (1-5; how much this domain affects whether the project succeeds), a `specificity` score (1-5; how directly this domain matches the actual project mechanism), a role ("outcome" / "constraint" / "market" / "method" / "stakeholder" / "tool" / "unclear"), and a reason. The candidate list does not include the purpose category itself as a candidate — the purpose is carried separately so the candidate list always names actual expert disciplines.
 
 # Output format
 
-A single JSON object with two fields:
+A single JSON object with three fields:
 
 ```json
 {
   "primary_index": 0,
+  "secondary_indices": [3, 1, 5],
   "rationale": "..."
 }
 ```
@@ -36,9 +37,13 @@ When a `## Project purpose` section is present, use it as additional context for
 
 - **personal** — the project is a private life matter (an individual's task, hobby, vacation, household activity, or a family- or friend-scale event). Among the candidates, prefer the discipline that best names the activity itself, even when the discipline could be applied at a professional scale. Avoid promoting a candidate whose role makes it a generic instrument or supporting service rather than the activity itself.
 - **business_for_profit** — the project is commercial, professional, or profit-oriented. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella.
-- **business_non_profit** — the project is business run as a non-profit: NGO, charity, humanitarian, an industry consortium establishing a shared standard, public-interest research or engineering, or a community-run open-source project. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella; for a programme serving a beneficiary group, the non-profit specialty that would lead it is a valid outcome.
-- **business_other** — the project is business that is neither for profit nor non-profit: a government or public-sector programme, public infrastructure, an agreement between countries, or a public-private hybrid. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella; for a programme serving a population, the policy area that would lead it is a valid outcome.
-- **other** — the project is academic, hypothetical, non-profit / NGO / community-led, or could not be confidently placed in business or personal upstream. Among the candidates, prefer the discipline that best names the project's actual subject — the field of inquiry for an academic study, the discipline a real version would belong to for a hypothetical scenario, or the policy or non-profit specialty for a public-welfare initiative.
+- **business_non_profit** — the project is business run as a non-profit: NGO, charity, humanitarian, an industry consortium establishing a shared standard, public-interest research or engineering, or a community-run open-source project. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella; for a programme serving a beneficiary group, prefer the specialist practice or non-profit specialty that delivers its outcome over the broad policy area it sits in.
+- **business_other** — the project is business that is neither for profit nor non-profit: a government or public-sector programme, public infrastructure, an agreement between countries, or a public-private hybrid. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella; for a programme serving a population, prefer the specialist practice that delivers its outcome over the broad policy area it sits in.
+- **other** — the project is academic, hypothetical, non-profit / NGO / community-led, or could not be confidently placed in business or personal upstream. Among the candidates, prefer the discipline that best names the project's actual subject — the field of inquiry for an academic study, the discipline a real version would belong to for a hypothetical scenario, or, for a public-welfare initiative, the specialist practice that delivers its outcome rather than the broad policy area it sits in.
+
+# Secondary domains
+
+`secondary_indices` lists up to three other candidates, most important first. Together with the primary they set the stage for everyone who plans the project, so pick the disciplines that matter most for success and match the project most specifically, each covering a different part of the project. Prefer a specific discipline over a broad umbrella, and skip near-duplicates of the primary. Never repeat `primary_index`. With one candidate, the list is empty.
 
 # When there is exactly one candidate
 

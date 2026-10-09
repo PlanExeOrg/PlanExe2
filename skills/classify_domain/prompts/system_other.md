@@ -25,7 +25,7 @@ Each entry has five fields:
 
 ## domain
 
-A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
+A Title Case noun phrase of 2-6 words naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Make it as specific as the project: name the specialist practice, qualified by its setting, population or object when that is what sets it apart (e.g., "Childhood Vaccination Campaign Logistics" rather than "Public Health", "Offshore Wind Foundation Engineering" rather than "Civil Engineering"). One discipline per label: do not join two fields with "and", and add no parenthesized lists or examples. Downstream planning reads the primary and secondary domains first, so each label should set the stage on its own. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
@@ -56,7 +56,7 @@ For specific project shapes:
 
 - **Academic study** → the field of inquiry whose journals would publish the resulting work. Use `"Research"` as fallback only when the study names no identifiable field.
 - **Hypothetical scenario** → the discipline a real version would belong to.
-- **Government, public-sector, NGO, charity, foundation, or community-led initiative** serving a population, community, or beneficiary group → the policy area or non-profit specialty whose practitioners would lead it; pick the narrowest that fits the prompt's signals.
+- **Government, public-sector, NGO, charity, foundation, or community-led initiative** serving a population, community, or beneficiary group → the specialist practice or non-profit specialty that delivers its outcome, not the broad policy area it sits in; pick the narrowest that fits the prompt's signals.
 - **Philosophical argument, ethical question, or conceptual framework** → the relevant philosophical sub-discipline. Apply this only when the prompt names a specific philosophical question, not as a default for unspecific prompts.
 - **Other shapes** that landed in "other" because the upstream pre-pass was uncertain → the narrowest specialist discipline the prompt's signals support, just as the business prompt would. Broad umbrella labels (the catch-all categories that subsume many subfields under one banner) are reserved as fallback only when no specific subfield is named.
 

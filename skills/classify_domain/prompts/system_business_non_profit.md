@@ -25,7 +25,7 @@ Each entry has five fields:
 
 ## domain
 
-A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
+A Title Case noun phrase of 2-6 words naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Make it as specific as the project: name the specialist practice, qualified by its setting, population or object when that is what sets it apart (e.g., "Childhood Vaccination Campaign Logistics" rather than "Public Health", "Offshore Wind Foundation Engineering" rather than "Civil Engineering"). One discipline per label: do not join two fields with "and", and add no parenthesized lists or examples. Downstream planning reads the primary and secondary domains first, so each label should set the stage on its own. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
@@ -33,7 +33,7 @@ The right test is: who would I hire to lead this project? Answer with the specia
 
 This project is business run as a non-profit: a non-profit, NGO, charity, foundation, humanitarian or community-led programme, an industry consortium establishing a shared standard, a public-interest research or engineering programme, or a community-run open-source or commons project. It exists to deliver value to its members, beneficiaries or the public rather than profit for its owners.
 
-Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, the policy area or non-profit specialty whose practitioners would lead it is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
+Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial. Classify it by what it actually does. For a programme serving a population, community or beneficiary group, name the specialist practice or non-profit specialty that delivers its outcome, not the broad policy area it sits in (the policy area, if relevant, is a secondary entry); for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
 
 Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 

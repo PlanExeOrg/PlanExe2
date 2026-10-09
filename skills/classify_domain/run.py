@@ -33,15 +33,20 @@ def augment_with_context(prompt: str, purpose_md: str, constraints_md: str) -> s
 def derive_primary(fits: list[dict]) -> str:
     if not fits:
         return "Unclear"
-    key = lambda f: (-(f["importance"] * f["specificity"]), -f["specificity"], -f["importance"])
     outcome = [f for f in fits if f["role"] == "outcome"]
-    return normalize_label(sorted(outcome or fits, key=key)[0]["domain"])
+    return normalize_label(sorted(outcome or fits, key=rank_key)[0]["domain"])
 
 
-def derive_secondaries(fits: list[dict], primary: str, cap: int = 3) -> list[str]:
+def rank_key(f: dict) -> tuple:
+    return -(f["importance"] * f["specificity"]), -f["specificity"], -f["importance"]
+
+
+def derive_secondaries(fits: list[dict], primary: str, picked: list[int] | None = None, cap: int = 3) -> list[str]:
+    """The selection call's picks first (valid, distinct, not the primary), then the best-ranked remaining fits."""
     seen = {label_key(primary)}
     out = []
-    for f in fits:
+    picked_fits = [fits[i] for i in (picked or []) if isinstance(i, int) and 0 <= i < len(fits)]
+    for f in picked_fits + sorted(fits, key=rank_key):
         domain = normalize_label(f["domain"])
         key = label_key(domain)
         if not domain or key in seen:
@@ -153,6 +158,7 @@ def run(ctx):
                         f"target was {TARGET_CANDIDATES}.")
 
     primary_select_seconds = 0.0
+    picked: list[int] = []
     if not fits:
         primary = "Unclear"
         rationale = "No candidates emitted; the prompt is too vague to identify a project."
@@ -168,6 +174,7 @@ def run(ctx):
                 raise IndexError(f"Primary-selection index {idx} out of range [0, {len(fits)}).")
             primary = normalize_label(fits[idx]["domain"])
             rationale = normalize_label(sel["rationale"])
+            picked = list(sel.get("secondary_indices") or [])
         except Exception as exc:
             fallback = derive_primary(fits)
             warnings.append(f"Primary-selection LLM call failed ({type(exc).__name__}: {exc}); falling back to "
@@ -177,7 +184,7 @@ def run(ctx):
                          "(high+outcome > medium+outcome > high any role > Unclear).")
         primary_select_seconds = round(time.time() - t, 3)
 
-    secondaries = derive_secondaries(fits, primary)
+    secondaries = derive_secondaries(fits, primary, picked)
     meta = planexe_metadata(last_result) if last_result else {}
     meta.pop("duration", None)
     meta["duration_seconds"] = round(first_pass_seconds, 3)
