@@ -37,11 +37,15 @@ _REVERSE = re.compile(r"(?<!\x01)" + _DATE_NAMED + r"(?P<trail>\s*(?:\(|,\s*)\s*
 # Bare offsets not already followed by a date.
 _FOLLOWED_BY_DATE = (r"(?!(?:\s+[A-Za-z][\w-]{1,15})?\s*(?:\(|,|:|—|=|~|≈)?\s*"
                      r"(?:\d{4}-\d{2}|(?:early|mid|late)[- ]|(?:" + _MONTH_RX + r")\b))")
-_RANGE = re.compile(r"\b[Mm]onths?\s?(?P<a>\d{1,3})\s*(?:[-–]|to)\s*(?P<b>\d{1,3})\b" + _FOLLOWED_BY_DATE)
+_RANGE = re.compile(r"\b[Mm]onths?\s?(?P<a>\d{1,3}(?:\.\d+)?)\s*(?:[-–]|to)\s*(?P<b>\d{1,3}(?:\.\d+)?)(?!\d|\.\d)"
+                    + _FOLLOWED_BY_DATE)
 # "months 18, 36, 54, 72" / "months 6 and 12"
 _LIST_SEP = r"\s*(?:,\s*(?:and|or)?|and|or|&|/)\s*"
 _LIST = re.compile(r"\b[Mm]onths?\s?(?P<items>\d{1,3}(?:\.\d+)?(?:" + _LIST_SEP + r"\d{1,3}(?:\.\d+)?)+)\b"
                    r"(?!\s*(?:[-–]|to)\s*\d|\+|\.\d|" + _LIST_SEP + r"\d)" + _FOLLOWED_BY_DATE)
+# A later list item followed by this is a quantity, not a month: "Month 8, 80/month", "Month 6.5, 100%",
+# "Month 2, 40 by Month 3".
+_QUANTITY_AFTER = re.compile(r"\s*%|\s*/\s*[A-Za-z]|\s+per\b|\s+(?:by|in|at|from|until|before|after)\s+[Mm]onths?\b")
 # A stale date-only parenthetical right after a computed date: "(2030-05-02 to 2032-05-02) (through February 2033)"
 _STALE_AFTER = re.compile(r"(?P<keep>\(\d{4}-\d{2}-\d{2}(?: to \d{4}-\d{2}-\d{2})?\))\s*\((?:through|by|until|to|ending|ends|"
                           r"from|in|approx\.?|about|~|≈)?\s*(?:early|mid|late)?[- ]?(?:" + _MONTH_RX +
@@ -103,25 +107,33 @@ def fix_text(text: str, start: date, annotate: bool = True) -> tuple[str, int]:
         before = m.string[line_start:m.start()]
         return before.count("(") > before.count(")")
 
-    def annotated(m: re.Match, dates: str) -> str:
+    def annotated(m: re.Match, dates: str, text: str | None = None) -> str:
         # Inside an existing parenthesis use "= date" to avoid nested "( ... (date) ... )".
-        return f"{m.group(0)} = {dates}" if inside_parens(m) else f"{m.group(0)} ({dates})"
+        text = m.group(0) if text is None else text
+        return f"{text} = {dates}" if inside_parens(m) else f"{text} ({dates})"
 
     def repl_range(m: re.Match) -> str:
         nonlocal count
-        a, b = int(m.group("a")), int(m.group("b"))
+        a, b = float(m.group("a")), float(m.group("b"))
         if not (in_range(a) and in_range(b)) or a >= b:
             return m.group(0)
         count += 1
-        return annotated(m, f"{add_months(start, a).isoformat()} to {add_months(start, b).isoformat()}")
+        return annotated(m, f"{offset_date(start, a).isoformat()} to {offset_date(start, b).isoformat()}")
 
     def repl_list(m: re.Match) -> str:
         nonlocal count
-        nums = [float(x) for x in re.findall(r"\d{1,3}(?:\.\d+)?", m.group("items"))]
+        items = list(re.finditer(r"\d{1,3}(?:\.\d+)?", m.group("items")))
+        for i, item in enumerate(items[1:], 1):
+            if _QUANTITY_AFTER.match(m.string, m.start("items") + item.end()):
+                items = items[:i]  # the list ends before the quantity
+                break
+        nums = [float(item.group()) for item in items]
         if not all(in_range(n) for n in nums):
             return m.group(0)
         count += 1
-        return annotated(m, ", ".join(offset_date(start, n).isoformat() for n in nums))
+        cut = m.start("items") + items[-1].end() - m.start()
+        dates = ", ".join(offset_date(start, n).isoformat() for n in nums)
+        return annotated(m, dates, m.group(0)[:cut]) + m.group(0)[cut:]
 
     def repl_bare(m: re.Match) -> str:
         nonlocal count

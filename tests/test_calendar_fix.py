@@ -57,6 +57,31 @@ class CalendarFixTest(unittest.TestCase):
         once = fix("Month 3", True)
         self.assertEqual(fix(once, True), once)  # idempotent
 
+    def test_quantities_after_a_month_are_not_months(self):
+        # Seen in heatwave reports: "Month 8, 80/month" became "Month 8, 80 (…, 2033-06-09)/month".
+        cases = {
+            "400 homes by Month 8, 80/month in Months 3-8":
+                "400 homes by Month 8 (2027-01-02), 80/month in Months 3-8 (2026-08-02 to 2027-01-02)",
+            "50% (120) by Month 6.5, 100% (~240) by Month 8":
+                "50% (120) by Month 6.5 (2026-11-17), 100% (~240) by Month 8 (2027-01-02)",
+            "40% hired in Month 3 and 40% in Month 4":
+                "40% hired in Month 3 (2026-08-02) and 40% in Month 4 (2026-09-02)",
+            "(20 by Month 2, 40 by Month 3)":
+                "(20 by Month 2 = 2026-07-02, 40 by Month 3 = 2026-08-02)",
+            "gates at Month 2, 4 and 6, 80 per site":
+                "gates at Month 2, 4 and 6 (2026-07-02, 2026-09-02, 2026-11-02), 80 per site",
+        }
+        for src, want in cases.items():
+            got = fix(src, True)
+            self.assertEqual(got, want, src)
+            self.assertEqual(fix(got, True), got, src)  # idempotent
+
+    def test_fractional_range_end(self):
+        # "Months 8–11.5" became "Months 8–11 (… to …).5".
+        self.assertEqual(fix("season Months 8–11.5 then review", True),
+                         "season Months 8–11.5 (2027-01-02 to 2027-04-17) then review")
+        self.assertEqual(fix("Months 0.5-2: hiring", True), "Months 0.5-2 (2026-05-17 to 2026-07-02): hiring")
+
     def test_leaves_other_text(self):
         for s in ["Months 6-12 (2027)", "in April 2028 we review", "a 3 month review", "Month 999"]:
             self.assertEqual(fix(s), s)
