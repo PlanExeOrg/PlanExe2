@@ -2,12 +2,13 @@ import re
 import time
 
 from planexe_skill.planexe import planexe_metadata, structured
-from planexe_skill.shared.purpose import PROMPT_VARIANTS, PURPOSES, prompt_variant
+from planexe_skill.shared.purpose import ADDENDA, PURPOSES, addendum, system_prompt
 
 TARGET_CANDIDATES = 9
 BATCH_SIZE = 3
 MAX_CALLS = 3
-PURPOSE_LABEL_KEYS = set(PURPOSES) | set(PROMPT_VARIANTS) | {"for-profit", "non-profit"}
+PURPOSE_LABEL_KEYS = (set(PURPOSES) | set(ADDENDA) | {"business_for_profit", "for_profit", "non_profit", "for-profit",
+                                                       "non-profit"})
 _WS = re.compile(r"\s+")
 
 
@@ -82,11 +83,12 @@ def to_markdown(primary: str, secondaries: list[str], rationale: str, fits: list
 def run(ctx):
     plan = ctx.read_text("plan.txt")
     purpose_dict = ctx.read_json("identify_purpose_raw.json")
-    purpose = prompt_variant(purpose_dict, "classify domain") if purpose_dict.get("purpose") in PURPOSES else ""
+    if purpose_dict.get("purpose") not in PURPOSES:
+        purpose_dict = {"purpose": "business"}  # unknown purpose: classify it as PlanExe classifies business
+    purpose = purpose_dict["purpose"]
     user_prompt = augment_with_context(plan, ctx.read_text("identify_purpose.md"),
                                        ctx.read_text("extract_constraints.md"))
-    system_prompt = ctx.skill_file(
-        f"prompts/system_{purpose or 'business_for_profit'}.md").strip()
+    fits_system_prompt = system_prompt(ctx, purpose_dict, "classify domain", "prompts/system_{}.md")
     fits_schema = ctx.skill_json("schema_fits.json")
 
     fits: list[dict] = []
@@ -106,7 +108,7 @@ def run(ctx):
                         f"{user_prompt}")
         t = time.time()
         try:
-            response, last_result = structured(ctx, system_prompt, user_msg, fits_schema, label=f"batch {call_index}")
+            response, last_result = structured(ctx, fits_system_prompt, user_msg, fits_schema, label=f"batch {call_index}")
         except Exception as e:
             if call_index == 1 and not fits:
                 raise
@@ -164,10 +166,13 @@ def run(ctx):
         rationale = "No candidates emitted; the prompt is too vague to identify a project."
     else:
         t = time.time()
-        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n" if purpose else ""
+        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n"
+        select_prompt = ctx.skill_file("prompts/primary_select.md").strip()
+        if addendum(purpose_dict):
+            select_prompt += "\n\n" + ctx.skill_file(f"prompts/system_{addendum(purpose_dict)}_addendum.md").strip()
         sel_msg = f"{user_prompt}\n\n---\n\n{purpose_section}## Candidate domains\n{format_candidate_list(fits)}\n"
         try:
-            sel, _ = structured(ctx, ctx.skill_file("prompts/primary_select.md").strip(), sel_msg,
+            sel, _ = structured(ctx, select_prompt, sel_msg,
                                 ctx.skill_json("schema_primary.json"), label="primary select")
             idx = int(sel["primary_index"])
             if idx < 0 or idx >= len(fits):
@@ -194,6 +199,6 @@ def run(ctx):
         meta["primary_select_duration_seconds"] = primary_select_seconds
     raw = {"primary_domain": primary, "secondary_domains": secondaries, "domain_fits": fits,
            "rationale": rationale, "warnings": warnings, "metadata": meta,
-           "system_prompt": system_prompt, "user_prompt": user_prompt}
+           "system_prompt": fits_system_prompt, "user_prompt": user_prompt}
     ctx.write_json("classify_domain_raw.json", raw)
     ctx.write_text("classify_domain.md", to_markdown(primary, secondaries, rationale, fits))

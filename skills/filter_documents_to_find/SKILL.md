@@ -13,8 +13,7 @@ identified_documents_to_find.json are reduced to `{id: <int>, name: "<document_n
 (integer ids instead of uuids) and embedded (python repr, as in PlanExe) as `File 'documents.json'`
 after the strategic_decisions.md, scenarios.md, assumptions.md (= consolidate_assumptions_short.md)
 and project-plan.md sections. The purpose in identify_purpose_raw.json selects the system prompt
-(`prompts/business_for_profit.md` / `business_non_profit.md` / `business_other.md` /
-`personal.md` / `other.md`). One structured call, schema `schema.json`
+(`prompts/business.md` / `personal.md` / `other.md`; a non_profit or other business plan also gets `business_non_profit_addendum.md` / `business_other_addendum.md`). One structured call, schema `schema.json`
 (document_list[] {id, rationale, impact_rating Critical/High/Medium/Low}, summary).
 
 Selection (code): keep all Critical; while fewer than 5 kept, add all High, then Medium, then Low.

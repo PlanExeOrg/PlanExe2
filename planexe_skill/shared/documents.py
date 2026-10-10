@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 
 from planexe_skill.planexe import planexe_metadata, raw_document, structured
-from planexe_skill.shared.purpose import prompt_variant
+from planexe_skill.shared.purpose import system_prompt
 
 # The number of documents to keep. It may be less or greater than this number (PlanExe PREFERRED_DOCUMENT_COUNT).
 PREFERRED_DOCUMENT_COUNT = 5
@@ -17,8 +17,8 @@ IMPACT_RATINGS = ("Critical", "High", "Medium", "Low")
 
 
 def select_system_prompt(ctx, identify_purpose_dict: dict, action: str) -> str:
-    """Pick the system prompt for identify_purpose_raw.json's purpose (and profit_motive)."""
-    return ctx.skill_file(f"prompts/{prompt_variant(identify_purpose_dict, action)}.md").strip()
+    """The system prompt for identify_purpose_raw.json's purpose (plus the profit_motive addendum)."""
+    return system_prompt(ctx, identify_purpose_dict, action)
 
 
 def documents_query(ctx, document_section: str) -> str:

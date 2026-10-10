@@ -10,8 +10,8 @@ est_llm_calls: 1
 One structured call: system prompt `prompts/system.md`, user prompt = plan.txt, schema `schema.json`
 (topic, purpose_detailed, purpose, profit_motive). "other" doubles as the low-confidence bucket.
 
-Tweak vs PlanExe: a profit_motive (for_profit, non_profit, other). Downstream, a business plan selects the
-`business_for_profit`, `business_non_profit` (NGO, an industry consortium establishing a shared standard, open
-source) or `business_other` (a government programme, an agreement between countries, a public-private hybrid)
-prompt variant (planexe_skill/shared/purpose.py). The last two judge the plan by its outcomes and funding
-accountability instead of ROI or revenue.
+Tweak vs PlanExe: a profit_motive (for_profit, non_profit, other), kept in identify_purpose_raw.json only.
+identify_purpose.md says `**Purpose:** business` for every business plan, so downstream stages see what PlanExe
+showed them. The skills that use planexe_skill/shared/purpose.py append a short addendum to their business prompt
+for non_profit (NGO, an industry consortium establishing a shared standard, open source) and other (a government
+programme, an agreement between countries, a public-private hybrid) business plans.

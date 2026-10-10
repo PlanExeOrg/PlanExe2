@@ -1,5 +1,5 @@
 from planexe_skill.planexe import format_json_for_query, planexe_metadata, structured
-from planexe_skill.shared.purpose import prompt_variant
+from planexe_skill.shared.purpose import check_purpose, system_prompt
 
 LIST_KEYS = ["strengths", "weaknesses", "opportunities", "threats", "recommendations", "strategic_objectives",
              "assumptions", "missing_information", "user_questions"]
@@ -18,12 +18,11 @@ SECTIONS = [
 
 
 def select_system_prompt(ctx, purpose_info: dict) -> str:
-    variant = prompt_variant(purpose_info, "perform SWOT analysis")
-    system_prompt = ctx.skill_file(f"prompts/{variant}.md")
-    if variant == "other":
-        system_prompt = system_prompt.replace("INSERT_USER_TOPIC_HERE", purpose_info["topic"])
-        system_prompt = system_prompt.replace("INSERT_USER_SWOTTYPEDETAILED_HERE", purpose_info["purpose_detailed"])
-    return system_prompt.strip()
+    prompt = system_prompt(ctx, purpose_info, "perform SWOT analysis")
+    if check_purpose(purpose_info, "perform SWOT analysis") == "other":
+        prompt = prompt.replace("INSERT_USER_TOPIC_HERE", purpose_info["topic"])
+        prompt = prompt.replace("INSERT_USER_SWOTTYPEDETAILED_HERE", purpose_info["purpose_detailed"])
+    return prompt
 
 
 def to_markdown(conduct: dict) -> str:

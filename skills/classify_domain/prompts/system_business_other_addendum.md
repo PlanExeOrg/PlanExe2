@@ -1,0 +1,5 @@
+# Addendum: business not run for profit
+
+This business project is not run for profit, and not as a non-profit either: it is, for example, a government programme, public infrastructure, an agreement between countries, or a public-private hybrid. No owner profits from it; it exists to deliver outcomes for the parties involved. Where parts of the plan earn money (fees, offtake, sales), their commercial viability still matters.
+
+Money flow is not a purpose signal: grants, public budgets, donations and large programme budgets do not make the project commercial; classify it by what it actually does. For a programme serving a population, community or beneficiary group, prefer the specialist practice that delivers its outcome over the broad policy area it sits in (the policy area, if relevant, is a secondary entry); for an agreement between countries, the field of the agreement (e.g., trade policy, arms control) is a candidate; for a technical programme, the engineering or scientific discipline that delivers the core capability usually owns the outcome.
