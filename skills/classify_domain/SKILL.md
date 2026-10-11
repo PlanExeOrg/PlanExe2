@@ -13,8 +13,7 @@ Two passes.
 1. Candidate generation: up to 3 batched calls (system prompt `prompts/system_<purpose>.md`, plus
    `prompts/system_business_<profit_motive>_addendum.md` for a non_profit or other business plan, schema
    `schema_fits.json`), 3 candidates per batch, until 9 distinct candidates. Domain labels are specific
-   noun phrases (2-6 words, one discipline each, no words that only
-   say the project is planned or managed), qualified by setting or population when that sets the practice apart. User message = plan.txt +
+   noun phrases (2-6 words, one discipline each), qualified by setting or population when that sets the practice apart. User message = plan.txt +
    "Plan purpose" + "Extracted constraints" sections. Cleanup in code: normalize labels, drop
    labels that are purpose tags rather than disciplines (business, business_for_profit, business_non_profit,
    business_other, for_profit, non_profit, personal, other, for-profit, non-profit), duplicates and 1x1 (importance=1, specificity=1) fits,
