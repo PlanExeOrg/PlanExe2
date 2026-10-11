@@ -2,13 +2,14 @@ import re
 import time
 
 from planexe_skill.planexe import planexe_metadata, structured
-from planexe_skill.shared.purpose import ADDENDA, PURPOSES, addendum, system_prompt
 
 TARGET_CANDIDATES = 9
 BATCH_SIZE = 3
 MAX_CALLS = 3
-PURPOSE_LABEL_KEYS = (set(PURPOSES) | set(ADDENDA) | {"business_for_profit", "for_profit", "non_profit", "for-profit",
-                                                       "non-profit"})
+PURPOSES = {"personal", "business", "other"}
+# Purpose tags, not disciplines (incl. the profit_motive variants from identify_purpose_raw.json).
+PURPOSE_LABEL_KEYS = PURPOSES | {"business_for_profit", "business_non_profit", "business_other",
+                                 "for_profit", "non_profit", "for-profit", "non-profit"}
 _WS = re.compile(r"\s+")
 
 
@@ -34,20 +35,15 @@ def augment_with_context(prompt: str, purpose_md: str, constraints_md: str) -> s
 def derive_primary(fits: list[dict]) -> str:
     if not fits:
         return "Unclear"
+    key = lambda f: (-(f["importance"] * f["specificity"]), -f["specificity"], -f["importance"])
     outcome = [f for f in fits if f["role"] == "outcome"]
-    return normalize_label(sorted(outcome or fits, key=rank_key)[0]["domain"])
+    return normalize_label(sorted(outcome or fits, key=key)[0]["domain"])
 
 
-def rank_key(f: dict) -> tuple:
-    return -(f["importance"] * f["specificity"]), -f["specificity"], -f["importance"]
-
-
-def derive_secondaries(fits: list[dict], primary: str, picked: list[int] | None = None, cap: int = 3) -> list[str]:
-    """The selection call's picks first (valid, distinct, not the primary), then the best-ranked remaining fits."""
+def derive_secondaries(fits: list[dict], primary: str, cap: int = 3) -> list[str]:
     seen = {label_key(primary)}
     out = []
-    picked_fits = [fits[i] for i in (picked or []) if isinstance(i, int) and 0 <= i < len(fits)]
-    for f in picked_fits + sorted(fits, key=rank_key):
+    for f in fits:
         domain = normalize_label(f["domain"])
         key = label_key(domain)
         if not domain or key in seen:
@@ -82,13 +78,11 @@ def to_markdown(primary: str, secondaries: list[str], rationale: str, fits: list
 
 def run(ctx):
     plan = ctx.read_text("plan.txt")
-    purpose_dict = ctx.read_json("identify_purpose_raw.json")
-    if purpose_dict.get("purpose") not in PURPOSES:
-        purpose_dict = {"purpose": "business"}  # unknown purpose: classify it as PlanExe classifies business
-    purpose = purpose_dict["purpose"]
+    purpose = str(ctx.read_json("identify_purpose_raw.json").get("purpose", "") or "").strip().lower()
     user_prompt = augment_with_context(plan, ctx.read_text("identify_purpose.md"),
                                        ctx.read_text("extract_constraints.md"))
-    fits_system_prompt = system_prompt(ctx, purpose_dict, "classify domain", "prompts/system_{}.md")
+    system_prompt = ctx.skill_file(
+        f"prompts/system_{purpose if purpose in PURPOSES else 'business'}.md").strip()
     fits_schema = ctx.skill_json("schema_fits.json")
 
     fits: list[dict] = []
@@ -108,7 +102,7 @@ def run(ctx):
                         f"{user_prompt}")
         t = time.time()
         try:
-            response, last_result = structured(ctx, fits_system_prompt, user_msg, fits_schema, label=f"batch {call_index}")
+            response, last_result = structured(ctx, system_prompt, user_msg, fits_schema, label=f"batch {call_index}")
         except Exception as e:
             if call_index == 1 and not fits:
                 raise
@@ -160,26 +154,21 @@ def run(ctx):
                         f"target was {TARGET_CANDIDATES}.")
 
     primary_select_seconds = 0.0
-    picked: list[int] = []
     if not fits:
         primary = "Unclear"
         rationale = "No candidates emitted; the prompt is too vague to identify a project."
     else:
         t = time.time()
-        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n"
-        select_prompt = ctx.skill_file("prompts/primary_select.md").strip()
-        if addendum(purpose_dict):
-            select_prompt += "\n\n" + ctx.skill_file(f"prompts/system_{addendum(purpose_dict)}_addendum.md").strip()
+        purpose_section = f"## Project purpose\n\n{purpose}\n\n---\n\n" if purpose in PURPOSES else ""
         sel_msg = f"{user_prompt}\n\n---\n\n{purpose_section}## Candidate domains\n{format_candidate_list(fits)}\n"
         try:
-            sel, _ = structured(ctx, select_prompt, sel_msg,
+            sel, _ = structured(ctx, ctx.skill_file("prompts/primary_select.md").strip(), sel_msg,
                                 ctx.skill_json("schema_primary.json"), label="primary select")
             idx = int(sel["primary_index"])
             if idx < 0 or idx >= len(fits):
                 raise IndexError(f"Primary-selection index {idx} out of range [0, {len(fits)}).")
             primary = normalize_label(fits[idx]["domain"])
             rationale = normalize_label(sel["rationale"])
-            picked = list(sel.get("secondary_indices") or [])
         except Exception as exc:
             fallback = derive_primary(fits)
             warnings.append(f"Primary-selection LLM call failed ({type(exc).__name__}: {exc}); falling back to "
@@ -189,7 +178,7 @@ def run(ctx):
                          "(high+outcome > medium+outcome > high any role > Unclear).")
         primary_select_seconds = round(time.time() - t, 3)
 
-    secondaries = derive_secondaries(fits, primary, picked)
+    secondaries = derive_secondaries(fits, primary)
     meta = planexe_metadata(last_result) if last_result else {}
     meta.pop("duration", None)
     meta["duration_seconds"] = round(first_pass_seconds, 3)
@@ -199,6 +188,6 @@ def run(ctx):
         meta["primary_select_duration_seconds"] = primary_select_seconds
     raw = {"primary_domain": primary, "secondary_domains": secondaries, "domain_fits": fits,
            "rationale": rationale, "warnings": warnings, "metadata": meta,
-           "system_prompt": fits_system_prompt, "user_prompt": user_prompt}
+           "system_prompt": system_prompt, "user_prompt": user_prompt}
     ctx.write_json("classify_domain_raw.json", raw)
     ctx.write_text("classify_domain.md", to_markdown(primary, secondaries, rationale, fits))

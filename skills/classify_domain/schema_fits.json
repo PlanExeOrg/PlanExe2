@@ -3,7 +3,7 @@
     "DomainFit": {
       "properties": {
         "domain": {
-          "description": "A Title Case noun phrase (2-6 words) naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun, not the noun for the person who practises it. Make it as specific as the project: the specialist practice, qualified by its setting, population or object when that sets it apart; never a broad umbrella when the prompt names something narrower. One discipline per label: no \"and\" joining two fields, no parenthesized lists.",
+          "description": "A short Title Case noun phrase (1-3 words) naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun, not the noun for the person who practises it. Pick the narrowest field the prompt's signals support.",
           "title": "Domain",
           "type": "string"
         },

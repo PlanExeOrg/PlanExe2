@@ -25,13 +25,13 @@ Each entry has five fields:
 
 ## domain
 
-A Title Case noun phrase of 2-6 words naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Make it as specific as the project: name the specialist practice, qualified by its setting, population or object when that is what sets it apart (e.g., "Childhood Vaccination Campaign Logistics" rather than "Public Health", "Offshore Wind Foundation Engineering" rather than "Civil Engineering"). One discipline per label: do not join two fields with "and", and add no parenthesized lists or examples. Downstream planning reads the primary and secondary domains first, so each label should set the stage on its own. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
+A 1-3 word Title Case noun phrase naming an expert discipline as a FIELD of practice — the area of expertise itself, not the practitioner. Use the field-of-practice noun (the abstract activity or domain), not the practitioner noun (the person who does it). Field nouns typically end in `-y`, `-ics`, `-ing`, `-ure`, or name an abstract activity; practitioner nouns typically end in `-er`, `-ist`, or `-or` and refer to the person.
 
 The right test is: who would I hire to lead this project? Answer with the specialist's field name (the discipline they practise), not the job title for that role.
 
 # Purpose-specific guidance: business projects
 
-This project is commercial, professional, entrepreneurial, or profit-oriented, including commercially financed infrastructure.
+This project is commercial, professional, infrastructure, public-welfare, governmental, entrepreneurial, or large-scale societal.
 
 Choose the narrowest discipline the prompt's signals support. Read the user message for named subfields, named techniques, named instruments, named substances, named media, named application areas, named regulators, named populations, named geographies. Each named thing pulls the answer toward a specific discipline; use the discipline name a practitioner of that thing would call themselves.
 

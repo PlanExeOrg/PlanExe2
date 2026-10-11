@@ -10,8 +10,8 @@ SKILLS = ROOT / "skills"
 PURPOSE_MODULE = "planexe_skill/shared/purpose.py"
 PURPOSE_IMPORT = "planexe_skill.shared.purpose"
 
-# Prompt file name pattern per skill; every other variant-using skill uses "prompts/{}.md".
-PROMPT_PATTERN = {"classify_domain": "prompts/system_{}.md"}
+# Prompt file name pattern per skill; every purpose-aware skill uses "prompts/{}.md".
+PROMPT_PATTERN: dict[str, str] = {}
 
 
 def skills_declaring_purpose() -> set[str]:
@@ -60,7 +60,7 @@ class PurposeTest(unittest.TestCase):
 
     def test_every_variant_has_a_prompt(self):
         skills = skills_declaring_purpose()
-        self.assertGreaterEqual(len(skills), 7)
+        self.assertGreaterEqual(len(skills), 6)
         for skill in sorted(skills):
             pattern = PROMPT_PATTERN.get(skill, "prompts/{}.md")
             for name in list(PURPOSES) + [f"{a}_addendum" for a in ADDENDA]:

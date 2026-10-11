@@ -1,15 +1,14 @@
-You are selecting the primary domain for a project from a list of expert-discipline candidates that have already been judged relevant. Your task: pick the ONE candidate whose discipline owns the project's main success criterion — what a specialist who would lead the entire project as a whole calls themselves — and up to three secondary candidates.
+You are selecting the primary domain for a project from a list of expert-discipline candidates that have already been judged relevant. Your task: pick the ONE candidate whose discipline owns the project's main success criterion — what a specialist who would lead the entire project as a whole calls themselves.
 
-The user message contains the original project description, a `## Project purpose` section identifying the project as `personal`, `business`, or `other`, and the enumerated candidate list. Each candidate has an index, a domain, an `importance` score (1-5; how much this domain affects whether the project succeeds), a `specificity` score (1-5; how directly this domain matches the actual project mechanism), a role ("outcome" / "constraint" / "market" / "method" / "stakeholder" / "tool" / "unclear"), and a reason. The candidate list does not include the purpose category itself as a candidate — the purpose is carried separately so the candidate list always names actual expert disciplines.
+The user message contains the original project description, an optional `## Project purpose` section identifying the project as `personal`, `business`, or `other`, and the enumerated candidate list. Each candidate has an index, a domain, an `importance` score (1-5; how much this domain affects whether the project succeeds), a `specificity` score (1-5; how directly this domain matches the actual project mechanism), a role ("outcome" / "constraint" / "market" / "method" / "stakeholder" / "tool" / "unclear"), and a reason. The candidate list does not include the purpose category itself as a candidate — the purpose is carried separately so the candidate list always names actual expert disciplines.
 
 # Output format
 
-A single JSON object with three fields:
+A single JSON object with two fields:
 
 ```json
 {
   "primary_index": 0,
-  "secondary_indices": [3, 1, 5],
   "rationale": "..."
 }
 ```
@@ -36,12 +35,8 @@ The candidate list is fixed. Pick from it.
 When a `## Project purpose` section is present, use it as additional context for the pick:
 
 - **personal** — the project is a private life matter (an individual's task, hobby, vacation, household activity, or a family- or friend-scale event). Among the candidates, prefer the discipline that best names the activity itself, even when the discipline could be applied at a professional scale. Avoid promoting a candidate whose role makes it a generic instrument or supporting service rather than the activity itself.
-- **business** — the project is business: commercial, professional or organizational objectives, infrastructure, or a societal or governmental initiative. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella.
-- **other** — the project is academic, hypothetical, non-profit / NGO / community-led, or could not be confidently placed in business or personal upstream. Among the candidates, prefer the discipline that best names the project's actual subject — the field of inquiry for an academic study, the discipline a real version would belong to for a hypothetical scenario, or, for a public-welfare initiative, the specialist practice that delivers its outcome rather than the broad policy area it sits in.
-
-# Secondary domains
-
-`secondary_indices` lists up to three other candidates, most important first. Together with the primary they set the stage for everyone who plans the project, so pick the disciplines that matter most for success and match the project most specifically, each covering a different part of the project. Prefer a specific discipline over a broad umbrella, and skip near-duplicates of the primary. Never repeat `primary_index`. With one candidate, the list is empty.
+- **business** — the project is commercial, professional, governmental, or large-scale societal. Apply the standard preferences: outcome over non-outcome, narrowest specialist over umbrella.
+- **other** — the project is academic, hypothetical, non-profit / NGO / community-led, or could not be confidently placed in business or personal upstream. Among the candidates, prefer the discipline that best names the project's actual subject — the field of inquiry for an academic study, the discipline a real version would belong to for a hypothetical scenario, or the policy or non-profit specialty for a public-welfare initiative.
 
 # When there is exactly one candidate
 
