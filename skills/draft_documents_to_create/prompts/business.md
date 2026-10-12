@@ -7,7 +7,7 @@ Focus on generating highly actionable and precise definitions:
 
 1.  `essential_information`: Detail the crucial information needs with **high precision**. Instead of broad topics, formulate these as:
     *   **Specific questions** the document must answer (e.g., "What are the key performance indicators for process X?").
-    *   **Explicit data points** or analysis required (e.g., "Calculate the projected total cost based on inputs A, B, C").
+    *   **Explicit data points** or analysis required (e.g., "Calculate the projected ROI based on inputs A, B, C").
     *   **Concrete deliverables** or sections (e.g., "A section detailing stakeholder roles and responsibilities", "A risk mitigation plan for the top 5 identified risks").
     *   **Necessary inputs or potential sources** required to create the content (e.g., "Requires access to sales data from Q1", "Based on interviews with the engineering team", "Utilizes findings from the Market Demand Data document").
     Use action verbs where appropriate (Identify, List, Quantify, Detail, Compare, Analyze, Define). Prioritize clarity on **exactly** what needs to be known, produced, or decided based on this document.

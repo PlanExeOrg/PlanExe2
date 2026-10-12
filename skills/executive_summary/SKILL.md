@@ -1,11 +1,11 @@
 ---
 name: executive_summary
 description: Produce a concise one-pager for decision-makers with key findings and recommendations.
-inputs: [canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md]
+inputs: [identify_purpose_raw.json, canonical_facts.json, strategic_decisions.md, scenarios.md, consolidate_assumptions_short.md, project_plan.md, data_collection.md, related_resources.md, swot_analysis.md, team.md, pitch.md, expert_criticism.md, wbs_project_level1_and_level2_and_level3.csv, review_plan.md]
 outputs: [executive_summary_raw.json, executive_summary.md]
 tier: low
 est_llm_calls: 1
-uses: [planexe_skill/shared/final_review.py]
+uses: [planexe_skill/shared/final_review.py, planexe_skill/shared/purpose.py]
 max_words_per_field: 60
 max_items_per_list: 5
 ---
@@ -17,3 +17,6 @@ documents (see review_plan) + `File 'review-plan.md'`.
 Markdown: one `## ` section per field (Focus and Context, Purpose and Goals, Key Deliverables and
 Outcomes, Timeline and Budget, Risks and Mitigations, Audience Tailoring, Action Orientation, Overall
 Takeaway, Feedback), then fix_bullet_lists. Raw = response + markdown + metadata + prompts.
+
+A non_profit or other business plan (identify_purpose_raw.json) gets `prompts/business_<profit_motive>_addendum.md`
+appended to the system prompt: where the prompt refers to ROI, revenue or profitability, apply cost-effectiveness.

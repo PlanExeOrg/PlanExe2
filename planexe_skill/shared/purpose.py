@@ -8,7 +8,9 @@ PlanExe has three purposes: business, personal, other. PlanExe2 also records a b
 
 The LLM sees every business plan as "business", as PlanExe always did: one base prompt per purpose
 (`business`, `personal`, `other`). Only a non_profit or other business plan gets a short addendum appended to the
-business prompt (`business_non_profit_addendum`, `business_other_addendum`) that says what differs.
+business prompt (`business_non_profit_addendum`, `business_other_addendum`) that says what differs: where a
+commercial plan is judged by ROI, revenue or profitability, it is judged by cost-effectiveness. Skills with a single
+system prompt append the addendum to it (`with_addendum`).
 """
 from __future__ import annotations
 
@@ -34,10 +36,15 @@ def addendum(identify_purpose_dict: dict) -> str | None:
     return None
 
 
-def system_prompt(ctx, identify_purpose_dict: dict, action: str, pattern: str = "prompts/{}.md") -> str:
-    """The base prompt for the purpose, plus the addendum for a non_profit or other business plan."""
-    text = ctx.skill_file(pattern.format(check_purpose(identify_purpose_dict, action))).strip()
+def with_addendum(ctx, identify_purpose_dict: dict, text: str, pattern: str = "prompts/{}.md") -> str:
+    """`text` plus the skill's addendum for a non_profit or other business plan."""
     extra = addendum(identify_purpose_dict)
     if extra:
-        text += "\n\n" + ctx.skill_file(pattern.format(f"{extra}_addendum")).strip()
-    return text
+        text = text.strip() + "\n\n" + ctx.skill_file(pattern.format(f"{extra}_addendum")).strip()
+    return text.strip()
+
+
+def system_prompt(ctx, identify_purpose_dict: dict, action: str, pattern: str = "prompts/{}.md") -> str:
+    """The base prompt for the purpose, plus the addendum for a non_profit or other business plan."""
+    text = ctx.skill_file(pattern.format(check_purpose(identify_purpose_dict, action)))
+    return with_addendum(ctx, identify_purpose_dict, text, pattern)

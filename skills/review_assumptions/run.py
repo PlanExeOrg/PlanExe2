@@ -1,4 +1,5 @@
 from planexe_skill.planexe import raw_document, structured
+from planexe_skill.shared.purpose import with_addendum
 
 DOCUMENTS = [
     ("Purpose", "identify_purpose.md"),
@@ -54,7 +55,7 @@ def run(ctx):
             ctx.log(f"Markdown file not found: {name} (from {title})")
             chunks.append(f"**Problem with document:** '{title}'\n\nFile not found.")
     full_markdown = "\n\n".join(chunks)
-    system_prompt = ctx.skill_file("prompts/system.md").strip()
+    system_prompt = with_addendum(ctx, ctx.read_json("identify_purpose_raw.json"), ctx.skill_file("prompts/system.md"))
     response, result = structured(ctx, system_prompt, full_markdown, ctx.skill_json("schema.json"))
     response = normalize(response)
     ctx.write_json("review_assumptions_raw.json", raw_document(response, result, system_prompt, full_markdown))

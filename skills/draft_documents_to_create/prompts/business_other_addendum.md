@@ -1,5 +1,7 @@
 # Addendum: business not run for profit
 
-This business project is not run for profit, and not as a non-profit either: it is, for example, a government programme, public infrastructure, an agreement between countries, or a public-private hybrid. No owner profits from it; it exists to deliver outcomes for the parties involved. Where parts of the plan earn money (fees, offtake, sales), their commercial viability still matters.
+This business project is not run for profit, and not as a non-profit either: it is, for example, a government programme, public infrastructure, an agreement between countries, or a public-private hybrid. No owner profits from it; it exists to deliver outcomes for the parties involved.
 
-Do not add revenue, investor, pitch or return-on-investment documents unless the project description explicitly asks for them. Analyses concern outcomes as well as cost (e.g., "Calculate the cost per unit of outcome based on inputs A, B, C").
+Where this prompt, its questions or its output fields refer to return on investment (ROI), revenue, profitability or financial returns, apply cost-effectiveness instead: the outcomes the project delivers per unit of money spent (e.g., cost per person served, per unit of risk reduced, per tonne avoided), how large and lasting those outcomes are, and how they compare with the alternatives. Money held back without a matching risk delivers no outcome, so size reserves to the risks they cover. Parts of the plan that do earn money (fees, offtake, sales) are still judged on revenue and ROI.
+
+Where the example asks for projected ROI, ask for cost-effectiveness (e.g., "Calculate the cost per unit of outcome based on inputs A, B, C").

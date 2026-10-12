@@ -1,7 +1,8 @@
 ---
 name: review_assumptions
 description: Flag unreasonable, missing, or contradictory assumptions with recommendations.
-inputs: [identify_purpose.md, plan_type.md, strategic_decisions.md, scenarios.md, physical_locations.md, currency_strategy.md, identify_risks.md, make_assumptions.md, distill_assumptions.md]
+inputs: [identify_purpose_raw.json, identify_purpose.md, plan_type.md, strategic_decisions.md, scenarios.md, physical_locations.md, currency_strategy.md, identify_risks.md, make_assumptions.md, distill_assumptions.md]
+uses: [planexe_skill/shared/purpose.py]
 outputs: [review_assumptions_raw.json, review_assumptions.md]
 tier: low
 est_llm_calls: 1
@@ -13,3 +14,6 @@ sensitivity}], conclusion). Note: plan.txt is NOT part of the input (as in PlanE
 User prompt = the nine upstream markdown documents, each as `# <Title>\n\n<content>`, joined with
 blank lines (a missing file becomes a "**Problem with document:**" chunk). The prompt focuses on
 critical missing assumptions, the three most important issues and quantified sensitivity ranges.
+
+A non_profit or other business plan (identify_purpose_raw.json) gets `prompts/business_<profit_motive>_addendum.md`
+appended to the system prompt: where the prompt refers to ROI, revenue or profitability, apply cost-effectiveness.

@@ -60,12 +60,42 @@ class PurposeTest(unittest.TestCase):
 
     def test_every_variant_has_a_prompt(self):
         skills = skills_declaring_purpose()
-        self.assertGreaterEqual(len(skills), 6)
+        self.assertGreaterEqual(len(skills), 9)
         for skill in sorted(skills):
             pattern = PROMPT_PATTERN.get(skill, "prompts/{}.md")
-            for name in list(PURPOSES) + [f"{a}_addendum" for a in ADDENDA]:
+            # Per-purpose base prompts where the skill has them; otherwise one system prompt plus the addenda.
+            bases = list(PURPOSES) if (SKILLS / skill / pattern.format("business")).is_file() else []
+            for name in bases + [f"{a}_addendum" for a in ADDENDA]:
                 with self.subTest(skill=skill, prompt=name):
                     self.assertTrue((SKILLS / skill / pattern.format(name)).is_file())
+
+    def test_addenda_use_cost_effectiveness_not_a_ban(self):
+        for skill in sorted(skills_declaring_purpose()):
+            for a in ADDENDA:
+                text = (SKILLS / skill / "prompts" / f"{a}_addendum.md").read_text()
+                with self.subTest(skill=skill, addendum=a):
+                    self.assertIn("apply cost-effectiveness instead", text)
+                    self.assertNotIn("Do not frame", text)
+
+    def test_business_prompts_keep_roi(self):
+        # The LLM sees a business plan as PlanExe did; only the addenda translate ROI into cost-effectiveness.
+        self.assertIn("ROI", (SKILLS / "review_assumptions" / "prompts" / "system.md").read_text())
+        self.assertIn("ROI", (SKILLS / "review_plan" / "questions.json").read_text())
+        self.assertIn("ROI", (SKILLS / "executive_summary" / "schema.json").read_text())
+        self.assertIn("projected ROI", (SKILLS / "draft_documents_to_create" / "prompts" / "business.md").read_text())
+
+    def test_with_addendum(self):
+        from planexe_skill.shared.purpose import with_addendum
+
+        class Ctx:
+            def skill_file(self, rel):
+                return (SKILLS / "review_plan" / rel).read_text()
+        base = "BASE"
+        self.assertEqual(with_addendum(Ctx(), {"purpose": "business", "profit_motive": "for_profit"}, base), "BASE")
+        self.assertEqual(with_addendum(Ctx(), {"purpose": "personal"}, base), "BASE")
+        other = with_addendum(Ctx(), {"purpose": "business", "profit_motive": "other"}, base)
+        self.assertTrue(other.startswith("BASE\n\n# Addendum"))
+        self.assertIn("cost-effectiveness", other)
 
     def test_classify_domain_drops_every_purpose_label(self):
         from skills.classify_domain.run import PURPOSE_LABEL_KEYS

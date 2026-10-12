@@ -1,5 +1,6 @@
 from planexe_skill.planexe import planexe_metadata, structured
 from planexe_skill.shared.final_review import REVIEW_PLAN, build_query, fix_bullet_lists
+from planexe_skill.shared.purpose import with_addendum
 
 KEYS = ("audience_tailoring", "focus_and_context", "purpose_and_goals", "key_deliverables_and_outcomes",
         "timeline_and_budget", "risks_and_mitigations", "action_orientation", "overall_takeaway", "feedback")
@@ -22,7 +23,7 @@ def to_markdown(d: dict) -> str:
 
 def run(ctx):
     user_prompt = build_query(ctx, [REVIEW_PLAN])
-    system_prompt = ctx.skill_file("prompts/system.md").strip()
+    system_prompt = with_addendum(ctx, ctx.read_json("identify_purpose_raw.json"), ctx.skill_file("prompts/system.md"))
     response, result = structured(ctx, system_prompt, user_prompt, ctx.skill_json("schema.json"))
     response = {k: str(response.get(k) or "") for k in KEYS}
     markdown = to_markdown(response)

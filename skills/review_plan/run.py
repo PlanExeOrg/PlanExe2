@@ -4,6 +4,7 @@ import time
 
 from planexe_skill.planexe import planexe_metadata, structured
 from planexe_skill.shared.final_review import build_query, transcript
+from planexe_skill.shared.purpose import with_addendum
 
 
 def to_markdown(question_answers_list: list[dict]) -> str:
@@ -25,7 +26,7 @@ def to_markdown(question_answers_list: list[dict]) -> str:
 
 def run(ctx):
     document = build_query(ctx)
-    system_prompt = ctx.skill_file("prompts/system.md").strip()
+    system_prompt = with_addendum(ctx, ctx.read_json("identify_purpose_raw.json"), ctx.skill_file("prompts/system.md"))
     system_prompt += "\n\nDocument for review:\n"
     system_prompt += document
     schema = ctx.skill_json("schema.json")
