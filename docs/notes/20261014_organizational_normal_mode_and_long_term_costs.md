@@ -140,6 +140,8 @@ Avoid creating a bureaucratic requirement to escalate every objection. Escalate 
 
 Security, accessibility, safety, privacy, and regulatory obligations cannot always be treated as optional feature priorities. Define applicable minimum standards and acceptance criteria early. If exceptions are permitted, require appropriate authorization, compensating controls, expiry dates, and a remediation owner.
 
+These minimums are **constraints, not objectives to trade away**. An analysis may report that a plan breaches one, or what meeting it costs, but it never offers dropping it as a saving: "cut accessibility work and save 20%" is a breach to flag, not an option to weigh.
+
 Automated testing levels and architectural investments, by contrast, usually require context-sensitive engineering choices. Do not turn one good practice into an inflexible universal rule.
 
 ### 3.5 Realign incentives with outcomes
@@ -236,6 +238,7 @@ Potential failure modes and safeguards:
 | Generates convincing but unverified management language | Provenance labels, verification gates, clear separation of observation and speculation |
 | Produces more meetings and reports | Measure reduction in wasted work; require decisions or useful learning from outputs |
 | Optimizes the wrong KPI | Balanced outcomes across time horizons and stakeholder groups |
+| Prices legal, safety or ethical minimums as savings | Treat them as constraints the optimization must respect (§3.4); flag breaches, never propose them as options |
 | Makes unsupported accusations about individuals | Focus on decisions, process and evidence; right to contest and correct |
 | Quietly makes consequential organizational changes | Human authorization, audit trail, reversibility, rollback criteria |
 | Concentrates sensitive organizational knowledge | Least privilege, compartmentalized access, retention limits, security controls |
@@ -250,6 +253,10 @@ The system's central weakness is that the agents meant to surface inconvenient f
 - **Configuration under shared control.** Changes to what agents may observe, how they escalate, or what they suppress require approval by more than the line management they report on.
 - **Resistance to manipulation.** Expect people to steer the agents: feeding selective evidence, framing questions, or flooding the ledger. Agents check whether evidence is complete (what is missing from the record, not only what is in it) and record who supplied each item.
 
+The ledger cannot force anyone to act on a finding. What it can do is make inaction a recorded decision: a finding above the severity threshold is closed only by a named authority choosing a disposition (accepted risk, mitigated, rejected with rationale), and that record stays visible to successor owners and to the independent reporting line. That is the realistic lever.
+
+The hardest step is not technical. It is getting an organization to accept, and keep funding, a system able to challenge its established practices. Adoption needs a sponsor whose own incentives favour long-term outcomes (a board, a regulator, a funder, or an owner), and it should start where that sponsor has authority (§6, Phase A).
+
 ### 4.7 Evidence standard for root-cause claims
 
 Linking defect histories, budgets, and decisions into a causal chain is where AI is most likely to produce plausible but false explanations. Before a root-cause claim is escalated:
@@ -257,7 +264,7 @@ Linking defect histories, budgets, and decisions into a causal chain is where AI
 - Every link in the chain cites its sources, and each link is labelled **measured**, **inferred**, or **assumed**.
 - At least one competing explanation is stated, with the evidence that distinguishes it.
 - Numbers are recomputed by code, not restated by the model.
-- A claim about a person's or team's decision is shown to them for correction before it goes upward.
+- A claim about a person's or team's decision is shown to them before it goes upward, with a **time-limited right to respond** (e.g., 5 working days). Their response is attached to the claim; it does not block escalation. If they dispute the claim, escalation proceeds with both versions and the disagreement is recorded as dissent.
 - Claims that fail these checks stay as hypotheses in the ledger and are not escalated.
 
 ---
@@ -397,11 +404,25 @@ PlanExe works at planning time, before a decision is taken, which is the cheapes
 
 Plans already find long-term costs, but they end up scattered across sections. Examples from October 2026 runs: Clear English leaves stewardship after Month 36 unfunded, media rescue has a USD 280 M gap between budget and cost, and the rubber programme leaves USD 13.9 B unassigned. Three general changes would make this a consistent output. Each can be tested with single-stage runs on copies of existing plans.
 
-1. **A cost-transfer lens.** For each saving, deferral, or reserve cut in the plan: what is gained now, who bears the cost later, when, and who funds the remedy. Implement as a `self_audit` check or as fields on `decision_register` decisions. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
+1. **Decision externalities.** For each consequential decision, and each saving, deferral, or reserve cut, the plan states:
+
+   | Dimension | Question |
+   |---|---|
+   | Immediate benefits | Who gains, and when? |
+   | Deferred costs | Who pays later, and when? |
+   | Externalities | Which costs fall outside the project's boundaries (other teams, users, society)? |
+   | Time horizon | Do the consequences outlive the project? |
+   | Accountability | Who owns the resulting obligations and funds the remedy? |
+   | Reversibility | Can the decision be undone, and at what cost? |
+   | Counterfactual | What follows from the main alternative? (`decision_register` already holds the options and their consequences.) |
+
+   Legal, safety, and ethical minimums are inputs to this analysis, not dimensions to trade (§3.4). Implement as fields on `decision_register` decisions, or as a `self_audit` check. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
 2. **Dissent in the decision register.** Each decision records the strongest objection raised against it (from `expert_criticism`, `premise_attack`, or the review stages) and its disposition: accepted, mitigated, rejected with a reason, or unresolved (§3.3). Test: rerun `decision_register` on a copy and check that the dispositions cite the objection's source.
 3. **Effects beyond the plan's horizon.** Plans state the effects and obligations that fall after their own end date (operation, maintenance, renewal, stewardship), with who carries them. This connects to `docs/notes/20261014_timescale.md`: the follow-up phase of a short-horizon plan and the renewal cycles of a long one are both effects beyond the main horizon. Test: check that the Yellowstone and rubber plans list them in one place.
 
 These keep PlanExe general-purpose: none of them depends on a domain, and none adds framing that would bias a plan towards caution. They make visible what a plan already implies.
+
+This section does not depend on §4–§7. The AI-coworker network is a long-term vision; these three changes are contained engineering work on a different timescale, and should be planned and evaluated separately.
 
 ## Closing thesis
 
