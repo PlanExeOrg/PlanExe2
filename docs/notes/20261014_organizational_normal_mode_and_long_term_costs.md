@@ -30,7 +30,7 @@ Three distinct problems keep the pattern in place, and solving one does not solv
 
 The third is likely the hardest: a manager can fully understand a finding and still rationally choose the short-term saving.
 
-**Core principle:** Optimize for the organization's long-term outcomes, not simply the apparent success of the current project or the reward horizon of its manager.
+**Core principle:** Improve the organization's long-term outcomes, not simply the apparent success of the current project or the reward horizon of its manager, while accounting for consequences imposed on customers, suppliers, workers, and society, and respecting applicable constraints (§3.4). A system that raises long-term profit by shifting costs onto others has not escaped the pattern; it has moved it outside the organization.
 
 ---
 
@@ -428,7 +428,7 @@ Where possible, use matched comparisons or phased rollout to estimate impact. At
 PlanExe works at planning time, before a decision is taken, which is the cheapest point to make a cost transfer visible. It should keep three reasoning tasks apart:
 
 1. **Detect** a possible unfavourable consequence (the critique stages).
-2. **Establish how likely** it is, with evidence labelled measured, inferred, or assumed (§4.7).
+2. **Establish how likely** it is. Keep three things apart: **evidence strength** (measured, inferred, or assumed, §4.7), **estimated likelihood**, and **severity**. A consequence can be probable on thin evidence, or improbable on strong evidence, and a severe risk can justify mitigation even when its likelihood cannot be estimated. Likelihood may be reported as **unknown**; it must never be invented to fill a field.
 3. **Decide whether it is acceptable**, which belongs to an authorized person. PlanExe recommends; it does not decide.
 
 Several of the mechanisms above already exist in its pipeline, in a planning-time form:
@@ -456,18 +456,37 @@ Plans already find long-term costs, but they end up scattered across sections. E
    | Opportunity cost | What valuable work does this prevent from ever happening (e.g., years of maintenance effort that could have built something else)? |
 
    The minimums of §3.4 are inputs to this analysis, not dimensions to trade. Implement as fields on `decision_register` decisions, or as a `self_audit` check. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
-2. **Dissent in the decision register.** Each decision records the strongest objection raised against it (from `expert_criticism`, `premise_attack`, or the review stages), with independent fields:
+2. **Dissent in the decision register.** Each decision records its material objections, one per materially different failure mechanism (e.g., security exposure, regulatory non-compliance, and unsustainable operating cost are three, not one), concisely, (from `expert_criticism`, `premise_attack`, or the review stages), with independent fields:
 
    | Field | Example |
    |---|---|
    | Origin | AI-generated / stakeholder-raised |
    | Evidence status | Unsupported / partly supported / independently verified |
-   | Confidence | Low / medium / high |
+   | Likelihood | Unknown / low / medium / high |
    | Severity | Low / medium / high / critical |
    | Disposition | Proposed by PlanExe; actual disposition awaiting a human decision |
 
    Origin and evidence status are separate: an AI objection can be verified, and a human objection can be unsupported. A planning-time report must not invent organizational history, so it separates four things: the **recommended decision** and the **predicted consequences** (which PlanExe produces), and the **actual decision** and the **observed consequences** (which stay unset until an authorized person decides and outcomes are observed). Test: rerun `decision_register` on a copy and check that objections carry their source, and that no actual disposition is filled in.
 3. **Effects beyond the plan's horizon.** Plans state the effects and obligations that fall after their own end date (operation, maintenance, renewal, stewardship), with who carries them. This connects to `docs/notes/20261014_timescale.md`: the follow-up phase of a short-horizon plan and the renewal cycles of a long one are both effects beyond the main horizon. Test: check that the Yellowstone and rubber plans list them in one place.
+
+**Placement in the pipeline.** Alternatives are compared early (the lever and scenario stages), while `self_audit` and `decision_register` run near the end. Analysis that only happens at the end finds consequences after the strategic choice is made. So:
+
+- **Decision externalities** are assessed where alternatives are compared, before a scenario is recommended.
+- **The decision register** preserves the material objections and their evidence.
+- **`self_audit`** checks that significant externalities and objections have not disappeared from the final report, without repeating the full analysis.
+
+**Evaluation.** The per-change tests above mostly measure recall, and a stage like this can produce plausible-sounding liabilities for almost any decision. Before adopting any of the three changes, run them on 10–20 existing plans from unrelated domains, including plans whose decisions are prudent, and assess independently:
+
+| Criterion | Question |
+|---|---|
+| Recall | Does it find the known material consequences? |
+| Precision | Are its findings supported by the plan? |
+| False positives | Does it invent liabilities where none are supported? |
+| Symmetry | Does it question over-investment as well as shortcuts? |
+| Materiality | Does it separate consequential costs from trivial ones? |
+| Decision impact | Does it change which alternative is preferable, or add information that existing stages did not already provide? |
+
+Decision impact matters most: a new stage is worth its cost only if it improves the decisions, not because it produces more insights.
 
 These keep PlanExe general-purpose: none of them depends on a domain, and none adds framing that would bias a plan towards caution. They make visible what a plan already implies.
 
