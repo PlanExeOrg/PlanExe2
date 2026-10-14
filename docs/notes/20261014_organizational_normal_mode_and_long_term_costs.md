@@ -20,6 +20,16 @@ A recurring mechanism is **short-term benefit / long-term cost transfer**:
 
 The proposed intervention is a network of **AI coworkers at every organizational level, including management**, connected through a governed **shared evidence ledger** (shared organizational memory, **not enforced consensus**). Their work is to observe, probe, propose small improvements, test outcomes, preserve disagreements, and route important findings to people who can act on them.
 
+Three distinct problems keep the pattern in place, and solving one does not solve the others:
+
+| Problem | Mechanism |
+|---|---|
+| The organization cannot see its dysfunction | AI coworkers investigate the current state and compare credible alternatives |
+| Inconvenient findings do not reach decision-makers | Shared evidence and independent escalation |
+| The incentives favour the short-term choice | Long-term accountability and incentive reform |
+
+The third is likely the hardest: a manager can fully understand a finding and still rationally choose the short-term saving.
+
 **Core principle:** Optimize for the organization's long-term outcomes, not simply the apparent success of the current project or the reward horizon of its manager.
 
 ---
@@ -140,7 +150,14 @@ Avoid creating a bureaucratic requirement to escalate every objection. Escalate 
 
 Security, accessibility, safety, privacy, and regulatory obligations cannot always be treated as optional feature priorities. Define applicable minimum standards and acceptance criteria early. If exceptions are permitted, require appropriate authorization, compensating controls, expiry dates, and a remediation owner.
 
-These minimums are **constraints, not objectives to trade away**. An analysis may report that a plan breaches one, or what meeting it costs, but it never offers dropping it as a saving: "cut accessibility work and save 20%" is a breach to flag, not an option to weigh.
+Not every minimum is universal. Distinguish:
+
+- **Binding legal and regulatory requirements**, which depend on jurisdiction.
+- **The organization's own commitments** (published policies, contracts, stated standards).
+- **Domain-specific safety requirements**, established by engineering or professional analysis for that domain.
+- **Optional improvements** beyond those minimums, which are legitimate trade-offs.
+
+The first three come from the context (jurisdiction, policy, domain), not from a universal threshold the analysis invents. Within them, these minimums are **constraints, not objectives to trade away**. An analysis may report that a plan breaches one, or what meeting it costs, but it never offers dropping it as a saving: "cut accessibility work and save 20%" is a breach to flag, not an option to weigh.
 
 Automated testing levels and architectural investments, by contrast, usually require context-sensitive engineering choices. Do not turn one good practice into an inflexible universal rule.
 
@@ -156,6 +173,14 @@ Useful options include:
 - Run retrospective reviews of previous decisions without using the exercise as a mechanism for personal retaliation.
 
 Incentives should avoid simplistic scores that employees can game. Use a small, balanced set of signals and qualitative review.
+
+**Better knowledge is not better incentives.** If a manager's bonus depends on staying within the annual budget, a well-evidenced finding that cutting maintenance creates expensive liabilities may change nothing: the manager understands it and still rationally takes the saving. Detection only helps if governance changes the payoff:
+
+- **Assign long-term liabilities an owner** at decision time, and keep that ownership attached when people move on.
+- **Carry remediation budgets across management transitions** instead of letting them lapse with the annual cycle.
+- **Evaluate consequential decisions beyond the annual cycle**, e.g. by reviewing them again after two to five years against the predictions made at the time.
+
+AI coworkers can expose the trade-off; only governance can make the long-term choice the rewarded one.
 
 ### 3.6 Use modest, reversible interventions
 
@@ -249,7 +274,7 @@ Potential failure modes and safeguards:
 The system's central weakness is that the agents meant to surface inconvenient findings about management are usually deployed, configured, and funded by management. This is a design requirement, not an open question:
 
 - **Independent reporting line.** Findings above an agreed severity go to a body that does not depend on the manager concerned: internal audit, an assurance function, a board committee, or an equivalent.
-- **Tamper-evident ledger.** Observations, decisions, warnings, and dispositions are append-only and versioned; deleting or reclassifying a finding leaves a trace.
+- **Two stores with different rules.** An **audit trail** of decisions, dispositions, and changes is append-only and versioned, so deleting or reclassifying a finding leaves a trace. The **underlying evidence** (documents, records, statements, personal data) has retention, redaction, correction, and access-control policies, because an immutable store of sensitive employee information becomes a liability over decades. The audit trail records that evidence was redacted or deleted, and why, without keeping its content.
 - **Configuration under shared control.** Changes to what agents may observe, how they escalate, or what they suppress require approval by more than the line management they report on.
 - **Resistance to manipulation.** Expect people to steer the agents: feeding selective evidence, framing questions, or flooding the ledger. Agents check whether evidence is complete (what is missing from the record, not only what is in it) and record who supplied each item.
 
@@ -264,8 +289,15 @@ Linking defect histories, budgets, and decisions into a causal chain is where AI
 - Every link in the chain cites its sources, and each link is labelled **measured**, **inferred**, or **assumed**.
 - At least one competing explanation is stated, with the evidence that distinguishes it.
 - Numbers are recomputed by code, not restated by the model.
-- A claim about a person's or team's decision is shown to them before it goes upward, with a **time-limited right to respond** (e.g., 5 working days). Their response is attached to the claim; it does not block escalation. If they dispute the claim, escalation proceeds with both versions and the disagreement is recorded as dissent.
-- Claims that fail these checks stay as hypotheses in the ledger and are not escalated.
+- A claim about a person's or team's decision is shown to them before it goes upward, with a **time-limited right to respond** whose length depends on severity and urgency (e.g., 5 working days for an ordinary organizational concern). Their response is attached to the claim; it does not block escalation. If they dispute the claim, escalation proceeds with both versions and the disagreement is recorded as dissent. For a critical or imminent risk (a security vulnerability, a safety incident), protective escalation happens immediately and the response is attached afterwards.
+
+Insufficient evidence lowers confidence; it does not by itself prevent escalation, especially when the evidence needed to verify a claim is controlled by the people it concerns:
+
+| Category | Escalation |
+|---|---|
+| Verified finding | Normal escalation |
+| Unverified but potentially severe risk | Provisional escalation, clearly labelled as unverified, with what would verify it |
+| Weak hypothesis with limited impact | Kept in the ledger for investigation |
 
 ---
 
@@ -393,7 +425,13 @@ Where possible, use matched comparisons or phased rollout to estimate impact. At
 
 ## 10. What this means for PlanExe
 
-PlanExe works at planning time, before a decision is taken, which is the cheapest point to make a cost transfer visible. Several of the mechanisms above already exist in its pipeline, in a planning-time form:
+PlanExe works at planning time, before a decision is taken, which is the cheapest point to make a cost transfer visible. It should keep three reasoning tasks apart:
+
+1. **Detect** a possible unfavourable consequence (the critique stages).
+2. **Establish how likely** it is, with evidence labelled measured, inferred, or assumed (§4.7).
+3. **Decide whether it is acceptable**, which belongs to an authorized person. PlanExe recommends; it does not decide.
+
+Several of the mechanisms above already exist in its pipeline, in a planning-time form:
 
 | This note asks for | PlanExe already has |
 |---|---|
@@ -404,7 +442,7 @@ PlanExe works at planning time, before a decision is taken, which is the cheapes
 
 Plans already find long-term costs, but they end up scattered across sections. Examples from October 2026 runs: Clear English leaves stewardship after Month 36 unfunded, media rescue has a USD 280 M gap between budget and cost, and the rubber programme leaves USD 13.9 B unassigned. Three general changes would make this a consistent output. Each can be tested with single-stage runs on copies of existing plans.
 
-1. **Decision externalities.** For each consequential decision, and each saving, deferral, or reserve cut, the plan states:
+1. **Decision externalities.** For each consequential decision, the plan states the following. This applies in both directions: a shortcut or reserve cut can defer costs, and so can over-investment, e.g. excessive redundancy that locks in long-term cost (`self_audit`'s "Gold Plating" check is the counterpart).
 
    | Dimension | Question |
    |---|---|
@@ -415,14 +453,27 @@ Plans already find long-term costs, but they end up scattered across sections. E
    | Accountability | Who owns the resulting obligations and funds the remedy? |
    | Reversibility | Can the decision be undone, and at what cost? |
    | Counterfactual | What follows from the main alternative? (`decision_register` already holds the options and their consequences.) |
+   | Opportunity cost | What valuable work does this prevent from ever happening (e.g., years of maintenance effort that could have built something else)? |
 
-   Legal, safety, and ethical minimums are inputs to this analysis, not dimensions to trade (§3.4). Implement as fields on `decision_register` decisions, or as a `self_audit` check. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
-2. **Dissent in the decision register.** Each decision records the strongest objection raised against it (from `expert_criticism`, `premise_attack`, or the review stages) and its disposition: accepted, mitigated, rejected with a reason, or unresolved (§3.3). Test: rerun `decision_register` on a copy and check that the dispositions cite the objection's source.
+   The minimums of §3.4 are inputs to this analysis, not dimensions to trade. Implement as fields on `decision_register` decisions, or as a `self_audit` check. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
+2. **Dissent in the decision register.** Each decision records the strongest objection raised against it (from `expert_criticism`, `premise_attack`, or the review stages), with independent fields:
+
+   | Field | Example |
+   |---|---|
+   | Origin | AI-generated / stakeholder-raised |
+   | Evidence status | Unsupported / partly supported / independently verified |
+   | Confidence | Low / medium / high |
+   | Severity | Low / medium / high / critical |
+   | Disposition | Proposed by PlanExe; actual disposition awaiting a human decision |
+
+   Origin and evidence status are separate: an AI objection can be verified, and a human objection can be unsupported. A planning-time report must not invent organizational history, so it separates four things: the **recommended decision** and the **predicted consequences** (which PlanExe produces), and the **actual decision** and the **observed consequences** (which stay unset until an authorized person decides and outcomes are observed). Test: rerun `decision_register` on a copy and check that objections carry their source, and that no actual disposition is filled in.
 3. **Effects beyond the plan's horizon.** Plans state the effects and obligations that fall after their own end date (operation, maintenance, renewal, stewardship), with who carries them. This connects to `docs/notes/20261014_timescale.md`: the follow-up phase of a short-horizon plan and the renewal cycles of a long one are both effects beyond the main horizon. Test: check that the Yellowstone and rubber plans list them in one place.
 
 These keep PlanExe general-purpose: none of them depends on a domain, and none adds framing that would bias a plan towards caution. They make visible what a plan already implies.
 
-This section does not depend on §4–§7. The AI-coworker network is a long-term vision; these three changes are contained engineering work on a different timescale, and should be planned and evaluated separately.
+The predicted and observed consequences of change 2 are also the natural interface to the vision in §4–§7: PlanExe reasons about possible futures, while AI coworkers investigate the present and remember the past. PlanExe's predicted consequences can later be compared with observed ones, closing a learning cycle: observe, plan, predict, decide, measure, update.
+
+Apart from that interface, this section does not depend on §4–§7. The AI-coworker network is a long-term vision; these three changes are contained engineering work on a different timescale, and should be planned and evaluated separately.
 
 ## Closing thesis
 
