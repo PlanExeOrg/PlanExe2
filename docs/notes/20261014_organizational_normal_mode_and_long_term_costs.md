@@ -428,7 +428,7 @@ Where possible, use matched comparisons or phased rollout to estimate impact. At
 PlanExe works at planning time, before a decision is taken, which is the cheapest point to make a cost transfer visible. It should keep three reasoning tasks apart:
 
 1. **Detect** a possible unfavourable consequence (the critique stages).
-2. **Establish how likely** it is. Keep three things apart: **evidence strength** (measured, inferred, or assumed, §4.7), **estimated likelihood**, and **severity**. A consequence can be probable on thin evidence, or improbable on strong evidence, and a severe risk can justify mitigation even when its likelihood cannot be estimated. Likelihood may be reported as **unknown**; it must never be invented to fill a field.
+2. **Establish how likely** it is. Keep three things apart: **evidence basis** (measured, inferred, or assumed, §4.7), **estimated likelihood**, and **severity**. The basis is not the same as evidence strength (a measurement from an unreliable sensor is weak evidence), which can be assessed separately when needed. A consequence can be probable on thin evidence, or improbable on strong evidence, and a severe risk can justify mitigation even when its likelihood cannot be estimated. Likelihood may be reported as **unknown**; it must never be invented to fill a field.
 3. **Decide whether it is acceptable**, which belongs to an authorized person. PlanExe recommends; it does not decide.
 
 Several of the mechanisms above already exist in its pipeline, in a planning-time form:
@@ -466,7 +466,7 @@ Plans already find long-term costs, but they end up scattered across sections. E
    | Severity | Low / medium / high / critical |
    | Disposition | Proposed by PlanExe; actual disposition awaiting a human decision |
 
-   Origin and evidence status are separate: an AI objection can be verified, and a human objection can be unsupported. A planning-time report must not invent organizational history, so it separates four things: the **recommended decision** and the **predicted consequences** (which PlanExe produces), and the **actual decision** and the **observed consequences** (which stay unset until an authorized person decides and outcomes are observed). Test: rerun `decision_register` on a copy and check that objections carry their source, and that no actual disposition is filled in.
+   Origin and evidence status are separate: an AI objection can be verified, and a human objection can be unsupported. A planning-time report must not invent organizational history, so it separates four things: the **recommended decision** and the **predicted consequences** (which PlanExe produces), and the **actual decision** and the **observed consequences** (which stay unset unless documented in the supplied context, e.g. "the board approved construction last month", or later confirmed by an authorized person, and until outcomes are observed). Test: rerun `decision_register` on a copy and check that objections carry their source, and that no actual disposition is filled in beyond what the prompt documents.
 3. **Effects beyond the plan's horizon.** Plans state the effects and obligations that fall after their own end date (operation, maintenance, renewal, stewardship), with who carries them. This connects to `docs/notes/20261014_timescale.md`: the follow-up phase of a short-horizon plan and the renewal cycles of a long one are both effects beyond the main horizon. Test: check that the Yellowstone and rubber plans list them in one place.
 
 **Placement in the pipeline.** Alternatives are compared early (the lever and scenario stages), while `self_audit` and `decision_register` run near the end. Analysis that only happens at the end finds consequences after the strategic choice is made. So:
@@ -475,7 +475,7 @@ Plans already find long-term costs, but they end up scattered across sections. E
 - **The decision register** preserves the material objections and their evidence.
 - **`self_audit`** checks that significant externalities and objections have not disappeared from the final report, without repeating the full analysis.
 
-**Evaluation.** The per-change tests above mostly measure recall, and a stage like this can produce plausible-sounding liabilities for almost any decision. Before adopting any of the three changes, run them on 10–20 existing plans from unrelated domains, including plans whose decisions are prudent, and assess independently:
+**Evaluation.** The per-change tests above mostly measure recall, and a stage like this can produce plausible-sounding liabilities for almost any decision. Before adopting any of the three changes, pilot them on 10–20 existing plans from unrelated domains, including plans whose decisions are prudent, and assess independently. This is a pilot to learn from, not a statistically definitive benchmark:
 
 | Criterion | Question |
 |---|---|
@@ -484,9 +484,10 @@ Plans already find long-term costs, but they end up scattered across sections. E
 | False positives | Does it invent liabilities where none are supported? |
 | Symmetry | Does it question over-investment as well as shortcuts? |
 | Materiality | Does it separate consequential costs from trivial ones? |
-| Decision impact | Does it change which alternative is preferable, or add information that existing stages did not already provide? |
+| Decision influence | Does it change the recommendation, or add considerations that existing stages did not already provide? |
+| Decision improvement | Is that change justified by the evidence, and judged better than the baseline by an independent assessor? |
 
-Decision impact matters most: a new stage is worth its cost only if it improves the decisions, not because it produces more insights.
+Decision improvement matters most. Influence alone is not enough: a convincing but wrong analysis can turn a sound decision into a bad one. A new stage is worth its cost only if it improves the decisions, not because it produces more insights.
 
 These keep PlanExe general-purpose: none of them depends on a domain, and none adds framing that would bias a plan towards caution. They make visible what a plan already implies.
 
