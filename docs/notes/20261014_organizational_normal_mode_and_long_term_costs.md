@@ -1,8 +1,8 @@
 # Escaping Organizational Normal Mode
 ## Mitigating Short-Term Benefits and Long-Term Costs with AI Coworkers
 
-**Status:** Concept and design principles — not an implementation specification  
-**Scope:** Domain-independent organizations, projects, and operations  
+**Status:** Concept and design principles — not an implementation specification. Section 10 lists concrete, testable changes for PlanExe.  
+**Scope:** Domain-independent organizations, projects, and operations; and what PlanExe can do about the pattern at planning time  
 **Central question:** How can an organization recognize accumulated dysfunction that it regards as normal, and gradually improve its long-term trajectory without reproducing the same incentive failures in AI?
 
 ## Executive summary
@@ -18,7 +18,7 @@ A recurring mechanism is **short-term benefit / long-term cost transfer**:
 5. Subsequent costs are treated as ordinary operations rather than traced back to the decisions that created them.
 6. The organization adapts to the degraded baseline and loses sight of the counterfactual: what could performance have been under different decisions?
 
-The proposed intervention is a network of **AI coworkers at every organizational level, including management**, connected through a governed shared evidence and memory system — a *hive mind* in the sense of shared organizational understanding, **not enforced consensus**. Their work is to observe, probe, propose small improvements, test outcomes, preserve disagreements, and route important findings to people who can act on them.
+The proposed intervention is a network of **AI coworkers at every organizational level, including management**, connected through a governed **shared evidence ledger** (shared organizational memory, **not enforced consensus**). Their work is to observe, probe, propose small improvements, test outcomes, preserve disagreements, and route important findings to people who can act on them.
 
 **Core principle:** Optimize for the organization's long-term outcomes, not simply the apparent success of the current project or the reward horizon of its manager.
 
@@ -169,7 +169,7 @@ This is more credible than assuming the entire organization must immediately ado
 
 ---
 
-## 4. AI coworkers and the organizational hive mind
+## 4. AI coworkers and a shared evidence ledger
 
 ### 4.1 Place AI coworkers in management as well as delivery teams
 
@@ -188,7 +188,7 @@ Embedding AI only with developers reproduces the old escalation problem: useful 
 
 ### 4.2 Shared evidence, not a compulsory shared opinion
 
-The hive mind should share an organizational evidence system, while permitting agents to reason independently and disagree.
+Agents share one organizational evidence ledger, while reasoning independently and free to disagree.
 
 A useful minimum information model:
 
@@ -223,7 +223,7 @@ Escalation must be **traceable, bounded, and contestable**. It should not become
 - **Challenger:** Tests assumptions, searches for disconfirming evidence, examines incentives and unintended consequences.
 - **Planner / experiment designer:** Produces options, predicts trade-offs, and helps people carry out approved, measurable improvements.
 
-These can be agent roles rather than separate models. Important decisions benefit from independent review, because a fully synchronized hive mind can amplify the same mistake across the whole organization.
+These can be agent roles rather than separate models. Important decisions benefit from independent review, because fully synchronized agents can amplify the same mistake across the whole organization.
 
 ### 4.5 Avoid recreating organizational dysfunction in AI
 
@@ -231,7 +231,7 @@ Potential failure modes and safeguards:
 
 | AI failure | Safeguard |
 |---|---|
-| Becomes a management surveillance system | Data minimization, purpose limits, role-based access, worker involvement, privacy review |
+| Becomes a management surveillance system | Data minimization, purpose limits, role-based access, worker involvement, privacy review, compliance with employee-monitoring and labour law (e.g., works-council consultation and GDPR in the EU) |
 | Repeats the opinion of the highest-status agent | Evidence-backed dissent, independent challenge, explicit uncertainty |
 | Generates convincing but unverified management language | Provenance labels, verification gates, clear separation of observation and speculation |
 | Produces more meetings and reports | Measure reduction in wasted work; require decisions or useful learning from outputs |
@@ -240,6 +240,25 @@ Potential failure modes and safeguards:
 | Quietly makes consequential organizational changes | Human authorization, audit trail, reversibility, rollback criteria |
 | Concentrates sensitive organizational knowledge | Least privilege, compartmentalized access, retention limits, security controls |
 | Treats a local improvement as overall progress | Evaluate spillovers and externalized costs across the organization |
+
+### 4.6 Governance and independence
+
+The system's central weakness is that the agents meant to surface inconvenient findings about management are usually deployed, configured, and funded by management. This is a design requirement, not an open question:
+
+- **Independent reporting line.** Findings above an agreed severity go to a body that does not depend on the manager concerned: internal audit, an assurance function, a board committee, or an equivalent.
+- **Tamper-evident ledger.** Observations, decisions, warnings, and dispositions are append-only and versioned; deleting or reclassifying a finding leaves a trace.
+- **Configuration under shared control.** Changes to what agents may observe, how they escalate, or what they suppress require approval by more than the line management they report on.
+- **Resistance to manipulation.** Expect people to steer the agents: feeding selective evidence, framing questions, or flooding the ledger. Agents check whether evidence is complete (what is missing from the record, not only what is in it) and record who supplied each item.
+
+### 4.7 Evidence standard for root-cause claims
+
+Linking defect histories, budgets, and decisions into a causal chain is where AI is most likely to produce plausible but false explanations. Before a root-cause claim is escalated:
+
+- Every link in the chain cites its sources, and each link is labelled **measured**, **inferred**, or **assumed**.
+- At least one competing explanation is stated, with the evidence that distinguishes it.
+- Numbers are recomputed by code, not restated by the model.
+- A claim about a person's or team's decision is shown to them for correction before it goes upward.
+- Claims that fail these checks stay as hypotheses in the ledger and are not escalated.
 
 ---
 
@@ -347,18 +366,12 @@ Where possible, use matched comparisons or phased rollout to estimate impact. At
 
 ## 8. Strategic design principles
 
-1. **Start from observed reality, not the organization's preferred self-description.**
-2. **Treat “normal” as a hypothesis, not a benchmark of adequacy.**
-3. **Make deferred costs and risk transfers visible.**
-4. **Protect the route from domain expertise to decision authority.**
-5. **Include AI coworkers in management; otherwise the information bottleneck remains.**
-6. **Share evidence and memory, but preserve independent reasoning and disagreement.**
-7. **Prefer small, reversible, measured improvements over imposed grand transformations.**
-8. **Distinguish missing evidence from evidence that a risk is absent.**
-9. **Evaluate the whole organization's trajectory, not one project's local success.**
-10. **Preserve human agency, due process, privacy, and accountability.**
-11. **Revisit decisions after their original owners have moved on.**
-12. **Measure whether the improvement system itself creates waste, harm, or distorted incentives.**
+1. **Treat "normal" as a hypothesis, not a benchmark of adequacy:** start from observed reality and credible counterfactuals.
+2. **Make deferred costs and risk transfers visible,** including those that fall after the original owners have moved on.
+3. **Protect the route from domain expertise to decision authority,** which is why AI coworkers belong in management too.
+4. **Share evidence, not opinions:** preserve independent reasoning and dissent.
+5. **Prefer small, reversible, measured improvements,** and measure whether the improvement system itself creates waste or harm.
+6. **Preserve human agency, due process, privacy, and accountability.**
 
 ## 9. Open research and design questions
 
@@ -367,9 +380,28 @@ Where possible, use matched comparisons or phased rollout to estimate impact. At
 - What escalation rules reliably surface serious problems without creating a torrent of low-value alerts?
 - How can the system tell a legitimate disagreement from a suppressed warning without making claims about motives?
 - Can independent agents preserve meaningful dissent while still coordinating on decisions?
-- Who governs the shared evidence system when the evidence challenges executive incentives?
+- Section 4.6 sets requirements for governance; which concrete reporting lines and controls hold up in practice, in organizations of different size and ownership?
 - What prevents the improvement apparatus from becoming another source of bureaucracy, employee surveillance, and short-term KPI gaming?
 - How should success be measured when the most valuable outcome is an incident that *didn't* occur or a bad investment that was *never* made?
+
+## 10. What this means for PlanExe
+
+PlanExe works at planning time, before a decision is taken, which is the cheapest point to make a cost transfer visible. Several of the mechanisms above already exist in its pipeline, in a planning-time form:
+
+| This note asks for | PlanExe already has |
+|---|---|
+| Independent challenge (§4.4, Challenger) | `premise_attack`, `expert_criticism`, `self_audit` |
+| Decision records with alternatives, owner and revisit trigger (§3.1) | `decision_register`: `options`, `consequences`, `owner`, `decide_by`; `ratify` with `revisit_by` |
+| Deferred costs and long-term liabilities (§3.2) | `self_audit` checks "Lacks Operational Sustainability" and "Underestimating Risks" |
+| Unknown costs stay unknown, not zero (§3.2) | canonical facts labelled "(estimate)" and "OPEN decision" |
+
+Plans already find long-term costs, but they end up scattered across sections. Examples from October 2026 runs: Clear English leaves stewardship after Month 36 unfunded, media rescue has a USD 280 M gap between budget and cost, and the rubber programme leaves USD 13.9 B unassigned. Three general changes would make this a consistent output. Each can be tested with single-stage runs on copies of existing plans.
+
+1. **A cost-transfer lens.** For each saving, deferral, or reserve cut in the plan: what is gained now, who bears the cost later, when, and who funds the remedy. Implement as a `self_audit` check or as fields on `decision_register` decisions. Test: run the stage on copies of the Clear English, media rescue and heatwave plans and check that the known transfers appear.
+2. **Dissent in the decision register.** Each decision records the strongest objection raised against it (from `expert_criticism`, `premise_attack`, or the review stages) and its disposition: accepted, mitigated, rejected with a reason, or unresolved (§3.3). Test: rerun `decision_register` on a copy and check that the dispositions cite the objection's source.
+3. **Effects beyond the plan's horizon.** Plans state the effects and obligations that fall after their own end date (operation, maintenance, renewal, stewardship), with who carries them. This connects to `docs/notes/20261014_timescale.md`: the follow-up phase of a short-horizon plan and the renewal cycles of a long one are both effects beyond the main horizon. Test: check that the Yellowstone and rubber plans list them in one place.
+
+These keep PlanExe general-purpose: none of them depends on a domain, and none adds framing that would bias a plan towards caution. They make visible what a plan already implies.
 
 ## Closing thesis
 
