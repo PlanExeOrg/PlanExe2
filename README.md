@@ -19,7 +19,8 @@ You need:
 
 - **Python 3.11 or newer** (standard library only; nothing to `pip install`).
 - **The Claude Code CLI, logged in**: `claude auth login`. PlanExe2 makes its LLM calls through it, on
-  your Claude subscription.
+  your Claude subscription. Or [opencode](https://opencode.ai) instead, to run on other models (see
+  [Other models with opencode](#other-models-with-opencode)).
 - **Usage budget**: a full plan is about 220-260 LLM calls and takes roughly 65-90 minutes.
 
 ### Recommended: clone the repo and ask your coding agent
@@ -65,6 +66,41 @@ success criteria. The start date (Month 0) defaults to today and may be in the p
 
 > Running inside a sandboxed agent (e.g. Claude Code desktop with sandbox on)? The child
 > `claude` process needs keychain access for auth, so run the command outside the sandbox.
+
+### Other models with opencode
+
+`--backend opencode` makes every LLM call through the headless [opencode](https://opencode.ai) CLI
+(`opencode run`) instead of `claude -p`, so you can see what plans other models produce: opencode's own
+free models, OpenRouter, LM Studio, Ollama, ...
+
+1. Install opencode (e.g. `brew install opencode` or `npm i -g opencode-ai`).
+2. Free models (`opencode/...`) need no setup. For other providers run `opencode auth login` and pick one.
+3. List the models you can use: `opencode models`.
+4. Pass one as `PROVIDER/MODEL`. There is no default model for this backend:
+
+```bash
+python3 -m planexe_skill check-prompt --prompt-file my_prompt.txt --backend opencode --model opencode/glm-5.3-flash-free
+python3 -m planexe_skill run runs/20261008_my_plan --backend opencode --model openrouter/moonshotai/kimi-k2.6
+```
+
+`--model` sets the model for every stage; `--model-high`, `--model-mid` and `--model-low` override it per
+tier. With the guided flow, tell the agent which model to use ("use kimi-k2.6 via OpenRouter") and
+`make-plan` adds the flags.
+
+Things to know:
+
+- Each call runs isolated: opencode's project config, plugins, `CLAUDE.md` files and tools are switched off,
+  except web search in the `tier: high` stages. Sessions go to a private database in the temp dir, not your
+  opencode history.
+- opencode has no schema-enforced output, so replies are parsed as JSON, validated, and the problems sent
+  back on a retry. Weaker models need more retries, or fail a stage; re-running resumes.
+- Free models are slower (roughly 40-80 s per call in testing), so a full plan takes longer than with Claude.
+  Their free tier refuses requests without tools, so for `opencode/...` models the `read` tool stays listed,
+  with every permission denied. If opencode changes that rule, the run stops with a hint to use another
+  provider.
+- Each report's Metadata section records the model used per stage.
+
+More in [Commands](https://docs.planexe.org/commands/#running-on-other-models-with-opencode).
 
 ### Why there is no pip package
 
