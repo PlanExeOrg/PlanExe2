@@ -55,13 +55,24 @@ def child_env(config_file: str, web_search: bool) -> dict[str, str]:
     return env
 
 
-def agent_config(system: str, web_search: bool) -> dict:
-    """opencode config with one agent whose prompt is our system prompt and whose only tool is web search."""
+def is_free_model(model: str) -> bool:
+    """opencode's own free models (opencode/...-free, opencode/big-pickle...) are served by OpenCode Zen."""
+    return model.startswith("opencode/")
+
+
+def agent_config(system: str, web_search: bool, free_model: bool = False) -> dict:
+    """opencode config with one agent whose prompt is our system prompt and whose only tool is web search.
+
+    opencode's free tier refuses requests that carry no tools at all (FreeTierError, HTTP 403), so for those
+    models the `read` tool stays listed; every permission is denied, so a call to it is refused.
+    """
     permission: dict[str, str] = {"*": "deny"}
     tools: dict[str, bool] = {"*": False}
     if web_search:
         permission["websearch"] = "allow"
         tools["websearch"] = True
+    elif free_model:
+        tools["read"] = True
     return {
         "$schema": "https://opencode.ai/config.json",
         "share": "disabled",
@@ -182,7 +193,7 @@ class OpenCodeCLIBackend(Backend):
             msg = "; ".join(state["errors"])
             text = f"opencode CLI reported an error: {msg}\nstderr (tail):\n{stderr[-1500:]}"
             if "free tier can only be used" in msg.lower():
-                raise LLMAuthError(text + "\nHint: opencode's free models refuse custom system prompts; "
+                raise LLMAuthError(text + "\nHint: opencode's free tier refuses requests without tools; "
                                    "pick a model from another provider (e.g. openrouter/..., lmstudio/...).")
             if any(a in msg.lower() for a in _AUTH):
                 raise LLMAuthError(text + f"\nHint: {self.login_hint}, then resume the run.")
@@ -201,7 +212,7 @@ class OpenCodeCLIBackend(Backend):
                       "markdown fences) that conforms to this JSON schema:\n" + json.dumps(schema, indent=1))
         fd, config_file = tempfile.mkstemp(prefix="planexe_skill_opencode_", suffix=".json")
         with os.fdopen(fd, "w", encoding="utf-8") as f:
-            json.dump(agent_config(system, web_search), f)
+            json.dump(agent_config(system, web_search, is_free_model(self.model_for(tier))), f)
         try:
             return self._complete(config_file, user, schema, tier, web_search)
         finally:

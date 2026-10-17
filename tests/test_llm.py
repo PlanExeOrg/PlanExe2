@@ -206,6 +206,10 @@ class OpenCodeCLITest(unittest.TestCase):
         search = agent_config("SYS", web_search=True)["agent"][AGENT]
         self.assertTrue(search["tools"]["websearch"])
         self.assertEqual(search["permission"]["websearch"], "allow")
+        # opencode's free tier refuses tool-less requests: keep one tool listed, still denied.
+        free = agent_config("SYS", web_search=False, free_model=True)["agent"][AGENT]
+        self.assertEqual(free["tools"], {"*": False, "read": True})
+        self.assertEqual(free["permission"], {"*": "deny"})
 
     def test_counts_web_searches(self, run, *_):
         fake = FakeOpenCodePopen([{"type": "tool_use", "part": {"tool": "websearch"}},
@@ -233,7 +237,7 @@ class OpenCodeCLITest(unittest.TestCase):
         run.side_effect = popen_sequence(oc_error("OpenCode's free tier can only be used from within OpenCode.", 403))
         with self.assertRaises(LLMAuthError) as cm:
             self.backend().complete("s", "u", SCHEMA, "low")
-        self.assertIn("refuse custom system prompts", str(cm.exception))
+        self.assertIn("refuses requests without tools", str(cm.exception))
         run.side_effect = popen_sequence(oc_error("User not found", 401))
         with self.assertRaises(LLMAuthError):
             self.backend().complete("s", "u", SCHEMA, "low")

@@ -76,7 +76,9 @@ There is no default model for this backend. Give `--model` for all tiers, or `--
   stage's system prompt as the agent prompt. `tier: high` stages may use opencode's `websearch` tool.
 - opencode has no schema-enforced output: the model replies with JSON, which is validated against the
   schema, and the problems are sent back on a retry. Weaker models need more retries, or fail a stage.
-- opencode's own free models (`opencode/...-free`) refuse custom system prompts, so they can't be used.
+- opencode's own free models (`opencode/...`, e.g. `opencode/glm-5.3-flash-free`) work too. Their free tier
+  refuses requests that carry no tools, so for these models the `read` tool stays listed (with every
+  permission denied, so it can't actually run).
 - Sessions go to a private database in the temp dir, not to your opencode session history.
 
 ## Progress, logs and stopping
