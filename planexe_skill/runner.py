@@ -272,7 +272,8 @@ class Runner:
                         if _is_auth_error(exc):
                             result.stopped = True
                             print("Authentication failed: stopping the run (no point in starting more LLM calls). "
-                                  f"Run 'claude auth login', then resume: python -m planexe_skill run {self.run_dir}",
+                                  f"{self.backend.login_hint}, then resume: "
+                                  f"python -m planexe_skill run {self.run_dir}",
                                   file=self.stream, flush=True)
         except KeyboardInterrupt:
             print("\nInterrupted: waiting for running stages to stop. Re-run the same command to resume.",

@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 import subprocess
 import unittest
 from unittest import mock
@@ -131,6 +132,111 @@ class ClaudeCLITest(unittest.TestCase):
         self.assertNotIn("CLAUDE_CODE_X", env)
         self.assertNotIn("ANTHROPIC_BASE_URL", env)
         self.assertEqual(env["KEEP"], "k")
+
+
+class FakeOpenCodePopen(FakePopen):
+    """Stands in for subprocess.Popen: replays opencode `--format json` events, one per line."""
+    def __init__(self, events: list[dict], returncode: int = 0, stderr: str = ""):
+        super().__init__("{}", returncode, stderr)
+        self._events = events
+
+    def __call__(self, cmd, **kwargs):
+        import io
+        super().__call__(cmd, **kwargs)
+        self.env = kwargs.get("env") or {}
+        self.stdout = io.StringIO("".join(json.dumps(e) + "\n" for e in self._events))
+        return self
+
+
+def oc_text(*texts: str, cost: float = 0.001) -> FakeOpenCodePopen:
+    events: list[dict] = [{"type": "step_start", "part": {"type": "step-start"}}]
+    events += [{"type": "text", "part": {"type": "text", "text": t}} for t in texts]
+    events.append({"type": "step_finish", "part": {"type": "step-finish", "cost": cost, "tokens": {
+        "input": 100, "output": 20, "reasoning": 5, "cache": {"read": 10, "write": 0}}}})
+    return FakeOpenCodePopen(events)
+
+
+def oc_error(message: str, status: int = 500) -> FakeOpenCodePopen:
+    return FakeOpenCodePopen([{"type": "error", "error": {"name": "APIError",
+                                                           "data": {"message": message, "statusCode": status}}}])
+
+
+@mock.patch("planexe_skill.llm.opencode_cli.time.sleep")
+@mock.patch("planexe_skill.llm.opencode_cli.shutil.which", return_value="/bin/opencode")
+@mock.patch("planexe_skill.llm.opencode_cli.subprocess.Popen")
+class OpenCodeCLITest(unittest.TestCase):
+    def backend(self, **kw):
+        from planexe_skill.llm.opencode_cli import OpenCodeCLIBackend
+        return OpenCodeCLIBackend(models={"mid": "openrouter/x/y"}, **kw)
+
+    def test_needs_a_model(self, *_):
+        from planexe_skill.llm.base import BackendConfigError
+        from planexe_skill.llm.opencode_cli import OpenCodeCLIBackend
+        with self.assertRaises(BackendConfigError):
+            OpenCodeCLIBackend()
+
+    def test_one_model_serves_every_tier(self, *_):
+        b = self.backend()
+        self.assertEqual([b.model_for(t) for t in ("high", "mid", "low")], ["openrouter/x/y"] * 3)
+        cmd = b.build_command("high")
+        self.assertEqual(cmd[cmd.index("-m") + 1], "openrouter/x/y")
+        self.assertIn("--pure", cmd)
+        self.assertNotIn("--variant", cmd)
+        self.assertIn("--variant", self.backend(variants={"high": "high"}).build_command("high"))
+
+    def test_parses_json_reply(self, run, *_):
+        fake = oc_text('Here:\n```json\n{"x": ', '"ok"}\n```')
+        run.side_effect = popen_sequence(fake)
+        r = self.backend().complete("SYS", "u", SCHEMA, "low")
+        self.assertEqual(r.data, {"x": "ok"})
+        self.assertEqual(r.metadata["input_tokens"], 110)
+        self.assertEqual(r.metadata["output_tokens"], 25)
+        self.assertEqual(r.metadata["cost_usd"], 0.001)
+        self.assertEqual(r.metadata["backend"], "opencode")
+        self.assertEqual(fake.input, "u")
+        self.assertFalse(Path(fake.env["OPENCODE_CONFIG"]).exists())  # temp agent config is removed after the call
+        self.assertNotIn("OPENCODE_ENABLE_EXA", fake.env)
+        self.assertEqual(fake.env["OPENCODE_DISABLE_CLAUDE_CODE"], "1")
+
+    def test_agent_config(self, *_):
+        from planexe_skill.llm.opencode_cli import AGENT, agent_config
+        plain = agent_config("SYS", web_search=False)["agent"][AGENT]
+        self.assertEqual(plain["prompt"], "SYS")
+        self.assertEqual(plain["tools"], {"*": False})
+        search = agent_config("SYS", web_search=True)["agent"][AGENT]
+        self.assertTrue(search["tools"]["websearch"])
+        self.assertEqual(search["permission"]["websearch"], "allow")
+
+    def test_counts_web_searches(self, run, *_):
+        fake = FakeOpenCodePopen([{"type": "tool_use", "part": {"tool": "websearch"}},
+                                  {"type": "text", "part": {"text": "plain answer"}}])
+        run.side_effect = popen_sequence(fake)
+        r = self.backend().complete("s", "u", None, "high", web_search=True)
+        self.assertEqual(r.text, "plain answer")
+        self.assertEqual(r.metadata["web_searches"], 1)
+        self.assertEqual(fake.env["OPENCODE_ENABLE_EXA"], "1")
+
+    def test_schema_problems_are_fed_back(self, run, *_):
+        bad, good = oc_text('{"y": 1}'), oc_text('{"x": "fixed"}')
+        run.side_effect = popen_sequence(bad, good)
+        r = self.backend().complete("s", "u", SCHEMA, "low")
+        self.assertEqual(r.data, {"x": "fixed"})
+        self.assertEqual(r.metadata["attempts"], 2)
+        self.assertIn("missing required key", good.input)
+
+    def test_retries_transient_error(self, run, *_):
+        run.side_effect = popen_sequence(oc_error("Provider returned error", 502), oc_text('{"x": "1"}'))
+        self.assertEqual(self.backend(retries=2).complete("s", "u", SCHEMA, "low").data, {"x": "1"})
+
+    def test_auth_errors_stop_the_run(self, run, *_):
+        from planexe_skill.llm.base import LLMAuthError
+        run.side_effect = popen_sequence(oc_error("OpenCode's free tier can only be used from within OpenCode.", 403))
+        with self.assertRaises(LLMAuthError) as cm:
+            self.backend().complete("s", "u", SCHEMA, "low")
+        self.assertIn("refuse custom system prompts", str(cm.exception))
+        run.side_effect = popen_sequence(oc_error("User not found", 401))
+        with self.assertRaises(LLMAuthError):
+            self.backend().complete("s", "u", SCHEMA, "low")
 
 
 @unittest.skipUnless(os.environ.get("PLANEXE_SKILL_LIVE") == "1", "set PLANEXE_SKILL_LIVE=1 for live test")

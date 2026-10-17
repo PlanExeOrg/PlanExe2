@@ -9,6 +9,10 @@ class LLMError(Exception):
     """An LLM call failed. The message is meant to be read by a human."""
 
 
+class BackendConfigError(ValueError):
+    """The backend can't be built from the given options (e.g. no model). The message is for a human."""
+
+
 class LLMAuthError(LLMError):
     """Not logged in / credentials revoked: every further call will fail, so the run must stop."""
 
@@ -22,6 +26,7 @@ class LLMResult:
 
 class Backend:
     name = "base"
+    login_hint = "Run 'claude auth login'"  # shown when a call fails with LLMAuthError
 
     def complete(self, system: str, user: str, schema: dict | None = None, tier: str = "low",
                  web_search: bool = False) -> LLMResult:

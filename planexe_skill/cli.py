@@ -17,7 +17,7 @@ from pathlib import Path
 
 from planexe_skill import SKILLS_ROOT
 from planexe_skill.dag import Dag, DagError
-from planexe_skill.llm import get_backend
+from planexe_skill.llm import BackendConfigError, get_backend
 from planexe_skill.manifest import Manifest
 from planexe_skill.planexe import plural
 from planexe_skill.runner import Runner, StageFailure
@@ -55,16 +55,24 @@ def _dag(args) -> Dag:
 
 
 def _backend(args):
-    if args.backend == "claude":
+    if args.backend in ("claude", "opencode"):
         models = {}
-        if args.model_high:
-            models["high"] = args.model_high
-        if args.model_low:
-            models["low"] = args.model_low
-        if args.model_mid:
-            models["mid"] = args.model_mid
-        return get_backend("claude", models=models)
+        for tier in ("high", "mid", "low"):
+            model = getattr(args, f"model_{tier}", None) or args.model
+            if model:
+                models[tier] = model
+        return get_backend(args.backend, models=models)
     return get_backend(args.backend)
+
+
+def add_backend_args(p, tiers: bool = True) -> None:
+    p.add_argument("--backend", default="claude", choices=["claude", "opencode", "fake"],
+                   help="claude: Claude Code CLI (default); opencode: opencode CLI, any provider/model it supports")
+    p.add_argument("--model", help="model for every tier (opencode: PROVIDER/MODEL, see `opencode models`)")
+    if tiers:
+        p.add_argument("--model-high", help="model for tier=high stages")
+        p.add_argument("--model-mid", help="model for tier=mid stages")
+        p.add_argument("--model-low", help="model for tier=low stages")
 
 
 _DATE_PREFIX = re.compile(r"^\d{8}_")
@@ -174,7 +182,7 @@ def cmd_check_prompt(args) -> int:
     if not prompt or not prompt.strip():
         print("give --prompt-file or --prompt", file=sys.stderr)
         return 2
-    result = check_prompt(prompt, get_backend("claude"))
+    result = check_prompt(prompt, _backend(args))
     print(json.dumps(result, indent=2, ensure_ascii=False) if args.json else format_result(result))
     return 0 if result.get("ready") else 1
 
@@ -222,10 +230,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--force-downstream", nargs="+", default=[], metavar="STAGE",
                    help="re-run these stages and everything downstream")
     p.add_argument("--workers", type=int, default=4, help="max concurrent LLM calls (default 4)")
-    p.add_argument("--backend", default="claude", choices=["claude", "fake"])
-    p.add_argument("--model-high", help="model for tier=high stages")
-    p.add_argument("--model-mid", help="model for tier=mid stages")
-    p.add_argument("--model-low", help="model for tier=low stages")
+    add_backend_args(p)
     p.add_argument("--dry-run", action="store_true", help="only print which stages would run")
     p.set_defaults(func=cmd_run)
 
@@ -242,6 +247,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--prompt-file", help="text file with the plan prompt")
     p.add_argument("--prompt", help="plan prompt text")
     p.add_argument("--json", action="store_true", help="print the raw result as JSON")
+    add_backend_args(p, tiers=False)
     p.set_defaults(func=cmd_check_prompt)
 
     p = sub.add_parser("graph", help="print stages in topological order")
@@ -251,6 +257,9 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     try:
         return args.func(args)
+    except BackendConfigError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
     except DagError as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
