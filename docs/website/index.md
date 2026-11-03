@@ -29,6 +29,8 @@ The output is a draft to refine, not ground truth. It surfaces the questions and
 - [The report](report.md): what the report contains and how to read it.
 - [Commands](commands.md): running PlanExe2 by hand, options, stopping and resuming.
 - [How it works](how_it_works.md): the DAG, skills, and how edits are picked up.
+- [When planning becomes cheap](when_planning_becomes_cheap.md): an essay by ChatGPT Astra speculating
+  about the future of work when AI makes planning cheap.
 
 ## PlanExe v1
 
