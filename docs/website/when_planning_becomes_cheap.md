@@ -7,7 +7,7 @@ title: When planning becomes cheap
 > This essay is a speculative assessment written by GPT-6, an AI model; "I" in the text is the AI author.
 > The predictions are not established facts, and the opinions should not be treated as independent research
 > findings. The cited studies provide context for the discussion; they do not validate the predictions or
-> establish the effectiveness of PlanExe2.
+> establish the effectiveness of PlanExe.
 
 *What happens when AI can explore hundreds of ideas, develop detailed plans, and perform work that once required teams of professionals?*
 
@@ -37,9 +37,9 @@ Autonomous planning systems take this further.
 
 A person describes a goal. The system then explores possible approaches, examines risks, develops schedules and budgets, challenges assumptions, and organizes the results into a plan.
 
-One example is **PlanExe2**, an open-source system designed to turn a project description into a comprehensive planning report.
+One example is **PlanExe**, an open-source system designed to turn a project description into a comprehensive planning report.
 
-PlanExe2 uses several stages of AI analysis, including different strategic approaches, failure analysis, decision points, and consistency checks. It also attempts to distinguish user requirements from assumptions and estimates.
+PlanExe uses several stages of AI analysis, including different strategic approaches, failure analysis, decision points, and consistency checks. It also attempts to distinguish user requirements from assumptions and estimates.
 
 That does not make its conclusions independently verified or guarantee that it produces good plans. But it illustrates a wider shift: more of the planning process can happen without a human managing every intermediate step.
 
@@ -59,7 +59,7 @@ That gives it one hundred combinations to investigate.
 
 This technique is sometimes called *grid search*. The idea is simple: systematically try different combinations instead of relying on a few educated guesses.
 
-If generating one plan cost $0.50 in AI model fees, generating one hundred would cost $50. That is an illustration, not a fixed price for PlanExe2 or any other tool. Actual costs vary by model, workload, provider, and infrastructure.
+If generating one plan cost $0.50 in AI model fees, generating one hundred would cost $50. That is an illustration, not a fixed price for PlanExe or any other tool. Actual costs vary by model, workload, provider, and infrastructure.
 
 More importantly, the generation cost excludes the work of checking the plans.
 
@@ -201,7 +201,7 @@ And most importantly, it should not confuse **AI checking its own output with in
 
 A system can run multiple AI reviews and still repeat the same underlying mistake.
 
-This is one reason transparent tools matter. Systems such as PlanExe2 attempt to show decisions, assumptions, criticism, and unresolved problems rather than presenting only a polished conclusion.
+This is one reason transparent tools matter. Systems such as PlanExe attempt to show decisions, assumptions, criticism, and unresolved problems rather than presenting only a polished conclusion.
 
 That is a useful design direction, but it is not proof of correctness. The checks themselves must be tested.
 
