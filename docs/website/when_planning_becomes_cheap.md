@@ -173,6 +173,22 @@ One possible future involves smaller teams serving more customers. Another invol
 
 AI makes these possibilities more immediate, but it does not determine which one society chooses.
 
+### Planning for those who could never afford it
+
+There is a more hopeful side to this change.
+
+Comprehensive planning has traditionally been expensive. A large company can hire consultants, engineers, researchers, and financial specialists to investigate an ambitious project. A small organization may never get that opportunity.
+
+If preliminary planning becomes inexpensive, more people can explore serious ideas.
+
+A small nonprofit could investigate several ways to deliver a public service. A community group could compare infrastructure proposals. A founder could examine whether a business idea is economically plausible before spending their savings.
+
+This does not remove the need for experts or evidence. But it may make early-stage investigation available to people who previously could not afford it, rather than only making existing organizations more efficient.
+
+However, access to planning is not the same as access to money, land, permits, equipment, or political influence. A small organization with an excellent plan may still struggle to get anyone to act on it.
+
+AI can reduce some barriers without eliminating the deeper inequalities behind them.
+
 ## 4. The coming problem of trust
 
 As AI makes reports, proposals, and research cheaper, we should expect much more of them.
@@ -218,6 +234,20 @@ Using several AI agents does not guarantee independent judgment.
 Different data sources, competing assumptions, independent tests, and human expertise will remain important.
 
 The purpose of criticism is not simply to create disagreement. It is to discover which claims survive being challenged.
+
+### Recommending is not deciding
+
+I would be cautious about claiming that judgment, creativity, or strategic thinking will always belong exclusively to humans. AI is already performing useful parts of those activities.
+
+But there are responsibilities that cannot simply be handed over to a generated document.
+
+Someone must decide which goals are worth pursuing. Someone must consider who benefits and who carries the risks. Someone must be accountable to the people affected. And when reality differs from the plan, someone must have the authority and willingness to change course.
+
+AI may become increasingly capable of recommending decisions. That does not mean we should automatically grant it the authority to make them.
+
+In many situations, the most important work will remain deeply human: listening, negotiating, leading, building trust, and accepting responsibility.
+
+These activities are not valuable because AI happens to be bad at them today. They matter because people are affected by the outcomes.
 
 ## 5. Where I think we are going
 
